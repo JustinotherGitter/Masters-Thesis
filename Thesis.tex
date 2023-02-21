@@ -1,0 +1,179 @@
+%\documentclass[a4paper,10pt, aas_macros]{report}
+%\documentclass[a4paper,11pt,oneside]{thesis}
+\documentclass{thesis}
+\usepackage{geometry}
+\geometry{a4paper, margin=25mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MOVE THE PACKAGE IMPORTS AT YOU OWN RISK!!!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[small]{caption}  %makes the captions to figures and tables slightly smaller than the normal text
+%Math packages
+% \usepackage{array}% Formats tabular environments. Used by math and table packages
+% textcomp is imported by gensymb, adding it suppresses warnings about \perthousand and \micro
+\usepackage{textcomp, gensymb}%Adds: \degree and \micro symbols,among others
+% \usepackage{amsmath} %to get matrixes
+\usepackage{amssymb} %this adds additional math support like \lesssim
+% 
+\usepackage{comment}
+% \usepackage{mathtools, siunitx}
+\usepackage{siunitx}
+
+%Graphic packages
+\usepackage{pgfplots} % this allows for custom in-text plots
+\pgfplotsset{compat=1.15}
+\usepackage{graphicx} %this allows you to work with graphics 
+% \usepackage{float}% Adds support for floats. As in floating
+% \usepackage[farskip=0pt]{subfig}% programmatic-like interface to create highly customizable subfloats/subfigures
+% \usepackage{wrapfig}% Allows you to wrap text around figures
+% \usepackage[bottom=3cm]{geometry} %this package has something to do with the page layout, since its accidental inclusion the margin size has decreased to a more reasonable size. 
+% \usepackage{rotating}  %this allows the table to be rotated
+% \usepackage{ctable}% enhanced table setup
+% %\usepackage{longtable}% create tables that continues to next page
+% \usepackage{multirow}% Adds support to split a table cell into multiple rows
+
+%Other packages
+
+\usepackage{svg}
+\usepackage{multirow}
+\usepackage{array}
+
+% Allows strikethrough using \sout{text here...}
+\usepackage{ulem}
+
+% \usepackage{epstopdf}% converts eps figures to pdf
+% \setcounter{secnumdepth}{5}% Section depth. e.g. 1.1.1.1
+% \usepackage{enumitem}% control the layout of lists
+\usepackage[hyperfootnotes=false, pdftitle={Cooper Dissertation}]{hyperref}% embed hyperlinks in citations and fig references, but not footnotes (it breaks the footnote command)
+% \usepackage[bottom, hang, flushmargin]{footmisc}% Control footnote layouts
+% \usepackage{xfrac}% Provides sfrac command: $\sfrac{a}{b}$ -> a/b
+% \usepackage{pdfpages}%Include pdf documents in latex. eg. for publications in the appendix
+% \usepackage{setspace} %set space and onehalfspacing set the spacing of the text
+%  \onehalfspacing	
+% \usepackage{upgreek}% Upright greek letters
+% \usepackage[toc]{appendix}%Add appendix to table of contents
+% \usepackage{etoolbox} % for \robustify. Prevents errors that occasionally popup when creating/calling subfigure references
+% \robustify{\subref}% robusify the \subref command so it doesn't break on a whim
+
+% Justin
+% Add the \gls command to keep track of acronyms
+\usepackage[nomain, acronym, automake, nonumberlist, nogroupskip, style=super]{glossaries-extra}
+% Make latex compile acronyms to use in document section
+\makeglossaries[acronym]
+% Set the style of the abbreviation to use in paragraphs
+\setabbreviationstyle[acronym]{long-short}
+% Add any wanted acronyms below
+\newacronym{SAAO}{SAAO}{South African Astronomical Observatory}
+\newacronym{SALT}{SALT}{South African Large Telescope}
+\newacronym{RSS}{RSS}{Robert Stobie Spectrograph}
+\newacronym{POLSALT}{POLSALT}{Polarimetric reductions for SALT}
+\newacronym{IRAF}{IRAF}{Image Reduction and Analysis Facility}
+\newacronym{CCD}{CCD}{Charged-Coupled Device}
+\newacronym{CMOS}{CMOS}{Complementary Metal-Oxide-Semiconductor}
+\newacronym{SAC}{SAC}{Spherical Aberration Corrector}
+\newacronym{SALTICAM}{SALTICAM}{SALT Imaging Camera}
+\newacronym{HRS}{HRS}{High Resolution Spectrograph}
+\newacronym{NIR}{NIR}{Near Infra-Red}
+\newacronym{NIRifs}{NIR IFS}{Near Infra-Red Integral Field Spectrograph}
+\newacronym{HET}{HET}{Hobby-Eberly Telescope}
+\newacronym{VPH}{VPH}{Volume Phase Holographic}
+\newacronym{QE}{QE}{Quantum Efficiency}
+\newacronym{SNR}{S/N}{Signal-to-Noise Ratio}
+%
+
+\usepackage[round,colon,authoryear,sort&compress]{natbib} %Sets bibliography references
+\usepackage[nottoc]{tocbibind} % Adds bibliography to ToC
+\usepackage{journal_macros} % Set macros for NASA ADS journal abbrevations
+
+% MY PACKAGES
+\usepackage{rotating}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage[font=scriptsize, labelfont=bf, justification=centering]{caption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage[english]{babel}
+\usepackage{blindtext} % Allows for Lorem Ipsum text
+% \usepackage{dirtree}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \graphicspath{{Figures1/}{Figures2/}}
+\newcommand{\super}[1]{\textsuperscript{#1}}
+\newcommand{\rmn}[1]{{\mathrm{#1}}}
+\newcommand{\degr}{\hbox{$^\circ$}}
+\newcommand{\arcmin}{\hbox{$^\prime$} }
+\newcommand{\arcsec}{\hbox{$^{\prime\prime}$} }
+\newcommand{\avg}[1]{\left< #1 \right> }
+\newcommand{\angstrom}{Å}
+
+\newcommand{\prgph}{\vspace{\baselineskip}}
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+%Hanno's commands
+%-------------------------------------------------
+
+% \newcommand{\todo}[1]{\textcolor{red}{\textbf{#1}}}
+% \renewcommand{\arraystretch}{0.8}
+% \renewcommand{\floatpagefraction}{.9}
+
+% \setabbreviationstyle[longonly]{long}
+% \setabbreviationstyle[shortonly]{short}
+
+% \newabbreviation[category=longonly]{FSRQ}{FSRQ}{Flat Spectrum Radio Quasar}
+% \newabbreviation[description={Interstellar Magnetic Fields}]{ISMF}{ISMF}{Interstellar Magnetic Fields}
+% \newabbreviation[category=shortonly]{GRB}{GRB}{Gamma-ray Burst}
+%-------------------------------------------------
+
+\title{\textbf{Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations}}
+
+\author{Justin Cooper}
+\Cdegree{B.Sc. (Hons)}
+\Sdegree{Magister Scientiae}
+\university{University of the Free State}
+\faculty{Faculty of Natural and Agricultural Sciences}
+\department{Department of Physics}
+\country{South Africa}
+
+\degreedate{Date of submission: \today} % TODO: Change \today to MONTH, YEAR at final submission
+\supervisor{Prof. B. van Soelen}
+
+
+\begin{document}
+\maketitle
+\clearpage
+
+\include{chapter_0/Abstract}
+
+\clearpage
+
+\tableofcontents
+
+% \glssetwidest{ISMF} %Longest abbreviation so the column width can be set
+
+
+\input{chapter_1/Introduction}
+\input{chapter_2/SALT_RSS_pipeline}
+\input{chapter_3/Developed_tools}
+\input{chapter_4/Testing}
+\input{chapter_5/Science_applications}
+\input{chapter_6/Conclusions}
+
+\include{chapter_0/Acknowledgements}
+\printglossary[type=acronym, title={List of Acronyms}]
+% \printglossary[type=abbreviations, style=alttree, title={List of Acronyms}]
+
+
+\bibliographystyle{plainnat} % aasjournal (surnames first), humannat
+%\bibliography{References/Catalogues,References/References}
+\bibliography{references}
+
+% \begin{appendices}
+% \input{Chapters/AppendixPub}
+% \end{appendices}
+
+\end{document}
