@@ -16,11 +16,13 @@ Spectroscopy originated in its most basic form with Newton's examinations of sun
 \end{figure}
 
 % How it works
-The simplest spectrometer schematic as shown in Figure \ref{fig:spectrometer} consists of incident light collected from the telescope's optics, labeled A, being focused onto a slit, labeled B, and passed through a collimator, labeled C. The collimator collimates the light allowing a dispersion element (such as a diffraction grating or prism), labeled D, to disperse the light into its constituent wavelengths. The resultant spectrum is focused by a focusing lens, labeled E, onto a focal plane, labeled F. Viewing optics are situated at the focal plane in the case of a spectroscope a detector is situated at the focal plane in the case of a spectrograph.
+The simplest spectrometer schematic as shown in Figure \ref{fig:spectrometer} consists of incident light collected from the telescope's optics, labeled A, being focused onto a slit, labeled B, and passed through a collimator, labeled C. The collimator collimates the light allowing a dispersion element (such as a diffraction grating or prism), labeled D, to disperse the light into its constituent wavelengths. The resultant spectrum is focused by a focusing lens, labeled E, onto a focal plane, labeled F. Viewing optics are situated at the focal plane in the case of a spectroscope and a detector is situated at the focal plane in the case of a spectrograph.
 \prgph
 
 % Telescope optics
 The telescope optics refers simply to all the components of a telescope necessary to acquire a focal point where the spectrometer, components labeled B - F, is situated. The focal point in most traditional telescope designs is fixed relative to the telescope and so the spectrometer may be mounted at that point. In cases where the telescope is designed to have a moving focal point relative to the telescope \cite[see][]{Arecibo, HET, SALT_design}, the spectrometer must also move along the telescope's focal path.
+\prgph
+\prgph
 
 % SLIT
 The slits function is to control the amount of incident light entering a spectrometer and, along with the exposure time of the detector, prevents over-exposures of bright sources on highly sensitive detectors \citep{TonkPracAmSpec}. If a source is spatially resolvable, or larger than the seeing conditions, the slit further acts to spatially limit the source to increase the spectral resolution, resulting in sharper features in the resultant spectrum.
@@ -32,7 +34,7 @@ Without a slit the spectral resolution would be determined by the projected widt
 
 % COLLIMATOR
 The collimating lens functions to collimate the focused light from the telescope, ensuring that all light rays run parallel before reaching the dispersion element. Since the collimator accounts for the telescope's focus, the focal ratio of the collimator, $f_{1} / d_{1}$, should thus optimally match the focal ratio of the telescope, $f / D$, as seen in Equation \ref{eq:focal_ratio} to be most efficient and to not waste collecting area or material on too large a collimator.
-\prgph
+% \prgph
 
 \begin{equation}
 	\frac{f}{D} = \frac{f_{1}}{d_{1}}
@@ -59,12 +61,12 @@ The focusing lens functions similarly to that of the telescope's optics but in t
 The two most prevalent detector types in spectroscopy are the \gls{CCD} and \gls{CMOS} detectors. In astronomical spectroscopy however, sources are fainter and exposure times are much longer and so the \gls{CCD} detectors are by far the preferred detector as their output has a higher-quality and lower-noise when compared to \gls{CMOS} cameras under the same conditions \citep{CCDvsCMOS}.
 \prgph
 
-The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in Section \ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an Analog-to-Digital converter which produces a two-dimensional array of `counts' with which information may be extracted from. Each \gls{CCD} image may be referred to by a name such as bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in Section \ref{subsec:calibration}.
+The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in Section \ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a two-dimensional array of `counts' with which information may be extracted from. Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in Section \ref{subsec:calibration}.
 
 \subsection{Dispersion Elements} \label{subsec:dispersion}
 % https://spectroscopy.wordpress.com/2020/05/12/basics-on-prisms-and-diffraction-gratings-part-1/
 
-Light can be broken up into its constituent wavelengths through two different physical phenomena, namely dispersion and diffraction, which dispersive elements use to create spectra. Dispersive prisms and diffractive gratings each have their strengths and weaknesses and a wide spectrum of instruments exist implementing both, or either, concepts. Regardless of the specific element, dispersive elements all have a resolving power, $R$, and angular dispersion. Generally, while the angular dispersion is a more involved process to determine, the resolving power of a spectrograph can be measured as:
+Light can be broken up into its constituent wavelengths through two different physical phenomena, namely dispersion and diffraction, which dispersive elements use to create spectra. Dispersive prisms and diffractive gratings each have their strengths and weaknesses and a wide spectrum of instruments exist implementing both, or either, concepts. Regardless of the specific element, dispersive elements all have a resolving power, $R$, and an angular dispersion. Generally, while the angular dispersion is a more involved process to determine, the resolving power of a spectrograph can be measured as:
 % \prgph
 
 \begin{equation}
@@ -72,7 +74,7 @@ Light can be broken up into its constituent wavelengths through two different ph
     \label{eq:resolving_power}
 \end{equation}
 
-\noindent where $\lambda$ is the wavelength of an incident monochromatic beam and $FWHM$ is the width of the feature on the detector at half of its maximum intensity.
+\noindent where $\lambda$ is the wavelength of an incident monochromatic beam and $FWHM$ refers to the width of the feature on the detector at half of its maximum intensity.
 \prgph
 
 %   - Prism
@@ -83,7 +85,7 @@ Light can be broken up into its constituent wavelengths through two different ph
     \label{fig:prism_diagram}
 \end{figure}
 
-The prism operates on the principle that the refractive index of light, $n$, varies as a function of its wavelength. Prisms were the only dispersive elements available for early spectroscopic studies, but they were not without flaw.
+The prism operates on the principle that the refractive index of light, $n$, varies as a function of its wavelength, $\lambda$. Prisms were the only dispersive elements available for early spectroscopic studies, but they were not without flaw.
 % \prgph
 
 \begin{equation}
@@ -91,7 +93,7 @@ The prism operates on the principle that the refractive index of light, $n$, var
     \label{eq:prism_angular_dispersion}
 \end{equation}
 
-Equation \ref{eq:prism_angular_dispersion}'s variables relate to Figure \ref{fig:prism_diagram} such that $\theta$ is the angle at which the refracted light differs from the incident light, $\lambda$ is the wavelength of the incident light, $B$ is the longest distance the beam would travel through the prism, and $a = L \sin(\alpha)$ is the cross-section of the incident beam where $L$ is the length of the transmissive surfaces and $\alpha$ is the incident angle of light to the prism surface. The refractive index of a material as a function of its wavelength, $n(\lambda)$, has several equations. Cauchy's equation, as given in Equation \ref{eq:Cauchy}, is a much simpler approximation of the refractive index that remains very accurate at visible wavelengths.
+The angular dispersion of a prism can be represented by Equation \ref{eq:prism_angular_dispersion} where the variables relate to Figure \ref{fig:prism_diagram} such that $\theta$ is the angle at which the refracted light differs from the incident light, $\lambda$ is the wavelength of the incident light, $B$ is the longest distance the beam would travel through the prism, and $a = L \sin(\alpha)$ is the cross-section of the incident beam where $L$ is the length of the transmissive surfaces and $\alpha$ is the incident angle of light to the prism surface. The refractive index of a material as a function of its wavelength, $n(\lambda)$, has several equations. Cauchy's equation, as given in Equation \ref{eq:Cauchy}, is a much simpler approximation of the refractive index that remains very accurate at visible wavelengths.
 % \prgph
 
 \begin{equation}
@@ -120,7 +122,7 @@ Multiple prisms can be used to increase the angular dispersion but as the disper
     \label{fig:grating_diagram}
 \end{figure}
 
-The diffraction grating operates on the principle that when light interacts with a grating where the groove size is comparable to the light's wavelength, the light is dispersed as a function of its wavelength through constructive and destructive interference. This interference results in multiple diffracted beams $m$, called orders, either side of a central reflected, or transmitted, beam such that $m \in Z$, where $m = 0$ is the non-dispersed beam.
+The diffraction grating operates on the principle that when light interacts with a grating where the groove size is comparable to the light's wavelength, the light is dispersed as a function of its wavelength through constructive and destructive interference. This interference results in multiple diffracted beams $m$, called orders, either side of a central reflected, or transmitted, beam such that $m \in Z$, where $m = 0$ is the non-dispersed, or reflected, beam.
 % \prgph
 
 \begin{equation}
@@ -129,7 +131,7 @@ The diffraction grating operates on the principle that when light interacts with
 \end{equation}
 
 % Link eq and fig
-Equation \ref{eq:grating_equation} is referred to as the grating equation and its variables relate to Figure \ref{fig:grating_diagram} such that $m$ is the order of light being measured, $\lambda$ is the wavelength of the incident light, $\sigma$ is the groove spacing, $\alpha$ is the angle of incident light from the grating normal, and $\beta$ is the angle of diffraction from the grating normal. When $\alpha$ and $\beta$ are located on opposite sides of the grating normal as in Figure \ref{fig:grating_diagram} they are defined to have similar signs, I.E. $m\lambda = \sigma (\sin(\alpha) + \sin(\beta))$, and have opposite signs when on the same side of the grating normal. I.E. $m\lambda = \sigma (\sin(\alpha) - \sin(\beta))$, irrespective of if the grating is reflective or transmissive.
+Equation \ref{eq:grating_equation} is referred to as the grating equation and its variables relate to Figure \ref{fig:grating_diagram} such that $m$ is the order of the diffracted beam being measured, $\lambda$ is the wavelength of the incident light, $\sigma$ is the groove spacing, $\alpha$ is the angle of incident light relative to the grating normal, and $\beta$ is the angle of diffraction relative to the grating normal. It is important to note that the sign of $\alpha$ and $\beta$ depend on whether the grating is reflective or tranmissive. In the case of a reflective grating, such as in Figure \ref{fig:grating_diagram}, the signs of $\alpha$ and $\beta$ are the same relative to the grating normal, I.E. $\lambda = \sigma (\sin(\alpha) + \sin(\beta))$ for $m = 1$. In the case of a transmissive grating, the signs of $\alpha$ and $\beta$ are the opposite relative to the grating normal, I.E. $\lambda = \sigma (\sin(\alpha) - \sin(\beta))$ for $m = 1$.
 \prgph
 
 % Free Spectral range and Blazing
