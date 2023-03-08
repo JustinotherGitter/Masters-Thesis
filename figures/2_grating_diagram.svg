@@ -7,7 +7,7 @@
    viewBox="0 0 90.200005 34.100001"
    version="1.1"
    id="svg5"
-   inkscape:export-filename="2_grating_diagram.pdf"
+   inkscape:export-filename="../ba68dd07/2_grating_diagram.pdf"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
@@ -28,8 +28,8 @@
      inkscape:document-units="mm"
      showgrid="true"
      inkscape:zoom="2.8284271"
-     inkscape:cx="220.97087"
-     inkscape:cy="43.487067"
+     inkscape:cx="136.11806"
+     inkscape:cy="30.759145"
      inkscape:window-width="1600"
      inkscape:window-height="845"
      inkscape:window-x="0"
@@ -162,6 +162,25 @@
          style="fill:context-stroke;fill-rule:evenodd;stroke:none"
          id="path9475-6" />
     </marker>
+    <marker
+       style="overflow:visible"
+       id="marker9477-3-5"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow2"
+       markerWidth="7.6999998"
+       markerHeight="5.5999999"
+       viewBox="0 0 7.7 5.6"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path9475-6-6" />
+    </marker>
   </defs>
   <g
      inkscape:label="Layer 1"
@@ -217,6 +236,10 @@
          d="m 47.988687,26.071173 4.160583,11.122239 5.56575,14.878585"
          id="path3728"
          sodipodi:nodetypes="ccc" />
+      <path
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker9477-3-5)"
+         d="M 57.647068,52.075865 37.697191,32.931034"
+         id="path3091-2" />
     </g>
     <g
        id="g9547"
@@ -231,6 +254,10 @@
          d="M 80.107729,52.133025 90.91847,37.911611 99.898183,26.098895"
          id="path9473-7"
          sodipodi:nodetypes="ccc" />
+      <path
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker9477-3)"
+         d="M 80.154784,52.150483 60.204907,33.005652"
+         id="path3091" />
     </g>
     <g
        id="g9778-5"
@@ -357,13 +384,24 @@
     <text
        xml:space="preserve"
        style="font-size:2.82222px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;stroke-width:0.264583"
-       x="99.964027"
-       y="28.554794"
+       x="100.3343"
+       y="28.315275"
        id="text2566"><tspan
          sodipodi:role="line"
          id="tspan2564"
          style="font-size:2.82222px;stroke-width:0.264583"
-         x="99.964027"
-         y="28.554794">m = -1</tspan></text>
+         x="100.3343"
+         y="28.315275">m = -1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:2.82222px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;display:inline;stroke-width:0.264583"
+       x="28.527287"
+       y="33.889824"
+       id="text2566-2"><tspan
+         sodipodi:role="line"
+         id="tspan2564-7"
+         style="font-size:2.82222px;stroke-width:0.264583"
+         x="28.527287"
+         y="33.889824">m = 1</tspan></text>
   </g>
 </svg>

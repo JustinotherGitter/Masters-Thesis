@@ -27,3 +27,5 @@ dispersions
 photoresist
 overscan
 mosaicking
+Mosaicking
+Chebyshev

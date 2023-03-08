@@ -61,7 +61,7 @@ The focusing lens functions similarly to that of the telescope's optics but in t
 The two most prevalent detector types in spectroscopy are the \gls{CCD} and \gls{CMOS} detectors. In astronomical spectroscopy however, sources are fainter and exposure times are much longer and so the \gls{CCD} detectors are by far the preferred detector as their output has a higher-quality and lower-noise when compared to \gls{CMOS} cameras under the same conditions \citep{CCDvsCMOS}.
 \prgph
 
-The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in Section \ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a two-dimensional array of `counts' with which information may be extracted from. Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in Section \ref{subsec:calibration}.
+The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in Section \ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a \gls{2D} array of `counts' with which information may be extracted from. Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in Section \ref{subsec:calibration}.
 
 \subsection{Dispersion Elements} \label{subsec:dispersion}
 % https://spectroscopy.wordpress.com/2020/05/12/basics-on-prisms-and-diffraction-gratings-part-1/
@@ -168,23 +168,30 @@ Similarly to the dispersion of a prism, Equation \ref{eq:grating_angular_dispers
 \prgph
 
 % Grism and immersed grating
-As mentioned before, multiple subgroups exist for both dispersive prisms and diffraction gratings. For prisms, along with the single and multiple prism setups mentioned above, there also exist grisms and immersed gratings. A grism (Grating Prism) refers to a transmissive grating etched onto one of the transmissive faces of a prism and allows a single camera to capture both spectroscopic and photometric images without needing to be moved, with and without the grism in the path of the beam of light, respectively. An immersed grating refers to a grism modified such that the transmissive grating is coated with reflective material. The primary source of dispersion for both grisms and immersive gratings is the grating and any aberration effects from the prism are negligible in comparison.
+As mentioned before, multiple subgroups exist for both dispersive prisms and diffractive gratings. For prisms, along with the single and multiple prism setups mentioned above, there also exist grisms and immersed gratings. A grism (Grating Prism) refers to a transmissive grating etched onto one of the transmissive faces of a prism and allows a single camera to capture both spectroscopic and photometric images without needing to be moved, with and without the grism in the path of the beam of light, respectively. An immersed grating refers to a grism modified such that the transmissive grating is coated with reflective material. The primary source of dispersion for both grisms and immersive gratings is the grating and any aberration effects from the prism are negligible in comparison.
 \prgph
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 10cm]{figures/2_vph_grating.pdf}
+    \caption{Geometry of a \gls{VPH} grating for an incident monochromatic beam of light.}
+    \label{fig:vph_grating}
+\end{figure}
 
 % Echelle and VPH grating
 % https://www.astro.ljmu.ac.uk/~ikb/vph.html
 For gratings, along with transmissive and reflective gratings there also exist \gls{VPH} gratings. A \gls{VPH} grating consists of a photoresist, which is a light-sensitive material, sandwiched between two glass substrates. Diffraction is possible since the photoresist's refractive index varies near-sinusoidally perpendicularly to the gratings lines. This allows for sharper diffraction orders and low stray light scattering as compared to more traditional gratings but since blazing is not possible the efficiency is decreased. An echelle grating refers to two gratings set up such that the dispersed light from one is further diffracted by a second and allows for comparatively higher spectral resolutions when compared to more traditional grating setups. The gratings used as part of the echelle grating may be any type of dispersion element, but gratings are traditionally preferred due to the linearity of their resultant spectrum.
 \prgph
 
-\subsection{Spectroscopic Calibrations}\label{subsec:calibration}
+\subsection{Detector and Spectroscopic Calibrations}\label{subsec:calibration}
 
-Acquiring a spectrum from observations is more involved than simply reading out the data recorded on the \gls{CCD}. A raw science image, which is a \gls{CCD} image of the observed source with no calibrations applied, has on it a combination of useful science data as well as noise. The noise is a combination of random noise introduced through statistical processes and systematic noise introduced through the instrumentation and the conditions the observations were taken under. This noise causes an uncertainty in the useful data and can be minimized, predominantly by calibrating for the systematic noise, but never fully removed \citep{CCDhandbook}.
+Acquiring a spectrum from observations is more involved than simply reading out the data recorded on the \gls{CCD}. A raw science image, which is the raw counts of the observed source read from the \gls{CCD} with no calibrations applied, has on it a combination of useful science data as well as noise. The noise is a combination of random noise introduced through statistical processes and systematic noise introduced through the instrumentation and the observation conditions the source was observed under. This noise causes an uncertainty in the useful data and can be minimized, predominantly by calibrating for the systematic noise, but never fully removed \citep{CCDhandbook}.
 \prgph
 
 The dominant source of noise in a raw image is detector noise. \gls{CCD}'s are manufactured to have a small base charge in each pixel, called the `bias' current which allows the readout noise, a type of random noise, to better be sampled. There is also an unintentional additional charge which is linearly proportional to the exposure time and originates from thermal agitation of the \gls{CCD} material, called the `dark' current. The dark current can be minimized and possibly ignored if the \gls{CCD} is adequately cooled. These types of noise add to the charge held by a pixel and are thus considered additive.
 \prgph
 
-The \gls{CCD} is not a perfect detector and the efficiency of it and the optics of the telescope also contribute noise to the image. The efficiency of a \gls{CCD} is referred to as the Quantum Efficiency, and it is a measure of what percentage of light striking the detector is actually recorded. The efficiency of the \gls{CCD} and telescope optics is also wavelength dependent and so the noise that results from them is more complex than that of additive noise. This type of noise is referred to as multiplicative noise.
+The \gls{CCD} is not a perfect detector and the efficiency of it and the optics of the telescope also contribute noise to the image. The efficiency of a \gls{CCD} is referred to as the Quantum Efficiency, and it is a measure of what percentage of light striking the detector is actually recorded and converted to a charge. The efficiency of the \gls{CCD} and telescope optics is also wavelength dependent and so the noise that results from them is more complex than that of additive noise. This type of noise is referred to as multiplicative noise.
 \prgph
 
 Each image taken by a \gls{CCD} will inherently have the additive types of noise in the image, and so bias and dark currents are the first types of noise to be accounted for by subtracting them from any subsequent images. Bias currents can be found by taking a bias image or by adding an overscan region to each image. A bias image is an image where the charges on the \gls{CCD} are reset and then immediately read off without exposing anything on the detector, effectively taking an image with zero exposure time. Alternatively, to save time during an observational run, overscan regions may be added to the images. An overscan region refers to adding a few cycles to the readout of each column of the \gls{CCD} such that the base current is read out and appended to each image.
@@ -193,50 +200,87 @@ Each image taken by a \gls{CCD} will inherently have the additive types of noise
 Dark currents can be found by taking an image with nothing exposed onto the detector for a certain exposure time. This resultant dark image can then be scaled to the science images exposure time since the dark current is linearly proportional to exposure time. When the detector is capable of being held at precise temperatures, dark images may be taken over multiple hours during the day to produce a high quality master dark image that may then be scaled and subtracted from all subsequent images.
 \prgph
 
-After the additive noise has been accounted for, the response from the pixels detecting the same incoming light are still not all the same due to the multiplicative noise which still needs to be accounted for. An image that has this noise accounted for is considered to be flat since all pixels share the same response to the incoming light. This noise can be measured by taking a flat image, or alternatively a flat-field, and multiple types of flats can be taken which all in essence image a uniformly illuminated region to determine the pixel to pixel response.
+After the additive noise has been accounted for, the response from the pixels detecting the same incoming light are still not all the same due to the multiplicative noise which still needs to be accounted for. An image that has this noise accounted for is considered to be flat since all pixels share the same response to the incoming light. This noise can be measured by taking a `flat' image, or alternatively a flat-field, and multiple types of flats can be taken which all in essence image a uniformly illuminated region to determine the pixel-to-pixel response.
 \prgph
 
-Night sky flats are produced from science images where the images contain mostly sky. The science images are combined using the mode statistic which removes any celestial objects. This allows science images to be used for flat-fielding but at the cost of having a low \gls{SNR} because of the dim background sky. Dome flats are images taken of a flat surface inside the telescopes dome that has been uniformly and indirectly illuminated. These flats allow precise control of the light and are also capable of being taken during the day. Finally, twilight flats are images taken of the twilight (or dawn) sky when the Sun has just set and opposite the direction of the Sun at about 20\degr from zenith. Careful planning is required for twilight flats as the sky's brightness changes rapidly with the setting and rising Sun.
+Night sky flats are produced from science images where the images contain mostly sky. The science images are combined using the mode statistic which removes any celestial objects. This allows science images to be used for flat-fielding but at the cost of having a low \gls{SNR} because of the dim background sky. Dome flats are images taken of a flat surface inside the telescopes dome that has been uniformly and indirectly illuminated. These flats allow precise control of the light source and are also capable of being taken during the day. Finally, twilight flats are images taken of the twilight (or dawn) sky, when the Sun has just set, opposite the direction of the Sun at about $20\degr$ from zenith. Careful planning is required for twilight flats as the sky's brightness changes rapidly with the setting and rising of the Sun.
 \prgph
 
-A flat-field must be normalized before being used to correct any science images since it only acts to account for the pixel-to-pixel response. The normalized flat image, $F^{n}_{\lambda}(x,y)$ can be calculated as:
+A flat-field must be normalized before being used to correct any science images since it only acts to account for the pixel-to-pixel response and not for the additive errors. The normalized flat image, $F^{n}_{\lambda}(x,y)$ can be calculated as:
 
 \begin{equation}
     F^{n}_{\lambda}(x,y) = \frac{F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{mode(F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y))}
     \label{eq:norm_flat}
 \end{equation}
 
-\noindent where $F_{\lambda}(x,y)$ is the non-normalized flat image, $B(x,y)$ is the bias image, $D(x,y)$ is the dark image which is scaled by $t_{S}$ and $t_{D}$, the science image and dark image exposure times, respectively.
+\noindent where $F_{\lambda}(x,y)$ is the non-corrected flat image, $B(x,y)$ is the bias image, $D(x,y)$ is the dark image which is scaled by $t_{S}$ and $t_{D}$, the science image and dark image exposure times, respectively.
 \prgph
 
-The calibrated science image, $S^{*}_{\lambda}(x,y)$, which has accounted for the bias and dark currents as well as the flat fielding can then be calculated as:
+The calibrated science image, $S^{*}_{\lambda}(x,y)$, which accounts for the bias and dark currents as well as the flat fielding can then be calculated as:
 
 \begin{equation}
     S^{*}_{\lambda}(x,y) = \frac{S_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{F^{n}_{\lambda}(x,y)}.
     \label{eq:science_cal}
 \end{equation}
 
-Multi-channel \gls{CCD}'s need additional calibrations after a calibrated image is acquired. These include cross-talk corrections and mosaicking which account for multiple \gls{CCD} detectors being read out at the same time and how the detectors are positioned relative to one another, respectively.
+Multi-channel \gls{CCD}'s are detectors that use either multiple \gls{CCD}'s or a \gls{CCD} with multiple output amplifiers which can be read out through multiple channels at the same time, increasing the detectors size while keeping the readout time constant. These \gls{CCD} setups need additional calibrations, specifically cross-talk corrections and mosaicking.
+\prgph
 
+Cross-talk noise refers to contamination that occurs during readout in one channel from another channel with a high signal and occurs because the signals can not be completely isolated from one another. Cross-talk corrections therefore account for this signal contamination between channels being read out at the same time \citep{CrossTalk}. Mosaicking is necessary for multi-channel \gls{CCD}'s since the digitized signal read out from the detector has no reference of the physical location of the pixel it was detected at. Mosaicking therefore orients the data acquired from a multi-channel detector correctly relatively to one another so that a single image is produced from the multiple channels read out from the detector.
+\prgph
 
-TODO: Frames observed (ARC, etc) and how they are corrected for
+Finally, calibrations necessary for spectroscopy are limited to wavelength calibrations. Since the dispersion element breaks the incident light into its constituent wavelengths non-linearly, as discussed in Section \ref{subsec:dispersion}, the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modeled to produce a reliable pixel to wavelength calibration \citep[see Eg.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in Figure \ref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
+\prgph
 
-% \begin{figure}[t]
-% \centering
-% \begin{tikzpicture}
-%     \begin{axis}[xlabel=Wavelength (Å), ylabel= Angular Dispersion (\arcsec/Å), width=7cm, y dir=reverse]
-%         \addplot[domain=4000:7000]{-x^(-3) * 206265};
-%     \end{axis}
-% \end{tikzpicture}
-% \begin{tikzpicture}
-%     \begin{axis}[xlabel=Wavelength (Å), ylabel= Angular Dispersion (\arcsec/Å), width=7cm]
-%         \addplot[domain=4000:7000]{x^(-1) * 206265};
-%     \end{axis}
-% \end{tikzpicture}
+The wavelength calibrations then consist of identifying a \gls{2D} pixel to wavelength conversion function from the arc frame which may later be applied to calibrate the science frames.
+\prgph
 
-% \caption{Approximate dispersion as a function of wavelength for a single prism (left) and a ruled, transmissive, diffraction grating (right).}
-% \label{fig:dispersion_comparisons}
-% \end{figure}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 16cm]{figures/2_Ne_arc.pdf}
+    \caption{Example of an arc spectrum for NeAr taken with \gls{SALT}'s \gls{RSS} using the PG1800 grating at a grating angle of $34.625$°, an articulation angle of $69.258$°, and covering a wavelength range of $\sim5600 - 6900$\angstrom. Plot adapted from \gls{SALT}'s published Longslit Line Atlases (as of 2023)\protect\footnotemark}
+    \label{fig:Ne_arc}
+\end{figure}
+\footnotetext{\protect\href{http://pysalt.salt.ac.za/lineatlas/plot_line_neon.pdf}{NeAr plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
+
+The two most common \gls{2D} approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations as found in Equations \ref{eq:chebyshev} and \ref{eq:legendre}, respectively. The Chebyshev polynomials may be recursively defined as:
+
+\begin{align}
+        T_{0}(x) &= 1 \\
+        T_{1}(x) &= x \\
+    T_{n + 1}(x) &= 2 x T_{n}(x) - T_{n - 1}(x)
+    \label{eq:chebypoly}
+\end{align}
+
+\noindent or approximated by:
+
+\begin{equation}
+    T_{0}(x) = \cos(n \cos^{-1}(x)).
+    \label{eq:chebypolyapprox}
+\end{equation}
+
+The Chebyshev approximation of a calibration function may then be determined by:
+
+\begin{equation}
+    a = b + c
+    \label{eq:chebyshev}
+\end{equation}
+
+\noindent where a, b, and c\dots
+\prgph
+
+The Legendre polynomial is defined as:
+
+\begin{equation}
+    d = e + f
+    \label{eq:legendre}
+\end{equation}
+
+\noindent where d, e, and f\dots
+\prgph
+
+% https://iraf.net/irafdocs/formats/identify.php
+% https://iraf.net/irafdocs/formats/fitcoords.php
 
 
 \section{Polarimetry}
@@ -245,7 +289,9 @@ TODO: Origin of polarimetry (short history), and most important how polarimetry 
 
 TODO: Uses and what its use in astrophysics is.
 
+\subsection{Polarimetric calibrations}
 
+TODO: Wollaston corrections and Tilt corrections
 
 
 \section{Spectropolarimetry} % In depth
