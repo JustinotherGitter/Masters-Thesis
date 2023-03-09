@@ -232,9 +232,6 @@ Cross-talk noise refers to contamination that occurs during readout in one chann
 Finally, calibrations necessary for spectroscopy are limited to wavelength calibrations. Since the dispersion element breaks the incident light into its constituent wavelengths non-linearly, as discussed in Section \ref{subsec:dispersion}, the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modeled to produce a reliable pixel to wavelength calibration \citep[see Eg.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in Figure \ref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
 \prgph
 
-The wavelength calibrations then consist of identifying a \gls{2D} pixel to wavelength conversion function from the arc frame which may later be applied to calibrate the science frames.
-\prgph
-
 \begin{figure}[t]
     \centering
     \includegraphics[width = 16cm]{figures/2_Ne_arc.pdf}
@@ -243,31 +240,64 @@ The wavelength calibrations then consist of identifying a \gls{2D} pixel to wave
 \end{figure}
 \footnotetext{\protect\href{http://pysalt.salt.ac.za/lineatlas/plot_line_neon.pdf}{NeAr plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
 
-The two most common \gls{2D} approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations as found in Equations \ref{eq:chebyshev} and \ref{eq:legendre}, respectively. The Chebyshev polynomials may be recursively defined as:
+The wavelength calibrations then consist of identifying a \gls{2D} pixel to wavelength conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common \gls{2D} approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations as found in Equations \ref{eq:chebyshev} and \ref{eq:legendre}, respectively. The Chebyshev polynomials are defined axplicitly as:
 
-\begin{align}
-        T_{0}(x) &= 1 \\
-        T_{1}(x) &= x \\
-    T_{n + 1}(x) &= 2 x T_{n}(x) - T_{n - 1}(x)
-    \label{eq:chebypoly}
-\end{align}
+\begin{gather}
+    T_{0}(x) = 1 \nonumber \\
+    T_{1}(x) = x \label{eq:chebypoly} \\
+    T_{n + 1}(x) = 2 x T_{n}(x) - T_{n - 1}(x), \text{ for } n \geq 1 \nonumber
+\end{gather}
 
-\noindent or approximated by:
+\noindent or recursively as:
 
 \begin{equation}
-    T_{0}(x) = \cos(n \cos^{-1}(x)).
+    T_{n}(x) = \cos(n \cos^{-1}(x)),
     \label{eq:chebypolyapprox}
 \end{equation}
 
-The Chebyshev approximation of a calibration function may then be determined by:
+\noindent where $T$ is a Chebyshev polynomial\footnote{Denoted $T$ as a hold-over from the alternate spelling, `Tchebycheff'.} of degree $n$. These Chebyshev polynomials are a set of orthogonal polynomials, when weighted by $1 / \sqrt{1 - x^{2}}$, meaning that the inner product of any two different Chebyshev polynomials, $T_{i}(x)$ and $T_{j}(x)$, over the range of $[-1, 1]$ is zero.
 
 \begin{equation}
-    a = b + c
+    \int_{-1}^{1} T_{i}(x) T_{j}(x) \frac{1}{\sqrt{1-x^{2}}} \,dx =
+    \begin{cases}
+        0,       & i \neq j\\
+        \pi / 2, & i = j \neq 0\\
+        \pi,     & i = j = 0
+    \end{cases}
+    \label{eq:chebyorth}
+\end{equation}
+
+The unknown calibration function may then be approximated by Chebyshev polynomials using:
+
+\begin{equation}
+    f(x) \approx \sum_{k = 0}^{N}  c_{k} T_{k}(u)
     \label{eq:chebyshev}
 \end{equation}
 
-\noindent where a, b, and c\dots
+\noindent where $N$ is the desired order, and $u \in [-1, 1]$ is a scaling factor to remap the variable $x \in [a, b]$ so that the orthogonality of the Chebyshev polynomials holds true.
+
+\begin{align}
+    u &= \frac{2 x - a - b}{b - a} & x &= \frac{b - a}{2} u + \frac{a+b}{2}
+    \label{eq:chebyXtoU}
+\end{align}
+
+The coefficients may be determined by:
+
+\begin{equation}
+    c_{i} = \frac{2}{N} \sum_{k = 0}^{N - 1} f(x_{k}) T_{i}(x_{k})
+    \label{eq:chebycoeff}
+\end{equation}
+
+The Chebyshev polynomials are more ideally suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in Figure \ref{fig:chebyshev}. This means that the chebyshev approximation is exact when $x$ is located at the x-intercepts of $T_{N}(x)$ which greatly minimizes the error in the approximation, even at lower order approximations \citep{cheby}.
 \prgph
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 12cm]{figures/2_chebyshev.pdf}
+    \caption{The first seven Chebyshev polynomials ($T_0$ through $T_{6}$) as defined by Equation \ref{eq:chebypoly} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from \citep{numerical_recipes} (2023)\protect\footnotemark}
+    \label{fig:chebyshev}
+\end{figure}
+\footnotetext{Available digitally at \protect\href{http://numerical.recipes/book}{numerical.recipes}}
 
 The Legendre polynomial is defined as:
 
@@ -281,6 +311,7 @@ The Legendre polynomial is defined as:
 
 % https://iraf.net/irafdocs/formats/identify.php
 % https://iraf.net/irafdocs/formats/fitcoords.php
+% https://www.embeddedrelated.com/showarticle/152.php#:~:text=To%20approximate%20a%20function%20by,2%20for%20all%20other%20k.
 
 
 \section{Polarimetry}
