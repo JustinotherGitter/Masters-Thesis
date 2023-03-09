@@ -61,7 +61,7 @@ The focusing lens functions similarly to that of the telescope's optics but in t
 The two most prevalent detector types in spectroscopy are the \gls{CCD} and \gls{CMOS} detectors. In astronomical spectroscopy however, sources are fainter and exposure times are much longer and so the \gls{CCD} detectors are by far the preferred detector as their output has a higher-quality and lower-noise when compared to \gls{CMOS} cameras under the same conditions \citep{CCDvsCMOS}.
 \prgph
 
-The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in Section \ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a \gls{2D} array of `counts' with which information may be extracted from. Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in Section \ref{subsec:calibration}.
+The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in Section \ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a two dimensional array of `counts' with which information may be extracted from. Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in Section \ref{subsec:calibration}.
 
 \subsection{Dispersion Elements} \label{subsec:dispersion}
 % https://spectroscopy.wordpress.com/2020/05/12/basics-on-prisms-and-diffraction-gratings-part-1/
@@ -240,22 +240,22 @@ Finally, calibrations necessary for spectroscopy are limited to wavelength calib
 \end{figure}
 \footnotetext{\protect\href{http://pysalt.salt.ac.za/lineatlas/plot_line_neon.pdf}{NeAr plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
 
-The wavelength calibrations then consist of identifying a \gls{2D} pixel to wavelength conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common \gls{2D} approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations as found in Equations \ref{eq:chebyshev} and \ref{eq:legendre}, respectively. The Chebyshev polynomials are defined axplicitly as:
+The wavelength calibrations then consist of identifying a two dimensional pixel to wavelength conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations as found in Equations \ref{eq:chebyshev} and \ref{eq:legendre}, respectively. The Chebyshev polynomials are defined explicitly as:
+
+\begin{equation}
+    T_{n}(x) = \cos(n \cos^{-1}(x)),
+    \label{eq:chebypolyexplicit}
+\end{equation}
+
+\noindent or recursively as:
 
 \begin{gather}
     T_{0}(x) = 1 \nonumber \\
     T_{1}(x) = x \label{eq:chebypoly} \\
-    T_{n + 1}(x) = 2 x T_{n}(x) - T_{n - 1}(x), \text{ for } n \geq 1 \nonumber
+    T_{n}(x) = 2 x T_{n - 1}(x) - T_{n - 2}(x), \text{ for } n > 1 \nonumber
 \end{gather}
 
-\noindent or recursively as:
-
-\begin{equation}
-    T_{n}(x) = \cos(n \cos^{-1}(x)),
-    \label{eq:chebypolyapprox}
-\end{equation}
-
-\noindent where $T$ is a Chebyshev polynomial\footnote{Denoted $T$ as a hold-over from the alternate spelling, `Tchebycheff'.} of degree $n$. These Chebyshev polynomials are a set of orthogonal polynomials, when weighted by $1 / \sqrt{1 - x^{2}}$, meaning that the inner product of any two different Chebyshev polynomials, $T_{i}(x)$ and $T_{j}(x)$, over the range of $[-1, 1]$ is zero.
+\noindent where $T$ is a Chebyshev polynomial\footnote{Denoted $T$ as a hold-over from the alternate spelling, `Tchebycheff'.} of degree $n$. Chebyshev polynomials are orthogonal when weighted by $1 / \sqrt{1 - x^{2}}$, meaning that the inner product of any two different polynomials, $T_{i}(x)$ and $T_{j}(x)$, over the range of $[-1, 1]$ is zero.
 
 \begin{equation}
     \int_{-1}^{1} T_{i}(x) T_{j}(x) \frac{1}{\sqrt{1-x^{2}}} \,dx =
@@ -267,29 +267,46 @@ The wavelength calibrations then consist of identifying a \gls{2D} pixel to wave
     \label{eq:chebyorth}
 \end{equation}
 
-The unknown calibration function may then be approximated by Chebyshev polynomials using:
+A one or two dimensional unknown calibration function may then be approximated by Chebyshev polynomials using:
 
 \begin{equation}
-    f(x) \approx \sum_{k = 0}^{N}  c_{k} T_{k}(u)
+    f(x) \approx \sum_{i = 0}^{N}  c_{i} T_{i}(u)
     \label{eq:chebyshev}
 \end{equation}
 
-\noindent where $N$ is the desired order, and $u \in [-1, 1]$ is a scaling factor to remap the variable $x \in [a, b]$ so that the orthogonality of the Chebyshev polynomials holds true.
-
-\begin{align}
-    u &= \frac{2 x - a - b}{b - a} & x &= \frac{b - a}{2} u + \frac{a+b}{2}
-    \label{eq:chebyXtoU}
-\end{align}
-
-The coefficients may be determined by:
+\noindent or
 
 \begin{equation}
-    c_{i} = \frac{2}{N} \sum_{k = 0}^{N - 1} f(x_{k}) T_{i}(x_{k})
-    \label{eq:chebycoeff}
+    F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} c_{ij} T_{i}(u) T_{j}(v),
+    \label{eq:chebyshev2D}
 \end{equation}
 
-The Chebyshev polynomials are more ideally suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in Figure \ref{fig:chebyshev}. This means that the chebyshev approximation is exact when $x$ is located at the x-intercepts of $T_{N}(x)$ which greatly minimizes the error in the approximation, even at lower order approximations \citep{cheby}.
-\prgph
+\noindent respectively, where $N$ and $M$ are the desired $x$ and $y$ orders, $c_{ij}$ are the Chebyshev polynomial coefficients, and $u, v \in [-1, 1]$ are scaling factors to remap the variables $x, y \in [a, b]$ such that the orthogonality property of the Chebyshev polynomials holds true \citep{chebysurf, cheby2d}.
+
+\begin{align}
+    (u, v) &= \frac{2 (x, y) - a - b}{b - a} & (x, y) &= \frac{b - a}{2} (u, v) + \frac{a+b}{2}
+    \label{eq:XtoUV}
+\end{align}
+
+% When the calibration function is known but the function cannot be evaluated, the coefficients, $c_{n}$, may be approximated by:
+
+% \begin{equation}
+%     c_{n} \approx \frac{2}{N} \sum_{k = 0}^{N - 1} f(x_{k}) T_{n}(x_{k})
+%     \label{eq:chebycoeff}
+% \end{equation}
+
+% \noindent where:
+
+% \noindent which returns the positions of the  x-intercepts.
+% \prgph
+
+The Chebyshev polynomials are more ideally suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in Figure \ref{fig:chebyshev}. This means that the chebyshev approximation is exact when $x = x_{n}$, where $x_{n}$ are the positions of the $n - 1$ x-intercepts of $T_{N}(x)$. This property greatly minimizes the error in the Chebyshev approximation, even at lower order approximations \citep{cheby}.
+
+\begin{equation}
+    x_{n} = \cos{\left(  \frac{\pi}{2} \frac{2 n + 1}{N} \right)}
+\end{equation}
+
+% \prgph
 
 \begin{figure}[t]
     \centering
@@ -299,19 +316,52 @@ The Chebyshev polynomials are more ideally suited for wavelength calibrations th
 \end{figure}
 \footnotetext{Available digitally at \protect\href{http://numerical.recipes/book}{numerical.recipes}}
 
-The Legendre polynomial is defined as:
+Similar to the Chebyshev polynomials, the Legendre polynomials may be defined explicitly as:
 
 \begin{equation}
-    d = e + f
+    P_{n}(x) = \frac{1}{2^{n} n!} \frac{d^{n}}{d x^{n}} (x^{2} - 1)^{n}
+    \label{eq:legpolyexplicit}
+\end{equation}
+
+\noindent or recursively as:
+
+\begin{gather}
+    P_{0}(x) = 1 \nonumber \\
+    P_{1}(x) = x \label{eq:legpoly} \\
+    P_{n}(x) = \frac{2 n + 1}{n + 1} x P_{n - 1}(x) - \frac{n}{n + 1} P_{n - 2}(x), \text{ for } n > 1 \nonumber
+\end{gather}
+
+\noindent where P is a Legendre polynomial of degree n. Legendre polynomials are also orthogonal over the range $[-1, 1]$.
+\prgph
+
+\begin{equation}
+    \int_{-1}^{1} P_{i}(x) P_{j}(x) \,dx =
+    \begin{cases}
+        0,                 & i \neq j\\
+        \frac{2}{2 n + 1}, & i = j
+    \end{cases}
+    \label{eq:legorth}
+\end{equation}
+
+A one or two dimensional unknown calibration function may then be approximated by Legendre polynomials using:
+
+\begin{equation}
+    f(x) \approx \sum_{n = 0}^{N} a_{n} P_{n}(u)
     \label{eq:legendre}
 \end{equation}
 
-\noindent where d, e, and f\dots
+\noindent or
+
+\begin{equation}
+    F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} a_{ij} P_{i}(u) P_{j}(v),
+    \label{eq:Legendre2D}
+\end{equation}
+
+\noindent respectively, where $N$ and $M$ are the desired $x$ and $y$ orders, $u$ and $v$ are the same mapping variable as in Equation \ref{eq:XtoUV}, and $a_{ij}$ are the Legendre polynomial coefficients. Legendre polynomials benefit from having the orthogonality condition with no weight necessary which makes their coefficients easier to compute but the error in a Legendre approximation of a function is greater than that of the error in a Chebyshev approximation for the same required order, $N$ (in one dimension) \citep{leg_cheb_relation}.
 \prgph
 
-% https://iraf.net/irafdocs/formats/identify.php
-% https://iraf.net/irafdocs/formats/fitcoords.php
-% https://www.embeddedrelated.com/showarticle/152.php#:~:text=To%20approximate%20a%20function%20by,2%20for%20all%20other%20k.
+Regardless of which set of polynomials is chosen, the polynomials are fit to the known (wavelength, pixel) pair using a least squares method. The resultant minimized function may then be used to convert the science frames from a (x pixel, y pixel) coordinate system to a (wavelength, pixel) coordinate system.
+\prgph
 
 
 \section{Polarimetry}

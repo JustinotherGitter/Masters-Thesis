@@ -7,6 +7,15 @@
 # General Diffraction Gratings : http://www.scholarpedia.org/article/Diffraction_gratings#Holographic_gratings
 # SALT call for proposals : http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html#ftnt_ref2
 
+# % # Spectroscopy Links # % #
+# https://iraf.net/irafdocs/formats/identify.php
+# https://iraf.net/irafdocs/formats/fitcoords.php
+# https://www.embeddedrelated.com/showarticle/152.php#:~:text=To%20approximate%20a%20function%20by,2%20for%20all%20other%20k.
+# https://www.chebfun.org/docs/guide/guide04.html
+
+# % # Polarimetry Links # % #
+
+
 @book{opticks,
         title = {Opticks:: Or, A Treatise of the Reflections, Refractions, Inflections and Colours of Light},
        author = {{Newton}, I. and {Innys}, W.},
@@ -32,7 +41,7 @@
 }
 
 @ARTICLE{WollPrism,
-       author = {{Hyde Wollaston}, William},
+       author = {{Wollaston}, William H.},
         title = "{XII. A Method of Examining Refractive and Dispersive Powers, by Prismatic Reflection}",
       journal = {Philosophical Transactions of the Royal Society of London Series I},
          year = 1802,
@@ -115,7 +124,7 @@
 }
 
 @BOOK{CCDhandbook,
-       author = {{Howell}, Steve Bruce},
+       author = {{Howell}, Steve B.},
         title = "{Handbook of CCD Astronomy}",
          year = 2006,
        volume = {5},
@@ -154,7 +163,7 @@
 }
 
 @article{WavCalSpectraModel,
-       author = {Dongyue Liu and Bryan M. Hennelly},
+       author = {{Liu}, Dongyue and {Hennelly}, Bryan M.},
         title ={Improved Wavelength Calibration by Modeling the Spectrometer},
       journal = {Applied Spectroscopy},
        volume = {76},
@@ -169,7 +178,7 @@
 }
 
 @article{WavCalCCDArray,
-       author = {Gaigalas, A. and Wang, Lili and He, Hua-Jun and Derose, Paul},
+       author = {{Gaigalas}, A. and {Wang}, Lili and {He}, Hua-Jun and {Derose}, Paul},
          year = {2009},
         month = {07},
         pages = {215},
@@ -180,7 +189,7 @@
 }
 
 @article{WavCalSpectroscopy,
-       author = {Ching-Hui Tseng and Joseph F. Ford and Charles K. Mann and Thomas J. Vickers},
+       author = {{Tseng}, Ching-Hui and {Ford}, Joseph F. and {Mann}, Charles K. and {Vickers}, Thomas J.},
       journal = {Applied spectroscopy},
      keywords = {Applied spectroscopy; Calibration; Detector arrays; Fourier transforms; Ion lasers; Raman spectroscopy},
        number = {11},
@@ -196,7 +205,7 @@
 
 @book{polynomials,
         title = {Methods of Mathematical Physics, Volume 1},
-       author = {Courant, R. and Hilbert, D.},
+       author = {{Courant}, R. and {Hilbert}, D.},
        number = {v. 1},
          isbn = {9783527617227},
           url = {https://books.google.co.za/books?id=z3s4WnhEAbAC},
@@ -206,7 +215,7 @@
 
 @book{numerical_recipes,
         title = {Numerical Recipes 3rd Edition: The Art of Scientific Computing},
-       author = {Press, W.H. and Teukolsky, S.A. and Vetterling, W.T. and Flannery, B.P.},
+       author = {{Press}, W.~H. and {Teukolsky}, S.~A. and {Vetterling}, W.~T. and {Flannery}, B.~P.},
          isbn = {9780521880688},
          lccn = {2007062003},
           url = {https://books.google.co.za/books?id=1aAOdzK3FegC},
@@ -215,12 +224,63 @@
 }
 
 @misc{cheby,
-  title={Mathematical methods for physicists},
-  author={Arfken, George B and Weber, Hans J},
-  year={1999},
-  publisher={American Association of physics teachers}
+        title = {Mathematical methods for physicists},
+       author = {{Arfken}, George B. and {Weber}, Hans J.},
+         year = {1999},
+    publisher = {American Association of physics teachers}
 }
 
+@book{leg,
+        title = {Numerical Methods},
+       author = {{Dahlquist}, G. and {Bj{\"o}rck}, {\AA}.},
+         isbn = {9780486428079},
+         lccn = {2002072867},
+       series = {Dover Books on Mathematics},
+          url = {https://books.google.co.ls/books?id=armfeHpJIwAC},
+         year = {2003},
+    publisher = {Dover Publications}
+}
+
+@article{chebysurf,
+        title = {Compression of aircraft aerodynamic database using multivariable Chebyshev polynomials},
+       author = {{Leng}, Gerard},
+      journal = {Advances in Engineering Software},
+       volume = {28},
+       number = {2},
+        pages = {133-141},
+         year = {1997},
+         issn = {0965-9978},
+          doi = {https://doi.org/10.1016/S0965-9978(96)00043-9},
+          url = {https://www.sciencedirect.com/science/article/pii/S0965997896000439},
+     keywords = {function approximation, data compression, multivariable orthogonal polynomials, aerodynamic database},
+     abstract = {An automated procedure for the modeling of aerodynamic data obtained from wind-tunnel measurements has been developed. Heuristics and multivariable Chebyshev orthogonal polynomials are combined to construct function approximations of the tabular aerodynamic database. This method results in a significant reduction in the size of the database and the man-hours required for developing an explicit mathematical model. The software design philosophy and validation results using actual aerodynamic data for the F16 fighter aircraft are presented here.}
+}
+
+@article{cheby2d,
+          doi = {10.48550/ARXIV.1507.03960},
+          url = {https://arxiv.org/abs/1507.03960},
+        title = {Digital terrain modeling with the Chebyshev polynomials},
+       author = {{Florinsky}, I.~V. and {Pankratov}, A.~N.},
+      journal = {Machine Learning and Data Analysis},
+         year = {2015},
+       volume = {1},
+       number = {12},
+        pages = {1647 - 1659},
+     keywords = {Geophysics (physics.geo-ph), Computational Engineering, Finance, and Science (cs.CE), Computational Geometry (cs.CG), Differential Geometry (math.DG), FOS: Physical sciences, FOS: Physical sciences, FOS: Computer and information sciences, FOS: Computer and information sciences, FOS: Mathematics, FOS: Mathematics, G.1.2, 41A10},
+    publisher = {arXiv},
+    copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@book{leg_cheb_relation,
+        place = {Cambridge},
+       series = {Encyclopedia of Mathematics and its Applications},
+        title = {Classical and Quantum Orthogonal Polynomials in One Variable},
+          DOI = {10.1017/CBO9781107325982},
+    publisher = {Cambridge University Press},
+       author = {{Ismail}, Mourad E.~H.},
+         year = {2005},
+   collection = {Encyclopedia of Mathematics and its Applications}
+}
 
 
 
@@ -395,7 +455,6 @@ archivePrefix = {arXiv},
        adsurl = {https://ui.adsabs.harvard.edu/abs/2010SPIE.7735E..4FB},
       adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
-
 
 @INPROCEEDINGS{SALT_NIR,
        author = {{Brink}, Janus D. and {Mogotsi}, Moses K. and {Saayman}, Melanie and {Van der Merwe}, Nicolaas M. and {Love}, Jonathan and {Christians}, Alrin},
