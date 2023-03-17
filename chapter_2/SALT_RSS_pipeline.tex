@@ -357,31 +357,93 @@ A one or two dimensional unknown calibration function may then be approximated b
     \label{eq:Legendre2D}
 \end{equation}
 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 12cm]{figures/2_legendre.pdf}
+    \caption{The first six Legendre polynomials ($P_0$ through $P_{5}$) as defined by Equation \ref{eq:legendre} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from Geek3, \protect\href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Legendrepolynomials6.svg}{Wikimedia Commons} (2023)}
+    \label{fig:legendre}
+\end{figure}
+
 \noindent respectively, where $N$ and $M$ are the desired $x$ and $y$ orders, $u$ and $v$ are the same mapping variable as in Equation \ref{eq:XtoUV}, and $a_{ij}$ are the Legendre polynomial coefficients. Legendre polynomials benefit from having the orthogonality condition with no weight necessary which makes their coefficients easier to compute but the error in a Legendre approximation of a function is greater than that of the error in a Chebyshev approximation for the same required order, $N$ (in one dimension) \citep{leg_cheb_relation}.
 \prgph
 
-Regardless of which set of polynomials is chosen, the polynomials are fit to the known (wavelength, pixel) pair using a least squares method. The resultant minimized function may then be used to convert the science frames from a (x pixel, y pixel) coordinate system to a (wavelength, pixel) coordinate system.
+Regardless of which set of polynomials is chosen, the polynomials are fit to the known (wavelength, pixel) pair using a least squares method. The resultant minimized function may then be used to convert the science frames from a (x pixel, y pixel) coordinate system to a (wavelength, y pixel) coordinate system.
 \prgph
 
 
 \section{Polarimetry}
 
-TODO: Origin of polarimetry (short history), and most important how polarimetry works in-depth (both practically and theoretically, I.E. Stokes parameters, wollaston prism, hwp, etc).
+% Origin of polarimetry (short history)
+Both Huygens and Newton came to the conclusion that light demonstrates transversal properties \citep{Huygens, opticks}, which was later further investigated and coined as `polarization' by Malus \citep{Pol_Malus}. Malus also investigated the polarization effects of multiple materials including some of which were birefringent, such as optical calcite, which he referred to as Iceland spar after Bartholinus' investigations of the material \citep{Bartholinus}.
 
-TODO: Uses and what its use in astrophysics is.
+% Malus' law gives:
+% \begin{equation}
+%     I = I_{0} \cos^{2} \theta
+%     \label{eq:Malus}
+% \end{equation}
+% \noindent where $I_{0}$ and $I$ are the Intensity of light before and after polarization, and $\theta$ is the orientation of the polarizer to the direction of propogation of the polarized light.
+\prgph
+
+Fresnel built on Malus' work showing that two beams of light, polarized at a right angle to one another, do not interfere, conclusively proving that light is transversal in nature, opposing the widely accepted longitudinal nature of light due to the prevalent belief in the ether. Fresnel later went on to correctly describe how polarized light is reflected and refracted at the surface of optical dielectic interfaces, without knowledge of the electromagnetic nature of light.Fresnel's equations for the reflectance and transmittance, $R$ and $T$, are defined as:
+
+\begin{align}
+    R_{s} &= \left\lvert \frac{Z_{2} \cos{\theta_{i}} - Z_{1} \cos{\theta_{t}}}{Z_{2} \cos{\theta_{i}} + Z_{1} \cos{\theta_{t}}} \right\rvert^{2} \nonumber \\
+    R_{p} &= \left\lvert \frac{Z_{2} \cos{\theta_{t}} - Z_{1} \cos{\theta_{i}}}{Z_{2} \cos{\theta_{t}} + Z_{1} \cos{\theta_{i}}} \right\rvert^{2} \nonumber \\
+    \label{eq:Fresnel} \\
+    T_{s} &= 1 - R_{s} \nonumber \\
+    T_{p} &= 1 - R_{p} \nonumber
+\end{align}
+
+\noindent where $s$ and $p$ are the two polarized components of light perpendicular to one another, $Z_{1}$ and $Z_{2}$ are the impedances of the two media, and $\theta_{i}$, $\theta_{t}$, and $\theta_{r}$ are the angles of incidence, transmission, and reflection, respectively \citep{Fresnel}.
+\prgph
+
+Nicol was the first to create a polarizer, aptly named the Nicol prism, where the incident light is split into its two perpendicular polarization components, namely the ordinary and extraordinary beams. Faraday discovered the phenomenon where the polarization plane of light is rotated when under the influence of a magnetic field, known as the Faraday effect. Brewster calculated the angle of incidence, $\theta_{B}$, at which incident polarized light is perfectly transmitted through a transparent surface, with refractive indexes of $n_{1}$ and $n_{2}$, while non-polarized incident light is perfectly polarized when reflected and partially polarized when refracted.
+
+\begin{equation}
+        \theta_{B} = \arctan{\frac{n_{2}}{n_{1}}}
+        \label{eq:Brewster}
+\end{equation}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm]{figures/2_Nicol_prism.pdf}
+    \caption{Nicol prism diagram for incident non-polarized light.}
+    \label{fig:Nicol_prism}
+\end{figure}
+
+Stokes' work created the first consistent description of polarization and gave us the Stokes parameters which give an operational approach to polarization, discussed later in more detail \citep{Stokes}. Hale was the first to apply polarization to astronomical observations, using a Fresnel rhomb and Nicol prism as a quarter-wave plate and polarizer, respectively \citep{Hale_pre,Hale_post}. Wollaston also created a prism, similarly named the Wollaston prism, which allowed simultaneous observation of the ordinary and extraordinary beams due to the smaller deviation angle \citep{WollPrism}.
+\prgph
+
+Finally, Chandrasekhar's work furthered our understanding of astrophysical polarimetry by explaining the origin of polarization observed in starlight as well as mathematically modeling the polarization of rotating stars, which came to be named Chandrasehkar polarization \citep{chandrasekhar}.
+
+% how polarimetry works (most important) (in-depth)
+% Polarimetry refers to the instrumental measurement of polarization.
+
+% - theoretically
+% Maxwells electromagnetic light equations
+% Stokes parameters
+
+% - practically
+% Wollaston prism, hwp, etc.
+
+
+% Uses and what its use in astrophysics is.
+
 
 \subsection{Polarimetric calibrations}
 
-TODO: Wollaston corrections and Tilt corrections
+% Wollaston corrections
+% Tilt corrections
 
 
 \section{Spectropolarimetry} % In depth
 
 % Spectropolarimetry is composed of Spectroscopy and polarimetry ...
 
-TODO: Origin of spectropolarimetry (short history), and most important how spectropolarimetry works in-depth (both practically and theoretically, I.E. frames, traces, O and E beams, etc).
+% Origin of spectropolarimetry (short history)
+% how spectropolarimetry works in-depth (both practically and theoretically, I.E. frames, traces, O and E beams, etc).
 
-TODO: Uses and what its use in astrophysics is.
+% Uses and what its use in astrophysics is.
 
 
 
@@ -404,7 +466,7 @@ The primary mirror is composed of 91 individual 1 m hexagonal mirrors which toge
 
 \subsection{Tracker and tracking}
 
-During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of ~5 $\mu$m and is capable of tracking $\pm$6$\degree$ from the optimal central track position. Targets at declinations from 10.5$\degree$ to -75.3$\degree$, as shown in Figure \ref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of ~7 m to 9 m when the tracker is furthest and closest to the optimal central position, respectively.
+During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of ~5 $\mu$m and is capable of tracking $\pm$6$\degree$ from the optimal central track position. Targets at declinations from 10.5$\degree$ to -75.3$\degree$, as shown in Figure \ref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of $\sim7$ m to 9 m when the tracker is furthest and closest to the optimal central position, respectively.
 \prgph
 
 \begin{figure}[t]

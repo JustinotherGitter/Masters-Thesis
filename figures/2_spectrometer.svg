@@ -26,20 +26,23 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="1.6920174"
-     inkscape:cx="328.30632"
-     inkscape:cy="118.7931"
-     inkscape:window-width="1600"
-     inkscape:window-height="877"
+     inkscape:cx="236.69969"
+     inkscape:cy="139.47847"
+     inkscape:window-width="1366"
+     inkscape:window-height="745"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g444">
+     inkscape:current-layer="g446">
     <inkscape:page
        x="0"
        y="0"
        id="page442"
        width="495.45599"
-       height="193.71667" />
+       height="193.71667"
+       inkscape:export-filename="2_spectrometer.pdf"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </sodipodi:namedview>
   <g
      id="g444"
@@ -262,28 +265,29 @@
          sodipodi:nodetypes="ccc" />
       <path
          style="opacity:1;fill:none;stroke:#000000;stroke-width:0.751177;stroke-dasharray:2.25353, 2.25353;stroke-dashoffset:0;stroke-opacity:1"
-         d="m 179.73764,189.53452 55.19659,-4.2558 45.68326,17.66717 59.45954,37.85819"
+         d="m 179.73764,189.53452 55.19659,-4.2558 45.68326,17.66717 85.32973,10.61077"
          id="path4044"
          sodipodi:nodetypes="cccc" />
       <path
          style="opacity:1;fill:none;stroke:#000000;stroke-width:0.751177;stroke-dasharray:2.25353, 2.25353;stroke-dashoffset:0;stroke-opacity:1"
-         d="m 206.00948,122.98426 3.22108,-1.12633 98.90832,31.67505 93.72217,51.60008"
+         d="m 206.00948,122.98426 3.22108,-1.12633 98.90832,31.67505 57.80834,60.02368"
          id="path4046"
          sodipodi:nodetypes="cccc" />
       <path
          style="opacity:1;fill:none;stroke:#000000;stroke-width:0.751177;stroke-dasharray:6.00942, 6.00942;stroke-dashoffset:0;stroke-opacity:1"
-         d="m 272.007,216.27815 33.51953,44.47367"
+         d="m 272.007,216.27815 64.4341,26.62514"
          id="path4048"
          sodipodi:nodetypes="cc" />
       <path
          style="opacity:1;fill:none;stroke:#000000;stroke-width:0.751177;stroke-dasharray:6.00942, 6.00942;stroke-dashoffset:0;stroke-opacity:1"
-         d="m 300.39699,167.27458 53.2968,65.66786"
+         d="m 300.39699,167.27458 37.47188,76.64851"
          id="path4050"
          sodipodi:nodetypes="cc" />
       <path
          style="opacity:1;fill:none;stroke:#000000;stroke-width:1.05016;stroke-opacity:1"
-         d="m 305.52653,260.75182 96.33452,-55.61876"
-         id="path4052" />
+         d="m 331.23544,252.30176 47.43174,-52.88822"
+         id="path4052"
+         sodipodi:nodetypes="cc" />
       <path
          style="opacity:1;fill:none;stroke:#000000;stroke-width:0.751177;stroke-dasharray:6.00941, 6.00941;stroke-dashoffset:0;stroke-opacity:1"
          d="m 237.88245,192.55379 -58.14481,-3.01927"
@@ -314,14 +318,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:sans-serif;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.751177;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       x="328.8735"
-       y="262.25183"
+       x="346.73904"
+       y="250.96092"
        id="text4202"><tspan
          sodipodi:role="line"
          id="tspan4200"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:cmr10;-inkscape-font-specification:cmr10;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.751181;stroke-dasharray:none;stroke-opacity:1"
-         x="328.8735"
-         y="262.25183">F.</tspan></text>
+         x="346.73904"
+         y="250.96092">F.</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:sans-serif;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.751177;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
