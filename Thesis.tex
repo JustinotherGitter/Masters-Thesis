@@ -1,6 +1,4 @@
-%\documentclass[a4paper,10pt, aas_macros]{report}
-%\documentclass[a4paper,11pt,oneside]{thesis}
-\documentclass{thesis}
+\documentclass{thesis} %[a4paper, 10pt, aas_macros]{report} %[a4paper, 11pt, oneside]{thesis}
 \usepackage{geometry}
 \geometry{a4paper, margin=25mm}
 
@@ -8,7 +6,8 @@
 % MOVE THE PACKAGE IMPORTS AT YOU OWN RISK!!!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[utf8]{inputenc}
-\usepackage[small]{caption}  %makes the captions to figures and tables slightly smaller than the normal text
+% Set the styling of captions
+\usepackage[font=scriptsize, labelfont=bf, justification=centering]{caption} %[small]{caption}
 %Math packages
 % \usepackage{array}% Formats tabular environments. Used by math and table packages
 % textcomp is imported by gensymb, adding it suppresses warnings about \perthousand and \micro
@@ -34,7 +33,6 @@
 % \usepackage{multirow}% Adds support to split a table cell into multiple rows
 
 %Other packages
-
 \usepackage{svg}
 \usepackage{multirow}
 \usepackage{array}
@@ -56,22 +54,20 @@
 % \usepackage{etoolbox} % for \robustify. Prevents errors that occasionally popup when creating/calling subfigure references
 % \robustify{\subref}% robusify the \subref command so it doesn't break on a whim
 
-% Justin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Justin Cooper %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Add the \gls command to keep track of acronyms
 \usepackage[nomain, acronym, automake, nonumberlist, nogroupskip, style=super]{glossaries-extra}
 % Make latex compile acronyms to use in document section
 \makeglossaries[acronym]
 % Set the style of the abbreviation to use in paragraphs
 \setabbreviationstyle[acronym]{long-short}
-% Add any wanted acronyms below
+% Add any acronyms below
 \newacronym{ADC}{ADC}{Analog-to-Digital Converter}
-% \newacronym{Ar}{Ar}{Argon}
 \newacronym{CCD}{CCD}{Charged-Coupled Device}
 \newacronym{CMOS}{CMOS}{Complementary Metal-Oxide-Semiconductor}
 \newacronym{HET}{HET}{Hobby-Eberly Telescope}
 \newacronym{HRS}{HRS}{High Resolution Spectrograph}
 \newacronym{IRAF}{IRAF}{Image Reduction and Analysis Facility}
-% \newacronym{NeAr}{NeAr}{Neon-Argon}
 \newacronym{NIR}{NIR}{Near Infra-Red}
 \newacronym{NIRifs}{NIR IFS}{Near Infra-Red Integral Field Spectrograph}
 \newacronym{POLSALT}{POLSALT}{Polarimetric reductions for SALT}
@@ -83,23 +79,20 @@
 \newacronym{SALTICAM}{SALTICAM}{SALT Imaging Camera}
 \newacronym{SNR}{S/N}{Signal-to-Noise Ratio}
 \newacronym{VPH}{VPH}{Volume Phase Holographic}
-%
 
-\usepackage[round,colon,authoryear,sort&compress]{natbib} %Sets bibliography references
-\usepackage[nottoc]{tocbibind} % Adds bibliography to ToC
-\usepackage{journal_macros} % Set macros for NASA ADS journal abbrevations
+% Set the bibliography references
+\usepackage[round,colon,authoryear,sort&compress]{natbib}
+% Add bibliography to ToC
+\usepackage[nottoc]{tocbibind}
+% Set macros for NASA ADS journal abbrevations
+\usepackage{journal_macros}
 
-% MY PACKAGES
-\usepackage{rotating}
-\usepackage{subcaption}
-\usepackage{amsmath}
-\usepackage[font=scriptsize, labelfont=bf, justification=centering]{caption}
+% Fix Underfull \hbox (badness 10000) in Bibliography
+\usepackage{etoolbox}
+\apptocmd{\sloppy}{\hbadness 10000\relax}{}{}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \usepackage[english]{babel}
-\usepackage{blindtext} % Allows for Lorem Ipsum text
-% \usepackage{dirtree}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\prgph}{\vspace{\baselineskip}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \graphicspath{{Figures1/}{Figures2/}}
 \newcommand{\super}[1]{\textsuperscript{#1}}
@@ -110,15 +103,12 @@
 \newcommand{\avg}[1]{\left< #1 \right> }
 \newcommand{\angstrom}{Å}
 
-\newcommand{\prgph}{\vspace{\baselineskip}}
-
-\renewcommand{\thefootnote}{\arabic{footnote}}
-
-
-\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
 %Hanno's commands
 %-------------------------------------------------
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
 % \newcommand{\todo}[1]{\textcolor{red}{\textbf{#1}}}
 % \renewcommand{\arraystretch}{0.8}
@@ -142,7 +132,8 @@
 \department{Department of Physics}
 \country{South Africa}
 
-\degreedate{Date of submission: \today} % TODO: Change \today to MONTH, YEAR at final submission
+% TODO: Change \today to MONTH, YEAR at final submission
+\degreedate{Date of submission: \today} 
 \supervisor{Prof. B. van Soelen}
 
 
@@ -156,8 +147,7 @@
 
 \tableofcontents
 
-% \glssetwidest{ISMF} %Longest abbreviation so the column width can be set
-
+% \glssetwidest{ISMF} % Longest abbreviation so the column width can be set
 
 \input{chapter_1/Introduction}
 \input{chapter_2/SALT_RSS_pipeline}
@@ -167,12 +157,10 @@
 \input{chapter_6/Conclusions}
 
 \include{chapter_0/Acknowledgements}
-\printglossary[type=acronym, title={List of Acronyms}]
-% \printglossary[type=abbreviations, style=alttree, title={List of Acronyms}]
+\printglossary[type=acronym, title={List of Acronyms}] %[type=abbreviations, style=alttree, title={List of Acronyms}]
 
 
-\bibliographystyle{plainnat} % aasjournal (surnames first), humannat
-%\bibliography{References/Catalogues,References/References}
+\bibliographystyle{plainnat} %{aasjournal} (surnames first) %{humannat}
 \bibliography{references}
 
 % \begin{appendices}

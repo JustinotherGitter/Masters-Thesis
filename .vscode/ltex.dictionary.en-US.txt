@@ -29,3 +29,15 @@ overscan
 mosaicking
 Mosaicking
 Chebyshev
+
+NeAr
+Longslit
+Malus
+birefringent
+Bartholinus
+Nicol
+rhomb
+Fabry-Pérot
+TODO
+IRAF
+polsalt

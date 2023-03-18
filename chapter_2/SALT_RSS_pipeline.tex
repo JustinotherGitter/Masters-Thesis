@@ -61,7 +61,7 @@ The focusing lens functions similarly to that of the telescope's optics but in t
 The two most prevalent detector types in spectroscopy are the \gls{CCD} and \gls{CMOS} detectors. In astronomical spectroscopy however, sources are fainter and exposure times are much longer and so the \gls{CCD} detectors are by far the preferred detector as their output has a higher-quality and lower-noise when compared to \gls{CMOS} cameras under the same conditions \citep{CCDvsCMOS}.
 \prgph
 
-The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in Section \ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a two dimensional array of `counts' with which information may be extracted from. Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in Section \ref{subsec:calibration}.
+The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in Section \ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a two-dimensional array of `counts' with which information may be extracted from. Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in Section \ref{subsec:calibration}.
 
 \subsection{Dispersion Elements} \label{subsec:dispersion}
 % https://spectroscopy.wordpress.com/2020/05/12/basics-on-prisms-and-diffraction-gratings-part-1/
@@ -89,7 +89,7 @@ The prism operates on the principle that the refractive index of light, $n$, var
 % \prgph
 
 \begin{equation}
-	\frac{d\theta}{d\lambda} = \frac{B}{a}\frac{dn}{d\lambda}% \propto -\lambda^{-3}
+	\frac{\partial \theta}{\partial \lambda} = \frac{B}{a}\frac{dn}{d\lambda}% \propto -\lambda^{-3}
     \label{eq:prism_angular_dispersion}
 \end{equation}
 
@@ -104,7 +104,7 @@ The angular dispersion of a prism can be represented by Equation \ref{eq:prism_a
 Equation \ref{eq:Cauchy}'s $A_{C}, B_{C}, C_{C}, \dots$ variables are called the Cauchy coefficients and have known values dependent on the material. Taking only the first term of the derivative of the Cauchy equation allows us to approximate the angular dispersion of a prism.
 
 \begin{equation}
-	\frac{d\theta}{d\lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\lambda^{-3}
+	\frac{\partial \theta}{\partial \lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\lambda^{-3}
     \label{eq:prism_angular_dispersion_approx}
 \end{equation}
 
@@ -131,7 +131,7 @@ The diffraction grating operates on the principle that when light interacts with
 \end{equation}
 
 % Link eq and fig
-Equation \ref{eq:grating_equation} is referred to as the grating equation and its variables relate to Figure \ref{fig:grating_diagram} such that $m$ is the order of the diffracted beam being measured, $\lambda$ is the wavelength of the incident light, $\sigma$ is the groove spacing, $\alpha$ is the angle of incident light relative to the grating normal, and $\beta$ is the angle of diffraction relative to the grating normal. It is important to note that the sign of $\alpha$ and $\beta$ depend on whether the grating is reflective or tranmissive. In the case of a reflective grating, such as in Figure \ref{fig:grating_diagram}, the signs of $\alpha$ and $\beta$ are the same relative to the grating normal, I.E. $\lambda = \sigma (\sin(\alpha) + \sin(\beta))$ for $m = 1$. In the case of a transmissive grating, the signs of $\alpha$ and $\beta$ are the opposite relative to the grating normal, I.E. $\lambda = \sigma (\sin(\alpha) - \sin(\beta))$ for $m = 1$.
+Equation \ref{eq:grating_equation} is referred to as the grating equation and its variables relate to Figure \ref{fig:grating_diagram} such that $m$ is the order of the diffracted beam being measured, $\lambda$ is the wavelength of the incident light, $\sigma$ is the groove spacing, $\alpha$ is the angle of incident light relative to the grating normal, and $\beta$ is the angle of diffraction relative to the grating normal. It is important to note that the sign of $\alpha$ and $\beta$ depend on whether the grating is reflective or transmissive. In the case of a reflective grating, such as in Figure \ref{fig:grating_diagram}, the signs of $\alpha$ and $\beta$ are the same relative to the grating normal, I.E. $\lambda = \sigma (\sin(\alpha) + \sin(\beta))$ for $m = 1$. In the case of a transmissive grating, the signs of $\alpha$ and $\beta$ are the opposite relative to the grating normal, I.E. $\lambda = \sigma (\sin(\alpha) - \sin(\beta))$ for $m = 1$.
 \prgph
 
 % Free Spectral range and Blazing
@@ -153,14 +153,14 @@ Equation \ref{eq:grating_equation} also describes how multiple wavelengths can s
 Taking the derivative of Equation \ref{eq:grating_equation} with respect to $\lambda$ and keeping $\alpha$ constant allows us to determine the angular dispersion of a diffraction grating.
 
 \begin{equation}
-    \frac{d\beta}{d\lambda} = \frac{m}{\sigma \cos(\beta)}
+    \frac{\partial \beta}{\partial \lambda} = \frac{m}{\sigma \cos(\beta)}
     \label{eq:grating_angular_dispersion}
 \end{equation}
 
 \noindent Substituting $m / \sigma$ with the grating equation gives
 
 \begin{equation}
-    \frac{d\beta}{d\lambda} = \frac{\sin(\alpha) + \sin(\beta)}{\lambda \cos(\beta)} \propto \lambda^{-1}
+    \frac{\partial \beta}{\partial \lambda} = \frac{\sin(\alpha) + \sin(\beta)}{\lambda \cos(\beta)} \propto \lambda^{-1}
     \label{eq:grating_angular_dispersion_approx}
 \end{equation}
 
@@ -223,13 +223,13 @@ The calibrated science image, $S^{*}_{\lambda}(x,y)$, which accounts for the bia
     \label{eq:science_cal}
 \end{equation}
 
-Multi-channel \gls{CCD}'s are detectors that use either multiple \gls{CCD}'s or a \gls{CCD} with multiple output amplifiers which can be read out through multiple channels at the same time, increasing the detectors size while keeping the readout time constant. These \gls{CCD} setups need additional calibrations, specifically cross-talk corrections and mosaicking.
+Multichannel \gls{CCD}'s are detectors that use either multiple \gls{CCD}'s or a \gls{CCD} with multiple output amplifiers which can be read out through multiple channels at the same time, increasing the detectors size while keeping the readout time constant. These \gls{CCD} setups need additional calibrations, specifically cross-talk corrections and mosaicking.
 \prgph
 
-Cross-talk noise refers to contamination that occurs during readout in one channel from another channel with a high signal and occurs because the signals can not be completely isolated from one another. Cross-talk corrections therefore account for this signal contamination between channels being read out at the same time \citep{CrossTalk}. Mosaicking is necessary for multi-channel \gls{CCD}'s since the digitized signal read out from the detector has no reference of the physical location of the pixel it was detected at. Mosaicking therefore orients the data acquired from a multi-channel detector correctly relatively to one another so that a single image is produced from the multiple channels read out from the detector.
+Cross-talk noise refers to contamination that occurs during readout in one channel from another channel with a high signal and occurs because the signals can not be completely isolated from one another. Cross-talk corrections therefore account for this signal contamination between channels being read out at the same time \citep{CrossTalk}. Mosaicking is necessary for multichannel \gls{CCD}'s since the digitized signal read out from the detector has no reference of the physical location of the pixel it was detected at. Mosaicking therefore orients the data acquired from a multichannel detector correctly relatively to one another so that a single image is produced from the multiple channels read out from the detector.
 \prgph
 
-Finally, calibrations necessary for spectroscopy are limited to wavelength calibrations. Since the dispersion element breaks the incident light into its constituent wavelengths non-linearly, as discussed in Section \ref{subsec:dispersion}, the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modeled to produce a reliable pixel to wavelength calibration \citep[see Eg.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in Figure \ref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
+Finally, calibrations necessary for spectroscopy are limited to wavelength calibrations. Since the dispersion element breaks the incident light into its constituent wavelengths non-linearly, as discussed in Section \ref{subsec:dispersion}, the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modeled to produce a reliable pixel to wavelength calibration \citep[see E.g.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in Figure \ref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
 \prgph
 
 \begin{figure}[t]
@@ -240,7 +240,7 @@ Finally, calibrations necessary for spectroscopy are limited to wavelength calib
 \end{figure}
 \footnotetext{\protect\href{http://pysalt.salt.ac.za/lineatlas/plot_line_neon.pdf}{NeAr plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
 
-The wavelength calibrations then consist of identifying a two dimensional pixel to wavelength conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations as found in Equations \ref{eq:chebyshev} and \ref{eq:legendre}, respectively. The Chebyshev polynomials are defined explicitly as:
+The wavelength calibrations then consist of identifying a two-dimensional pixel to wavelength conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations as found in Equations \ref{eq:chebyshev} and \ref{eq:legendre}, respectively. The Chebyshev polynomials are defined explicitly as:
 
 \begin{equation}
     T_{n}(x) = \cos(n \cos^{-1}(x)),
@@ -248,12 +248,14 @@ The wavelength calibrations then consist of identifying a two dimensional pixel 
 \end{equation}
 
 \noindent or recursively as:
-
-\begin{gather}
-    T_{0}(x) = 1 \nonumber \\
-    T_{1}(x) = x \label{eq:chebypoly} \\
-    T_{n}(x) = 2 x T_{n - 1}(x) - T_{n - 2}(x), \text{ for } n > 1 \nonumber
-\end{gather}
+\begin{equation}
+    \begin{gathered}
+        T_{0}(x) = 1 \\
+        T_{1}(x) = x  \\
+        T_{n}(x) = 2 x T_{n - 1}(x) - T_{n - 2}(x), \text{ for } n > 1
+    \end{gathered}
+    \label{eq:chebypoly}
+\end{equation}
 
 \noindent where $T$ is a Chebyshev polynomial\footnote{Denoted $T$ as a hold-over from the alternate spelling, `Tchebycheff'.} of degree $n$. Chebyshev polynomials are orthogonal when weighted by $1 / \sqrt{1 - x^{2}}$, meaning that the inner product of any two different polynomials, $T_{i}(x)$ and $T_{j}(x)$, over the range of $[-1, 1]$ is zero.
 
@@ -267,7 +269,7 @@ The wavelength calibrations then consist of identifying a two dimensional pixel 
     \label{eq:chebyorth}
 \end{equation}
 
-A one or two dimensional unknown calibration function may then be approximated by Chebyshev polynomials using:
+A one or two-dimensional unknown calibration function may then be approximated by Chebyshev polynomials using:
 
 \begin{equation}
     f(x) \approx \sum_{i = 0}^{N}  c_{i} T_{i}(u)
@@ -300,7 +302,7 @@ A one or two dimensional unknown calibration function may then be approximated b
 % \noindent which returns the positions of the  x-intercepts.
 % \prgph
 
-The Chebyshev polynomials are more ideally suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in Figure \ref{fig:chebyshev}. This means that the chebyshev approximation is exact when $x = x_{n}$, where $x_{n}$ are the positions of the $n - 1$ x-intercepts of $T_{N}(x)$. This property greatly minimizes the error in the Chebyshev approximation, even at lower order approximations \citep{cheby}.
+The Chebyshev polynomials are more ideally suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in Figure \ref{fig:chebyshev}. This means that the Chebyshev approximation is exact when $x = x_{n}$, where $x_{n}$ are the positions of the $n - 1$ x-intercepts of $T_{N}(x)$. This property greatly minimizes the error in the Chebyshev approximation, even at lower order approximations \citep{cheby}.
 
 \begin{equation}
     x_{n} = \cos{\left(  \frac{\pi}{2} \frac{2 n + 1}{N} \right)}
@@ -325,11 +327,14 @@ Similar to the Chebyshev polynomials, the Legendre polynomials may be defined ex
 
 \noindent or recursively as:
 
-\begin{gather}
-    P_{0}(x) = 1 \nonumber \\
-    P_{1}(x) = x \label{eq:legpoly} \\
-    P_{n}(x) = \frac{2 n + 1}{n + 1} x P_{n - 1}(x) - \frac{n}{n + 1} P_{n - 2}(x), \text{ for } n > 1 \nonumber
-\end{gather}
+\begin{equation}
+    \begin{gathered}
+        P_{0}(x) = 1 \\
+        P_{1}(x) = x \\
+        P_{n}(x) = \frac{2 n + 1}{n + 1} x P_{n - 1}(x) - \frac{n}{n + 1} P_{n - 2}(x), \text{ for } n > 1
+    \end{gathered}
+    \label{eq:legpoly}
+\end{equation}
 
 \noindent where P is a Legendre polynomial of degree n. Legendre polynomials are also orthogonal over the range $[-1, 1]$.
 \prgph
@@ -343,7 +348,7 @@ Similar to the Chebyshev polynomials, the Legendre polynomials may be defined ex
     \label{eq:legorth}
 \end{equation}
 
-A one or two dimensional unknown calibration function may then be approximated by Legendre polynomials using:
+A one or two-dimensional unknown calibration function may then be approximated by Legendre polynomials using:
 
 \begin{equation}
     f(x) \approx \sum_{n = 0}^{N} a_{n} P_{n}(u)
@@ -367,7 +372,7 @@ A one or two dimensional unknown calibration function may then be approximated b
 \noindent respectively, where $N$ and $M$ are the desired $x$ and $y$ orders, $u$ and $v$ are the same mapping variable as in Equation \ref{eq:XtoUV}, and $a_{ij}$ are the Legendre polynomial coefficients. Legendre polynomials benefit from having the orthogonality condition with no weight necessary which makes their coefficients easier to compute but the error in a Legendre approximation of a function is greater than that of the error in a Chebyshev approximation for the same required order, $N$ (in one dimension) \citep{leg_cheb_relation}.
 \prgph
 
-Regardless of which set of polynomials is chosen, the polynomials are fit to the known (wavelength, pixel) pair using a least squares method. The resultant minimized function may then be used to convert the science frames from a (x pixel, y pixel) coordinate system to a (wavelength, y pixel) coordinate system.
+Regardless of which set of polynomials is chosen, the polynomials are fit to the known (wavelength, pixel) pair using the least squares method. The resultant minimized function may then be used to convert the science frames from a (x pixel, y pixel) coordinate system to a (wavelength, y pixel) coordinate system.
 \prgph
 
 
@@ -384,17 +389,19 @@ Both Huygens and Newton came to the conclusion that light demonstrates transvers
 % \noindent where $I_{0}$ and $I$ are the Intensity of light before and after polarization, and $\theta$ is the orientation of the polarizer to the direction of propogation of the polarized light.
 \prgph
 
-Fresnel built on Malus' work showing that two beams of light, polarized at a right angle to one another, do not interfere, conclusively proving that light is transversal in nature, opposing the widely accepted longitudinal nature of light due to the prevalent belief in the ether. Fresnel later went on to correctly describe how polarized light is reflected and refracted at the surface of optical dielectic interfaces, without knowledge of the electromagnetic nature of light.Fresnel's equations for the reflectance and transmittance, $R$ and $T$, are defined as:
+Fresnel built on Malus' work showing that two beams of light, polarized at a right angle to one another, do not interfere, conclusively proving that light is transversal in nature, opposing the widely accepted longitudinal nature of light due to the prevalent belief in the ether. Fresnel later went on to correctly describe how polarized light is reflected and refracted at the surface of optical dielectric interfaces, without knowledge of the electromagnetic nature of light. Fresnel's equations for the reflectance and transmittance, $R$ and $T$, are defined as:
 
-\begin{align}
-    R_{s} &= \left\lvert \frac{Z_{2} \cos{\theta_{i}} - Z_{1} \cos{\theta_{t}}}{Z_{2} \cos{\theta_{i}} + Z_{1} \cos{\theta_{t}}} \right\rvert^{2} \nonumber \\
-    R_{p} &= \left\lvert \frac{Z_{2} \cos{\theta_{t}} - Z_{1} \cos{\theta_{i}}}{Z_{2} \cos{\theta_{t}} + Z_{1} \cos{\theta_{i}}} \right\rvert^{2} \nonumber \\
-    \label{eq:Fresnel} \\
-    T_{s} &= 1 - R_{s} \nonumber \\
-    T_{p} &= 1 - R_{p} \nonumber
-\end{align}
-
-\noindent where $s$ and $p$ are the two polarized components of light perpendicular to one another, $Z_{1}$ and $Z_{2}$ are the impedances of the two media, and $\theta_{i}$, $\theta_{t}$, and $\theta_{r}$ are the angles of incidence, transmission, and reflection, respectively \citep{Fresnel}.
+\begin{equation}
+    \begin{gathered}
+        R_{s} = \left\lvert \frac{Z_{2} \cos{\theta_{i}} - Z_{1} \cos{\theta_{t}}}{Z_{2} \cos{\theta_{i}} + Z_{1} \cos{\theta_{t}}} \right\rvert^{2} \\
+        R_{p} = \left\lvert \frac{Z_{2} \cos{\theta_{t}} - Z_{1} \cos{\theta_{i}}}{Z_{2} \cos{\theta_{t}} + Z_{1} \cos{\theta_{i}}} \right\rvert^{2} \\
+        T_{s} = 1 - R_{s} \\
+        T_{p} = 1 - R_{p}
+    \end{gathered}
+    \label{eq:Fresnel} 
+\end{equation}
+    
+\noindent where $s$ and $p$ are the two polarized components of light perpendicular to one another, $Z_{1}$ and $Z_{2}$ are the impedance of the two media, and $\theta_{i}$, $\theta_{t}$, and $\theta_{r}$ are the angles of incidence, transmission, and reflection, respectively \citep{Fresnel}.
 \prgph
 
 Nicol was the first to create a polarizer, aptly named the Nicol prism, where the incident light is split into its two perpendicular polarization components, namely the ordinary and extraordinary beams. Faraday discovered the phenomenon where the polarization plane of light is rotated when under the influence of a magnetic field, known as the Faraday effect. Brewster calculated the angle of incidence, $\theta_{B}$, at which incident polarized light is perfectly transmitted through a transparent surface, with refractive indexes of $n_{1}$ and $n_{2}$, while non-polarized incident light is perfectly polarized when reflected and partially polarized when refracted.
@@ -404,24 +411,136 @@ Nicol was the first to create a polarizer, aptly named the Nicol prism, where th
         \label{eq:Brewster}
 \end{equation}
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=10cm]{figures/2_Nicol_prism.pdf}
     \caption{Nicol prism diagram for incident non-polarized light.}
     \label{fig:Nicol_prism}
 \end{figure}
-
-Stokes' work created the first consistent description of polarization and gave us the Stokes parameters which give an operational approach to polarization, discussed later in more detail \citep{Stokes}. Hale was the first to apply polarization to astronomical observations, using a Fresnel rhomb and Nicol prism as a quarter-wave plate and polarizer, respectively \citep{Hale_pre,Hale_post}. Wollaston also created a prism, similarly named the Wollaston prism, which allowed simultaneous observation of the ordinary and extraordinary beams due to the smaller deviation angle \citep{WollPrism}.
 \prgph
 
-Finally, Chandrasekhar's work furthered our understanding of astrophysical polarimetry by explaining the origin of polarization observed in starlight as well as mathematically modeling the polarization of rotating stars, which came to be named Chandrasehkar polarization \citep{chandrasekhar}.
+Stokes' work created the first consistent description of polarization and gave us the Stokes parameters which give an operational approach to polarization, discussed later in more detail \citep{Stokes}. Hale was the first to apply polarization to astronomical observations, using a Fresnel rhomb and Nicol prism as a quarter-wave plate and polarizer, respectively \citep{Hale_pre,Hale_post}. Wollaston also created a prism, similarly named the Wollaston prism, which allowed simultaneous observation of the ordinary and extraordinary beams due to the smaller deviation angle \citep{WollPrism}. Finally, Chandrasekhar's work furthered our understanding of astrophysical polarimetry by explaining the origin of polarization observed in starlight as well as mathematically modeling the polarization of rotating stars, which came to be named Chandrasekhar polarization \citep{chandrasekhar}.
+\prgph
 
 % how polarimetry works (most important) (in-depth)
 % Polarimetry refers to the instrumental measurement of polarization.
 
 % - theoretically
+% Polarization ellipse from two perpendicular electric field vectors
 % Maxwells electromagnetic light equations
 % Stokes parameters
+Maxwell's equations for an electromagnetic field propagating through a vacuum are given as:
+
+\begin{equation}
+    \begin{gathered}
+        \nabla \cdot \textbf{E} = 0 \\
+        \nabla \cdot \textbf{B} = 0 \\
+        \nabla \times \textbf{E} = - \frac{\partial \textbf{B}}{\partial t} \\
+        \nabla \times \textbf{B} = \mu_{0} \epsilon_{0} \frac{\partial \textbf{E}}{\partial t}
+    \end{gathered}
+    \label{eq:Maxwell}
+\end{equation}
+
+\noindent where $\textbf{E}$ and $\textbf{B}$ are the electric and magnetic field vectors, and $\mu_{0}$ and $\epsilon_{0}$ are the permeability and permittivity of free space, respectively, and related to the speed of light by $c~=~(\mu_{0} \epsilon_{0})^{-\frac{1}{2}}$. \hyperref[eq:Maxwell]{Maxwell's Equations} take a non-trivial solution for the electric field vector propagating along the $z$-axis, towards a hypothetical observer, of the form:
+
+\begin{equation}
+    \textbf{E} = E_{x} \cos(\omega t - \Phi_{x}) \hat{\boldsymbol{x}} +
+                 E_{y} \cos(\omega t - \Phi_{y}) \hat{\boldsymbol{y}}
+    \label{eq:Maxwell_sol}
+\end{equation}
+
+\noindent where $E_{x}$, $E_{y}$, $\Phi_{x}$, and $\Phi_{y}$ are four constants describing the amplitude and phase of the electric field vector in the $x$ and $y$ axes. Rewriting Equation \ref{eq:Maxwell_sol} using the complex values allows us to simplify the form of the solution to:
+
+\begin{equation}
+    \textbf{E} = \Re(\textbf{E}_{0} e^{-i \omega t})
+    \label{eq:E_field_vector}
+\end{equation}
+
+\noindent where we only consider the real part of the equation, and where $\textbf{E}_{0}$ is defined as:
+
+\begin{equation}
+    \textbf{E}_{0} = E_{x} e^{i \Phi_{x}} \hat{\boldsymbol{x}} + 
+                     E_{y} e^{i \Phi_{y}} \hat{\boldsymbol{y}}
+    \label{eq:pol_vector}
+\end{equation}
+
+\noindent and is referred to as the polarization vector since it neatly contains the variables that control the polarization. Although the magnetic field is not discussed, it can be shown from \hyperref[eq:Maxwell]{Maxwell's Equations} that it is always defined as in phase and perpendicular to the electric field vector as well as perpendicular to the direction of propagation with the form $\textbf{B} = \Re(\textbf{B}_{0} e^{-i \omega t})$.
+\prgph
+
+% Polarizing Ellipse
+For an electric field vector with oscillating waves in some combination of both the $x$ and $y$ axes, the tip of the vector sweeps out an ellipse. This ellipse is referred to as the polarization ellipse and has the form:
+
+\begin{equation}
+    \left( \frac{\textbf{E}_{x}}{\textbf{E}_{0, x}}\right)^{2} +
+    \left( \frac{\textbf{E}_{y}}{\textbf{E}_{0, y}}\right)^{2} +
+    \frac{2 \textbf{E}_{x} \textbf{E}_{y}}{\textbf{E}_{0, x} \textbf{E}_{0, y}} \cos\Phi =
+    \sin^{2} \Phi
+    \label{eq:pol_ellipse}
+\end{equation}
+
+\noindent where $\Phi = \Phi_{x} - \Phi_{y}$ is the phase difference, and the degree of polarization is given by the eccentricity of the ellipse and the angle at which it is rotated gives the polarization angle. Because $\textbf{E}_{0, x}$, $\textbf{E}_{0, y}$, $\Phi_{x}$, and $\Phi_{y}$ are constant, the resultant polarization ellipse is fixed as the wave continues to propagate. We may then manipulate Equation~\ref{eq:pol_ellipse} to produce the polarization parameters:
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=6cm]{figures/2_pol_ellipse.pdf}
+    \caption{The polarization ellipse for an electric field vector propagating through free space.}
+    \label{fig:pol_ellipse}
+\end{figure}
+
+
+\begin{gather*}
+    (E_{x}^{2} + E_{y}^{2})^{2} - (E_{x}^{2} - E_{y}^{2})^{2} - (2 E_{x} E_{y} \cos \Phi)^{2} = (2 E_{x} E_{y} \sin \Phi)^{2} \\
+    \therefore P_{I}^{2} - P_{Q}^{2} - P_{U}^{2} = P_{V}^{2} \\
+    \therefore P_{I}^{2} = P_{Q}^{2} + P_{U}^{2} + P_{V}^{2}
+\end{gather*}
+
+\noindent where
+
+\begin{equation}
+    \begin{gathered}
+        P_{I} = E_{x}^{2} + E_{y}^{2} \\
+        P_{Q} = E_{x}^{2} - E_{y}^{2} \\
+        P_{U} = 2 E_{x} E_{y} \cos \Phi \\
+        P_{V} = 2 E_{x} E_{y} \sin \Phi
+    \end{gathered}
+    \label{eq:pol_params}
+\end{equation}
+\prgph
+
+There is however a seemingly small albeit major shortcoming of the polarization as defined in Equation~\ref{eq:pol_params}, the polarization ellipse as represented by Figure~\ref{fig:pol_ellipse} deals only with a single transverse wave and is incapable of handling a wave-packet, made up of multiple waves. This is because the waves making up a wave-packet will not share their polarization properties and will temporally vary from one another. By taking the time average of the waves in a wave-packet:
+
+\begin{equation}
+    \avg{\textbf{E}_{i} \textbf{E}_{j}} = \lim_{T \rightarrow \infty} \frac{1}{T} \int_{0}^{T} \textbf{E}_{i} \textbf{E}_{j}\,dt, \text{ for } i, j \in (x, y)
+\end{equation}
+
+\noindent where $T$ is the total averaging time, Equation~\ref{eq:pol_ellipse} now simplifies to:
+
+\begin{equation}
+    \textbf{S} = 
+    \begin{pmatrix}
+        S_{0} \\
+        S_{1} \\
+        S_{2} \\
+        S_{3}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        I \\
+        Q \\
+        U \\
+        V
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \avg{E_{x}^{2}} + \avg{E_{y}^{2}} \\
+        \avg{E_{x}^{2}} - \avg{E_{y}^{2}} \\
+        \avg{2 E_{x} E_{y} \cos \Phi} \\
+        \avg{2 E_{x} E_{y} \sin \Phi}
+    \end{pmatrix}
+    \label{eq:Stokes_params}
+\end{equation}
+
+\noindent where $S_{0}$ to $ S_{3}$ are referred to as the Stokes (polarization) parameters. These Stokes parameters may also be written in terms of the now time-invariant \hyperref[fig:pol_ellipse]{polarization ellipse}:
 
 % - practically
 % Wollaston prism, hwp, etc.
@@ -450,7 +569,7 @@ Finally, Chandrasekhar's work furthered our understanding of astrophysical polar
 
 \section{The South African Large Telescope} % Basics, not in depth
 
-\gls{SALT} is a 10 m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}. The operational design was based off of the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation (37$\degree$ from zenith in the case of SALT) while still allowing for full azimuthal rotation \citep{HET}. Both SALT and HET utilise a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path. Figure \ref{fig:SALT_telescope} depicts \gls{SALT}'s tracker (top left), supporting structure, and primary mirror (bottom right).
+\gls{SALT} is a 10 m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}. The operational design was based off of the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation (37$\degree$ from zenith in the case of SALT) while still allowing for full azimuthal rotation \citep{HET}. Both SALT and HET utilize a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path. Figure \ref{fig:SALT_telescope} depicts \gls{SALT}'s tracker (top left), supporting structure, and primary mirror (bottom right).
 
 \begin{figure}[t]
     \centering
@@ -509,9 +628,9 @@ TODO: How reductions would be done in general and through pure IRAF.
 
 I.E. Frames observed → flat, bias, arc, multiple targets, others(?)
 
-Corrections → flat fielding, bias subtraction (eq from obs. astro), others(?)
+Corrections → flat fielding, bias subtraction (EQ from obs. astro), others(?)
 
-Calibrations → wavelength, flux, shifting (trace to centre), background subtraction, others(?)
+Calibrations → wavelength, flux, shifting (trace to center), background subtraction, others(?)
 
 Extraction → spectral extraction, others(?)
 
@@ -523,7 +642,7 @@ TODO:
 
 In depth but not a users guide, more focus on purpose than the parameters (I.E. why each step is necessary and draw comparison to general reduction)
 
-Why polsalt works without any major need for concern.) "All steps except for the wavelength calibration and spectral extraction run with no user input. The spectral extraction is not a calibration but a simple check to make sure the entire trace is included in the window and also that the background regions do not contain any other objects lying on the frame or include the trace."
+Why polsalt works without any major need for concern. "All steps except for the wavelength calibration and spectral extraction run with no user input. The spectral extraction is not a calibration but a simple check to make sure the entire trace is included in the window and also that the background regions do not contain any other objects lying on the frame or include the trace."
 
 \noindent Raw image reductions
 
@@ -548,7 +667,7 @@ All processes run / files created / PURPOSE!
 
 All processes run / files created / PURPOSE!
 
-\noindent Post processing analysis % All 'script.py' steps in the BASH reduction
+\noindent Post-processing analysis % All 'script.py' steps in the BASH reduction
 
 PURPOSE
 Data Culling (BASH) (not used but mention use) / 
