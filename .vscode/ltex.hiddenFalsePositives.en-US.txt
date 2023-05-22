@@ -27,3 +27,16 @@
 {"rule":"SINGULAR_VERB_AFTER_THESE_OR_THOSE","sentence":"^\\QThese Stokes parameters may also be written in terms of the now time-invariant polarization ellipse:\\E$"}
 {"rule":"FROM_X_Y","sentence":"^\\QThe \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is currently being commissioned and will extend SALT's operational wavelength range from 3200 - 9000 Å to 3200 - 17000 Å, providing medium resolution spectroscopy at R = 2000 - 5000 over NIR wavelengths \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qastro), others(?)\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q – \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q are referred to as the Stokes (polarization) parameters.\\E$"}
+{"rule":"SINGULAR_VERB_AFTER_THESE_OR_THOSE","sentence":"^\\QThese Stokes parameters may also be written in terms of the now time-invariant polarization ellipse as:\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QFigure adapted from Inductiveload, via \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q (2023)\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q are four constants describing the amplitude and phase of the electric field vector in the \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q plane.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q are all constants describing the amplitude and phase of the electric field vector in the \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q plane.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qand is referred to as the polarization vector since it neatly contains the variables that are responsible for the polarization.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the phase difference.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q – \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q are referred to as the Stokes (polarization) parameters \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q denotes the axis of transmission for the polarizer and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q denote the fast and slow axis of the waveplate.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the beam incident on the optical element and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q represents the \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Mueller matrix representing the optical element.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the total averaging time over electric field vectors \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QMueller matrices are espesially useful\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QMueller matrices are especially useful\\E$"}

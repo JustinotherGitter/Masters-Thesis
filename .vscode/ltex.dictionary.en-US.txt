@@ -41,3 +41,7 @@ Fabry-Pérot
 TODO
 IRAF
 polsalt
+waveplate
+retardance
+polarimeter
+Soelen

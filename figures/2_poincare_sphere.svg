@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="360"
+   height="360"
+   version="1.1"
+   id="svg314"
+   sodipodi:docname="2_poincare_sphere.svg"
+   inkscape:export-filename="2_poincare_sphere.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs318" />
+  <sodipodi:namedview
+     id="namedview316"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.323861"
+     inkscape:cx="171.09047"
+     inkscape:cy="181.28791"
+     inkscape:window-width="1366"
+     inkscape:window-height="745"
+     inkscape:window-x="1592"
+     inkscape:window-y="126"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g311" />
+  <clipPath
+     id="clip1">
+    <path
+       d="M -200,-200 L 200,-200 L 200,200 L -200,200 L -200,-52 L 0,-52 L 0,-82 L -200,-82 L -200,-200 Z"
+       id="path226" />
+  </clipPath>
+  <g
+     id="poincare"
+     transform="translate(159.5, 195.5) scale(1,-1)">
+    <path
+       d="M -143,0 A 143,62 0 1 0 143,0"
+       style="stroke:#808080;stroke-width:1;stroke-dasharray:6,6;fill:none;"
+       id="path229" />
+    <path
+       d="M 0,143 A 143,60 -90 1 1 0,-143"
+       transform="rotate(13)"
+       clip-path="url(#clip1)"
+       style="stroke:#808080;stroke-dasharray:6,6;stroke-width:1;fill:none;"
+       id="path231" />
+    <path
+       d="M -125,0 H 186"
+       transform="rotate(-135)"
+       style="stroke:#000000;stroke-width:1;fill:none;"
+       id="path233" />
+    <path
+       d="M 0,-2.5 L 4,-3 L 2,4 L 0,12 L -2,4 L -4,-3 L 0,-2.5 Z"
+       transform="rotate(-225) translate(0,186)"
+       style="stroke:none;fill:#000000;"
+       id="path235" />
+    <path
+       d="M -155,0 H 188"
+       transform="rotate(-10.6)"
+       style="stroke:#000000;stroke-width:1;fill:none;"
+       id="path237" />
+    <path
+       d="M 0,-2.5 L 4,-3 L 2,4 L 0,12 L -2,4 L -4,-3 L 0,-2.5 Z"
+       transform="rotate(-10.6) translate(188,0) rotate(270)"
+       style="stroke:none;fill:#000000;"
+       id="path239" />
+    <path
+       d="M 0,-163 V 177"
+       style="stroke:#000000;stroke-width:1;fill:none;"
+       id="path241" />
+    <path
+       d="M 0,-2.5 L 4,-3 L 2,4 L 0,12 L -2,4 L -4,-3 L 0,-2.5 Z"
+       transform="translate(0,177)"
+       style="stroke:none;fill:#000000;"
+       id="path243" />
+    <circle
+       cx="0"
+       cy="0"
+       r="143"
+       style="stroke:#000000;stroke-width:2;fill:none;"
+       id="circle245" />
+    <path
+       d="M 0,-143 A 143,60 -90 1 1 0,143"
+       transform="rotate(13)"
+       style="stroke:#000000;stroke-width:1;fill:none;"
+       id="path247" />
+    <path
+       d="M -143,0 A 143,62 0 1 1 143,0"
+       style="stroke:#000000;stroke-width:1;fill:none;"
+       id="path249" />
+    <path
+       d="M 0,0 L -56.88,-56.88 A 143,62 0 0 1 66.73,-54.84 L 0,0 Z"
+       style="stroke:none;fill:#204a87;opacity:0.2;"
+       id="path251" />
+    <path
+       d="M 0,0 L 52.68,-68.44 A 143,60 -90 0 1 53.71,63.72 L 0,0 Z"
+       transform="rotate(13)"
+       style="stroke:none;fill:#f57900;opacity:0.3;"
+       id="path253" />
+    <path
+       d="M 0,0 L 38,74.17"
+       style="stroke:#4e9a06;stroke-width:2;fill:none;"
+       id="path255" />
+    <path
+       d="M 0,0 L -10,3 L -10,-3 L 0,0 Z"
+       transform="translate(38, 74.17) rotate(63)"
+       style="stroke:#4e9a06;stroke-width:2;fill:#4e9a06;"
+       id="path257" />
+    <path
+       d="M 52.68,-68.44 A 143,60 -90 0 1 53.71,63.72"
+       transform="rotate(13)"
+       style="stroke:#f57900;stroke-width:2;fill:none;"
+       id="path259" />
+    <path
+       d="M 0,0 L -10,3 L -10,-3 L 0,0 Z"
+       transform="translate(38, 74.17) rotate(112)"
+       style="stroke:#f57900;stroke-width:2;fill:#f57900;"
+       id="path261" />
+    <path
+       d="M -56.88,-56.88 A 143,62 0 0 1 62,-55.87"
+       style="stroke:#204a87;stroke-width:2;fill:none;"
+       id="path263" />
+    <path
+       d="M 0,0 L -10,3 L -10,-3 L 0,0 Z"
+       transform="translate(66.73,-54.84) rotate(11)"
+       style="stroke:#204a87;stroke-width:2;fill:#204a87;"
+       id="path265" />
+    <circle
+       cx="38"
+       cy="74.17"
+       r="4"
+       style="stroke:none;fill:#5c3566;"
+       id="circle267" />
+    <circle
+       cx="0"
+       cy="0"
+       r="3"
+       style="stroke:none;fill:#000000;"
+       id="circle269" />
+    <text
+       transform="scale(1,-1)"
+       x="64"
+       y="-10"
+       xml:space="preserve"
+       style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif Italic"
+       id="text273"><tspan
+   x="64"
+   y="-10"
+   id="tspan271">2χ</tspan>
+    </text>
+    <text
+       transform="scale(1,-1)"
+       x="-43"
+       y="98"
+       xml:space="preserve"
+       style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif Italic"
+       id="text277"><tspan
+   x="-43"
+   y="87"
+   id="tspan275">2ψ</tspan>
+    </text>
+    <text
+       transform="scale(1,-1)"
+       x="2"
+       y="-66"
+       xml:space="preserve"
+       style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif Italic"
+       id="text281"><tspan
+   x="2"
+   y="-66"
+   id="tspan279">Ip</tspan>
+    </text>
+    <g
+       transform="translate(-127,-154) scale(1,-1)"
+       id="g291">
+      <text
+         x="0"
+         y="0"
+         xml:space="preserve"
+         style="font-size:32px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif Italic"
+         id="text285"><tspan
+   x="0"
+   y="0"
+   id="tspan283">S</tspan>
+      </text>
+      <text
+         x="19.6"
+         y="7.8"
+         style="font-size:24px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif Italic"
+         id="text289"><tspan
+           x="19.6"
+           y="7.8"
+           id="tspan287">1</tspan></text>
+    </g>
+    <g
+       transform="translate(157,-65) scale(1,-1)"
+       id="g301">
+      <text
+         x="0"
+         y="0"
+         xml:space="preserve"
+         style="font-size:32px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif Italic"
+         id="text295"><tspan
+   x="0"
+   y="0"
+   id="tspan293">S</tspan>
+      </text>
+      <text
+         x="19.6"
+         y="7.8"
+         style="font-size:24px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif Italic"
+         id="text299"><tspan
+           x="19.6"
+           y="7.8"
+           id="tspan297">2</tspan></text>
+    </g>
+    <g
+       transform="translate(6,167) scale(1,-1)"
+       id="g311">
+      <text
+         x="0"
+         y="0"
+         xml:space="preserve"
+         style="font-size:32px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif Italic"
+         id="text305"><tspan
+   x="0"
+   y="0"
+   id="tspan303">S</tspan>
+      </text>
+      <text
+         x="19.6"
+         y="7.8"
+         style="font-size:24px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif Italic"
+         id="text309"><tspan
+           x="19.6"
+           y="7.8"
+           id="tspan307">3</tspan></text>
+    </g>
+  </g>
+</svg>

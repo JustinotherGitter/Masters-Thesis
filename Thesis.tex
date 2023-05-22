@@ -55,6 +55,15 @@
 % \robustify{\subref}% robusify the \subref command so it doesn't break on a whim
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Justin Cooper %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Todo and coloring:
+% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX &
+% https://www.overleaf.com/learn/latex/Environments
+% \usepackage{xcolor}
+% \newcommand{\todo}[1]{\textcolor{red}{\textbf{#1}}}
+% \newenvironment{name}[numarg][optarg_default]{begin_def}{end_def}
+
+% Page nubering alteration:
+% https://www.overleaf.com/learn/latex/Page_numbering
 % Add the \gls command to keep track of acronyms
 \usepackage[nomain, acronym, automake, nonumberlist, nogroupskip, style=super]{glossaries-extra}
 % Make latex compile acronyms to use in document section
@@ -91,16 +100,17 @@
 \usepackage{etoolbox}
 \apptocmd{\sloppy}{\hbadness 10000\relax}{}{}
 
+\newcommand{\arcmin}{\hbox{$^\prime$} }
+\newcommand{\arcsec}{\hbox{$^{\prime\prime}$} }
+\newcommand{\avg}[1]{\left< #1 \right> }
+\newcommand{\degr}{\hbox{$^\circ$}}
+\newcommand{\matr}[1]{\mathbf{#1}}
 \newcommand{\prgph}{\vspace{\baselineskip}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \graphicspath{{Figures1/}{Figures2/}}
 \newcommand{\super}[1]{\textsuperscript{#1}}
 \newcommand{\rmn}[1]{{\mathrm{#1}}}
-\newcommand{\degr}{\hbox{$^\circ$}}
-\newcommand{\arcmin}{\hbox{$^\prime$} }
-\newcommand{\arcsec}{\hbox{$^{\prime\prime}$} }
-\newcommand{\avg}[1]{\left< #1 \right> }
 \newcommand{\angstrom}{Å}
 
 
@@ -110,7 +120,6 @@
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
-% \newcommand{\todo}[1]{\textcolor{red}{\textbf{#1}}}
 % \renewcommand{\arraystretch}{0.8}
 % \renewcommand{\floatpagefraction}{.9}
 
