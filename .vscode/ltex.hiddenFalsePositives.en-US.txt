@@ -40,3 +40,4 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the total averaging time over electric field vectors \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
 {"rule":"MISSING_GENITIVE","sentence":"^\\QMueller matrices are espesially useful\\E$"}
 {"rule":"MISSING_GENITIVE","sentence":"^\\QMueller matrices are especially useful\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QMueller matrices are especially useful when dealing with paths through optical elements as they observe the `train' property \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}

@@ -647,18 +647,15 @@ The Mueller matrix for linear polarization where $\beta$ is the angle between th
 \end{equation}
 \prgph
 
-% From these matrices and the chain rule in Equation~\ref{eq:mueller_train} we can find that a resultant Stokes vector $\matr{S}^{\prime}$ for a setup similar to Figure~\ref{fig:polarimeter} is given by:
 
-% \begin{gather}
-    %     \matr{S}^{\prime} = \matr{P} \matr{W} \matr{S} \nonumber \\
-    %     \therefore \matr{S}^{\prime} = \frac{1}{2} \left[ I + Q \cos2\beta + U \cos\alpha \sin2\beta + V \sin\alpha \sin2\beta\right]
-    % \end{gather}
-    
-    % Wollaston prism, hwp, etc.
+These matrices in combination with the chain rule in Equation~\ref{eq:mueller_train} allow us to describe how the Stokes parameters would change when passing through various optical elements. For a setup similar to Figure~\ref{fig:polarimeter}, we can vary the polarization angle, $\alpha$, and retandance angle, $\beta$, to acquire a system of equations that we can solve to retrieve the Stokes polarization parameters.
 
 \begin{equation}
     I(\alpha, \beta) = \frac{1}{2} \left[ I + Q \cos2\beta + U \cos\alpha \sin2\beta + V \sin\alpha \sin2\beta\right]
 \end{equation}
+
+% Wollaston prism, hwp, etc.
+
 
 
 

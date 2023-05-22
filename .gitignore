@@ -1,7 +1,8 @@
-# Ignore all but the important Thesis files
+# Ignore all but the important 'Thesis' files
 Thesis*
 !Thesis.tex
 !Thesis.pdf
 
 # Misc files/folders that aren't crucial to rerun Thesis.tex
 eg_chapters/
+.vscode/
