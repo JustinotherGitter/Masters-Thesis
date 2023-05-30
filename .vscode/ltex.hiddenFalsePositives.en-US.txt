@@ -41,3 +41,4 @@
 {"rule":"MISSING_GENITIVE","sentence":"^\\QMueller matrices are espesially useful\\E$"}
 {"rule":"MISSING_GENITIVE","sentence":"^\\QMueller matrices are especially useful\\E$"}
 {"rule":"MISSING_GENITIVE","sentence":"^\\QMueller matrices are especially useful when dealing with paths through optical elements as they observe the `train' property \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QPolarizers separate the polarization components through: Absorption of one of the polarized components, such as in Polaroid polarizing filters, total internal reflection of a single polarized component, such as in a Nicol prism (Figure \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q), Refraction of a single polarized component, such as in a Rochon prism (Figure\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q).\\E$"}

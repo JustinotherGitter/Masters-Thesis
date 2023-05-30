@@ -47,3 +47,6 @@ polarimeter
 Soelen
 
 retandance
+wollaston
+monoaxial
+Rochon

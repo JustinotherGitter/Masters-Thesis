@@ -37,8 +37,8 @@ The collimating lens functions to collimate the focused light from the telescope
 % \prgph
 
 \begin{equation}
-	\frac{f}{D} = \frac{f_{1}}{d_{1}}
-	\label{eq:focal_ratio}
+    \frac{f}{D} = \frac{f_{1}}{d_{1}}
+    \label{eq:focal_ratio}
 \end{equation}
 
 % From basic trigonometry and a small angle approximation, $\sin(\theta) \approx \theta$, Equation \ref{eq:small_angle} can be derived. From it, it can be seen that as the linear size, $D$, of most stellar objects is much smaller than the distance to those objects, $d$, and thus the incident light is already almost entirely collimated.
@@ -70,7 +70,7 @@ Light can be broken up into its constituent wavelengths through two different ph
 % \prgph
 
 \begin{equation}
-	R = \frac{\lambda}{FWHM}
+    R = \frac{\lambda}{FWHM}
     \label{eq:resolving_power}
 \end{equation}
 
@@ -89,7 +89,7 @@ The prism operates on the principle that the refractive index of light, $n$, var
 % \prgph
 
 \begin{equation}
-	\frac{\partial \theta}{\partial \lambda} = \frac{B}{a}\frac{dn}{d\lambda}% \propto -\lambda^{-3}
+    \frac{\partial \theta}{\partial \lambda} = \frac{B}{a}\frac{dn}{d\lambda}% \propto -\lambda^{-3}
     \label{eq:prism_angular_dispersion}
 \end{equation}
 
@@ -97,14 +97,14 @@ The angular dispersion of a prism can be represented by Equation \ref{eq:prism_a
 % \prgph
 
 \begin{equation}
-	n(\lambda) = A_{C} + \frac{B_{C}}{\lambda^{2}} + \frac{C_{C}}{\lambda^{4}} + \dots
+    n(\lambda) = A_{C} + \frac{B_{C}}{\lambda^{2}} + \frac{C_{C}}{\lambda^{4}} + \dots
     \label{eq:Cauchy}
 \end{equation}
 
 Equation \ref{eq:Cauchy}'s $A_{C}, B_{C}, C_{C}, \dots$ variables are called the Cauchy coefficients and have known values dependent on the material. Taking only the first term of the derivative of the Cauchy equation allows us to approximate the angular dispersion of a prism.
 
 \begin{equation}
-	\frac{\partial \theta}{\partial \lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\lambda^{-3}
+    \frac{\partial \theta}{\partial \lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\lambda^{-3}
     \label{eq:prism_angular_dispersion_approx}
 \end{equation}
 
@@ -126,7 +126,7 @@ The diffraction grating operates on the principle that when light interacts with
 % \prgph
 
 \begin{equation}
-	m\lambda = \sigma (\sin(\alpha) \pm \sin(\beta))
+    m\lambda = \sigma (\sin(\alpha) \pm \sin(\beta))
     \label{eq:grating_equation}
 \end{equation}
 
@@ -139,7 +139,7 @@ Equation \ref{eq:grating_equation} also describes how multiple wavelengths can s
 % \prgph
 
 \begin{equation}
-	m\lambda_{b} = 2\sigma\sin(\theta)\cos(\alpha - \theta)
+    m\lambda_{b} = 2\sigma\sin(\theta)\cos(\alpha - \theta)
     \label{eq:blaze_wavelength}
 \end{equation}
 
@@ -262,8 +262,8 @@ The wavelength calibrations then consist of identifying a two-dimensional pixel 
 \begin{equation}
     \int_{-1}^{1} T_{i}(x) T_{j}(x) \frac{1}{\sqrt{1-x^{2}}} \,dx =
     \begin{cases}
-        0,       & i \neq j\\
-        \pi / 2, & i = j \neq 0\\
+        0,       & i \neq j     \\
+        \pi / 2, & i = j \neq 0 \\
         \pi,     & i = j = 0
     \end{cases}
     \label{eq:chebyorth}
@@ -286,7 +286,7 @@ A one or two-dimensional unknown calibration function may then be approximated b
 \noindent respectively, where $N$ and $M$ are the desired $x$ and $y$ orders, $c_{ij}$ are the Chebyshev polynomial coefficients, and $u, v \in [-1, 1]$ are scaling factors to remap the variables $x, y \in [a, b]$ such that the orthogonality property of the Chebyshev polynomials holds true \citep{chebysurf, cheby2d}.
 
 \begin{align}
-    (u, v) &= \frac{2 (x, y) - a - b}{b - a} & (x, y) &= \frac{b - a}{2} (u, v) + \frac{a+b}{2}
+    (u, v) & = \frac{2 (x, y) - a - b}{b - a} & (x, y) & = \frac{b - a}{2} (u, v) + \frac{a+b}{2}
     \label{eq:XtoUV}
 \end{align}
 
@@ -342,7 +342,7 @@ Similar to the Chebyshev polynomials, the Legendre polynomials may be defined ex
 \begin{equation}
     \int_{-1}^{1} P_{i}(x) P_{j}(x) \,dx =
     \begin{cases}
-        0,                 & i \neq j\\
+        0,                 & i \neq j \\
         \frac{2}{2 n + 1}, & i = j
     \end{cases}
     \label{eq:legorth}
@@ -398,17 +398,17 @@ Fresnel built on Malus' work showing that two beams of light, polarized at a rig
         T_{s} = 1 - R_{s} \\
         T_{p} = 1 - R_{p}
     \end{gathered}
-    \label{eq:Fresnel} 
+    \label{eq:Fresnel}
 \end{equation}
-    
+
 \noindent where $s$ and $p$ are the two polarized components of light perpendicular to one another, $Z_{1}$ and $Z_{2}$ are the impedance of the two media, and $\theta_{i}$, $\theta_{t}$, and $\theta_{r}$ are the angles of incidence, transmission, and reflection, respectively \citep{Fresnel}.
 \prgph
 
 Nicol was the first to create a polarizer, aptly named the Nicol prism, where the incident light is split into its two perpendicular polarization components, namely the ordinary and extraordinary beams. Faraday discovered the phenomenon where the polarization plane of light is rotated when under the influence of a magnetic field, known as the Faraday effect. Brewster calculated the angle of incidence, $\theta_{B}$, at which incident polarized light is perfectly transmitted through a transparent surface, with refractive indexes of $n_{1}$ and $n_{2}$, while non-polarized incident light is perfectly polarized when reflected and partially polarized when refracted.
 
 \begin{equation}
-        \theta_{B} = \arctan{\frac{n_{2}}{n_{1}}}
-        \label{eq:Brewster}
+    \theta_{B} = \arctan{\frac{n_{2}}{n_{1}}}
+    \label{eq:Brewster}
 \end{equation}
 
 \begin{figure}[t]
@@ -445,7 +445,7 @@ Maxwell's equations for an electromagnetic field propagating through a vacuum ar
 
 \begin{equation}
     \matr{E} = E_{x} \cos(\omega t - \Phi_{x}) \hat{\boldsymbol{x}} +
-                 E_{y} \cos(\omega t - \Phi_{y}) \hat{\boldsymbol{y}}
+    E_{y} \cos(\omega t - \Phi_{y}) \hat{\boldsymbol{y}}
     \label{eq:Maxwell_sol}
 \end{equation}
 
@@ -459,8 +459,8 @@ Maxwell's equations for an electromagnetic field propagating through a vacuum ar
 \noindent where we only consider the real part of the equation, and where $\matr{E}_{0}$ is defined as:
 
 \begin{equation}
-    \matr{E}_{0} = E_{x} e^{i \Phi_{x}} \hat{\boldsymbol{x}} + 
-                     E_{y} e^{i \Phi_{y}} \hat{\boldsymbol{y}}
+    \matr{E}_{0} = E_{x} e^{i \Phi_{x}} \hat{\boldsymbol{x}} +
+    E_{y} e^{i \Phi_{y}} \hat{\boldsymbol{y}}
     \label{eq:pol_vector}
 \end{equation}
 
@@ -516,7 +516,7 @@ There is, however, a seemingly small albeit major shortcoming of the polarizatio
 \noindent where $T$ is the total averaging time over electric field vectors $\matr{E}_{i}$ and $\matr{E}_{j}$. Equation~\ref{eq:pol_params} now simplifies to:
 
 \begin{equation}
-    \matr{S} = 
+    \matr{S} =
     \begin{pmatrix}
         S_{0} \\
         S_{1} \\
@@ -534,7 +534,7 @@ There is, however, a seemingly small albeit major shortcoming of the polarizatio
     \begin{pmatrix}
         \avg{E_{x}^{2}} + \avg{E_{y}^{2}} \\
         \avg{E_{x}^{2}} - \avg{E_{y}^{2}} \\
-        \avg{2 E_{x} E_{y} \cos \Phi} \\
+        \avg{2 E_{x} E_{y} \cos \Phi}     \\
         \avg{2 E_{x} E_{y} \sin \Phi}
     \end{pmatrix}
     \label{eq:Stokes_params}
@@ -552,7 +552,7 @@ Using the \hyperref[eq:Stokes_params]{Stokes parameters}, we can now account for
 \noindent where it should be noted that $(I, Q, U, V)$ represent the partial polarization parameters and are related to $(P_{I}, P_{Q}, P_{U}, P_{V})$ since the polarization may be partial. In general, and henceforth, $(P_{I}, P_{Q}, P_{U}, P_{V})$ are relative quantities normalized to the intensity, where
 
 \begin{align}
-    P_{I} &= 1, & P_{Q} &= \frac{Q}{I}, & P_{U} &= \frac{U}{I}, \text{   and } & P_{V} &= \frac{V}{I}.
+    P_{I} & = 1, & P_{Q} & = \frac{Q}{I}, & P_{U} & = \frac{U}{I}, \text{   and } & P_{V} & = \frac{V}{I}.
     \label{eq:norm_Stokes}
 \end{align}
 \prgph
@@ -572,7 +572,7 @@ Similar to the polarization ellipse, the Stokes parameters may be represented pi
 \begin{figure}[t]
     \centering
     \includegraphics[width=6cm]{figures/2_poincare_sphere.pdf}
-    \caption{The Poincar{\'e} sphere describing the polarization properties of a wave-packet propagating through free space. Figure adapted from Inductiveload, via \protect\href{https://commons.wikimedia.org/wiki/File:Poincaré_sphere.svg}{Wikimedia Commons} (2023)}
+    \caption{The Poincar{\'e} sphere describing the polarization properties of a wave-packet propagating through free space. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Poincaré_sphere.svg}{Wikimedia Commons} (2023)}
     \label{fig:poincare}
 \end{figure}
 \prgph
@@ -604,18 +604,19 @@ Except for polarimetry in the radio-wavelength regime, the polarization of a bea
     \matr{S}^{\prime} = \matr{M}_{N} \dots \matr{M}_{0} \matr{S}
     \label{eq:mueller_train}
 \end{equation}
+\prgph
 
 Some Mueller Matrices are given below with angles related to those in Figure~\ref{fig:polarimeter}, measured counter-clockwise in a right-handed coordinate system.
 
 \paragraph*{General rotation}
 The Mueller matrix for coordinate space rotations about the origin by an angle $\theta$.
 \begin{equation}
-    \matr{R}(\theta) = 
+    \matr{R}(\theta) =
     \begin{bmatrix}
-        1 &  0             & 0             & 0 \\
-        0 &  \cos 2 \theta & \sin 2 \theta & 0 \\
+        1 & 0              & 0             & 0 \\
+        0 & \cos 2 \theta  & \sin 2 \theta & 0 \\
         0 & -\sin 2 \theta & \cos 2 \theta & 0 \\
-        0 &  0             & 0             & 1 \\
+        0 & 0              & 0             & 1 \\
     \end{bmatrix}
     \label{matrix:rotate}
 \end{equation}
@@ -623,12 +624,12 @@ The Mueller matrix for coordinate space rotations about the origin by an angle $
 \paragraph*{General linear retardance}
 The Mueller matrix for retardance where $\alpha$ is the angle between the incoming vector and fast axis, and $\delta$ is the retardance introduced by the retarder. The retarder is often referred to by this retardance, e.g. if the retardance is $\delta = \pi$ or $\pi / 2$ $radians$, the retarder is referred to as a half- or quarter-wave plate, respectively.
 \begin{equation}
-    \matr{W}(\alpha, \delta) = 
+    \matr{W}(\alpha, \delta) =
     \begin{bmatrix}
-        1 & 0               & 0               & 0 \\
-        0 & \cos^{2} 2 \alpha + \sin^{2} 2 \alpha \cos \delta & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta) & \sin 2 \alpha \sin \delta \\
-        0 & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta) & \cos^{2} 2 \alpha \cos \delta + \sin^{2} 2 \alpha & -\cos 2 \alpha \sin \delta \\
-        0 & -\sin 2 \alpha \sin \delta& \cos 2 \alpha \sin \delta & \cos \delta \\
+        1 & 0                                                 & 0                                                 & 0                          \\
+        0 & \cos^{2} 2 \alpha + \sin^{2} 2 \alpha \cos \delta & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \sin 2 \alpha \sin \delta  \\
+        0 & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \cos^{2} 2 \alpha \cos \delta + \sin^{2} 2 \alpha & -\cos 2 \alpha \sin \delta \\
+        0 & -\sin 2 \alpha \sin \delta                        & \cos 2 \alpha \sin \delta                         & \cos \delta                \\
     \end{bmatrix}
     \label{matrix:retarder}
 \end{equation}
@@ -647,17 +648,51 @@ The Mueller matrix for linear polarization where $\beta$ is the angle between th
 \end{equation}
 \prgph
 
-
-These matrices in combination with the chain rule in Equation~\ref{eq:mueller_train} allow us to describe how the Stokes parameters would change when passing through various optical elements. For a setup similar to Figure~\ref{fig:polarimeter}, we can vary the polarization angle, $\alpha$, and retandance angle, $\beta$, to acquire a system of equations that we can solve to retrieve the Stokes polarization parameters.
+These matrices in combination with the chain rule in Equation~\ref{eq:mueller_train} allow us to describe how the Stokes parameters would change when passing through various optical elements. For a setup similar to Figure~\ref{fig:polarimeter}, we can vary the retandance angle, $\alpha$, and polarization angle, $\beta$, to acquire a system of equations that we can solve to retrieve the Stokes polarization parameters.
 
 \begin{equation}
     I(\alpha, \beta) = \frac{1}{2} \left[ I + Q \cos2\beta + U \cos\alpha \sin2\beta + V \sin\alpha \sin2\beta\right]
+    \label{eq:Stokes_intensity}
 \end{equation}
+\prgph
 
-% Wollaston prism, hwp, etc.
+Several or more frames taken under differing configurations may be used to reduce the system of equations, but it is possible to extract the Stokes polarization parameters using only four frames for well-chosen configurations. The first three configurations do not use the waveplate, $\alpha = 0\degr$, but use polarizer angles of $\beta \in {0\degr, 45\degr, 90\degr}$, and the last configuration (to determine $S_{0}$ or $V$) uses a retardance of $\alpha = 90\degr$ and a polarizer angle of $\beta = 45\degr$.
+\prgph
 
+From Equation~\ref{eq:Stokes_intensity} we see that the polarizing element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$ or $I$, $Q$, and $U$) can be found by only changing the polarizing elements angle, $\beta$.
+\prgph
 
+Polarizers are typically made from two prisms, of a birefringent material, cemented together with an optically transparent adhesive. The actual effect of separating the perpendicular polarization components is achieved using varying effects, namely through:
+\begin{itemize}
+    \item absorption of one of the polarized components, such as in Polaroid polarizing filters,
+    \item total internal reflection of a single polarized component, such as in a Nicol prism (Figure~\ref{fig:Nicol_prism}),
+    \item Refraction of a single polarized component, such as in a Rochon prism (Figure\ref{fig:Rochon_prism}), or
+    \item Refraction of both polarization components in differing directions, such as in a Wollaston prism (Figure~\ref{fig:Wollaston_prism}).
+\end{itemize}
+\prgph
 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/2_rochon.pdf}
+    \caption{Diagram of a Rochon prism. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Rochon_Prism.svg}{Wikimedia Commons} (2023)}
+    \label{fig:Rochon_prism}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
+    \caption{Diagram of a Wollaston prism. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Wollaston-prism.svg}{Wikimedia Commons} (2023)}
+    \label{fig:Wollaston_prism}
+\end{figure}
+
+% Wollaston prism
+The Wollaston prism is a common optical polarizing element in astrophysical polarimetry which separates an incident beam into two linearly polarized beams, orthogonal to one another, as expected of a polarizer, but which returns the two beams equally deviated from their common axis. The Wollaston prism consists of two prisms of a birefringent monoaxial material, cemented together along their hypotenuses with their optical axes orthogonal, as seen in Figure~\ref{fig:Wollaston_prism} \citep{wollaston}.
+\prgph
+
+It's benefit over simpler elements, as listed previously, is that a single frame allows for the observation of a set of orthogonal polarization configurations, halving the observational time necessary to collect enough data to calculate the Stokes parameters.
+\prgph
+
+% hwp, etc.
 
 
 \subsection{Polarimetric calibrations}
@@ -757,12 +792,12 @@ Why polsalt works without any major need for concern. "All steps except for the 
 
 \noindent Raw image reductions
 
-[Bias/Dark/Flat/Fringe(?)/Crosstalk/Mosaicking]
+    [Bias/Dark/Flat/Fringe(?)/Crosstalk/Mosaicking]
 All processes run / files created / PURPOSE!
 
 \noindent Wavelength calibrations
 
-[Arc/Background subtraction/Cosmic ray rejection]
+    [Arc/Background subtraction/Cosmic ray rejection]
 All processes run / files created / PURPOSE! / Heavy focus since supplementary pipeline replaces this step
 
 \noindent Spectral extraction
@@ -771,7 +806,7 @@ All processes run / files created / PURPOSE!
 
 \noindent Raw Stokes calculations
 
-[Wollaston]
+    [Wollaston]
 All processes run / files created / PURPOSE!
 
 \noindent Final Stokes calculations
@@ -781,9 +816,9 @@ All processes run / files created / PURPOSE!
 \noindent Post-processing analysis % All 'script.py' steps in the BASH reduction
 
 PURPOSE
-Data Culling (BASH) (not used but mention use) / 
-Flux Calibrations (BASH and errors in GUI (make 100\% sure about division error and notify Danielle before/if planning on including)) / 
-saving plot and text pipeline results (BASH and GUI) / 
-Synthetic Filtering (BASH) / 
+Data Culling (BASH) (not used but mention use) /
+Flux Calibrations (BASH and errors in GUI (make 100\% sure about division error and notify Danielle before/if planning on including)) /
+saving plot and text pipeline results (BASH and GUI) /
+Synthetic Filtering (BASH) /
 
 Mention bash script and GUI versions and differences, as well as what SALT's preferred method is
