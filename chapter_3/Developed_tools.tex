@@ -1,51 +1,53 @@
 \chapter{Developed Tools}
 
-TODO: This chapter is \textbf{highly} in depth as it is the `meat' of the dissertation
+\todo{This chapter is \textbf{highly} in depth as it is the `meat' of the dissertation}
 
 \section{Limitations of POLSALT and the Need for a Supplementary Tool} % Rename
 
-TODO: Shortcomings (bad word - must change)/limitations of polsalt \textbf{in depth}, can mention other faults very briefly but the main take away should be the need for a way to do the wavelength calibration with more control as well as the need to check the beam (and target frame) wavelength calibrations against one another (since very accurate wavelength calibration necessary for stokes parameter calculations)
+\todo{Shortcomings (bad word - must change)/limitations of polsalt \textbf{in depth}, can mention other faults very briefly but the main take away should be the need for a way to do the wavelength calibration with more control as well as the need to check the beam (and target frame) wavelength calibrations against one another (since very accurate wavelength calibration necessary for stokes parameter calculations)}
 
-Why an external supplementary tool necessary (and how it overcomes POLSALTS limitations) and benefit of it over trying to `brute force' polsalt reductions
+\todo{Why an external supplementary tool necessary (and how it overcomes POLSALTS limitations) and benefit of it over trying to `brute force' polsalt reductions}
 
 \section{Wavelength calibrations using the Supplementary Pipeline and IRAF}
 
-TODO: short description of what is to be discussed
+\todo{short description of what is to be discussed}
 
 \subsection{Splitting the uncalibrated wavelength files}
 
-TODO: All processes run in pipeline split
-Focus on \textbf{why}. Parsing polsalt mxgbp frame into something useable by IRAF and making sure the header reflects the changes
+\todo{All processes run in pipeline split
+    Focus on \textbf{why}. Parsing polsalt mxgbp frame into something useable by IRAF and making sure the header reflects the changes}
 
 \subsection{IRAF wavelength calibration}
 
-TODO: All wavelength calibration steps - Again, focus on \textbf{why} instead of how
+\todo{All wavelength calibration steps - Again, focus on \textbf{why} instead of how
+    \begin{itemize}
+        \item Identify
+        \item Reidentify
+        \item Fitcoords
+    \end{itemize}
+}
 
-Identify
-
-Reidentify
-
-Fitcoords
-
-(Optional) Transform (mention good for sanity checks which is not possible using the pure polsalt implementation)
+\todo{(Optional) Transform (mention good for sanity checks which is not possible using the pure polsalt implementation)}
 
 \subsection{Joining the wavelength calibrated files}
 
-TODO: All processes run in pipeline join.
-Focus on \textbf{why}. Parsing IRAF frames to be used by POLSALT and making sure the header and extensions reflect the changes
+\todo{All processes run in pipeline join.
+    Focus on \textbf{why}. Parsing IRAF frames to be used by POLSALT and making sure the header and extensions reflect the changes}
 
 \section{Additional Tools}
 
 \subsection{Cross correlation}
 
-TODO: Why a cross correlation necessary and how it works
+\todo{Why a cross correlation necessary and how it works}
 
 \subsection{Skyline comparisons}
 
-TODO: Again, why a skyline comparison necessary and how it works. Also how the frame is transformed (IRAF bypassed) and that the flux is not conserved so only for checking and not for science use.
+\todo{Again, why a skyline comparison necessary and how it works. Also, how the frame is transformed (IRAF bypassed) and that the flux is not conserved so only for checking and not for science use.}
 
 \section{General Reduction Procedure}
 
-TODO: General reduction procedure from raw data to finalized results
-
-This includes \textsc{polsalt} pre-reductions, splitting, \textsc{iraf} wavelength calibrations, checking, joining, and \textsc{polsalt} finalizations. (Include Relative flux calibrations for `shape correcting' spectrum??)
+\todo{General reduction procedure from raw data to finalized results
+    \begin{itemize}
+        \item This includes \textsc{polsalt} pre-reductions, splitting, \textsc{iraf} wavelength calibrations, checking, joining, and \textsc{polsalt} finalization. (Include Relative flux calibrations for `shape correcting' spectrum??)
+    \end{itemize}
+}

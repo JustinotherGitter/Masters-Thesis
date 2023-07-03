@@ -58,11 +58,11 @@
 % Todo and coloring:
 % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX &
 % https://www.overleaf.com/learn/latex/Environments
-% \usepackage{xcolor}
-% \newcommand{\todo}[1]{\textcolor{red}{\textbf{#1}}}
-% \newenvironment{name}[numarg][optarg_default]{begin_def}{end_def}
+\usepackage{xcolor}
+\newcommand\todo[1]{\textcolor{red}{\textbf{TODO: #1}}}
+% \renewcommand\todo[1]{} % Hide TODO's
 
-% Page nubering alteration:
+% Page numbering alteration:
 % https://www.overleaf.com/learn/latex/Page_numbering
 % Add the \gls command to keep track of acronyms
 \usepackage[nomain, acronym, automake, nonumberlist, nogroupskip, style=super]{glossaries-extra}

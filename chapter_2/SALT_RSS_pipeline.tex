@@ -692,23 +692,24 @@ The Wollaston prism is a common optical polarizing element in astrophysical pola
 It's benefit over simpler elements, as listed previously, is that a single frame allows for the observation of a set of orthogonal polarization configurations, halving the observational time necessary to collect enough data to calculate the Stokes parameters.
 \prgph
 
+\todo{Half-wave plate}
 % hwp, etc.
 
 
 \subsection{Polarimetric calibrations}
 
-% Wollaston corrections
-% Tilt corrections
+\todo{Wollaston corrections}
+\todo{Tilt corrections}
 
 
 \section{Spectropolarimetry} % In depth
 
-% Spectropolarimetry is composed of Spectroscopy and polarimetry ...
+\todo{Spectropolarimetry is composed of Spectroscopy and polarimetry \dots}
 
-% Origin of spectropolarimetry (short history)
-% how spectropolarimetry works in-depth (both practically and theoretically, I.E. frames, traces, O and E beams, etc).
+\todo{Origin of spectropolarimetry (short history)}
+\todo{How spectropolarimetry works in-depth (both practically and theoretically, I.E. frames, traces, O and E beams, etc).}
 
-% Uses and what its use in astrophysics is.
+\todo{Uses and what its use in astrophysics is.}
 
 
 
@@ -761,64 +762,74 @@ The SALTICAM functions as the acquisition camera and simple science imager with 
 The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, narrowband imaging mode, multi-object and high resolution spectroscopy modes, and low resolution Fabry-P\'erot imaging spectroscopy and tunable filter narrowband imaging modes \citep[for an in-depth discussion on operational modes see][]{SALT_operational_modes}.
 \prgph
 
-TODO: Optical layout (Figure) and description, and CCD/Lamps/Filters etc. available. Focus on spectropolarimetry and a short description on how observations are organized, gratings, spectral ranges, as well as the latest developments (PG0700, and anything else new)
-\prgph
+\todo{Optical layout (Figure) and description, and CCD/Lamps/Filters etc. available. Focus on spectropolarimetry and a short description on how observations are organized, gratings, spectral ranges, as well as the latest developments (PG0700, and anything else new)
+    \prgph}
 
 \section{RSS Spectropolarimetric Reductions} % In depth
 
-TODO: How spectropolarimetry reductions differ from spectroscopy, polarimetry, and general spectropolarimetry reductions
+\todo{How spectropolarimetry reductions differ from spectroscopy, polarimetry, and general spectropolarimetry reductions}
 
 \subsection{General Reduction Process} % Rename?, In depth
 
-TODO: How reductions would be done in general and through pure IRAF.
-
-I.E. Frames observed → flat, bias, arc, multiple targets, others(?)
-
-Corrections → flat fielding, bias subtraction (EQ from obs. astro), others(?)
-
-Calibrations → wavelength, flux, shifting (trace to center), background subtraction, others(?)
-
-Extraction → spectral extraction, others(?)
-
-\sout{Stokes parameter calculations / Post processing / Displaying / saving / comparing results}
+\todo{
+    \begin{itemize}
+        \item How reductions would be done in general and through pure IRAF.
+        \item I.E. Frames observed → flat, bias, arc, multiple targets, others(?)
+        \item Corrections → flat fielding, bias subtraction (EQ from obs. astro), others(?)
+        \item Calibrations → wavelength, flux, shifting (trace to center), background subtraction, others(?)
+        \item Extraction → spectral extraction, others(?)
+        \item \sout{Stokes parameter calculations / Post processing / Displaying / saving / comparing results}
+    \end{itemize}
+}
 
 \subsection{POLSALT} % In depth
 
-TODO:
-
-In depth but not a users guide, more focus on purpose than the parameters (I.E. why each step is necessary and draw comparison to general reduction)
-
-Why polsalt works without any major need for concern. "All steps except for the wavelength calibration and spectral extraction run with no user input. The spectral extraction is not a calibration but a simple check to make sure the entire trace is included in the window and also that the background regions do not contain any other objects lying on the frame or include the trace."
-
-\noindent Raw image reductions
-
-    [Bias/Dark/Flat/Fringe(?)/Crosstalk/Mosaicking]
-All processes run / files created / PURPOSE!
-
-\noindent Wavelength calibrations
-
-    [Arc/Background subtraction/Cosmic ray rejection]
-All processes run / files created / PURPOSE! / Heavy focus since supplementary pipeline replaces this step
-
-\noindent Spectral extraction
-
-All processes run / files created / PURPOSE!
-
-\noindent Raw Stokes calculations
-
-    [Wollaston]
-All processes run / files created / PURPOSE!
-
-\noindent Final Stokes calculations
-
-All processes run / files created / PURPOSE!
-
-\noindent Post-processing analysis % All 'script.py' steps in the BASH reduction
-
-PURPOSE
-Data Culling (BASH) (not used but mention use) /
-Flux Calibrations (BASH and errors in GUI (make 100\% sure about division error and notify Danielle before/if planning on including)) /
-saving plot and text pipeline results (BASH and GUI) /
-Synthetic Filtering (BASH) /
-
-Mention bash script and GUI versions and differences, as well as what SALT's preferred method is
+\todo{
+    \begin{itemize}
+        \item In depth but not a users guide, more focus on purpose than the parameters (I.E. why each step is necessary and draw comparison to general reduction)
+        \item Why polsalt works without any major need for concern. "All steps except for the wavelength calibration and spectral extraction run with no user input. The spectral extraction is not a calibration but a simple check to make sure the entire trace is included in the window and also that the background regions do not contain any other objects lying on the frame or include the trace."
+    \end{itemize}
+}
+\todo{
+    Raw image reductions
+    \begin{itemize}
+        \item Bias/Dark/Flat/Fringe(?)/Crosstalk/Mosaicking
+        \item All processes run / files created / PURPOSE!
+    \end{itemize}
+}
+\todo{
+    Wavelength calibrations
+    \begin{itemize}
+        \item Arc/Background subtraction/Cosmic ray rejection
+        \item All processes run / files created / PURPOSE! / Heavy focus since supplementary pipeline replaces this step
+    \end{itemize}
+}
+\todo{
+    Spectral extraction
+    \begin{itemize}
+        \item All processes run / files created / PURPOSE!
+        \item Raw Stokes calculations
+        \item Wollaston ??
+        \item All processes run / files created / PURPOSE!
+    \end{itemize}
+}
+\todo{
+    Final Stokes calculations
+    \begin{itemize}
+        \item All processes run / files created / PURPOSE!
+    \end{itemize}
+}
+\todo{
+    Post-processing analysis
+    \begin{itemize}
+        \item PURPOSE
+        \item All 'script.py' steps in the BASH reduction
+        \item Data Culling (BASH) (not used but mention use) /
+        \item Flux Calibrations (BASH and errors in GUI (make 100\% sure about division error and notify Danielle before/if planning on including)) /
+        \item saving plot and text pipeline results (BASH and GUI) /
+        \item Synthetic Filtering (BASH) /
+    \end{itemize}
+    \begin{itemize}
+        \item Mention bash script and GUI versions and differences, as well as what SALT's preferred method is
+    \end{itemize}
+}
