@@ -555,7 +555,7 @@ Using the \hyperref[eq:Stokes_params]{Stokes parameters}, we can now account for
     P_{I} & = 1, & P_{Q} & = \frac{Q}{I}, & P_{U} & = \frac{U}{I}, \text{   and } & P_{V} & = \frac{V}{I}.
     \label{eq:norm_Stokes}
 \end{align}
-\prgph
+% \prgph
 
 Similar to the polarization ellipse, the Stokes parameters may be represented pictorially using the Poincar{\'e} sphere in spherical coordinates $(IP, 2 \Psi, 2 \chi)$, where $I$ denotes the total intensity and $P$ the degree of polarization, or the ratio of polarized to non-polarized light in the wave-packet, $\Psi$ denotes the polarization angle. It should be noted that the Poincar{\'e} sphere also uses the normalized Stokes parameters $(S_{0} = 1)$ as defined above in equation~\ref{eq:norm_Stokes}.
 
@@ -604,7 +604,7 @@ Except for polarimetry in the radio-wavelength regime, the polarization of a bea
     \matr{S}^{\prime} = \matr{M}_{N} \dots \matr{M}_{0} \matr{S}
     \label{eq:mueller_train}
 \end{equation}
-\prgph
+% \prgph
 
 Some Mueller Matrices are given below with angles related to those in Figure~\ref{fig:polarimeter}, measured counter-clockwise in a right-handed coordinate system.
 
@@ -654,14 +654,30 @@ These matrices in combination with the chain rule in Equation~\ref{eq:mueller_tr
     I(\alpha, \beta) = \frac{1}{2} \left[ I + Q \cos2\beta + U \cos\alpha \sin2\beta + V \sin\alpha \sin2\beta\right]
     \label{eq:Stokes_intensity}
 \end{equation}
+% \prgph
+
+Several or more frames taken under differing configurations may be used to reduce the system of equations, but it is possible to extract the Stokes polarization parameters using only four frames for well-chosen configurations. The first three configurations do not use the waveplate, i.e. $\alpha = 0\degr$, but use polarizer angles of $\beta \in {0\degr, 45\degr, 90\degr}$, and the last configuration (to determine $S_{3}$ or $V$) uses a retardance of $\alpha = 90\degr$ and a polarizer angle of $\beta = 45\degr$.
 \prgph
 
-Several or more frames taken under differing configurations may be used to reduce the system of equations, but it is possible to extract the Stokes polarization parameters using only four frames for well-chosen configurations. The first three configurations do not use the waveplate, $\alpha = 0\degr$, but use polarizer angles of $\beta \in {0\degr, 45\degr, 90\degr}$, and the last configuration (to determine $S_{0}$ or $V$) uses a retardance of $\alpha = 90\degr$ and a polarizer angle of $\beta = 45\degr$.
+From Equation~\ref{eq:Stokes_intensity} we see that the polarizing element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$, or $I$, $Q$, and $U$) can be found by changing only the polarizing elements angle, $\beta$.
+% \prgph
+
+\paragraph{Wave plates}
+Wave plates, also commonly referred to as retarders, are generally made from optically transparent birefringent crystals. A wave plate has a fast and slow axis, which are perpendicular to one another and both perpendicular to an incident beam. Due to the birefringence of the wave plate medium, the phase velocity of the beam polarized parallel to the fast axis, namely the extraordinary beam, slightly increases while that of the beam polarized parallel to the slow axis, namely the ordinary beam, remains unaffected \citep{Hecht_optics}. This introduces a phase difference between the two beams, $\Delta \alpha$, which is given by
+
+\begin{equation}
+    \Delta \alpha = \frac{2 \pi \Delta n L}{\lambda_{0}}
+\end{equation}
+
+\noindent where $\Delta n$ and $L$ refer to the birefringence and thickness of the wave plate medium, respectively, and $\lambda_{0}$ refers to the vacuum wavelength of the beam.
 \prgph
 
-From Equation~\ref{eq:Stokes_intensity} we see that the polarizing element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$ or $I$, $Q$, and $U$) can be found by only changing the polarizing elements angle, $\beta$.
+This phase difference is often chosen as $\Delta \alpha = n \cdot \frac{\lambda}{4}$ for $n \in Z^{+}$, with half- and quarter-wave plates being the most common.
 \prgph
+\todo{Finish wave plate}
 
+
+\paragraph{Polarizers}
 Polarizers are typically made from two prisms, of a birefringent material, cemented together with an optically transparent adhesive. The actual effect of separating the perpendicular polarization components is achieved using varying effects, namely through:
 \begin{itemize}
     \item absorption of one of the polarized components, such as in Polaroid polarizing filters,
@@ -669,7 +685,7 @@ Polarizers are typically made from two prisms, of a birefringent material, cemen
     \item Refraction of a single polarized component, such as in a Rochon prism (Figure\ref{fig:Rochon_prism}), or
     \item Refraction of both polarization components in differing directions, such as in a Wollaston prism (Figure~\ref{fig:Wollaston_prism}).
 \end{itemize}
-\prgph
+% \prgph
 
 \begin{figure}[t]
     \centering
@@ -685,33 +701,32 @@ Polarizers are typically made from two prisms, of a birefringent material, cemen
     \label{fig:Wollaston_prism}
 \end{figure}
 
-% Wollaston prism
+\paragraph{Wollaston prisms}
 The Wollaston prism is a common optical polarizing element in astrophysical polarimetry which separates an incident beam into two linearly polarized beams, orthogonal to one another, as expected of a polarizer, but which returns the two beams equally deviated from their common axis. The Wollaston prism consists of two prisms of a birefringent monoaxial material, cemented together along their hypotenuses with their optical axes orthogonal, as seen in Figure~\ref{fig:Wollaston_prism} \citep{wollaston}.
 \prgph
 
-It's benefit over simpler elements, as listed previously, is that a single frame allows for the observation of a set of orthogonal polarization configurations, halving the observational time necessary to collect enough data to calculate the Stokes parameters.
-\prgph
-
-\todo{Half-wave plate}
-% hwp, etc.
-
+A Wollaston prisms benefit over simpler elements, as listed previously, is that a single frame allows for the observation of a set of orthogonal polarization configurations. This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty.
+% \prgph
 
 \subsection{Polarimetric calibrations}
 
-\todo{Wollaston corrections}
-\todo{Tilt corrections}
+\todo{
+    \begin{itemize}
+        \item Wollaston corrections
+        \item Tilt corrections
+    \end{itemize}
+}
 
 
 \section{Spectropolarimetry} % In depth
 
-\todo{Spectropolarimetry is composed of Spectroscopy and polarimetry \dots}
-
-\todo{Origin of spectropolarimetry (short history)}
-\todo{How spectropolarimetry works in-depth (both practically and theoretically, I.E. frames, traces, O and E beams, etc).}
-
-\todo{Uses and what its use in astrophysics is.}
-
-
+\todo{Spectropolarimetry is composed of Spectroscopy and polarimetry \dots
+    \begin{itemize}
+        \item Origin of spectropolarimetry (short history)
+        \item How spectropolarimetry works in-depth (both practically and theoretically, I.E. frames, traces, O and E beams, etc).
+        \item Uses and what its use in astrophysics is.
+    \end{itemize}
+}
 
 
 \section{The South African Large Telescope} % Basics, not in depth
