@@ -191,6 +191,14 @@ Acquiring a spectrum from observations is more involved than simply reading out 
 The dominant source of noise in a raw image is detector noise. \gls{CCD}'s are manufactured to have a small base charge in each pixel, called the `bias' current which allows the readout noise, a type of random noise, to better be sampled. There is also an unintentional additional charge which is linearly proportional to the exposure time and originates from thermal agitation of the \gls{CCD} material, called the `dark' current. The dark current can be minimized and possibly ignored if the \gls{CCD} is adequately cooled. These types of noise add to the charge held by a pixel and are thus considered additive.
 \prgph
 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 10cm]{figures/2_ccd.jpg}
+    \caption{Diagram of a \gls{CCD}. Figure adapted from \citep{ccd_fig}}
+    \label{fig:ccd_diagram}
+\end{figure}
+
+
 The \gls{CCD} is not a perfect detector and the efficiency of it and the optics of the telescope also contribute noise to the image. The efficiency of a \gls{CCD} is referred to as the Quantum Efficiency, and it is a measure of what percentage of light striking the detector is actually recorded and converted to a charge. The efficiency of the \gls{CCD} and telescope optics is also wavelength dependent and so the noise that results from them is more complex than that of additive noise. This type of noise is referred to as multiplicative noise.
 \prgph
 
@@ -648,11 +656,14 @@ The Mueller matrix for linear polarization where $\beta$ is the angle between th
 \end{equation}
 \prgph
 
-These matrices in combination with the chain rule in Equation~\ref{eq:mueller_train} allow us to describe how the Stokes parameters would change when passing through various optical elements. For a setup similar to Figure~\ref{fig:polarimeter}, we can vary the retandance angle, $\alpha$, and polarization angle, $\beta$, to acquire a system of equations that we can solve to retrieve the Stokes polarization parameters.
+These matrices in combination with the chain rule in Equation~\ref{eq:mueller_train} allow us to describe how the Stokes parameters would change when passing through various optical elements. For a setup similar to Figure~\ref{fig:polarimeter}, we can vary the retandance angle, $\alpha$, and polarization angle, $\beta$, for a wave plate with a relative phase difference, $\gamma$, to acquire a system of equations that we can solve to retrieve the Stokes polarization parameters \citep{waveplate_in_specpol}.
 
 \begin{equation}
-    I(\alpha, \beta) = \frac{1}{2} \left[ I + Q \cos2\beta + U \cos\alpha \sin2\beta + V \sin\alpha \sin2\beta\right]
-    \label{eq:Stokes_intensity}
+    \begin{split}
+        S(\alpha, \beta, \gamma) \propto \frac{1}{2} \{ I & + [Q \cos2\alpha + U \sin2\alpha] \cos(2\beta - 2\alpha) \\
+        & - [Q \sin2\alpha + U \cos2\alpha] \sin(2\beta - 2\alpha) \cos\gamma \label{eq:Stokes_intensity} \\
+        & + V \sin(2\beta - 2\alpha)\sin\gamma \}
+    \end{split}
 \end{equation}
 % \prgph
 
@@ -663,19 +674,20 @@ From Equation~\ref{eq:Stokes_intensity} we see that the polarizing element is th
 % \prgph
 
 \paragraph{Wave plates}
-Wave plates, also commonly referred to as retarders, are generally made from optically transparent birefringent crystals. A wave plate has a fast and slow axis, which are perpendicular to one another and both perpendicular to an incident beam. Due to the birefringence of the wave plate medium, the phase velocity of the beam polarized parallel to the fast axis, namely the extraordinary beam, slightly increases while that of the beam polarized parallel to the slow axis, namely the ordinary beam, remains unaffected \citep{Hecht_optics}. This introduces a phase difference between the two beams, $\Delta \alpha$, which is given by
+Wave plates, also commonly referred to as retarders, are generally made from optically transparent birefringent crystals. A wave plate has a fast and slow axis, which are perpendicular to one another and both perpendicular to an incident beam. Due to the birefringence of the wave plate medium, the phase velocity of the beam polarized parallel to the fast axis, namely the extraordinary beam, slightly increases while that of the beam polarized parallel to the slow axis, namely the ordinary beam, remains unaffected \citep{Hecht_optics}.
+\prgph
+
+This introduces a relative phase difference between the two beams, $\gamma$, which is given by
 
 \begin{equation}
-    \Delta \alpha = \frac{2 \pi \Delta n L}{\lambda_{0}}
+    \gamma = \frac{2 \pi \Delta n L}{\lambda_{0}}
 \end{equation}
 
 \noindent where $\Delta n$ and $L$ refer to the birefringence and thickness of the wave plate medium, respectively, and $\lambda_{0}$ refers to the vacuum wavelength of the beam.
 \prgph
 
-This phase difference is often chosen as $\Delta \alpha = n \cdot \frac{\lambda}{4}$ for $n \in Z^{+}$, with half- and quarter-wave plates being the most common.
-\prgph
-\todo{Finish wave plate}
-
+This relative phase difference determines the name of the wave plate, such as the half- and quarter-wave plates referring to the $\gamma = m(\pi/2) $ and $\gamma = m(\pi/4)$ for $m \in Z^{+}$, respectively, which are also the most commonly used wave plates. Phase differences with an integer multiple of one another still relate to the same phase difference and are referred to as multiple-order wave plates. Multiple multiple-order wave plates can be combined by alternatively aligning the fast axis of one to the slow axis of another to create a compound zero-order wave plate. When the phase difference of the wave plate is not an integer difference it is referred to as a zero-order wave plate \citep{Hale_birefringence}.
+% \prgph
 
 \paragraph{Polarizers}
 Polarizers are typically made from two prisms, of a birefringent material, cemented together with an optically transparent adhesive. The actual effect of separating the perpendicular polarization components is achieved using varying effects, namely through:
@@ -702,7 +714,7 @@ Polarizers are typically made from two prisms, of a birefringent material, cemen
 \end{figure}
 
 \paragraph{Wollaston prisms}
-The Wollaston prism is a common optical polarizing element in astrophysical polarimetry which separates an incident beam into two linearly polarized beams, orthogonal to one another, as expected of a polarizer, but which returns the two beams equally deviated from their common axis. The Wollaston prism consists of two prisms of a birefringent monoaxial material, cemented together along their hypotenuses with their optical axes orthogonal, as seen in Figure~\ref{fig:Wollaston_prism} \citep{wollaston}.
+The Wollaston prism consists of two prisms consisting of a birefringent monoaxial material, cemented together with an optically transparent adhesive along their hypotenuses with their optical axes orthogonal, as seen in Figure~\ref{fig:Wollaston_prism}. The Wollaston prism is a common optical polarizing element in astrophysical polarimetry which separates an incident beam into two linearly polarized beams, orthogonal to one another, as expected of a polarizer, but which returns the two beams deviated from their common axis equally. The deviation angle is determined by the right-angle prism base angles \citep{wollaston}.
 \prgph
 
 A Wollaston prisms benefit over simpler elements, as listed previously, is that a single frame allows for the observation of a set of orthogonal polarization configurations. This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty.
@@ -710,8 +722,22 @@ A Wollaston prisms benefit over simpler elements, as listed previously, is that 
 
 \subsection{Polarimetric calibrations}
 
+Similar to Section~\ref{subsec:calibration}, polarimetric calibrations are necessary when dealing with a polarimeter, though as the optical elements differ the calibrations similarly differ. Luckily corrections and calibrations are limited to only those related to the optical components introduced by the components of the polarimeter; those related to the \gls{CCD} remain unchanged and as such need not be discussed again.
+\prgph
+
+The most notable difference of an exposure taken by a polarimeter, specifically a polarimeter which produces both the o- and e-beams simultaneously, is the presence of two images of the same area of sky. Once the \gls{CCD} calibrations have been completed the o- and e-beams can be extracted and further reduced. The extraction depends heavily on the layout of the polarimeter but often a simple cropping of the differing sections is enough to suffice. Once the differing beams have been extracted the beams need to be aligned such that the sources within them overlap.
+\prgph
+
 \todo{
     \begin{itemize}
+        % \item Corrections Related to the Detector
+        \item Extraction of the O and E Ray Images
+        \item Image Alignment
+        \item Sky Subtraction
+              % \item Estimation of the Stokes Parameters
+              % \item Binning of the Stokes Parameters
+              % \item Calculation of the Degree and Orientation of the Polarization
+              % \item Display of the Final Polarization Data
         \item Wollaston corrections
         \item Tilt corrections
     \end{itemize}
@@ -723,7 +749,7 @@ A Wollaston prisms benefit over simpler elements, as listed previously, is that 
 \todo{Spectropolarimetry is composed of Spectroscopy and polarimetry \dots
     \begin{itemize}
         \item Origin of spectropolarimetry (short history)
-        \item How spectropolarimetry works in-depth (both practically and theoretically, I.E. frames, traces, O and E beams, etc).
+        \item How spectropolarimetry works in-depth (both practically and theoretically, I.E. frames, traces, O and E beams, etc.).
         \item Uses and what its use in astrophysics is.
     \end{itemize}
 }
