@@ -723,16 +723,18 @@ A Wollaston prisms benefit over simpler elements, as listed previously, is that 
 \subsection{Polarimetric calibrations}
 
 % Corrections Related to the Detector
-Similar to Section~\ref{subsec:calibration}, polarimetric calibrations are necessary when dealing with a polarimeter, though as the optical elements differ the calibrations similarly differ. Corrections and calibrations related to the \gls{CCD} remain unchanged and those related to correcting for the optical elements only need to be modified to correct for polarization instead of wavelength.
+Similar to Section~\ref{subsec:calibration}, polarimetric calibrations are necessary when dealing with a polarimeter, though as the optical elements differ the calibrations similarly differ. Corrections and calibrations related to the \gls{CCD} remain unchanged while those related to correcting for the optical elements only need to be modified to correct for polarization instead of wavelength.
 \prgph
 
 % Flat-fielding, Extraction of the O and E Ray Images
 % The most notable feature of an exposure taken by a polarimeter, specifically a polarimeter which produces both the $O$- and $E$-beams simultaneously, is the presence of two images of the same area of sky with the target source along with any additional sources present in both images.
-Once the \gls{CCD} calibrations have been completed, the polarization intrinsic to the optical elements needs to be accounted for such that the pixel-to-pixel response is uniform. Flat-fielding can once again be used to correct for this. The flats taken for polarimetry
+Once the \gls{CCD} calibrations have been completed, the polarization intrinsic to the optical elements needs to be accounted for such that the pixel-to-pixel response is uniform. Flat-fielding can once again be used to correct for this. The flats taken for polarimetry, however, introduce an additional challenge as the targets for conventional flats are polarized, such as twilight and dome flats which are polarized by light scattering in the atmosphere and the reflective surface of the dome, respectively.
+\prgph
 
-\todo{Continue here}
+If no unpolarized flat images can be taken for flat field calibrations then, when possible due to the polarimeter design, the wave plate may be constantly rotated to act as a depolarizing element and is effective so long as the wave plate rotates faster than the flat exposure time. Alternatively, spatially constant polarized flats may be used with the added restriction that science and flat images have more than the minimum two images taken. These frames may be redundant since the $O$- and $E$-beams differ by $\pi / 4$ but this introduced redundancy allows for the cancellation of any uniform polarization. More redundant pairs observed (up to the maximum redundancy of $16$) allow for a more efficient cancellation of the uniform polarization but cost exposure time as well as a flat image which is time-independent. In any case, when the flat contains any polarization, the removal of the uniform polarization  from the science frames is left for when the polarization is calculated \citep{polarimetry_error}.
+\prgph
 
-the $O$- and $E$-beams can be extracted and further reduced. The extraction depends heavily on the layout of the polarimeter but often a simple cropping of the differing sections is enough to separate the two images.
+After calibrations for the \gls{CCD} and light path are accounted for, the $O$- and $E$-beams can be extracted and further reduced. The extraction depends heavily on the layout of the polarimeter but often a simple cropping of the differing sections is enough to separate the two images.
 \prgph
 
 % Image Alignment
@@ -741,22 +743,6 @@ The matching dual images need to be aligned once they have been extracted such t
 
 % Sky Subtraction
 The polarization introduced by the sky needs to be removed as it will influence the polarization results of the target source. Thankfully, the background polarization is an additive type of noise and may be subtracted out across the frames. This subtraction should be done for each image in the frame, however, as the background intensity of each image will differ as the background polarization differs.
-\prgph
-
-% \todo{
-%     \begin{itemize}
-% \item Corrections Related to the Detector
-% \item Extraction of the O and E Ray Images
-% \item Image Alignment
-% \item Sky Subtraction
-% \item Estimation of the Stokes Parameters
-% \item Binning of the Stokes Parameters
-% \item Calculation of the Degree and Orientation of the Polarization
-% \item Display of the Final Polarization Data
-% \item Wollaston corrections
-% \item Tilt corrections
-%     \end{itemize}
-% }
 
 
 \section{Spectropolarimetry} % In depth
