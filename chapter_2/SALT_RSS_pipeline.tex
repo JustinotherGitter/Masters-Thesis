@@ -720,7 +720,7 @@ The Wollaston prism consists of two prisms consisting of a birefringent monoaxia
 A Wollaston prisms benefit over simpler elements, as listed previously, is that a single frame allows for the observation of a set of orthogonal polarization configurations. This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty.
 % \prgph
 
-\subsection{Polarimetric calibrations}
+\subsection{Polarimetric calibrations}\label{subsec:pol_cal}
 
 % Corrections Related to the Detector
 Similar to Section~\ref{subsec:calibration}, polarimetric calibrations are necessary when dealing with a polarimeter, though as the optical elements differ the calibrations similarly differ. Corrections and calibrations related to the \gls{CCD} remain unchanged while those related to correcting for the optical elements only need to be modified to correct for polarization instead of wavelength.
@@ -747,14 +747,24 @@ The polarization introduced by the sky needs to be removed as it will influence 
 
 \section{Spectropolarimetry} % In depth
 
-As the name suggests, spectropolarimetry is the measurement of the polarization of light for a chosen spectral range. The history of spectropolarimetry is one limited by the constituent elements of spectropolarimeters, namely spectrometers and polarimeters. The most notable historical contributions unrelated to spectroscopy or polarimetry are those of spectropolarimetric studies instead of instrumental developments.
+As the name suggests, spectropolarimetry is the measurement of the polarization of light for a chosen spectral range and provides results of not only spectra but also polarization parameters across the spectral range. The history of spectropolarimetry is one limited by the constituent elements of spectropolarimeters, namely spectrometers and polarimeters. The most notable historical contributions unrelated to spectroscopy or polarimetry are those of spectropolarimetric studies instead of instrumental developments.
 \prgph
 
+\todo{Figure of spectropolarimeter, reference}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
+    \caption{Diagram of an ideal spectropolarimeter. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Wollaston-prism.svg}{Wikimedia Commons} (2023)}
+    \label{fig:spectropolarimeter}
+\end{figure}
 
+Along with common points of consideration when developing any instrumentation for observational astronomy, such as resolution and sensitivity, spectropolarimeters need to consider both the spectral range and any inherent polarization that may be introduced by the any elements within the light path.
+\prgph
+
+Time is another constraint for spectropolarimetry as, depending on the target of observation, the incident light is split up by wavelength as well as by polarization states. This `double' dividing of the incident light results in increased exposure times of not only target frames but also (time-dependent) calibration frames when compared to more traditional photometric observations.
 
 \todo{
     \begin{itemize}
-        \item SALT O and E beam figure
         \item How spectropolarimetry works in-depth (both practically and theoretically, I.E. frames, traces, O and E beams, etc.).
         \item Uses and what its use in astrophysics is.
     \end{itemize}
@@ -762,11 +772,18 @@ As the name suggests, spectropolarimetry is the measurement of the polarization 
 
 \subsection{Spectropolarimetric calibrations}
 
-\todo{
-    \begin{itemize}
-        \item refer back to both subsections and talk about how they combine as there aren't any new elements introduced.
-    \end{itemize}
-}
+\todo{Figure of spectropolarimetric exposure, and caption}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
+    \caption{A spectropolarimetric target exposure of \dots.}
+    \label{fig:specpol_exposure}
+\end{figure}
+
+Spectropolarimetric calibrations are more involved when compared to the previous calibration discussions (Sections~\ref{subsec:calibration},~\ref{subsec:pol_cal}). More exposures are required to acquire enough redundancy for the calculation of all Stokes parameters, and the combination of calibrations discussed previously accounting for wavelength as well as polarization must both be implemented.
+\prgph
+
+\todo{Wavelength calibrations most important for spectroscopy just as frame alignment most important for polarimetry, both important for spectropolarimetry.}
 
 \section{The South African Large Telescope} % Basics, not in depth
 
