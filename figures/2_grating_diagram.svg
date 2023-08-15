@@ -2,15 +2,15 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="9.0200005cm"
-   height="3.4100001cm"
-   viewBox="0 0 90.200005 34.100001"
+   width="8.6495829cm"
+   height="3.4085641cm"
+   viewBox="0 0 86.495829 34.085641"
    version="1.1"
    id="svg5"
-   inkscape:export-filename="../ba68dd07/2_grating_diagram.pdf"
+   inkscape:export-filename="2_grating_diagram.pdf"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
-   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
    sodipodi:docname="2_grating_diagram.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -27,23 +27,23 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="136.11806"
-     inkscape:cy="30.759145"
+     inkscape:zoom="7.9999999"
+     inkscape:cx="211.75"
+     inkscape:cy="103.25"
      inkscape:window-width="1600"
-     inkscape:window-height="845"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="877"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer2">
+     inkscape:current-layer="layer1">
     <inkscape:grid
        type="xygrid"
        id="grid132"
        units="mm"
        spacingx="1"
        spacingy="1"
-       originx="-24.900001"
-       originy="-26"
+       originx="-24.900002"
+       originy="-26.014358"
        snapvisiblegridlinesonly="false" />
   </sodipodi:namedview>
   <defs
@@ -187,15 +187,15 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline"
-     transform="translate(-24.9,-26)">
+     transform="translate(-24.9,-26.014358)">
     <path
        style="fill:#a8a8a8;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="m 115,60 v -5 l -5,-5 -17.5,5 -5,-5 -17.5,5 -5,-5 -17.5,5 -5,-5 -17.5,5 v 5 z"
+       d="M 111.29583,60 V 55 L 110,50 88.795833,55 87.5,50 66.295833,55 65,50 43.795833,55 42.5,50 25,55 v 5 z"
        id="path247"
        sodipodi:nodetypes="cccccccccccc" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.200493;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.801974, 0.400987;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 92.5,55.1 H 110"
+       style="fill:none;stroke:#000000;stroke-width:0.227807;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.911236, 0.455618;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 88.9,54.999756 h 22.39577"
        id="path966" />
     <g
        id="g9778">
@@ -222,10 +222,11 @@
      id="layer2"
      inkscape:label="Layer 2"
      style="display:inline"
-     transform="translate(-24.9,-26)">
+     transform="translate(-24.9,-26.014358)">
     <g
        id="g9525"
-       style="display:inline">
+       style="display:inline"
+       transform="translate(-1.5875)">
       <path
          style="display:inline;fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#marker9477)"
          d="M 57.729148,52.06004 68.768134,37.937877 77.987354,26.14374"
@@ -243,7 +244,8 @@
     </g>
     <g
        id="g9547"
-       style="display:inline">
+       style="display:inline"
+       transform="translate(-1.5875)">
       <path
          style="display:inline;fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#marker9591)"
          d="m 70.005604,26.05049 4.323634,11.157834 5.751495,14.842658"
@@ -262,7 +264,7 @@
     <g
        id="g9778-5"
        style="display:inline"
-       transform="translate(-25.131653,-5.9584375)">
+       transform="translate(-26.719154,-5.9584375)">
       <text
          xml:space="preserve"
          style="font-size:3.52778px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;stroke-width:0.2;stroke-dasharray:none"
@@ -310,7 +312,7 @@
     <g
        id="g9778-5-1"
        style="display:inline"
-       transform="translate(-51.638509,-6.7742203)">
+       transform="translate(-53.22601,-6.7742203)">
       <text
          xml:space="preserve"
          style="font-size:3.52778px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;stroke-width:0.264583"
@@ -355,7 +357,8 @@
     </g>
     <g
        id="g10210"
-       style="display:inline">
+       style="display:inline"
+       transform="translate(-3.804337)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.799999, 0.4;stroke-dashoffset:0;stroke-opacity:1"
          d="m 70.099337,55 v 5"
@@ -384,24 +387,24 @@
     <text
        xml:space="preserve"
        style="font-size:2.82222px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;stroke-width:0.264583"
-       x="100.3343"
+       x="98.746796"
        y="28.315275"
        id="text2566"><tspan
          sodipodi:role="line"
          id="tspan2564"
          style="font-size:2.82222px;stroke-width:0.264583"
-         x="100.3343"
+         x="98.746796"
          y="28.315275">m = -1</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:2.82222px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;display:inline;stroke-width:0.264583"
-       x="28.527287"
+       x="26.939785"
        y="33.889824"
        id="text2566-2"><tspan
          sodipodi:role="line"
          id="tspan2564-7"
          style="font-size:2.82222px;stroke-width:0.264583"
-         x="28.527287"
+         x="26.939785"
          y="33.889824">m = 1</tspan></text>
   </g>
 </svg>

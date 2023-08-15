@@ -1,73 +1,69 @@
 \chapter{Spectropolarimetry and the SALT RSS}
 
-This chapter gives a brief overview of the basics of spectropolarimetry and how it functions based off of the principles of both spectroscopy and polarimetry. Further, it is discussed how these techniques are practically implemented for \gls{SALT}, and more specifically the \gls{RSS}, and how the spectropolarimetric reduction process is completed.
+This chapter gives a brief overview of the basics of spectropolarimetry (\S~\ref{sec:spectropolarimetry}), and how it functions, following from the principles of both spectroscopy (\S~\ref{sec:spectroscopy}) and polarimetry (\S~\ref{sec:polarimetry}). Further, it is discussed how these techniques are practically implemented for \gls{SALT} (\S~\ref{sec:SALT}), more specifically the \gls{RSS} (\S~\ref{subsec:RSS}), and how the spectropolarimetric reduction process is completed (\S~\ref{sec:RSS_reductions}).
 
-\section{Spectroscopy}
+\section{Spectroscopy}\label{sec:spectroscopy}
 
-% History
-Spectroscopy originated in its most basic form with Newton's examinations of sunlight through a prism \citep{opticks} but came to prominence as a field of scientific study with Wollaston's improvements to the optics elements \citep{WollPrism}, Fraunhofer's use of a diffraction grating instead of a prism as a dispersion element \citep{FraunGrating}, and Bunsen and Kirchoff's classifications of spectral features to their respective chemical elements \citep{KirBunSpec}.
+Spectroscopy originated in its most basic form with Newton's examinations of sunlight through a prism \citep{opticks} but came to prominence as a field of scientific study with Wollaston's improvements to the optics elements \citep{WollPrism}, Fraunhofer's use of a diffraction grating instead of a prism \citep{FraunGrating}, and Bunsen and Kirchoff's classifications of spectral features to their respective chemical elements \citep{KirBunSpec}.
 \prgph
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 0.9\textwidth]{figures/2_spectrometer.pdf}
-    \caption{Layout depicting the path light collected by a telescope would travel through a simple spectrometer.}
+    \caption{Layout depicting the light path through a spectrometer.}
     \label{fig:spectrometer}
 \end{figure}
 
 % How it works
-The simplest spectrometer schematic as shown in Figure \ref{fig:spectrometer} consists of incident light collected from the telescope's optics, labeled A, being focused onto a slit, labeled B, and passed through a collimator, labeled C. The collimator collimates the light allowing a dispersion element (such as a diffraction grating or prism), labeled D, to disperse the light into its constituent wavelengths. The resultant spectrum is focused by a focusing lens, labeled E, onto a focal plane, labeled F. Viewing optics are situated at the focal plane in the case of a spectroscope and a detector is situated at the focal plane in the case of a spectrograph.
-\prgph
+The simplest spectrometer schematic, as shown in Figure~\ref{fig:spectrometer}, consists of incident light collected from the telescope's optics, labelled A, being focused onto a slit, B, and passed through a collimator, C. The collimator collimates the light allowing a dispersion element, D, to disperse the light into its constituent wavelengths. The resultant spectrum is focused by a lens, E, onto a focal plane, F. Viewing optics are situated at the focal plane in the case of a spectroscope and a detector is situated at the focal plane in the case of a spectrograph.
 
-% Telescope optics
-The telescope optics refers simply to all the components of a telescope necessary to acquire a focal point where the spectrometer, components labeled B - F, is situated. The focal point in most traditional telescope designs is fixed relative to the telescope and so the spectrometer may be mounted at that point. In cases where the telescope is designed to have a moving focal point relative to the telescope \cite[see][]{Arecibo, HET, SALT_design}, the spectrometer must also move along the telescope's focal path.
-\prgph
-\prgph
+\subsection{Telescope optics}
 
-% SLIT
-The slits function is to control the amount of incident light entering a spectrometer and, along with the exposure time of the detector, prevents over-exposures of bright sources on highly sensitive detectors \citep{TonkPracAmSpec}. If a source is spatially resolvable, or larger than the seeing conditions, the slit further acts to spatially limit the source to increase the spectral resolution, resulting in sharper features in the resultant spectrum.
-\prgph
+The telescope optics refers simply to all the components of a telescope necessary to acquire a focal point at the spectrometer entrance, labelled B. The focal point in most traditional telescope designs is fixed relative to the telescope and so the spectrometer may be mounted at that point. In cases where the telescope is designed to have a moving focal point relative to the telescope \cite[see][]{Arecibo, HET, SALT_design}, the spectrometer must also move along the telescope's focal path.
 
-Without a slit the spectral resolution would be determined by the projected width of the source on the detector, or the seeing if the source was a star-like point source. Increasing the spectral resolution comes with the trade-off of decreasing the light collected from the source and thus acquiring a less intense resultant spectrum. Multiple spectra may be acquired simultaneously when the slit is positioned such that collinear sources lie along the slit.
+
+\subsection{Slit}
+
+The slit's function is to control the amount of incident light entering a spectrometer and, along with the exposure time of the detector, prevents over-exposures of bright sources on highly sensitive detectors \citep{TonkPracAmSpec}. If a source is spatially resolvable, or larger than the seeing conditions, the slit further acts to spatially limit the source to increase the spectral resolution, resulting in sharper features in the resultant spectrum. Without the slit the spectral resolution would be determined by the projected width of the source on the detector, or the seeing if the source was a star-like point source. Increasing the spectral resolution comes with the trade-off of decreasing the light collected from the source and thus acquiring a less intense resultant spectrum. Multiple spectra may be acquired simultaneously when the slit is positioned such that collinear sources lie along the slit.
+
 %Spectroscopy done with no slit is commonly referred to as objective spectroscopy and, as the name suggests, the prism is situated just before the telescopes objective, the primary element of the telescope that focuses the collected light to the primary focus.
-\prgph
 
-% COLLIMATOR
-The collimating lens functions to collimate the focused light from the telescope, ensuring that all light rays run parallel before reaching the dispersion element. Since the collimator accounts for the telescope's focus, the focal ratio of the collimator, $f_{1} / d_{1}$, should thus optimally match the focal ratio of the telescope, $f / D$, as seen in Equation \ref{eq:focal_ratio} to be most efficient and to not waste collecting area or material on too large a collimator.
-% \prgph
+\subsection{Collimator}
 
-\begin{equation}
-    \frac{f}{D} = \frac{f_{1}}{d_{1}}
-    \label{eq:focal_ratio}
-\end{equation}
+The collimators function is to collimate the focused light from the telescope, ensuring that all light rays run parallel before reaching the dispersion element. Since the collimator accounts for the telescope's focus, the focal ratio of the collimator ($f_{c} / D_{c}$, where $f$ refers to the focal length and $D$ refers to the diameter) should thus ideally match the focal ratio of the telescope ($f_{T} / D_{T}$). Another consideration of the collimator is ensuring that the full collecting area is utilized as an oversized collimator may be heavier as well as more expensive than necessary.
 
-% From basic trigonometry and a small angle approximation, $\sin(\theta) \approx \theta$, Equation \ref{eq:small_angle} can be derived. From it, it can be seen that as the linear size, $D$, of most stellar objects is much smaller than the distance to those objects, $d$, and thus the incident light is already almost entirely collimated.
+% as seen in Equation~\ref{eq:focal_ratio}
+% \begin{equation}
+%     \frac{f}{D} = \frac{f_{1}}{d_{1}}
+%     \label{eq:focal_ratio}
+% \end{equation}
+
+% From basic trigonometry and a small angle approximation, $\sin(\theta) \approx \theta$, Equation~\ref{eq:small_angle} can be derived. From it, it can be seen that as the linear size, $D$, of most stellar objects is much smaller than the distance to those objects, $d$, and thus the incident light is already almost entirely collimated.
 
 % \begin{equation}
 % 	\theta (\arcsec) = 206265 \frac{D}{d}
 % 	\label{eq:small_angle}
 % \end{equation}
 
-% DISPERSION ELEMENT
-The dispersion element is the element that defines a spectrometer. As the name suggests, a dispersion element disperses the light incident on it into its constituent wavelengths and produces a spectrum. There are two types of dispersion elements, namely the prism and the diffraction grating, which operate on different principles, as discussed in Section \ref{subsec:dispersion}.
-\prgph
+\subsection{Dispersion Element}
 
-% Focusing lens and FOCAL PLANE / Detector / Camera / CCD
-% Can use \citep{CMOS_use} for CMOS use in general spectroscopy
-%  - Spectroscopy and Spectrography
-The focusing lens functions similarly to that of the telescope's optics but in this case focuses the dispersed light onto some receiver situated at the focal plane. As mentioned previously, an eye piece is fixed to the focal point for a spectroscope while a spectrograph employs a detector.
-\prgph
+Including a dispersion element in the optical path is what defines a spectrometer. As the name suggests, a dispersion element disperses the light incident on it into its constituent wavelengths and produces a spectrum. There are two types of dispersion elements, namely the prism and the diffraction grating, which operate on different principles, as discussed in \S~\ref{subsec:dispersion}.
+
+\subsection{Lens}
+
+The lens functions similarly to that of the telescope's optics but in this case focuses the dispersed light onto a receiver situated at the focal plane. As mentioned previously, an eye piece is fixed to the focal point for a spectroscope while a spectrograph employs a detector.
+
+\subsection{Detector}
 
 The two most prevalent detector types in spectroscopy are the \gls{CCD} and \gls{CMOS} detectors. In astronomical spectroscopy however, sources are fainter and exposure times are much longer and so the \gls{CCD} detectors are by far the preferred detector as their output has a higher-quality and lower-noise when compared to \gls{CMOS} cameras under the same conditions \citep{CCDvsCMOS}.
 \prgph
 
-The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in Section \ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a two-dimensional array of `counts' with which information may be extracted from. Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in Section \ref{subsec:calibration}.
+The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in \S~\ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a two-dimensional array of `counts' with which information may be extracted from.
+% Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in \S~\ref{subsec:calibration}.
 
-\subsection{Dispersion Elements} \label{subsec:dispersion}
-% https://spectroscopy.wordpress.com/2020/05/12/basics-on-prisms-and-diffraction-gratings-part-1/
+\subsection{Dispersion of Light} \label{subsec:dispersion}
 
 Light can be broken up into its constituent wavelengths through two different physical phenomena, namely dispersion and diffraction, which dispersive elements use to create spectra. Dispersive prisms and diffractive gratings each have their strengths and weaknesses and a wide spectrum of instruments exist implementing both, or either, concepts. Regardless of the specific element, dispersive elements all have a resolving power, $R$, and an angular dispersion. Generally, while the angular dispersion is a more involved process to determine, the resolving power of a spectrograph can be measured as:
-% \prgph
 
 \begin{equation}
     R = \frac{\lambda}{FWHM}
@@ -75,9 +71,9 @@ Light can be broken up into its constituent wavelengths through two different ph
 \end{equation}
 
 \noindent where $\lambda$ is the wavelength of an incident monochromatic beam and $FWHM$ refers to the width of the feature on the detector at half of its maximum intensity.
-\prgph
 
-%   - Prism
+\subsubsection{Prism} \label{subsubsec:prism}
+
 \begin{figure}[t]
     \centering
     \includegraphics[width = 7cm]{figures/2_prism_diagram.pdf}
@@ -85,58 +81,61 @@ Light can be broken up into its constituent wavelengths through two different ph
     \label{fig:prism_diagram}
 \end{figure}
 
-The prism operates on the principle that the refractive index of light, $n$, varies as a function of its wavelength, $\lambda$. Prisms were the only dispersive elements available for early spectroscopic studies, but they were not without flaw.
-% \prgph
+The prism operates on the principle that the refractive index of light, $n$, varies as a function of its wavelength, $\lambda$. Prisms were the only dispersive elements available for early spectroscopic studies, but they were not without flaw. The angular dispersion of a prism is given by
 
 \begin{equation}
     \frac{\partial \theta}{\partial \lambda} = \frac{B}{a}\frac{dn}{d\lambda}% \propto -\lambda^{-3}
     \label{eq:prism_angular_dispersion}
 \end{equation}
 
-The angular dispersion of a prism can be represented by Equation \ref{eq:prism_angular_dispersion} where the variables relate to Figure \ref{fig:prism_diagram} such that $\theta$ is the angle at which the refracted light differs from the incident light, $\lambda$ is the wavelength of the incident light, $B$ is the longest distance the beam would travel through the prism, and $a = L \sin(\alpha)$ is the cross-section of the incident beam where $L$ is the length of the transmissive surfaces and $\alpha$ is the incident angle of light to the prism surface. The refractive index of a material as a function of its wavelength, $n(\lambda)$, has several equations. Cauchy's equation, as given in Equation \ref{eq:Cauchy}, is a much simpler approximation of the refractive index that remains very accurate at visible wavelengths.
-% \prgph
+\noindent where $\theta$ is the angle at which the refracted light differs from the incident light, $\lambda$ is the wavelength of the incident light, $B$ is the longest distance the beam would travel through the prism, and $a = L \sin(\alpha)$ is the cross-section of the incident beam where $L$ is the length of the transmissive surfaces and $\alpha$ is the incident angle of light to the prism surface, as shown in Figure~\ref{fig:prism_diagram}. The refractive index of a material as a function of its wavelength, $n(\lambda)$, can be approximated by Cauchy's equation
 
 \begin{equation}
     n(\lambda) = A_{C} + \frac{B_{C}}{\lambda^{2}} + \frac{C_{C}}{\lambda^{4}} + \dots
     \label{eq:Cauchy}
 \end{equation}
 
-Equation \ref{eq:Cauchy}'s $A_{C}, B_{C}, C_{C}, \dots$ variables are called the Cauchy coefficients and have known values dependent on the material. Taking only the first term of the derivative of the Cauchy equation allows us to approximate the angular dispersion of a prism.
+\noindent where $A_{C}, B_{C}, C_{C}$ are the Cauchy coefficients and have known values dependent on the material. Cauchy's equation is a much simpler approximation of the refractive index that remains very accurate at visible wavelengths. Taking only the first term of the derivative of the Cauchy equation allows us to approximate the angular dispersion of a prism.
 
 \begin{equation}
     \frac{\partial \theta}{\partial \lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\lambda^{-3}
     \label{eq:prism_angular_dispersion_approx}
 \end{equation}
 
-Equation \ref{eq:prism_angular_dispersion_approx} shows that the angular dispersion of a prism is wavelength dependent and furthermore that longer wavelengths are dispersed less than shorter wavelengths \citep{BirneyObsAstro, Hecht_optics}. The dependence of the angular dispersion, $d\theta/d\lambda$, on the wavelength, $\lambda$, is crucial for the formation of a spectrum but this cubic, non-linear, relation results in a non-linear spectrum. Since prisms rely on the refractive index of the material they are made of they have low angular dispersions.
+Equation~\ref{eq:prism_angular_dispersion_approx} shows that the angular dispersion of a prism is wavelength dependent and furthermore that longer wavelengths are dispersed less than shorter wavelengths \citep{BirneyObsAstro, Hecht_optics}. The dependence of the angular dispersion, $d\theta/d\lambda$, on the wavelength, $\lambda$, is crucial for the formation of a spectrum but this cubic, non-linear, relation results in a non-linear spectrum. Since prisms rely on the refractive index of the material they are made of, they have low angular dispersions.
 \prgph
 
-Multiple prisms can be used to increase the angular dispersion but as the dispersion is non-linear it becomes increasingly more difficult to calibrate. The more material and material boundaries the light must pass through the more its intensity decreases due to attenuation effects and Fresnel losses. Even so, the transmittance of modern prisms for their selected wavelength range is generally very high due to improved manufacturing methods as well as improved transmitting materials.
-\prgph
+Multiple prisms can be used to increase the angular dispersion but as the dispersion is non-linear it becomes increasingly more difficult to calibrate. The more material and material boundaries the light must pass through, the more its intensity decreases due to attenuation effects and Fresnel losses. Even so, the transmittance of modern prisms for their selected wavelength range is generally very high\footnotemark{} due to improved manufacturing methods as well as improved transmitting materials.
+\enlargethispage{-2\baselineskip}
+\footnotetext{See manufacturers technical specifications, \href{https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=148}{THORLABS}, or \href{https://www.edmundoptics.eu/c/prisms/607/}{Edmund Optics} for example.}
 
-%   - Diffraction grating
+\subsubsection{Diffraction grating}
+
 \begin{figure}[t]
     \centering
     \includegraphics[width = 9cm]{figures/2_grating_diagram.pdf}
-    \caption{Geometry of a reflective blazed grating refracting\\an incident monochromatic beam}
+    \caption{Geometry of a reflective blazed grating refracting an incident monochromatic beam.}
     \label{fig:grating_diagram}
 \end{figure}
 
-The diffraction grating operates on the principle that when light interacts with a grating where the groove size is comparable to the light's wavelength, the light is dispersed as a function of its wavelength through constructive and destructive interference. This interference results in multiple diffracted beams $m$, called orders, either side of a central reflected, or transmitted, beam such that $m \in Z$, where $m = 0$ is the non-dispersed, or reflected, beam.
-% \prgph
+The alternative dispersing element is a diffraction grating, which operates on the principle that as light interacts with a grating where the groove size is comparable to the light's wavelength, the light is dispersed through constructive and destructive interference. This interference results in multiple diffracted beams $m$, called orders, either side of a central reflected, or transmitted, beam such that $m \in Z$, where $m = 0$ is the non-dispersed, or reflected, beam.
+\prgph
+
+An example of a reflective blazed grating is illustrated in Figure~\ref{fig:grating_diagram}. Here a monochromatic beam is incident on the grating at an angle of $\alpha$ from the grating normal. Due to the interference, the beam of wavelength $\lambda$ is found at an angle of $\beta$ from the grating normal. The relation between the incident and diffracted beams is given by the grating equation
 
 \begin{equation}
     m\lambda = \sigma (\sin(\alpha) \pm \sin(\beta))
     \label{eq:grating_equation}
 \end{equation}
 
-% Link eq and fig
-Equation \ref{eq:grating_equation} is referred to as the grating equation and its variables relate to Figure \ref{fig:grating_diagram} such that $m$ is the order of the diffracted beam being measured, $\lambda$ is the wavelength of the incident light, $\sigma$ is the groove spacing, $\alpha$ is the angle of incident light relative to the grating normal, and $\beta$ is the angle of diffraction relative to the grating normal. It is important to note that the sign of $\alpha$ and $\beta$ depend on whether the grating is reflective or transmissive. In the case of a reflective grating, such as in Figure \ref{fig:grating_diagram}, the signs of $\alpha$ and $\beta$ are the same relative to the grating normal, I.E. $\lambda = \sigma (\sin(\alpha) + \sin(\beta))$ for $m = 1$. In the case of a transmissive grating, the signs of $\alpha$ and $\beta$ are the opposite relative to the grating normal, I.E. $\lambda = \sigma (\sin(\alpha) - \sin(\beta))$ for $m = 1$.
+\noindent where $\sigma$ is the groove spacing of the grating and $m$ is the order of the diffracted beam being considered. The grating equation also applies to transmission gratings, though care should be taken for the signs of $\alpha$ and $\beta$.
 \prgph
 
-% Free Spectral range and Blazing
-Equation \ref{eq:grating_equation} also describes how multiple wavelengths can share an angle of refraction when $m\lambda_{m} = (m + 1)\lambda_{m + 1}$. The regions of an order that do not overlap with another order are called the free spectral range. To account for the overlaps and increase the free spectral range an order-blocking filter may be used, and the diffraction grating may be blazed by an angle, $\theta$, such as in Figure \ref{fig:grating_diagram}. Blazing refers to the fact that the grooves on the surface of the grating are not symmetrical. The asymmetry of the grooves diffract the incident beam such that most of the incident beam's intensity is focused to a single order for a designated `blazed' wavelength, $\lambda_{b}$.
+% It is important to note that the sign of $\alpha$ and $\beta$ depend on whether the grating is reflective or transmissive. In the case of a reflective grating, such as in Figure~\ref{fig:grating_diagram}, the signs of $\alpha$ and $\beta$ are the same relative to the grating normal, $\lambda = \sigma (\sin(\alpha) + \sin(\beta))$ for $m = 1$. In the case of a transmissive grating, the signs of $\alpha$ and $\beta$ are the opposite relative to the grating normal, $\lambda = \sigma (\sin(\alpha) - \sin(\beta))$ for $m = 1$.
 % \prgph
+
+% Free Spectral range and Blazing
+Equation~\ref{eq:grating_equation} also shows that different wavelengths will have the same angle of dispersion. The regions of an order that do not overlap with another order are called free spectral ranges. To account for the overlaps and increase the free spectral range an order-blocking filter may be used. A diffraction grating may be blazed by an angle, $\theta$, such as in Figure~\ref{fig:grating_diagram}. Blazing refers to the fact that the grooves on the surface of the grating are not symmetrical. The asymmetry of the grooves diffract the incident beam such that most of the incident beam's intensity is found in a single order. The wavelength at which a blazed spectrograph is most effective is called the blaze wavelength, $\lambda_{b}$, which is determined by
 
 \begin{equation}
     m\lambda_{b} = 2\sigma\sin(\theta)\cos(\alpha - \theta)
@@ -146,49 +145,54 @@ Equation \ref{eq:grating_equation} also describes how multiple wavelengths can s
 \noindent where
 
 \begin{equation}
-    2\theta = \alpha + \beta
+    2\theta = \alpha + \beta.
 \end{equation}
 
 % Angular dispersion
-Taking the derivative of Equation \ref{eq:grating_equation} with respect to $\lambda$ and keeping $\alpha$ constant allows us to determine the angular dispersion of a diffraction grating.
+Taking the derivative of Equation~\ref{eq:grating_equation} with respect to $\lambda$ while keeping $\alpha$ constant, allows us to determine the angular dispersion of a diffraction grating, namely
 
 \begin{equation}
-    \frac{\partial \beta}{\partial \lambda} = \frac{m}{\sigma \cos(\beta)}
+    \frac{\partial \beta}{\partial \lambda} = \frac{m}{\sigma \cos(\beta)}.
     \label{eq:grating_angular_dispersion}
 \end{equation}
 
 \noindent Substituting $m / \sigma$ with the grating equation gives
 
 \begin{equation}
-    \frac{\partial \beta}{\partial \lambda} = \frac{\sin(\alpha) + \sin(\beta)}{\lambda \cos(\beta)} \propto \lambda^{-1}
+    \frac{\partial \beta}{\partial \lambda} = \frac{\sin(\alpha) + \sin(\beta)}{\lambda \cos(\beta)} \propto \lambda^{-1}.
     \label{eq:grating_angular_dispersion_approx}
 \end{equation}
 
-Similarly to the dispersion of a prism, Equation \ref{eq:grating_angular_dispersion_approx} shows that the dispersion of a grating is wavelength dependent, but this dependence is only inversely proportional and thus more uniform across a wavelength range than that of a prism. Furthermore, shorter wavelengths are refracted less than longer wavelengths since there is no negative relation between the angular dispersion and the wavelength \citep{BirneyObsAstro, Hecht_optics}.
+Similarly to the dispersion of a prism, Equation~\ref{eq:grating_angular_dispersion_approx} shows that the dispersion of a grating is wavelength dependent, but this dependence is only inversely proportional and thus more uniform across a wavelength range than that of a prism. Furthermore, shorter wavelengths are refracted less than longer wavelengths since there is no negative relation between the angular dispersion and the wavelength \citep{BirneyObsAstro, Hecht_optics}.
 \prgph
 
 % Grism and immersed grating
-As mentioned before, multiple subgroups exist for both dispersive prisms and diffractive gratings. For prisms, along with the single and multiple prism setups mentioned above, there also exist grisms and immersed gratings. A grism (Grating Prism) refers to a transmissive grating etched onto one of the transmissive faces of a prism and allows a single camera to capture both spectroscopic and photometric images without needing to be moved, with and without the grism in the path of the beam of light, respectively. An immersed grating refers to a grism modified such that the transmissive grating is coated with reflective material. The primary source of dispersion for both grisms and immersive gratings is the grating and any aberration effects from the prism are negligible in comparison.
+As mentioned before, multiple subgroups exist for both dispersive prisms and diffractive gratings. For prisms, along with the single and multiple prism setups mentioned, there also exists grisms and immersed gratings. A grism (Grating Prism), as shown in Figure~\ref{fig:grism}, refers to a transmissive grating etched onto one of the transmissive faces of a prism and allows a single camera to capture both spectroscopic and photometric images without needing to be moved, with and without the grism in the path of the beam of light, respectively. An immersed grating refers to a grism modified such that the transmissive grating is coated with reflective material. The primary source of dispersion for both grisms and immersive gratings is the grating and any aberration effects from the prism are negligible in comparison.
 \prgph
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 10cm]{figures/2_vph_grating.pdf}
-    \caption{Geometry of a \gls{VPH} grating for an incident monochromatic beam of light.}
-    \label{fig:vph_grating}
+    \includegraphics[width = 10cm]{figures/2_grism.pdf}
+    \caption{Diagram of a grism for an incident monochromatic beam of light and a diffracted beam of order $m = 1$.}
+    \label{fig:grism}
 \end{figure}
 
 % Echelle and VPH grating
-% https://www.astro.ljmu.ac.uk/~ikb/vph.html
-For gratings, along with transmissive and reflective gratings there also exist \gls{VPH} gratings. A \gls{VPH} grating consists of a photoresist, which is a light-sensitive material, sandwiched between two glass substrates. Diffraction is possible since the photoresist's refractive index varies near-sinusoidally perpendicularly to the gratings lines. This allows for sharper diffraction orders and low stray light scattering as compared to more traditional gratings but since blazing is not possible the efficiency is decreased. An echelle grating refers to two gratings set up such that the dispersed light from one is further diffracted by a second and allows for comparatively higher spectral resolutions when compared to more traditional grating setups. The gratings used as part of the echelle grating may be any type of dispersion element, but gratings are traditionally preferred due to the linearity of their resultant spectrum.
-\prgph
+Other types of gratings include the \gls{VPH} grating as well as the echelle grating. The \gls{VPH} grating consists of a photoresist, which is a light-sensitive material, sandwiched between two glass substrates. Diffraction is possible since the photoresist's refractive index varies near-sinusoidally perpendicularly to the gratings lines, as seen in Figure~\ref{fig:vph_grating}. This allows for sharper diffraction orders and low stray light scattering as compared to more traditional gratings but since blazing is not possible the efficiency is decreased. An echelle grating refers to a diffraction grating with higher groove spacing which is optimized for use at high orders. The high order of the diffracted beam allows for greater angular dispersion which is most useful when combined with another dispersion element to cross-disperse a spectrum, resulting in a high resolution spectrum.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 10cm]{figures/2_vph_grating.pdf}
+    \caption{Diagram of a \gls{VPH} grating for an incident monochromatic beam of light.}
+    \label{fig:vph_grating}
+\end{figure}
 
 \subsection{Detector and Spectroscopic Calibrations}\label{subsec:calibration}
 
 Acquiring a spectrum from observations is more involved than simply reading out the data recorded on the \gls{CCD}. A raw science image, which is the raw counts of the observed source read from the \gls{CCD} with no calibrations applied, has on it a combination of useful science data as well as noise. The noise is a combination of random noise introduced through statistical processes and systematic noise introduced through the instrumentation and the observation conditions the source was observed under. This noise causes an uncertainty in the useful data and can be minimized, predominantly by calibrating for the systematic noise, but never fully removed \citep{CCDhandbook}.
 \prgph
 
-The dominant source of noise in a raw image is detector noise. \gls{CCD}'s are manufactured to have a small base charge in each pixel, called the `bias' current which allows the readout noise, a type of random noise, to better be sampled. There is also an unintentional additional charge which is linearly proportional to the exposure time and originates from thermal agitation of the \gls{CCD} material, called the `dark' current. The dark current can be minimized and possibly ignored if the \gls{CCD} is adequately cooled. These types of noise add to the charge held by a pixel and are thus considered additive.
+The dominant source of noise in a raw image is detector noise. \glspl{CCD} are manufactured to have a small base charge in each pixel, called the `bias' current which allows the readout noise, a type of random noise, to better be sampled. There is also an unintentional additional charge which is linearly proportional to the exposure time and originates from thermal agitation of the \gls{CCD} material, called the `dark' current. The dark current can be minimized and possibly ignored if the \gls{CCD} is adequately cooled. These types of noise add to the charge held by a pixel and are thus considered additive.
 \prgph
 
 \begin{figure}[t]
@@ -202,26 +206,28 @@ The dominant source of noise in a raw image is detector noise. \gls{CCD}'s are m
 The \gls{CCD} is not a perfect detector and the efficiency of it and the optics of the telescope also contribute noise to the image. The efficiency of a \gls{CCD} is referred to as the Quantum Efficiency, and it is a measure of what percentage of light striking the detector is actually recorded and converted to a charge. The efficiency of the \gls{CCD} and telescope optics is also wavelength dependent and so the noise that results from them is more complex than that of additive noise. This type of noise is referred to as multiplicative noise.
 \prgph
 
-Each image taken by a \gls{CCD} will inherently have the additive types of noise in the image, and so bias and dark currents are the first types of noise to be accounted for by subtracting them from any subsequent images. Bias currents can be found by taking a bias image or by adding an overscan region to each image. A bias image is an image where the charges on the \gls{CCD} are reset and then immediately read off without exposing anything on the detector, effectively taking an image with zero exposure time. Alternatively, to save time during an observational run, overscan regions may be added to the images. An overscan region refers to adding a few cycles to the readout of each column of the \gls{CCD} such that the base current is read out and appended to each image.
+Additive noise, such as bias and dark currents, is inherent to \gls{CCD} images, and as such needs to be subtracted out first when performing calibrations. Bias currents can be found by taking a bias image or by adding an overscan region to each image. A bias image is an image where the charges on the \gls{CCD} are reset and then immediately read off without exposing anything on the detector, effectively taking an image with zero exposure time. Alternatively, to save time during an observational run, overscan regions may be added to the images. An overscan region refers to adding a few cycles to the readout of each column of the \gls{CCD} such that the base current is read out and appended to each image.
 \prgph
 
-Dark currents can be found by taking an image with nothing exposed onto the detector for a certain exposure time. This resultant dark image can then be scaled to the science images exposure time since the dark current is linearly proportional to exposure time. When the detector is capable of being held at precise temperatures, dark images may be taken over multiple hours during the day to produce a high quality master dark image that may then be scaled and subtracted from all subsequent images.
+Dark currents can be found by taking an image with nothing exposed onto the detector for a certain exposure time. This resultant dark image can then be scaled to the science images exposure time since the dark current should be linearly proportional to exposure time. When the detector is capable of being held at precise temperatures, dark images may be taken over multiple hours during the day to produce a high quality master dark image that may then be scaled and subtracted from all subsequent images.
 \prgph
 
-After the additive noise has been accounted for, the response from the pixels detecting the same incoming light are still not all the same due to the multiplicative noise which still needs to be accounted for. An image that has this noise accounted for is considered to be flat since all pixels share the same response to the incoming light. This noise can be measured by taking a `flat' image, or alternatively a flat-field, and multiple types of flats can be taken which all in essence image a uniformly illuminated region to determine the pixel-to-pixel response.
+Next, multiplicative noise, such as a \gls{CCD}'s pixel-to-pixel response, should be accounted for. This pixel-to-pixel response should be uniform across the image and to achieve this an average response may be divided out. The average response is referred to as a `flat' image or flat-field and may be acquired by observing a uniformly illuminated region to determine the pixel-to-pixel response.
 \prgph
 
-Night sky flats are produced from science images where the images contain mostly sky. The science images are combined using the mode statistic which removes any celestial objects. This allows science images to be used for flat-fielding but at the cost of having a low \gls{SNR} because of the dim background sky. Dome flats are images taken of a flat surface inside the telescopes dome that has been uniformly and indirectly illuminated. These flats allow precise control of the light source and are also capable of being taken during the day. Finally, twilight flats are images taken of the twilight (or dawn) sky, when the Sun has just set, opposite the direction of the Sun at about $20\degr$ from zenith. Careful planning is required for twilight flats as the sky's brightness changes rapidly with the setting and rising of the Sun.
+Night sky flats are produced from science images where the images contain mostly sky and are used in photometry. The science images are combined using the mode statistic which removes any celestial objects at the cost of a low \gls{SNR} flat-field.
+Twilight flats are produced from images of the twilight (or dawn) sky and are again used in photometry. They are taken when the Sun has just set, opposite the direction of the Sun at about $20\degr$ from zenith. Although these flats provide better \glspl{SNR}, careful planning is required as the sky's brightness changes rapidly.
+Finally, dome flats are images taken of a flat surface inside the telescopes dome and are used in both photometry and spectroscopy. The dome is uniformly and indirectly illuminated which allows for precise control of the light source.
 \prgph
 
-A flat-field must be normalized before being used to correct any science images since it only acts to account for the pixel-to-pixel response and not for the additive errors. The normalized flat image, $F^{n}_{\lambda}(x,y)$ can be calculated as:
+A flat-field must be normalized before being used to correct any science images since it only acts to account for the pixel-to-pixel response and not for the additive errors. A  normalized spectroscopic flat image, $F^{n}_{\lambda}(x,y)$, can be calculated as:
 
 \begin{equation}
-    F^{n}_{\lambda}(x,y) = \frac{F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{mode(F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y))}
+    F^{n}_{\lambda}(x,y) = \frac{F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{median_{lp}(F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y))}
     \label{eq:norm_flat}
 \end{equation}
 
-\noindent where $F_{\lambda}(x,y)$ is the non-corrected flat image, $B(x,y)$ is the bias image, $D(x,y)$ is the dark image which is scaled by $t_{S}$ and $t_{D}$, the science image and dark image exposure times, respectively.
+\noindent where $F_{\lambda}(x,y)$ is the non-corrected flat image, $B(x,y)$ is the bias image, $D(x,y)$ is the dark image which is scaled by the exposure time of the science image, $t_{S}$, and the dark image, $t_{D}$. $median_{lp}$ is a low-pass median filter which smoothes out any rapid changes in the pixel-to-pixel response, removing the illumination contribution.
 \prgph
 
 The calibrated science image, $S^{*}_{\lambda}(x,y)$, which accounts for the bias and dark currents as well as the flat fielding can then be calculated as:
@@ -231,13 +237,10 @@ The calibrated science image, $S^{*}_{\lambda}(x,y)$, which accounts for the bia
     \label{eq:science_cal}
 \end{equation}
 
-Multichannel \gls{CCD}'s are detectors that use either multiple \gls{CCD}'s or a \gls{CCD} with multiple output amplifiers which can be read out through multiple channels at the same time, increasing the detectors size while keeping the readout time constant. These \gls{CCD} setups need additional calibrations, specifically cross-talk corrections and mosaicking.
+Multichannel \glspl{CCD} are detectors that use either multiple \glspl{CCD} or a \gls{CCD} with multiple output amplifiers which can be read out through multiple channels at the same time, increasing the detectors size while keeping the readout time constant. These \gls{CCD} setups need additional calibrations, specifically cross-talk corrections and mosaicking. Cross-talk noise refers to contamination that occurs during readout in one channel from another channel with a high signal and occurs because the signals can not be completely isolated from one another. Cross-talk corrections therefore account for this signal contamination between channels being read out at the same time \citep{CrossTalk}. Mosaicking is necessary for multichannel \glspl{CCD} since the digitized signal read out from the detector has no reference of the physical location of the pixel it was detected at. Mosaicking therefore orients the data acquired from a multichannel detector correctly relatively to one another so that a single image is produced from the multiple channels read out from the detector.
 \prgph
 
-Cross-talk noise refers to contamination that occurs during readout in one channel from another channel with a high signal and occurs because the signals can not be completely isolated from one another. Cross-talk corrections therefore account for this signal contamination between channels being read out at the same time \citep{CrossTalk}. Mosaicking is necessary for multichannel \gls{CCD}'s since the digitized signal read out from the detector has no reference of the physical location of the pixel it was detected at. Mosaicking therefore orients the data acquired from a multichannel detector correctly relatively to one another so that a single image is produced from the multiple channels read out from the detector.
-\prgph
-
-Finally, calibrations necessary for spectroscopy are limited to wavelength calibrations. Since the dispersion element breaks the incident light into its constituent wavelengths non-linearly, as discussed in Section \ref{subsec:dispersion}, the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modeled to produce a reliable pixel to wavelength calibration \citep[see E.g.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in Figure \ref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
+Finally, calibrations necessary for spectroscopy are limited to wavelength calibrations. Since the dispersion element breaks the incident light into its constituent wavelengths non-linearly, as discussed in \S~\ref{subsec:dispersion}, the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modeled to produce a reliable pixel to wavelength calibration \citep[see E.g.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in Figure~\ref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
 \prgph
 
 \begin{figure}[t]
@@ -248,7 +251,7 @@ Finally, calibrations necessary for spectroscopy are limited to wavelength calib
 \end{figure}
 \footnotetext{\protect\href{http://pysalt.salt.ac.za/lineatlas/plot_line_neon.pdf}{NeAr plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
 
-The wavelength calibrations then consist of identifying a two-dimensional pixel to wavelength conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations as found in Equations \ref{eq:chebyshev} and \ref{eq:legendre}, respectively. The Chebyshev polynomials are defined explicitly as:
+The wavelength calibrations then consist of identifying a two-dimensional pixel to wavelength conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations as found in Equations~\ref{eq:chebyshev} and~\ref{eq:legendre}, respectively. The Chebyshev polynomials are defined explicitly as:
 
 \begin{equation}
     T_{n}(x) = \cos(n \cos^{-1}(x)),
@@ -310,7 +313,7 @@ A one or two-dimensional unknown calibration function may then be approximated b
 % \noindent which returns the positions of the  x-intercepts.
 % \prgph
 
-The Chebyshev polynomials are more ideally suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in Figure \ref{fig:chebyshev}. This means that the Chebyshev approximation is exact when $x = x_{n}$, where $x_{n}$ are the positions of the $n - 1$ x-intercepts of $T_{N}(x)$. This property greatly minimizes the error in the Chebyshev approximation, even at lower order approximations \citep{cheby}.
+The Chebyshev polynomials are more ideally suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in Figure~\ref{fig:chebyshev}. This means that the Chebyshev approximation is exact when $x = x_{n}$, where $x_{n}$ are the positions of the $n - 1$ x-intercepts of $T_{N}(x)$. This property greatly minimizes the error in the Chebyshev approximation, even at lower order approximations \citep{cheby}.
 
 \begin{equation}
     x_{n} = \cos{\left(  \frac{\pi}{2} \frac{2 n + 1}{N} \right)}
@@ -321,7 +324,7 @@ The Chebyshev polynomials are more ideally suited for wavelength calibrations th
 \begin{figure}[t]
     \centering
     \includegraphics[width = 12cm]{figures/2_chebyshev.pdf}
-    \caption{The first seven Chebyshev polynomials ($T_0$ through $T_{6}$) as defined by Equation \ref{eq:chebypoly} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from \citep{numerical_recipes} (2023)\protect\footnotemark}
+    \caption{The first seven Chebyshev polynomials ($T_0$ through $T_{6}$) as defined by Equation~\ref{eq:chebypoly} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from \citep{numerical_recipes} (2023)\protect\footnotemark}
     \label{fig:chebyshev}
 \end{figure}
 \footnotetext{Available digitally at \protect\href{http://numerical.recipes/book}{numerical.recipes}}
@@ -373,18 +376,18 @@ A one or two-dimensional unknown calibration function may then be approximated b
 \begin{figure}[t]
     \centering
     \includegraphics[width = 12cm]{figures/2_legendre.pdf}
-    \caption{The first six Legendre polynomials ($P_0$ through $P_{5}$) as defined by Equation \ref{eq:legendre} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from Geek3, \protect\href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Legendrepolynomials6.svg}{Wikimedia Commons} (2023)}
+    \caption{The first six Legendre polynomials ($P_0$ through $P_{5}$) as defined by Equation~\ref{eq:legendre} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from Geek3, \protect\href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Legendrepolynomials6.svg}{Wikimedia Commons} (2023)}
     \label{fig:legendre}
 \end{figure}
 
-\noindent respectively, where $N$ and $M$ are the desired $x$ and $y$ orders, $u$ and $v$ are the same mapping variable as in Equation \ref{eq:XtoUV}, and $a_{ij}$ are the Legendre polynomial coefficients. Legendre polynomials benefit from having the orthogonality condition with no weight necessary which makes their coefficients easier to compute but the error in a Legendre approximation of a function is greater than that of the error in a Chebyshev approximation for the same required order, $N$ (in one dimension) \citep{leg_cheb_relation}.
+\noindent respectively, where $N$ and $M$ are the desired $x$ and $y$ orders, $u$ and $v$ are the same mapping variable as in Equation~\ref{eq:XtoUV}, and $a_{ij}$ are the Legendre polynomial coefficients. Legendre polynomials benefit from having the orthogonality condition with no weight necessary which makes their coefficients easier to compute but the error in a Legendre approximation of a function is greater than that of the error in a Chebyshev approximation for the same required order, $N$ (in one dimension) \citep{leg_cheb_relation}.
 \prgph
 
 Regardless of which set of polynomials is chosen, the polynomials are fit to the known (wavelength, pixel) pair using the least squares method. The resultant minimized function may then be used to convert the science frames from a (x pixel, y pixel) coordinate system to a (wavelength, y pixel) coordinate system.
 \prgph
 
 
-\section{Polarimetry}
+\section{Polarimetry}\label{sec:polarimetry}
 
 % Origin of polarimetry (short history)
 Both Huygens and Newton came to the conclusion that light demonstrates transversal properties \citep{Huygens, opticks}, which was later further investigated and coined as `polarization' by Malus \citep{Pol_Malus}. Malus also investigated the polarization effects of multiple materials including some of which were birefringent, such as optical calcite, which he referred to as Iceland spar after Bartholinus' investigations of the material \citep{Bartholinus}.
@@ -457,7 +460,7 @@ Maxwell's equations for an electromagnetic field propagating through a vacuum ar
     \label{eq:Maxwell_sol}
 \end{equation}
 
-\noindent where $E_{x}$, $E_{y}$, $\Phi_{x}$, and $\Phi_{y}$ are all constants describing the amplitude and phase of the electric field vector in the $(x, y)$ plane. Rewriting Equation \ref{eq:Maxwell_sol} using complex values allows us to simplify the form of the solution to:
+\noindent where $E_{x}$, $E_{y}$, $\Phi_{x}$, and $\Phi_{y}$ are all constants describing the amplitude and phase of the electric field vector in the $(x, y)$ plane. Rewriting Equation~\ref{eq:Maxwell_sol} using complex values allows us to simplify the form of the solution to:
 
 \begin{equation}
     \matr{E} = \Re(\matr{E}_{0} e^{-i \omega t})
@@ -723,7 +726,7 @@ A Wollaston prisms benefit over simpler elements, as listed previously, is that 
 \subsection{Polarimetric calibrations}\label{subsec:pol_cal}
 
 % Corrections Related to the Detector
-Similar to Section~\ref{subsec:calibration}, polarimetric calibrations are necessary when dealing with a polarimeter, though as the optical elements differ the calibrations similarly differ. Corrections and calibrations related to the \gls{CCD} remain unchanged while those related to correcting for the optical elements only need to be modified to correct for polarization instead of wavelength.
+Similar to \S~\ref{subsec:calibration}, polarimetric calibrations are necessary when dealing with a polarimeter, though as the optical elements differ the calibrations similarly differ. Corrections and calibrations related to the \gls{CCD} remain unchanged while those related to correcting for the optical elements only need to be modified to correct for polarization instead of wavelength.
 \prgph
 
 % Flat-fielding, Extraction of the O and E Ray Images
@@ -745,18 +748,18 @@ The matching dual images need to be aligned once they have been extracted such t
 The polarization introduced by the sky needs to be removed as it will influence the polarization results of the target source. Thankfully, the background polarization is an additive type of noise and may be subtracted out across the frames. This subtraction should be done for each image in the frame, however, as the background intensity of each image will differ as the background polarization differs.
 
 
-\section{Spectropolarimetry} % In depth
+\section{Spectropolarimetry} \label{sec:spectropolarimetry} % In depth
 
 As the name suggests, spectropolarimetry is the measurement of the polarization of light for a chosen spectral range and provides results of not only spectra but also polarization parameters across the spectral range. The history of spectropolarimetry is one limited by the constituent elements of spectropolarimeters, namely spectrometers and polarimeters. The most notable historical contributions unrelated to spectroscopy or polarimetry are those of spectropolarimetric studies instead of instrumental developments.
 \prgph
 
-\todo{Figure of spectropolarimeter, reference}
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
-    \caption{Diagram of an ideal spectropolarimeter. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Wollaston-prism.svg}{Wikimedia Commons} (2023)}
-    \label{fig:spectropolarimeter}
-\end{figure}
+% \todo{Figure of spectropolarimeter, reference}
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
+%     \caption{Diagram of an ideal spectropolarimeter. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Wollaston-prism.svg}{Wikimedia Commons} (2023)}
+%     \label{fig:spectropolarimeter}
+% \end{figure}
 
 Along with common points of consideration when developing any instrumentation for observational astronomy, such as resolution and sensitivity, spectropolarimeters need to consider both the spectral range and any inherent polarization that may be introduced by the any elements within the light path. Time is another constraint for spectropolarimetry as, depending on the target of observation, the incident light is split up by wavelength as well as by polarization states. This `double' dividing of the incident light results in increased exposure times of not only target frames but also calibration frames which are time-dependent when compared to more traditional photometric observations.
 
@@ -769,22 +772,24 @@ Along with common points of consideration when developing any instrumentation fo
 
 \subsection{Spectropolarimetric calibrations}
 
+As spectropolarimetry is an amalgamation of spectroscopy and polarimetry, it naturally follows that the calibrations necessary are a combination of both as discussed in \S~\ref{subsec:calibration},~\ref{subsec:pol_cal}. Luckily calibrations are independent of one another and as such need not be repeated here.
+\prgph
+
+Spectropolarimetric calibrations are, however, more involved when compared to the previous calibration discussions as minor deviations across spectra and polarized beams during calibration may compound, resulting in worse \gls{SNR}'s. Generally, more exposures are required to acquire enough redundancy and signal for the calculation of all Stokes parameters, further adding calibrations to be completed. It should therefore be noted just how important the wavelength and image alignment calibrations are when dealing with spectropolarimetry.
+\prgph
+
 \todo{Figure of spectropolarimetric exposure, and caption}
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
-    \caption{A spectropolarimetric target exposure of \dots.}
+    \includegraphics[width=1.0\textwidth]{figures/2_specpol_sci.pdf}
+    \caption{A spectropolarimetric target exposure as observed by the \gls{SALT} \gls{RSS} in spectropolarimetry mode.}
     \label{fig:specpol_exposure}
 \end{figure}
 
-Spectropolarimetric calibrations are more involved when compared to the previous calibration discussions (Sections~\ref{subsec:calibration},~\ref{subsec:pol_cal}). More exposures are required to acquire enough redundancy for the calculation of all Stokes parameters, and the combination of calibrations discussed previously accounting for wavelength as well as polarization must both be implemented.
-\prgph
 
-\todo{Wavelength calibrations most important for spectroscopy just as frame alignment most important for polarimetry, both important for spectropolarimetry.}
+\section{The Southern African Large Telescope} \label{sec:SALT} % Basics, not in depth
 
-\section{The South African Large Telescope} % Basics, not in depth
-
-\gls{SALT} is a 10 m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}. The operational design was based off of the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation (37$\degree$ from zenith in the case of SALT) while still allowing for full azimuthal rotation \citep{HET}. Both SALT and HET utilize a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path. Figure \ref{fig:SALT_telescope} depicts \gls{SALT}'s tracker (top left), supporting structure, and primary mirror (bottom right).
+\gls{SALT} is a 10 m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}. The operational design was based off of the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation (37$\degree$ from zenith in the case of SALT) while still allowing for full azimuthal rotation \citep{HET}. Both SALT and HET utilize a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path. Figure~\ref{fig:SALT_telescope} depicts \gls{SALT}'s tracker (top left), supporting structure, and primary mirror (bottom right).
 
 \begin{figure}[t]
     \centering
@@ -796,11 +801,11 @@ Spectropolarimetric calibrations are more involved when compared to the previous
 
 \subsection{The primary mirror}
 
-The primary mirror is composed of 91 individual 1 m hexagonal mirrors which together form an 11 m segmented spherical mirror. Each mirror segment can be adjusted by actuators allowing the individual mirrors to approximate a single monolithic spherical mirror. The fixed elevation means that SALT's primary mirror has a fixed gravity vector allowing for a lighter, cost-effective supporting structure when compared to that of a more traditional altitude-azimuthal mount but with the trade-off that the control mechanism and tracking has increased complexity \citep{SALT_design}.
+The primary mirror is composed of 91 individual 1 m hexagonal mirrors which together form an 11 m segmented spherical mirror. Each mirror segment can be adjusted by actuators allowing the individual mirrors to approximate a single monolithic spherical mirror. The fixed elevation means that SALT's primary mirror has a fixed gravity vector allowing for a lighter, cost-effective supporting structure when compared to those of a more traditional altitude-azimuthal mount but with the trade-off that the control mechanism and tracking has increased complexity \citep{SALT_design}.
 
 \subsection{Tracker and tracking}
 
-During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of ~5 $\mu$m and is capable of tracking $\pm$6$\degree$ from the optimal central track position. Targets at declinations from 10.5$\degree$ to -75.3$\degree$, as shown in Figure \ref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of $\sim7$ m to 9 m when the tracker is furthest and closest to the optimal central position, respectively.
+During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of ~5 $\mu$m and is capable of tracking $\pm$6$\degree$ from the optimal central track position. Targets at declinations from 10.5$\degree$ to -75.3$\degree$, as shown in Figure~\ref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of $\sim7$ m to 9 m when the tracker is furthest and closest to the optimal central position, respectively.
 \prgph
 
 \begin{figure}[t]
@@ -816,11 +821,11 @@ During observations the primary mirror is stationary and the tracker tracks cele
 The tracker is equipped with a 4 mirror spherical aberration corrector \citep{SALT_SAC}, and an atmospheric dispersion compensator \citep{SALT_ADC}, which corrects for the spherical aberration caused by the geometry of the primary mirror and allows access to wavelengths as short as 3200 \AA. These return a corrected flat focal plane with an 8\arcmin diameter field of view at prime focus on to the science instruments, with a 1\arcmin annulus around it used by the Tracker in a closed-loop guidance system.
 \prgph
 
-\subsection{The Robert Stobie Spectrograph}
+\subsection{The Robert Stobie Spectrograph} \label{subsec:RSS}
 
-SALT is equipped with the \gls{SALTICAM} and the \gls{RSS} science instruments onboard the tracker, and the \gls{HRS} and \gls{NIRifs} science instruments which are fibre-fed from the tracker to their own climate controlled rooms. The \gls{RSS} is the most used instrument on \gls{SALT} and the only instrument used for spectropolarimetry, and as such will be discussed in more depth than the other instruments.
+SALT is equipped with the \gls{SALTICAM} and the \gls{RSS} science instruments onboard the tracker, and the \gls{HRS} and \gls{NIRWALS} science instruments which are fibre-fed from the tracker to their own climate controlled rooms. The \gls{RSS} is the most used instrument on \gls{SALT} and the only instrument used for spectropolarimetry, and as such will be discussed in more depth than the other instruments.
 
-The \gls{NIRifs} is currently being commissioned and will extend SALT's operational wavelength range from 3200 - 9000 \AA\ to 3200 - 17000 \AA, providing medium resolution spectroscopy at R = 2000 - 5000 over NIR wavelengths \citep{NIR, SALT_NIR}. This is ideally suited for studies of nearby galaxies.
+The \gls{NIRWALS} is currently being commissioned and will have a wavelength coverage of 8000 to 17000 \AA, providing medium resolution spectroscopy at R = 2000 to 5000 over \gls{NIR} wavelengths \citep{NIRWALS, SALT_NIRWALS}. This is ideally suited for studies of nearby galaxies.
 
 The \gls{HRS} echelle spectrograph was designed for high resolution spectroscopy at R = 37000 - 67000 covering a wavelength range of 3700 - 8900 \AA\ and consists of a dichroic beam splitter and two \gls{VPH} gratings \citep{SALT_hires}. This instrument is capable of stellar atmospheric and radial velocity analysis.
 
@@ -833,7 +838,7 @@ The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operat
 \todo{Optical layout (Figure) and description, and CCD/Lamps/Filters etc. available. Focus on spectropolarimetry and a short description on how observations are organized, gratings, spectral ranges, as well as the latest developments (PG0700, and anything else new)
     \prgph}
 
-\section{RSS Spectropolarimetric Reductions} % In depth
+\section{RSS Spectropolarimetric Reductions} \label{sec:RSS_reductions} % In depth
 
 \todo{How spectropolarimetry reductions differ from spectroscopy, polarimetry, and general spectropolarimetry reductions}
 
