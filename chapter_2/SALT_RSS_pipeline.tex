@@ -1,6 +1,6 @@
 \chapter{Spectropolarimetry and the SALT RSS}
 
-This chapter gives a brief overview of the basics of spectropolarimetry (\S~\ref{sec:spectropolarimetry}), and how it functions, following from the principles of both spectroscopy (\S~\ref{sec:spectroscopy}) and polarimetry (\S~\ref{sec:polarimetry}). Further, it is discussed how these techniques are practically implemented for \gls{SALT} (\S~\ref{sec:SALT}), more specifically the \gls{RSS} (\S~\ref{subsec:RSS}), and how the spectropolarimetric reduction process is completed (\S~\ref{sec:RSS_reductions}).
+This chapter gives a brief overview of the basics of spectropolarimetry (\S~\ref{sec:spectropolarimetry}), and how it functions, following from the principles of both spectroscopy (\S~\ref{sec:spectroscopy}) and polarimetry (\S~\ref{sec:polarimetry}). Further, it is discussed how these techniques are practically implemented for \gls{SALT} (\S~\ref{sec:SALT}), more specifically the \gls{RSS} (\S~\ref{subsubsec:RSS}), and how the spectropolarimetric reduction process is completed (\S~\ref{sec:RSS_reductions}).
 
 \section{Spectroscopy}\label{sec:spectroscopy}
 
@@ -794,17 +794,18 @@ Figure~\ref{fig:specpol_exp} illustrates a typical science image taken with a sp
 The derived relations given in \S~\ref{subsec:pol}, such as the \hyperref[eq:Stokes_params]{Stokes parameters}, are valid for both polarimetry and spectropolarimetry due to the \hyperref[eq:pol_t_avg]{time averaging}, which accounts for temporal variations and permits partially polarized incident beams, and the achromatic nature of the polarization calculations.
 \prgph
 
-What is measured on the detector by each exposure are the wavelength dependent intensities of the $O$- and $E$-beams, $f_{O}(\lambda)$ and $f_{E}(\lambda)$, respectively, for varying half wave-plate angles, $\theta_{i}$. The $O$- and $E$-beam intensities thus relate to the Stokes parameters following:
+For linear spectropolarimetry with half-wave plate angles of $\theta_{i}$, an exposure measures the wavelength dependent intensities of the $O$- and $E$-beams, $I\arcmin_{O}(\lambda)$ and $I\arcmin_{E}(\lambda)$, respectively. The $O$- and $E$-beam intensities thus relate to the Stokes parameters following:
 
 \begin{equation}
   \begin{gathered}
-    f_{O, i}(\lambda) = \frac{1}{2} [I + Q\cos(4\theta_{i}) + U\sin(4\theta_{i})], \\
-    f_{E, i}(\lambda) = \frac{1}{2} [I - Q\cos(4\theta_{i}) - U\sin(4\theta_{i})].
+    I\arcmin_{O, i}(\lambda) = \frac{1}{2} [I + Q\cos(4\theta_{i}) + U\sin(4\theta_{i})], \\
+    I\arcmin_{E, i}(\lambda) = \frac{1}{2} [I - Q\cos(4\theta_{i}) - U\sin(4\theta_{i})].
   \end{gathered}
   \label{eq:specpol_flux_to_Stokes}
 \end{equation}
 
 At least two exposures are needed to solve for the $I$, $Q$, and $U$ polarization parameters since two equations arise from a single exposure of a dual-beam configuration and at least four linear equations are required to solve for three variables in a system of linear equations.
+\prgph
 
 The first Stokes parameter, $I$, may be recovered for each dual-beam exposure as
 
@@ -820,7 +821,7 @@ Next, the second and third Stokes parameters, $Q$ and $U$, are found by first de
   \label{eq:specpol_norm_flux}
 \end{equation}
 
-\noindent which then allows Equation~\ref{eq:specpol_flux_to_Stokes} to be written in terms of the normalized Stokes parameters, $\bar{Q} = Q / I$ and $\bar{U} = U / I$, or, alternatively, the degree of polarization, $P$, and polarization angle, $\chi$:
+\noindent which then allows Equation~\ref{eq:specpol_flux_to_Stokes} to be written in terms of the normalized Stokes para\-meters, $\bar{Q} = Q / I$ and $\bar{U} = U / I$, or, alternatively, the degree of polarization, $P$, and polarization angle, $\chi$:
 
 \begin{equation}
   F_{i}(\lambda) = \bar{Q}(\lambda) \cos(4\theta_{i}) + \bar{U}(\lambda) \sin(4\theta_{i}) = P\cos(4\theta_{i} - 2\chi).
@@ -840,7 +841,7 @@ The optimal change in waveplate angle is $\Delta\theta = \pi/8$ as it allows the
 \noindent where N is the amount of exposures taken, limited such that $N \in [2, 16]$, and $F_{i}$ is the normalized difference in relative intensities for the $i^{th}$ exposure \citep{polarimetry_error}.
 \prgph
 
-The desired degree of polarization as well as the polarization angle for linear spectropolarimetry is calculated as:
+The desired degree of polarization as well as the polarization angle for linear spectro\-polarimetry is calculated as:
 
 \begin{equation}
   \begin{gathered}
@@ -885,7 +886,7 @@ During observations the primary mirror is stationary and the tracker tracks cele
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width = 13cm]{figures/2_SALT_visibility.png}
+  \includegraphics[width = 1.0 \textwidth]{figures/2_SALT_visibility.png}
   \caption{The visibility annulus of objects observable by SALT. Figure adapted from the SALT call for proposals (2013)\protect\footnotemark}
   \label{fig:SALT_visibility}
 \end{figure}
@@ -896,26 +897,52 @@ During observations the primary mirror is stationary and the tracker tracks cele
 The tracker is equipped with a 4 mirror spherical aberration corrector \citep{SALT_SAC}, and an atmospheric dispersion compensator \citep{SALT_ADC}, which corrects for the spherical aberration caused by the geometry of the primary mirror and allows access to wavelengths as short as 3200 \AA. These return a corrected flat focal plane with an 8\arcmin diameter field of view at prime focus on to the science instruments, with a 1\arcmin annulus around it used by the Tracker in a closed-loop guidance system.
 
 
-\subsection{The Robert Stobie Spectrograph} \label{subsec:RSS}
+\subsection{SALT Instrumentation} \label{subsec:SALT_instr}
 
-SALT is equipped with the \gls{SALTICAM} and the \gls{RSS} science instruments onboard the tracker, and the \gls{HRS} and \gls{NIRWALS} science instruments which are fibre-fed from the tracker to their own climate controlled rooms. The \gls{RSS} is the most used instrument on \gls{SALT} and the only instrument used for spectropolarimetry, and as such will be discussed in more depth than the other instruments.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width = 1.0\textwidth]{figures/2_RSS_optical_path.png}
+  \caption{The optical path of the \gls{SALT} \gls{RSS}. Figure adapted from the SALT call for proposals (2023)\protect\footnotemark}
+  \label{fig:RSS_layout}
+\end{figure}
+\footnotetext{\protect\url{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}}
+
+SALT is equipped with the \gls{SALTICAM} and the \gls{RSS} science instruments onboard the tracker, and the \gls{HRS} and \gls{NIRWALS} science instruments which are fibre-fed from the tracker to their own climate controlled rooms. The \gls{RSS} is currently the most used instrument on \gls{SALT} and the only instrument used for spectropolarimetry.
+
+\subsubsection{\gls{NIRWALS}}
 
 The \gls{NIRWALS} is currently being commissioned and will have a wavelength coverage of 8000 to 17000 \AA, providing medium resolution spectroscopy at R = 2000 to 5000 over \gls{NIR} wavelengths \citep{NIRWALS, SALT_NIRWALS}. This is ideally suited for studies of nearby galaxies.
 
+\subsubsection{\gls{HRS}}
+
 The \gls{HRS} echelle spectrograph was designed for high resolution spectroscopy at R = 37000 - 67000 covering a wavelength range of 3700 - 8900 \AA\ and consists of a dichroic beam splitter and two \gls{VPH} gratings \citep{SALT_hires}. This instrument is capable of stellar atmospheric and radial velocity analysis.
 
-The SALTICAM functions as the acquisition camera and simple science imager with various imaging modes, such as full-mode and slot-mode imaging, and supports low exposure times, down to 50 ms \citep{SALTICAM}. This enables photometry of faint objects, especially at fast exposure times.
+\subsubsection{\gls{SALTICAM}}
+
+The \gls{SALTICAM} functions as the acquisition camera and simple science imager with various imaging modes, such as full-mode and slot-mode imaging, and supports low exposure times, down to 50 ms \citep{SALTICAM}. This enables photometry of faint objects, especially at fast exposure times.
+
+\subsubsection{\gls{RSS}} \label{subsubsec:RSS}
+
+The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, narrowband imaging mode, multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][or the \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{latest call for proposals}]{SALT_operational_modes}.
+
+\paragraph{The Detector}
+The \gls{RSS} detector consists of a mosaic of 3 \gls{CCD} chips with a total pixel scale of $0.1267\arcsec$ per unbinned pixel with varying readout times depending on the binning and readout mode. The mosaicking results in a characteristic double `gap' in the frames and resultant spectra taken with the \gls{RSS}, as seen in Figure~\ref{fig:specpol_exp}.
+
+\paragraph{The Available Gratings}
+The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, as listed in Table~\ref{table:RSS_gratings}. Observations may be planned using \href{https://astronomers.salt.ac.za/software/}{simulator tools} provided by \gls{SALT} and are performed in the first order only. \gls{RSS} spectroscopy has a clear, three \gls{UV} (with differing lower filtering ranges), and one blue order blocking filter available, used to block out contamination from the second order.
+
+\input{tables/2_RSS_gratings.tex}
+
+
+\section{RSS Spectropolarimetry} \label{sec:RSS_reductions} % In depth
+
+Spectropolarimetry using the \gls{RSS} is currently limited to long-slit linear, $(I, Q, U)$, spectro\-polarimetry where an observation consists of the minimum two half-wave plate pairs are taken. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter.
 \prgph
 
-The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, narrowband imaging mode, multi-object and high resolution spectroscopy modes, and low resolution Fabry-P\'erot imaging spectroscopy and tunable filter narrowband imaging modes \citep[for an in-depth discussion on operational modes see][]{SALT_operational_modes}.
-\prgph
-
-\todo{Optical layout (Figure) and description, and CCD/Lamps/Filters etc. available. Focus on spectropolarimetry and a short description on how observations are organized, gratings, spectral ranges, as well as the latest developments (PG0700, and anything else new)
-  \prgph}
-
-\section{RSS Spectropolarimetric Reductions} \label{sec:RSS_reductions} % In depth
-
-\todo{How spectropolarimetry reductions differ from spectro\-scopy, polar\-imetry, and how general spectro\-polarimetry reductions are done}
+\todo{\begin{itemize}
+    \item How specpol reductions differ from spectroscopy / polarimetry
+    \item how general spectropolarimetry reductions are done
+  \end{itemize}}
 
 \subsection{General Reduction Process} % Rename?, In depth
 
