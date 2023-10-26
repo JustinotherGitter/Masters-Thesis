@@ -929,18 +929,22 @@ The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operat
 The \gls{RSS} detector consists of a mosaic of 3 \gls{CCD} chips with a total pixel scale of $0.1267\arcsec$ per unbinned pixel with varying readout times depending on the binning and readout mode. The mosaicking results in a characteristic double `gap' in the frames and resultant spectra taken with the \gls{RSS}, as seen in Figure~\ref{fig:specpol_exp}.
 
 \paragraph{The Available Gratings}
-The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, as listed in Table~\ref{table:RSS_gratings}. Observations may be planned using \href{https://astronomers.salt.ac.za/software/}{simulator tools} provided by \gls{SALT} and are performed in the first order only. \gls{RSS} spectroscopy has a clear, three \gls{UV} (with differing lower filtering ranges), and one blue order blocking filter available, used to block out contamination from the second order.
+The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, as listed in Table~\ref{table:RSS_gratings}. Observations may be planned using \href{https://astronomers.salt.ac.za/software/}{simulator tools} provided by \gls{SALT} and are performed in the first order only. The \gls{RSS} has a clear filter, as well as three \gls{UV} (with differing lower filtering ranges) and one blue order blocking filter available, used in conjunction with the various gratings to block out contamination from the second order.
 
 \input{tables/2_RSS_gratings.tex}
 
 
 \section{RSS Spectropolarimetry} \label{sec:RSS_reductions} % In depth
 
-Spectropolarimetry using the \gls{RSS} is currently limited to long-slit linear, $(I, Q, U)$, spectro\-polarimetry where an observation consists of the minimum two half-wave plate pairs are taken. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter.
+Spectropolarimetry using the \gls{RSS} is currently limited to long-slit linear, $(I, Q, U)$, spectro\-polarimetry where an observation consists of the minimum two half-wave plate pairs are taken. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter\footnote{Commission status sighted from the latest \href{https://astronomers.salt.ac.za/wp-content/uploads/sites/71/2022/06/3170AM0013_Polarimetry_Observers_Guide_V1.2.pdf}{`Polarimetry Observers Guide' (2022)}.}.
 \prgph
 
+\input{tables/2_Polarimetry_patterns.tex}
+
+To account for the efficiencies of the optical components which vary slightly across polarization as well as across the spectrum
+
 \todo{\begin{itemize}
-    \item How specpol reductions differ from spectroscopy / polarimetry
+    \item Note double differential method
     \item how general spectropolarimetry reductions are done
   \end{itemize}}
 
