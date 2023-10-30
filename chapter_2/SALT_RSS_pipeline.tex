@@ -962,53 +962,54 @@ To account for the efficiencies of the optical components which vary slightly ac
 }
 
 \subsection{POLSALT} % In depth
+% http://salt-conference-2018.salt.ac.za/wp-content/uploads/2018/11/Groenewald.pdf
+% https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf
 
-\todo{
-  \begin{itemize}
-    \item In depth but not a users guide, more focus on purpose than the parameters (I.E. why each step is necessary and draw comparison to general reduction)
-    \item Why polsalt works without any major need for concern. "All steps except for the wavelength calibration and spectral extraction run with no user input. The spectral extraction is not a calibration but a simple check to make sure the entire trace is included in the window and also that the background regions do not contain any other objects lying on the frame or include the trace."
-  \end{itemize}
-}
-\todo{
-  Raw image reductions
-  \begin{itemize}
-    \item Bias/Dark/Flat/Fringe(?)/Crosstalk/Mosaicking
-    \item All processes run / files created / PURPOSE!
-  \end{itemize}
-}
-\todo{
-  Wavelength calibrations
-  \begin{itemize}
-    \item Arc/Background subtraction/Cosmic ray rejection
-    \item All processes run / files created / PURPOSE! / Heavy focus since supplementary pipeline replaces this step
-  \end{itemize}
-}
-\todo{
-  Spectral extraction
-  \begin{itemize}
-    \item All processes run / files created / PURPOSE!
-    \item Raw Stokes calculations
-    \item Wollaston ??
-    \item All processes run / files created / PURPOSE!
-  \end{itemize}
-}
-\todo{
-  Final Stokes calculations
-  \begin{itemize}
-    \item All processes run / files created / PURPOSE!
-  \end{itemize}
-}
-\todo{
-  Post-processing analysis
-  \begin{itemize}
-    \item PURPOSE
-    \item All 'script.py' steps in the BASH reduction
-    \item Data Culling (BASH) (not used but mention use) /
-    \item Flux Calibrations (BASH and errors in GUI (make 100\% sure about division error and notify Danielle before/if planning on including)) /
-    \item saving plot and text pipeline results (BASH and GUI) /
-    \item Synthetic Filtering (BASH) /
-  \end{itemize}
-  \begin{itemize}
-    \item Mention bash script and GUI versions and differences, as well as what SALT's preferred method is
-  \end{itemize}
-}
+\textsc{polsalt} refers to software developed by Ken Nordsieck and Enrico Kotze with the intended purpose of having a complete reduction pipeline for spectropolarimetric data taken using \glspl{SALT} \gls{RSS}. Newer versions of the software include a \gls{GUI} as well as limited interactivity during key steps in the reduction process, and it is this beta version for which the reduction process is outlined\footnote{\textsc{polsalt} is made freely available via the \textsc{polsalt} GitHub repository, available at \url{https://github.com/saltastro/polsalt}. Great care must be taken during installation}.
+\prgph
+
+The steps that make up the reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw stokes calculations, final stokes calculations, and visualization of the results. As the \textsc{polsalt} GitHub repository and its documentation is available publicly, a general reduction process will be outlined, noting which processes are run.
+
+\paragraph{Basic \gls{CCD} reductions} Basic \gls{CCD} reductions use \textbf{imred.py} and apply basic reductions to the raw data necessary before any calibrations may be done. These corrections include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and variance information. Files with basic reductions performed have ``mxgbp" prepended to their names, and as of February 2022, this reduction step is not required as data received from \gls{SALT} has these files as included as product data.
+
+\paragraph{Wavelength calibrations} Wavelength calibrations use \textbf{specpolwavmap.py} and separately calibrate the $O$- and $E$-beams for all necessary frames before applying cosmic-ray rejections. This step is interactive and allows the user to individually fit wavelength calibration maps to each beam. The importance of good correlation between both beams has been touched on previously and will be further discussed in \S~\ref{sec:polsalt_limits}. The wavelength calibrated results are saved to files with ``w" prepended to their names, and the $O$- and $E$-beams of the extensions within each file are split into their own sub-extensions.
+
+% \todo{
+%   \begin{itemize}
+%     \item Mention difficulty with PG0300?
+%     \item Mention GUI difficulties?
+%   \end{itemize}
+% }
+
+\paragraph{Spectral extraction} The background subtraction and spectral extraction use \textbf{specpol\-extract\_dev.py} and correct for the beam-splitter distortion and tilt, perform sky subtraction, and extract a one dimensional wavelength dependent spectrum for each beam extension. This step is interactive and, using the brightest trace in the images, allows the user to define regions which span the wavelength axis and which define the background and trace regions for the sky subtraction and spectral extraction. Files with corrections applied are saved with ``c" prepended to their names and files which contain the extracted one dimensional spectrum have ``e" further prepended to their names.
+
+\paragraph{Raw stokes calculations} Raw stokes calculations use \textbf{specpolrawstokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and `raw stokes' signal, $S$, are calculated as:
+
+\begin{equation}
+  \begin{gathered}
+    I = \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2}) \\
+    S = \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right].
+  \end{gathered}
+  \label{eq:polsalt_rawstokes}
+\end{equation}
+
+The files generated containing the raw stokes information have a very specific naming style, with most notably the pair of frames used being included.
+
+\paragraph{Final stokes calculations} The Final stokes calculations use \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw stokes signals, calibrates for polarimetric zero-point and waveplate efficiency calibrations and calculates the final stokes parameters. The raw stokes are culled using a systematic error as well as a chi-squared analysis.
+
+\paragraph{Visualization} Plotting the results of the spectropolarimetric reduction process uses \textbf{specpolview.py} and generates a plot of the Intensity, Linear Polarization ($\%$), and Equatorial Polarization Angle ($\deg$) against a shared wavelength axis, as seen in Figure~\ref{fig:polsalt_plot}. Multiple options allow for variations in the resultant plots, for example the axis ranges, binning, etc.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_plot.pdf}
+  \caption{A typical plot resulting from the reduction process. Figure adapted from \citep{cooper_HEASA2022}}
+  \label{fig:polsalt_plot}
+\end{figure}
+
+\paragraph{Post-processing analysis} Generally, the plot of the spectropolarimetric results is the stopping point for most reduction procedures as it contains or creates the desired results. However, two additional tools exist which may be used after the visualization has been completed and are not represented in the \gls{GUI}, namely, flux calibrations and synthetic filtering.
+
+Flux-calibrations use \textbf{specpolflux.py} and are only intended for shape corrections of the spectrum due to the unique design of \gls{SALT}. Additionally, the flux database file must exist for the standard observed and must be copied over to the working science directory.
+
+Synthetic filtering uses \textbf{specpolfilter.py} and computes the synthetically filtered polarization results. The filters which can be synthesized are the Johnson $U$, $B$, and $V$ filter curves from the \gls{SALTICAM} filters, as well as the Cousins $R$, and $I$ filter curves, along with any user defined wavelength dependent throughput.
+
+% \todo{Flux Calibrations (errors in GUI (make 100\% sure about division error and notify}
