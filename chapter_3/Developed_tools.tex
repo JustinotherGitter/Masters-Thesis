@@ -1,53 +1,67 @@
 \chapter{Developed Tools}
 
-\todo{This chapter is \textbf{highly} in depth as it is the `meat' of the dissertation}
+This chapter contains an overview of why supplementary tools were deemed necessary for an already complete reduction process(\S~\ref{sec:polsalt_limits}), which aspects of the reduction process have been altered, replaced, or added (\S~\ref{sec:mod_tools}, \ref{sec:add_tools}), and finally what an updated reduction process consists of using a combination of all software.
+
+% \todo{
+%   \begin{itemize}
+%     \item Mention difficulty with PG0300?
+%     \item Mention GUI difficulties?
+%   \end{itemize}
+% }
 
 \section{Limitations of POLSALT and the Need for a Supplementary Tool} \label{sec:polsalt_limits} % Rename
 
-\todo{Shortcomings (bad word - must change)/limitations of polsalt \textbf{in depth}, can mention other faults very briefly but the main take away should be the need for a way to do the wavelength calibration with more control as well as the need to check the beam (and target frame) wavelength calibrations against one another (since very accurate wavelength calibration necessary for stokes parameter calculations)}
+% Why
+The creation of supplementary tools for \textsc{polsalt} spectropolarimetric reductions stem from, primarily, the limitations of the wavelength calibration phase and a need for a way to compare wavelength solutions across matching $O$ and $E$ polarization beams. Due to the time-consuming process of recalibrating the wavelength solutions it is not feasible to perform the wavelength calibrations time and time again for any amount of reductions larger than a handful of observations.
+\prgph
 
-\todo{Why an external supplementary tool necessary (and how it overcomes POLSALTS limitations) and benefit of it over trying to `brute force' polsalt reductions}
+% How
+One solution is to use a well established tool to perform the wavelength calibration, one which allows for rapid recalibrations as well as provides a familiar interface with which the user can analyze their wavelength solution. \textsc{iraf} provides this familiar environment and reliability, even considering it's age and lack of further development. Unfortunately, \textsc{iraf} is unable to parse the files as is and a need for formatting is necessary for integration purposes. This restructuring works both ways as once the \textsc{iraf} reductions are complete the format must be reformatted to match that of the \textsc{polsalt} output such that reductions can carry on in \textsc{polsalt}.
 
-\section{Wavelength calibrations using the Supplementary Pipeline and IRAF}
 
-\todo{short description of what is to be discussed}
+\todo{Can mention other faults very briefly, but the main takeaway should be the need for a way to do the wavelength calibration with more control as well as the need to check the O/E beam wavelength calibrations against one another (since very accurate wavelength calibration necessary for stokes parameter calculations)}
+
+
+\section{Wavelength calibrations using the Supplementary Pipeline and IRAF} \label{sec:mod_tools}
+
+% \todo{short description of what is to be discussed}
 
 \subsection{Splitting the uncalibrated wavelength files}
 
-\todo{All processes run in pipeline split
-  Focus on \textbf{why}. Parsing polsalt mxgbp frame into something useable by IRAF and making sure the header reflects the changes}
+% \todo{All processes run in pipeline split
+%   Focus on \textbf{why}. Parsing polsalt mxgbp frame into something useable by IRAF and making sure the header reflects the changes}
 
-\subsection{IRAF wavelength calibration}
+\subsection{IRAF wavelength calibration}\label{subsec:IRAF_wav_cal}
 
-\todo{All wavelength calibration steps - Again, focus on \textbf{why} instead of how
-  \begin{itemize}
-    \item Identify
-    \item Reidentify
-    \item Fitcoords
-  \end{itemize}
-}
+% \todo{All wavelength calibration steps - Again, focus on \textbf{why} instead of how
+%   \begin{itemize}
+%     \item Identify
+%     \item Reidentify
+%     \item Fitcoords
+%   \end{itemize}
+% }
 
-\todo{(Optional) Transform (mention good for sanity checks which is not possible using the pure polsalt implementation)}
+% \todo{(Optional) Transform (mention good for sanity checks which is not possible using the pure polsalt implementation)}
 
 \subsection{Joining the wavelength calibrated files}
 
-\todo{All processes run in pipeline join.
-  Focus on \textbf{why}. Parsing IRAF frames to be used by POLSALT and making sure the header and extensions reflect the changes}
+% \todo{All processes run in pipeline join.
+%   Focus on \textbf{why}. Parsing \textsc{iraf} frames to be used by POLSALT and making sure the header and extensions reflect the changes}
 
-\section{Additional Tools}
+\section{Additional Tools}\label{sec:add_tools}
 
 \subsection{Cross correlation}
 
-\todo{Why a cross correlation necessary and how it works}
+% \todo{Why a cross correlation necessary and how it works}
 
 \subsection{Skyline comparisons}
 
-\todo{Again, why a skyline comparison necessary and how it works. Also, how the frame is transformed (IRAF bypassed) and that the flux is not conserved so only for checking and not for science use.}
+% \todo{Again, why a skyline comparison necessary and how it works. Also, how the frame is transformed (\textsc{iraf} bypassed) and that the flux is not conserved so only for checking and not for science use.}
 
 \section{General Reduction Procedure}
 
-\todo{General reduction procedure from raw data to finalized results
-  \begin{itemize}
-    \item This includes \textsc{polsalt} pre-reductions, splitting, \textsc{iraf} wavelength calibrations, checking, joining, and \textsc{polsalt} finalization. (Include Relative flux calibrations for `shape correcting' spectrum??)
-  \end{itemize}
-}
+% \todo{General reduction procedure from raw data to finalized results
+%   \begin{itemize}
+%     \item This includes \textsc{polsalt} pre-reductions, splitting, \textsc{iraf} wavelength calibrations, checking, joining, and \textsc{polsalt} finalization. (Include Relative flux calibrations for `shape correcting' spectrum??)
+%   \end{itemize}
+% }

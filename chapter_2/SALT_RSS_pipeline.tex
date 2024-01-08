@@ -1,6 +1,6 @@
 \chapter{Spectropolarimetry and the SALT RSS}
 
-This chapter gives a brief overview of the basics of spectropolarimetry (\S~\ref{sec:spectropolarimetry}), and how it functions, following from the principles of both spectroscopy (\S~\ref{sec:spectroscopy}) and polarimetry (\S~\ref{sec:polarimetry}). Further, it is discussed how these techniques are practically implemented for \gls{SALT} (\S~\ref{sec:SALT}), more specifically the \gls{RSS} (\S~\ref{subsubsec:RSS}), and how the spectropolarimetric reduction process is completed (\S~\ref{sec:RSS_reductions}).
+This chapter gives an overview of the basics of spectropolarimetry (\S~\ref{sec:spectropolarimetry}), and how it functions, following from the principles of both spectroscopy (\S~\ref{sec:spectroscopy}) and polarimetry (\S~\ref{sec:polarimetry}). Further, it is discussed how these techniques are practically implemented for \gls{SALT} (\S~\ref{sec:SALT}), more specifically the \gls{RSS} (\S~\ref{subsubsec:RSS}), and how the spectropolarimetric reduction process is completed (\S~\ref{sec:RSS_reductions}).
 
 \section{Spectroscopy}\label{sec:spectroscopy}
 
@@ -8,10 +8,10 @@ Spectroscopy originated in its most basic form with Newton's examinations of sun
 \prgph
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 0.9\textwidth]{figures/2_spectrometer.pdf}
-  \caption{Layout depicting the light path through a spectrometer.}
-  \label{fig:spectrometer}
+    \centering
+    \includegraphics[width = 0.9\textwidth]{figures/2_spectrometer.pdf}
+    \caption{Layout depicting the light path through a spectrometer.}
+    \label{fig:spectrometer}
 \end{figure}
 
 % How it works
@@ -66,8 +66,8 @@ The \gls{CCD} is a detector composed of many thousands of pixels which can store
 Light can be broken up into its constituent wavelengths through two different physical phenomena, namely dispersion and diffraction, which dispersive elements use to create spectra. Dispersive prisms and diffractive gratings each have their strengths and weaknesses and a wide spectrum of instruments exist implementing both, or either, concepts. Regardless of the specific element, dispersive elements all have a resolving power, $R$, and an angular dispersion. Generally, while the angular dispersion is a more involved process to determine, the resolving power of a spectrograph can be measured as:
 
 \begin{equation}
-  R = \frac{\lambda}{FWHM}
-  \label{eq:resolving_power}
+    R = \frac{\lambda}{FWHM}
+    \label{eq:resolving_power}
 \end{equation}
 
 \noindent where $\lambda$ is the wavelength of an incident monochromatic beam and $FWHM$ refers to the width of the feature on the detector at half of its maximum intensity.
@@ -75,31 +75,31 @@ Light can be broken up into its constituent wavelengths through two different ph
 \subsubsection{Prism} \label{subsubsec:prism}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 7cm]{figures/2_prism_diagram.pdf}
-  \caption{Geometry of a prism refracting an incident monochromatic beam at a minimum deviation angle.}
-  \label{fig:prism_diagram}
+    \centering
+    \includegraphics[width = 7cm]{figures/2_prism_diagram.pdf}
+    \caption{Geometry of a prism refracting an incident monochromatic beam at a minimum deviation angle.}
+    \label{fig:prism_diagram}
 \end{figure}
 
 The prism operates on the principle that the refractive index of light, $n$, varies as a function of its wavelength, $\lambda$. Prisms were the only dispersive elements available for early spectroscopic studies, but they were not without flaw. The angular dispersion of a prism is given by
 
 \begin{equation}
-  \frac{\partial \theta}{\partial \lambda} = \frac{B}{a}\frac{dn}{d\lambda}% \propto -\lambda^{-3}
-  \label{eq:prism_angular_dispersion}
+    \frac{\partial \theta}{\partial \lambda} = \frac{B}{a}\frac{dn}{d\lambda}% \propto -\lambda^{-3}
+    \label{eq:prism_angular_dispersion}
 \end{equation}
 
 \noindent where $\theta$ is the angle at which the refracted light differs from the incident light, $\lambda$ is the wavelength of the incident light, $B$ is the longest distance the beam would travel through the prism, and $a = L \sin(\alpha)$ is the cross-section of the incident beam where $L$ is the length of the transmissive surfaces and $\alpha$ is the incident angle of light to the prism surface, as shown in Figure~\ref{fig:prism_diagram}. The refractive index of a material as a function of its wavelength, $n(\lambda)$, can be approximated by Cauchy's equation
 
 \begin{equation}
-  n(\lambda) = A_{C} + \frac{B_{C}}{\lambda^{2}} + \frac{C_{C}}{\lambda^{4}} + \dots
-  \label{eq:Cauchy}
+    n(\lambda) = A_{C} + \frac{B_{C}}{\lambda^{2}} + \frac{C_{C}}{\lambda^{4}} + \dots
+    \label{eq:Cauchy}
 \end{equation}
 
 \noindent where $A_{C}, B_{C}, C_{C}$ are the Cauchy coefficients and have known values dependent on the material. Cauchy's equation is a much simpler approximation of the refractive index that remains very accurate at visible wavelengths. Taking only the first term of the derivative of the Cauchy equation allows us to approximate the angular dispersion of a prism.
 
 \begin{equation}
-  \frac{\partial \theta}{\partial \lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\lambda^{-3}
-  \label{eq:prism_angular_dispersion_approx}
+    \frac{\partial \theta}{\partial \lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\lambda^{-3}
+    \label{eq:prism_angular_dispersion_approx}
 \end{equation}
 
 Equation~\ref{eq:prism_angular_dispersion_approx} shows that the angular dispersion of a prism is wavelength dependent and furthermore that longer wavelengths are dispersed less than shorter wavelengths \citep{BirneyObsAstro, Hecht_optics}. The dependence of the angular dispersion, $d\theta/d\lambda$, on the wavelength, $\lambda$, is crucial for the formation of a spectrum but this cubic, non-linear, relation results in a non-linear spectrum. Since prisms rely on the refractive index of the material they are made of, they have low angular dispersions.
@@ -112,10 +112,10 @@ Multiple prisms can be used to increase the angular dispersion but as the disper
 \subsubsection{Diffraction grating}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 9cm]{figures/2_grating_diagram.pdf}
-  \caption{Geometry of a reflective blazed grating refracting an incident monochromatic beam.}
-  \label{fig:grating_diagram}
+    \centering
+    \includegraphics[width = 9cm]{figures/2_grating_diagram.pdf}
+    \caption{Geometry of a reflective blazed grating refracting an incident monochromatic beam.}
+    \label{fig:grating_diagram}
 \end{figure}
 
 The alternative dispersing element is a diffraction grating, which operates on the principle that as light interacts with a grating where the groove size is comparable to the light's wavelength, the light is dispersed through constructive and destructive interference. This interference results in multiple diffracted beams $m$, called orders, either side of a central reflected, or transmitted, beam such that $m \in Z$, where $m = 0$ is the non-dispersed, or reflected, beam.
@@ -124,8 +124,8 @@ The alternative dispersing element is a diffraction grating, which operates on t
 An example of a reflective blazed grating is illustrated in Figure~\ref{fig:grating_diagram}. Here a monochromatic beam is incident on the grating at an angle of $\alpha$ from the grating normal. Due to the interference, the beam of wavelength $\lambda$ is found at an angle of $\beta$ from the grating normal. The relation between the incident and diffracted beams is given by the grating equation
 
 \begin{equation}
-  m\lambda = \sigma (\sin(\alpha) \pm \sin(\beta))
-  \label{eq:grating_equation}
+    m\lambda = \sigma (\sin(\alpha) \pm \sin(\beta))
+    \label{eq:grating_equation}
 \end{equation}
 
 \noindent where $\sigma$ is the groove spacing of the grating and $m$ is the order of the diffracted beam being considered. The grating equation also applies to transmission gratings, though care should be taken for the signs of $\alpha$ and $\beta$.
@@ -138,29 +138,29 @@ An example of a reflective blazed grating is illustrated in Figure~\ref{fig:grat
 Equation~\ref{eq:grating_equation} also shows that different wavelengths will have the same angle of dispersion. The regions of an order that do not overlap with another order are called free spectral ranges. To account for the overlaps and increase the free spectral range an order-blocking filter may be used. A diffraction grating may be blazed by an angle, $\theta$, such as in Figure~\ref{fig:grating_diagram}. Blazing refers to the fact that the grooves on the surface of the grating are not symmetrical. The asymmetry of the grooves diffract the incident beam such that most of the incident beam's intensity is found in a single order. The wavelength at which a blazed spectrograph is most effective is called the blaze wavelength, $\lambda_{b}$, which is determined by
 
 \begin{equation}
-  m\lambda_{b} = 2\sigma\sin(\theta)\cos(\alpha - \theta)
-  \label{eq:blaze_wavelength}
+    m\lambda_{b} = 2\sigma\sin(\theta)\cos(\alpha - \theta)
+    \label{eq:blaze_wavelength}
 \end{equation}
 
 \noindent where
 
 \begin{equation}
-  2\theta = \alpha + \beta.
+    2\theta = \alpha + \beta.
 \end{equation}
 
 % Angular dispersion
 Taking the derivative of Equation~\ref{eq:grating_equation} with respect to $\lambda$ while keeping $\alpha$ constant, allows us to determine the angular dispersion of a diffraction grating, namely
 
 \begin{equation}
-  \frac{\partial \beta}{\partial \lambda} = \frac{m}{\sigma \cos(\beta)}.
-  \label{eq:grating_angular_dispersion}
+    \frac{\partial \beta}{\partial \lambda} = \frac{m}{\sigma \cos(\beta)}.
+    \label{eq:grating_angular_dispersion}
 \end{equation}
 
 \noindent Substituting $m / \sigma$ with the grating equation gives
 
 \begin{equation}
-  \frac{\partial \beta}{\partial \lambda} = \frac{\sin(\alpha) + \sin(\beta)}{\lambda \cos(\beta)} \propto \lambda^{-1}.
-  \label{eq:grating_angular_dispersion_approx}
+    \frac{\partial \beta}{\partial \lambda} = \frac{\sin(\alpha) + \sin(\beta)}{\lambda \cos(\beta)} \propto \lambda^{-1}.
+    \label{eq:grating_angular_dispersion_approx}
 \end{equation}
 
 Similarly to the dispersion of a prism, Equation~\ref{eq:grating_angular_dispersion_approx} shows that the dispersion of a grating is wavelength dependent, but this dependence is only inversely proportional and thus more uniform across a wavelength range than that of a prism. Furthermore, shorter wavelengths are refracted less than longer wavelengths since there is no negative relation between the angular dispersion and the wavelength \citep{BirneyObsAstro, Hecht_optics}.
@@ -171,20 +171,20 @@ As mentioned before, multiple subgroups exist for both dispersive prisms and dif
 \prgph
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 10cm]{figures/2_grism.pdf}
-  \caption{Diagram of a grism for an incident monochromatic beam of light and a diffracted beam of order $m = 1$.}
-  \label{fig:grism}
+    \centering
+    \includegraphics[width = 10cm]{figures/2_grism.pdf}
+    \caption{Diagram of a grism for an incident monochromatic beam of light and a diffracted beam of order $m = 1$.}
+    \label{fig:grism}
 \end{figure}
 
 % Echelle and VPH grating
 Other types of gratings include the \gls{VPH} grating as well as the echelle grating. The \gls{VPH} grating consists of a photoresist, which is a light-sensitive material, sandwiched between two glass substrates. Diffraction is possible since the photoresist's refractive index varies near-sinusoidally perpendicularly to the gratings lines, as seen in Figure~\ref{fig:vph_grating}. This allows for sharper diffraction orders and low stray light scattering as compared to more traditional gratings but since blazing is not possible the efficiency is decreased. An echelle grating refers to a diffraction grating with higher groove spacing which is optimized for use at high orders. The high order of the diffracted beam allows for greater angular dispersion which is most useful when combined with another dispersion element to cross-disperse a spectrum, resulting in a high resolution spectrum.
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 10cm]{figures/2_vph_grating.pdf}
-  \caption{Diagram of a \gls{VPH} grating for an incident monochromatic beam of light.}
-  \label{fig:vph_grating}
+    \centering
+    \includegraphics[width = 10cm]{figures/2_vph_grating.pdf}
+    \caption{Diagram of a \gls{VPH} grating for an incident monochromatic beam of light.}
+    \label{fig:vph_grating}
 \end{figure}
 
 \subsection{Detector and Spectroscopic Calibrations}\label{subsec:calibration}
@@ -196,10 +196,10 @@ The dominant source of noise in a raw image is detector noise. \glspl{CCD} are m
 \prgph
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 10cm]{figures/2_ccd.jpg}
-  \caption{Diagram of a \gls{CCD}. Figure adapted from \citep{ccd_fig}}
-  \label{fig:ccd_diagram}
+    \centering
+    \includegraphics[width = 10cm]{figures/2_ccd.jpg}
+    \caption{Diagram of a \gls{CCD}. Figure adapted from \citep{ccd_fig}}
+    \label{fig:ccd_diagram}
 \end{figure}
 
 
@@ -223,8 +223,8 @@ Finally, dome flats are images taken of a flat surface inside the telescopes dom
 A flat-field must be normalized before being used to correct any science images since it only acts to account for the pixel-to-pixel response and not for the additive errors. A  normalized spectroscopic flat image, $F^{n}_{\lambda}(x,y)$, can be calculated as:
 
 \begin{equation}
-  F^{n}_{\lambda}(x,y) = \frac{F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{median_{lp}(F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y))}
-  \label{eq:norm_flat}
+    F^{n}_{\lambda}(x,y) = \frac{F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{median_{lp}(F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y))}
+    \label{eq:norm_flat}
 \end{equation}
 
 \noindent where $F_{\lambda}(x,y)$ is the non-corrected flat image, $B(x,y)$ is the bias image, $D(x,y)$ is the dark image which is scaled by the exposure time of the science image, $t_{S}$, and the dark image, $t_{D}$. $median_{lp}$ is a low-pass median filter which smoothes out any rapid changes in the pixel-to-pixel response, removing the illumination contribution.
@@ -233,17 +233,17 @@ A flat-field must be normalized before being used to correct any science images 
 The calibrated science image, $S^{*}_{\lambda}(x,y)$, which accounts for the bias and dark currents as well as the flat fielding can then be calculated as:
 
 \begin{equation}
-  S^{*}_{\lambda}(x,y) = \frac{S_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{F^{n}_{\lambda}(x,y)}.
-  \label{eq:science_cal}
+    S^{*}_{\lambda}(x,y) = \frac{S_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{F^{n}_{\lambda}(x,y)}.
+    \label{eq:science_cal}
 \end{equation}
 
 Multichannel \glspl{CCD} are detectors that use either multiple \glspl{CCD} or a \gls{CCD} with multiple output amplifiers which can be read out through multiple channels at the same time, increasing the detectors size while keeping the readout time constant. These \gls{CCD} setups need additional calibrations, specifically cross-talk corrections and mosaicking. Cross-talk noise refers to contamination that occurs during readout in one channel from another channel with a high signal and occurs because the signals can not be completely isolated from one another. Cross-talk corrections therefore account for this signal contamination between channels being read out at the same time \citep{CrossTalk}. Mosaicking is necessary for multichannel \glspl{CCD} since the digitized signal read out from the detector has no reference of the physical location of the pixel it was detected at. Mosaicking therefore orients the data acquired from a multichannel detector correctly relatively to one another so that a single image is produced from the multiple channels read out from the detector.
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 16cm]{figures/2_Ne_arc.pdf}
-  \caption{Example of an arc spectrum for NeAr taken with \gls{SALT}'s \gls{RSS} using the PG1800 grating at a grating angle of $34.625$°, an articulation angle of $69.258$°, and covering a wavelength range of $\sim5600 - 6900$\angstrom. Plot adapted from \gls{SALT}'s published Longslit Line Atlases (as of 2023)\protect\footnotemark}
-  \label{fig:Ne_arc}
+    \centering
+    \includegraphics[width = 16cm]{figures/2_Ne_arc.pdf}
+    \caption{Example of an arc spectrum for NeAr taken with \gls{SALT}'s \gls{RSS} using the PG1800 grating at a grating angle of $34.625$°, an articulation angle of $69.258$°, and covering a wavelength range of $\sim5600 - 6900$\angstrom. Plot adapted from \gls{SALT}'s published Longslit Line Atlases (as of 2023)\protect\footnotemark}
+    \label{fig:Ne_arc}
 \end{figure}
 \footnotetext{\protect\href{http://pysalt.salt.ac.za/lineatlas/plot_line_neon.pdf}{NeAr plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
 
@@ -257,40 +257,40 @@ The wavelength calibrations then consist of defining a two-dimensional pixel-to-
 \paragraph{Chebyshev polynomials}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 12cm]{figures/2_chebyshev.pdf}
-  \caption{The first seven Chebyshev polynomials ($T_0$ through $T_{6}$) as defined by Equation~\ref{eq:chebypoly} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from \citep{numerical_recipes} (2023)\protect\footnotemark}
-  \label{fig:chebyshev}
+    \centering
+    \includegraphics[width = 12cm]{figures/2_chebyshev.pdf}
+    \caption{The first seven Chebyshev polynomials ($T_0$ through $T_{6}$) as defined by Equation~\ref{eq:chebypoly} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from \citep{numerical_recipes} (2023)\protect\footnotemark}
+    \label{fig:chebyshev}
 \end{figure}
 \footnotetext{Available digitally at \protect\href{http://numerical.recipes/book}{numerical.recipes}}
 
 The Chebyshev polynomials are defined explicitly as:
 
 \begin{equation}
-  T_{n}(x) = \cos(n \cos^{-1}(x)),
-  \label{eq:chebypolyexplicit}
+    T_{n}(x) = \cos(n \cos^{-1}(x)),
+    \label{eq:chebypolyexplicit}
 \end{equation}
 
 \noindent or recursively as:
 \begin{equation}
-  \begin{gathered}
-    T_{0}(x) = 1 \\
-    T_{1}(x) = x  \\
-    T_{n}(x) = 2 x T_{n - 1}(x) - T_{n - 2}(x), \text{ for } n > 1
-  \end{gathered}
-  \label{eq:chebypoly}
+    \begin{gathered}
+        T_{0}(x) = 1 \\
+        T_{1}(x) = x  \\
+        T_{n}(x) = 2 x T_{n - 1}(x) - T_{n - 2}(x), \text{ for } n > 1
+    \end{gathered}
+    \label{eq:chebypoly}
 \end{equation}
 
 \noindent where $T$ is a Chebyshev polynomial\footnote{Denoted $T$ as a hold-over from the alternate spelling, `Tchebycheff'.} of order $n$. An important property of Chebyshev polynomials is that they are orthogonal polynomials. This means that the inner product of any two differing Chebyshev polynomials, $T_{i}(x)$ and $T_{j}(x)$, over the range $[-1, 1]$ is zero, as shown by
 
 \begin{equation}
-  \int_{-1}^{1} T_{i}(x) T_{j}(x) \frac{1}{\sqrt{1-x^{2}}} \,dx =
-  \begin{cases}
-    0,       & i \neq j     \\
-    \pi / 2, & i = j \neq 0 \\
-    \pi,     & i = j = 0
-  \end{cases}
-  \label{eq:chebyorth}
+    \int_{-1}^{1} T_{i}(x) T_{j}(x) \frac{1}{\sqrt{1-x^{2}}} \,dx =
+    \begin{cases}
+        0,       & i \neq j     \\
+        \pi / 2, & i = j \neq 0 \\
+        \pi,     & i = j = 0
+    \end{cases}
+    \label{eq:chebyorth}
 \end{equation}
 
 \noindent where $1 / \sqrt{1 - x^{2}}$ is the weighting factor for Chebyshev polynomials. This property is important because it means that each coefficient in the Chebyshev polynomial expansion are independent of one another, allowing for a unique solution when approximating an unknown function.
@@ -299,23 +299,23 @@ The Chebyshev polynomials are defined explicitly as:
 An approximation, using Chebyshev polynomials, of an unknown wavelength calibration function is given by
 
 \begin{equation}
-  f(x) \approx \sum_{i = 0}^{N}  c_{i} T_{i}(u)
-  \label{eq:chebyshev}
+    f(x) \approx \sum_{i = 0}^{N}  c_{i} T_{i}(u)
+    \label{eq:chebyshev}
 \end{equation}
 
 \noindent or
 
 \begin{equation}
-  F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} c_{ij} T_{i}(u) T_{j}(v),
-  \label{eq:chebyshev2D}
+    F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} c_{ij} T_{i}(u) T_{j}(v),
+    \label{eq:chebyshev2D}
 \end{equation}
 
 \noindent for a one- or a two-dimensional wavelength surface function, respectively. Here $N$ and $M$ are the desired $x$ and $y$ orders, and $c_{i}$ and $c_{ij}$ are the Chebyshev polynomial coefficients \citep{chebysurf, cheby2d}. Since the orthogonality property of the Chebyshev polynomials only holds true over the range $[-1, 1]$, the $(x, y) \in ([0, a], [0, b])$ pixel coordinates must be remapped to $u, v \in [-1, 1]$ following the relation
 
 \begin{align}
-  (u, v) & = \frac{2 (x, y) - a - b}{b - a}.
-  \label{eq:XtoUV}
-  % & (x, y) & = \frac{b - a}{2} (u, v) + \frac{a+b}{2}
+    (u, v) & = \frac{2 (x, y) - a - b}{b - a}.
+    \label{eq:XtoUV}
+    % & (x, y) & = \frac{b - a}{2} (u, v) + \frac{a+b}{2}
 \end{align}
 
 % When the calibration function is known but the function cannot be evaluated, the coefficients, $c_{n}$, may be approximated by:
@@ -339,39 +339,39 @@ The Chebyshev polynomials are more suited for wavelength calibrations than stand
 \paragraph{Legendre polynomials}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 12cm]{figures/2_legendre.pdf}
-  \caption{The first six Legendre polynomials ($P_0$ through $P_{5}$) as defined by Equation~\ref{eq:legendre} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from Geek3, \protect\href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Legendrepolynomials6.svg}{Wikimedia Commons} (2023)}
-  \label{fig:legendre}
+    \centering
+    \includegraphics[width = 12cm]{figures/2_legendre.pdf}
+    \caption{The first six Legendre polynomials ($P_0$ through $P_{5}$) as defined by Equation~\ref{eq:legendre} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from Geek3, \protect\href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Legendrepolynomials6.svg}{Wikimedia Commons} (2023)}
+    \label{fig:legendre}
 \end{figure}
 
 Similar to the Chebyshev polynomials, the Legendre polynomials may be defined explicitly as:
 
 \begin{equation}
-  P_{n}(x) = \frac{1}{2^{n} n!} \frac{d^{n}}{d x^{n}} (x^{2} - 1)^{n}
-  \label{eq:legpolyexplicit}
+    P_{n}(x) = \frac{1}{2^{n} n!} \frac{d^{n}}{d x^{n}} (x^{2} - 1)^{n}
+    \label{eq:legpolyexplicit}
 \end{equation}
 
 \noindent or recursively as:
 
 \begin{equation}
-  \begin{gathered}
-    P_{0}(x) = 1 \\
-    P_{1}(x) = x \\
-    P_{n}(x) = \frac{2 n + 1}{n + 1} x P_{n - 1}(x) - \frac{n}{n + 1} P_{n - 2}(x), \text{ for } n > 1
-  \end{gathered}
-  \label{eq:legpoly}
+    \begin{gathered}
+        P_{0}(x) = 1 \\
+        P_{1}(x) = x \\
+        P_{n}(x) = \frac{2 n + 1}{n + 1} x P_{n - 1}(x) - \frac{n}{n + 1} P_{n - 2}(x), \text{ for } n > 1
+    \end{gathered}
+    \label{eq:legpoly}
 \end{equation}
 
 \noindent where $P$ is a Legendre polynomial of order $n$. Legendre polynomials also hold the property of orthogonality. This means that the inner product of any two differing Legendre polynomials, $P_{i}(x)$ and $P_{j}(x)$, over the range $[-1, 1]$ is zero, as shown by
 
 \begin{equation}
-  \int_{-1}^{1} P_{i}(x) P_{j}(x) \,dx =
-  \begin{cases}
-    0,                 & i \neq j \\
-    \frac{2}{2 n + 1}, & i = j
-  \end{cases}
-  \label{eq:legorth}
+    \int_{-1}^{1} P_{i}(x) P_{j}(x) \,dx =
+    \begin{cases}
+        0,                 & i \neq j \\
+        \frac{2}{2 n + 1}, & i = j
+    \end{cases}
+    \label{eq:legorth}
 \end{equation}
 
 \noindent where a weight of $1$ is the weighting factor for Legendre polynomials.
@@ -380,15 +380,15 @@ Similar to the Chebyshev polynomials, the Legendre polynomials may be defined ex
 An approximation, using Legendre polynomials, of an unknown wavelength calibration function is given by
 
 \begin{equation}
-  f(x) \approx \sum_{n = 0}^{N} a_{n} P_{n}(u)
-  \label{eq:legendre}
+    f(x) \approx \sum_{n = 0}^{N} a_{n} P_{n}(u)
+    \label{eq:legendre}
 \end{equation}
 
 \noindent or
 
 \begin{equation}
-  F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} a_{ij} P_{i}(u) P_{j}(v),
-  \label{eq:Legendre2D}
+    F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} a_{ij} P_{i}(u) P_{j}(v),
+    \label{eq:Legendre2D}
 \end{equation}
 
 \noindent for a one-dimensional wavelength function or a two-dimensional surface function, respectively. Here $N$ and $M$ are the desired $x$ and $y$ orders, $u$ and $v$ are the same mapping variable as in Equation~\ref{eq:XtoUV}, and $a_{ij}$ are the Legendre polynomial coefficients.
@@ -416,13 +416,13 @@ Both Huygens and Newton came to the conclusion that light demonstrates transvers
 Fresnel built on Malus' work showing that two beams of light, polarized at a right angle to one another, do not interfere, conclusively proving that light is transversal in nature, opposing the widely accepted longitudinal nature of light due to the prevalent belief in the ether. Fresnel later went on to correctly describe how polarized light is reflected and refracted at the surface of optical dielectric interfaces, without knowledge of the electromagnetic nature of light. Fresnel's equations for the reflectance and transmittance, $R$ and $T$, are defined as:
 
 \begin{equation}
-  \begin{gathered}
-    R_{s} = \left\lvert \frac{Z_{2} \cos{\theta_{i}} - Z_{1} \cos{\theta_{t}}}{Z_{2} \cos{\theta_{i}} + Z_{1} \cos{\theta_{t}}} \right\rvert^{2} \\
-    R_{p} = \left\lvert \frac{Z_{2} \cos{\theta_{t}} - Z_{1} \cos{\theta_{i}}}{Z_{2} \cos{\theta_{t}} + Z_{1} \cos{\theta_{i}}} \right\rvert^{2} \\
-    T_{s} = 1 - R_{s} \\
-    T_{p} = 1 - R_{p}
-  \end{gathered}
-  \label{eq:Fresnel}
+    \begin{gathered}
+        R_{s} = \left\lvert \frac{Z_{2} \cos{\theta_{i}} - Z_{1} \cos{\theta_{t}}}{Z_{2} \cos{\theta_{i}} + Z_{1} \cos{\theta_{t}}} \right\rvert^{2} \\
+        R_{p} = \left\lvert \frac{Z_{2} \cos{\theta_{t}} - Z_{1} \cos{\theta_{i}}}{Z_{2} \cos{\theta_{t}} + Z_{1} \cos{\theta_{i}}} \right\rvert^{2} \\
+        T_{s} = 1 - R_{s} \\
+        T_{p} = 1 - R_{p}
+    \end{gathered}
+    \label{eq:Fresnel}
 \end{equation}
 
 \noindent where $s$ and $p$ are the two polarized components of light perpendicular to one another, $Z_{1}$ and $Z_{2}$ are the impedance of the two media, and $\theta_{i}$, $\theta_{t}$, and $\theta_{r}$ are the angles of incidence, transmission, and reflection, respectively \citep{Fresnel}.
@@ -431,15 +431,15 @@ Fresnel built on Malus' work showing that two beams of light, polarized at a rig
 Nicol was the first to create a polarizer, aptly named the Nicol prism, where the incident light is split into its two perpendicular polarization components, namely the ordinary and extraordinary beams. Faraday discovered the phenomenon where the polarization plane of light is rotated when under the influence of a magnetic field, known as the Faraday effect. Brewster calculated the angle of incidence, $\theta_{B}$, at which incident polarized light is perfectly transmitted through a transparent surface, with refractive indexes of $n_{1}$ and $n_{2}$, while non-polarized incident light is perfectly polarized when reflected and partially polarized when refracted.
 
 \begin{equation}
-  \theta_{B} = \arctan{\frac{n_{2}}{n_{1}}}
-  \label{eq:Brewster}
+    \theta_{B} = \arctan{\frac{n_{2}}{n_{1}}}
+    \label{eq:Brewster}
 \end{equation}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width=10cm]{figures/2_Nicol_prism.pdf}
-  \caption{Nicol prism diagram for incident non-polarized light.}
-  \label{fig:Nicol_prism}
+    \centering
+    \includegraphics[width=10cm]{figures/2_Nicol_prism.pdf}
+    \caption{Nicol prism diagram for incident non-polarized light.}
+    \label{fig:Nicol_prism}
 \end{figure}
 \prgph
 
@@ -450,36 +450,36 @@ Stokes' work created the first consistent description of polarization and gave u
 Maxwell's equations for an electromagnetic field propagating through a vacuum are given as:
 
 \begin{equation}
-  \begin{gathered}
-    \nabla \cdot \matr{E} = 0 \\
-    \nabla \cdot \matr{B} = 0 \\
-    \nabla \times \matr{E} = - \frac{1}{c} \frac{\partial \matr{B}}{\partial t} \\
-    \nabla \times \matr{B} = \frac{1}{c} \frac{\partial \matr{E}}{\partial t}
-  \end{gathered}
-  \label{eq:Maxwell}
+    \begin{gathered}
+        \nabla \cdot \matr{E} = 0 \\
+        \nabla \cdot \matr{B} = 0 \\
+        \nabla \times \matr{E} = - \frac{1}{c} \frac{\partial \matr{B}}{\partial t} \\
+        \nabla \times \matr{B} = \frac{1}{c} \frac{\partial \matr{E}}{\partial t}
+    \end{gathered}
+    \label{eq:Maxwell}
 \end{equation}
 
 \noindent where $\matr{E}$ and $\matr{B}$ are the electric and magnetic field vectors, and $c$ is the speed of light \citep{Griffiths}. In a right-handed $(x, y, z)$ coordinate system, a non-trivial solution of an electromagnetic wave following \hyperref[eq:Maxwell]{Maxwell's Equations} propagating along the $z$-axis, towards a hypothetical observer, is described by:
 
 \begin{equation}
-  \matr{E} = E_{x} \cos(\omega t - \Phi_{x}) \hat{\boldsymbol{x}} +
-  E_{y} \cos(\omega t - \Phi_{y}) \hat{\boldsymbol{y}}
-  \label{eq:Maxwell_sol}
+    \matr{E} = E_{x} \cos(\omega t - \Phi_{x}) \hat{\boldsymbol{x}} +
+    E_{y} \cos(\omega t - \Phi_{y}) \hat{\boldsymbol{y}}
+    \label{eq:Maxwell_sol}
 \end{equation}
 
 \noindent where $E_{x}$, $E_{y}$, $\Phi_{x}$, and $\Phi_{y}$ are all parameters describing the amplitude and phase of the electric field vector in the $(x, y)$ plane. Rewriting Equation~\ref{eq:Maxwell_sol} using complex values allows us to simplify the form of the solution to:
 
 \begin{equation}
-  \matr{E} = \Re(\matr{E}_{0} e^{-i \omega t})
-  \label{eq:E_field_vector}
+    \matr{E} = \Re(\matr{E}_{0} e^{-i \omega t})
+    \label{eq:E_field_vector}
 \end{equation}
 
 \noindent where we only consider the real part of the equation, and where $\matr{E}_{0}$ is defined as:
 
 \begin{equation}
-  \matr{E}_{0} = E_{x} e^{i \Phi_{x}} \hat{\boldsymbol{x}} +
-  E_{y} e^{i \Phi_{y}} \hat{\boldsymbol{y}}
-  \label{eq:pol_vector}
+    \matr{E}_{0} = E_{x} e^{i \Phi_{x}} \hat{\boldsymbol{x}} +
+    E_{y} e^{i \Phi_{y}} \hat{\boldsymbol{y}}
+    \label{eq:pol_vector}
 \end{equation}
 
 \noindent and is referred to as the polarization vector since it neatly contains the parameters responsible for the polarization properties \citep{pol_phys}.
@@ -490,77 +490,77 @@ Maxwell's equations for an electromagnetic field propagating through a vacuum ar
 For an electric field vector with oscillations in some combination of the $x$ and $y$ axes, the tip of the vector sweeps out an ellipse, as depicted in Figure~\ref{fig:pol_ellipse}. This ellipse is referred to as the polarization ellipse and has the form:
 
 \begin{equation}
-  \left( \frac{\matr{E}_{x}}{\matr{E}_{0, x}}\right)^{2} +
-  \left( \frac{\matr{E}_{y}}{\matr{E}_{0, y}}\right)^{2} -
-  \frac{2 \matr{E}_{x} \matr{E}_{y}}{\matr{E}_{0, x} \matr{E}_{0, y}} \cos\Phi =
-  \sin^{2} \Phi
-  \label{eq:pol_ellipse}
+    \left( \frac{\matr{E}_{x}}{\matr{E}_{0, x}}\right)^{2} +
+    \left( \frac{\matr{E}_{y}}{\matr{E}_{0, y}}\right)^{2} -
+    \frac{2 \matr{E}_{x} \matr{E}_{y}}{\matr{E}_{0, x} \matr{E}_{0, y}} \cos\Phi =
+    \sin^{2} \Phi
+    \label{eq:pol_ellipse}
 \end{equation}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width=6cm]{figures/2_pol_ellipse.pdf}
-  \caption{The polarization ellipse for an electric field vector propagating through free space.}
-  \label{fig:pol_ellipse}
+    \centering
+    \includegraphics[width=6cm]{figures/2_pol_ellipse.pdf}
+    \caption{The polarization ellipse for an electric field vector propagating through free space.}
+    \label{fig:pol_ellipse}
 \end{figure}
 
 \noindent where $\Phi = \Phi_{x} - \Phi_{y}$ and is the phase difference between the $x$ and $y$ phase parameters. The degree of polarization for the polarization ellipse is related to the eccentricity of the ellipse and the angle at which it is rotated relates to the polarization angle. Since $\matr{E}_{0, x}$, $\matr{E}_{0, y}$, $\Phi_{x}$, and $\Phi_{y}$ describe the wave, the polarization ellipse that results from these parameters is fixed as the wave continues to propagate. An alternate representation of Equation~\ref{eq:pol_ellipse} is given by:
 
 \begin{equation}
-  (E_{x}^{2} + E_{y}^{2})^{2} - (E_{x}^{2} - E_{y}^{2})^{2} - (2 E_{x} E_{y} \cos \Phi)^{2} = (2 E_{x} E_{y} \sin \Phi)^{2}
-  \label{eq:pol_ellipse_alt}
+    (E_{x}^{2} + E_{y}^{2})^{2} - (E_{x}^{2} - E_{y}^{2})^{2} - (2 E_{x} E_{y} \cos \Phi)^{2} = (2 E_{x} E_{y} \sin \Phi)^{2}
+    \label{eq:pol_ellipse_alt}
 \end{equation}
 
 \noindent where
 
 \begin{equation}
-  \begin{gathered}
-    P_{I} = E_{x}^{2} + E_{y}^{2}, \\
-    P_{Q} = E_{x}^{2} - E_{y}^{2}, \\
-    P_{U} = 2 E_{x} E_{y} \cos \Phi, and \\
-    P_{V} = 2 E_{x} E_{y} \sin \Phi.
-  \end{gathered}
-  \label{eq:pol_params}
+    \begin{gathered}
+        P_{I} = E_{x}^{2} + E_{y}^{2}, \\
+        P_{Q} = E_{x}^{2} - E_{y}^{2}, \\
+        P_{U} = 2 E_{x} E_{y} \cos \Phi, and \\
+        P_{V} = 2 E_{x} E_{y} \sin \Phi.
+    \end{gathered}
+    \label{eq:pol_params}
 \end{equation}
 
 From Equations~\ref{eq:pol_ellipse_alt},~\ref{eq:pol_params}, the polarization parameters are related by:
 
 \begin{equation}
-  P_{I}^{2} = P_{Q}^{2} + P_{U}^{2} + P_{V}^{2}.
+    P_{I}^{2} = P_{Q}^{2} + P_{U}^{2} + P_{V}^{2}.
 \end{equation}
 
 There is, however, a seemingly small albeit major shortcoming of the polarization as defined in Equation~\ref{eq:pol_params}, the polarization ellipse as represented by Figure~\ref{fig:pol_ellipse} deals only with a single transverse wave and is incapable of handling a wave-packet made up of multiple waves. This is because the waves making up a wave-packet will not share their polarization properties and will temporally vary from one another. By taking the time average of the waves in a wave-packet, which happens inherently in the process of observations, this temporal variation may be eliminated.
 
 \begin{equation}
-  \avg{\matr{E}_{i} \matr{E}_{j}} = \lim_{dt \rightarrow \infty} \frac{1}{T} \int_{0}^{T} \matr{E}_{i} \matr{E}_{j}\,dt, \text{ for } i, j \in (x, y)
-  \label{eq:pol_t_avg}
+    \avg{\matr{E}_{i} \matr{E}_{j}} = \lim_{dt \rightarrow \infty} \frac{1}{T} \int_{0}^{T} \matr{E}_{i} \matr{E}_{j}\,dt, \text{ for } i, j \in (x, y)
+    \label{eq:pol_t_avg}
 \end{equation}
 
 \noindent where $T$ is the total averaging time over electric field vectors $\matr{E}_{i}$ and $\matr{E}_{j}$. Equation~\ref{eq:pol_params} now simplifies to:
 
 \begin{equation}
-  \matr{S} =
-  \begin{pmatrix}
-    S_{0} \\
-    S_{1} \\
-    S_{2} \\
-    S_{3}
-  \end{pmatrix}
-  =
-  \begin{pmatrix}
-    I \\
-    Q \\
-    U \\
-    V
-  \end{pmatrix}
-  =
-  \begin{pmatrix}
-    \avg{E_{x}^{2} + E_{y}^{2}}   \\
-    \avg{E_{x}^{2} - E_{y}^{2}}   \\
-    \avg{2 E_{x} E_{y} \cos \Phi} \\
-    \avg{2 E_{x} E_{y} \sin \Phi}
-  \end{pmatrix}
-  \label{eq:Stokes_params}
+    \matr{S} =
+    \begin{pmatrix}
+        S_{0} \\
+        S_{1} \\
+        S_{2} \\
+        S_{3}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        I \\
+        Q \\
+        U \\
+        V
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \avg{E_{x}^{2} + E_{y}^{2}}   \\
+        \avg{E_{x}^{2} - E_{y}^{2}}   \\
+        \avg{2 E_{x} E_{y} \cos \Phi} \\
+        \avg{2 E_{x} E_{y} \sin \Phi}
+    \end{pmatrix}
+    \label{eq:Stokes_params}
 \end{equation}
 
 \noindent where $S_{0}$ -- $ S_{3}$ are referred to as the Stokes (polarization) parameters \citep{Stokes}.
@@ -572,34 +572,34 @@ Only beams of completely polarized light could be accounted for before Stokes' w
 Using the \hyperref[eq:Stokes_params]{Stokes parameters}, we can now account for partially polarized light such that:
 
 \begin{equation}
-  I^{2} \geq  Q^{2} + U^{2} + V^{2},
+    I^{2} \geq  Q^{2} + U^{2} + V^{2},
 \end{equation}
 
 \noindent where it should be noted that $(I, Q, U, V)$ represent the partial polarization parameters and are related to $(P_{I}, P_{Q}, P_{U}, P_{V})$ since the polarization may be partial. In general, and henceforth, $(P_{I}, P_{Q}, P_{U}, P_{V})$ are relative quantities normalized to the intensity, where
 
 \begin{align}
-  P_{I} & = 1, & P_{Q} & = \frac{Q}{I}, & P_{U} & = \frac{U}{I}, \text{   and } & P_{V} & = \frac{V}{I}.
-  \label{eq:norm_Stokes}
+    P_{I} & = 1, & P_{Q} & = \frac{Q}{I}, & P_{U} & = \frac{U}{I}, \text{   and } & P_{V} & = \frac{V}{I}.
+    \label{eq:norm_Stokes}
 \end{align}
 % \prgph
 
 Similar to the polarization ellipse, the Stokes parameters may be depicted using the Poincar{\'e} sphere in spherical coordinates $(IP, 2 \Psi, 2 \chi)$, where $I$ denotes the total intensity and $P$ the degree of polarization, or the ratio of polarized to non-polarized light in the wave-packet, $\chi$ denotes the polarization angle, and $\Psi$ denotes the ellipticity angle of the polarization ellipse. It should be noted that the Poincar{\'e} sphere also uses the normalized Stokes parameters $(S_{0} = 1)$ as defined above in equation~\ref{eq:norm_Stokes}.
 
 \begin{equation}
-  \begin{gathered}
-    I = S_{0} \\
-    P = \frac{\sqrt{S_{1}^2 + S_{2}^2 + S_{3}^2}}{S_{0}}, \text{ for } 0 \leq P \leq 1 \\
-    2 \Psi = \arctan \frac{S_{3}}{\sqrt{S_{1}^{2} + S_{2}^{2}}} \\
-    2 \chi = \arctan \frac{S_{2}}{S_{1}}
-  \end{gathered}
-  \label{eq:poincare_coords}
+    \begin{gathered}
+        I = S_{0} \\
+        P = \frac{\sqrt{S_{1}^2 + S_{2}^2 + S_{3}^2}}{S_{0}}, \text{ for } 0 \leq P \leq 1 \\
+        2 \Psi = \arctan \frac{S_{3}}{\sqrt{S_{1}^{2} + S_{2}^{2}}} \\
+        2 \chi = \arctan \frac{S_{2}}{S_{1}}
+    \end{gathered}
+    \label{eq:poincare_coords}
 \end{equation}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width=6cm]{figures/2_poincare_sphere.pdf}
-  \caption{The Poincar{\'e} sphere describing the polarization properties of a wave-packet propagating through free space. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Poincaré_sphere.svg}{Wikimedia Commons} (2023)}
-  \label{fig:poincare}
+    \centering
+    \includegraphics[width=6cm]{figures/2_poincare_sphere.pdf}
+    \caption{The Poincar{\'e} sphere describing the polarization properties of a wave-packet propagating through free space. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Poincaré_sphere.svg}{Wikimedia Commons} (2023)}
+    \label{fig:poincare}
 \end{figure}
 \prgph
 
@@ -608,10 +608,10 @@ Similar to the polarization ellipse, the Stokes parameters may be depicted using
 % \citep{pol_in_spectra}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width=1\textwidth]{figures/2_polarimeter.pdf}
-  \caption{Diagram of an ideal polarimeter. Figure adapted from \cite{pol_in_spectra}.}
-  \label{fig:polarimeter}
+    \centering
+    \includegraphics[width=1\textwidth]{figures/2_polarimeter.pdf}
+    \caption{Diagram of an ideal polarimeter. Figure adapted from \cite{pol_in_spectra}.}
+    \label{fig:polarimeter}
 \end{figure}
 
 % - practically
@@ -622,14 +622,14 @@ Similar to the polarization ellipse, the Stokes parameters may be depicted using
 Except for polarimetry in the radio-wavelength regime, the polarization of a beam can not be directly measured. The polarization properties may, however, be recovered from the beam through manipulation of the four parameters mentioned in Equation~\ref{eq:Maxwell_sol}. This so-called manipulation is achieved by passing the beam through optical elements which vary the beam for differing amplitudes and phases. These matrix operations may be represented by their corresponding Mueller matrices. For ideal components, the resultant beam $\matr{S}^{\prime}$ after passing through an optical element is given by
 
 \begin{equation}
-  \matr{S}^{\prime} = \matr{M} \matr{S}
+    \matr{S}^{\prime} = \matr{M} \matr{S}
 \end{equation}
 
 \noindent where $\matr{S}$ is the beam incident on the optical element and $\matr{M}$ represents the $4 \times 4$ Mueller matrix representing the optical element. Mueller matrices are especially useful when dealing with paths through optical elements as they observe the `train' property \citep{Mueller_train}. This means that an incoming beam $\matr{S}$ passing, in order, through elements with known Mueller matrices $(\matr{M}_{0}, \dots, \matr{M}_{N})$ results in an outgoing beam $\matr{S}^{\prime}$ such that:
 
 \begin{equation}
-  \matr{S}^{\prime} = \matr{M}_{N} \dots \matr{M}_{0} \matr{S}
-  \label{eq:mueller_train}
+    \matr{S}^{\prime} = \matr{M}_{N} \dots \matr{M}_{0} \matr{S}
+    \label{eq:mueller_train}
 \end{equation}
 % \prgph
 
@@ -638,55 +638,55 @@ Some Mueller Matrices are given below with angles related to those in Figure~\re
 \paragraph{General rotation}
 The Mueller matrix for coordinate space rotations about the origin by an angle $\theta$.
 \begin{equation}
-  \matr{R}(\theta) =
-  \begin{bmatrix}
-    1 & 0              & 0             & 0 \\
-    0 & \cos 2 \theta  & \sin 2 \theta & 0 \\
-    0 & -\sin 2 \theta & \cos 2 \theta & 0 \\
-    0 & 0              & 0             & 1 \\
-  \end{bmatrix}
-  \label{matrix:rotate}
+    \matr{R}(\theta) =
+    \begin{bmatrix}
+        1 & 0              & 0             & 0 \\
+        0 & \cos 2 \theta  & \sin 2 \theta & 0 \\
+        0 & -\sin 2 \theta & \cos 2 \theta & 0 \\
+        0 & 0              & 0             & 1 \\
+    \end{bmatrix}
+    \label{matrix:rotate}
 \end{equation}
 
 \paragraph{General linear retardance}
 The Mueller matrix for retardance where $\alpha$ is the angle between the incoming vector and fast axis, and $\delta$ is the retardance introduced by the retarder. The retarder is often referred to by this retardance, e.g. if the retardance is $\delta = \pi$ or $\pi / 2$, the retarder is referred to as a half- or quarter-wave plate, respectively.
 \begin{equation}
-  \matr{W}(\alpha, \delta) =
-  \begin{bmatrix}
-    1 & 0                                                 & 0                                                 & 0                          \\
-    0 & \cos^{2} 2 \alpha + \sin^{2} 2 \alpha \cos \delta & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \sin 2 \alpha \sin \delta  \\
-    0 & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \cos^{2} 2 \alpha \cos \delta + \sin^{2} 2 \alpha & -\cos 2 \alpha \sin \delta \\
-    0 & -\sin 2 \alpha \sin \delta                        & \cos 2 \alpha \sin \delta                         & \cos \delta                \\
-  \end{bmatrix}
-  \label{matrix:retarder}
+    \matr{W}(\alpha, \delta) =
+    \begin{bmatrix}
+        1 & 0                                                 & 0                                                 & 0                          \\
+        0 & \cos^{2} 2 \alpha + \sin^{2} 2 \alpha \cos \delta & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \sin 2 \alpha \sin \delta  \\
+        0 & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \cos^{2} 2 \alpha \cos \delta + \sin^{2} 2 \alpha & -\cos 2 \alpha \sin \delta \\
+        0 & -\sin 2 \alpha \sin \delta                        & \cos 2 \alpha \sin \delta                         & \cos \delta                \\
+    \end{bmatrix}
+    \label{matrix:retarder}
 \end{equation}
 
 \paragraph{General linear polarization}
 The Mueller matrix for linear polarization where $\beta$ is the angle between the incoming vector and transmission axis.
 \begin{equation}
-  \matr{P}(\beta) = \frac{1}{2}
-  \begin{bmatrix}
-    1            & \cos 2 \beta              & \sin 2 \beta              & 0 \\
-    \cos 2 \beta & \cos^{2} 2 \beta          & \cos 2 \beta \sin 2 \beta & 0 \\
-    \sin 2 \beta & \sin 2 \beta \cos 2 \beta & \sin^{2} 2 \beta          & 0 \\
-    0            & 0                         & 0                         & 0 \\
-  \end{bmatrix}
-  \label{matrix:polarizer}
+    \matr{P}(\beta) = \frac{1}{2}
+    \begin{bmatrix}
+        1            & \cos 2 \beta              & \sin 2 \beta              & 0 \\
+        \cos 2 \beta & \cos^{2} 2 \beta          & \cos 2 \beta \sin 2 \beta & 0 \\
+        \sin 2 \beta & \sin 2 \beta \cos 2 \beta & \sin^{2} 2 \beta          & 0 \\
+        0            & 0                         & 0                         & 0 \\
+    \end{bmatrix}
+    \label{matrix:polarizer}
 \end{equation}
 \prgph
 
 These matrices in combination with Equation~\ref{eq:mueller_train} allow us to describe how the Stokes parameters would change when passing through various optical elements. For a setup similar to Figure~\ref{fig:polarimeter}, we can vary the retandance angle, $\alpha$, and polarization angle, $\beta$, for a wave plate with a relative phase difference, $\gamma$, to acquire a system of equations that we can solve to retrieve the Stokes polarization parameters \citep{waveplate_in_specpol}.
 
 \begin{equation}
-  \begin{split}
-    S(\alpha, \beta, \gamma) \propto \frac{1}{2} \{ I & + [Q \cos2\alpha + U \sin2\alpha] \cos(2\beta - 2\alpha) \\
-    & - [Q \sin2\alpha + U \cos2\alpha] \sin(2\beta - 2\alpha) \cos\gamma \label{eq:Stokes_intensity} \\
-    & + V \sin(2\beta - 2\alpha)\sin\gamma \}
-  \end{split}
+    \begin{split}
+        S(\alpha, \beta, \gamma) \propto \frac{1}{2} \{ I & + [Q \cos2\alpha + U \sin2\alpha] \cos(2\beta - 2\alpha) \\
+        & - [Q \sin2\alpha + U \cos2\alpha] \sin(2\beta - 2\alpha) \cos\gamma \label{eq:Stokes_intensity} \\
+        & + V \sin(2\beta - 2\alpha)\sin\gamma \}
+    \end{split}
 \end{equation}
 % \prgph
 
-Several or more frames taken under differing configurations may be used to reduce a system of equations to extract all four Stokes polarization parameters, but it is possible to extract the $I$, $Q$ and $U$ polarization parameters using only four frames, or two dual-beam frames, for well-chosen configurations. These polarization parameters vary the retarder angle such that $\alpha \in {0\degr, 45\degr, 90\degr, 135\degr}$ while keeping the polarizer stationary. More frames for additional retarder angles are advisable, however, as they correct for any differences in sensitivity, such as may arise in a polarized flat field and which is further discussed in \S~\ref{subsubsec:pol_flat}.
+Several or more frames taken under differing configurations may be used to reduce a system of equations to extract all four Stokes polarization parameters, but it is possible to extract the $I$, $Q$ and $U$ polarization parameters using only four frames, or two dual-beam frames, for well-chosen configurations and assuming ideal components. This ideal configuration varies the retarder angle such that $\Delta\alpha = \pi / 8$ while keeping the polarizer stationary. More frames for additional retarder angles are advisable and often necessary, however, as they correct for any differences in sensitivity, such as may arise in a polarized flat field and which is further discussed in \S~\ref{subsubsec:pol_flat} \citep{polarimetry_error}.
 \prgph
 
 From Equation~\ref{eq:Stokes_intensity} we see that the linear retarder element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$, or $I$, $Q$, and $U$) may be found by changing only the angle of retardance, $\alpha$.
@@ -698,7 +698,7 @@ Wave plates, also commonly referred to as retarders, are generally made from opt
 This difference in the perpendicular component's phase velocities introduces a relative phase difference between the two beams, $\gamma$, which is given by:
 
 \begin{equation}
-  \gamma = \frac{2 \pi \Delta n L}{\lambda_{0}}
+    \gamma = \frac{2 \pi \Delta n L}{\lambda_{0}}
 \end{equation}
 
 \noindent where $\Delta n$ and $L$ refer to the birefringence and thickness of the wave plate medium, respectively, and $\lambda_{0}$ refers to the vacuum wavelength of the beam.
@@ -710,25 +710,25 @@ This relative phase difference determines the name of the wave plate, such as th
 \paragraph{Polarizers}
 Polarizers are typically made from two prisms, of a birefringent material, cemented together with an optically transparent adhesive. The actual effect of separating the perpendicular polarization components is achieved using varying effects, namely through:
 \begin{itemize}
-  \item absorption of one of the polarized components, such as in Polaroid polarizing filters,
-  \item total internal reflection of a single polarized component, such as in a Nicol prism (Figure~\ref{fig:Nicol_prism}),
-  \item Refraction of a single polarized component, such as in a Rochon prism (Figure~\ref{fig:Rochon_prism}), or
-  \item Refraction of both polarization components in differing directions, such as in a Wollaston prism (Figure~\ref{fig:Wollaston_prism}).
+    \item absorption of one of the polarized components, such as in Polaroid polarizing filters,
+    \item total internal reflection of a single polarized component, such as in a Nicol prism (Figure~\ref{fig:Nicol_prism}),
+    \item Refraction of a single polarized component, such as in a Rochon prism (Figure~\ref{fig:Rochon_prism}), or
+    \item Refraction of both polarization components in differing directions, such as in a Wollaston prism (Figure~\ref{fig:Wollaston_prism}).
 \end{itemize}
 % \prgph
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width=0.5\textwidth]{figures/2_rochon.pdf}
-  \caption{Diagram of a Rochon prism. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Rochon_Prism.svg}{Wikimedia Commons} (2023)}
-  \label{fig:Rochon_prism}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/2_rochon.pdf}
+    \caption{Diagram of a Rochon prism. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Rochon_Prism.svg}{Wikimedia Commons} (2023)}
+    \label{fig:Rochon_prism}
 \end{figure}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
-  \caption{Diagram of a Wollaston prism. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Wollaston-prism.svg}{Wikimedia Commons} (2023)}
-  \label{fig:Wollaston_prism}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
+    \caption{Diagram of a Wollaston prism. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Wollaston-prism.svg}{Wikimedia Commons} (2023)}
+    \label{fig:Wollaston_prism}
 \end{figure}
 
 \paragraph{Wollaston prisms}
@@ -775,10 +775,10 @@ Spectropolarimetry can provide further insights into a materials physical struct
 \prgph
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width=1.0\textwidth]{figures/2_specpol_sci.pdf}
-  \caption{A spectropolarimetric target exposure as observed by the \gls{SALT} \gls{RSS} in spectropolarimetry mode.}
-  \label{fig:specpol_exp}
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/2_specpol_sci.pdf}
+    \caption{A spectropolarimetric target exposure as observed by the \gls{SALT} \gls{RSS} in spectropolarimetry mode.}
+    \label{fig:specpol_exp}
 \end{figure}
 
 Along with common points of consideration when developing any instrumentation for observational astronomy, such as resolution and sensitivity, spectropolarimeters need to consider the spectral response of the polarimetric components as well as the polarization response of the spectroscopic components as both are simultaneously in the light-path during observations and have noticeable affects on one another. Time is another constraint for spectropolarimetry as the incident light is separated both by wavelength and by polarization states. This division of the incident light results in increased exposure times of not only observations of targets but also observations needed for calibrations, both of which are time-dependent.
@@ -797,11 +797,11 @@ The derived relations given in \S~\ref{subsec:pol}, such as the \hyperref[eq:Sto
 For linear spectropolarimetry with half-wave plate angles of $\theta_{i}$, an exposure measures the wavelength dependent intensities of the $O$- and $E$-beams, $I\arcmin_{O}(\lambda)$ and $I\arcmin_{E}(\lambda)$, respectively. The $O$- and $E$-beam intensities thus relate to the Stokes parameters following:
 
 \begin{equation}
-  \begin{gathered}
-    I\arcmin_{O, i}(\lambda) = \frac{1}{2} [I + Q\cos(4\theta_{i}) + U\sin(4\theta_{i})], \\
-    I\arcmin_{E, i}(\lambda) = \frac{1}{2} [I - Q\cos(4\theta_{i}) - U\sin(4\theta_{i})].
-  \end{gathered}
-  \label{eq:specpol_flux_to_Stokes}
+    \begin{gathered}
+        I\arcmin_{O, i}(\lambda) = \frac{1}{2} [I + Q\cos(4\theta_{i}) + U\sin(4\theta_{i})], \\
+        I\arcmin_{E, i}(\lambda) = \frac{1}{2} [I - Q\cos(4\theta_{i}) - U\sin(4\theta_{i})].
+    \end{gathered}
+    \label{eq:specpol_flux_to_Stokes}
 \end{equation}
 
 At least two exposures are needed to solve for the $I$, $Q$, and $U$ polarization parameters since two equations arise from a single exposure of a dual-beam configuration and at least four linear equations are required to solve for three variables in a system of linear equations.
@@ -810,32 +810,32 @@ At least two exposures are needed to solve for the $I$, $Q$, and $U$ polarizatio
 The first Stokes parameter, $I$, may be recovered for each dual-beam exposure as
 
 \begin{equation}
-  I(\lambda) = f_{O, i}(\lambda) + f_{E, i}(\lambda).
-  \label{eq:specpol_I_calc}
+    I(\lambda) = f_{O, i}(\lambda) + f_{E, i}(\lambda).
+    \label{eq:specpol_I_calc}
 \end{equation}
 
 Next, the second and third Stokes parameters, $Q$ and $U$, are found by first defining the normalized difference in relative intensities as
 
 \begin{equation}
-  F_{i}(\lambda) \equiv \frac{f_{O, i}(\lambda) - f_{E, i}(\lambda)}{f_{O, i}(\lambda) + f_{E, i}(\lambda)}
-  \label{eq:specpol_norm_flux}
+    F_{i}(\lambda) \equiv \frac{f_{O, i}(\lambda) - f_{E, i}(\lambda)}{f_{O, i}(\lambda) + f_{E, i}(\lambda)}
+    \label{eq:specpol_norm_flux}
 \end{equation}
 
 \noindent which then allows Equation~\ref{eq:specpol_flux_to_Stokes} to be written in terms of the normalized Stokes para\-meters, $\bar{Q} = Q / I$ and $\bar{U} = U / I$, or, alternatively, the degree of polarization, $P$, and polarization angle, $\chi$:
 
 \begin{equation}
-  F_{i}(\lambda) = \bar{Q}(\lambda) \cos(4\theta_{i}) + \bar{U}(\lambda) \sin(4\theta_{i}) = P\cos(4\theta_{i} - 2\chi).
-  \label{eq:specpol_F_to_params}
+    F_{i}(\lambda) = \bar{Q}(\lambda) \cos(4\theta_{i}) + \bar{U}(\lambda) \sin(4\theta_{i}) = P\cos(4\theta_{i} - 2\chi).
+    \label{eq:specpol_F_to_params}
 \end{equation}
 
 The optimal change in waveplate angle is $\Delta\theta = \pi/8$ as it allows the normalized Stokes polarization parameters to be written as:
 
 \begin{equation}
-  \begin{gathered}
-    \bar{Q}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \cos(\frac{\pi}{2} i) \\
-    \bar{U}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \sin(\frac{\pi}{2} i)
-  \end{gathered}
-  \label{eq:specpol_Stokes_sol}
+    \begin{gathered}
+        \bar{Q}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \cos(\frac{\pi}{2} i) \\
+        \bar{U}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \sin(\frac{\pi}{2} i)
+    \end{gathered}
+    \label{eq:specpol_Stokes_sol}
 \end{equation}
 
 \noindent where N is the amount of exposures taken, limited such that $N \in [2, 16]$, and $F_{i}$ is the normalized difference in relative intensities for the $i^{th}$ exposure \citep{polarimetry_error}.
@@ -844,11 +844,11 @@ The optimal change in waveplate angle is $\Delta\theta = \pi/8$ as it allows the
 The desired degree of polarization as well as the polarization angle for linear spectro\-polarimetry is calculated as:
 
 \begin{equation}
-  \begin{gathered}
-    P    = \sqrt{\bar{Q}^{2} + \bar{U}^{2}} \\
-    \chi = \frac{1}{2} \arctan \frac{\bar{U}}{\bar{Q}}
-  \end{gathered}
-  \label{eq:specpol_results}
+    \begin{gathered}
+        P    = \sqrt{\bar{Q}^{2} + \bar{U}^{2}} \\
+        \chi = \frac{1}{2} \arctan \frac{\bar{U}}{\bar{Q}}
+    \end{gathered}
+    \label{eq:specpol_results}
 \end{equation}
 
 \noindent which is derived from Equations~\ref{eq:poincare_coords} or by solving a system of linear equations of Equation~\ref{eq:specpol_F_to_params} \citep{pol_std,keller_instr}.
@@ -868,10 +868,10 @@ Spectropolarimetric calibrations are, however, more involved when compared to th
 \gls{SALT} is a 10 m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}. The operational design was based off of the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation (37$\degree$ from zenith in the case of SALT) while still allowing for full azimuthal rotation \citep{HET}. Both SALT and HET utilize a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path. Figure~\ref{fig:SALT_telescope} depicts \gls{SALT}'s tracker (top left), supporting structure, and primary mirror (bottom right).
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 15cm]{figures/2_SALT_telescope.png}
-  \caption{The tracker, supporting structure, and primary mirror of SALT. Figure adapted from the SALT call for proposals (2022)\protect\footnotemark}
-  \label{fig:SALT_telescope}
+    \centering
+    \includegraphics[width = 15cm]{figures/2_SALT_telescope.png}
+    \caption{The tracker, supporting structure, and primary mirror of SALT. Figure adapted from the SALT call for proposals (2022)\protect\footnotemark}
+    \label{fig:SALT_telescope}
 \end{figure}
 \footnotetext{\protect\url{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}}
 
@@ -885,10 +885,10 @@ During observations the primary mirror is stationary and the tracker tracks cele
 \prgph
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 1.0 \textwidth]{figures/2_SALT_visibility.png}
-  \caption{The visibility annulus of objects observable by SALT. Figure adapted from the SALT call for proposals (2013)\protect\footnotemark}
-  \label{fig:SALT_visibility}
+    \centering
+    \includegraphics[width = 1.0 \textwidth]{figures/2_SALT_visibility.png}
+    \caption{The visibility annulus of objects observable by SALT. Figure adapted from the SALT call for proposals (2013)\protect\footnotemark}
+    \label{fig:SALT_visibility}
 \end{figure}
 \footnotetext{\protect\url{https://pysalt.salt.ac.za/proposal_calls/2013-2/}}
 
@@ -900,10 +900,10 @@ The tracker is equipped with a 4 mirror spherical aberration corrector \citep{SA
 \subsection{SALT Instrumentation} \label{subsec:SALT_instr}
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 1.0\textwidth]{figures/2_RSS_optical_path.png}
-  \caption{The optical path of the \gls{SALT} \gls{RSS}. Figure adapted from the SALT call for proposals (2023)\protect\footnotemark}
-  \label{fig:RSS_layout}
+    \centering
+    \includegraphics[width = 1.0\textwidth]{figures/2_RSS_optical_path.png}
+    \caption{The optical path of the \gls{SALT} \gls{RSS}. Figure adapted from the SALT call for proposals (2023)\protect\footnotemark}
+    \label{fig:RSS_layout}
 \end{figure}
 \footnotetext{\protect\url{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}}
 
@@ -923,7 +923,7 @@ The \gls{SALTICAM} functions as the acquisition camera and simple science imager
 
 \subsubsection{\gls{RSS}} \label{subsubsec:RSS}
 
-The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, narrowband imaging mode, multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][or the \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{latest call for proposals}]{SALT_operational_modes}.
+The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, a narrowband imaging mode, and multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][or the \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{latest call for proposals}]{SALT_operational_modes}.
 
 \paragraph{The Detector}
 The \gls{RSS} detector consists of a mosaic of 3 \gls{CCD} chips with a total pixel scale of $0.1267\arcsec$ per unbinned pixel with varying readout times depending on the binning and readout mode. The mosaicking results in a characteristic double `gap' in the frames and resultant spectra taken with the \gls{RSS}, as seen in Figure~\ref{fig:specpol_exp}.
@@ -936,80 +936,56 @@ The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, a
 
 \section{RSS Spectropolarimetry} \label{sec:RSS_reductions} % In depth
 
-Spectropolarimetry using the \gls{RSS} is currently limited to long-slit linear, $(I, Q, U)$, spectro\-polarimetry where an observation consists of the minimum two half-wave plate pairs are taken. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter\footnote{Commission status sighted from the latest \href{https://astronomers.salt.ac.za/wp-content/uploads/sites/71/2022/06/3170AM0013_Polarimetry_Observers_Guide_V1.2.pdf}{`Polarimetry Observers Guide' (2022)}.}.
+Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit linear spectro\-polarimetry, $(I, Q, U)$, where observations are taken following the waveplate pattern lists as in Table~\ref{table:RSS_specpol_patterns}. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter.\footnote{Commission status sighted from the latest \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{`Polarimetry Observers Guide' (2024)}.}
 \prgph
 
 \input{tables/2_Polarimetry_patterns.tex}
 
-To account for the efficiencies of the optical components which vary slightly across polarization as well as across the spectrum
-
-\todo{\begin{itemize}
-    \item Note double differential method
-    \item how general spectropolarimetry reductions are done
-  \end{itemize}}
-
-\subsection{General Reduction Process} % Rename?, In depth
-
-\todo{
-  \begin{itemize}
-    \item How reductions would be done in general and through pure IRAF.
-    \item I.E. Frames observed → flat, bias, arc, multiple targets, others(?)
-    \item Corrections → flat fielding, bias subtraction (EQ from obs. astro), others(?)
-    \item Calibrations → wavelength, flux, shifting (trace to center), background subtraction, others(?)
-    \item Extraction → spectral extraction, others(?)
-    \item \sout{Stokes parameter calculations / Post processing / Displaying / saving / comparing results}
-  \end{itemize}
-}
 
 \subsection{POLSALT} % In depth
 % http://salt-conference-2018.salt.ac.za/wp-content/uploads/2018/11/Groenewald.pdf
 % https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf
+% https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version#7-specpolfilterpy--compute-synthetic-filter-polarization-results-for-listed-filters
+% https://github.com/saltastro/polsalt/wiki/
 
-\textsc{polsalt} refers to software developed by Ken Nordsieck and Enrico Kotze with the intended purpose of having a complete reduction pipeline for spectropolarimetric data taken using \glspl{SALT} \gls{RSS}. Newer versions of the software include a \gls{GUI} as well as limited interactivity during key steps in the reduction process, and it is this beta version for which the reduction process is outlined\footnote{\textsc{polsalt} is made freely available via the \textsc{polsalt} GitHub repository, available at \url{https://github.com/saltastro/polsalt}. Great care must be taken during installation}.
+\textsc{polsalt} is the current reduction package being developed within \gls{SAAO}/\gls{SALT} as the official reduction pipeline for spectropolarimetric data taken using \glspl{SALT} \gls{RSS}.\footnote{\textsc{polsalt} is made freely available via the \textsc{polsalt} GitHub repository, available at \url{https://github.com/saltastro/polsalt}. It is strongly advised to follow the wiki for installation instructions.} Newer versions of the software include a \gls{GUI} as well as limited interactivity during key steps in the reduction process. Below we summarize the reduction steps for the ``beta version" [23 January 2020] which was adapted in this study.
 \prgph
 
-The steps that make up the reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw stokes calculations, final stokes calculations, and visualization of the results. As the \textsc{polsalt} GitHub repository and its documentation is available publicly, a general reduction process will be outlined, noting which processes are run.
+The steps that make up the reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw stokes calculations, final stokes calculations, and visualization of the results. Each step is crucial for good results and thus briefly discussed (a detailed documentation for the reduction steps and purpose may be found at \href{https://github.com/saltastro/polsalt/wiki}{the \textsc{polsalt} github wiki}):
 
-\paragraph{Basic \gls{CCD} reductions} Basic \gls{CCD} reductions use \textbf{imred.py} and apply basic reductions to the raw data necessary before any calibrations may be done. These corrections include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and variance information. Files with basic reductions performed have ``mxgbp" prepended to their names, and as of February 2022, this reduction step is not required as data received from \gls{SALT} has these files as included as product data.
+\paragraph{Basic \gls{CCD} reductions:} Basic \gls{CCD} reductions are run via \textbf{imred.py} and apply basic reductions to the raw data necessary before any calibrations may be done. These corrections include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and pixel variance information. Files with basic reductions performed have ``mxgbp" prepended to their names. As of February 2022, the reduction step is automatically run for all RSS spectropolarimetric observations as part of the default SALT basic reduction pipeline that is run each day.
 
-\paragraph{Wavelength calibrations} Wavelength calibrations use \textbf{specpolwavmap.py} and separately calibrate the $O$- and $E$-beams for all necessary frames before applying cosmic-ray rejections. This step is interactive and allows the user to individually fit wavelength calibration maps to each beam. The importance of good correlation between both beams has been touched on previously and will be further discussed in \S~\ref{sec:polsalt_limits}. The wavelength calibrated results are saved to files with ``w" prepended to their names, and the $O$- and $E$-beams of the extensions within each file are split into their own sub-extensions.
+\paragraph{Wavelength calibrations:} Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpolwavmap.py} and separately calibrates the $O$- and $E$-beams, based on the arc frames, and applies a simple cosmic-ray rejection for all science frames. This step is interactive and allows the user to individually fit wavelength calibration maps to each beam. The importance of good correlation between both beams has been touched on previously and will be further discussed in \S~\ref{sec:polsalt_limits}. The wavelength calibrated results are saved as an additional extension to each science FITS file, which are prefixed with a ``w", and the $O$- and $E$-beams of the extensions are split into their own sub-extensions.
 
-% \todo{
-%   \begin{itemize}
-%     \item Mention difficulty with PG0300?
-%     \item Mention GUI difficulties?
-%   \end{itemize}
-% }
+\paragraph{Spectral extraction:} The background subtraction and spectral extraction are run via \textbf{spec\-pol\-extract\_dev.py} which corrects for the beam-splitter distortion and tilt, performs sky subtraction, and extracts a one dimensional wavelength dependent spectrum for each beam extension. This step is interactive and, using the brightest trace in the images, allows the user to define regions which span the wavelength axis and which define the background and trace regions for the sky subtraction and spectral extraction. Files with corrections applied are saved with ``c" prepended to their names and files which contain the extracted one dimensional spectrum have ``e" further prepended to their names.
 
-\paragraph{Spectral extraction} The background subtraction and spectral extraction use \textbf{specpol\-extract\_dev.py} and correct for the beam-splitter distortion and tilt, perform sky subtraction, and extract a one dimensional wavelength dependent spectrum for each beam extension. This step is interactive and, using the brightest trace in the images, allows the user to define regions which span the wavelength axis and which define the background and trace regions for the sky subtraction and spectral extraction. Files with corrections applied are saved with ``c" prepended to their names and files which contain the extracted one dimensional spectrum have ``e" further prepended to their names.
-
-\paragraph{Raw stokes calculations} Raw stokes calculations use \textbf{specpolrawstokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and `raw stokes' signal, $S$, are calculated as:
+\paragraph{Raw stokes calculations:} Raw stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw stokes' signal, $S$, are calculated as:
 
 \begin{equation}
-  \begin{gathered}
-    I = \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2}) \\
-    S = \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right].
-  \end{gathered}
-  \label{eq:polsalt_rawstokes}
+    \begin{gathered}
+        I = \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2}) \\
+        S = \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right].
+    \end{gathered}
+    \label{eq:polsalt_rawstokes}
 \end{equation}
 
-The files generated containing the raw stokes information have a very specific naming style, with most notably the pair of frames used being included.
+The raw stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw stokes information have a very specific naming style, with most notably the pair of frames used being included.
 
-\paragraph{Final stokes calculations} The Final stokes calculations use \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw stokes signals, calibrates for polarimetric zero-point and waveplate efficiency calibrations and calculates the final stokes parameters. The raw stokes are culled using a systematic error as well as a chi-squared analysis.
+\paragraph{Final stokes calculations:} The Final stokes calculations are performed via \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw stokes signals, calibrates for polarimetric zero-point and waveplate efficiency calibrations and calculates the final stokes parameters. Before the final stokes calculations are performed, data culling is applied to the raw stokes to eliminate outlier results which may arise due to, for example, atmospheric conditions. Data culling compares observation cycles against one another, compares the deviation of the means which estimate the systematic polarization baseline fluctuations (due to imperfections in repeatability), and performs a chi-squared analysis to eliminate outliers.
 
-\paragraph{Visualization} Plotting the results of the spectropolarimetric reduction process uses \textbf{specpolview.py} and generates a plot of the Intensity, Linear Polarization ($\%$), and Equatorial Polarization Angle ($\deg$) against a shared wavelength axis, as seen in Figure~\ref{fig:polsalt_plot}. Multiple options allow for variations in the resultant plots, for example the axis ranges, binning, etc.
+\paragraph{Visualization:} Plotting the results of the spectropolarimetric reduction process uses \textbf{specpolview.py} and generates a plot of the Intensity, Linear Polarization ($\%$), and Equatorial Polarization Angle ($\degr$) against a shared wavelength axis, as seen in Figure~\ref{fig:polsalt_plot}. This step is interactive and various options, such as the wavelength range, binning, etc., are available.
 
 \begin{figure}[t]
-  \centering
-  \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_plot.pdf}
-  \caption{A typical plot resulting from the reduction process. Figure adapted from \citep{cooper_HEASA2022}}
-  \label{fig:polsalt_plot}
+    \centering
+    \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_plot.pdf}
+    \caption{A typical plot resulting from the reduction process. Figure adapted from \citep{cooper_HEASA2022}}
+    \label{fig:polsalt_plot}
 \end{figure}
 
-\paragraph{Post-processing analysis} Generally, the plot of the spectropolarimetric results is the stopping point for most reduction procedures as it contains or creates the desired results. However, two additional tools exist which may be used after the visualization has been completed and are not represented in the \gls{GUI}, namely, flux calibrations and synthetic filtering.
+\paragraph{Post-processing analysis:} Generally, the plot of the spectropolarimetric results is the stopping point for most reduction procedures as it contains or creates the desired results. However, additional tools exist which may be used after the polarization reductions have been completed, and which are not represented in the \gls{GUI}, namely, flux calibration and synthetic filtering.
 
-Flux-calibrations use \textbf{specpolflux.py} and are only intended for shape corrections of the spectrum due to the unique design of \gls{SALT}. Additionally, the flux database file must exist for the standard observed and must be copied over to the working science directory.
+Flux-calibrations are performed via \textbf{specpolflux.py} and are only intended for shape corrections of the spectrum. Additionally, the flux database file must exist for the standard observed and must be copied over to the working science directory.
 
-Synthetic filtering uses \textbf{specpolfilter.py} and computes the synthetically filtered polarization results. The filters which can be synthesized are the Johnson $U$, $B$, and $V$ filter curves from the \gls{SALTICAM} filters, as well as the Cousins $R$, and $I$ filter curves, along with any user defined wavelength dependent throughput.
+Synthetic filtering is calculated via \textbf{specpolfilter.py} and computes the synthetically filtered polarization results. The filters which can be synthesized are the Johnson $U$, $B$, and $V$ filter curves from the \gls{SALTICAM} filters, as well as the Cousins $R$ and $I$ filter curves, along with any user defined wavelength dependent throughput.
 
 % \todo{Flux Calibrations (errors in GUI (make 100\% sure about division error and notify}
