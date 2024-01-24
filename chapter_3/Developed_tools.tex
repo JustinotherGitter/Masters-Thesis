@@ -1,6 +1,9 @@
 \chapter{Developed Tools}
 
-This chapter contains an overview of why supplementary tools were deemed necessary for an already complete reduction process(\S~\ref{sec:polsalt_limits}), which aspects of the reduction process have been altered, replaced, or added (\S~\ref{sec:mod_tools}, \ref{sec:add_tools}), and finally what an updated reduction process consists of using a combination of all software.
+This chapter contains an overview of why supplementary tools were deemed necessary for an already working reduction process (\S~\ref{sec:polsalt_limits}), which aspects of the reduction process have been altered, replaced, or added (\S~\ref{sec:mod_tools}, \ref{sec:add_tools}), and finally what an updated reduction process consists of using a combination of all software (\S~\ref{sec:red_proc}).
+
+
+\section{Limitations of POLSALT and the Need for a Supplementary Tool} \label{sec:polsalt_limits} % Rename
 
 % \todo{
 %   \begin{itemize}
@@ -9,27 +12,34 @@ This chapter contains an overview of why supplementary tools were deemed necessa
 %   \end{itemize}
 % }
 
-\section{Limitations of POLSALT and the Need for a Supplementary Tool} \label{sec:polsalt_limits} % Rename
-
 % Why
 The creation of supplementary tools for \textsc{polsalt} spectropolarimetric reductions stem from, primarily, the limitations of the wavelength calibration phase and a need for a way to compare wavelength solutions across matching $O$ and $E$ polarization beams. Due to the time-consuming process of recalibrating the wavelength solutions it is not feasible to perform the wavelength calibrations time and time again for any amount of reductions larger than a handful of observations.
 \prgph
 
 % How
-One solution is to use a well established tool to perform the wavelength calibration, one which allows for rapid recalibrations as well as provides a familiar interface with which the user can analyze their wavelength solution. \textsc{iraf} provides this familiar environment and reliability, even considering it's age and lack of further development. Unfortunately, \textsc{iraf} is unable to parse the files as is and a need for formatting is necessary for integration purposes. This restructuring works both ways as once the \textsc{iraf} reductions are complete the format must be reformatted to match that of the \textsc{polsalt} output such that reductions can carry on in \textsc{polsalt}.
+One solution is to use a well established tool to perform the wavelength calibration, one which allows for rapid recalibrations as well as provides a familiar interface with which the user can analyze their wavelength solutions. \textsc{iraf} provides this familiar environment and reliability, even considering it's age and \hyperlink{limited community development}{https://github.com/iraf-community/iraf}. Unfortunately, \textsc{iraf} is unable to parse the file structure implemented by \textsc{polsalt} as is and formatting of the data structures are necessary for integration purposes. This restructuring works both ways as once the \textsc{iraf} reductions are complete the format must be reformatted to match that of the \textsc{polsalt} output such that the reduction process may carry on in \textsc{polsalt}.
+\prgph
 
-
-\todo{Can mention other faults very briefly, but the main takeaway should be the need for a way to do the wavelength calibration with more control as well as the need to check the O/E beam wavelength calibrations against one another (since very accurate wavelength calibration necessary for stokes parameter calculations)}
+\todo{Mention other faults briefly? The main takeaway should be the need for a way to do the wavelength calibration with more control as well as the need to check the O/E beam wavelength calibrations against one another (since very accurate wavelength calibration necessary for stokes parameter calculations)}
 
 
 \section{Wavelength calibrations using the Supplementary Pipeline and IRAF} \label{sec:mod_tools}
 
-\todo{Short description of what is to be discussed}
+The supplementary tools offer an alternate procedure for wavelength calibrations for the \textsc{polsalt} pipeline. This procedure can be broken into three unique steps: the parsing of \textsc{polsalt} data into an \textsc{iraf} friendly format, from here on referred to as splitting; the wavelength calibration performed in \textsc{iraf}; and the reformatting of the data with its wavelength calibration back into the \textsc{polsalt} format, from here on referred to as joining.
 
-\subsection{Splitting the uncalibrated wavelength files}
+\subsection{Splitting the POLSALT pre-calibration files}
 
-\todo{All processes run in pipeline split
-    Focus on \textbf{why}. Parsing polsalt mxgbp frame into something useable by IRAF and making sure the header reflects the changes}
+The main struggle of formatting the files for \textsc{iraf} is that \textsc{iraf} does not handle \gls{FITS} files with nested file extensions well. There are means of accessing inner extensions via indexing within \textsc{iraf}, but this is unreliable for the various \textsc{iraf} tasks. As such, the extension structure needs to be handled such that \textsc{iraf} receives a flattened extension structure with proper extension headers.
+\prgph
+
+The \textsc{polsalt} files with basic \gls{CCD} reductions applied, namely files created by \textsc{polsalt} with a prefix of `mxgbp' (\S~\ref{subsec:polsalt}), are used as the starting point for the supplementary tool's splitting method. Running the split method finds all the \gls{FITS} files for wavelength calibration, creates two empty \gls{HDU} structures for each sub-extension of the \gls{FITS} file, and appends all science and header data necessary for wavelength calibration to the \gls{HDU} structures. Presets such as the row along which the data is split, and the amount of cropping applied to the data before appending, are defined but are freely controlled by the user. As this step creates multiple files, it was decided to keep the files for wavelength calibration as light as possible, with only the necessary science extension being copied over.
+
+\todo{Mention steps before and how they return (especially) the file structure.
+    All processes run in pipeline split with description of each and purpose. Focus on \textbf{why}.
+    Header changes
+}
+
+\todo{Parsing polsalt mxgbp frame into something useable by IRAF and making sure the header reflects the changes}
 
 \subsection{IRAF wavelength calibration}\label{subsec:IRAF_wav_cal}
 
@@ -58,7 +68,7 @@ One solution is to use a well established tool to perform the wavelength calibra
 
 \todo{Again, why a skyline comparison necessary and how it works. Also, how the frame is transformed (\textsc{iraf} bypassed) and that the flux is not conserved so only for checking and not for science use.}
 
-\section{General Reduction Procedure}
+\section{General Reduction Procedure}\label{sec:red_proc}
 
 \todo{General reduction procedure from raw data to finalized results
     \begin{itemize}
