@@ -65,7 +65,7 @@
 % Page numbering alteration:
 % https://www.overleaf.com/learn/latex/Page_numbering
 % Add the \gls command to keep track of acronyms
-\usepackage[nomain, acronym, automake, nonumberlist, nogroupskip, style=super]{glossaries-extra}
+\usepackage[nomain, acronym, automake, nonumberlist, nogroupskip, style=super, shortcuts]{glossaries-extra}
 % Make latex compile acronyms to use in document section
 \makeglossaries[acronym]
 % Set the style of the abbreviation to use in paragraphs
@@ -112,6 +112,8 @@
 \newcommand{\degr}{\hbox{$^\circ$}}
 \newcommand{\matr}[1]{\mathbf{#1}}
 \newcommand{\prgph}{\vspace{\baselineskip}}
+\newcommand{\iraf}{\textsc{iraf} }
+\newcommand{\polsalt}{\textsc{polsalt} }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \graphicspath{{Figures1/}{Figures2/}}
