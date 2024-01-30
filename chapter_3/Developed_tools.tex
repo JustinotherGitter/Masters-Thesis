@@ -50,7 +50,7 @@ In an attempt to simplify the \iraf reduction procedure it was decided to split 
 
 % What it does -> Primary focus
 %   All processes run & description of each. Focus on why.
-The \polsalt files with basic \gls{CCD} reductions applied, namely \gls{FITS} files with the prefix `mxgbp' (\S~\ref{subsec:polsalt}), are used as the starting point for the supplementary tool's splitting method. Running the split method finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each sub-extension of the \gls{FITS} file, and appends all science and header data necessary for wavelength calibration to the relevant \gls{HDU} structure.
+The \polsalt files with basic \gls{CCD} reductions applied, namely \gls{FITS} files with the prefix `mxgbp' (\S~\ref{subsec:polsalt}), are used as the starting point for the supplementary tool's \texttt{split} method. Running \texttt{split} finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each sub-extension of the \gls{FITS} file, and appends all science and header data necessary for wavelength calibration to the relevant \gls{HDU} structure.
 \prgph
 
 % Focus on minimizing changes and optimizing size
@@ -65,30 +65,47 @@ As the intent was always to parse the wavelength function back into \polsalt it 
 \end{figure}
 
 % Any changes from how polsalt would do it
-In an attempt to automate the scripting of the \iraf wavelength calibrations, row cropping was introduced into the split method to ignore the regions without a trace either side of the frame, and the creation of files listing the $O$ and $E$ beams. The row cropping was decided on as \iraf does not handle the empty rows well, specifically when it comes to the \textit{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt pipeline as possible.
+In an attempt to automate the scripting of the \iraf wavelength calibrations, row cropping was introduced into the \texttt{split} method to ignore the regions without a trace either side of the frame, and the creation of files listing the $O$ and $E$ beams. The row cropping was decided on as \iraf does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt pipeline as possible.
 
 
 \subsection{IRAF wavelength calibration}\label{subsec:IRAF_wav_cal}
 
-% Why necessary
-As every university and research group has their own preferred wavelength calibration procedure and often use certain parameters for the various \iraf tasks, only a brief overview of the tasks used will be provided here.
+% What is IRAF and why necessary
+\iraf is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. As every researcher, university, and research group have their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf tasks (e.g. the order and type of the polynomial used in \texttt{identify}) only a brief overview of the tasks used will be provided here.
+\prgph
+
+For the alternate wavelength calibrations, the relevant tasks, in order, are \texttt{identify} and \texttt{reidentify} located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and optionally the \texttt{transform} tasks located under the \texttt{noao.twodspec.longslit} package. A useful \iraf task that will not be discussed but nevertheless deserves a mention is the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script. It is instrumental as a scripting aid and is what allows \iraf its rapid recalibration of the wavelength solution.
 
 % What it does -> Primary focus
 %   All processes run & description of each. Focus on why.
+% https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.identify.html#h_29
 \paragraph{Identify}
-\todo{Description of identify task and why performed emphasis instead of how}
+The \texttt{identify} task is used to interactively determine a one-dimensional wavelength function across a chosen row of an arc exposure by identifying features in the spectrum with known wavelengths. \texttt{identify} gives the first approximation of the wavelength solution, which is saved to a local database, and is built on in subsequent tasks. It is thus imperative that the initial fit is done well to minimize errors further down the calibration process.
 \prgph
 
+The process of using \texttt{identify} consists of identifying known features spanning the entire wavelength range and then removing identified features which negatively impact the wavelength solution. A balance must be found between the number of identified features and parameters of the fit against the deviation of the fit from the known features. % RMS
+
+% https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html#h_29
 \paragraph{Reidentify}
-\todo{Description of reidentify task and why performed emphasis instead of how}
+The \texttt{reidentify} task is used to run the \texttt{identify} task autonomously and repeatedly across the entirety of the arc exposure at a defined interval. \texttt{reidentify} uses the one-dimensional wavelength solution stored in the database created by the initial \texttt{identify} call and shifts the identified points to match their known spectral features. The task may fail based on a number of defined conditions, most common of which is the loss of features as the task moves further from the row at which the user ran \texttt{identify}.
 \prgph
 
+When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will allow immediate confirmation whether the task quit early or not. Regardless of where the task ended, the newly defined wavelength solutions are appended to the local database.
+
+% https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html
 \paragraph{Fitcoords}
-\todo{Description of fitcoords task and why performed emphasis instead of how}
+The \texttt{fitcoords} task is used to combine the collection of one-dimensional wavelength solutions in the local database to a two-dimensional surface function. This surface function is the final two-dimensional wavelength solution and is what is needed to convert the \iraf formatted wavelength calibrated \gls{FITS} files back into the \polsalt format.
 \prgph
 
+The process of using \texttt{fitcoords} consists of examining the distribution of identified points and eliminating any points that \texttt{reidentify} may have misidentified. The function type and degree of the axes are also customizable
+
+\todo{continue here}
+
+% https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html
 \paragraph{Transform}
-\todo{Description of transform task and why performed emphasis instead of how}
+and when applied to the relevant arc and science exposures converts the
+
+\todo{Description of transform task and why performed - emphasis instead of how}
 \todo{Mention optional, good for sanity checks which is not possible using the pure polsalt implementation}
 \prgph
 
@@ -96,6 +113,8 @@ As every university and research group has their own preferred wavelength calibr
 \todo{Files created or modified throughout the wavelength calibration process.}
 
 \subsection{Joining the wavelength calibrated files}
+
+The \iraf tasks are used to generate the two-dimensional pixel to wavelength solutions necessary for wavelength calibrations and are stored by \iraf in their respective database files. \todo{How db converted to wav ext.}
 
 \todo{
     \begin{itemize}
