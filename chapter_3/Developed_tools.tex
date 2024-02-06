@@ -79,10 +79,10 @@ A useful \iraf task that will not be discussed but nevertheless deserves a menti
 
 For the alternate wavelength calibrations, the relevant tasks, in order, are \texttt{identify} and \texttt{reidentify} located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and optionally the \texttt{transform} tasks located under the \texttt{noao.twodspec.longslit} package. These tasks produce a two-dimensional wavelength solution and thus must all be run twice to create the different wavelength solutions for each of the two spectropolarimetric beams.
 
-
 % What it does -> Primary focus
 %   All processes run & description of each. Focus on why.
 % https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.identify.html#h_29
+% https://iraf.net/irafdocs/formats/identify.php
 \paragraph{Identify}
 The \texttt{identify} task is used to interactively determine a one-dimensional wavelength function across a chosen row of an arc exposure by identifying features in the spectrum with known wavelengths. \texttt{identify} gives the first approximation of the wavelength solution, which is saved to a local database, and is built on in subsequent tasks. It is thus imperative that the initial fit is done well to minimize errors further down the calibration process.
 \prgph
@@ -97,6 +97,7 @@ The \texttt{reidentify} task is used to run the \texttt{identify} task autonomou
 When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will allow immediate confirmation whether the task quit early or not. Regardless of where the task ended, the newly defined wavelength solutions are appended to the local database.
 
 % https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html
+% https://iraf.net/irafdocs/formats/fitcoords.php
 \paragraph{Fitcoords}
 The \texttt{fitcoords} task is used to combine the collection of one-dimensional wavelength solutions in the local database to a two-dimensional surface function. This surface function is the final two-dimensional wavelength solution and is what is needed to convert the \iraf formatted wavelength calibrated \gls{FITS} files back into the \polsalt format.
 \prgph
@@ -128,7 +129,9 @@ The \gls{FITS} files created by the \texttt{join} method and \polsalt pipeline's
 
 % append new extensions
 % How db converted to wav func
-The wavelength extension is created entirely by \texttt{join} by appending a blank extension to the \gls{HDU} and filling the image pixels with their respective wavelength value. This is done entirely by \texttt{join} which parses the wavelength database file and creates a function which provides the corresponding wavelength when provided with a ($pixel$, $pixel$) position. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in Figure~\ref{fig:pol_wav_ext}.
+% parse and save wavelength functions as image
+The wavelength extension is created entirely by \texttt{join} by appending a blank extension to the \gls{HDU} and filling the image pixels with their respective wavelength value. This is done entirely by \texttt{join} which parses the wavelength database file and creates a function which provides the corresponding wavelength when provided with a ($pixel$, $pixel$) position. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in Figure~\ref{fig:pol_wav_ext}. Note that regions that fall outside the trace are masked by setting the wavelength extensions corresponding pixel value to $0$.
+\prgph
 
 \begin{figure}[t]
     \centering
@@ -137,17 +140,14 @@ The wavelength extension is created entirely by \texttt{join} by appending a bla
     \label{fig:pol_wav_ext}
 \end{figure}
 
-
-% parse and save wavelength functions as image
 % cosmic ray cleaning
+\texttt{join} cleans the science extension of cosmic rays using the \texttt{lacosmic} python package which was specifically designed for this purpose and uses the L.A. Cosmic algorithm, based on Laplacian edge detection. The parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, specifically the read noise and gain, as well as a publication and \hyperlink{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions} by the algorithm's creator \citep{lacosmic}. The chosen parameters work well for all but the worst of cosmic rays, as can be seen when comparing Figures~\ref{fig:OE_split} and \ref{fig:polsalt_post_wav_cal}.
+\prgph
+
 % polsalt specific cropping (wav mask)
 % mask wavelength using wollaston curve for polsalt `parsability'
 % update BPM to reflect wavelength cropping
-
-\todo{Return file structuring.}
-\prgph
-
-\todo{Focus on \textbf{why}. Parsing \iraf frames to be used by POLSALT and making sure the header and extensions reflect the changes}
+The wavelength extension is masked to remove any impossible wavelengths and also corrected for the skewing of the trace introduced by the wollaston element. The skewing must be added to the wavelength extension since \polsalt introduces a wollaston correction in the \texttt{spectral extraction} process. Finally, the \gls{BPM} extension is masked to reflect the valid wavelength calibrated regions for both spectropolarimetric beams and the files are saved with the \polsalt wavelength calibrated `wmxgbp' prefix.
 
 \begin{figure}[t]
     \centering
@@ -159,21 +159,30 @@ The wavelength extension is created entirely by \texttt{join} by appending a bla
 
 \section{Additional Tools}\label{sec:add_tools}
 
-Along with the ability to perform wavelength calibrations in \iraf, it was deemed necessary to create tools to allow for the comparison of the $O$ and $E$ beams.
-
-\todo{fill out}
+Before creating the supplementary tool's \texttt{split} and \texttt{join} methods used to perform wavelength calibrations in \iraf, it was deemed necessary to create tools to allow for the comparison of the $O$ and $E$ beams wavelength solutions.
 
 \subsection{Cross correlation}
 
-\todo{Why a cross correlation necessary and how it works}
+\todo{\begin{itemize}
+        \item Why cross correlation
+        \item How it works
+        \item discussion of script processes
+        \item discuss all arguments provided to method
+    \end{itemize}}
 
 
 \subsection{Skyline comparisons}
 
-\todo{REMOVE? Not truly implemented... Again, why a skyline comparison necessary and how it works. Also, how the frame is transformed (\iraf bypassed) and that the flux is not conserved so only for checking and not for science use.}
+\todo{REMOVE? Not truly implemented... Again, why a skyline comparison necessary and how it works. Also, how the frame is transformed (IRAF bypassed) and that the flux is not conserved so only for checking and not for science use.}
 
 
 \section{General Reduction Procedure}\label{sec:red_proc}
+
+This section aims to give a thorough overview of the reduction procedure from start to finish and to cover all commands needed to achieve a finalized result. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files, only the commands necessary to complete each step of the reduction process, assuming that the software is running as intended.
+\prgph
+
+\todo{Mention help docs for POLSALT, IRAF, and supplementary tools.}
+\prgph
 
 \begin{figure}[t]
     \centering
@@ -184,7 +193,14 @@ Along with the ability to perform wavelength calibrations in \iraf, it was deeme
 
 \todo{General reduction procedure from raw data to finalized results
     \begin{itemize}
-        \item This includes \polsalt pre-reductions, splitting, \iraf wavelength calibrations, checking, joining, and \polsalt finalization. (Include Relative flux calibrations for `shape correcting' spectrum??)
-        \item mention help docs of sup. tools.
+        \item raw files from salt
+        \item file structure expected by POLSALT pre-reductions (often already complete)
+        \item running \texttt{split}
+        \item iraf tasks in order, focus on mkscript and changes necessary
+        \item running optional transform and then cross correlation
+        \item running \texttt{join}
+        \item deletion of o and e beam fits (due to POLSALT naming conventions and to save memory)
+        \item POLSALT completion up to and including plotting
+        \item relative flux calibrations for spectrum shape corrections if a standard observation available
     \end{itemize}
 }
