@@ -6,7 +6,7 @@ This chapter contains an overview of why supplementary tools were deemed necessa
 \section{Limitations of POLSALT and the Need for a Supplementary Tool} \label{sec:polsalt_limits} % Rename
 
 % Why
-The creation of supplementary tools for \polsalt spectropolarimetric reductions stem from, primarily, the limitations of the wavelength calibration process and a need for a way to compare wavelength solutions across matching $O$ and $E$ polarization beams. Due to the time-consuming process of recalibrating the wavelength solutions it is not feasible to perform the wavelength calibrations time and time again for any amount of reductions larger than a handful of observations.
+The creation of supplementary tools for \polsalt\ spectropolarimetric reductions stem from, primarily, the limitations of the wavelength calibration process and a need for a way to compare wavelength solutions across matching $O$ and $E$ polarization beams. Due to the time-consuming process of recalibrating the wavelength solutions it is not feasible to perform the wavelength calibrations time and time again for any amount of reductions larger than a handful of observations.
 \prgph
 
 % PG0300 reasoning
@@ -14,7 +14,7 @@ The prime motivation of finding an alternate method of wavelength calibrating th
 \prgph
 
 % How
-The chosen solution was to use a well established tool to perform the wavelength calibration - one which allows for rapid recalibrations as well as provides a familiar interface with which the user can analyze their wavelength solutions. \iraf provides this familiar environment and reliability, even considering it's age and \hyperlink{https://github.com/iraf-community/iraf}{limited community development}. Unfortunately, \iraf is unable to parse the file structure implemented by \polsalt as is and formatting of the data structures are necessary for integration purposes. This restructuring works both ways as once the \iraf reductions are complete the format must be reformatted to match that of the \polsalt output such that the reduction process may carry on in \polsalt.
+The chosen solution was to use a well established tool to perform the wavelength calibration - one which allows for rapid recalibrations as well as provides a familiar interface with which the user can analyze their wavelength solutions. \iraf\ provides this familiar environment and reliability, even considering it's age and \hyperlink{https://github.com/iraf-community/iraf}{limited community development}. Unfortunately, \iraf\ is unable to parse the file structure implemented by \polsalt\ as is and formatting of the data structures are necessary for integration purposes. This restructuring works both ways as once the \iraf\ reductions are complete the format must be reformatted to match that of the \polsalt\ output such that the reduction process may carry on in \polsalt.
 \prgph
 
 \begin{figure}[t]
@@ -28,12 +28,12 @@ The chosen solution was to use a well established tool to perform the wavelength
 
 \section{Wavelength calibrations - Supplementary Tools and IRAF} \label{sec:mod_tools}
 
-The supplementary tools offer an alternate procedure for wavelength calibrations for the \polsalt pipeline. This procedure can be broken into three unique steps: the parsing of \polsalt data into an \iraf friendly format, from here on referred to as splitting; the wavelength calibration performed in \iraf; and the reformatting of the data with its wavelength calibration back into the format expected by \polsalt, from here on referred to as joining.
+The supplementary tools offer an alternate procedure for wavelength calibrations for the \polsalt\ pipeline. This procedure can be broken into three unique steps: the parsing of \polsalt\ data into an \iraf\ friendly format, from here on referred to as splitting; the wavelength calibration performed in \iraf; and the reformatting of the data with its wavelength calibration back into the format expected by \polsalt, from here on referred to as joining.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_pre_wav_cal.pdf}
-    \caption{The science extension of a typical \polsalt \acs{FITS} file after basic \gls{CCD} reductions have been completed.}
+    \caption{The science extension of a typical \polsalt\ \acs{FITS} file after basic \gls{CCD} reductions have been completed.}
     \label{fig:polsalt_pre_wav_cal}
 \end{figure}
 
@@ -42,19 +42,19 @@ The supplementary tools offer an alternate procedure for wavelength calibrations
 
 % Why necessary
 %   Mention steps before and how they return (especially) the file structure.
-As mentioned previously, the format of the \gls{FITS} file created by \polsalt after basic \gls{CCD} reductions and that expected by \iraf to be used for the wavelength calibrations are incompatible. A typical \gls{FITS} file created by the \polsalt basic \gls{CCD} reductions process contains a primary header along with the various image extensions, all of which include the trace for both polarimetry beams, as seen in Figure~\ref{fig:polsalt_pre_wav_cal}. \iraf deals best with a singular trace, and therefore a singular polarization beam, at a time.
+As mentioned previously, the format of the \gls{FITS} file created by \polsalt\ after basic \gls{CCD} reductions and that expected by \iraf\ to be used for the wavelength calibrations are incompatible. A typical \gls{FITS} file created by the \polsalt\ basic \gls{CCD} reductions process contains a primary header along with the various image extensions, all of which include the trace for both polarimetry beams, as seen in Figure~\ref{fig:polsalt_pre_wav_cal}. \iraf\ deals best with a singular trace, and therefore a singular polarization beam, at a time.
 \prgph
 
-In an attempt to simplify the \iraf reduction procedure it was decided to split the polarization beams into their own files, as the parameters of \iraf tasks generally handle lists of files better than subregions of the same \gls{HDU}, and generally allowed for easier calibrations further down the \iraf wavelength calibration process.
+In an attempt to simplify the \iraf\ reduction procedure it was decided to split the polarization beams into their own files, as the parameters of \iraf\ tasks generally handle lists of files better than subregions of the same \gls{HDU}, and generally allowed for easier calibrations further down the \iraf\ wavelength calibration process.
 \prgph
 
 % What it does -> Primary focus
 %   All processes run & description of each. Focus on why.
-The \polsalt files with basic \gls{CCD} reductions applied, namely \gls{FITS} files with the prefix `mxgbp' (\S~\ref{subsec:polsalt}), are used as the starting point for the supplementary tool's \texttt{split} method. Running \texttt{split} finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each sub-extension of the \gls{FITS} file, and appends all science and header data necessary for wavelength calibration to the relevant \gls{HDU} structure.
+The \polsalt\ files with basic \gls{CCD} reductions applied, namely \gls{FITS} files with the prefix `mxgbp' (\S~\ref{subsec:polsalt}), are used as the starting point for the supplementary tool's \texttt{split} method. Running \texttt{split} finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each sub-extension of the \gls{FITS} file, and appends all science and header data necessary for wavelength calibration to the relevant \gls{HDU} structure.
 \prgph
 
 % Focus on minimizing changes and optimizing size
-As the intent was always to parse the wavelength function back into \polsalt it was decided to keep these temporary \gls{FITS} files as light as possible. This is especially necessary when considering the amount of frames that must be taken for a single spectropolarimetric observation, and then how that increases for long term studies.
+As the intent was always to parse the wavelength function back into \polsalt\ it was decided to keep these temporary \gls{FITS} files as light as possible. This is especially necessary when considering the amount of frames that must be taken for a single spectropolarimetric observation, and then how that increases for long term studies.
 \prgph
 
 \begin{figure}[t]
@@ -65,16 +65,16 @@ As the intent was always to parse the wavelength function back into \polsalt it 
 \end{figure}
 
 % Any changes from how polsalt would do it
-In an attempt to automate the scripting of the \iraf wavelength calibrations, row cropping was introduced into the \texttt{split} method to ignore the regions without a trace either side of the frame, and the creation of files listing the $O$ and $E$ beams. The row cropping was decided on as \iraf does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt pipeline as possible.
+In an attempt to automate the scripting of the \iraf\ wavelength calibrations, row cropping was introduced into the \texttt{split} method to ignore the regions without a trace either side of the frame, and the creation of files listing the $O$ and $E$ beams. The row cropping was decided on as \iraf\ does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
 
 
 \subsection{IRAF wavelength calibration}\label{subsec:IRAF_wav_cal}
 
 % What is IRAF and why necessary
-\iraf is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. As every researcher, university, and research group have their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf tasks (e.g. the order and type of the polynomial used in \texttt{identify}, etc.) only a brief overview of the tasks used will be provided here.
+\iraf\ is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. As every researcher, university, and research group have their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf\ tasks (e.g. the order and type of the polynomial used in \texttt{identify}, etc.) only a brief overview of the tasks used will be provided here.
 \prgph
 
-A useful \iraf task that will not be discussed but nevertheless deserves a mention is the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script. It is instrumental as a scripting aid and is what allows \iraf its rapid recalibrations of the wavelength solutions.
+A useful \iraf\ task that will not be discussed but nevertheless deserves a mention is the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script. It is instrumental as a scripting aid and is what allows \iraf\ its rapid recalibrations of the wavelength solutions.
 \prgph
 
 For the alternate wavelength calibrations, the relevant tasks, in order, are \texttt{identify} and \texttt{reidentify} located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and optionally the \texttt{transform} tasks located under the \texttt{noao.twodspec.longslit} package. These tasks produce a two-dimensional wavelength solution and thus must all be run twice to create the different wavelength solutions for each of the two spectropolarimetric beams.
@@ -99,32 +99,32 @@ When running \texttt{reidentify} non-interactively, it is recommended to set the
 % https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html
 % https://iraf.net/irafdocs/formats/fitcoords.php
 \paragraph{Fitcoords}
-The \texttt{fitcoords} task is used to combine the collection of one-dimensional wavelength solutions in the local database to a two-dimensional surface function. This surface function is the final two-dimensional wavelength solution and is what is needed to convert the \iraf formatted wavelength calibrated \gls{FITS} files back into the \polsalt format.
+The \texttt{fitcoords} task is used to combine the collection of one-dimensional wavelength solutions in the local database to a two-dimensional surface function. This surface function is the final two-dimensional wavelength solution and is what is needed to convert the \iraf\ formatted wavelength calibrated \gls{FITS} files back into the \polsalt\ format.
 \prgph
 
 The process of using \texttt{fitcoords}, follows closely to that of \texttt{identify} and consists of examining the distribution of identified points and eliminating any points that \texttt{reidentify} may have misidentified. By eliminating outliers with bad residuals and modifying the two-dimensional surface function type and degree, the overall error of the fit decreases, matching more closely to what the `true' wavelength solution is.
 
 % https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html
 \paragraph{Transform}
-The \texttt{transform} task is an optional step in the \iraf wavelength calibration process but is good to perform since it is quick to run and easy to script. \texttt{transform} converts the ($pixel$, $pixel$) units stored in the exposure to ($wavelength$, $pixel$) units which allows for an immediate check of whether the wavelength solution was found correctly. Any error in the wavelength solution will be easily spotted in the transformed images and may range from minor, such as the arc exposure's arc lines or science exposure's sky lines not being straight across the columns of the frame, to more severe, such as the wavelength solution completely readjusting the frame to an incoherent mess.
+The \texttt{transform} task is an optional step in the \iraf\ wavelength calibration process but is good to perform since it is quick to run and easy to script. \texttt{transform} converts the ($pixel$, $pixel$) units stored in the exposure to ($wavelength$, $pixel$) units which allows for an immediate check of whether the wavelength solution was found correctly. Any error in the wavelength solution will be easily spotted in the transformed images and may range from minor, such as the arc exposure's arc lines or science exposure's sky lines not being straight across the columns of the frame, to more severe, such as the wavelength solution completely readjusting the frame to an incoherent mess.
 
 \todo{Include poor and good transformed image examples?}
 
 
 \subsection{Joining the wavelength calibrated files}
 
-As mentioned previously, the format of the \gls{FITS} file created by \iraf after wavelength calibrations and that expected by \polsalt for the \texttt{spectral extraction} are incompatible. A typical \gls{FITS} file expected by the \polsalt \texttt{spectral extraction} contains a primary header along with the various image extensions, the most notable extension being the newly added wavelength extension. All images contained within the extensions have the trace for both polarimetry beams split, as seen in Figure~\ref{fig:polsalt_post_wav_cal} and the headers of each extension updated.
+As mentioned previously, the format of the \gls{FITS} file created by \iraf\ after wavelength calibrations and that expected by \polsalt\ for the \texttt{spectra extraction} are incompatible. A typical \gls{FITS} file expected by the \polsalt\ \texttt{spectra extraction} contains a primary header along with the various image extensions, the most notable extension being the newly added wavelength extension. All images contained within the extensions have the trace for both polarimetry beams split, as seen in Figure~\ref{fig:polsalt_post_wav_cal} and the headers of each extension updated.
 \prgph
 
-All pieces necessary to recreate the \polsalt wavelength calibrated \gls{FITS} files exist once the \iraf procedure to generate the database entry for the two-dimensional wavelength solution is complete. The \texttt{join} method of the supplementary tools is used at this point and, once run, autonomously creates the desired files.
+All pieces necessary to recreate the \polsalt\ wavelength calibrated \gls{FITS} files exist once the \iraf\ procedure to generate the database entry for the two-dimensional wavelength solution is complete. The \texttt{join} method of the supplementary tools is used at this point and, once run, autonomously creates the desired files.
 \prgph
 
-Running \texttt{join} finds all the relevant \gls{FITS} and local database files necessary to run the \polsalt \texttt{spectral extraction}, creates an empty \gls{HDU} structure for each pair of matching spectropolarimetric beams, copies over the extensions and their respective image and header information, checks and corrects the trace splitting to best match that of \polsalt, appends a new extension and parses the database wavelength solutions into the \polsalt intensity-wavelength format, cleans the science extension for cosmic rays, and does some house-cleaning to align the finalized \gls{FITS} files to those created when using the `pure' \polsalt pipeline.
+Running \texttt{join} finds all the relevant \gls{FITS} and local database files necessary to run the \polsalt\ \texttt{spectra extraction}, creates an empty \gls{HDU} structure for each pair of matching spectropolarimetric beams, copies over the extensions and their respective image and header information, checks and corrects the trace splitting to best match that of \polsalt, appends a new extension and parses the database wavelength solutions into the \polsalt\ intensity-wavelength format, cleans the science extension for cosmic rays, and does some house-cleaning to align the finalized \gls{FITS} files to those created when using the `pure' \polsalt\ pipeline.
 \prgph
 
 % update headers
 % copy data, double check shape change
-The \gls{FITS} files created by the \texttt{join} method and \polsalt pipeline's \texttt{wavelength calibration} methods are almost identical. The only difference between the \gls{FITS} files is the shape of the images stored within them, reflected also through specifically the `NAXIS2' header keyword, since \texttt{split} introduces a cropping. It was deemed unnecessary to reintroduce the cropped region as it is promptly discarded in the following \polsalt \texttt{spectral extraction} process and raises no issues when left out. Otherwise, both the \texttt{join} method and \polsalt \texttt{wavelength calibration} update the headers to reflect the new shape of the data and data type, through header keywords `CTYPE3' and `BITPIX', respectively.
+The \gls{FITS} files created by the \texttt{join} method and \polsalt\ pipeline's \texttt{wavelength calibration} methods are almost identical. The only difference between the \gls{FITS} files is the shape of the images stored within them, reflected also through specifically the `NAXIS2' header keyword, since \texttt{split} introduces a cropping. It was deemed unnecessary to reintroduce the cropped region as it is promptly discarded in the following \polsalt\ \texttt{spectra extraction} process and raises no issues when left out. Otherwise, both the \texttt{join} method and \polsalt\ \texttt{wavelength calibration} update the headers to reflect the new shape of the data and data type, through header keywords `CTYPE3' and `BITPIX', respectively.
 \prgph
 
 % append new extensions
@@ -136,7 +136,7 @@ The wavelength extension is created entirely by \texttt{join} by appending a bla
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_pol_wav_ext.pdf}
-    \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt pipeline.}
+    \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline.}
     \label{fig:pol_wav_ext}
 \end{figure}
 
@@ -147,12 +147,12 @@ The wavelength extension is created entirely by \texttt{join} by appending a bla
 % polsalt specific cropping (wav mask)
 % mask wavelength using wollaston curve for polsalt `parsability'
 % update BPM to reflect wavelength cropping
-The wavelength extension is masked to remove any impossible wavelengths and also corrected for the skewing of the trace introduced by the wollaston element. The skewing must be added to the wavelength extension since \polsalt introduces a wollaston correction in the \texttt{spectral extraction} process. Finally, the \gls{BPM} extension is masked to reflect the valid wavelength calibrated regions for both spectropolarimetric beams and the files are saved with the \polsalt wavelength calibrated `wmxgbp' prefix.
+The wavelength extension is masked to remove any impossible wavelengths and also corrected for the skewing of the trace introduced by the wollaston element. The skewing must be added to the wavelength extension since \polsalt\ introduces a wollaston correction in the \texttt{spectra extraction} process. Finally, the \gls{BPM} extension is masked to reflect the valid wavelength calibrated regions for both spectropolarimetric beams and the files are saved with the \polsalt\ wavelength calibrated `wmxgbp' prefix.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_post_wav_cal.pdf}
-    \caption{The science extension of a \gls{FITS} file ready to be handed back to the \polsalt pipeline.}
+    \caption{The science extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline.}
     \label{fig:polsalt_post_wav_cal}
 \end{figure}
 
@@ -178,27 +178,78 @@ Before creating the supplementary tool's \texttt{split} and \texttt{join} method
 
 \section{General Reduction Procedure}\label{sec:red_proc}
 
-This section aims to give a thorough overview of the reduction procedure from start to finish and to cover all commands needed to achieve a finalized result. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files, only the commands necessary to complete each step of the reduction process, assuming that the software is running as intended.
-\prgph
-
-\todo{Mention help docs for POLSALT, IRAF, and supplementary tools.}
-\prgph
-
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.7\textwidth]{figures/3_new_workflow.pdf}
+    \includegraphics[width = 0.8\textwidth]{figures/3_new_workflow.pdf}
     \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and the developed supplementary tools.}
     \label{fig:new_workflow}
 \end{figure}
 
-\todo{General reduction procedure from raw data to finalized results
+This section aims to give an overview of the reduction procedure from start to finish and to cover all commands needed to achieve a finalized result. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files, only the commands necessary to complete each step of the reduction process, assuming that the software is running as intended.
+\prgph
+
+It is recommended that \polsalt\ is used through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu. Reductions are possible, however, purely using a \gls{CLI} and the \polsalt\ scripts. It is assumed that usage of \polsalt\ through the \gls{GUI} or \gls{CLI} use the `beta' or `basic' versions, respectively, and that both versions are run from the \polsalt\ directory. The \iraf\ terminal, once launched, and the \gls{CLI} supplementary tools are assumed to be run from the `working' directory. This ensures that commands containing \texttt{<.../>} notate relative paths to the desired file or folder.
+\prgph
+
+Help documentation, primarily describing the possible arguments, is available in the \gls{CLI} for \polsalt\ and the supplementary tools using the \texttt{-h|--help} flag with their respective invocation, such as:
+
+\begin{verbatim}> python <.../>Masters split --help\end{verbatim}
+
+\noindent and for \iraf\ through the \texttt{?} `cursor key' option while running an interactive task.
+\prgph
+
+\subsection{POLSALT Pre-reductions}\label{subsec:reduc_pre}
+
+\polsalt\ requires a file structure such that the raw data received from \gls{SALT} is located in a folder labeled using the observing date as well as being in a sub-folder labeled raw, such as \texttt{YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory named \texttt{YYYYMMDD/sci/} which contains all the files modified during the reduction process. This allows for separation of reductions of the same data by simply renaming the \texttt{sci/} directory.
+\prgph
+
+To launch the \gls{GUI}, navigate to the \polsalt\ directory within a \gls{CLI} and run:
+
+\begin{verbatim}> python -W ignore reducepoldataGUI.py &\end{verbatim}
+
+\noindent Once the window has launched, ensure that the first and second paths at the top of the window point to the \polsalt\ and data observation date directories, respectively. The `raw image reduction' may then be selected from the dropdown and run. The \polsalt\ \gls{CLI} command:
+
+\begin{verbatim}> python scripts/reducepoldata.py <.../>YYYYMMDD\end{verbatim}
+
+\noindent then runs the raw image reduction process. It should be noted that the \polsalt\ \gls{CLI} command will, by default, attempt to run the wavelength calibration process. This behavior may be stopped by using the \texttt{-w} flag when running the command.
+\prgph
+
+\todo{Include screenshot of GUI, reference in paragraph above}
+
+
+\subsection{Wavelength Calibration} \label{subsec:reduc_wav}
+
+Splitting the data in the working \texttt{sci/} directory may then be done using:
+
+\begin{verbatim}> python <.../>Masters split\end{verbatim}
+
+Multiple default parameters are used, the most notable of which are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt\'s default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}.
+\prgph
+
+Moving on to \iraf\, the wavelength calibrations are performed using the tasks described in \S~\ref{subsec:IRAF_wav_cal}, namely \texttt{identify}, \texttt{reidentify}, and \texttt{fitcoords}. Tasks may be edited within the terminal using the \texttt{eparam} task, but it is recommended to create an \iraf\ cl (command language) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using:
+
+\begin{verbatim}>> mkscript script_name.cl\end{verbatim}
+
+\noindent which will interactively ask for the task and parameters to be used. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked. Running an \iraf\ script may be done by running:
+
+\begin{verbatim}>> cl<script_name.cl\end{verbatim}
+
+\noindent but is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file and pasted in the \iraf\ terminal. \todo{continue here}
+\prgph
+
+\todo{
     \begin{itemize}
-        \item raw files from salt
-        \item file structure expected by POLSALT pre-reductions (often already complete)
-        \item running \texttt{split}
         \item iraf tasks in order, focus on mkscript and changes necessary
         \item running optional transform and then cross correlation
         \item running \texttt{join}
+    \end{itemize}
+}
+
+
+\subsection{POLSALT Reduction Completion} \label{subsec:reduc_com}
+
+\todo{
+    \begin{itemize}
         \item deletion of o and e beam fits (due to POLSALT naming conventions and to save memory)
         \item POLSALT completion up to and including plotting
         \item relative flux calibrations for spectrum shape corrections if a standard observation available
