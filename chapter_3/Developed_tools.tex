@@ -20,7 +20,7 @@ The chosen solution was to use a well established tool to perform the wavelength
 \begin{figure}[t]
     \centering
     \includegraphics[width = 0.98\textwidth]{figures/3_arc_spectrum.png}
-    \caption{One of many Argon arc lamp spectra as provided by \gls{SALT} for line identification. Plot adapted from \gls{SALT}'s published Longslit Line Atlases (as of 2024)\protect\footnotemark}
+    \caption{One of many Argon arc lamp spectra as provided by \gls{SALT} for line identification. Plot adapted from \gls{SALT}'s published Longslit Line Atlases (as of 2024)\protect\footnotemark, resized to fit within the document margins but otherwise unchanged.}
     \label{fig:ar_arc_salt}
 \end{figure}
 \footnotetext{\protect\href{https://pysalt.salt.ac.za/lineatlas/plot_line_argon_lores.pdf}{low resolution Ar plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
@@ -195,8 +195,8 @@ Help documentation, primarily describing the possible arguments, is available in
 
 \begin{verbatim}> python <.../>Masters split --help\end{verbatim}
 
-\noindent and for \iraf\ through the \texttt{?} `cursor key' option while running an interactive task.
-\prgph
+\noindent and for \iraf\ through the \texttt{?|:.help} `cursor mode' options while running an interactive task.
+
 
 \subsection{POLSALT Pre-reductions}\label{subsec:reduc_pre}
 
@@ -218,6 +218,7 @@ To launch the \gls{GUI}, navigate to the \polsalt\ directory within a \gls{CLI} 
 
 
 \subsection{Wavelength Calibration} \label{subsec:reduc_wav}
+\todo{create subsubsections for split, iraf, join, and additionals (including transform)?}
 
 Splitting the data in the working \texttt{sci/} directory may then be done using:
 
@@ -226,24 +227,49 @@ Splitting the data in the working \texttt{sci/} directory may then be done using
 Multiple default parameters are used, the most notable of which are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt\'s default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}.
 \prgph
 
-Moving on to \iraf\, the wavelength calibrations are performed using the tasks described in \S~\ref{subsec:IRAF_wav_cal}, namely \texttt{identify}, \texttt{reidentify}, and \texttt{fitcoords}. Tasks may be edited within the terminal using the \texttt{eparam} task, but it is recommended to create an \iraf\ cl (command language) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using:
+Moving on to \iraf\, the wavelength calibrations are performed using the tasks described in \S~\ref{subsec:IRAF_wav_cal}, namely \texttt{identify}, \texttt{reidentify}, and \texttt{fitcoords}, and may be run directly in the \iraf\ terminal using:\footnote{Please see the \iraf\ help docs, available at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/iraf.html}, on the relevant tasks for a comprehensive discussion of the parameters available.}
 
-\begin{verbatim}>> mkscript script_name.cl\end{verbatim}
+\begin{verbatim}
+cl> identify images
+cl> reidentify reference images
+cl> fitcoords images fitname
+\end{verbatim}
+
+\noindent where `images' refer to a list or file containing the \gls{FITS} files relevant to the task, `reference' refers to the \gls{FITS} file previously identified, and `fitname' refers to the name to be used for the final two-dimensional wavelength solution. The interactive tasks take up the bulk of the reduction time as this is where the fine-tuning of the reduction is done, through the use of cursor commands (otherwise known as colon commands), which allow modification of the parameters mid-reduction. Task parameters may, however, be edited beforehand within the \iraf\ terminal using the \texttt{eparam} task, and optionally saved, and quit or run using a combination of \texttt{:w}, and \texttt{:q} or \texttt{:go} cursor commands, respectively.
+\prgph
+
+It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using:
+
+\begin{verbatim}cl> mkscript script_name.cl\end{verbatim}
 
 \noindent which will interactively ask for the task and parameters to be used. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked. Running an \iraf\ script may be done by running:
 
-\begin{verbatim}>> cl<script_name.cl\end{verbatim}
+\begin{verbatim}cl> cl < script_name.cl\end{verbatim}
 
-\noindent but is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file and pasted in the \iraf\ terminal. \todo{continue here}
+\noindent but is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file to the \iraf\ terminal.
+\prgph
+
+\todo{Mention iraf tasks and interactive colon-commands here? This varies greatly based on user unlike pre-reductions/splitting/joining.}
+\prgph
+
+Joining the separate beams with their respective wavelength solutions may now be completed using:
+
+\begin{verbatim}> python <.../>Masters join\end{verbatim}
+
+Similar to the \texttt{split} procedure mentioned before, the \texttt{join} procedure has the same defaults defined and so a user must keep track of which defaults were changed and keep them consistent between the two tasks.
 \prgph
 
 \todo{
     \begin{itemize}
-        \item iraf tasks in order, focus on mkscript and changes necessary
-        \item running optional transform and then cross correlation
-        \item running \texttt{join}
+        \item running cross correlation - discussed here but only truly done after spectra extraction, check variation between beams.
+        \item running skyline checks - skyline uses transformed images, check variation across the frame
     \end{itemize}
 }
+
+\todo{discuss transform here}
+\begin{verbatim}cl> transform input output fitnames\end{verbatim}
+
+\noindent where input is the same as the images pseudo-paramater name?????????????
 
 
 \subsection{POLSALT Reduction Completion} \label{subsec:reduc_com}
