@@ -201,12 +201,12 @@ Cross correlation allows for the comparison of the features in signals. This is 
 This section aims to give an overview of the reduction procedure from start to finish and to cover all commands needed to achieve a finalized result. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files, only the commands necessary to complete each step of the reduction process, assuming that the software is running as intended.
 \prgph
 
-It is recommended that \polsalt\ is used through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu. Reductions are possible, however, purely using a \gls{CLI} and the \polsalt\ scripts. It is assumed that usage of \polsalt\ through the \gls{GUI} or \gls{CLI} use the `beta' or `basic' versions, respectively, and that both versions are run from the \polsalt\ directory. The \iraf\ terminal, once launched, and the \gls{CLI} supplementary tools are assumed to be run from the `working' directory. This ensures that commands containing \texttt{<.../>} notate relative paths to the desired file or folder.
+It is recommended that \polsalt\ is used through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu. Reductions are possible, however, purely using a \gls{CLI} and the \polsalt\ scripts. It is assumed that usage of \polsalt\ through the \gls{GUI} or \gls{CLI} use the `beta' or `basic' versions, respectively, and that the beta version is launched from the \polsalt\ directory while the basic version is run by copying over the `scripts' folder to the working directory. The \iraf\ terminal, once launched, and the \gls{CLI} supplementary tools are also assumed to be run from the `working' directory. This ensures that commands containing \texttt{<.../>} notate the need for the inclusion of relative paths to the desired file or folder.
 \prgph
 
 Help documentation, primarily describing the possible arguments, is available in the \gls{CLI} for \polsalt\ and the supplementary tools using the \texttt{-h|--help} flag with their respective invocation, such as:
 
-\begin{verbatim}> python <.../>Masters split --help\end{verbatim}
+\begin{verbatim}> python <.../>Masters --help\end{verbatim}
 
 \noindent and for \iraf\ through the \texttt{?|:.help} `cursor mode' options while running an interactive task.
 
@@ -286,10 +286,43 @@ Finally, at least for reductions using \iraf, the optional \texttt{transform} ta
 
 \subsection{POLSALT Reduction Completion} \label{subsec:reduc_com}
 
-Reductions may now be completed using \polsalt.
+Reductions may now be completed using \polsalt. The reduction process consists of correcting for the wollaston tilt, extracting the spectra, creating the stokes files, and displaying the results. As always, the reductions are handled slightly differently for the differing versions.
+
+\subsubsection{POLSALT, the basic version}
+
+Covering the basic version first, the wavelength solution needs to be applied to all the \gls{FITS} files and the tilt introduced by the wollaston prism must be corrected for. This is done through the command:
+
+\begin{verbatim}> python scripts/correct_files.py w*fits\end{verbatim}
+
+\noindent where the `w*.fits' is a wildcard expression that lists the \gls{FITS} files that have a wavelength extension and returns it to the \polsalt\ script.
+\prgph
+
+Next, the spectra in each \gls{FITS} file are extracted using the command:
+
+\begin{verbatim}> python scripts/pol_extract.py c*.fits --yo A --ye B --dy spec_width\end{verbatim}
+
+\noindent where the center row of the $O$ and $E$ beam spectra, \texttt{A} and \texttt{B}, as well as the spectral width, \texttt{spec\_width}, must be provided. These may be found through \gls{FITS} viewing software such as ds9\footnote{Available at \protect\url{https://sites.google.com/cfa.harvard.edu/saoimageds9}} or more manually through python.
+\prgph
+
+The Stokes files may then be calculated and created using the command:
+
+\begin{verbatim}> python scripts/pol_stokes.py\end{verbatim}
+
+\noindent which automatically detects the \gls{FITS} files using the wildcards `e*fits' for raw stokes and `*\_h*.fits' for the final stokes calculations. The deletion of the \gls{FITS} files created in the supplementary \texttt{split} method may be deleted in the \texttt{join} method specifically to avoid this naming convention clash, but may also be avoided by providing an alternate default subscript to the supplementary methods.
+\prgph
+
+Finally, the results of the stokes calculations may be viewed using the command:
+
+\begin{verbatim}> python polsalt/specpolview.py *_stokes.fits\end{verbatim}
+
+\noindent where a file name, which may also use a wildcard, is provided as well as optional para\-meters to define the binning (\texttt{bin=[int]A}), error bars (\texttt{errors=True|False}), choice of plot (\texttt{type=Ipt|Iqu}), save options (\texttt{save=[text][plot]}), and debug (\texttt{debug=False|True}).
+
+\subsubsection{POLSALT, the beta version}
+
 
 \todo{
     \begin{itemize}
+        \item Check pathing convention
         \item Deletion of o and e beam fits (due to POLSALT naming conventions and to save memory)
         \item POLSALT completion up to and including plotting
         \item relative flux calibrations for spectrum shape corrections if a standard observation available
