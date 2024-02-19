@@ -162,9 +162,9 @@ The wavelength extension is masked to remove any impossible wavelengths and also
 Before creating the supplementary tool's \texttt{split} and \texttt{join} methods used to perform wavelength calibrations in \iraf, it was deemed necessary to create tools to allow for the comparison of the $O$ and $E$ beams wavelength solutions.
 
 
-\subsection{Sky line comparisons}
+\subsection{Sky line comparisons}\label{subsec:skyline_discuss}
 
-Sky line comparisons serve two unique yet interconnected services. Firstly, they naively transform the wavelength calibrated frame, without conserving flux, allowing the user confirmation of the variation of sky lines across the columns of the frame, and secondly, they compare the wavelength position of the sky lines with the \gls{SALT} sky lines,\footnote{The first iteration of a sky line atlas is available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}} allowing confirmation of the wavelength solution at positions across the rows of the frame. The file used for skyline comparisons may be the \iraf\ \texttt{transform} \gls{FITS} file, which allows for flux conservation through the `\texttt{flux}' parameter.
+Sky line comparisons serve two unique yet interconnected services. Firstly, they naively transform the wavelength calibrated frames, without conserving flux, allowing the user confirmation of the variation of sky lines across the columns of the frame, and secondly, they compare the wavelength position of the sky lines with the \gls{SALT} sky lines,\footnote{The first iteration of a sky line atlas is available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}} allowing confirmation of the wavelength solution at positions across the rows of the frame. The file used for skyline comparisons may be the \iraf\ \texttt{transform} \gls{FITS} file, which allows for flux conservation through the `\texttt{flux}' parameter.
 \prgph
 
 The \texttt{skyline} method loads the wavelength calibrated files, transforms the frames (as described above) if the frame was not transformed by \iraf's \texttt{transform} method, divides out the continua, compares the averaged cross-column sky lines to those of a single row, and compares the wavelength position of said sky lines to those known by \gls{SALT}.
@@ -231,14 +231,19 @@ To launch the \gls{GUI}, navigate to the \polsalt\ directory within a \gls{CLI} 
 
 
 \subsection{Wavelength Calibration} \label{subsec:reduc_wav}
-\todo{Create subsubsections for split, iraf, join, and the optional tools (including transform)?}
 
-Splitting the data in the working \texttt{sci/} directory may then be done using:
+The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to be read by \iraf\ and \polsalt\ as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented below, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a good calibration function. This process depends heavily and varies greatly based on the user and as such not all use cases can be discussed herein.
+
+\subsubsection{Preparing data for IRAF}
+
+Splitting the data in the working \texttt{sci/} directory may then be done through a \gls{CLI} using:
 
 \begin{verbatim}> python <.../>Masters split\end{verbatim}
 
-Multiple default parameters are used, the most notable of which are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}.
-\prgph
+The method takes multiple parameters, but default parameters are used where ever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}.
+
+
+\subsubsection{IRAF wavelength calibrations}
 
 Moving on to \iraf, the wavelength calibrations are performed using the tasks described in \S~\ref{subsec:IRAF_wav_cal}, namely \texttt{identify}, \texttt{reidentify}, and \texttt{fitcoords}, and may be run directly in the \iraf\ terminal using:\footnote{Please see the \iraf\ help docs, available at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/iraf.html}, on the relevant tasks for a comprehensive discussion of the parameters available.}
 
@@ -260,28 +265,41 @@ It is recommended to create an \iraf\ Command Language (cl) script for each task
 \begin{verbatim}cl> cl < script_name.cl\end{verbatim}
 
 \noindent but is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file to the \iraf\ terminal.
-\prgph
 
-Joining the separate beams with their respective wavelength solutions may now be completed using:
+
+\subsubsection{Preparing data for POLSALT}
+
+The results of the wavelength calibrations may now be parsed back into the format expected by \polsalt. Joining the separate beams with their respective wavelength solutions is once again performed in the \gls{CLI} and is completed using:
 
 \begin{verbatim}> python <.../>Masters join\end{verbatim}
 
-Similar to the \texttt{split} procedure mentioned before, the \texttt{join} procedure has the same defaults defined and so a user must keep track of which defaults were changed and keep them consistent between the two tasks.
+Similar to the \texttt{split} procedure mentioned before, the \texttt{join} procedure has the same defaults defined and so it is up to a user to keep track of which defaults they decided to change and keep them consistent between the two tasks.
+
+
+\subsubsection{Supplementary checks of the wavelength solution}
+
+The supplementary tools and the optional \iraf\ \texttt{transform} task are used as methods for confirming the wavelength solutions across the frame, against reference wavelength positions, and across the polarization beams. They are all discussed here as this section pertains to the supplementary tools and \iraf\ procedures, but might only be used later on in the reduction process.
 \prgph
 
-\todo{
-    \begin{itemize}
-        \item Running cross correlation - discussed here but only truly done after spectra extraction, check variation between beams.
-        \item Running skyline checks - skyline `can' use transformed images, check variation across the frame (both axes)
-    \end{itemize}
-}
-\prgph
-
-Finally, at least for reductions using \iraf, the optional \texttt{transform} task may be run using:
+The \iraf\ \texttt{transform} task may be run before closing the \iraf\ environment using:
 
 \begin{verbatim}cl> transform images output fitnames\end{verbatim}
 
 \noindent where `images' refers to the same pseudonym as used in the previous \iraf\ task usage examples, `output' refers to the new file name for the transformed input images, and `fitnames' refers to the two-dimensional wavelength function name created by the \texttt{fitcoords} task.
+\prgph
+
+The \texttt{skyline} method is run in the \gls{CLI} using:
+
+\begin{verbatim}> python <.../>Masters skyline cal_images\end{verbatim}
+
+\noindent where `cal\_images' refers to either the transformed images produced by the \iraf\ \texttt{transform} task or the raw wavelength calibrated frames. The difference in the flux conservation when \texttt{skyline} transforms the frames is discussed in \S~\ref{subsec:skyline_discuss}. Otherwise, as with all the other supplementary tools, default parameters also describe the overplotting of the $O$ and $E$ beams, the overplotting of the sklines provided by \gls{SALT}, and the cross row variation of a frame.
+\prgph
+
+The \texttt{correlate} method is run in the \gls{CLI} using:
+
+\begin{verbatim}> python <.../>Masters correlate spec_images\end{verbatim}
+
+\noindent where `spec\_images' refers to spectra extracted \gls{FITS} files. If the user wishes to compare the $O$ and $E$ beams of a single file then only that image name is to be provided, otherwise it is assumed that the user wishes to compare the same polarization beam across the files provided. It is worth pointing out here that as the input images are only created after performing the \polsalt\ \texttt{spectra extraction} and thus should only be completed thereafter.
 
 
 \subsection{POLSALT Reduction Completion} \label{subsec:reduc_com}
@@ -299,9 +317,9 @@ Covering the basic version first, the wavelength solution needs to be applied to
 
 Next, the spectra in each \gls{FITS} file are extracted using the command:
 
-\begin{verbatim}> python scripts/pol_extract.py c*.fits --yo A --ye B --dy spec_width\end{verbatim}
+\begin{verbatim}> python scripts/pol_extract.py c*.fits --yo A --ye B --dy C\end{verbatim}
 
-\noindent where the center row of the $O$ and $E$ beam spectra, \texttt{A} and \texttt{B}, as well as the spectral width, \texttt{spec\_width}, must be provided. These may be found through \gls{FITS} viewing software such as ds9\footnote{Available at \protect\url{https://sites.google.com/cfa.harvard.edu/saoimageds9}} or more manually through python.
+\noindent where the center row of the $O$ and $E$ beam spectra, \texttt{A} and \texttt{B}, as well as the spectral width, \texttt{C}, are integer values and must be provided. These may be found through \gls{FITS} viewing software such as ds9\footnote{Available at \protect\url{https://sites.google.com/cfa.harvard.edu/saoimageds9}} or more manually through python.
 \prgph
 
 The Stokes files may then be calculated and created using the command:
@@ -315,16 +333,34 @@ Finally, the results of the stokes calculations may be viewed using the command:
 
 \begin{verbatim}> python polsalt/specpolview.py *_stokes.fits\end{verbatim}
 
-\noindent where a file name, which may also use a wildcard, is provided as well as optional para\-meters to define the binning (\texttt{bin=[int]A}), error bars (\texttt{errors=True|False}), choice of plot (\texttt{type=Ipt|Iqu}), save options (\texttt{save=[text][plot]}), and debug (\texttt{debug=False|True}).
+\noindent where a file name, which may also use a wildcard, is provided as well as optional para\-meters to define the binning (\texttt{bin=[int]A} where [int] refers to an actual integer value), error bars (\texttt{errors=True|False}), choice of plot (\texttt{type=Ipt|Iqu} for unbinned intensity and either polarization percentage and polarization angle, or $Q$ and $U$ stokes parameters), save options (\texttt{save=[text][plot] where either or both `text' and `plot' may be provided}), and a debug mode (\texttt{debug=False|True}).
+
 
 \subsubsection{POLSALT, the beta version}
 
+The \polsalt\ beta version has access to a \gls{GUI} but may also be run as a script. The script will be discussed before the \gls{GUI} as it is straightforward to run and modify.
+\prgph
+
+Firstly, to run the \polsalt\ beta script, it is suggested to copy over the \texttt{reducepol\-data\_sc.py} to the working directory. In general, running the script as:
+
+\begin{verbatim}> python reducepoldata_sc.py YYYYMMDD\end{verbatim}
+
+\noindent will run the entire reduction process interactively without the need to select which process to run next. For the purposes of using the script alongside \iraf\ wavelength calibrations, a few changes must be made. The script may either be run with a break inserted before the call to the wavelength calibration, \texttt{specpolwavmap}, and later rerun with all processes before spectral extraction, \texttt{specpolextract\_sc}, commented out, or may be split into two seperate files which cover the pre- and post- wavelength calibration steps and run when appropriate.
+\prgph
+
+The \polsalt\ beta \texttt{reducepoldata\_sc.py} copies a \texttt{script.py} file into the science working directory, `YYYYMMDD/sci/', which provides analysis scripts for analysis and modification of the \polsalt\ beta results. These tools consist of data culling for the final stokes calculations, text and plot output (the same as the basic version of \polsalt's \texttt{specpolview.py}), relative flux calibration corrections, and synthetic filtering of polarization results. The \polsalt\ analysis scripts may be run using:
+
+\begin{verbatim}> python script.py\end{verbatim}
+
+\noindent followed by \texttt{specpolfinalstokes.py}, \texttt{specpolview.py}, \texttt{specpolflux.py}, or \texttt{specpol\-filter.py}, respectively, for the analysis modes mentioned previously. Each mode has its own usage parameters, and it is suggested that a user look up the documentation before attempting to use any of them.\footnote{A description of the use of each analysis script is available from \url{https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version} and is exhaustive enough for general use, but the source code is also made available and should be consulted before usage.}
+\prgph
+
+Finally, the reduction process using the \polsalt\ \gls{GUI} is completed by selecting and, when applicable, interactively modifying the reduction step through the interactive windows, one-by-one, from the \glspl{GUI} dropdown menu.
+\prgph
 
 \todo{
     \begin{itemize}
-        \item Check pathing convention
         \item Deletion of o and e beam fits (due to POLSALT naming conventions and to save memory)
-        \item POLSALT completion up to and including plotting
-        \item relative flux calibrations for spectrum shape corrections if a standard observation available
+        \item finish gui writeup
     \end{itemize}
 }
