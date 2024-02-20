@@ -71,7 +71,7 @@ To aid the \iraf\ wavelength calibrations, row cropping and file list creation w
 \subsection{IRAF wavelength calibration}\label{subsec:IRAF_wav_cal}
 
 % What is IRAF and why necessary
-\iraf\ is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. As every researcher, university, and research group have their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf\ tasks (e.g. the order and type of the polynomial used in \texttt{identify}, etc.) only a brief overview of the tasks used will be provided here.
+\iraf\ is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here as every researcher, university, and research group have their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf\ tasks (e.g. the order and type of the polynomial used in \texttt{identify}, etc.).
 \prgph
 
 A useful \iraf\ task that will not be discussed but nevertheless deserves a mention is the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script. It is instrumental as a scripting aid and is what allows \iraf\ its rapid recalibrations of the wavelength solutions.
@@ -159,7 +159,7 @@ The wavelength extension is masked to remove any impossible wavelengths and also
 
 \section{Additional Tools}\label{sec:add_tools}
 
-Before creating the supplementary tool's \texttt{split} and \texttt{join} methods used to perform wavelength calibrations in \iraf, it was deemed necessary to create tools to allow for the comparison of the $O$ and $E$ beams wavelength solutions.
+Before creating the supplementary tool's \texttt{split} and \texttt{join} methods used to perform wavelength calibrations in \iraf, it was deemed necessary to create a tool to allow for the comparison of the wavelength solutions between the extracted spectra of the $O$ and $E$ polarization beams, referred to as \texttt{correlate}. The scope was later expanded to allow for the inspection of the cross-row and cross-column axes of the wavelength solutions as the \iraf\ wavelength calibration procedure provided much more flexibility.
 
 
 \subsection{Sky line comparisons}\label{subsec:skyline_discuss}
@@ -167,15 +167,20 @@ Before creating the supplementary tool's \texttt{split} and \texttt{join} method
 Sky line comparisons serve two unique yet interconnected services. Firstly, they naively transform the wavelength calibrated frames, without conserving flux, allowing the user confirmation of the variation of sky lines across the columns of the frame, and secondly, they compare the wavelength position of the sky lines with the \gls{SALT} sky lines,\footnote{The first iteration of a sky line atlas is available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}} allowing confirmation of the wavelength solution at positions across the rows of the frame. The file used for skyline comparisons may be the \iraf\ \texttt{transform} \gls{FITS} file, which allows for flux conservation through the `\texttt{flux}' parameter.
 \prgph
 
-The \texttt{skyline} method loads the wavelength calibrated files, transforms the frames (as described above) if the frame was not transformed by \iraf's \texttt{transform} method, divides out the continua, compares the averaged cross-column sky lines to those of a single row, and compares the wavelength position of said sky lines to those known by \gls{SALT}.
+The \texttt{skyline} method loads the wavelength calibrated files, transforms the frames (as described above) if the frame was not transformed by \iraf's \texttt{transform} method, divides out the continua, compares the cross-column sky lines to those of a single row, and compares the wavelength position of said sky lines to a list of sky lines known by \gls{SALT}.
 
+Determining if there is an inaccuracy in the wavelength solution in the spatial ($y$, or vertical) axis is relatively straightforward as a perfect wavelength solution will remove any horizontal variation of the sky lines. Any horizontal deviation of the sky lines after transformation reflects a poor fit of the wavelength solution. Any vertical variation may be found through a quick visual inspection of a transformed frame, as mentioned previously, but may be inspected more thoroughly using the \texttt{skyline} method. As mentioned, the sky lines are averaged and compared to sky lines of a typical row. A wavelength solution exhibiting a poor fit across the spatial axis will display broader averaged sky lines than that of a relatively good fit.
+\prgph
 
-\todo{Give more detail when properly implemented in code. Discuss arguments (both compulsory and optional)}
+As no features, other than the trace of sources exposed across a frame, exist that uniformly cover the wavelength ($x$, horizontal) axis of a typical frame, determining if the horizontal fit of the wavelength solution is more challenging. Thankfully, \gls{SALT} has published a sky line atlas which we may make use of. By first considering the spatial fit of the wavelength solution, it is ensured that the wavelength positions of all sky lines are well-defined. Comparisons may now be made to the wavelength positions measured by \gls{SALT}. Minor variations in the comparison of the sky lines are expected, but any uniform trends indicate an underlying poor fit across the wavelength axis of the wavelength solution. A poor horizontal fit is difficult to spot without supplementary tools and may have drastic adverse effect on the final polarization results.
 
 
 \subsection{Cross correlation}
 
-Cross correlation allows for the comparison of the features in signals. This is useful when dealing with spectropolarimetric spectra as it allows a comparison of how well aligned the spectra are wavelength-wise. Using this, we can determine if any misidentifications had skewed the entire wavelength solution, as compared to the \texttt{skyline} method which allows identification of singular misidentifications within the wavelength solution.
+The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from one another. The \texttt{correlate} method was created for this express purpose.
+\prgph
+
+Cross correlation of the two spectra allows for the comparison of the features within the spectra as a function of the wavelength displacement. This is useful when dealing with spectropolarimetric spectra as it allows a comparison of how well aligned the spectra are wavelength-wise. Using this, we can determine if any misidentifications had skewed the entire wavelength solution, as compared to the \texttt{skyline} method which allows identification of singular misidentifications within the wavelength solution.
 \prgph
 
 
@@ -184,7 +189,6 @@ Cross correlation allows for the comparison of the features in signals. This is 
     \begin{itemize}
         \item Why cross correlation
         \item discussion of script processes (how it works)
-        \item discuss all arguments provided to method
     \end{itemize}
 }
 
@@ -292,7 +296,7 @@ The \texttt{skyline} method is run in the \gls{CLI} using:
 
 \begin{verbatim}> python <.../>Masters skyline cal_images\end{verbatim}
 
-\noindent where `cal\_images' refers to either the transformed images produced by the \iraf\ \texttt{transform} task or the raw wavelength calibrated frames. The difference in the flux conservation when \texttt{skyline} transforms the frames is discussed in \S~\ref{subsec:skyline_discuss}. Otherwise, as with all the other supplementary tools, default parameters also describe the overplotting of the $O$ and $E$ beams, the overplotting of the sklines provided by \gls{SALT}, and the cross row variation of a frame.
+\noindent where `cal\_images' refers to either the transformed images, prefixed `t', produced by the \iraf\ \texttt{transform} task or the raw wavelength calibrated frames. The difference in the flux conservation when \texttt{skyline} transforms the frames is discussed in \S~\ref{subsec:skyline_discuss}. Otherwise, as with all the other supplementary tools, default parameters also describe the overplotting of the $O$ and $E$ beams, the overplotting of the skylines provided by \gls{SALT}, and the cross row variation of a frame.
 \prgph
 
 The \texttt{correlate} method is run in the \gls{CLI} using:
@@ -361,6 +365,6 @@ Finally, the reduction process using the \polsalt\ \gls{GUI} is completed by sel
 \todo{
     \begin{itemize}
         \item Deletion of o and e beam fits (due to POLSALT naming conventions and to save memory)
-        \item finish gui writeup
+        \item finish GUI write-up
     \end{itemize}
 }

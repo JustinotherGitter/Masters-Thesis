@@ -948,7 +948,7 @@ Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit l
 % https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version#7-specpolfilterpy--compute-synthetic-filter-polarization-results-for-listed-filters
 % https://github.com/saltastro/polsalt/wiki/
 
-\polsalt\ is the current reduction package being developed within \gls{SAAO}/\gls{SALT} as the official reduction pipeline for spectropolarimetric data taken using \glspl{SALT} \gls{RSS}.\footnote{\polsalt\ is made freely available via the \polsalt\ GitHub repository, available at \url{https://github.com/saltastro/polsalt}. It is strongly advised to follow the wiki for installation instructions.} Newer versions of the software include a \gls{GUI} as well as limited interactivity during key steps in the reduction process. Below we summarize the reduction steps for the ``beta version" [23 January 2020] which was adapted in this study.
+\polsalt\ is the current reduction package being constantly developed and used within \gls{SAAO}/\gls{SALT} as the official reduction pipeline for spectropolarimetric data taken using \glspl{SALT} \gls{RSS}.\footnote{\polsalt\ is made freely available via the \polsalt\ GitHub repository, available at \url{https://github.com/saltastro/polsalt}. It is strongly advised to follow the wiki for installation instructions.} Newer versions of the software, aptly named the `beta version', include a \gls{GUI} as well as limited interactivity during key steps in the reduction process.\footnote{Installation files and instructions for the `beta version' utilizing the \gls{GUI} are available at \url{http://www.saao.ac.za/~ejk/polsalt/code/} in a TAR GZIP file.} Below we summarize the reduction steps for the ``beta version" [23 January 2020] which was adapted in this study.
 \prgph
 
 The steps that make up the reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw stokes calculations, final stokes calculations, and visualization of the results. Each step is crucial for good results and thus briefly discussed (a detailed documentation for the reduction steps and purpose may be found at \href{https://github.com/saltastro/polsalt/wiki}{the \polsalt\ github wiki}):
@@ -968,6 +968,7 @@ The steps that make up the reduction pipeline include basic \gls{CCD} reductions
     \end{gathered}
     \label{eq:polsalt_rawstokes}
 \end{equation}
+\prgph
 
 The raw stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw stokes information have a very specific naming style, with most notably the pair of frames used being included.
 
