@@ -164,6 +164,8 @@ Before creating the supplementary tool's \texttt{split} and \texttt{join} method
 
 \subsection{Sky line comparisons}\label{subsec:skyline_discuss}
 
+\todo{Include example of skyline result}\prgph
+
 Sky line comparisons serve two unique yet interconnected services. Firstly, they naively transform the wavelength calibrated frames, without conserving flux, allowing the user confirmation of the variation of sky lines across the columns of the frame, and secondly, they compare the wavelength position of the sky lines with the \gls{SALT} sky lines,\footnote{The first iteration of a sky line atlas is available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}} allowing confirmation of the wavelength solution at positions across the rows of the frame. The file used for skyline comparisons may be the \iraf\ \texttt{transform} \gls{FITS} file, which allows for flux conservation through the `\texttt{flux}' parameter.
 \prgph
 
@@ -177,20 +179,21 @@ As no features, other than the trace of sources exposed across a frame, exist th
 
 \subsection{Cross correlation}
 
-The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from one another. The \texttt{correlate} method was created for this express purpose.
+\todo{Include example of correlate result}\prgph
+
+The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from one another. The difficulty arises in comparing the two spectra since variations between the two are expected and are what define the stokes, and thus final polarization, results. The \texttt{correlate} method was created for this express purpose.
 \prgph
 
-Cross correlation of the two spectra allows for the comparison of the features within the spectra as a function of the wavelength displacement. This is useful when dealing with spectropolarimetric spectra as it allows a comparison of how well aligned the spectra are wavelength-wise. Using this, we can determine if any misidentifications had skewed the entire wavelength solution, as compared to the \texttt{skyline} method which allows identification of singular misidentifications within the wavelength solution.
+The \texttt{correlate} method loads the provided \gls{FITS} files created by the \polsalt\ \texttt{spectra extraction}, removes the continuum and separates the \gls{CCD} regions. The relevant, separated, \gls{CCD} regions are then cross correlated and any offset between the spectra may be plotted.
 \prgph
 
+As the stokes results, and thus final polarization results, are determined and are heavily influenced by the differences in the spectra of the different $O$ and $E$ polarization beams, a direct comparison is not appropriate. Any observed unpolarized light, however, will reflect equally in both polarization beams and so the general trend of the two spectra may reasonably be expected to follow one another. Cross correlation of the two spectra for the different, $O$ and $E$, polarization beams allows for a comparison of the features within the spectra as a function of the wavelength displacement.
+\prgph
 
+Sources under spectropolarimetric observation are often expected to vary over time and as such as the ratio of polarized to unpolarized light varies. The accuracy of correlation may decrease as features with differences in the polarized component of the polarization beams change. The differences in the features of the different spectra are often negligible when compared to the overall trend of the spectra and are generally only reflected in a change in the intensity of said features.
+\prgph
 
-\todo{
-    \begin{itemize}
-        \item Why cross correlation
-        \item discussion of script processes (how it works)
-    \end{itemize}
-}
+Cross correlation is useful when dealing with spectropolarimetric spectra as it allows a comparison of how well aligned the notable features of the spectra are wavelength-wise. Minor deviations between spectra weight the cross correlation less than the more prominent features, and therefore, cross correlation results acquired when using the \texttt{correlate} method more accurately reflect any general offset between polarization beams that may not necessarily be found when using the \texttt{skyline} method.
 
 
 \section{General Reduction Procedure}\label{sec:red_proc}
@@ -217,6 +220,8 @@ Help documentation, primarily describing the possible arguments, is available in
 
 \subsection{POLSALT Pre-reductions}\label{subsec:reduc_pre}
 
+\todo{Include screenshot of GUI, reference in paragraph}\prgph
+
 \polsalt\ requires a file structure such that the raw data received from \gls{SALT} is located in a folder labeled using the observing date as well as being in a sub-folder labeled raw, such as \texttt{YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory named \texttt{YYYYMMDD/sci/} which contains all the files modified during the reduction process. This allows for separation of reductions of the same data by simply renaming the \texttt{sci/} directory.
 \prgph
 
@@ -229,9 +234,6 @@ To launch the \gls{GUI}, navigate to the \polsalt\ directory within a \gls{CLI} 
 \begin{verbatim}> python scripts/reducepoldata.py <.../>YYYYMMDD\end{verbatim}
 
 \noindent then runs the raw image reduction process. It should be noted that the \polsalt\ \gls{CLI} command will, by default, attempt to run the wavelength calibration process. This behavior may be stopped by using the \texttt{-w} flag when running the command.
-\prgph
-
-\todo{Include screenshot of GUI, reference in paragraph above}
 
 
 \subsection{Wavelength Calibration} \label{subsec:reduc_wav}
@@ -304,6 +306,17 @@ The \texttt{correlate} method is run in the \gls{CLI} using:
 \begin{verbatim}> python <.../>Masters correlate spec_images\end{verbatim}
 
 \noindent where `spec\_images' refers to spectra extracted \gls{FITS} files. If the user wishes to compare the $O$ and $E$ beams of a single file then only that image name is to be provided, otherwise it is assumed that the user wishes to compare the same polarization beam across the files provided. It is worth pointing out here that as the input images are only created after performing the \polsalt\ \texttt{spectra extraction} and thus should only be completed thereafter.
+\prgph
+
+A final reminder is made here about the clash of default naming schemes and wildcard file collection performed by \polsalt. A simple wildcard \texttt{mv} move or \texttt{rm} remove command may be run in the \gls{CLI} to deal with the created split files used by \iraf. The remove command may be run using:
+
+\begin{verbatim}> rm obeam* ebeam*\end{verbatim}
+
+\noindent while moving the files to a new subfolder the may be done using:
+
+\begin{verbatim}> mkdir ./split_files/
+> mv obeam* ebeam* ./split_files/
+\end{verbatim}
 
 
 \subsection{POLSALT Reduction Completion} \label{subsec:reduc_com}
@@ -362,9 +375,4 @@ The \polsalt\ beta \texttt{reducepoldata\_sc.py} copies a \texttt{script.py} fil
 Finally, the reduction process using the \polsalt\ \gls{GUI} is completed by selecting and, when applicable, interactively modifying the reduction step through the interactive windows, one-by-one, from the \glspl{GUI} dropdown menu.
 \prgph
 
-\todo{
-    \begin{itemize}
-        \item Deletion of o and e beam fits (due to POLSALT naming conventions and to save memory)
-        \item finish GUI write-up
-    \end{itemize}
-}
+The reduction process when using the \polsalt\ beta version is straightforward and is made even more so by the inclusion of the \gls{GUI}. As no commands are necessary, save for those to launch the \gls{GUI} window, not much can be said of the reduction process. Excellent resources, created by the \gls{SALT} (\todo{\gls{SAAO}?}) team, are available online for any queries about the reduction process using any version of \polsalt, including the \gls{GUI}.\footnote{See the official \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ wiki} or alternative online resources such as \href{https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf}{\gls{SALT} workshop slides}.}
