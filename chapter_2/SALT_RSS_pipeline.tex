@@ -204,23 +204,18 @@ Twilight flats are produced from images of the twilight (or dawn) sky. They are 
 \prgph
 
 A flat-field must be normalized before being used to correct any science images since it only acts to account for the pixel-to-pixel response and not for the additive errors. A  normalized spectroscopic flat image, $F^{n}_{\lambda}(x,y)$, can be calculated as:
-
 \begin{equation}
-    F^{n}_{\lambda}(x,y) = \frac{F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{median_{lp}(F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y))}
-    \label{eq:norm_flat}
+    F^{n}_{\lambda}(x,y) = \frac{F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{\text{med}_{lp}(F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y))}\,,\label{eq:norm_flat}
 \end{equation}
-
-\noindent where $F_{\lambda}(x,y)$ is the non-corrected flat image, $B(x,y)$ is the bias image, $D(x,y)$ is the dark image which is scaled by the exposure time of the science image, $t_{S}$, and the dark image, $t_{D}$. $median_{lp}$ is a low-pass median filter which smoothes out any rapid changes in the pixel-to-pixel response, removing the illumination contribution.
+where $F_{\lambda}(x,y)$ is the non-corrected flat image, $B(x,y)$ is the bias image, $D(x,y)$ is the dark image which is scaled by the exposure time of the science image, $t_{S}$, and the dark image, $t_{D}$. med$_{lp}$ is a low-pass median filter which smoothes out any rapid changes in the pixel-to-pixel response, removing the illumination contribution.
 \prgph
 
 The calibrated science image, $S^{*}_{\lambda}(x,y)$, which accounts for the bias and dark currents as well as the flat fielding can then be calculated as:
-
 \begin{equation}
-    S^{*}_{\lambda}(x,y) = \frac{S_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{F^{n}_{\lambda}(x,y)}.
-    \label{eq:science_cal}
+    S^{*}_{\lambda}(x,y) = \frac{S_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{F^{n}_{\lambda}(x,y)}\,.\label{eq:science_cal}
 \end{equation}
 
-Multichannel \glspl{CCD} are detectors that use either multiple \glspl{CCD} or a \gls{CCD} with multiple output amplifiers which can be read out through multiple channels at the same time, increasing the detectors size while keeping the readout time constant. These \gls{CCD} setups need additional calibrations, specifically cross-talk corrections and mosaicking. Cross-talk noise refers to contamination that occurs during readout in one channel from another channel with a high signal and occurs because the signals can not be completely isolated from one another. Cross-talk corrections therefore account for this signal contamination between channels being read out at the same time \citep{CrossTalk}. Mosaicking is necessary for multichannel \glspl{CCD} since the digitized signal read out from the detector has no reference of the physical location of the pixel it was detected at. Mosaicking therefore orients the data acquired from a multichannel detector correctly relatively to one another so that a single image is produced from the multiple channels read out from the detector.
+When multichannel \glspl{CCD} are used, which consist of multiple \glspl{CCD} or a \gls{CCD} with multiple output amplifiers, additional calibrations, specifically cross-talk corrections and mosaicking, are required. Cross-talk noise refers to contamination that occurs during readout in one channel from another channel with a high signal and occurs because the signals can not be completely isolated from one another. Cross-talk corrections therefore account for this signal contamination between channels being read out at the same time \citep{CrossTalk}. Mosaicking is necessary for multichannel \glspl{CCD} since the digitized signal read out from the detector has no reference of the physical location of the pixel it was detected at. Mosaicking, therefore, correctly orients the data acquired from a multichannel detector so that a single correctly oriented image is produced.
 
 \begin{figure}[t]
     \centering
@@ -230,89 +225,69 @@ Multichannel \glspl{CCD} are detectors that use either multiple \glspl{CCD} or a
 \end{figure}
 \footnotetext{\protect\href{http://pysalt.salt.ac.za/lineatlas/plot_line_neon.pdf}{NeAr plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
 
-
 \subsubsection{Wavelength Calibration}
 
-Finally, calibrations unique to spectroscopy are the wavelength calibrations. Since the dispersion element breaks the incident light into its constituent wavelengths non-linearly, as discussed in \S~\ref{subsec:dispersion}, the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modeled to produce a reliable pixel to wavelength calibration \citep[see E.g.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in Figure~\ref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc-lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
+Finally, since the dispersion element breaks the incident light into its constituent wavelengths non-linearly (\S~\ref{subsec:dispersion}), the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modelled to produce a reliable pixel to wavelength calibration \citep[see E.g.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in Figure~\ref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc-lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
 \prgph
 
 The wavelength calibrations then consist of defining a two-dimensional pixel-to-wave\-length conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations.
-
 
 \paragraph{Chebyshev polynomials}
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 12cm]{figures/2_chebyshev.pdf}
-    \caption{The first seven Chebyshev polynomials ($T_0$ through $T_{6}$) as defined by Equation~\ref{eq:chebypoly} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from \citep{numerical_recipes} (2023)\protect\footnotemark}
+    \caption{The first seven Chebyshev polynomials ($T_0$ through $T_{6}$) as defined by Equation~\ref{eq:chebypoly} over the region $[-1, 1]$ for which they are orthogonal. Plot adapted from \citep{numerical_recipes} (2023)\protect\footnotemark}
     \label{fig:chebyshev}
 \end{figure}
-\footnotetext{Available digitally at \protect\href{http://numerical.recipes/book}{numerical.recipes}}
+\footnotetext{Excellent resources on Chebyshev and Legendre polynomials are available digitally at \protect\href{http://numerical.recipes/book}{www.numerical.recipes/book}.}
 
 The Chebyshev polynomials are defined explicitly as:
-
 \begin{equation}
-    T_{n}(x) = \cos(n \cos^{-1}(x)),
-    \label{eq:chebypolyexplicit}
+    T_{n}(x) = \cos(n \cos^{-1}(x))\,,\label{eq:chebypolyexplicit}
 \end{equation}
-
-\noindent or recursively as:
+or recursively as:
 \begin{equation}
     \begin{gathered}
-        T_{0}(x) = 1 \\
-        T_{1}(x) = x  \\
-        T_{n}(x) = 2 x T_{n - 1}(x) - T_{n - 2}(x), \text{ for } n > 1
-    \end{gathered}
-    \label{eq:chebypoly}
+        T_{0}(x) = 1\,,\\
+        T_{1}(x) = x\,,\rlap{\quad and}\\
+        T_{n}(x) = 2 x T_{n - 1}(x) - T_{n - 2}(x)\,,\rlap{\quad for $n > 1$\,,}
+    \end{gathered}\label{eq:chebypoly}
 \end{equation}
-
-\noindent where $T$ is a Chebyshev polynomial\footnote{Denoted $T$ as a hold-over from the alternate spelling, `Tchebycheff'.} of order $n$. An important property of Chebyshev polynomials is that they are orthogonal polynomials. This means that the inner product of any two differing Chebyshev polynomials, $T_{i}(x)$ and $T_{j}(x)$, over the range $[-1, 1]$ is zero, as shown by
-
+where $T$ is a Chebyshev polynomial of order $n$.\footnote{Chebyshev polynomials are denoted $T$ as a hold-over from the alternate spelling of `Tchebycheff'.}
+An important property of Chebyshev polynomials is that they are orthogonal polynomials. This means that the inner product of any two differing Chebyshev polynomials, $T_{i}(x)$ and $T_{j}(x)$, over the range $[-1, 1]$ is zero, as shown by:
 \begin{equation}
     \int_{-1}^{1} T_{i}(x) T_{j}(x) \frac{1}{\sqrt{1-x^{2}}} \,dx =
     \begin{cases}
         0,       & i \neq j     \\
         \pi / 2, & i = j \neq 0 \\
         \pi,     & i = j = 0
-    \end{cases}
-    \label{eq:chebyorth}
+    \end{cases}\label{eq:chebyorth}
 \end{equation}
-
-\noindent where $1 / \sqrt{1 - x^{2}}$ is the weighting factor for Chebyshev polynomials. This property is important because it means that each coefficient in the Chebyshev polynomial expansion are independent of one another, allowing for a unique solution when approximating an unknown function.
+where $1 / \sqrt{1 - x^{2}}$ is the weighting factor for Chebyshev polynomials. This property is important because it means that the coefficients in the Chebyshev polynomial expansion are independent of one another, allowing for a unique solution when approximating an unknown function \citep{numerical_recipes, cheby}.
 \prgph
 
-An approximation, using Chebyshev polynomials, of an unknown wavelength calibration function is given by
-
+An approximation, using Chebyshev polynomials, of an unknown wavelength calibration function is given by:
 \begin{equation}
-    f(x) \approx \sum_{i = 0}^{N}  c_{i} T_{i}(u)
-    \label{eq:chebyshev}
+    f(x) \approx \sum_{i = 0}^{N}  c_{i} T_{i}(u)\,,\label{eq:chebyshev}
 \end{equation}
-
-\noindent or
-
+or
 \begin{equation}
-    F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} c_{ij} T_{i}(u) T_{j}(v),
-    \label{eq:chebyshev2D}
+    F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} c_{ij} T_{i}(u) T_{j}(v)\,,\label{eq:chebyshev2D}
 \end{equation}
-
-\noindent for a one- or a two-dimensional wavelength surface function, respectively. Here $N$ and $M$ are the desired $x$ and $y$ orders, and $c_{i}$ and $c_{ij}$ are the Chebyshev polynomial coefficients \citep{chebysurf, cheby2d}. Since the orthogonality property of the Chebyshev polynomials only holds true over the range $[-1, 1]$, the $(x, y) \in ([0, a], [0, b])$ pixel coordinates must be remapped to $u, v \in [-1, 1]$ following the relation
-
+for a one- or a two-dimensional wavelength surface function, respectively. Here $N$ and $M$ are the desired $x$ and $y$ orders, and $c_{i}$ and $c_{ij}$ are the Chebyshev polynomial coefficients \citep{chebysurf, cheby2d}. Since the orthogonality property of the Chebyshev polynomials only holds true over the range $[-1, 1]$, the $(x, y) \in ([0, a], [0, b])$ pixel coordinates must be remapped to $u, v \in [-1, 1]$ following the relation:
 \begin{align}
-    (u, v) & = \frac{2 (x, y) - a - b}{b - a}.
-    \label{eq:XtoUV}
+    (u, v) & = \frac{2 (x, y) - a - b}{b - a}\,.\label{eq:XtoUV}
     % & (x, y) & = \frac{b - a}{2} (u, v) + \frac{a+b}{2}
 \end{align}
 
 % When the calibration function is known but the function cannot be evaluated, the coefficients, $c_{n}$, may be approximated by:
-
 % \begin{equation}
-%     c_{n} \approx \frac{2}{N} \sum_{k = 0}^{N - 1} f(x_{k}) T_{n}(x_{k})
-%     \label{eq:chebycoeff}
+%     c_{n} \approx \frac{2}{N} \sum_{k = 0}^{N - 1} f(x_{k}) T_{n}(x_{k})\,,\label{eq:chebycoeff}
 % \end{equation}
+% where:
 
-% \noindent where:
-
-% \noindent which returns the positions of the  x-intercepts.
+% which returns the positions of the  x-intercepts.
 % \prgph
 
 The Chebyshev polynomials are more suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in Figure~\ref{fig:chebyshev}. This means that the Chebyshev approximation is exact when $x = x_{n}$, where $x_{n}$ are the positions of the $n - 1$ $x$-intercepts of $T_{N}(x)$. These properties greatly minimize the error in the Chebyshev approximation, even at lower order approximations \citep{cheby}.
@@ -321,66 +296,51 @@ The Chebyshev polynomials are more suited for wavelength calibrations than stand
 %     x_{n} = \cos{\left(  \frac{\pi}{2} \frac{2 n + 1}{N} \right)}
 % \end{equation}
 
-
 \paragraph{Legendre polynomials}
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 12cm]{figures/2_legendre.pdf}
-    \caption{The first six Legendre polynomials ($P_0$ through $P_{5}$) as defined by Equation~\ref{eq:legendre} over the region $[-1, 1]$ for which they are orthogonal. Figure adapted from Geek3, \protect\href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Legendrepolynomials6.svg}{Wikimedia Commons} (2023)}
+    \caption{The first six Legendre polynomials ($P_0$ through $P_{5}$) as defined by Equation~\ref{eq:legendre} over the region $[-1, 1]$ for which they are orthogonal. Plot adapted from Geek3, \protect\href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Legendrepolynomials6.svg}{Wikimedia Commons} (2023).}
     \label{fig:legendre}
 \end{figure}
 
 Similar to the Chebyshev polynomials, the Legendre polynomials may be defined explicitly as:
-
 \begin{equation}
-    P_{n}(x) = \frac{1}{2^{n} n!} \frac{d^{n}}{d x^{n}} (x^{2} - 1)^{n}
-    \label{eq:legpolyexplicit}
+    P_{n}(x) = \frac{1}{2^{n} n!} \frac{d^{n}}{d x^{n}} (x^{2} - 1)^{n}\,,\label{eq:legpolyexplicit}
 \end{equation}
-
-\noindent or recursively as:
-
+or recursively as:
 \begin{equation}
     \begin{gathered}
-        P_{0}(x) = 1 \\
-        P_{1}(x) = x \\
-        P_{n}(x) = \frac{2 n + 1}{n + 1} x P_{n - 1}(x) - \frac{n}{n + 1} P_{n - 2}(x), \text{ for } n > 1
-    \end{gathered}
-    \label{eq:legpoly}
+        P_{0}(x) = 1\,,\\
+        P_{1}(x) = x\,,\rlap{\quad and}\\
+        P_{n}(x) = \frac{2 n + 1}{n + 1} x P_{n - 1}(x) - \frac{n}{n + 1} P_{n - 2}(x)\,,\rlap{\quad for $n > 1$\,,}
+    \end{gathered}\label{eq:legpoly}
 \end{equation}
-
-\noindent where $P$ is a Legendre polynomial of order $n$. Legendre polynomials also hold the property of orthogonality. This means that the inner product of any two differing Legendre polynomials, $P_{i}(x)$ and $P_{j}(x)$, over the range $[-1, 1]$ is zero, as shown by
-
+where $P$ is a Legendre polynomial of order $n$. Legendre polynomials also hold the property of orthogonality. This means that the inner product of any two differing Legendre polynomials, $P_{i}(x)$ and $P_{j}(x)$, over the range $[-1, 1]$ is zero, as shown by:
 \begin{equation}
     \int_{-1}^{1} P_{i}(x) P_{j}(x) \,dx =
     \begin{cases}
         0,                 & i \neq j \\
         \frac{2}{2 n + 1}, & i = j
-    \end{cases}
-    \label{eq:legorth}
+    \end{cases}\label{eq:legorth}
 \end{equation}
-
-\noindent where a weight of $1$ is the weighting factor for Legendre polynomials.
+where a weight of $1$ is the weighting factor for Legendre polynomials \citep{numerical_recipes, leg}.
 \prgph
 
-An approximation, using Legendre polynomials, of an unknown wavelength calibration function is given by
-
+An approximation, using Legendre polynomials, of an unknown wavelength calibration function is given by:
 \begin{equation}
-    f(x) \approx \sum_{n = 0}^{N} a_{n} P_{n}(u)
-    \label{eq:legendre}
+    f(x) \approx \sum_{n = 0}^{N} a_{n} P_{n}(u)\,,\label{eq:legendre}
 \end{equation}
-
-\noindent or
-
+or
 \begin{equation}
-    F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} a_{ij} P_{i}(u) P_{j}(v),
-    \label{eq:Legendre2D}
+    F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} a_{ij} P_{i}(u) P_{j}(v)\,,\label{eq:Legendre2D}
 \end{equation}
-
-\noindent for a one-dimensional wavelength function or a two-dimensional surface function, respectively. Here $N$ and $M$ are the desired $x$ and $y$ orders, $u$ and $v$ are the same mapping variable as in Equation~\ref{eq:XtoUV}, and $a_{ij}$ are the Legendre polynomial coefficients.
+for a one-dimensional wavelength function or a two-dimensional surface function, respectively. Here $N$ and $M$ are the desired $x$ and $y$ orders, $u$ and $v$ are the same mapping variable as in Equation~\ref{eq:XtoUV}, and $a_{ij}$ are the Legendre polynomial coefficients.
 \prgph
 
-Legendre polynomials benefit from having the orthogonality condition with no weight necessary ($w = 1$) which makes their coefficients computationally easier to compute but increases the error in a Legendre approximation when compared to that of the error in a Chebyshev approximation for a function\footnote{For one-dimensional Legendre and Chebyshev approximations of the same order, $N$} \citep{leg_cheb_relation}.
+Legendre polynomials benefit from having the orthogonality condition with no weight necessary ($w = 1$) which makes their coefficients computationally easier to compute but increases the error in a Legendre approximation when compared to that of the error in a Chebyshev approximation for functions of the same order, $N$ \citep{leg_cheb_relation}.
+% for one-dimensional Legendre and Chebyshev approximations
 \prgph
 
 Regardless of which method of polynomial approximation is chosen, the polynomials are fit by varying the relevant coefficients using the least squares method. The resultant minimized function may then be used to convert the science frames from an $(x$-pixel$, y$-pixel$)$ coordinate system to a $(\lambda, y$-pixel$)$ coordinate system.
@@ -399,132 +359,92 @@ Both Huygens and Newton came to the conclusion that light demonstrates transvers
 % \noindent where $I_{0}$ and $I$ are the Intensity of light before and after polarization, and $\theta$ is the orientation of the polarizer to the direction of propogation of the polarized light.
 \prgph
 
-Fresnel built on Malus' work showing that two beams of light, polarized at a right angle to one another, do not interfere, conclusively proving that light is transversal in nature, opposing the widely accepted longitudinal nature of light due to the prevalent belief in the ether. Fresnel later went on to correctly describe how polarized light is reflected and refracted at the surface of optical dielectric interfaces, without knowledge of the electromagnetic nature of light. Fresnel's equations for the reflectance and transmittance, $R$ and $T$, are defined as:
-
+Fresnel built on Malus' work showing that two beams of light, polarized at a right angle to one another, do not interfere, conclusively proving that light is transversal in nature, opposing the widely accepted longitudinal nature of light due to the prevalent belief in the ether. He later went on to correctly describe how polarized light is reflected and refracted at the surface of optical dielectric interfaces, without knowledge of the electromagnetic nature of light. Fresnel's equations for the reflectance and transmittance, $R$ and $T$, are defined as:
 \begin{equation}
     \begin{gathered}
-        R_{s} = \left\lvert \frac{Z_{2} \cos{\theta_{i}} - Z_{1} \cos{\theta_{t}}}{Z_{2} \cos{\theta_{i}} + Z_{1} \cos{\theta_{t}}} \right\rvert^{2} \\
-        R_{p} = \left\lvert \frac{Z_{2} \cos{\theta_{t}} - Z_{1} \cos{\theta_{i}}}{Z_{2} \cos{\theta_{t}} + Z_{1} \cos{\theta_{i}}} \right\rvert^{2} \\
-        T_{s} = 1 - R_{s} \\
-        T_{p} = 1 - R_{p}
-    \end{gathered}
-    \label{eq:Fresnel}
+        R_{s} = \left\lvert \frac{Z_{2} \cos{\theta_{i}} - Z_{1} \cos{\theta_{t}}}{Z_{2} \cos{\theta_{i}} + Z_{1} \cos{\theta_{t}}} \right\rvert^{2}\,,\\
+        R_{p} = \left\lvert \frac{Z_{2} \cos{\theta_{t}} - Z_{1} \cos{\theta_{i}}}{Z_{2} \cos{\theta_{t}} + Z_{1} \cos{\theta_{i}}} \right\rvert^{2}\,,\\
+        T_{s} = 1 - R_{s}\,,\quad\text{and}\\
+        T_{p} = 1 - R_{p},
+    \end{gathered}\label{eq:Fresnel}
 \end{equation}
-
-\noindent where $s$ and $p$ are the two polarized components of light perpendicular to one another, $Z_{1}$ and $Z_{2}$ are the impedance of the two media, and $\theta_{i}$, $\theta_{t}$, and $\theta_{r}$ are the angles of incidence, transmission, and reflection, respectively \citep{Fresnel}.
+where $s$ and $p$ are the two polarized components of light perpendicular to one another, $Z_{1}$ and $Z_{2}$ are the impedance of the two media, and $\theta_{i}$, $\theta_{t}$, and $\theta_{r}$ are the angles of incidence, transmission, and reflection, respectively \citep{Fresnel}.
 \prgph
 
-Nicol was the first to create a polarizer, aptly named the Nicol prism, where the incident light is split into its two perpendicular polarization components, namely the ordinary and extraordinary beams. Faraday discovered the phenomenon where the polarization plane of light is rotated when under the influence of a magnetic field, known as the Faraday effect. Brewster calculated the angle of incidence, $\theta_{B}$, at which incident polarized light is perfectly transmitted through a transparent surface, with refractive indexes of $n_{1}$ and $n_{2}$, while non-polarized incident light is perfectly polarized when reflected and partially polarized when refracted.
-
-\begin{equation}
-    \theta_{B} = \arctan{\frac{n_{2}}{n_{1}}}
-    \label{eq:Brewster}
-\end{equation}
+Nicol was the first to create a polarizer, aptly named the Nicol prism, where the incident light is split into its two perpendicular polarization components, namely the ordinary and extraordinary beams. Faraday discovered the phenomenon where the polarization plane of light is rotated when under the influence of a magnetic field, known as the Faraday effect. Brewster calculated the angle of incidence, $\theta_{B} = \arctan{n_{2} / n_{1}}$, at which incident polarized light is perfectly transmitted through a transparent surface, with refractive indexes of $n_{1}$ and $n_{2}$, while non-polarized incident light is perfectly polarized when reflected and partially polarized when refracted.
+\prgph
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=10cm]{figures/2_Nicol_prism.pdf}
-    \caption{Nicol prism diagram for incident non-polarized light.}
+    \caption{Diagram of a Nicol prism for incident non-polarized light. Diagram adapted from Fred the Oyster, \protect\href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}, via \protect\href{https://en.m.wikipedia.org/wiki/File:Nicol_prism.svg}{Wikimedia Commons} (2023).}
     \label{fig:Nicol_prism}
 \end{figure}
-\prgph
 
-Stokes' work created the first consistent description of polarization and gave us the Stokes parameters which give an operational approach to polarization, discussed later in more detail \citep{Stokes}. Hale was the first to apply polarization to astronomical observations, using a Fresnel rhomb and Nicol prism as a quarter-wave plate and polarizer, respectively \citep{Hale_pre,Hale_post}. Wollaston also created a prism, similarly named the Wollaston prism, which allowed simultaneous observation of the ordinary and extraordinary beams due to the smaller deviation angle \citep{WollPrism}. Finally, Chandrasekhar's work furthered our understanding of astrophysical polarimetry by explaining the origin of polarization observed in starlight as well as mathematically modeling the polarization of rotating stars, which came to be named Chandrasekhar polarization \citep{chandrasekhar}.
-
+Stokes' work created the first consistent description of polarization and gave us the Stokes parameters which describe an operational approach to measuring polarization (discussed further in \S~\ref{subsec:pol}) \citep{Stokes}. Hale was the first to apply polarization to astronomical observations, using a Fresnel rhomb and Nicol prism as a quarter-wave plate and polarizer, respectively \citep{Hale_pre,Hale_post}. Wollaston also created a prism, similarly named the Wollaston prism, which allowed simultaneous observation of the ordinary and extraordinary beams due to the smaller deviation angle \citep{WollPrism}. Finally, Chandrasekhar's work furthered our understanding of astrophysical polarimetry by explaining the origin of polarization observed in starlight as well as mathematically modeling the polarization of rotating stars, which came to be named Chandrasekhar polarization \citep{chandrasekhar}.
 
 \subsection{Polarization}\label{subsec:pol}
 
 Maxwell's equations for an electromagnetic field propagating through a vacuum are given as:
-
 \begin{equation}
     \begin{gathered}
-        \nabla \cdot \matr{E} = 0 \\
-        \nabla \cdot \matr{B} = 0 \\
-        \nabla \times \matr{E} = - \frac{1}{c} \frac{\partial \matr{B}}{\partial t} \\
-        \nabla \times \matr{B} = \frac{1}{c} \frac{\partial \matr{E}}{\partial t}
-    \end{gathered}
-    \label{eq:Maxwell}
+        \nabla \cdot \matr{E} = 0\,,\\
+        \nabla \cdot \matr{B} = 0\,,\\
+        \nabla \times \matr{E} = - \frac{1}{c} \frac{\partial \matr{B}}{\partial t}\,,\rlap{\quad and}\\
+        \nabla \times \matr{B} = \frac{1}{c} \frac{\partial \matr{E}}{\partial t},
+    \end{gathered}\label{eq:Maxwell}
 \end{equation}
-
-\noindent where $\matr{E}$ and $\matr{B}$ are the electric and magnetic field vectors, and $c$ is the speed of light \citep{Griffiths}. In a right-handed $(x, y, z)$ coordinate system, a non-trivial solution of an electromagnetic wave following \hyperref[eq:Maxwell]{Maxwell's Equations} propagating along the $z$-axis, towards a hypothetical observer, is described by:
-
+where $\matr{E}$ and $\matr{B}$ are the electric and magnetic field vectors, and $c$ is the speed of light. In a right-handed $(x, y, z)$ coordinate system, a non-trivial solution of an electromagnetic wave following \hyperref[eq:Maxwell]{Maxwell's Equations} propagating along the $z$-axis, towards a hypothetical observer, is described by:
 \begin{equation}
-    \matr{E} = E_{x} \cos(\omega t - \Phi_{x}) \hat{\boldsymbol{x}} +
-    E_{y} \cos(\omega t - \Phi_{y}) \hat{\boldsymbol{y}}
-    \label{eq:Maxwell_sol}
+    \begin{gathered}
+        \matr{E} = E_{x} \cos(kz - \omega t + \Phi_{x}) \hat{\boldsymbol{x}} +
+        E_{y} \cos(kz - \omega t + \Phi_{y}) \hat{\boldsymbol{y}}\,,\rlap{\quad and}\\
+        \matr{B} = \frac{1}{c} E_{y} \cos(kz - \omega t + \Phi_{y}) \hat{\boldsymbol{x}} +
+        \frac{1}{c} E_{x} \cos(kz - \omega t + \Phi_{x}) \hat{\boldsymbol{y}}\,,
+    \end{gathered}\label{eq:Maxwell_sol}
 \end{equation}
+where $E_{x}$, $E_{y}$, $\Phi_{x}$, and $\Phi_{y}$ are all parameters describing the amplitude and phase of the electric field vector in the $(x, y)$ plane, and with the magnetic field vector proportional and perpendicular to the electric field vector \citep{Griffiths}.
+\prgph
 
-\noindent where $E_{x}$, $E_{y}$, $\Phi_{x}$, and $\Phi_{y}$ are all parameters describing the amplitude and phase of the electric field vector in the $(x, y)$ plane. Rewriting Equation~\ref{eq:Maxwell_sol} using complex values allows us to simplify the form of the solution to:
-
+Considering only the electric field component and rewriting Equation~\ref{eq:Maxwell_sol} using complex values allows us to simplify the form of the solution to:
 \begin{equation}
-    \matr{E} = \Re(\matr{E}_{0} e^{-i \omega t})
-    \label{eq:E_field_vector}
+    \matr{E} = \Re(\matr{E}_{0} e^{-i \omega t})\,,\label{eq:E_field_vector}
 \end{equation}
-
-\noindent where we only consider the real part of the equation, and where $\matr{E}_{0}$ is defined as:
-
+where we only consider the real part of the equation, and where $\matr{E}_{0}$ is defined as:
 \begin{equation}
     \matr{E}_{0} = E_{x} e^{i \Phi_{x}} \hat{\boldsymbol{x}} +
-    E_{y} e^{i \Phi_{y}} \hat{\boldsymbol{y}}
-    \label{eq:pol_vector}
+    E_{y} e^{i \Phi_{y}} \hat{\boldsymbol{y}}\,,\label{eq:pol_vector}
 \end{equation}
-
-\noindent and is referred to as the polarization vector since it neatly contains the parameters responsible for the polarization properties \citep{pol_phys}.
-% Although the magnetic field is not discussed, it can be shown from \hyperref[eq:Maxwell]{Maxwell's Equations} that it is always defined as in phase and perpendicular to both the electric field vector and the direction of propagation with the form $\matr{B} = \Re(\matr{B}_{0} e^{-i \omega t})$.
+and is referred to as the polarization vector since it neatly contains the parameters responsible for the polarization properties \citep{pol_phys}.
 \prgph
 
 % Polarizing Ellipse
-For an electric field vector with oscillations in some combination of the $x$ and $y$ axes, the tip of the vector sweeps out an ellipse, as depicted in Figure~\ref{fig:pol_ellipse}. This ellipse is referred to as the polarization ellipse and has the form:
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=6cm]{figures/2_pol_ellipse.pdf}
+    \caption{The polarization ellipse for an electric field vector propagating through free space. Diagram adapted from Inductiveload, \protect\href{https://creativecommons.org/publicdomain/mark/1.0/}{PDM 1.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Polarisation_ellipse2.svg}{Wikimedia Commons} (2023).}
+    \label{fig:pol_ellipse}
+\end{figure}
 
+For an electric field vector with oscillations in some combination of the $x$ and $y$ axes, the tip of the vector sweeps out an ellipse, as depicted in Figure~\ref{fig:pol_ellipse}. This ellipse is referred to as the polarization ellipse and has the form:
 \begin{equation}
     \left( \frac{\matr{E}_{x}}{\matr{E}_{0, x}}\right)^{2} +
     \left( \frac{\matr{E}_{y}}{\matr{E}_{0, y}}\right)^{2} -
     \frac{2 \matr{E}_{x} \matr{E}_{y}}{\matr{E}_{0, x} \matr{E}_{0, y}} \cos\Phi =
-    \sin^{2} \Phi
-    \label{eq:pol_ellipse}
+    \sin^{2} \Phi\,,\label{eq:pol_ellipse}
 \end{equation}
+where $\Phi = \Phi_{x} - \Phi_{y}$ is the phase difference between the $x$ and $y$ phase parameters. The degree of polarization for the polarization ellipse is related to the eccentricity of the ellipse and the angle at which it is rotated relates to the polarization angle. Since $\matr{E}_{0, x}$, $\matr{E}_{0, y}$, $\Phi_{x}$, and $\Phi_{y}$ describe the wave, the polarization ellipse that results from these parameters is fixed as the wave continues to propagate.
+\prgph
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=6cm]{figures/2_pol_ellipse.pdf}
-    \caption{The polarization ellipse for an electric field vector propagating through free space.}
-    \label{fig:pol_ellipse}
-\end{figure}
-
-\noindent where $\Phi = \Phi_{x} - \Phi_{y}$ and is the phase difference between the $x$ and $y$ phase parameters. The degree of polarization for the polarization ellipse is related to the eccentricity of the ellipse and the angle at which it is rotated relates to the polarization angle. Since $\matr{E}_{0, x}$, $\matr{E}_{0, y}$, $\Phi_{x}$, and $\Phi_{y}$ describe the wave, the polarization ellipse that results from these parameters is fixed as the wave continues to propagate. An alternate representation of Equation~\ref{eq:pol_ellipse} is given by:
-
+Since observations consist of images taken over a desired exposure time, time averaging of Equation~\ref{eq:pol_ellipse} over the exposure time is necessary. Given the periodical nature and high frequencies of the fields, the time averaging may be found over a single oscillation using:
 \begin{equation}
-    (E_{x}^{2} + E_{y}^{2})^{2} - (E_{x}^{2} - E_{y}^{2})^{2} - (2 E_{x} E_{y} \cos \Phi)^{2} = (2 E_{x} E_{y} \sin \Phi)^{2}
-    \label{eq:pol_ellipse_alt}
+    \avg{\matr{E}_{i} \matr{E}_{j}} = \lim_{dt \rightarrow \infty} \frac{1}{T} \int_{0}^{T} \matr{E}_{i} \matr{E}_{j}\,dt\,,\quad \text{for } i, j \in (x, y)\,,\label{eq:pol_t_avg}
 \end{equation}
-
-\noindent where
-
+where $T$ is the total averaging time over the electric field vectors $\matr{E}_{i}$ and $\matr{E}_{j}$ \citep{field_guide}. Applying the time averaging to Equation~\ref{eq:pol_ellipse} and simplifying results in:
 \begin{equation}
-    \begin{gathered}
-        P_{I} = E_{x}^{2} + E_{y}^{2}, \\
-        P_{Q} = E_{x}^{2} - E_{y}^{2}, \\
-        P_{U} = 2 E_{x} E_{y} \cos \Phi, and \\
-        P_{V} = 2 E_{x} E_{y} \sin \Phi.
-    \end{gathered}
-    \label{eq:pol_params}
+    (E_{0x}^{2} + E_{0y}^{2})^{2} - (E_{0x}^{2} - E_{0y}^{2})^{2} - (2 E_{x} E_{y} \cos \Phi)^{2} = (2 E_{x} E_{y} \sin \Phi)^{2}\,.\label{eq:pol_ellipse_alt}
 \end{equation}
-
-From Equations~\ref{eq:pol_ellipse_alt},~\ref{eq:pol_params}, the polarization parameters are related by:
-
-\begin{equation}
-    P_{I}^{2} = P_{Q}^{2} + P_{U}^{2} + P_{V}^{2}.
-\end{equation}
-
-There is, however, a seemingly small albeit major shortcoming of the polarization as defined in Equation~\ref{eq:pol_params}, the polarization ellipse as represented by Figure~\ref{fig:pol_ellipse} deals only with a single transverse wave and is incapable of handling a wave-packet made up of multiple waves. This is because the waves making up a wave-packet will not share their polarization properties and will temporally vary from one another. By taking the time average of the waves in a wave-packet, which happens inherently in the process of observations, this temporal variation may be eliminated.
-
-\begin{equation}
-    \avg{\matr{E}_{i} \matr{E}_{j}} = \lim_{dt \rightarrow \infty} \frac{1}{T} \int_{0}^{T} \matr{E}_{i} \matr{E}_{j}\,dt, \text{ for } i, j \in (x, y)
-    \label{eq:pol_t_avg}
-\end{equation}
-
-\noindent where $T$ is the total averaging time over electric field vectors $\matr{E}_{i}$ and $\matr{E}_{j}$. Equation~\ref{eq:pol_params} now simplifies to:
-
+The expressions inside the parentheses can be found through observation and may also be represented as:
 \begin{equation}
     \matr{S} =
     \begin{pmatrix}
@@ -542,45 +462,46 @@ There is, however, a seemingly small albeit major shortcoming of the polarizatio
     \end{pmatrix}
     =
     \begin{pmatrix}
-        \avg{E_{x}^{2} + E_{y}^{2}}   \\
-        \avg{E_{x}^{2} - E_{y}^{2}}   \\
-        \avg{2 E_{x} E_{y} \cos \Phi} \\
-        \avg{2 E_{x} E_{y} \sin \Phi}
+        E_{0x}^{2} + E_{0y}^{2}   \\
+        E_{0x}^{2} - E_{0y}^{2}   \\
+        2 E_{0x} E_{0y} \cos \Phi \\
+        2 E_{0x} E_{0y} \sin \Phi
     \end{pmatrix}
     \label{eq:Stokes_params}
 \end{equation}
-
-\noindent where $S_{0}$ -- $ S_{3}$ are referred to as the Stokes (polarization) parameters \citep{Stokes}.
+where $S_{0}$ to $ S_{3}$ are referred to as the Stokes (polarization) parameters. The parameters describe the: $S_{0}$, total intensity (often normalized to $1$); $S_{1}$, ratio of the \gls{LHP} to \gls{LVP} light; $S_{2}$, ratio of the \gls{L45P} to \gls{L-45P} light; and $S_{3}$, ratio of the \gls{RCP} (clockwise) to \gls{LCP} (counter-clockwise) light. When the intensity is normalized, the Stokes parameters range from $1$ to $-1$, based on the dominating component of the parameter \citep{Stokes, chandrasekhar}.
 \prgph
 
-Only beams of completely polarized light could be accounted for before Stokes' work polarization. For a reference direction which defines the direction of the $x$-axis of our coordinate system, the Stokes parameters are physically described as follows: the $Q$ parameter is defined as the difference between the amount of photons oscillating parallel and perpendicular to the reference direction, the $U$ parameter is defined as the difference between the amount of photons oscillating at $45\degr$ and $135\degr$ counter-clockwise from the reference direction, and the $V$ parameter is defined as the difference between the amount of photons with right-handed (positive, clockwise) circular polarization and left-handed (negative, counter-clockwise) circular polarization \citep{Stokes}.
-\prgph
-
-Using the \hyperref[eq:Stokes_params]{Stokes parameters}, we can now account for partially polarized light such that:
-
-\begin{equation}
-    I^{2} \geq  Q^{2} + U^{2} + V^{2},
-\end{equation}
-
-\noindent where it should be noted that $(I, Q, U, V)$ represent the partial polarization parameters and are related to $(P_{I}, P_{Q}, P_{U}, P_{V})$ since the polarization may be partial. In general, and henceforth, $(P_{I}, P_{Q}, P_{U}, P_{V})$ are relative quantities normalized to the intensity, where
-
-\begin{align}
-    P_{I} & = 1, & P_{Q} & = \frac{Q}{I}, & P_{U} & = \frac{U}{I}, \text{   and } & P_{V} & = \frac{V}{I}.
-    \label{eq:norm_Stokes}
-\end{align}
+% There is, however, a seemingly small, albeit major, shortcoming of the polarization as defined in Equation~\ref{eq:pol_params}; the polarization ellipse as represented by Figure~\ref{fig:pol_ellipse} deals only with a single transverse wave and is incapable of handling a collection of waves which create a wave-packet. This is because the waves making up a wave-packet will not share their polarization properties and will temporally vary from one another. By taking the time average of the waves in a wave-packet, which happens inherently in the process of observations, this temporal variation may be eliminated.
 % \prgph
 
-Similar to the polarization ellipse, the Stokes parameters may be depicted using the Poincar{\'e} sphere in spherical coordinates $(IP, 2 \Psi, 2 \chi)$, where $I$ denotes the total intensity and $P$ the degree of polarization, or the ratio of polarized to non-polarized light in the wave-packet, $\chi$ denotes the polarization angle, and $\Psi$ denotes the ellipticity angle of the polarization ellipse. It should be noted that the Poincar{\'e} sphere also uses the normalized Stokes parameters $(S_{0} = 1)$ as defined above in equation~\ref{eq:norm_Stokes}.
+From Equations~\ref{eq:pol_ellipse_alt},~\ref{eq:Stokes_params}, the polarization parameters are related by:
+\begin{equation}
+    {I}^{2} = {Q}^{2} + {U}^{2} + {V}^{2}\,,
+\end{equation}
+for entirely polarized light. Only beams of completely polarized light could be accounted for before Stokes' work on polarization. Using the \hyperref[eq:Stokes_params]{Stokes parameters}, we can now account for partially polarized light such that:
+\begin{equation}
+    I^{2} \geq  Q^{2} + U^{2} + V^{2}\,,
+\end{equation}
+where $I, Q, U, \text{ and } V$ are the normalized polarization parameters.
+\prgph
 
+% In general, and henceforth, $(P_{I}, P_{Q}, P_{U}, P_{V})$ are relative quantities normalized to the intensity, where
+% \begin{align}
+%     P_{I} & = 1\,, & P_{Q} & = \frac{Q}{I}\,, & P_{U} & = \frac{U}{I}\,, \text{   and } & P_{V} & = \frac{V}{I}\,.\label{eq:norm_Stokes}
+% \end{align}
+% \prgph
+
+Similar to the polarization ellipse, the Stokes parameters may be depicted using the Poincar{\'e} sphere in spherical coordinates $(IP, 2 \Psi, 2 \chi)$, such that:
 \begin{equation}
     \begin{gathered}
-        I = S_{0} \\
-        P = \frac{\sqrt{S_{1}^2 + S_{2}^2 + S_{3}^2}}{S_{0}}, \text{ for } 0 \leq P \leq 1 \\
-        2 \Psi = \arctan \frac{S_{3}}{\sqrt{S_{1}^{2} + S_{2}^{2}}} \\
-        2 \chi = \arctan \frac{S_{2}}{S_{1}}
-    \end{gathered}
-    \label{eq:poincare_coords}
+        I = S_{0}\,,\\
+        P = \frac{\sqrt{S_{1}^2 + S_{2}^2 + S_{3}^2}}{S_{0}}\,,\rlap{\quad for $0 \leq P \leq 1$\,,}\\
+        2 \Psi = \arctan \frac{S_{3}}{\sqrt{S_{1}^{2} + S_{2}^{2}}}\,,\rlap{\quad and}\\
+        2 \chi = \arctan \frac{S_{2}}{S_{1}}\,,
+    \end{gathered}\label{eq:poincare_coords}
 \end{equation}
+where $I$ denotes the total intensity, $P$ denotes the degree of polarization, or the ratio of polarized to non-polarized light in the wave-packet, $\chi$ denotes the polarization angle, and $\Psi$ denotes the ellipticity angle of the polarization ellipse.
 
 \begin{figure}[t]
     \centering
@@ -588,7 +509,6 @@ Similar to the polarization ellipse, the Stokes parameters may be depicted using
     \caption{The Poincar{\'e} sphere describing the polarization properties of a wave-packet propagating through free space. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Poincaré_sphere.svg}{Wikimedia Commons} (2023)}
     \label{fig:poincare}
 \end{figure}
-\prgph
 
 % Special cases, (1, \pm1, 0, 0), (1, 0, \pm1, 0), (1, 0, 0, \pm1), (1, 0, 0, 0)
 % Mueller matrix
@@ -603,29 +523,20 @@ Similar to the polarization ellipse, the Stokes parameters may be depicted using
 
 % - practically
 % Waveplate and polarizer
-
-
 \subsection{Polarization Measurement}\label{subsec:pol_measure}
 
-Except for polarimetry in the radio-wavelength regime, the polarization of a beam can not be directly measured. The polarization properties may, however, be recovered from the beam through manipulation of the four parameters mentioned in Equation~\ref{eq:Maxwell_sol}. This so-called manipulation is achieved by passing the beam through optical elements which vary the beam for differing amplitudes and phases. These matrix operations may be represented by their corresponding Mueller matrices. For ideal components, the resultant beam $\matr{S}^{\prime}$ after passing through an optical element is given by
+Except for polarimetry in the radio-wavelength regime, the polarization of a beam can not be directly measured. The polarization properties may, however, be recovered from the beam through the manipulation of the four parameters given in Equation~\ref{eq:Maxwell_sol}. This so-called manipulation is achieved by passing the beam through optical elements which vary the beam for differing amplitudes and phases. These matrix operations may be represented by their corresponding Mueller matrices.
+\prgph
 
+For ideal components, the resultant beam $\matr{S}^{\prime}$ after passing through an optical element is given by $\matr{S}^{\prime} = \matr{M} \matr{S}$, where $\matr{S}$ is the beam incident on the optical element and $\matr{M}$ represents the $4 \times 4$ Mueller matrix representing the optical element. Mueller matrices are especially useful when dealing with paths through optical elements as they observe the `train' property \citep{Mueller_train}. This means that an incoming beam $\matr{S}$ passing, in order, through elements with known Mueller matrices $(\matr{M}_{0}, \dots, \matr{M}_{N})$ results in an outgoing beam $\matr{S}^{\prime}$ such that:
 \begin{equation}
-    \matr{S}^{\prime} = \matr{M} \matr{S}
+    \matr{S}^{\prime} = \matr{M}_{N} \dots \matr{M}_{0} \matr{S}\,.\label{eq:mueller_train}
 \end{equation}
-
-\noindent where $\matr{S}$ is the beam incident on the optical element and $\matr{M}$ represents the $4 \times 4$ Mueller matrix representing the optical element. Mueller matrices are especially useful when dealing with paths through optical elements as they observe the `train' property \citep{Mueller_train}. This means that an incoming beam $\matr{S}$ passing, in order, through elements with known Mueller matrices $(\matr{M}_{0}, \dots, \matr{M}_{N})$ results in an outgoing beam $\matr{S}^{\prime}$ such that:
-
-\begin{equation}
-    \matr{S}^{\prime} = \matr{M}_{N} \dots \matr{M}_{0} \matr{S}
-    \label{eq:mueller_train}
-\end{equation}
-% \prgph
 
 Some Mueller Matrices are given below with angles related to those in Figure~\ref{fig:polarimeter}, measured counter-clockwise in a right-handed coordinate system.
 
-
 \paragraph{General rotation}
-The Mueller matrix for coordinate space rotations about the origin by an angle $\theta$.
+The Mueller matrix for coordinate space rotations about the origin by an angle $\theta$,
 \begin{equation}
     \matr{R}(\theta) =
     \begin{bmatrix}
@@ -633,13 +544,11 @@ The Mueller matrix for coordinate space rotations about the origin by an angle $
         0 & \cos 2 \theta  & \sin 2 \theta & 0 \\
         0 & -\sin 2 \theta & \cos 2 \theta & 0 \\
         0 & 0              & 0             & 1 \\
-    \end{bmatrix}
-    \label{matrix:rotate}
+    \end{bmatrix}\,.\label{matrix:rotate}
 \end{equation}
 
-
 \paragraph{General linear retardance}
-The Mueller matrix for retardance where $\alpha$ is the angle between the incoming vector and fast axis, and $\delta$ is the retardance introduced by the retarder. The retarder is often referred to by this retardance, e.g. if the retardance is $\delta = \pi$ or $\pi / 2$, the retarder is referred to as a half- or quarter-wave plate, respectively.
+The Mueller matrix for retardance where $\alpha$ is the angle between the incoming vector and fast axis, and $\delta$ is the retardance introduced by the retarder,
 \begin{equation}
     \matr{W}(\alpha, \delta) =
     \begin{bmatrix}
@@ -647,13 +556,12 @@ The Mueller matrix for retardance where $\alpha$ is the angle between the incomi
         0 & \cos^{2} 2 \alpha + \sin^{2} 2 \alpha \cos \delta & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \sin 2 \alpha \sin \delta  \\
         0 & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \cos^{2} 2 \alpha \cos \delta + \sin^{2} 2 \alpha & -\cos 2 \alpha \sin \delta \\
         0 & -\sin 2 \alpha \sin \delta                        & \cos 2 \alpha \sin \delta                         & \cos \delta                \\
-    \end{bmatrix}
-    \label{matrix:retarder}
+    \end{bmatrix}\rlap{.}\label{matrix:retarder}
 \end{equation}
-
+The retarder is often referred to by this retardance, e.g. if the retardance is $\delta = \pi$ or $\pi / 2$, the retarder is referred to as a half- or quarter-wave plate, respectively.
 
 \paragraph{General linear polarization}
-The Mueller matrix for linear polarization where $\beta$ is the angle between the incoming vector and transmission axis.
+The Mueller matrix for linear polarization where $\beta$ is the angle between the incoming vector and transmission axis,
 \begin{equation}
     \matr{P}(\beta) = \frac{1}{2}
     \begin{bmatrix}
@@ -661,10 +569,8 @@ The Mueller matrix for linear polarization where $\beta$ is the angle between th
         \cos 2 \beta & \cos^{2} 2 \beta          & \cos 2 \beta \sin 2 \beta & 0 \\
         \sin 2 \beta & \sin 2 \beta \cos 2 \beta & \sin^{2} 2 \beta          & 0 \\
         0            & 0                         & 0                         & 0 \\
-    \end{bmatrix}
-    \label{matrix:polarizer}
+    \end{bmatrix}\,.\label{matrix:polarizer}
 \end{equation}
-\prgph
 
 These matrices in combination with Equation~\ref{eq:mueller_train} allow us to describe how the Stokes parameters would change when passing through various optical elements. For a setup similar to Figure~\ref{fig:polarimeter}, we can vary the retandance angle, $\alpha$, and polarization angle, $\beta$, for a wave plate with a relative phase difference, $\gamma$, to acquire a system of equations that we can solve to retrieve the Stokes polarization parameters \citep{waveplate_in_specpol}.
 
