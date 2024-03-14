@@ -60,12 +60,12 @@ As the intent was always to parse the wavelength function back into \polsalt\ it
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_OEsplit.pdf}
-    \caption{The split $O$ and $E$ beams as handed to \iraf.}
+    \caption{The split $O$- and $E$-beams as handed to \iraf.}
     \label{fig:OE_split}
 \end{figure}
 
 % Any changes from how polsalt would do it
-To aid the \iraf\ wavelength calibrations, row cropping and file list creation were introduced into the \texttt{split} method to ignore the regions without a trace either side of the frame, and to list the $O$ and $E$ beam \gls{FITS} files, respectively. The row cropping was decided on as \iraf\ does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
+To aid the \iraf\ wavelength calibrations, row cropping and file list creation were introduced into the \texttt{split} method to ignore the regions without a trace either side of the frame, and to list the $O$- and $E$-beam \gls{FITS} files, respectively. The row cropping was decided on as \iraf\ does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
 
 
 \subsection{IRAF wavelength calibration}\label{subsec:IRAF_wav_cal}
@@ -159,7 +159,7 @@ The wavelength extension is masked to remove any impossible wavelengths and also
 
 \section{Additional Tools}\label{sec:add_tools}
 
-Before creating the supplementary tool's \texttt{split} and \texttt{join} methods used to perform wavelength calibrations in \iraf, it was deemed necessary to create a tool to allow for the comparison of the wavelength solutions between the extracted spectra of the $O$ and $E$ polarization beams, referred to as \texttt{correlate}. The scope was later expanded to allow for the inspection of the cross-row and cross-column axes of the wavelength solutions as the \iraf\ wavelength calibration procedure provided much more flexibility.
+Before creating the supplementary tool's \texttt{split} and \texttt{join} methods used to perform wavelength calibrations in \iraf, it was deemed necessary to create a tool to allow for the comparison of the wavelength solutions between the extracted spectra of the $O$ and $E$ beams, referred to as \texttt{correlate}. The scope was later expanded to allow for the inspection of the cross-row and cross-column axes of the wavelength solutions as the \iraf\ wavelength calibration procedure provided much more flexibility.
 
 
 \subsection{Sky line comparisons}\label{subsec:skyline_discuss}
@@ -187,7 +187,7 @@ The \texttt{skyline} method allows for confirmation of a single wavelength solut
 The \texttt{correlate} method loads the provided \gls{FITS} files created by the \polsalt\ \texttt{spectra extraction}, removes the continuum and separates the \gls{CCD} regions. The relevant, separated, \gls{CCD} regions are then cross correlated and any offset between the spectra may be plotted.
 \prgph
 
-As the stokes results, and thus final polarization results, are determined and are heavily influenced by the differences in the spectra of the different $O$ and $E$ polarization beams, a direct comparison is not appropriate. Any observed unpolarized light, however, will reflect equally in both polarization beams and so the general trend of the two spectra may reasonably be expected to follow one another. Cross correlation of the two spectra for the different, $O$ and $E$, polarization beams allows for a comparison of the features within the spectra as a function of the wavelength displacement.
+As the stokes results, and thus final polarization results, are determined and are heavily influenced by the differences in the spectra of the different $O$ and $E$ beams, a direct comparison is not appropriate. Any observed unpolarized light, however, will reflect equally in both polarization beams and so the general trend of the two spectra may reasonably be expected to follow one another. Cross correlation of the two spectra for the different, $O$ and $E$, polarization beams allows for a comparison of the features within the spectra as a function of the wavelength displacement.
 \prgph
 
 Sources under spectropolarimetric observation are often expected to vary over time and as such as the ratio of polarized to unpolarized light varies. The accuracy of correlation may decrease as features with differences in the polarized component of the polarization beams change. The differences in the features of the different spectra are often negligible when compared to the overall trend of the spectra and are generally only reflected in a change in the intensity of said features.
@@ -298,14 +298,14 @@ The \texttt{skyline} method is run in the \gls{CLI} using:
 
 \begin{verbatim}> python <.../>Masters skyline cal_images\end{verbatim}
 
-\noindent where `cal\_images' refers to either the transformed images, prefixed `t', produced by the \iraf\ \texttt{transform} task or the raw wavelength calibrated frames. The difference in the flux conservation when \texttt{skyline} transforms the frames is discussed in \S~\ref{subsec:skyline_discuss}. Otherwise, as with all the other supplementary tools, default parameters also describe the overplotting of the $O$ and $E$ beams, the overplotting of the skylines provided by \gls{SALT}, and the cross row variation of a frame.
+\noindent where `cal\_images' refers to either the transformed images, prefixed `t', produced by the \iraf\ \texttt{transform} task or the raw wavelength calibrated frames. The difference in the flux conservation when \texttt{skyline} transforms the frames is discussed in \S~\ref{subsec:skyline_discuss}. Otherwise, as with all the other supplementary tools, default parameters also describe the overplotting of the $O$- and $E$-beams, the overplotting of the skylines provided by \gls{SALT}, and the cross row variation of a frame.
 \prgph
 
 The \texttt{correlate} method is run in the \gls{CLI} using:
 
 \begin{verbatim}> python <.../>Masters correlate spec_images\end{verbatim}
 
-\noindent where `spec\_images' refers to spectra extracted \gls{FITS} files. If the user wishes to compare the $O$ and $E$ beams of a single file then only that image name is to be provided, otherwise it is assumed that the user wishes to compare the same polarization beam across the files provided. It is worth pointing out here that as the input images are only created after performing the \polsalt\ \texttt{spectra extraction} and thus should only be completed thereafter.
+\noindent where `spec\_images' refers to spectra extracted \gls{FITS} files. If the user wishes to compare the $O$- and $E$-beams of a single file then only that image name is to be provided, otherwise it is assumed that the user wishes to compare the same polarization beam across the files provided. It is worth pointing out here that as the input images are only created after performing the \polsalt\ \texttt{spectra extraction} and thus should only be completed thereafter.
 \prgph
 
 A final reminder is made here about the clash of default naming schemes and wildcard file collection performed by \polsalt. A simple wildcard \texttt{mv} move or \texttt{rm} remove command may be run in the \gls{CLI} to deal with the created split files used by \iraf. The remove command may be run using:
@@ -336,7 +336,7 @@ Next, the spectra in each \gls{FITS} file are extracted using the command:
 
 \begin{verbatim}> python scripts/pol_extract.py c*.fits --yo A --ye B --dy C\end{verbatim}
 
-\noindent where the center row of the $O$ and $E$ beam spectra, \texttt{A} and \texttt{B}, as well as the spectral width, \texttt{C}, are integer values and must be provided. These may be found through \gls{FITS} viewing software such as ds9\footnote{Available at \protect\url{https://sites.google.com/cfa.harvard.edu/saoimageds9}} or more manually through python.
+\noindent where the center row of the spectra for the $O$- and $E$-beams, \texttt{A} and \texttt{B}, as well as the spectral width, \texttt{C}, are integer values and must be provided. These may be found through \gls{FITS} viewing software such as ds9\footnote{Available at \protect\url{https://sites.google.com/cfa.harvard.edu/saoimageds9}} or more manually through python.
 \prgph
 
 The Stokes files may then be calculated and created using the command:

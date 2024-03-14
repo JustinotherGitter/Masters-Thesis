@@ -506,7 +506,7 @@ where $I$ denotes the total intensity, $P$ denotes the degree of polarization, o
 \begin{figure}[t]
     \centering
     \includegraphics[width=6cm]{figures/2_poincare_sphere.pdf}
-    \caption{The Poincar{\'e} sphere describing the polarization properties of a wave-packet propagating through free space. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Poincaré_sphere.svg}{Wikimedia Commons} (2023)}
+    \caption{The Poincar{\'e} sphere describing the polarization properties of a wave-packet propagating through free space. Diagram adapted from Inductiveload, \protect\href{https://creativecommons.org/publicdomain/mark/1.0/}{PDM 1.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Poincaré_sphere.svg}{Wikimedia Commons} (2023).}
     \label{fig:poincare}
 \end{figure}
 
@@ -517,7 +517,7 @@ where $I$ denotes the total intensity, $P$ denotes the degree of polarization, o
 \begin{figure}[t]
     \centering
     \includegraphics[width=1\textwidth]{figures/2_polarimeter.pdf}
-    \caption{Diagram of an ideal polarimeter. Figure adapted from \cite{pol_in_spectra}.}
+    \caption{Diagram of an ideal polarimeter. Diagram adapted from \cite{pol_in_spectra}.}
     \label{fig:polarimeter}
 \end{figure}
 
@@ -572,41 +572,34 @@ The Mueller matrix for linear polarization where $\beta$ is the angle between th
     \end{bmatrix}\,.\label{matrix:polarizer}
 \end{equation}
 
-These matrices in combination with Equation~\ref{eq:mueller_train} allow us to describe how the Stokes parameters would change when passing through various optical elements. For a setup similar to Figure~\ref{fig:polarimeter}, we can vary the retandance angle, $\alpha$, and polarization angle, $\beta$, for a wave plate with a relative phase difference, $\gamma$, to acquire a system of equations that we can solve to retrieve the Stokes polarization parameters \citep{waveplate_in_specpol}.
-
+These matrices in combination with Equation~\ref{eq:mueller_train} allow us to describe how the incoming Stokes parameters would change when passing through the various optical elements. For a setup similar to Figure~\ref{fig:polarimeter}, the detected Stokes parameters can be described by:
 \begin{equation}
     \begin{split}
-        S(\alpha, \beta, \gamma) \propto \frac{1}{2} \{ I & + [Q \cos2\alpha + U \sin2\alpha] \cos(2\beta - 2\alpha) \\
+        S^{\prime}(\alpha, \beta, \gamma) \propto \frac{1}{2} \{ I & + [Q \cos2\alpha + U \sin2\alpha] \cos(2\beta - 2\alpha) \\
         & - [Q \sin2\alpha + U \cos2\alpha] \sin(2\beta - 2\alpha) \cos\gamma \label{eq:Stokes_intensity} \\
-        & + V \sin(2\beta - 2\alpha)\sin\gamma \}
+        & + V \sin(2\beta - 2\alpha)\sin\gamma \}\,,
     \end{split}
 \end{equation}
-% \prgph
+where the retandance angle, $\alpha$, polarization angle, $\beta$, for a wave plate with a relative phase difference, $\gamma$, may be varied to acquire a system of equations that can be solved to retrieve the Stokes polarization parameters \citep{waveplate_in_specpol}.
+\prgph
 
 Several or more frames taken under differing configurations may be used to reduce a system of equations to extract all four Stokes polarization parameters, but it is possible to extract the $I$, $Q$ and $U$ polarization parameters using only four frames, or two dual-beam frames, for well-chosen configurations and assuming ideal components. This ideal configuration varies the retarder angle such that $\Delta\alpha = \pi / 8$ while keeping the polarizer stationary. More frames for additional retarder angles are advisable and often necessary, however, as they correct for any differences in sensitivity, such as may arise in a polarized flat field and which is further discussed in \S~\ref{subsubsec:pol_flat} \citep{polarimetry_error}.
 \prgph
 
 From Equation~\ref{eq:Stokes_intensity} we see that the linear retarder element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$, or $I$, $Q$, and $U$) may be found by changing only the angle of retardance, $\alpha$.
 
-
 \paragraph{Wave plates}
-Wave plates, also commonly referred to as retarders, are generally made from optically transparent birefringent crystals. A wave plate has a fast and slow axis, which are perpendicular to one another and both perpendicular to an incident beam. Due to the birefringence of the wave plate medium, the phase velocity of the beam polarized parallel to the fast axis, namely the extraordinary beam, slightly increases while that of the beam polarized parallel to the slow axis, namely the ordinary beam, remains unaffected \citep{Hecht_optics}.
-\prgph
-
-This difference in the perpendicular component's phase velocities introduces a relative phase difference between the two beams, $\gamma$, which is given by:
-
+Wave plates, also commonly referred to as retarders, are generally made from optically transparent birefringent crystals. A wave plate has a fast and slow axis, which are perpendicular to one another and both perpendicular to an incident beam. Due to the birefringence of the wave plate medium, the phase velocity of the beam polarized parallel to the fast axis, namely the extraordinary beam, slightly increases while that of the beam polarized parallel to the slow axis, namely the ordinary beam, remains unaffected. This difference in the perpendicular component's phase velocities introduces a relative phase difference between the two beams, $\gamma$, which is given by:
 \begin{equation}
     \gamma = \frac{2 \pi \Delta n L}{\lambda_{0}}
 \end{equation}
-
-\noindent where $\Delta n$ and $L$ refer to the birefringence and thickness of the wave plate medium, respectively, and $\lambda_{0}$ refers to the vacuum wavelength of the beam.
+where $\Delta n$ and $L$ refer to the birefringence and thickness of the wave plate medium, respectively, and $\lambda_{0}$ refers to the vacuum wavelength of the beam \citep{Hecht_optics}.
 \prgph
 
-This relative phase difference determines the name of the wave plate, such as the half- and quarter-wave plates referring to the $\gamma = m(\pi/2) $ and $\gamma = m(\pi/4)$ for $m \in Z^{+}$, respectively, which are also the most commonly used wave plates. Phase differences with an integer multiple of one another still relate to the same phase difference and are referred to as multiple-order wave plates. Multiple multiple-order wave plates can be combined by alternatively aligning the fast axis of one to the slow axis of another to create a compound zero-order wave plate. When the phase difference of the wave plate is not an integer difference it is referred to as a zero-order wave plate \citep{Hale_birefringence}.
+This relative phase difference determines the name of the wave plate, such that the $\gamma = m(\pi/2) $ and $\gamma = m(\pi/4)$ phase differences, for $m \in Z^{+}$, refer to the half- and quarter-wave plates (which are the most common wave plate phases), respectively. Phase differences with an integer multiple of one another relate to the same phase difference and are referred to as multiple-order wave plates, while wave plates with a phase difference less than an integer multiple are referred to as zero-order wave plates. Several multiple-order wave plates can be combined by alternatively aligning the fast axis of one to the slow axis of another to create a compound zero-order wave plate \citep{Hale_birefringence}.
 % \prgph
 
-
-\paragraph{Polarizers}
+\paragraph{Polarizers}\label{prgph:polarizer}
 Polarizers are typically made from two prisms, of a birefringent material, cemented together with an optically transparent adhesive. The actual effect of separating the perpendicular polarization components is achieved using varying effects, namely through:
 \begin{itemize}
     \item absorption of one of the polarized components, such as in Polaroid polarizing filters,
@@ -614,48 +607,42 @@ Polarizers are typically made from two prisms, of a birefringent material, cemen
     \item Refraction of a single polarized component, such as in a Rochon prism (Figure~\ref{fig:Rochon_prism}), or
     \item Refraction of both polarization components in differing directions, such as in a Wollaston prism (Figure~\ref{fig:Wollaston_prism}).
 \end{itemize}
-% \prgph
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/2_rochon.pdf}
-    \caption{Diagram of a Rochon prism. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Rochon_Prism.svg}{Wikimedia Commons} (2023)}
+    \caption{Diagram of a Rochon prism. Included in the diagram are the optical axes of the differing sections of the birefringent material as well as polarizing directions of the incident beam, denoted using the $\leftrightarrow$ and $\odot$ symbols, for the $O$- and $E$-beams, respectively. Figure adapted from ChrisHodgesUK, \protect\href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Rochon_Prism.svg}{Wikimedia Commons} (2023).}
     \label{fig:Rochon_prism}
 \end{figure}
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
-    \caption{Diagram of a Wollaston prism. Figure adapted from \protect\href{https://commons.wikimedia.org/wiki/File:Wollaston-prism.svg}{Wikimedia Commons} (2023)}
+    \caption{Diagram of a Wollaston prism. Included in the diagram are the optical axes of the differing sections of the birefringent material as well as polarizing directions of the incident beam, denoted using the $\leftrightarrow$ and $\updownarrow$ symbols, for the $O$- and $E$-beams, respectively. Diagram adapted from fgalore, \protect\href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Wollaston-prism.svg}{Wikimedia Commons} (2023).}
     \label{fig:Wollaston_prism}
 \end{figure}
 
-
 \paragraph{Wollaston prisms}
-The Wollaston prism consists of two prisms consisting of a birefringent monoaxial material, cemented together with an optically transparent adhesive along their hypotenuses with their optical axes orthogonal, as seen in Figure~\ref{fig:Wollaston_prism}. The Wollaston prism is a common optical polarizing element in astrophysical polarimetry which separates an incident beam into two linearly polarized beams, orthogonal to one another, as expected of a polarizer, but which returns the two beams deviated from their common axis equally. The deviation angle is determined by the right-angle prism base angles \citep{wollaston}.
+The Wollaston prism consists of two right-angle prisms consisting of a birefringent monoaxial material, cemented together with an optically transparent adhesive along their hypotenuses with their optical axes orthogonal, as seen in Figure~\ref{fig:Wollaston_prism}. The Wollaston prism is a common optical polarizing element in astrophysical polarimetry which separates an incident beam into two linearly polarized $O$- and $E$-beams, orthogonal to one another, and deviated from their common axis equally. The deviation angle of the polarized beams is determined by the wedge angle which is defined as the angle from the common hypotenuse to that of the outer transmission face of either prism.
 \prgph
 
-Wollaston prisms are beneficial over simpler elements, as listed previously, since a single frame allows for the observation of a set of orthogonal polarization configurations. This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty.
-% \prgph
-
+Wollaston prisms benefit over simpler elements (such as those listed in the \hyperref[prgph:polarizer]{polarizer} paragraph) since a single frame allows for the observation of both orthogonal polarization components. This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty \citep{wollaston}.
 
 \subsection{Polarimetric calibrations}\label{subsec:pol_cal}
 
-
-\subsubsection{Detector Calibrations}\label{subsubsec:pol_detector}
-
-Similar to \S~\ref{subsec:calibration}, polarimetric calibrations are necessary when dealing with a polarimeter, though as the optical elements differ the calibrations also differ. Corrections and calibrations related to the \gls{CCD} remain unchanged while those related to correcting for the optical elements only need to be modified to correct for polarization instead of wavelength.
-
-% The most notable feature of an exposure taken by a polarimeter, specifically a polarimeter which produces both the $O$- and $E$-beams simultaneously, is the presence of two images of the same area of sky with the target source along with any additional sources present in both images.
-
+The raw science images acquired during polarimetric observations contain a combination of useful science data as well as noise, similar to \S~\ref{subsec:calibration}. Corrections and calibrations related to the detector remain unchanged from those described in \S~\ref{subsec:calibration}, while those related to correcting for the optical elements relate to corrections for spurious polarization effects.
 
 \subsubsection{Flat Fielding}\label{subsubsec:pol_flat}
 
-Once the \gls{CCD} calibrations have been completed, the polarization intrinsic to the optical elements needs to be accounted for such that the pixel-to-pixel response is made uniform. Flat-fielding can once again be used to correct for this. The flats taken for polarimetry, however, introduce an additional challenge as the targets for conventional flats are polarized, such as twilight and dome flats which are polarized by light scattering in the atmosphere and the reflective surface of the dome, respectively.
+Once the \gls{CCD} calibrations have been completed, the polarization intrinsic to the optical elements needs to be accounted for such that the pixel-to-pixel response is made uniform. Flat-fielding is, once again, used to correct for this. The flats taken for polarimetry, however, introduce an additional challenge as the targets for conventional flats are polarized, such as twilight and dome flats which are polarized by light scattering in the atmosphere and the reflective surface of the dome, respectively.
 \prgph
 
-If no unpolarized flat images can be taken for flat field calibrations then, when possible due to the polarimeter design, the wave plate may be constantly rotated to act as a depolarizing element and is effective so long as the wave plate is rotated faster than the flat's exposure time. Alternatively, spatially constant polarized flats may be used with the added restriction that additional exposures for the science and flat images are taken. Redundant exposures are simply exposures taken with a half-wave plate angle that differs from an existing exposure by $\pi / 4$. The introduced redundancy partially cancels out any uniform polarization across beams and more redundant observations allow for an increased cancellation efficiency. Increasing the amount of  redundant observations also increases the time needed to observe all the exposures, which in turn introduces time-dependent effects such as fringing or intensity variations of the source. As such, a balance must be found for the amount of redundant frames observed. In any case, when the flat contains any polarization, the removal of the uniform polarization  from the science frames is left for when the polarization is calculated \citep{polarimetry_error, pol_optimize}.
+If no unpolarized flat images can be taken for flat field calibrations then, when possible due to the polarimeter design, the wave plate may be constantly rotated to act as a depolarizing element; this is effective so long as the wave plate rotation period is much faster than the flat's exposure time. Alternatively, polarized flats may be taken at the same set of half-wave plate angles used for science observations and averaged together to achieve a similar depolarizing effect.
 
+Observing additional `redundant' exposures for the science and flat images increases the depolarizing effect up to the maximum of $16$ half-wave plate positions, where exposures with a half-wave plate angle differing by $\pi / 4$ from another are considered redundant due to the $O$- and $E$-beams swapping between the related exposures.
+\prgph
+
+Increasing the amount of redundant observations proportionally increases the time needed to observe all the exposures, which in turn introduces time-dependent effects such as fringing or intensity variations of the flat source. As such, a middle ground must be found for the amount of redundant frames observed. \citep{polarimetry_error, pol_optimize}.
 
 \subsubsection{Dual-beam Extraction and Alignment}\label{subsubsec:pol_oe_extract}
 
@@ -663,20 +650,18 @@ After calibrations for the \gls{CCD} and light path are accounted for, the $O$- 
 \prgph
 
 % Image Alignment
-The matching dual images need to be aligned once they have been extracted such that the sources present in them overlap. The Wollaston prism needs to be corrected for as it introduces a Wollaston prism beam deviation. The aligning of the $O$- and $E$-beams is crucial as the comparison of the dual images is what allows for the calculation of the polarization properties.
-
+After extracting the $O$- and $E$-beams for a specific half-wave plate angle, the images need to be aligned such that the sources present in them overlap. The Wollaston prism needs to be corrected for as it introduces a beam deviation which differs across both images. The aligning of the $O$- and $E$-beams is crucial as the comparison of the dual images is what allows for the calculation of the polarization properties.
 
 \subsubsection{Sky Subtraction}\label{subsubsec:pol_sky_subtract}
 
-The polarization introduced by the sky needs to be removed as it will influence the polarization results of the target source. Thankfully, the background polarization is an additive type of noise and may be subtracted out across the frames. This subtraction should be done for each beam in each frame, however, as the background intensity of each image will differ as the background polarization differs.
-
+The polarization introduced by the sky introduces a difference in the intensity of the background sky and needs to be removed as it will influence the polarization results of the target source. Thankfully, the background polarization is an additive type of noise and may be subtracted out across the frames. This subtraction is done independently for both beams in a frame and for each frame since the background intensity of all observed polarimetric beams will differ based on the observational parameters.
 
 \section{Spectropolarimetry} \label{sec:spectropolarimetry} % In depth
 
-As the name suggests, spectropolarimetry is the measurement of the polarization of light for a chosen spectral range and provides polarimetric results as a function of wavelength. The history of spectropolarimetry is defined by the advancements of spectrometers and polarimeters, given in \S~\ref{sec:polarimetry},~\ref{sec:spectroscopy}. The most notable historical contributions unrelated to spectroscopy or polarimetry, however, are those of spectropolarimetric studies instead of instrumental developments.
+As the name suggests, spectropolarimetry is the measurement of the polarization of light for a chosen spectral range and provides polarimetric results as a function of wavelength. As spectropolarimetry is so closely reliant on both spectroscopy and polarimetry, advancements in spectropolarimeters have always been gated by the advancements of spectrometers and polarimeters (as described in \S~\ref{sec:spectroscopy},~\ref{sec:polarimetry}).
 \prgph
 
-Spectropolarimetry can provide further insights into a materials physical structure, chemical composition, and magnetic field, allowing spectropolarimetry to be useful across multiple disciplines. In astronomy in particular, spectropolarimetry has been used to study the magnetic field, chemical composition, and underlying structure and emission processes of multiple types of celestial objects \citep[see for example][]{specpol_AGN, specpol_stars, specpol_SN}.
+The most notable historical contributions of spectropolarimetry are those of spectropolarimetric studies instead of instrumental developments. Spectropolarimetry provides further insights into a materials physical structure, chemical composition, and magnetic field, allowing spectropolarimetry to be useful across multiple disciplines. In astronomy in particular, spectropolarimetry has been used to study the magnetic field, chemical composition, and underlying structure and emission processes of multiple types of celestial objects \citep[see for example][]{specpol_AGN, specpol_stars, specpol_SN}.
 \prgph
 
 \begin{figure}[t]
@@ -761,7 +746,7 @@ The desired degree of polarization as well as the polarization angle for linear 
 % \todo{V Stokes polarization parameter}
 
 
-\subsection{Spectropolarimetric calibrations}
+\subsection{Spectropolarimetric calibrations}\label{subsec:specpol_cal}
 
 The calibrations necessary for the measurement to take place are, as always, seemingly more involved than the calculation of the results themselves. As spectropolarimetry is an amalgamation of spectroscopy and polarimetry, it naturally follows that the calibrations necessary are a combination of both calibrations, as discussed in \S~\ref{subsec:calibration},~\ref{subsec:pol_cal}. Even though the spectrometer and polarizer components both have an effect on an incident beam following the light-path through the spectropolarimeter, the calibrations procedures for both components remain mostly independent of one another and as such need not be repeated here.
 \prgph
