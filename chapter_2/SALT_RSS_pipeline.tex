@@ -483,14 +483,10 @@ for entirely polarized light. Only beams of completely polarized light could be 
 \begin{equation}
     I^{2} \geq  Q^{2} + U^{2} + V^{2}\,,
 \end{equation}
-where $I, Q, U, \text{ and } V$ are the normalized polarization parameters.
-\prgph
-
-% In general, and henceforth, $(P_{I}, P_{Q}, P_{U}, P_{V})$ are relative quantities normalized to the intensity, where
-% \begin{align}
-%     P_{I} & = 1\,, & P_{Q} & = \frac{Q}{I}\,, & P_{U} & = \frac{U}{I}\,, \text{   and } & P_{V} & = \frac{V}{I}\,.\label{eq:norm_Stokes}
-% \end{align}
-% \prgph
+where $I, Q, U, \text{ and } V$ are the normalized polarization parameters, often symbolized as
+\begin{equation}
+    \bar{Q} = \frac{Q}{I}\,,\quad \bar{U} = \frac{U}{I}\,,\quad \text{and}\quad \bar{V} = \frac{V}{I}\,.\label{eq:Stokes_norm}
+\end{equation}
 
 Similar to the polarization ellipse, the Stokes parameters may be depicted using the Poincar{\'e} sphere in spherical coordinates $(IP, 2 \Psi, 2 \chi)$, such that:
 \begin{equation}
@@ -517,7 +513,7 @@ where $I$ denotes the total intensity, $P$ denotes the degree of polarization, o
 \begin{figure}[t]
     \centering
     \includegraphics[width=1\textwidth]{figures/2_polarimeter.pdf}
-    \caption{Diagram of an ideal polarimeter. Diagram adapted from \cite{pol_in_spectra}.}
+    \caption{A diagram of an ideal polarimeter. Diagram adapted from \cite{pol_in_spectra}.}
     \label{fig:polarimeter}
 \end{figure}
 
@@ -671,106 +667,88 @@ The most notable historical contributions of spectropolarimetry are those of spe
     \label{fig:specpol_exp}
 \end{figure}
 
-Along with common points of consideration when developing any instrumentation for observational astronomy, such as resolution and sensitivity, spectropolarimeters need to consider the spectral response of the polarimetric components as well as the polarization response of the spectroscopic components as both are simultaneously in the light-path during observations and have noticeable affects on one another. Time is another constraint for spectropolarimetry as the incident light is separated both by wavelength and by polarization states. This division of the incident light results in increased exposure times of not only observations of targets but also observations needed for calibrations, both of which are time-dependent.
+Along with common points of consideration when developing any instrumentation for observational astronomy, such as resolution and sensitivity, spectropolarimeters need also consider the spectral response of the polarimetric components as well as the polarization response of the spectroscopic components as both are simultaneously in the light-path during observations and have noticeable affects on one another. Time is another constraint for spectropolarimetry as the incident light is separated both by wavelength and by polarization states. This division of the incident light results in increased exposure times for both target observations and observations necessary for calibrations.
 \prgph
 
 Figure~\ref{fig:specpol_exp} illustrates a typical science image taken with a spectropolarimeter. The image contains the $O$- and $E$-beams which are both dispersed into their spectra. Spectropolarimetric results are acquired from measurements and calibrations of these images alongside any necessary calibration images.
 
-
 \subsection{Spectropolarimetric measurement}
 
-% The underlying theory of spectropolarimetry is covered in enough depth in \S~\ref{subsec:pol} that it need not be rehashed here. The
-% From \S~\ref{subsec:pol} we know light broken up into perpendicular components allows us to measure the polarization for an incoming beam. Taking ths a step further we can
-The derived relations given in \S~\ref{subsec:pol}, such as the \hyperref[eq:Stokes_params]{Stokes parameters}, are valid for both polarimetry and spectropolarimetry due to the \hyperref[eq:pol_t_avg]{time averaging}, which accounts for temporal variations and permits partially polarized incident beams, and the achromatic nature of the polarization calculations.
+The derived relations given in \S~\ref{subsec:pol}, such as the \hyperref[eq:Stokes_params]{Stokes parameters}, describe polarization in general and are valid for both polarimetry and spectropolarimetry. Due to the time averaging of the observed light (Equation~\ref{eq:pol_t_avg}), any minor temporal variation, partial polarization, or monochromatic nature of the spectropolarimetric polarization parameters are accounted for.
 \prgph
 
-For linear spectropolarimetry with half-wave plate angles of $\theta_{i}$, an exposure measures the wavelength dependent intensities of the $O$- and $E$-beams, $I\arcmin_{O}(\lambda)$ and $I\arcmin_{E}(\lambda)$, respectively. The $O$- and $E$-beam intensities thus relate to the Stokes parameters following:
-
+For linear spectropolarimetry using a dual-beam polarizing element, an exposure measures the $O$- and $E$-beam wavelength dependent intensities, $f_{O, i}(\lambda)$ and $f_{E, i}(\lambda)$, for a given wave plate angle $\theta_{i}$ at angle $i$. These intensities thus relate to the wavelength dependent Stokes parameters as:
 \begin{equation}
     \begin{gathered}
-        I\arcmin_{O, i}(\lambda) = \frac{1}{2} [I + Q\cos(4\theta_{i}) + U\sin(4\theta_{i})], \\
-        I\arcmin_{E, i}(\lambda) = \frac{1}{2} [I - Q\cos(4\theta_{i}) - U\sin(4\theta_{i})].
-    \end{gathered}
-    \label{eq:specpol_flux_to_Stokes}
+        f_{O, i}(\lambda) = \frac{1}{2} [I(\lambda) + Q(\lambda)\cos(4\theta_{i}) + U(\lambda)\sin(4\theta_{i})]\,,\rlap{\quad and} \\
+        f_{E, i}(\lambda) = \frac{1}{2} [I(\lambda) - Q(\lambda)\cos(4\theta_{i}) - U(\lambda)\sin(4\theta_{i})]\,.
+    \end{gathered}\label{eq:specpol_flux_to_Stokes}
 \end{equation}
-
-At least two exposures are needed to solve for the $I$, $Q$, and $U$ polarization parameters since two equations arise from a single exposure of a dual-beam configuration and at least four linear equations are required to solve for three variables in a system of linear equations.
+At least four linear equations are required to solve for three variables in a system of linear equations and thus at least two exposures must be taken to solve for the linear ($I(\lambda)$, $Q(\lambda)$, and $U(\lambda)$) polarization parameters \citep{pol_std, keller_instr}.
 \prgph
 
-The first Stokes parameter, $I$, may be recovered for each dual-beam exposure as
-
+The first Stokes parameter, $I(\lambda)$, may be recovered for each dual-beam exposure using
 \begin{equation}
-    I(\lambda) = f_{O, i}(\lambda) + f_{E, i}(\lambda).
-    \label{eq:specpol_I_calc}
+    I_{i}(\lambda) = f_{O, i}(\lambda) + f_{E, i}(\lambda)\,.\label{eq:specpol_I_calc}
 \end{equation}
-
-Next, the second and third Stokes parameters, $Q$ and $U$, are found by first defining the normalized difference in relative intensities as
-
-\begin{equation}
-    F_{i}(\lambda) \equiv \frac{f_{O, i}(\lambda) - f_{E, i}(\lambda)}{f_{O, i}(\lambda) + f_{E, i}(\lambda)}
-    \label{eq:specpol_norm_flux}
-\end{equation}
-
-\noindent which then allows Equation~\ref{eq:specpol_flux_to_Stokes} to be written in terms of the normalized Stokes para\-meters, $\bar{Q} = Q / I$ and $\bar{U} = U / I$, or, alternatively, the degree of polarization, $P$, and polarization angle, $\chi$:
-
-\begin{equation}
-    F_{i}(\lambda) = \bar{Q}(\lambda) \cos(4\theta_{i}) + \bar{U}(\lambda) \sin(4\theta_{i}) = P\cos(4\theta_{i} - 2\chi).
-    \label{eq:specpol_F_to_params}
-\end{equation}
-
-The optimal change in waveplate angle is $\Delta\theta = \pi/8$ as it allows the normalized Stokes polarization parameters to be written as:
-
-\begin{equation}
-    \begin{gathered}
-        \bar{Q}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \cos(\frac{\pi}{2} i) \\
-        \bar{U}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \sin(\frac{\pi}{2} i)
-    \end{gathered}
-    \label{eq:specpol_Stokes_sol}
-\end{equation}
-
-\noindent where N is the amount of exposures taken, limited such that $N \in [2, 16]$, and $F_{i}$ is the normalized difference in relative intensities for the $i^{th}$ exposure \citep{polarimetry_error}.
+By calculating the $I_{i}(\lambda)$ Stokes parameter for each wave plate position $i$, the variation of the target over the course of observation may be corrected for, resulting in the $I(\lambda)$ Stokes parameter.
 \prgph
 
-The desired degree of polarization as well as the polarization angle for linear spectro\-polarimetry is calculated as:
+Next, the $Q(\lambda)$ and $U(\lambda)$ Stokes parameters are found by first defining the normalized difference in relative intensities, $F_{i}(\lambda)$, as:
+\begin{equation}
+    F_{i}(\lambda) \equiv \frac{f_{O, i}(\lambda) - f_{E, i}(\lambda)}{f_{O, i}(\lambda) + f_{E, i}(\lambda)}\,,\label{eq:specpol_norm_flux}
+\end{equation}
+which allows Equation~\ref{eq:specpol_flux_to_Stokes} to be written, as
+\begin{equation}
+    F_{i}(\lambda) = \bar{Q}(\lambda) \cos(4\theta_{i}) + \bar{U}(\lambda) \sin(4\theta_{i}) = P\cos(4\theta_{i} - 2\chi)\,,\label{eq:specpol_F_to_params}
+\end{equation}
+in terms of the normalized Stokes parameters, or, alternatively, the degree of polarization, $P$, and polarization angle, $\chi$ (as described in Equations~\ref{eq:Stokes_norm}, and \ref{eq:poincare_coords}).
+\prgph
 
+The optimal change in wave plate angle is $\Delta\theta_{i} = \pi/8$ as it allows the normalized Stokes polarization parameters to be calculated as:
 \begin{equation}
     \begin{gathered}
-        P    = \sqrt{\bar{Q}^{2} + \bar{U}^{2}} \\
-        \chi = \frac{1}{2} \arctan \frac{\bar{U}}{\bar{Q}}
-    \end{gathered}
-    \label{eq:specpol_results}
+        \bar{Q}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \cos\left(\frac{\pi}{2} i\right)\,,\rlap{\quad and}\\
+        \bar{U}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \sin\left(\frac{\pi}{2} i\right)\,,
+    \end{gathered}\label{eq:specpol_Stokes_sol}
 \end{equation}
+where $N$ is the number of exposures taken, limited such that $N \in [2, 16]$ \citep{polarimetry_error}.
 
-\noindent which is derived from Equations~\ref{eq:poincare_coords} or by solving a system of linear equations of Equation~\ref{eq:specpol_F_to_params} \citep{pol_std,keller_instr}.
+% The desired degree of polarization as well as the polarization angle for linear spectro\-polarimetry is calculated as:
 
-% \todo{V Stokes polarization parameter}
+% \begin{equation}
+%     \begin{gathered}
+%         P    = \sqrt{\bar{Q}^{2} + \bar{U}^{2}} \\
+%         \chi = \frac{1}{2} \arctan \frac{\bar{U}}{\bar{Q}}
+%     \end{gathered}
+%     \label{eq:specpol_results}
+% \end{equation}
 
+% \noindent which is derived from Equations~\ref{eq:poincare_coords} or by solving a system of linear equations of Equation~\ref{eq:specpol_F_to_params} \citep{pol_std,keller_instr}.
 
 \subsection{Spectropolarimetric calibrations}\label{subsec:specpol_cal}
 
-The calibrations necessary for the measurement to take place are, as always, seemingly more involved than the calculation of the results themselves. As spectropolarimetry is an amalgamation of spectroscopy and polarimetry, it naturally follows that the calibrations necessary are a combination of both calibrations, as discussed in \S~\ref{subsec:calibration},~\ref{subsec:pol_cal}. Even though the spectrometer and polarizer components both have an effect on an incident beam following the light-path through the spectropolarimeter, the calibrations procedures for both components remain mostly independent of one another and as such need not be repeated here.
+% The calibrations necessary for the measurement to take place are, as always, seemingly more involved than the calculation of the results themselves.
+Just as the elements of a spectropolarimeter are an amalgamation of both a spectrometer and polarimeter, it naturally follows that the calibrations necessary to reduce spectropolarimetric data are a combination of the calibrations needed for spectroscopy and polarimetry, discussed further in \S~\ref{subsec:calibration}, and \ref{subsec:pol_cal}. Even though the spectrometer and polarimeter components both have an effect on an incident beam following the light-path through the spectropolarimeter, the calibration procedures for both methods remain mostly independent of one another and as such need not be repeated here.
 \prgph
 
-Spectropolarimetric calibrations are, however, more involved when compared to the previous calibration discussions as minor deviations in the calibrations across the spectra and the polarized beam may compound, resulting in poor \gls{SNR}'s for the spectropolarimetric results. Generally, more exposures over longer timespans are required to acquire enough redundancy and signal for the calculation of the Stokes parameters on top of the time necessary for calibrations to be completed. It should therefore be noted just how important the wavelength and image alignment calibrations are when dealing with spectropolarimetry.
-
+Spectropolarimetric calibrations are, however, more involved when compared to the same calibrations for either spectroscopy or polarimetry. Minor deviations in the calibrations across both the spectra and the polarized beam compound, especially when dealing with the wavelength calibration, resulting in poor \glsfirst{SNR}'s. Generally, more exposures over longer timespans are required to acquire enough redundancy and signal for the calculation of the Stokes parameters on top of the time necessary for calibrations to be completed. It should therefore be noted just how important the calibrations are when dealing with spectropolarimetry.
 
 \section{The Southern African Large Telescope} \label{sec:SALT} % Basics, not in depth
 
-\gls{SALT} is a 10 m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}. The operational design was based off of the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation (37$\degree$ from zenith in the case of SALT) while still allowing for full azimuthal rotation \citep{HET}. Both SALT and HET utilize a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path. Figure~\ref{fig:SALT_telescope} depicts \gls{SALT}'s tracker (top left), supporting structure, and primary mirror (bottom right).
+\glsfirst{SALT} is a 10 m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}. The operational design was based on the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation (37$\degree$ from zenith in the case of SALT) while still allowing for full azimuthal rotation \citep{HET}. Both SALT and HET utilize a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path. Figure~\ref{fig:SALT_telescope} depicts \gls{SALT}'s tracker (top left), supporting structure, and primary mirror (bottom right).
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 15cm]{figures/2_SALT_telescope.png}
-    \caption{The tracker, supporting structure, and primary mirror of SALT. Figure adapted from the SALT call for proposals (2022)\protect\footnotemark}
+    \caption{The tracker, supporting structure, and primary mirror of SALT. Figure adapted from the SALT call for proposals (2022).\protect\footnotemark}
     \label{fig:SALT_telescope}
 \end{figure}
 \footnotetext{\protect\url{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}}
 
-
 \subsection{The primary mirror}
 
-The primary mirror is composed of 91 individual 1 m hexagonal mirrors which together form an 11 m segmented spherical mirror. Each mirror segment can be adjusted by actuators allowing the individual mirrors to approximate a single monolithic spherical mirror. The fixed elevation means that SALT's primary mirror has a fixed gravity vector allowing for a lighter, cost-effective supporting structure when compared to those of a more traditional altitude-azimuthal mount but with the trade-off that the control mechanism and tracking has increased complexity \citep{SALT_design}.
-
+The primary mirror is composed of 91 individual 1 m hexagonal mirrors which together form an 11 m segmented spherical mirror. Each mirror segment can be adjusted by actuators allowing the individual mirrors to approximate a single monolithic spherical mirror. The fixed elevation means that SALT's primary mirror has a fixed gravity vector allowing for a lighter, cost-effective supporting structure when compared to those of a more traditional altitude-azimuthal mount but with the trade-off that the control mechanism and tracking have increased complexity \citep{SALT_design}.
 
 \subsection{Tracker and tracking}
 
@@ -780,14 +758,14 @@ During observations the primary mirror is stationary and the tracker tracks cele
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0 \textwidth]{figures/2_SALT_visibility.png}
-    \caption{The visibility annulus of objects observable by SALT. Figure adapted from the SALT call for proposals (2013)\protect\footnotemark}
+    \caption{The visibility annulus of objects observable by SALT. Figure adapted from the SALT call for proposals (2013).\protect\footnotemark}
     \label{fig:SALT_visibility}
 \end{figure}
 \footnotetext{\protect\url{https://pysalt.salt.ac.za/proposal_calls/2013-2/}}
 
 % Mention Center of Curvature Alignment System? : https://en.wikipedia.org/wiki/Shack%E2%80%93Hartmann_wavefront_sensor
 
-The tracker is equipped with a 4 mirror spherical aberration corrector \citep{SALT_SAC}, and an atmospheric dispersion compensator \citep{SALT_ADC}, which corrects for the spherical aberration caused by the geometry of the primary mirror and allows access to wavelengths as short as 3200 \AA. These return a corrected flat focal plane with an 8\arcmin diameter field of view at prime focus on to the science instruments, with a 1\arcmin annulus around it used by the Tracker in a closed-loop guidance system.
+The tracker is equipped with a spherical aberration corrector \citep{SALT_SAC}, and an atmospheric dispersion compensator \citep{SALT_ADC}, which corrects for the spherical aberration caused by the geometry of the primary mirror and allows access to wavelengths as short as 3200 \AA. These return a corrected flat focal plane with an 8\arcmin diameter field of view at prime focus on to the science instruments, with a 1\arcmin annulus around it used by the Tracker in a closed-loop guidance system.
 
 
 \subsection{SALT Instrumentation} \label{subsec:SALT_instr}
@@ -795,43 +773,36 @@ The tracker is equipped with a 4 mirror spherical aberration corrector \citep{SA
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/2_RSS_optical_path.png}
-    \caption{The optical path of the \gls{SALT} \gls{RSS}. Figure adapted from the SALT call for proposals (2023)\protect\footnotemark}
+    \caption{The optical path of the \gls{SALT} \gls{RSS}. Figure adapted from the SALT call for proposals (2023).\protect\footnotemark}
     \label{fig:RSS_layout}
 \end{figure}
 \footnotetext{\protect\url{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}}
 
-SALT is equipped with the \gls{SALTICAM} and the \gls{RSS} science instruments onboard the tracker, and the \gls{HRS} and \gls{NIRWALS} science instruments which are fibre-fed from the tracker to their own climate controlled rooms. The \gls{RSS} is currently the most used instrument on \gls{SALT} and the only instrument used for spectropolarimetry.
-
+SALT is equipped with the \gls{SALTICAM} and the \gls{RSS} science instruments onboard the tracker, and the \gls{HRS} and \gls{NIRWALS} science instruments which are fibre-fed from the tracker to their own climate controlled rooms. The \gls{RSS} is currently the only instrument used for spectropolarimetry.
 
 \subsubsection{\gls{NIRWALS}}
 
-The \gls{NIRWALS} is currently being commissioned and will have a wavelength coverage of 8000 to 17000 \AA, providing medium resolution spectroscopy at R = 2000 to 5000 over \gls{NIR} wavelengths \citep{NIRWALS, SALT_NIRWALS}. This is ideally suited for studies of nearby galaxies.
-
+The \glsfirst{NIRWALS} is currently being commissioned and will have a wavelength coverage of 8000 to 17000 \AA, providing medium resolution spectroscopy at R = 2000 to 5000 over \gls{NIR} wavelengths \citep{NIRWALS, SALT_NIRWALS}. \gls{NIRWALS} is fibre-fed from its integral field unit, containing 212 object fibers, along with a separate sky bundle, containing 36 fibers, housed in the \gls{SALT} fibre instrument feed. It is ideally suited for studies of nearby galaxies.
 
 \subsubsection{\gls{HRS}}
 
 The \gls{HRS} echelle spectrograph was designed for high resolution spectroscopy at R = 37000 - 67000 covering a wavelength range of 3700 - 8900 \AA\ and consists of a dichroic beam splitter and two \gls{VPH} gratings \citep{SALT_hires}. This instrument is capable of stellar atmospheric and radial velocity analysis.
 
-
 \subsubsection{\gls{SALTICAM}}
 
 The \gls{SALTICAM} functions as the acquisition camera and simple science imager with various imaging modes, such as full-mode and slot-mode imaging, and supports low exposure times, down to 50 ms \citep{SALTICAM}. This enables photometry of faint objects, especially at fast exposure times.
-
 
 \subsubsection{\gls{RSS}} \label{subsubsec:RSS}
 
 The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, a narrowband imaging mode, and multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][or the \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{latest call for proposals}]{SALT_operational_modes}.
 
-
 \paragraph{The Detector}
 The \gls{RSS} detector consists of a mosaic of 3 \gls{CCD} chips with a total pixel scale of $0.1267\arcsec$ per unbinned pixel with varying readout times depending on the binning and readout mode. The mosaicking results in a characteristic double `gap' in the frames and resultant spectra taken with the \gls{RSS}, as seen in Figure~\ref{fig:specpol_exp}.
-
 
 \paragraph{The Available Gratings}
 The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, as listed in Table~\ref{table:RSS_gratings}. Observations may be planned using \href{https://astronomers.salt.ac.za/software/}{simulator tools} provided by \gls{SALT} and are performed in the first order only. The \gls{RSS} has a clear filter, as well as three \gls{UV} (with differing lower filtering ranges) and one blue order blocking filter available, used in conjunction with the various gratings to block out contamination from the second order.
 
 \input{tables/2_RSS_gratings.tex}
-
 
 \section{RSS Spectropolarimetry} \label{sec:RSS_reductions} % In depth
 
@@ -839,7 +810,6 @@ Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit l
 \prgph
 
 \input{tables/2_Polarimetry_patterns.tex}
-
 
 \subsection{POLSALT} \label{subsec:polsalt}% In depth
 % http://salt-conference-2018.salt.ac.za/wp-content/uploads/2018/11/Groenewald.pdf
@@ -850,34 +820,27 @@ Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit l
 \polsalt\ is the current reduction package being constantly developed and used within \gls{SAAO}/\gls{SALT} as the official reduction pipeline for spectropolarimetric data taken using \glspl{SALT} \gls{RSS}.\footnote{\polsalt\ is made freely available via the \polsalt\ GitHub repository, available at \url{https://github.com/saltastro/polsalt}. It is strongly advised to follow the wiki for installation instructions.} Newer versions of the software, aptly named the `beta version', include a \gls{GUI} as well as limited interactivity during key steps in the reduction process.\footnote{Installation files and instructions for the `beta version' utilizing the \gls{GUI} are available at \url{http://www.saao.ac.za/~ejk/polsalt/code/} in a TAR GZIP file.} Below we summarize the reduction steps for the ``beta version" [23 January 2020] which was adapted in this study.
 \prgph
 
-The steps that make up the reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw stokes calculations, final stokes calculations, and visualization of the results. Each step is crucial for good results and thus briefly discussed (a detailed documentation for the reduction steps and purpose may be found at \href{https://github.com/saltastro/polsalt/wiki}{the \polsalt\ github wiki}):
-
+The steps that make up the reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw stokes calculations, final stokes calculations, and visualization of the results. Each step is crucial for good results and thus briefly discussed (a detailed documentation for the reduction steps and purpose may be found at \href{https://github.com/saltastro/polsalt/wiki}{the \polsalt\ github wiki}).
 
 \paragraph{Basic \gls{CCD} reductions:} Basic \gls{CCD} reductions are run via \textbf{imred.py} and apply basic reductions to the raw data necessary before any calibrations may be done. These corrections include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and pixel variance information. Files with basic reductions performed have ``mxgbp" prepended to their names. As of February 2022, the reduction step is automatically run for all RSS spectropolarimetric observations as part of the default SALT basic reduction pipeline that is run each day.
 
-
 \paragraph{Wavelength calibrations:} Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpolwavmap.py} and separately calibrates the $O$- and $E$-beams, based on the arc frames, and applies a simple cosmic-ray rejection for all science frames. This step is interactive and allows the user to individually fit wavelength calibration maps to each beam. The importance of good correlation between both beams has been touched on previously and will be further discussed in \S~\ref{sec:polsalt_limits}. The wavelength calibrated results are saved as an additional extension to each science FITS file, which are prefixed with a ``w", and the $O$- and $E$-beams of the extensions are split into their own sub-extensions.
-
 
 \paragraph{Spectral extraction:} The background subtraction and spectral extraction are run via \textbf{spec\-pol\-extract\_dev.py} which corrects for the beam-splitter distortion and tilt, performs sky subtraction, and extracts a one dimensional wavelength dependent spectrum for each beam extension. This step is interactive and, using the brightest trace in the images, allows the user to define regions which span the wavelength axis and which define the background and trace regions for the sky subtraction and spectral extraction. Files with corrections applied are saved with ``c" prepended to their names and files which contain the extracted one dimensional spectrum have ``e" further prepended to their names.
 
-
 \paragraph{Raw stokes calculations:} Raw stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw stokes' signal, $S$, are calculated as:
-
 \begin{equation}
     \begin{gathered}
-        I = \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2}) \\
-        S = \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right].
-    \end{gathered}
-    \label{eq:polsalt_rawstokes}
+        I = \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2})\,,\rlap{\quad and}\\
+        S = \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right]\,,
+    \end{gathered}\label{eq:polsalt_rawstokes}
 \end{equation}
+respectively.
 \prgph
 
 The raw stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw stokes information have a very specific naming style, with most notably the pair of frames used being included.
 
-
 \paragraph{Final stokes calculations:} The Final stokes calculations are performed via \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw stokes signals, calibrates for polarimetric zero-point and waveplate efficiency calibrations and calculates the final stokes parameters. Before the final stokes calculations are performed, data culling is applied to the raw stokes to eliminate outlier results which may arise due to, for example, atmospheric conditions. Data culling compares observation cycles against one another, compares the deviation of the means which estimate the systematic polarization baseline fluctuations (due to imperfections in repeatability), and performs a chi-squared analysis to eliminate outliers.
-
 
 \paragraph{Visualization:} Plotting the results of the spectropolarimetric reduction process uses \textbf{specpolview.py} and generates a plot of the Intensity, Linear Polarization ($\%$), and Equatorial Polarization Angle ($\degr$) against a shared wavelength axis, as seen in Figure~\ref{fig:polsalt_plot}. This step is interactive and various options, such as the wavelength range, binning, etc., are available.
 
@@ -888,11 +851,10 @@ The raw stokes signal is calculated as the normalized difference of the $O$- and
     \label{fig:polsalt_plot}
 \end{figure}
 
-
 \paragraph{Post-processing analysis:} Generally, the plot of the spectropolarimetric results is the stopping point for most reduction procedures as it contains or creates the desired results. However, additional tools exist which may be used after the polarization reductions have been completed, and which are not represented in the \gls{GUI}, namely, flux calibration and synthetic filtering.
 
 Flux-calibrations are performed via \textbf{specpolflux.py} and are only intended for shape corrections of the spectrum. Additionally, the flux database file must exist for the standard observed and must be copied over to the working science directory.
 
 Synthetic filtering is calculated via \textbf{specpolfilter.py} and computes the synthetically filtered polarization results. The filters which can be synthesized are the Johnson $U$, $B$, and $V$ filter curves from the \gls{SALTICAM} filters, as well as the Cousins $R$ and $I$ filter curves, along with any user defined wavelength dependent throughput.
 
-% \todo{Flux Calibrations (errors in GUI (make 100\% sure about division error and notify}
+% \todo{Flux Calibrations (errors in GUI (make 100\% sure about division error and notify Dani\'el}
