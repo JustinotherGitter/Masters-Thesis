@@ -105,7 +105,7 @@ which shows that the angular dispersion of a prism is wavelength dependent and f
 Multiple prisms can be used to increase the angular dispersion but as the dispersion is non-linear it becomes increasingly more difficult to calibrate. The more material and material boundaries the light must pass through, the more its intensity decreases due to attenuation effects and Fresnel losses. Even so, the transmittance of modern prisms for their selected wavelength range is generally very high due to improved manufacturing methods as well as improved transmitting materials.\footnote{See manufacturers technical specifications, \href{https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=148}{THORLABS}, or \href{https://www.edmundoptics.eu/c/prisms/607/}{Edmund Optics} for example.}
 \enlargethispage{-2\baselineskip}
 
-\subsubsection{Diffraction grating}
+\subsubsection{Diffraction grating}\label{subsubsec:diff_grat}
 
 \begin{figure}[t]
     \centering
@@ -786,15 +786,15 @@ The \glsfirst{NIRWALS} is currently being commissioned and will have a wavelengt
 
 \subsubsection{\gls{HRS}}
 
-The \gls{HRS} echelle spectrograph was designed for high resolution spectroscopy at R = 37000 - 67000 covering a wavelength range of 3700 - 8900 \AA\ and consists of a dichroic beam splitter and two \gls{VPH} gratings \citep{SALT_hires}. This instrument is capable of stellar atmospheric and radial velocity analysis.
+The \glsfirst{HRS} echelle spectrograph was designed for high resolution spectroscopy at R = 37000 - 67000 covering a wavelength range of 3700 - 8900 \AA\ and consists of a dichroic beam splitter and two \gls{VPH} gratings \citep{SALT_hires}. This instrument is capable of stellar atmospheric and radial velocity analysis.
 
 \subsubsection{\gls{SALTICAM}}
 
-The \gls{SALTICAM} functions as the acquisition camera and simple science imager with various imaging modes, such as full-mode and slot-mode imaging, and supports low exposure times, down to 50 ms \citep{SALTICAM}. This enables photometry of faint objects, especially at fast exposure times.
+The \glsfirst{SALTICAM} functions as the acquisition camera and simple science imager with various imaging modes, such as full-mode and slot-mode imaging, and supports low exposure times, down to 50 ms \citep{SALTICAM}. This enables photometry of faint objects, especially at fast exposure times.
 
 \subsubsection{\gls{RSS}} \label{subsubsec:RSS}
 
-The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, a narrowband imaging mode, and multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][or the \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{latest call for proposals}]{SALT_operational_modes}.
+The \glsfirst{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, a narrowband imaging mode, and multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][or the \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{latest call for proposals}]{SALT_operational_modes}.
 
 \paragraph{The Detector}
 The \gls{RSS} detector consists of a mosaic of 3 \gls{CCD} chips with a total pixel scale of $0.1267\arcsec$ per unbinned pixel with varying readout times depending on the binning and readout mode. The mosaicking results in a characteristic double `gap' in the frames and resultant spectra taken with the \gls{RSS}, as seen in Figure~\ref{fig:specpol_exp}.
@@ -804,57 +804,9 @@ The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, a
 
 \input{tables/2_RSS_gratings.tex}
 
-\section{RSS Spectropolarimetry} \label{sec:RSS_reductions} % In depth
+\paragraph{\gls{RSS} Spectropolarimetry} \label{sec:RSS_reductions}
 
 Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit linear spectro\-polarimetry, $(I, Q, U)$, where observations are taken following the waveplate pattern lists as in Table~\ref{table:RSS_specpol_patterns}. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter.\footnote{Commission status sighted from the latest \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{`Polarimetry Observers Guide' (2024)}.}
 \prgph
 
 \input{tables/2_Polarimetry_patterns.tex}
-
-\subsection{POLSALT} \label{subsec:polsalt}% In depth
-% http://salt-conference-2018.salt.ac.za/wp-content/uploads/2018/11/Groenewald.pdf
-% https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf
-% https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version#7-specpolfilterpy--compute-synthetic-filter-polarization-results-for-listed-filters
-% https://github.com/saltastro/polsalt/wiki/
-
-\polsalt\ is the current reduction package being constantly developed and used within \gls{SAAO}/\gls{SALT} as the official reduction pipeline for spectropolarimetric data taken using \glspl{SALT} \gls{RSS}.\footnote{\polsalt\ is made freely available via the \polsalt\ GitHub repository, available at \url{https://github.com/saltastro/polsalt}. It is strongly advised to follow the wiki for installation instructions.} Newer versions of the software, aptly named the `beta version', include a \gls{GUI} as well as limited interactivity during key steps in the reduction process.\footnote{Installation files and instructions for the `beta version' utilizing the \gls{GUI} are available at \url{http://www.saao.ac.za/~ejk/polsalt/code/} in a TAR GZIP file.} Below we summarize the reduction steps for the ``beta version" [23 January 2020] which was adapted in this study.
-\prgph
-
-The steps that make up the reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw stokes calculations, final stokes calculations, and visualization of the results. Each step is crucial for good results and thus briefly discussed (a detailed documentation for the reduction steps and purpose may be found at \href{https://github.com/saltastro/polsalt/wiki}{the \polsalt\ github wiki}).
-
-\paragraph{Basic \gls{CCD} reductions:} Basic \gls{CCD} reductions are run via \textbf{imred.py} and apply basic reductions to the raw data necessary before any calibrations may be done. These corrections include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and pixel variance information. Files with basic reductions performed have ``mxgbp" prepended to their names. As of February 2022, the reduction step is automatically run for all RSS spectropolarimetric observations as part of the default SALT basic reduction pipeline that is run each day.
-
-\paragraph{Wavelength calibrations:} Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpolwavmap.py} and separately calibrates the $O$- and $E$-beams, based on the arc frames, and applies a simple cosmic-ray rejection for all science frames. This step is interactive and allows the user to individually fit wavelength calibration maps to each beam. The importance of good correlation between both beams has been touched on previously and will be further discussed in \S~\ref{sec:polsalt_limits}. The wavelength calibrated results are saved as an additional extension to each science FITS file, which are prefixed with a ``w", and the $O$- and $E$-beams of the extensions are split into their own sub-extensions.
-
-\paragraph{Spectral extraction:} The background subtraction and spectral extraction are run via \textbf{spec\-pol\-extract\_dev.py} which corrects for the beam-splitter distortion and tilt, performs sky subtraction, and extracts a one dimensional wavelength dependent spectrum for each beam extension. This step is interactive and, using the brightest trace in the images, allows the user to define regions which span the wavelength axis and which define the background and trace regions for the sky subtraction and spectral extraction. Files with corrections applied are saved with ``c" prepended to their names and files which contain the extracted one dimensional spectrum have ``e" further prepended to their names.
-
-\paragraph{Raw stokes calculations:} Raw stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw stokes' signal, $S$, are calculated as:
-\begin{equation}
-    \begin{gathered}
-        I = \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2})\,,\rlap{\quad and}\\
-        S = \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right]\,,
-    \end{gathered}\label{eq:polsalt_rawstokes}
-\end{equation}
-respectively.
-\prgph
-
-The raw stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw stokes information have a very specific naming style, with most notably the pair of frames used being included.
-
-\paragraph{Final stokes calculations:} The Final stokes calculations are performed via \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw stokes signals, calibrates for polarimetric zero-point and waveplate efficiency calibrations and calculates the final stokes parameters. Before the final stokes calculations are performed, data culling is applied to the raw stokes to eliminate outlier results which may arise due to, for example, atmospheric conditions. Data culling compares observation cycles against one another, compares the deviation of the means which estimate the systematic polarization baseline fluctuations (due to imperfections in repeatability), and performs a chi-squared analysis to eliminate outliers.
-
-\paragraph{Visualization:} Plotting the results of the spectropolarimetric reduction process uses \textbf{specpolview.py} and generates a plot of the Intensity, Linear Polarization ($\%$), and Equatorial Polarization Angle ($\degr$) against a shared wavelength axis, as seen in Figure~\ref{fig:polsalt_plot}. This step is interactive and various options, such as the wavelength range, binning, etc., are available.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_plot.pdf}
-    \caption{A typical plot resulting from the reduction process. Figure adapted from \citep{cooper_HEASA2022}}
-    \label{fig:polsalt_plot}
-\end{figure}
-
-\paragraph{Post-processing analysis:} Generally, the plot of the spectropolarimetric results is the stopping point for most reduction procedures as it contains or creates the desired results. However, additional tools exist which may be used after the polarization reductions have been completed, and which are not represented in the \gls{GUI}, namely, flux calibration and synthetic filtering.
-
-Flux-calibrations are performed via \textbf{specpolflux.py} and are only intended for shape corrections of the spectrum. Additionally, the flux database file must exist for the standard observed and must be copied over to the working science directory.
-
-Synthetic filtering is calculated via \textbf{specpolfilter.py} and computes the synthetically filtered polarization results. The filters which can be synthesized are the Johnson $U$, $B$, and $V$ filter curves from the \gls{SALTICAM} filters, as well as the Cousins $R$ and $I$ filter curves, along with any user defined wavelength dependent throughput.
-
-% \todo{Flux Calibrations (errors in GUI (make 100\% sure about division error and notify Dani\'el}

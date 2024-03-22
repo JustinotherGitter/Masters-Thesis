@@ -5,6 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MOVE THE PACKAGE IMPORTS AT YOU OWN RISK!!!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 % Set the styling of captions
 \usepackage[font=scriptsize, labelfont=bf]{caption} %[small, , justification=centering]{caption}
@@ -55,12 +56,32 @@
 % \robustify{\subref}% robusify the \subref command so it doesn't break on a whim
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Justin Cooper %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\includeonly{
+    chapter_0/Abstract,
+    chapter_0/Acknowledgements,
+    chapter_0/Appendix_reduction,
+    chapter_1/Introduction,
+    chapter_2/SALT_RSS_pipeline,
+    chapter_3/Developed_tools,
+    chapter_4/Testing,
+    chapter_5/Science_applications,
+    chapter_6/Conclusions
+}
+
+% Access to relative font resizing for '\Chapter' command
+\usepackage{relsize}
+\newcommand{\Chapter}[2]{\chapter[#1]{#1:\\ \smallskip {\smaller[1] #2}}}
+
 % Todo and coloring:
 % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX &
 % https://www.overleaf.com/learn/latex/Environments
 \usepackage{xcolor}
 \newcommand\todo[1]{\textcolor{red}{\textbf{TODO: #1}}}
 % \renewcommand\todo[1]{} % Hide TODO's
+
+\newcommand{\iraf}{\textsc{iraf}}
+\newcommand{\polsalt}{\textsc{polsalt}}
+\newcommand{\stops}{\textsc{stops}}
 
 % Page numbering alteration:
 % https://www.overleaf.com/learn/latex/Page_numbering
@@ -83,15 +104,15 @@
 \newacronym{HDU}{HDU}{Header Data Unit}
 \newacronym{HET}{HET}{Hobby-Eberly Telescope}
 \newacronym{HRS}{HRS}{High Resolution Spectrograph}
-\newacronym{IRAF}{IRAF}{Image Reduction and Analysis Facility}
+\newacronym{IRAF}{\iraf}{Image Reduction and Analysis Facility}
 \newacronym{L-45P}{L$-45^\circ$}{Linear $-45^\circ$ Polarized}
 \newacronym{L45P}{L$+45^\circ$}{Linear $+45^\circ$ Polarized}
 \newacronym{LCP}{LCP}{Left Circularly Polarized}
 \newacronym{LHP}{LHP}{Linear Horizontally Polarized}
 \newacronym{LVP}{LVP}{Linear Vertically Polarized}
 \newacronym{NIR}{NIR}{Near Infra-Red}
-\newacronym{NIRWALS}{NIRWALS}{Near Infra-Red WAshburn Labs Spectrograph}
-\newacronym{POLSALT}{POLSALT}{Polarimetric reductions for SALT}
+\newacronym{NIRWALS}{NIRWALS}{Near Infra-Red Washburn Labs Spectrograph}
+\newacronym{POLSALT}{\polsalt}{Polarimetric reductions for SALT}
 \newacronym{QE}{QE}{Quantum Efficiency}
 \newacronym{RCP}{RCP}{Right Circularly Polarized}
 \newacronym{RSS}{RSS}{Robert Stobie Spectrograph}
@@ -100,6 +121,7 @@
 \newacronym{SALT}{SALT}{Southern African Large Telescope}
 \newacronym{SALTICAM}{SALTICAM}{SALT Imaging Camera}
 \newacronym{SNR}{S/N}{Signal-to-Noise Ratio}
+\newacronym{STOPS}{\stops}{Supplementary Tools for \textsc{polsalt} Spectro\-polarimetry}
 \newacronym{UV}{UV}{Ultraviolet}
 \newacronym{VPH}{VPH}{Volume Phase Holographic}
 
@@ -114,15 +136,15 @@
 \usepackage{etoolbox}
 \apptocmd{\sloppy}{\hbadness 10000\relax}{}{}
 
+% Commands for commonly used symbols
 \newcommand{\angstrom}{Å}
 \newcommand{\arcmin}{\hbox{$^\prime$} }
 \newcommand{\arcsec}{\hbox{$^{\prime\prime}$} }
 \newcommand{\avg}[1]{\left< #1 \right> }
 \newcommand{\degr}{\hbox{$^\circ$}}
 \newcommand{\matr}[1]{\mathbf{#1}}
+
 \newcommand{\prgph}{\vspace{\baselineskip}}
-\newcommand{\iraf}{\textsc{iraf}}
-\newcommand{\polsalt}{\textsc{polsalt}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \graphicspath{{Figures1/}{Figures2/}}
@@ -167,29 +189,25 @@
 \clearpage
 
 \include{chapter_0/Abstract}
-
-\clearpage
+\include{chapter_0/Acknowledgements}
 
 \tableofcontents
 
 % \glssetwidest{ISMF} % Longest abbreviation so the column width can be set
 
-\input{chapter_1/Introduction}
-\input{chapter_2/SALT_RSS_pipeline}
-\input{chapter_3/Developed_tools}
-\input{chapter_4/Testing}
-\input{chapter_5/Science_applications}
-\input{chapter_6/Conclusions}
+\include{chapter_1/Introduction}
+\include{chapter_2/SALT_RSS_pipeline}
+\include{chapter_3/Developed_tools}
+\include{chapter_4/Testing}
+\include{chapter_5/Science_applications}
+\include{chapter_6/Conclusions}
 
-\include{chapter_0/Acknowledgements}
-\printglossary[type=acronym, title={List of Acronyms}] %[type=abbreviations, style=alttree, title={List of Acronyms}]
-
+\appendix
+\include{chapter_0/Appendix_reduction}
 
 \bibliographystyle{plainnat} %{aasjournal} (surnames first) %{humannat}
 \bibliography{references}
 
-% \begin{appendices}
-% \input{Chapters/AppendixPub}
-% \end{appendices}
+\printglossary[type=acronym, title={List of Acronyms}] %[type=abbreviations, style=alttree]
 
 \end{document}
