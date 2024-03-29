@@ -8,10 +8,17 @@ This chapter contains an overview of \polsalt\ (\S~\ref{sec:polsalt}) and the li
 % https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version#7-specpolfilterpy--compute-synthetic-filter-polarization-results-for-listed-filters
 % https://github.com/saltastro/polsalt/wiki/
 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
+    \caption{The layout of the \polsalt\ \gls{GUI}}
+    \label{fig:polsalt_gui}
+\end{figure}
+
 \polsalt\ is the current reduction package being constantly developed and used within the \gls{SAAO}/\gls{SALT} research group as the official reduction pipeline for spectropolarimetric data taken using the \gls{SALT} \gls{RSS}.\footnote{\polsalt\ is made freely available via the \polsalt\ GitHub repository, available at \url{https://github.com/saltastro/polsalt}. It is strongly advised to follow the wiki for installation instructions.} Newer versions of the software, aptly named the `beta version', include a \gls{GUI} as well as limited interactivity during key steps in the reduction process.\footnote{Installation files and instructions for the `beta version' utilizing the \gls{GUI} are available at \url{http://www.saao.ac.za/~ejk/polsalt/code/} in a TAR GZIP file.}
 \prgph
 
-The `beta version' (last updated 23 January 2020) was the version adapted in this study. The steps that make up the \polsalt\ reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw stokes calculations, final stokes calculations, and visualization of the results. Each step is crucial for good results and thus briefly discussed (a detailed documentation for the reduction steps and purpose may be found at the \href{https://github.com/saltastro/polsalt/wiki}{GitHub wiki for \polsalt}).\footnote{The GitHub wiki for \polsalt\ is available at \url{https://github.com/saltastro/polsalt/wiki}.}
+The `beta version' (last updated 23 January 2020) was the version adapted in this study. The steps that make up the \polsalt\ reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw Stokes calculations, final Stokes calculations, and visualization of the results. Each step is crucial for good results and thus briefly discussed (a detailed documentation for the reduction steps and purpose may be found at the \href{https://github.com/saltastro/polsalt/wiki}{GitHub wiki for \polsalt}).\footnote{The GitHub wiki for \polsalt\ is available at \url{https://github.com/saltastro/polsalt/wiki}.}
 
 \subsection{Basic CCD reductions}
 
@@ -25,9 +32,9 @@ Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpol
 
 Background subtraction and spectral extraction is run via \textbf{spec\-pol\-extract\_dev.py} which corrects for the beam-splitter distortion and tilt, performs sky subtraction, and extracts a one dimensional wavelength dependent spectrum for each beam extension. This step is interactive and, using the brightest trace in the images, allows the user to define regions which span the wavelength axis and which define the background and trace regions for the sky subtraction and spectral extraction. Files with corrections applied are saved with ``c'' prepended to their names and files which contain the extracted one dimensional spectrum have ``e'' further prepended to their names.
 
-\subsection{Raw stokes calculations}
+\subsection{Raw Stokes calculations}
 
-Raw stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw stokes' signal, $S$, are calculated as:
+Raw Stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw Stokes' signal, $S$, are calculated as:
 \begin{equation}
     \begin{gathered}
         I = \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2})\,,\rlap{\quad and}\\
@@ -37,11 +44,11 @@ Raw stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} an
 respectively.
 \prgph
 
-The raw stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw stokes information have a very specific naming style, with most notably the pair of frames used being included.
+The raw Stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw Stokes information have a very specific naming style, with most notably the pair of frames used being included.
 
-\subsection{Final stokes calculations}
+\subsection{Final Stokes calculations}
 
-The Final stokes calculations are performed via \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw stokes signals, calibrates for polarimetric zero-point and waveplate efficiency calibrations and calculates the final stokes parameters. Before the final stokes calculations are performed, data culling is applied to the raw stokes to eliminate outlier results which may arise due to, for example, atmospheric conditions. Data culling compares observation cycles against one another, compares the deviation of the means which estimate the systematic polarization baseline fluctuations (due to imperfections in repeatability), and performs a chi-squared analysis to eliminate outliers.
+The Final Stokes calculations are performed via \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw Stokes signals, calibrates for polarimetric zero-point and waveplate efficiency calibrations and calculates the final Stokes parameters. Before the final Stokes calculations are performed, data culling is applied to the raw Stokes to eliminate outlier results which may arise due to, for example, atmospheric conditions. Data culling compares observation cycles against one another, compares the deviation of the means which estimate the systematic polarization baseline fluctuations (due to imperfections in repeatability), and performs a chi-squared analysis to eliminate outliers.
 
 \subsection{Visualization}
 
@@ -232,13 +239,13 @@ As no features, other than the trace of sources exposed across a frame, exist th
 
 \todo{Include example of correlate result}\prgph
 
-The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from one another. The difficulty arises in comparing the two spectra since variations between the two are expected and are what define the stokes, and thus final polarization, results. The \texttt{correlate} method was created for this express purpose.
+The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from one another. The difficulty arises in comparing the two spectra since variations between the two are expected and are what define the Stokes, and thus final polarization, results. The \texttt{correlate} method was created for this express purpose.
 \prgph
 
 The \texttt{correlate} method loads the provided \gls{FITS} files created by the \polsalt\ \texttt{spectra extraction}, removes the continuum and separates the \gls{CCD} regions. The relevant, separated, \gls{CCD} regions are then cross correlated and any offset between the spectra may be plotted.
 \prgph
 
-As the stokes results, and thus final polarization results, are determined and are heavily influenced by the differences in the spectra of the different $O$ and $E$ beams, a direct comparison is not appropriate. Any observed unpolarized light, however, will reflect equally in both polarization beams and so the general trend of the two spectra may reasonably be expected to follow one another. Cross correlation of the two spectra for the different, $O$ and $E$, polarization beams allows for a comparison of the features within the spectra as a function of the wavelength displacement.
+As the Stokes results, and thus final polarization results, are determined and are heavily influenced by the differences in the spectra of the different $O$ and $E$ beams, a direct comparison is not appropriate. Any observed unpolarized light, however, will reflect equally in both polarization beams and so the general trend of the two spectra may reasonably be expected to follow one another. Cross correlation of the two spectra for the different, $O$ and $E$, polarization beams allows for a comparison of the features within the spectra as a function of the wavelength displacement.
 \prgph
 
 Sources under spectropolarimetric observation are often expected to vary over time and as such as the ratio of polarized to unpolarized light varies. The accuracy of correlation may decrease as features with differences in the polarized component of the polarization beams change. The differences in the features of the different spectra are often negligible when compared to the overall trend of the spectra and are generally only reflected in a change in the intensity of said features.
@@ -255,7 +262,7 @@ Cross correlation is useful when dealing with spectropolarimetric spectra as it 
     \label{fig:new_workflow}
 \end{figure}
 
-This section aims to provide an overview of the reduction procedure from start to finish and to cover all commands needed to achieve a finalized result. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files, only the commands necessary to complete each step of the reduction process, assuming that the software is running as intended.
+This section aims to provide a complete overview of the reduction procedure and to discuss all commands necessary to achieve a finalized result. A generalized reduction procedure may be found in Appendix~\ref{app:reduction}. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files, only the commands necessary to complete each step of the reduction process, assuming that the software is running as intended.
 \prgph
 
 It is recommended that \polsalt\ is used through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu. Reductions are possible, however, purely using a \gls{CLI} and the \polsalt\ scripts. It is assumed that usage of \polsalt\ through the \gls{GUI} or \gls{CLI} use the `beta' or `basic' versions, respectively, and that the beta version is launched from the \polsalt\ directory while the basic version is run by copying over the `scripts' folder to the working directory. The \iraf\ terminal, once launched, and the \gls{CLI} supplementary tools are also assumed to be run from the `working' directory. This ensures that commands containing \texttt{<.../>} notate the need for the inclusion of relative paths to the desired file or folder.
@@ -303,7 +310,7 @@ Splitting the data in the working \texttt{sci/} directory may then be done throu
 
 \begin{verbatim}> python <.../>STOPS split\end{verbatim}
 
-The method takes multiple parameters, but default parameters are used where ever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}.
+The method takes multiple parameters, but default parameters are used where ever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}.
 
 
 \subsubsection{\iraf\ wavelength calibrations}
@@ -378,7 +385,7 @@ A final reminder is made here about the clash of default naming schemes and wild
 
 \subsection{\polsalt\ Reduction Completion} \label{subsec:reduc_com}
 
-Reductions may now be completed using \polsalt. The reduction process consists of correcting for the wollaston tilt, extracting the spectra, creating the stokes files, and displaying the results. As always, the reductions are handled slightly differently for the differing versions.
+Reductions may now be completed using \polsalt. The reduction process consists of correcting for the wollaston tilt, extracting the spectra, creating the Stokes files, and displaying the results. As always, the reductions are handled slightly differently for the differing versions.
 
 \subsubsection{\polsalt, the basic version}
 
@@ -400,14 +407,14 @@ The Stokes files may then be calculated and created using the command:
 
 \begin{verbatim}> python scripts/pol_stokes.py\end{verbatim}
 
-\noindent which automatically detects the \gls{FITS} files using the wildcards `e*fits' for raw stokes and `*\_h*.fits' for the final stokes calculations. The deletion of the \gls{FITS} files created in the supplementary \texttt{split} method may be deleted in the \texttt{join} method specifically to avoid this naming convention clash, but may also be avoided by providing an alternate default subscript to the supplementary methods.
+\noindent which automatically detects the \gls{FITS} files using the wildcards `e*fits' for raw Stokes and `*\_h*.fits' for the final Stokes calculations. The deletion of the \gls{FITS} files created in the supplementary \texttt{split} method may be deleted in the \texttt{join} method specifically to avoid this naming convention clash, but may also be avoided by providing an alternate default subscript to the supplementary methods.
 \prgph
 
-Finally, the results of the stokes calculations may be viewed using the command:
+Finally, the results of the Stokes calculations may be viewed using the command:
 
 \begin{verbatim}> python polsalt/specpolview.py *_stokes.fits\end{verbatim}
 
-\noindent where a file name, which may also use a wildcard, is provided as well as optional para\-meters to define the binning (\texttt{bin=[int]A} where [int] refers to an actual integer value), error bars (\texttt{errors=True|False}), choice of plot (\texttt{type=Ipt|Iqu} for unbinned intensity and either polarization percentage and polarization angle, or $Q$ and $U$ stokes parameters), save options (\texttt{save=[text][plot] where either or both `text' and `plot' may be provided}), and a debug mode (\texttt{debug=False|True}).
+\noindent where a file name, which may also use a wildcard, is provided as well as optional para\-meters to define the binning (\texttt{bin=[int]A} where [int] refers to an actual integer value), error bars (\texttt{errors=True|False}), choice of plot (\texttt{type=Ipt|Iqu} for unbinned intensity and either polarization percentage and polarization angle, or $Q$ and $U$ Stokes parameters), save options (\texttt{save=[text][plot] where either or both `text' and `plot' may be provided}), and a debug mode (\texttt{debug=False|True}).
 
 
 \subsubsection{\polsalt, the beta version}
@@ -422,7 +429,7 @@ Firstly, to run the \polsalt\ beta script, it is suggested to copy over the \tex
 \noindent will run the entire reduction process interactively without the need to select which process to run next. For the purposes of using the script alongside \iraf\ wavelength calibrations, a few changes must be made. The script may either be run with a break inserted before the call to the wavelength calibration, \texttt{specpolwavmap}, and later rerun with all processes before spectral extraction, \texttt{specpolextract\_sc}, commented out, or may be split into two seperate files which cover the pre- and post- wavelength calibration steps and run when appropriate.
 \prgph
 
-The \polsalt\ beta \texttt{reducepoldata\_sc.py} copies a \texttt{script.py} file into the science working directory, `YYYYMMDD/sci/', which provides analysis scripts for analysis and modification of the \polsalt\ beta results. These tools consist of data culling for the final stokes calculations, text and plot output (the same as the basic version of \polsalt's \texttt{specpolview.py}), relative flux calibration corrections, and synthetic filtering of polarization results. The \polsalt\ analysis scripts may be run using:
+The \polsalt\ beta \texttt{reducepoldata\_sc.py} copies a \texttt{script.py} file into the science working directory, `YYYYMMDD/sci/', which provides analysis scripts for analysis and modification of the \polsalt\ beta results. These tools consist of data culling for the final Stokes calculations, text and plot output (the same as the basic version of \polsalt's \texttt{specpolview.py}), relative flux calibration corrections, and synthetic filtering of polarization results. The \polsalt\ analysis scripts may be run using:
 
 \begin{verbatim}> python script.py\end{verbatim}
 
@@ -433,3 +440,5 @@ Finally, the reduction process using the \polsalt\ \gls{GUI} is completed by sel
 \prgph
 
 The reduction process when using the \polsalt\ beta version is straightforward and is made even more so by the inclusion of the \gls{GUI}. As no commands are necessary, save for those to launch the \gls{GUI} window, not much can be said of the reduction process. Excellent resources, created by the \gls{SALT} (\todo{\gls{SAAO}?}) team, are available online for any queries about the reduction process using any version of \polsalt, including the \gls{GUI}.\footnote{See the official \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ wiki} or alternative online resources such as \href{https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf}{\gls{SALT} workshop slides}.}
+
+\todo{From appendix -> Discuss - all <\dots> params, - salt/py3 env, replace verbatim with listings for consistency}

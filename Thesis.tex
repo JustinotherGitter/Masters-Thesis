@@ -5,17 +5,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MOVE THE PACKAGE IMPORTS AT YOU OWN RISK!!!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
 % Set the styling of captions
-\usepackage[font=scriptsize, labelfont=bf]{caption} %[small, , justification=centering]{caption}
+\usepackage[font=scriptsize, labelfont=bf, hypcap=true]{caption}
+%[small, , justification=centering]{caption}
+
 %Math packages
 % \usepackage{array}% Formats tabular environments. Used by math and table packages
 % textcomp is imported by gensymb, adding it suppresses warnings about \perthousand and \micro
-\usepackage{textcomp, gensymb}%Adds: \degree and \micro symbols,among others
+\usepackage{textcomp, gensymb}%Addws: \degree and \micro symbols,among others
 % \usepackage{amsmath} %to get matrixes
 \usepackage{amssymb} %this adds additional math support like \lesssim
-% 
+
 \usepackage{comment}
 % \usepackage{mathtools, siunitx}
 \usepackage{siunitx}
@@ -60,6 +63,7 @@
     chapter_0/Abstract,
     chapter_0/Acknowledgements,
     chapter_0/Appendix_reduction,
+    chapter_0/Appendix_code,
     chapter_1/Introduction,
     chapter_2/SALT_RSS_pipeline,
     chapter_3/Developed_tools,
@@ -68,15 +72,47 @@
     chapter_6/Conclusions
 }
 
+% Include directory `tree' structures
+\usepackage{dirtree}
+
 % Access to relative font resizing for '\Chapter' command
 \usepackage{relsize}
 \newcommand{\Chapter}[2]{\chapter[#1]{#1:\\ \smallskip {\smaller[1] #2}}}
+
+% Allow insertion of syntax highlighted code
+\usepackage{listings}
+\lstset{
+    backgroundcolor=\color{gray!10!white},
+    basicstyle=\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    breakautoindent=false,
+    breakindent=0pt,
+    frame={lines},
+    showstringspaces=false,
+    literate={~}{{\raisebox{0.5ex}{\texttildelow}}}{1}{-}{-}{1},
+    escapeinside={(*@}{@*)},
+    postbreak=\mbox{\larger[1]\texttt{>\->\->}\space},
+}
+\lstdefinestyle{sourceStyle}{%
+    belowcaptionskip=1\baselineskip,
+    basicstyle=\footnotesize\ttfamily,
+    identifierstyle=\color{blue},
+    keywordstyle=\bfseries\color{green!40!black},
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\tiny\textcolor{gray},
+    breakautoindent=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    tabsize=2,
+}
+
 
 % Todo and coloring:
 % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX &
 % https://www.overleaf.com/learn/latex/Environments
 \usepackage{xcolor}
-\newcommand\todo[1]{\textcolor{red}{\textbf{TODO: #1}}}
+\newcommand\todo[1]{{}\textcolor{red}{\textbf{TODO: #1}}}
 % \renewcommand\todo[1]{} % Hide TODO's
 
 \newcommand{\iraf}{\textsc{iraf}}
@@ -137,14 +173,18 @@
 \apptocmd{\sloppy}{\hbadness 10000\relax}{}{}
 
 % Commands for commonly used symbols
-\newcommand{\angstrom}{Å}
+\newcommand{\angstrom}{\AA}
 \newcommand{\arcmin}{\hbox{$^\prime$} }
 \newcommand{\arcsec}{\hbox{$^{\prime\prime}$} }
 \newcommand{\avg}[1]{\left< #1 \right> }
 \newcommand{\degr}{\hbox{$^\circ$}}
 \newcommand{\matr}[1]{\mathbf{#1}}
 
+% Shorthand for blank line after a paragraph
 \newcommand{\prgph}{\vspace{\baselineskip}}
+
+% Use numeric counting for footnotes
+\renewcommand{\thefootnote}{\arabic{footnote}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \graphicspath{{Figures1/}{Figures2/}}
@@ -154,7 +194,6 @@
 
 %Hanno's commands
 %-------------------------------------------------
-\renewcommand{\thefootnote}{\arabic{footnote}}
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -185,6 +224,7 @@
 
 
 \begin{document}
+\frontmatter
 \maketitle
 \clearpage
 
@@ -193,8 +233,8 @@
 
 \tableofcontents
 
-% \glssetwidest{ISMF} % Longest abbreviation so the column width can be set
 
+\mainmatter
 \include{chapter_1/Introduction}
 \include{chapter_2/SALT_RSS_pipeline}
 \include{chapter_3/Developed_tools}
@@ -202,12 +242,16 @@
 \include{chapter_5/Science_applications}
 \include{chapter_6/Conclusions}
 
-\appendix
+\appendix % New chapter count type
+\renewcommand{\thechapter}{\Roman{chapter}} % Roman numerals for Appendix numbering
 \include{chapter_0/Appendix_reduction}
+\include{chapter_0/Appendix_code}
 
+\backmatter % No chapter count type
 \bibliographystyle{plainnat} %{aasjournal} (surnames first) %{humannat}
 \bibliography{references}
 
+\glssetwidest{\gls{STOPS}} % Longest abbreviation so the column width can be set
 \printglossary[type=acronym, title={List of Acronyms}] %[type=abbreviations, style=alttree]
 
 \end{document}
