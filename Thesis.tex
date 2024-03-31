@@ -8,6 +8,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
+% Suppress scsl font not found error
+\usepackage{silence}
+\WarningFilter{latexfont}{Font shape `T1/cmr/m/scsl' undefined}
+
+% Set paragraph seperation and indentation
+\usepackage[%
+    skip=1.0\baselineskip plus2pt,
+    indent=20pt
+]{parskip}
+% No lineskip in itemize
+\usepackage{enumitem}
+\setlist[itemize]{nosep}
+
 % Set the styling of captions
 \usepackage[font=scriptsize, labelfont=bf, hypcap=true]{caption}
 %[small, , justification=centering]{caption}
@@ -46,7 +59,6 @@
 
 % \usepackage{epstopdf}% converts eps figures to pdf
 % \setcounter{secnumdepth}{5}% Section depth. e.g. 1.1.1.1
-% \usepackage{enumitem}% control the layout of lists
 \usepackage[hyperfootnotes=false, pdftitle={Cooper Dissertation}]{hyperref}% embed hyperlinks in citations and fig references, but not footnotes (it breaks the footnote command)
 % \usepackage[bottom, hang, flushmargin]{footmisc}% Control footnote layouts
 % \usepackage{xfrac}% Provides sfrac command: $\sfrac{a}{b}$ -> a/b
@@ -75,12 +87,13 @@
 % Include directory `tree' structures
 \usepackage{dirtree}
 
-% Access to relative font resizing for '\Chapter' command
+% Access to relative font resizing for '\Chapter' and listings commands
 \usepackage{relsize}
 \newcommand{\Chapter}[2]{\chapter[#1]{#1:\\ \smallskip {\smaller[1] #2}}}
 
 % Allow insertion of syntax highlighted code
 \usepackage{listings}
+\lstloadlanguages{bash, Python}
 \lstset{
     backgroundcolor=\color{gray!10!white},
     basicstyle=\ttfamily,
@@ -102,6 +115,7 @@
     numbers=left,
     numbersep=5pt,
     numberstyle=\tiny\textcolor{gray},
+    stringstyle=\ttfamily\color{red!50!brown},
     breakautoindent=true,
     postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
     tabsize=2,
@@ -112,7 +126,7 @@
 % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX &
 % https://www.overleaf.com/learn/latex/Environments
 \usepackage{xcolor}
-\newcommand\todo[1]{{}\textcolor{red}{\textbf{TODO: #1}}}
+\newcommand\todo[1]{{\noindent}\textcolor{red}{\textbf{TODO: #1}}}
 % \renewcommand\todo[1]{} % Hide TODO's
 
 \newcommand{\iraf}{\textsc{iraf}}
@@ -181,7 +195,7 @@
 \newcommand{\matr}[1]{\mathbf{#1}}
 
 % Shorthand for blank line after a paragraph
-\newcommand{\prgph}{\vspace{\baselineskip}}
+% \newcommand{\prgph}%{}%{\vspace{\baselineskip}}
 
 % Use numeric counting for footnotes
 \renewcommand{\thefootnote}{\arabic{footnote}}

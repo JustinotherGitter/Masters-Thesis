@@ -5,7 +5,6 @@ This chapter gives an overview of the basics of spectropolarimetry (\S~\ref{sec:
 \section{Spectroscopy}\label{sec:spectroscopy}
 
 Spectroscopy originated in its most basic form with Newton's examinations of sunlight through a prism \citep{opticks} but came to prominence as a field of scientific study with Wollaston's improvements to the optics elements \citep{WollPrism}, Fraunhofer's use of a diffraction grating instead of a prism \citep{FraunGrating}, and Bunsen and Kirchoff's classifications of spectral features to their respective chemical elements \citep{KirBunSpec}.
-\prgph
 
 \begin{figure}[t]
     \centering
@@ -24,7 +23,6 @@ The telescope optics refers simply to all the components of a telescope necessar
 \subsection{Slit}
 
 The slit's function is to control the amount of incident light entering a spectrometer and, along with the exposure time of the detector, prevents over-exposures of bright sources on highly sensitive detectors \citep{TonkPracAmSpec}. If a source is spatially resolvable, or larger than the seeing conditions, the slit additionally acts to spatially limit the source to increase the spectral resolution, resulting in sharper features in the resultant spectrum. Without the slit the spectral resolution would be determined by the projected width of the source on the detector, or the seeing if the source was a star-like point source. Increasing the spectral resolution comes with the trade-off of decreasing the light collected from the source and thus acquiring a less intense resultant spectrum. Multiple spectra may be acquired simultaneously when the slit is positioned such that collinear sources lie along the slit.
-\prgph
 
 The spectrometer is usually situated at the focal point. In cases where this is not feasible due to restrictions, for example restrictions of weight or size, a fibre feed may be situated behind the slit on the telescope. This allows the signal to be routed away from the telescope to a controlled environment with only miniscule losses.
 
@@ -60,7 +58,6 @@ The lens functions similarly to that of the telescope's optics but in this case 
 \subsection{Detector}
 
 The two most prevalent detector types in spectroscopy are the \gls{CCD} and \gls{CMOS} detectors. In astronomical spectroscopy however, sources are fainter and exposure times are much longer and so the \gls{CCD} detectors are by far the preferred detector as their output has a higher-quality and lower-noise when compared to \gls{CMOS} cameras under the same conditions \citep{CCDvsCMOS}.
-\prgph
 
 The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in \S~\ref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a two-dimensional array of `counts'.
 
@@ -89,7 +86,6 @@ The prism operates on the principle that the refractive index of light, $n$, var
     % \propto -\lambda^{-3}
 \end{equation}
 where $\theta$ is the angle at which the refracted light differs from the incident light, $\lambda$ is the wavelength of the incident light, $B$ is the longest distance the beam would travel through the prism. $a = L \sin(\alpha)$ is the maximal beam width that would fit onto a prism with a transmissive surface of length $L$ for a given angle, $\alpha$, at which a beam would strike the transmissive surface, as shown in Figure~\ref{fig:prism_diagram}.
-\prgph
 
 The refractive index of a material as a function of its wavelength, $n(\lambda)$, can be approximated by Cauchy's equation:
 \begin{equation}
@@ -100,7 +96,6 @@ where $A_{C}, B_{C}, C_{C}$ are the Cauchy coefficients and have known values fo
     \frac{\partial \theta}{\partial \lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\lambda^{-3}\,,\label{eq:prism_angular_dispersion_approx}
 \end{equation}
 which shows that the angular dispersion of a prism is wavelength dependent and furthermore that longer wavelengths are dispersed less than shorter wavelengths \citep{BirneyObsAstro, Hecht_optics}. The dependence of the angular dispersion, $d\theta/d\lambda$, on the wavelength, $\lambda$, is crucial for the formation of a spectrum but this cubic, non-linear, relation results in a non-linear spectrum. Since prisms rely on the refractive index of the material they are made of, they have low angular dispersions.
-\prgph
 
 Multiple prisms can be used to increase the angular dispersion but as the dispersion is non-linear it becomes increasingly more difficult to calibrate. The more material and material boundaries the light must pass through, the more its intensity decreases due to attenuation effects and Fresnel losses. Even so, the transmittance of modern prisms for their selected wavelength range is generally very high due to improved manufacturing methods as well as improved transmitting materials.\footnote{See manufacturers technical specifications, \href{https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=148}{THORLABS}, or \href{https://www.edmundoptics.eu/c/prisms/607/}{Edmund Optics} for example.}
 \enlargethispage{-2\baselineskip}
@@ -115,17 +110,14 @@ Multiple prisms can be used to increase the angular dispersion but as the disper
 \end{figure}
 
 The alternative dispersing element is a diffraction grating, which operates on the principle that as light interacts with a grating where the groove size is comparable to the light's wavelength, the light is dispersed through constructive and destructive interference. This interference results in multiple diffracted beams $m$, called orders, either side of a central reflected, or transmitted, beam such that $m \in Z$, where $m = 0$ is the non-dispersed, or reflected, beam.
-\prgph
 
 An example of a reflective blazed grating is illustrated in Figure~\ref{fig:grating_diagram}. Here a monochromatic beam is incident on the grating at an angle of $\alpha$ from the grating normal. Due to the interference, a diffracted beam of wavelength $\lambda$ is found at an angle of $\beta$ from the grating normal. The relation between the incident and diffracted beams is given by the grating equation:
 \begin{equation}
     m\lambda = \sigma (\sin(\alpha) \pm \sin(\beta))\,,\label{eq:grating_equation}
 \end{equation}
 where $\sigma$ is the groove spacing of the grating and $m$ is the order of the diffracted beam being considered. The grating equation also applies to transmission gratings, though care should be taken for the signs of $\alpha$ and $\beta$.
-\prgph
 
 % It is important to note that the sign of $\alpha$ and $\beta$ depend on whether the grating is reflective or transmissive. In the case of a reflective grating, such as in Figure~\ref{fig:grating_diagram}, the signs of $\alpha$ and $\beta$ are the same relative to the grating normal, $\lambda = \sigma (\sin(\alpha) + \sin(\beta))$ for $m = 1$. In the case of a transmissive grating, the signs of $\alpha$ and $\beta$ are the opposite relative to the grating normal, $\lambda = \sigma (\sin(\alpha) - \sin(\beta))$ for $m = 1$.
-% \prgph
 
 % Free Spectral range and Blazing
 Equation~\ref{eq:grating_equation} also shows that different diffracted beams may share an angle of dispersion for beams not in the same order. The regions of an order that do not overlap with another order are called free spectral ranges. An order-blocking filter may be used to account for the overlaps and increase the free spectral range. A diffraction grating can also be blazed by an angle $\theta$, as illustrated in Figure~\ref{fig:grating_diagram}. Blazing refers to the fact that the grooves on the surface of the grating are not symmetrical. The asymmetry of the grooves diffracts the incident beam such that most of the beam's intensity is found in a reflected, zeroth order, beam. The wavelength at which a blazed spectrograph is most effective is called the blaze wavelength, $\lambda_{b}$, which is determined by:
@@ -152,7 +144,6 @@ Similar to the dispersion of a prism, Equation~\ref{eq:grating_angular_dispersio
 \subsubsection{Alternate Diffraction Elements}
 
 As mentioned before, multiple subgroups exist for both dispersive prisms and diffractive gratings. For prisms, along with the single and multiple prism setups mentioned, there also exists grisms and immersed gratings. A grism (Grating Prism), as shown in Figure~\ref{fig:grism}, refers to a transmissive grating etched onto one of the transmissive faces of a prism and allows a single camera to capture both spectroscopic and photometric images without needing to be moved, with and without the grism in the path of the beam of light, respectively. An immersed grating refers to a grism modified such that the transmissive grating is coated with reflective material. The primary source of dispersion for both grisms and immersive gratings is the grating and any aberration effects from the prism are negligible in comparison.
-\prgph
 
 \begin{figure}[t]
     \centering
@@ -174,10 +165,8 @@ Other types of gratings include the \gls{VPH} grating as well as the echelle gra
 \subsection{Detector and Spectroscopic Calibrations}\label{subsec:calibration}
 
 Acquiring a spectrum from observations is more involved than simply reading out the data recorded on the \gls{CCD}. A raw science image, which is the raw counts of the observed source read from the \gls{CCD} with no calibrations applied, has on it a combination of useful science data as well as noise. The noise is a combination of random noise introduced through statistical processes and systematic noise introduced through the instrumentation and the observation conditions the source was observed under. This noise causes an uncertainty in the useful data and can be minimized, predominantly by calibrating for the systematic noise, but never fully removed \citep{CCDhandbook}.
-\prgph
 
 The dominant source of noise in a raw image is detector noise. \glspl{CCD} are manufactured to have a small base charge in each pixel, called the `bias' current which allows the readout noise, a type of random noise, to better be sampled. There is also an unintentional additional charge which is linearly proportional to the exposure time and originates from thermal agitation of the \gls{CCD} material, called the `dark' current. The dark current can be minimized and possibly ignored if the \gls{CCD} is adequately cooled. These types of noise add to the charge held by a pixel and are thus considered additive.
-\prgph
 
 \begin{figure}[t]
     \centering
@@ -187,28 +176,22 @@ The dominant source of noise in a raw image is detector noise. \glspl{CCD} are m
 \end{figure}
 
 The \gls{CCD} is not a perfect detector and the efficiency of it and the optics of the telescope also contribute noise to the image. The efficiency of a \gls{CCD} is referred to as the Quantum Efficiency, and it is a measure of what percentage of light striking the detector is actually recorded and converted to a charge. The efficiency of the \gls{CCD} and telescope optics is also wavelength dependent and so the noise that results from them is more complex than that of additive noise. This type of noise is referred to as multiplicative noise.
-\prgph
 
 Additive noise, such as bias and dark currents, is inherent to \gls{CCD} images, and as such needs to be subtracted out first when performing calibrations. Bias currents can be found by taking a bias image or by adding an overscan region to each image. A bias image is an image where the charges on the \gls{CCD} are reset and then immediately read off without exposing anything on the detector, effectively taking an image with zero exposure time. Alternatively, to save time during an observational run, overscan regions may be added to the images. An overscan region refers to adding a few cycles to the readout of each column of the \gls{CCD} such that the base current is read out and appended to each image.
-\prgph
 
 Dark currents can be found by taking an image with nothing exposed onto the detector for a certain exposure time. This resultant dark image can then be scaled to the science images exposure time since the dark current should be linearly proportional to exposure time. When the detector is capable of being held at precise temperatures, dark images may be taken over multiple hours during the day to produce a high quality master dark image that may then be scaled and subtracted from all subsequent images.
-\prgph
 
 Next, multiplicative noise, such as a \gls{CCD}'s pixel-to-pixel response, should be accounted for. This pixel-to-pixel response should be uniform across the image and to achieve this an average response may be divided out. The average response is referred to as a `flat' image or flat-field and may be acquired by observing a uniformly illuminated surface to determine the pixel-to-pixel response.
-\prgph
 
 Dome flats are images taken of a relatively flat surface, usually the inside a telescopes dome, and are used in both photometry and spectroscopy. The surface is uniformly and indirectly illuminated by a projector lamp, ideal for flat-field images. Alternate flat-fielding methods, such as night sky and twilight flats, are available but are suited solely for photometry.
 Night sky flats are produced from science images containing mostly sky. The science images are combined using the `mode' statistic which removes any celestial objects at the cost of a low \gls{SNR} flat-field.
 Twilight flats are produced from images of the twilight (or dawn) sky. They are taken when the Sun has just set, in the opposite direction, at $\sim 20\degr$ from zenith and provide a better \glspl{SNR} at the cost of careful timing of the images.
-\prgph
 
 A flat-field must be normalized before being used to correct any science images since it only acts to account for the pixel-to-pixel response and not for the additive errors. A  normalized spectroscopic flat image, $F^{n}_{\lambda}(x,y)$, can be calculated as:
 \begin{equation}
     F^{n}_{\lambda}(x,y) = \frac{F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y)}{\text{med}_{lp}(F_{\lambda}(x,y) - B(x,y) - (\frac{t_{S}}{t_{D}})D(x,y))}\,,\label{eq:norm_flat}
 \end{equation}
 where $F_{\lambda}(x,y)$ is the non-corrected flat image, $B(x,y)$ is the bias image, $D(x,y)$ is the dark image which is scaled by the exposure time of the science image, $t_{S}$, and the dark image, $t_{D}$. med$_{lp}$ is a low-pass median filter which smoothes out any rapid changes in the pixel-to-pixel response, removing the illumination contribution.
-\prgph
 
 The calibrated science image, $S^{*}_{\lambda}(x,y)$, which accounts for the bias and dark currents as well as the flat fielding can then be calculated as:
 \begin{equation}
@@ -228,7 +211,6 @@ When multichannel \glspl{CCD} are used, which consist of multiple \glspl{CCD} or
 \subsubsection{Wavelength Calibration}
 
 Finally, since the dispersion element breaks the incident light into its constituent wavelengths non-linearly (\S~\ref{subsec:dispersion}), the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modelled to produce a reliable pixel to wavelength calibration \citep[see E.g.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in Figure~\ref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc-lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
-\prgph
 
 The wavelength calibrations then consist of defining a two-dimensional pixel-to-wave\-length conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations.
 
@@ -265,7 +247,6 @@ An important property of Chebyshev polynomials is that they are orthogonal polyn
     \end{cases}\label{eq:chebyorth}
 \end{equation}
 where $1 / \sqrt{1 - x^{2}}$ is the weighting factor for Chebyshev polynomials. This property is important because it means that the coefficients in the Chebyshev polynomial expansion are independent of one another, allowing for a unique solution when approximating an unknown function \citep{numerical_recipes, cheby}.
-\prgph
 
 An approximation, using Chebyshev polynomials, of an unknown wavelength calibration function is given by:
 \begin{equation}
@@ -288,7 +269,6 @@ for a one- or a two-dimensional wavelength surface function, respectively. Here 
 % where:
 
 % which returns the positions of the  x-intercepts.
-% \prgph
 
 The Chebyshev polynomials are more suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in Figure~\ref{fig:chebyshev}. This means that the Chebyshev approximation is exact when $x = x_{n}$, where $x_{n}$ are the positions of the $n - 1$ $x$-intercepts of $T_{N}(x)$. These properties greatly minimize the error in the Chebyshev approximation, even at lower order approximations \citep{cheby}.
 
@@ -326,7 +306,6 @@ where $P$ is a Legendre polynomial of order $n$. Legendre polynomials also hold 
     \end{cases}\label{eq:legorth}
 \end{equation}
 where a weight of $1$ is the weighting factor for Legendre polynomials \citep{numerical_recipes, leg}.
-\prgph
 
 An approximation, using Legendre polynomials, of an unknown wavelength calibration function is given by:
 \begin{equation}
@@ -337,11 +316,9 @@ or
     F(x, y) \approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} a_{ij} P_{i}(u) P_{j}(v)\,,\label{eq:Legendre2D}
 \end{equation}
 for a one-dimensional wavelength function or a two-dimensional surface function, respectively. Here $N$ and $M$ are the desired $x$ and $y$ orders, $u$ and $v$ are the same mapping variable as in Equation~\ref{eq:XtoUV}, and $a_{ij}$ are the Legendre polynomial coefficients.
-\prgph
 
 Legendre polynomials benefit from having the orthogonality condition with no weight necessary ($w = 1$) which makes their coefficients computationally easier to compute but increases the error in a Legendre approximation when compared to that of the error in a Chebyshev approximation for functions of the same order, $N$ \citep{leg_cheb_relation}.
 % for one-dimensional Legendre and Chebyshev approximations
-\prgph
 
 Regardless of which method of polynomial approximation is chosen, the polynomials are fit by varying the relevant coefficients using the least squares method. The resultant minimized function may then be used to convert the science frames from an $(x$-pixel$, y$-pixel$)$ coordinate system to a $(\lambda, y$-pixel$)$ coordinate system.
 
@@ -357,7 +334,6 @@ Both Huygens and Newton came to the conclusion that light demonstrates transvers
 %     \label{eq:Malus}
 % \end{equation}
 % \noindent where $I_{0}$ and $I$ are the Intensity of light before and after polarization, and $\theta$ is the orientation of the polarizer to the direction of propogation of the polarized light.
-\prgph
 
 Fresnel built on Malus' work showing that two beams of light, polarized at a right angle to one another, do not interfere, conclusively proving that light is transversal in nature, opposing the widely accepted longitudinal nature of light due to the prevalent belief in the ether. He later went on to correctly describe how polarized light is reflected and refracted at the surface of optical dielectric interfaces, without knowledge of the electromagnetic nature of light. Fresnel's equations for the reflectance and transmittance, $R$ and $T$, are defined as:
 \begin{equation}
@@ -369,10 +345,8 @@ Fresnel built on Malus' work showing that two beams of light, polarized at a rig
     \end{gathered}\label{eq:Fresnel}
 \end{equation}
 where $s$ and $p$ are the two polarized components of light perpendicular to one another, $Z_{1}$ and $Z_{2}$ are the impedance of the two media, and $\theta_{i}$, $\theta_{t}$, and $\theta_{r}$ are the angles of incidence, transmission, and reflection, respectively \citep{Fresnel}.
-\prgph
 
 Nicol was the first to create a polarizer, aptly named the Nicol prism, where the incident light is split into its two perpendicular polarization components, namely the ordinary and extraordinary beams. Faraday discovered the phenomenon where the polarization plane of light is rotated when under the influence of a magnetic field, known as the Faraday effect. Brewster calculated the angle of incidence, $\theta_{B} = \arctan{n_{2} / n_{1}}$, at which incident polarized light is perfectly transmitted through a transparent surface, with refractive indexes of $n_{1}$ and $n_{2}$, while non-polarized incident light is perfectly polarized when reflected and partially polarized when refracted.
-\prgph
 
 \begin{figure}[t]
     \centering
@@ -404,7 +378,6 @@ where $\matr{E}$ and $\matr{B}$ are the electric and magnetic field vectors, and
     \end{gathered}\label{eq:Maxwell_sol}
 \end{equation}
 where $E_{x}$, $E_{y}$, $\Phi_{x}$, and $\Phi_{y}$ are all parameters describing the amplitude and phase of the electric field vector in the $(x, y)$ plane, and with the magnetic field vector proportional and perpendicular to the electric field vector \citep{Griffiths}.
-\prgph
 
 Considering only the electric field component and rewriting Equation~\ref{eq:Maxwell_sol} using complex values allows us to simplify the form of the solution to:
 \begin{equation}
@@ -416,7 +389,6 @@ where we only consider the real part of the equation, and where $\matr{E}_{0}$ i
     E_{y} e^{i \Phi_{y}} \hat{\boldsymbol{y}}\,,\label{eq:pol_vector}
 \end{equation}
 and is referred to as the polarization vector since it neatly contains the parameters responsible for the polarization properties \citep{pol_phys}.
-\prgph
 
 % Polarizing Ellipse
 \begin{figure}[t]
@@ -434,7 +406,6 @@ For an electric field vector with oscillations in some combination of the $x$ an
     \sin^{2} \Phi\,,\label{eq:pol_ellipse}
 \end{equation}
 where $\Phi = \Phi_{x} - \Phi_{y}$ is the phase difference between the $x$ and $y$ phase parameters. The degree of polarization for the polarization ellipse is related to the eccentricity of the ellipse and the angle at which it is rotated relates to the polarization angle. Since $\matr{E}_{0, x}$, $\matr{E}_{0, y}$, $\Phi_{x}$, and $\Phi_{y}$ describe the wave, the polarization ellipse that results from these parameters is fixed as the wave continues to propagate.
-\prgph
 
 Since observations consist of images taken over a desired exposure time, time averaging of Equation~\ref{eq:pol_ellipse} over the exposure time is necessary. Given the periodical nature and high frequencies of the fields, the time averaging may be found over a single oscillation using:
 \begin{equation}
@@ -470,10 +441,8 @@ The expressions inside the parentheses can be found through observation and may 
     \label{eq:Stokes_params}
 \end{equation}
 where $S_{0}$ to $ S_{3}$ are referred to as the Stokes (polarization) parameters. The parameters describe the: $S_{0}$, total intensity (often normalized to $1$); $S_{1}$, ratio of the \gls{LHP} to \gls{LVP} light; $S_{2}$, ratio of the \gls{L45P} to \gls{L-45P} light; and $S_{3}$, ratio of the \gls{RCP} (clockwise) to \gls{LCP} (counter-clockwise) light. When the intensity is normalized, the Stokes parameters range from $1$ to $-1$, based on the dominating component of the parameter \citep{Stokes, chandrasekhar}.
-\prgph
 
 % There is, however, a seemingly small, albeit major, shortcoming of the polarization as defined in Equation~\ref{eq:pol_params}; the polarization ellipse as represented by Figure~\ref{fig:pol_ellipse} deals only with a single transverse wave and is incapable of handling a collection of waves which create a wave-packet. This is because the waves making up a wave-packet will not share their polarization properties and will temporally vary from one another. By taking the time average of the waves in a wave-packet, which happens inherently in the process of observations, this temporal variation may be eliminated.
-% \prgph
 
 From Equations~\ref{eq:pol_ellipse_alt},~\ref{eq:Stokes_params}, the polarization parameters are related by:
 \begin{equation}
@@ -522,7 +491,6 @@ where $I$ denotes the total intensity, $P$ denotes the degree of polarization, o
 \subsection{Polarization Measurement}\label{subsec:pol_measure}
 
 Except for polarimetry in the radio-wavelength regime, the polarization of a beam can not be directly measured. The polarization properties may, however, be recovered from the beam through the manipulation of the four parameters given in Equation~\ref{eq:Maxwell_sol}. This so-called manipulation is achieved by passing the beam through optical elements which vary the beam for differing amplitudes and phases. These matrix operations may be represented by their corresponding Mueller matrices.
-\prgph
 
 For ideal components, the resultant beam $\matr{S}^{\prime}$ after passing through an optical element is given by $\matr{S}^{\prime} = \matr{M} \matr{S}$, where $\matr{S}$ is the beam incident on the optical element and $\matr{M}$ represents the $4 \times 4$ Mueller matrix representing the optical element. Mueller matrices are especially useful when dealing with paths through optical elements as they observe the `train' property \citep{Mueller_train}. This means that an incoming beam $\matr{S}$ passing, in order, through elements with known Mueller matrices $(\matr{M}_{0}, \dots, \matr{M}_{N})$ results in an outgoing beam $\matr{S}^{\prime}$ such that:
 \begin{equation}
@@ -577,10 +545,8 @@ These matrices in combination with Equation~\ref{eq:mueller_train} allow us to d
     \end{split}
 \end{equation}
 where the retandance angle, $\alpha$, polarization angle, $\beta$, for a wave plate with a relative phase difference, $\gamma$, may be varied to acquire a system of equations that can be solved to retrieve the Stokes polarization parameters \citep{waveplate_in_specpol}.
-\prgph
 
 Several or more frames taken under differing configurations may be used to reduce a system of equations to extract all four Stokes polarization parameters, but it is possible to extract the $I$, $Q$ and $U$ polarization parameters using only four frames, or two dual-beam frames, for well-chosen configurations and assuming ideal components. This ideal configuration varies the retarder angle such that $\Delta\alpha = \pi / 8$ while keeping the polarizer stationary. More frames for additional retarder angles are advisable and often necessary, however, as they correct for any differences in sensitivity, such as may arise in a polarized flat field and which is further discussed in \S~\ref{subsubsec:pol_flat} \citep{polarimetry_error}.
-\prgph
 
 From Equation~\ref{eq:Stokes_intensity} we see that the linear retarder element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$, or $I$, $Q$, and $U$) may be found by changing only the angle of retardance, $\alpha$.
 
@@ -590,12 +556,10 @@ Wave plates, also commonly referred to as retarders, are generally made from opt
     \gamma = \frac{2 \pi \Delta n L}{\lambda_{0}}
 \end{equation}
 where $\Delta n$ and $L$ refer to the birefringence and thickness of the wave plate medium, respectively, and $\lambda_{0}$ refers to the vacuum wavelength of the beam \citep{Hecht_optics}.
-\prgph
 
 This relative phase difference determines the name of the wave plate, such that the $\gamma = m(\pi/2) $ and $\gamma = m(\pi/4)$ phase differences, for $m \in Z^{+}$, refer to the half- and quarter-wave plates (which are the most common wave plate phases), respectively. Phase differences with an integer multiple of one another relate to the same phase difference and are referred to as multiple-order wave plates, while wave plates with a phase difference less than an integer multiple are referred to as zero-order wave plates. Several multiple-order wave plates can be combined by alternatively aligning the fast axis of one to the slow axis of another to create a compound zero-order wave plate \citep{Hale_birefringence}.
-% \prgph
 
-\paragraph{Polarizers}\label{prgph:polarizer}
+\paragraph{Polarizers}\label{par:polarizer}
 Polarizers are typically made from two prisms, of a birefringent material, cemented together with an optically transparent adhesive. The actual effect of separating the perpendicular polarization components is achieved using varying effects, namely through:
 \begin{itemize}
     \item absorption of one of the polarized components, such as in Polaroid polarizing filters,
@@ -620,9 +584,8 @@ Polarizers are typically made from two prisms, of a birefringent material, cemen
 
 \paragraph{Wollaston prisms}
 The Wollaston prism consists of two right-angle prisms consisting of a birefringent monoaxial material, cemented together with an optically transparent adhesive along their hypotenuses with their optical axes orthogonal, as seen in Figure~\ref{fig:Wollaston_prism}. The Wollaston prism is a common optical polarizing element in astrophysical polarimetry which separates an incident beam into two linearly polarized $O$- and $E$-beams, orthogonal to one another, and deviated from their common axis equally. The deviation angle of the polarized beams is determined by the wedge angle which is defined as the angle from the common hypotenuse to that of the outer transmission face of either prism.
-\prgph
 
-Wollaston prisms benefit over simpler elements (such as those listed in the \hyperref[prgph:polarizer]{polarizer} paragraph) since a single frame allows for the observation of both orthogonal polarization components. This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty \citep{wollaston}.
+Wollaston prisms benefit over simpler elements (such as those listed in the \hyperref[par:polarizer]{polarizer} paragraph) since a single frame allows for the observation of both orthogonal polarization components. This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty \citep{wollaston}.
 
 \subsection{Polarimetric calibrations}\label{subsec:pol_cal}
 
@@ -631,19 +594,16 @@ The raw science images acquired during polarimetric observations contain a combi
 \subsubsection{Flat Fielding}\label{subsubsec:pol_flat}
 
 Once the \gls{CCD} calibrations have been completed, the polarization intrinsic to the optical elements needs to be accounted for such that the pixel-to-pixel response is made uniform. Flat-fielding is, once again, used to correct for this. The flats taken for polarimetry, however, introduce an additional challenge as the targets for conventional flats are polarized, such as twilight and dome flats which are polarized by light scattering in the atmosphere and the reflective surface of the dome, respectively.
-\prgph
 
 If no unpolarized flat images can be taken for flat field calibrations then, when possible due to the polarimeter design, the wave plate may be constantly rotated to act as a depolarizing element; this is effective so long as the wave plate rotation period is much faster than the flat's exposure time. Alternatively, polarized flats may be taken at the same set of half-wave plate angles used for science observations and averaged together to achieve a similar depolarizing effect.
 
 Observing additional `redundant' exposures for the science and flat images increases the depolarizing effect up to the maximum of $16$ half-wave plate positions, where exposures with a half-wave plate angle differing by $\pi / 4$ from another are considered redundant due to the $O$- and $E$-beams swapping between the related exposures.
-\prgph
 
 Increasing the amount of redundant observations proportionally increases the time needed to observe all the exposures, which in turn introduces time-dependent effects such as fringing or intensity variations of the flat source. As such, a middle ground must be found for the amount of redundant frames observed. \citep{polarimetry_error, pol_optimize}.
 
 \subsubsection{Dual-beam Extraction and Alignment}\label{subsubsec:pol_oe_extract}
 
 After calibrations for the \gls{CCD} and light path are accounted for, the $O$- and $E$-beams can be extracted and further reduced. The extraction depends heavily on the layout of the polarimeter but often a simple cropping of the differing sections is enough to separate the two images.
-\prgph
 
 % Image Alignment
 After extracting the $O$- and $E$-beams for a specific half-wave plate angle, the images need to be aligned such that the sources present in them overlap. The Wollaston prism needs to be corrected for as it introduces a beam deviation which differs across both images. The aligning of the $O$- and $E$-beams is crucial as the comparison of the dual images is what allows for the calculation of the polarization properties.
@@ -655,10 +615,8 @@ The polarization introduced by the sky introduces a difference in the intensity 
 \section{Spectropolarimetry} \label{sec:spectropolarimetry} % In depth
 
 As the name suggests, spectropolarimetry is the measurement of the polarization of light for a chosen spectral range and provides polarimetric results as a function of wavelength. As spectropolarimetry is so closely reliant on both spectroscopy and polarimetry, advancements in spectropolarimeters have always been gated by the advancements of spectrometers and polarimeters (as described in \S~\ref{sec:spectroscopy},~\ref{sec:polarimetry}).
-\prgph
 
 The most notable historical contributions of spectropolarimetry are those of spectropolarimetric studies instead of instrumental developments. Spectropolarimetry provides further insights into a materials physical structure, chemical composition, and magnetic field, allowing spectropolarimetry to be useful across multiple disciplines. In astronomy in particular, spectropolarimetry has been used to study the magnetic field, chemical composition, and underlying structure and emission processes of multiple types of celestial objects \citep[see for example][]{specpol_AGN, specpol_stars, specpol_SN}.
-\prgph
 
 \begin{figure}[t]
     \centering
@@ -668,14 +626,12 @@ The most notable historical contributions of spectropolarimetry are those of spe
 \end{figure}
 
 Along with common points of consideration when developing any instrumentation for observational astronomy, such as resolution and sensitivity, spectropolarimeters need also consider the spectral response of the polarimetric components as well as the polarization response of the spectroscopic components as both are simultaneously in the light-path during observations and have noticeable affects on one another. Time is another constraint for spectropolarimetry as the incident light is separated both by wavelength and by polarization states. This division of the incident light results in increased exposure times for both target observations and observations necessary for calibrations.
-\prgph
 
 Figure~\ref{fig:specpol_exp} illustrates a typical science image taken with a spectropolarimeter. The image contains the $O$- and $E$-beams which are both dispersed into their spectra. Spectropolarimetric results are acquired from measurements and calibrations of these images alongside any necessary calibration images.
 
 \subsection{Spectropolarimetric measurement}
 
 The derived relations given in \S~\ref{subsec:pol}, such as the \hyperref[eq:Stokes_params]{Stokes parameters}, describe polarization in general and are valid for both polarimetry and spectropolarimetry. Due to the time averaging of the observed light (Equation~\ref{eq:pol_t_avg}), any minor temporal variation, partial polarization, or monochromatic nature of the spectropolarimetric polarization parameters are accounted for.
-\prgph
 
 For linear spectropolarimetry using a dual-beam polarizing element, an exposure measures the $O$- and $E$-beam wavelength dependent intensities, $f_{O, i}(\lambda)$ and $f_{E, i}(\lambda)$, for a given wave plate angle $\theta_{i}$ at angle $i$. These intensities thus relate to the wavelength dependent Stokes parameters as:
 \begin{equation}
@@ -685,14 +641,12 @@ For linear spectropolarimetry using a dual-beam polarizing element, an exposure 
     \end{gathered}\label{eq:specpol_flux_to_Stokes}
 \end{equation}
 At least four linear equations are required to solve for three variables in a system of linear equations and thus at least two exposures must be taken to solve for the linear ($I(\lambda)$, $Q(\lambda)$, and $U(\lambda)$) polarization parameters \citep{pol_std, keller_instr}.
-\prgph
 
 The first Stokes parameter, $I(\lambda)$, may be recovered for each dual-beam exposure using
 \begin{equation}
     I_{i}(\lambda) = f_{O, i}(\lambda) + f_{E, i}(\lambda)\,.\label{eq:specpol_I_calc}
 \end{equation}
 By calculating the $I_{i}(\lambda)$ Stokes parameter for each wave plate position $i$, the variation of the target over the course of observation may be corrected for, resulting in the $I(\lambda)$ Stokes parameter.
-\prgph
 
 Next, the $Q(\lambda)$ and $U(\lambda)$ Stokes parameters are found by first defining the normalized difference in relative intensities, $F_{i}(\lambda)$, as:
 \begin{equation}
@@ -703,7 +657,6 @@ which allows Equation~\ref{eq:specpol_flux_to_Stokes} to be written, as
     F_{i}(\lambda) = \bar{Q}(\lambda) \cos(4\theta_{i}) + \bar{U}(\lambda) \sin(4\theta_{i}) = P\cos(4\theta_{i} - 2\chi)\,,\label{eq:specpol_F_to_params}
 \end{equation}
 in terms of the normalized Stokes parameters, or, alternatively, the degree of polarization, $P$, and polarization angle, $\chi$ (as described in Equations~\ref{eq:Stokes_norm}, and \ref{eq:poincare_coords}).
-\prgph
 
 The optimal change in wave plate angle is $\Delta\theta_{i} = \pi/8$ as it allows the normalized Stokes polarization parameters to be calculated as:
 \begin{equation}
@@ -730,7 +683,6 @@ where $N$ is the number of exposures taken, limited such that $N \in [2, 16]$ \c
 
 % The calibrations necessary for the measurement to take place are, as always, seemingly more involved than the calculation of the results themselves.
 Just as the elements of a spectropolarimeter are an amalgamation of both a spectrometer and polarimeter, it naturally follows that the calibrations necessary to reduce spectropolarimetric data are a combination of the calibrations needed for spectroscopy and polarimetry, discussed further in \S~\ref{subsec:calibration}, and \ref{subsec:pol_cal}. Even though the spectrometer and polarimeter components both have an effect on an incident beam following the light-path through the spectropolarimeter, the calibration procedures for both methods remain mostly independent of one another and as such need not be repeated here.
-\prgph
 
 Spectropolarimetric calibrations are, however, more involved when compared to the same calibrations for either spectroscopy or polarimetry. Minor deviations in the calibrations across both the spectra and the polarized beam compound, especially when dealing with the wavelength calibration, resulting in poor \glsfirst{SNR}'s. Generally, more exposures over longer timespans are required to acquire enough redundancy and signal for the calculation of the Stokes parameters on top of the time necessary for calibrations to be completed. It should therefore be noted just how important the calibrations are when dealing with spectropolarimetry.
 
@@ -753,7 +705,6 @@ The primary mirror is composed of 91 individual 1 m hexagonal mirrors which toge
 \subsection{Tracker and tracking}
 
 During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of ~5 $\mu$m and is capable of tracking $\pm$6$\degree$ from the optimal central track position. Targets at declinations from 10.5$\degree$ to -75.3$\degree$, as shown in Figure~\ref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of $\sim7$ m to 9 m when the tracker is furthest and closest to the optimal central position, respectively.
-\prgph
 
 \begin{figure}[t]
     \centering
@@ -807,6 +758,5 @@ The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, a
 \paragraph{\gls{RSS} Spectropolarimetry} \label{sec:RSS_reductions}
 
 Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit linear spectro\-polarimetry, $(I, Q, U)$, where observations are taken following the waveplate pattern lists as in Table~\ref{table:RSS_specpol_patterns}. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter.\footnote{Commission status sighted from the latest \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{`Polarimetry Observers Guide' (2024)}.}
-\prgph
 
 \input{tables/2_Polarimetry_patterns.tex}

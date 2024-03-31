@@ -1,4 +1,5 @@
 \chapter{The Modified Reduction Process} \label{app:reduction}
+
 \newcommand{\obj}{<\textit{OBJ}>}
 \newcommand{\obsdate}{<\textit{OBSDATE}>}
 \newcommand{\oarc}{<\textit{O-beam ARC}>}
@@ -10,15 +11,13 @@
 \newcommand{\fit}{03\_fitcoords.cl}
 \newcommand{\tran}{04\_transform.cl}
 
-
 This section of the Appendix aims to provide a minimum working example of the commands necessary to reduce \polsalt\ data using \stops\ and \iraf. It contains the commands necessary to activate all software and run through the reduction process but makes no attempt at discussion.\footnote{Please see \S~\ref{sec:red_proc} for a discussion of the commands and default `\texttt{<...>}' parameters.}
-\prgph
 
 Both \polsalt\ and \iraf\ are launched from the default \gls{CLI} but use independent interfaces during the reduction process. To distinguish which window is in focus, the `\texttt{\$}' token is used for default \gls{CLI} commands while the `\texttt{cl>}' or `\texttt{>\->\->}' tokens are used for \iraf's xgterm single- and multi-line commands.
-\prgph
 
 General instructions for the reduction process which might not necessarily be line-fed commands passed to a \gls{CLI} may either be discussed outside a listing environment or included as part of the listing environment with a preceding `\texttt{\#}' token. Finally, \polsalt\ implements a \gls{GUI} and thus takes no line-fed commands. As such, the instructions when using the \polsalt\ \gls{GUI} follow those of the general instructions with the added exception that they relate to the \gls{GUI}.
-\prgph\hrule\prgph
+
+\vspace{\baselineskip}\hrule
 
 \begin{figure}[h!]
     \centering
@@ -35,7 +34,6 @@ General instructions for the reduction process which might not necessarily be li
     \label{dir:pre_red}
 \end{figure}
 \footnotetext{Data located in the `sci' folder is often provided by \gls{SALT} but does not form part of the minimal file structure necessary to begin the reduction process.}
-\prgph
 
 \begin{lstlisting}[
     language=bash,
@@ -45,7 +43,6 @@ $ cd ~/polsalt
 $ conda activate salt
 $ python -W ignore reducepoldataGUI.py &
 \end{lstlisting}
-\prgph
 
 \noindent Refer to Figure~\ref{fig:polsalt_gui} for a depiction of the \polsalt\ \gls{GUI}. To complete the \polsalt\ pre-calibrations and with the \gls{GUI} in focus:
 \begin{itemize}
@@ -66,7 +63,6 @@ $ cd (*@\obsdate@*)/sci
 $ conda activate stops
 $ python ~/STOPS . split
 \end{lstlisting}
-\prgph
 
 \begin{lstlisting}[
     language=bash,
@@ -82,10 +78,8 @@ cl> longslit
 cl> unlearn longslit
 cl> longslit.dispaxis=1
 \end{lstlisting}
-\prgph
 
 The \texttt{identify} task requires an average feature width, `fwidth', as a parameter. The width of a feature may be found in \iraf\ using the \texttt{implot} task along with the cursor commands, but may also be found using any \gls{FITS} viewing software capable of displaying rows of image data.\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/plot.implot.html} for documentation on the \texttt{implot} task.}
-\prgph
 
 \begin{lstlisting}[
     language=bash,
@@ -99,7 +93,6 @@ cl>
 cl> identify ("(*@\oarc@*)",
 >>> "", "", section="middle line", database="database", coordlist="linelists$idhenear.dat", units="", nsum="10", match=-3., maxfeatures=50, zwidth=100., ftype="emission", fwidth=8., cradius=5., threshold=0., minsep=2., function="spline3", order=2, sample="*", niterate=0, low_reject=3., high_reject=3., grow=0., autowrite=no, graphics="stdgraph", cursor="", aidpars="")
 \end{lstlisting}
-\prgph
 
 \iraf\ will launch an interactive window for the \texttt{identify} task. Cursor commands allow the arc lines to be identified using `m' (and typing the relevant wavelength), while `d' and `i' will delete a single and all identified arc lines, respectively. The `f' cursor command will perform a preliminary fit which can be quit using the `q' cursor command. The `l' cursor command will attempt to identify any unidentified arc lines. Once complete, a figure of the identified lines may be saved using `\texttt{:labels coord}' and `\texttt{:.snap eps}', and the task safely quit with the `q' cursor command.\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.identify.html} for documentation on the \texttt{identify} task.} Repeat the \texttt{identify} procedure, replacing \oarc\ with \earc.
 
@@ -115,7 +108,6 @@ cl>
 cl> reidentify ("(*@\oarc@*)",
 >>> "(*@\oarc@*)", "yes", "", "", interactive="no", section="middle line", newaps=yes, override=no, refit=yes, trace=yes, step="10", nsum="10", shift="0.", search=0., nlost=0, cradius=5., threshold=0., addfeatures=no, coordlist="linelists$idhenear.dat", match=-3., maxfeatures=50, minsep=2., database="database", logfiles="logfile", plotfile="", verbose=yes, graphics="stdgraph", cursor="", aidpars="")
 \end{lstlisting}
-\prgph
 
 The \texttt{reidentify} task will run autonomously so long as the \texttt{interactive} parameter is set to ``no''.\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html} for documentation on the \texttt{reidentify} task.} Repeat the \texttt{reidentify} procedure, replacing \oarc\ with \earc\ at both the `reference' and `image' parameter locations.
 
@@ -131,7 +123,6 @@ cl>
 cl> fitcoords ("(*@\oarc\ (exclude the file extension)@*)",
 >>> fitname="", interactive=yes, combine=no, database="database", deletions="deletions.db", function="chebyshev", xorder=6, yorder=6, logfiles="STDOUT,logfile", plotfile="plotfile", graphics="stdgraph", cursor="")
 \end{lstlisting}
-\prgph
 
 \iraf\ will launch an interactive window for the \texttt{fitcoords} task. The interactive window allows the parameters to be optimized without having to rerun the task. The x- and y-axis being plotted may be changed using the `x' or `y' cursor commands followed by the desired data axis (such as `x', `y', or `r' for residuals).\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html} for documentation on the \texttt{fitcoords} task.} Repeat the \texttt{fitcoords} procedure, replacing \oarc\ with \earc.
 
@@ -147,10 +138,8 @@ cl>
 cl> transform ("(*@@\ofiles@*)",
 >>> "(*@t//@\ofiles@*)", "(*@\oarc@*) (exclude the file extension)", minput="", moutput="", database="database", interptype="linear", x1="INDEF", x2="INDEF", dx="INDEF", nx="INDEF", xlog="no", y1="INDEF", y2="INDEF", dy="INDEF", ny="INDEF", ylog="no", flux="yes", blank="INDEF", logfiles="STDOUT,logfile")
 \end{lstlisting}
-\prgph
 
 Inspect the transformed images, notably the arc images, using any \gls{FITS} viewer as a cursory check that the wavelength calibrations were completed without error.\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html} for documentation on the \texttt{transform} task.}
-\prgph
 
 The gain and read noise is now needed since part of the \stops\ \texttt{join} method, the cosmic ray rejection, may need them as parameters. Determining these parameters may be done using the `\textit{GAINSET}' and `\textit{ROSPEED}' \gls{FITS} keywords, where the cosmic ray rejection defaults to \textit{GAINSET}=`FAINT', and \textit{ROSPEED}=`SLOW'. If the values for the keywords differ the gain and read noise parameters should be updated.\footnote{The read noise and gain may be determined from \protect\url{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}, specifically Tables~6.1 and 6.2.}
 
@@ -181,7 +170,6 @@ $ mkdir split_files
 $ mv *obeam* *ebeam* *oarc* *earc* split_files/
 $ mv *.eps *.cl *.db database/
 \end{lstlisting}
-\prgph
 
 The \polsalt\ \texttt{spectra extraction} is now run. If the \polsalt\ \gls{GUI} was closed it should now be reopened using Listing~\ref{code:polsalt_launch}. With the \gls{GUI} in focus:
 \begin{itemize}
@@ -190,7 +178,6 @@ The \polsalt\ \texttt{spectra extraction} is now run. If the \polsalt\ \gls{GUI}
     \item Check the tick boxes of all wavelength calibrated images to be processed (exclude the arc) in the display box covering the lower half of the \gls{GUI}.
     \item Proceed with the reductions by clicking `OK'
 \end{itemize}
-\prgph
 
 The \polsalt\ \texttt{spectra extraction} is interactive and will launch a separate \gls{GUI} for the background subtraction and spectral extraction (See Figure~\ref{fig:polsalt_gui_spec}). The background and spectral regions to be extracted may be adjusted, noting that adjustments affect both $O$- and $E$-beams. Once both background regions contain no trace and the spectral region fully contains only the science trace, the reduction may be completed by clicking `OK'.
 
@@ -202,7 +189,6 @@ $ cd (*@\obsdate@*)/sci
 $ conda activate stops
 $ python ~/STOPS . correlate (*@<\textit{O-beam SCI}>@*)
 \end{lstlisting}
-\prgph
 
 The \polsalt\ \texttt{raw Stokes calculation}, \texttt{final Stokes calculation}, and \texttt{results visualisation} can now be completed. For the last time, if the \polsalt\ \gls{GUI} was closed it should now be reopened using \ref{code:polsalt_launch}. With the \gls{GUI} in focus:
 \begin{itemize}
@@ -217,10 +203,8 @@ The \polsalt\ \texttt{raw Stokes calculation}, \texttt{final Stokes calculation}
     \item Check the tick boxes of the ``final Stokes'' image to be visualized in the display box covering the lower half of the \gls{GUI}.
     \item Proceed with the \texttt{visualisation} by clicking `OK'
 \end{itemize}
-\prgph
 
 The \polsalt\ \texttt{visualisation} is interactive and will launch a separate \gls{GUI} (See Figure~\ref{fig:polsalt_gui_vis}). The \gls{GUI} may be used to change the binning and parameters of the plot before saving the plot to a PDF file.
-\prgph
 
 This concludes the minimum working example of the \polsalt\ reduction process when substituting the \polsalt\ \texttt{wavelength calibrations} with those done in \iraf. Aside from the final results, the file structure after reductions should resemble something akin to that provided in Figure~\ref{dir:post_red}.
 
