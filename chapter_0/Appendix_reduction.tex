@@ -11,13 +11,16 @@
 \newcommand{\fit}{03\_fitcoords.cl}
 \newcommand{\tran}{04\_transform.cl}
 
-This section of the Appendix aims to provide a minimum working example of the commands necessary to reduce \polsalt\ data using \stops\ and \iraf. It contains the commands necessary to activate all software and run through the reduction process but makes no attempt at discussion.\footnote{Please see \S~\ref{sec:red_proc} for a discussion of the commands and default `\texttt{<...>}' parameters.}
+This section of the Appendix aims to provide a minimum working example of the commands necessary to reduce \polsalt\ data using \stops\ and \iraf. It contains the commands necessary to activate all software and run through the reduction process but makes no attempt at discussion.
 
 Both \polsalt\ and \iraf\ are launched from the default \gls{CLI} but use independent interfaces during the reduction process. To distinguish which window is in focus, the `\texttt{\$}' token is used for default \gls{CLI} commands while the `\texttt{cl>}' or `\texttt{>\->\->}' tokens are used for \iraf's xgterm single- and multi-line commands.
 
-General instructions for the reduction process which might not necessarily be line-fed commands passed to a \gls{CLI} may either be discussed outside a listing environment or included as part of the listing environment with a preceding `\texttt{\#}' token. Finally, \polsalt\ implements a \gls{GUI} and thus takes no line-fed commands. As such, the instructions when using the \polsalt\ \gls{GUI} follow those of the general instructions with the added exception that they relate to the \gls{GUI}.
+General instructions for the reduction process which might not necessarily be line-fed commands passed to a \gls{CLI} may either be discussed outside a `Listing' environment or included as part of the `Listing' environment with a preceding `\texttt{\#}' token. Finally, \polsalt\ implements a \gls{GUI} and thus takes no line-fed commands. As such, the instructions when using the \polsalt\ \gls{GUI} follow those of the general instructions with the added exception that they relate to the \gls{GUI}.
 
-\vspace{\baselineskip}\hrule
+As a final note, some parameters are distinguished using a `<\texttt{\dots}>' notation. They signify parameters that may vary from reduction to reduction, such as filenames, but which are necessary in each reduction process. Notable uses of this notation include the date of observation, \obsdate\ (formatted `YYYYMMDD'), and the filenames for the science and arc \gls{FITS} files, \oarc\ and \ofiles\ (or \earc\ and \efiles\ for the other polarimetric beam), respectively.
+
+% Reduction Procedure
+\vspace{\baselineskip}\hrule\vspace{\baselineskip}
 
 \begin{figure}[h!]
     \centering
@@ -30,10 +33,11 @@ General instructions for the reduction process which might not necessarily be li
             .3 mxgbpP\obsdate<*>.fits .
         }
     \end{minipage}
-    \caption{The typical minimal file structure of data provided by \gls{SALT}.\protect\footnotemark}
+    \caption{The typical minimal file structure of data provided by \gls{SALT}.}
     \label{dir:pre_red}
 \end{figure}
-\footnotetext{Data located in the `sci' folder is often provided by \gls{SALT} but does not form part of the minimal file structure necessary to begin the reduction process.}
+
+Ensure the data is formatted in a file structure similar to that in Figure~\ref{dir:pre_red}. Data located in the `sci' folder is often provided by \gls{SALT} but does not form part of the minimal file structure necessary to begin the reduction process. If `mxgbp' prefixed data is available, the reduction may be begun starting at Listing~\ref{code:stops_split}.
 
 \begin{lstlisting}[
     language=bash,

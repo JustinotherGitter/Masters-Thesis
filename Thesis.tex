@@ -20,20 +20,20 @@
 % No lineskip in itemize
 \usepackage{enumitem}
 \setlist[itemize]{nosep}
+% \usepackage{setspace} %set space and onehalfspacing set the spacing of the text
+% \onehalfspacing
 
 % Set the styling of captions
 \usepackage[font=scriptsize, labelfont=bf, hypcap=true]{caption}
-%[small, , justification=centering]{caption}
 
 %Math packages
-% \usepackage{array}% Formats tabular environments. Used by math and table packages
 % textcomp is imported by gensymb, adding it suppresses warnings about \perthousand and \micro
 \usepackage{textcomp, gensymb}%Addws: \degree and \micro symbols,among others
 % \usepackage{amsmath} %to get matrixes
 \usepackage{amssymb} %this adds additional math support like \lesssim
 
 \usepackage{comment}
-% \usepackage{mathtools, siunitx}
+% \usepackage{mathtools}
 \usepackage{siunitx}
 
 %Graphic packages
@@ -43,16 +43,14 @@
 % \usepackage{float}% Adds support for floats. As in floating
 % \usepackage[farskip=0pt]{subfig}% programmatic-like interface to create highly customizable subfloats/subfigures
 % \usepackage{wrapfig}% Allows you to wrap text around figures
-% \usepackage[bottom=3cm]{geometry} %this package has something to do with the page layout, since its accidental inclusion the margin size has decreased to a more reasonable size. 
 % \usepackage{rotating}  %this allows the table to be rotated
 % \usepackage{ctable}% enhanced table setup
 % %\usepackage{longtable}% create tables that continues to next page
-% \usepackage{multirow}% Adds support to split a table cell into multiple rows
 
 %Other packages
 \usepackage{svg}
-\usepackage{multirow}
-\usepackage{array}
+\usepackage{multirow} %% Adds support to split a table cell into multiple rows
+\usepackage{array} %% Formats tabular environments. Used by math and table packages
 
 % Allows strikethrough using \sout{text here...}
 \usepackage{ulem}
@@ -63,11 +61,7 @@
 % \usepackage[bottom, hang, flushmargin]{footmisc}% Control footnote layouts
 % \usepackage{xfrac}% Provides sfrac command: $\sfrac{a}{b}$ -> a/b
 % \usepackage{pdfpages}%Include pdf documents in latex. eg. for publications in the appendix
-% \usepackage{setspace} %set space and onehalfspacing set the spacing of the text
-%  \onehalfspacing	
 % \usepackage{upgreek}% Upright greek letters
-% \usepackage[toc]{appendix}%Add appendix to table of contents
-% \usepackage{etoolbox} % for \robustify. Prevents errors that occasionally popup when creating/calling subfigure references
 % \robustify{\subref}% robusify the \subref command so it doesn't break on a whim
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Justin Cooper %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,7 +88,7 @@
 % Allow insertion of syntax highlighted code
 \usepackage{listings}
 \lstloadlanguages{bash, Python}
-\lstset{
+\lstset{%
     backgroundcolor=\color{gray!10!white},
     basicstyle=\ttfamily,
     breaklines=true,
@@ -256,16 +250,18 @@
 \include{chapter_5/Science_applications}
 \include{chapter_6/Conclusions}
 
-\appendix % New chapter count type
-\renewcommand{\thechapter}{\Roman{chapter}} % Roman numerals for Appendix numbering
+\appendix %% New chapter count type
+% Roman numerals for Appendix numbering
+\renewcommand{\thechapter}{\Roman{chapter}}
 \include{chapter_0/Appendix_reduction}
 \include{chapter_0/Appendix_code}
 
-\backmatter % No chapter count type
+\backmatter %% No chapter count type
 \bibliographystyle{plainnat} %{aasjournal} (surnames first) %{humannat}
 \bibliography{references}
 
-\glssetwidest{\gls{STOPS}} % Longest abbreviation so the column width can be set
+% Longest abbreviation so the column width can be set
+\glssetwidest{\gls{STOPS}}
 \printglossary[type=acronym, title={List of Acronyms}] %[type=abbreviations, style=alttree]
 
 \end{document}

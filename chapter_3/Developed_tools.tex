@@ -1,6 +1,6 @@
 \Chapter{Existing and Developed Software}{An overview of \polsalt, \iraf, and \stops} %% custom chapter command (defined in preamble)
 
-This chapter contains an overview of \polsalt\ (\S~\ref{sec:polsalt}) and the limitations faced during \polsalt\ wavelength calibrations (\S~\ref{subsec:polsalt_limits}), a brief overview of the \iraf\ tasks relevant to spectropolarimetric wavelength calibrations (\S~\ref{sec:iraf}), and an overview of \stops, the software developed to supplement the \polsalt\ reduction process (\S~\ref{sec:stops}). Finally, a discussion of the updated reduction process, which may be found in Appendix~\ref{app:reduction}, is included (\S~\ref{sec:red_proc}).
+This chapter contains an overview of \polsalt\ (\S~\ref{sec:polsalt}) and the limitations faced during \polsalt\ wavelength calibrations (\S~\ref{subsec:polsalt_limits}), a brief overview of the \iraf\ tasks relevant to spectropolarimetric wavelength calibrations (\S~\ref{sec:iraf}), and an overview of \stops, the software developed to supplement the \polsalt\ reduction process (\S~\ref{sec:stops}). Finally, a discussion of the updated reduction process, an example of which may be found in Appendix~\ref{app:reduction}, is included (\S~\ref{sec:red_proc}).
 
 \section[\polsalt]{\polsalt\ - \glsxtrlong{POLSALT}} \label{sec:polsalt}
 % http://salt-conference-2018.salt.ac.za/wp-content/uploads/2018/11/Groenewald.pdf
@@ -247,16 +247,19 @@ Cross correlation is useful when dealing with spectropolarimetric spectra as it 
     \label{fig:new_workflow}
 \end{figure}
 
-This section aims to provide a complete overview of the reduction procedure and to discuss all commands necessary to achieve a finalized result. A generalized reduction procedure may be found in Appendix~\ref{app:reduction}. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files, only the commands necessary to complete each step of the reduction process, assuming that the software is running as intended.
+This section aims to provide a comprehensive discussion of the modified reduction procedure, an example of which is provided in Appendix~\ref{app:reduction}. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files: instead, the commands necessary to complete each step of the reduction process are discussed, assuming that the software is running as intended.
 
-It is recommended that \polsalt\ is used through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu. Reductions are possible, however, purely using a \gls{CLI} and the \polsalt\ scripts. It is assumed that usage of \polsalt\ through the \gls{GUI} or \gls{CLI} use the `beta' or `basic' versions, respectively, and that the beta version is launched from the \polsalt\ directory while the basic version is run by copying over the `scripts' folder to the working directory. The \iraf\ terminal, once launched, and the \gls{CLI} supplementary tools are also assumed to be run from the `working' directory. This ensures that commands containing \texttt{<.../>} notate the need for the inclusion of relative paths to the desired file or folder.
+It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu, as seen in Figure~\ref{fig:polsalt_gui}. Reductions are possible, however, purely through the \gls{CLI} using the \polsalt\ `beta' scripts.
 
-Help documentation, primarily describing the possible arguments, is available in the \gls{CLI} for \polsalt\ and the supplementary tools using the \texttt{-h|--help} flag with their respective invocation, such as:
-
-\begin{verbatim}> python <.../>STOPS --help\end{verbatim}
-
-\noindent and for \iraf\ through the \texttt{?|:.help} `cursor mode' options while running an interactive task.
-
+Help documentation, primarily describing the possible arguments, is available in the \gls{CLI} for \stops\ using the \texttt{-h|--help} flag, invoked as:
+\begin{lstlisting}[
+    language=bash,
+    label=code:help_docs]
+$ python ~/STOPS --help
+$ # OR
+$ python ~/STOPS [split|join|correlate|skylines] --help
+\end{lstlisting}
+and for \iraf\ through the \texttt{?|:.help} `cursor commands' while running an interactive task. Help for \polsalt\ may be found at the \polsalt wiki
 
 \subsection{\polsalt\ Pre-reductions}\label{subsec:reduc_pre}
 
@@ -267,81 +270,61 @@ Help documentation, primarily describing the possible arguments, is available in
     \label{fig:polsalt_pre_wav_cal}
 \end{figure}
 
-\todo{Include screenshot of GUI, reference in paragraph}
+The \polsalt\ reduction process requires a file structure such that the raw data received from \gls{SALT} is located in a folder labelled using the observing date with a sub-folder labelled raw, such as \texttt{./YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory named \texttt{./YYYYMMDD/sci/} which contains all the files modified during the reduction process. Multiple reduction procedures using the same data may therefore be separated by simply renaming the \texttt{sci/} sub-folder.
 
-\polsalt\ requires a file structure such that the raw data received from \gls{SALT} is located in a folder labeled using the observing date as well as being in a sub-folder labeled raw, such as \texttt{YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory named \texttt{YYYYMMDD/sci/} which contains all the files modified during the reduction process. This allows for separation of reductions of the same data by simply renaming the \texttt{sci/} directory.
+The \polsalt\ \gls{GUI} may be launched by opening a \gls{CLI} and running Listing~\ref{code:polsalt_launch}. Once the window, depicted in Figure~\ref{fig:polsalt_gui}, has launched, ensure that the first two paths at the top of the window point to the \polsalt\ and working directories. The `raw image reduction' may then be selected from the dropdown and run.
 
-To launch the \gls{GUI}, navigate to the \polsalt\ directory within a \gls{CLI} and run:
-
-\begin{verbatim}> python -W ignore reducepoldataGUI.py &\end{verbatim}
-
-\noindent Once the window has launched, ensure that the first and second paths at the top of the window point to the \polsalt\ and data observation date directories, respectively. The `raw image reduction' may then be selected from the dropdown and run. The \polsalt\ \gls{CLI} command:
-
-\begin{verbatim}> python scripts/reducepoldata.py <.../>YYYYMMDD\end{verbatim}
-
-\noindent then runs the raw image reduction process. It should be noted that the \polsalt\ \gls{CLI} command will, by default, attempt to run the wavelength calibration process. This behavior may be stopped by using the \texttt{-w} flag when running the command.
-
+% Alternately, the \polsalt\ \gls{CLI} command:
+% \begin{verbatim}\end{verbatim}
+% \begin{lstlisting}[
+%     language=bash,
+%     label=code:polsalt_raw]
+% $ python scripts/reducepoldata.py <.../>YYYYMMDD
+% \end{lstlisting}
+% then runs the raw image reduction process. It should be noted that the \polsalt\ \gls{CLI} command will, by default, attempt to run the wavelength calibration process. This behavior may be stopped by using the \texttt{-w} flag when running the command.
 
 \subsection{Wavelength Calibration} \label{subsec:reduc_wav}
 
-The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to be read by \iraf\ and \polsalt\ as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented below, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a good calibration function. This process depends heavily and varies greatly based on the user and as such not all use cases can be discussed herein.
+The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to be read by \iraf\ and \polsalt\ as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented in Listings~\ref{code:stops_split}~-~\ref{code:stops_join}, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a good calibration function. This process depends heavily and varies greatly based on the user and as such not all use cases can be discussed herein.
 
 \subsubsection{Preparing data for \iraf}
 
-Splitting the data in the working \texttt{sci/} directory may then be done through a \gls{CLI} using:
-
-\begin{verbatim}> python <.../>STOPS split\end{verbatim}
-
-The method takes multiple parameters, but default parameters are used where ever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}.
-
+Splitting the data is presented in Lisiting~\ref{code:stops_split}. The \stops\ \texttt{split} method may take multiple parameters, as seen in \S~\ref{sec:stops}, but default parameters should be used where ever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}.
 
 \subsubsection{\iraf\ wavelength calibrations}
 
-Moving on to \iraf, the wavelength calibrations are performed using the tasks described in Listings~\ref{code:iraf_id}-\ref{code:iraf_transform} in Appendix~\ref{app:reduction}, namely \texttt{identify}, \texttt{reidentify}, and \texttt{fitcoords}, and may be run directly in the \iraf\ terminal using:\footnote{Please see the \iraf\ help docs, available at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/iraf.html}, on the relevant tasks for a comprehensive discussion of the parameters available.}
-
-\begin{verbatim}
+The \iraf\ wavelength calibrations are performed using the tasks described in \S~\ref{sec:iraf}, namely \texttt{identify}, \texttt{reidentify}, \texttt{fitcoords}, and optionally \texttt{transform}. In general, these tasks are run directly in the \iraf\ terminal using:\footnote{Please see the \iraf\ help docs, available at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/iraf.html}, on the relevant tasks for a comprehensive discussion of the parameters available.}
+\begin{lstlisting}[
+    language=bash,
+    label=code:iraf_wav_basic]
 cl> identify images
 cl> reidentify reference images
 cl> fitcoords images fitname
-\end{verbatim}
+cl> transform images output fitname
+\end{lstlisting}
+where `images' refer to a list or file containing the \gls{FITS} files relevant to the task, `reference' refers to the \gls{FITS} file previously identified, `fitname' refers to the name to be used for the final two-dimensional wavelength solution, and `output' refers to the new file name for the transformed input images.
 
-\noindent where `images' refer to a list or file containing the \gls{FITS} files relevant to the task, `reference' refers to the \gls{FITS} file previously identified, and `fitname' refers to the name to be used for the final two-dimensional wavelength solution. The interactive tasks take up the bulk of the reduction time as this is where the fine-tuning of the reduction is done, through the use of cursor commands (otherwise known as colon commands), which allow modification of the parameters mid-reduction. Task parameters may, however, be edited beforehand within the \iraf\ terminal using the \texttt{eparam} task, and optionally saved, and quit or run using a combination of \texttt{:w}, and \texttt{:q} or \texttt{:go} cursor commands, respectively.
+The interactive tasks take up the bulk of the reduction time as this is where the fine-tuning of the reduction is done, through the use of cursor (or colon) commands, which allow modification of the parameters mid-reduction. Task parameters may, however, be edited beforehand within the \iraf\ terminal using the \texttt{eparam} task, and optionally saved, and quit or run using a combination of \texttt{:w}, and \texttt{:q} or \texttt{:go} cursor commands, respectively.
 
-It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using:
-
-\begin{verbatim}cl> mkscript script_name.cl\end{verbatim}
-
-\noindent which will interactively ask for the task and parameters to be used. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked. Running an \iraf\ script may be done by running:
-
-\begin{verbatim}cl> cl < script_name.cl\end{verbatim}
-
-\noindent but is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file to the \iraf\ terminal.
-
+The reduction process in Appendix~\ref{app:reduction}, namely Listings~\ref{code:iraf_id}~-~\ref{code:iraf_transform}, describes how to script the tasks for posterity. It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations, but this is not strictly necessary. The scripts are created using the \texttt{mkscript} task which interactively asks for a task to script and parameters to use. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked. Running an \iraf\ script may be done by running:
+\begin{lstlisting}[
+    language=bash,
+    label=code:iraf_script_run]
+    cl> cl < script_name.cl
+\end{lstlisting}
+but is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file to the \iraf\ terminal.
 
 \subsubsection{Preparing data for \polsalt}
 
-The results of the wavelength calibrations may now be parsed back into the format expected by \polsalt. Joining the separate beams with their respective wavelength solutions is once again performed in the \gls{CLI} and is completed using:
+The results of the wavelength calibrations may now be parsed back into the format expected by \polsalt\. Joining the separate beams with their respective wavelength solutions is once again performed in the \gls{CLI}following Listing~\ref{code:stops_join}.
 
-\begin{verbatim}> python <.../>STOPS join\end{verbatim}
+Similar to the \texttt{split} procedure mentioned before, the \texttt{join} procedure has the same defaults defined and so the responsibility falls on a user to keep track of which defaults were changed, and to keep the parameters consistent between the two tasks. Note that \stops\ has logging implemented, see \S~\ref{sec:stops}, and so the onus of tracking the parameters may be passed on to a logging file.
 
-Similar to the \texttt{split} procedure mentioned before, the \texttt{join} procedure has the same defaults defined and so it is up to a user to keep track of which defaults they decided to change and keep them consistent between the two tasks.
+\subsubsection{Sky line checks of the wavelength solution}
 
+The optional \iraf\ \texttt{transform} task and \stops\ \texttt{skylines} method are used to confirm the wavelength solution across the frame, as described in \S~\ref{subsec:stops_skyline}, by comparing known and observed sky line wavelength positions.
 
-\subsubsection{Supplementary checks of the wavelength solution}
-
-The supplementary tools and the optional \iraf\ \texttt{transform} task are used as methods for confirming the wavelength solutions across the frame, against reference wavelength positions, and across the polarization beams. They are all discussed here as this section pertains to the supplementary tools and \iraf\ procedures, but might only be used later on in the reduction process.
-
-The \iraf\ \texttt{transform} task may be run before closing the \iraf\ environment using:
-
-\begin{verbatim}cl> transform images output fitnames\end{verbatim}
-
-\noindent where `images' refers to the same pseudonym as used in the previous \iraf\ task usage examples, `output' refers to the new file name for the transformed input images, and `fitnames' refers to the two-dimensional wavelength function name created by the \texttt{fitcoords} task.
-
-The \texttt{skyline} method is run in the \gls{CLI} using:
-
-\begin{verbatim}> python <.../>STOPS skyline cal_images\end{verbatim}
-
-\noindent where `cal\_images' refers to either the transformed images, prefixed `t', produced by the \iraf\ \texttt{transform} task or the raw wavelength calibrated frames. The difference in the flux conservation when \texttt{skyline} transforms the frames is discussed in \S~\ref{subsec:stops_skyline}. Otherwise, as with all the other supplementary tools, default parameters also describe the overplotting of the $O$- and $E$-beams, the overplotting of the skylines provided by \gls{SALT}, and the cross row variation of a frame.
+The \texttt{skyline} method is run in the \gls{CLI} following Listing~\ref{code:stops_sky}. The difference in the flux conservation when \texttt{skyline} transforms the frames is discussed in \S~\ref{subsec:stops_skyline}. Otherwise, as with the rest of \stops, default parameters describe the overplotting of the $O$- and $E$-beams, the overplotting of the skylines provided by \gls{SALT}, and the cross row variation of a frame.
 
 The \texttt{correlate} method is run in the \gls{CLI} using:
 
@@ -411,4 +394,4 @@ Finally, the reduction process using the \polsalt\ \gls{GUI} is completed by sel
 
 The reduction process when using the \polsalt\ beta version is straightforward and is made even more so by the inclusion of the \gls{GUI}. As no commands are necessary, save for those to launch the \gls{GUI} window, not much can be said of the reduction process. Excellent resources, created by the \gls{SALT} (\todo{\gls{SAAO}?}) team, are available online for any queries about the reduction process using any version of \polsalt, including the \gls{GUI}.\footnote{See the official \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ wiki} or alternative online resources such as \href{https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf}{\gls{SALT} workshop slides}.}
 
-\todo{From appendix → Discuss - all <\dots> params, - salt/py3 env, replace verbatim with listings for consistency, add polsalt GUI spectra extract, add polsalt GUI visualisation}
+\todo{From appendix → Discuss - salt/py3 env, replace verbatim with listings for consistency, add polsalt GUI spectra extract, add polsalt GUI visualisation}
