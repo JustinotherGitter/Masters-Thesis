@@ -276,8 +276,7 @@ $ python ~/STOPS --help
 $ # OR
 $ python ~/STOPS [split|join|correlate|skylines] --help
 \end{lstlisting}
-{\parskip=0pt
-and for \iraf\ through the \texttt{?|:.help} `cursor commands' while running an interactive task. Help for \polsalt\ may be found at the \polsalt\ wiki.}
+{\parskip=0pt and} for \iraf\ through the \texttt{?|:.help} `cursor commands' while running an interactive task. Help for \polsalt\ may be found at the \polsalt\ wiki.
 
 \subsection{\polsalt\ Pre-reductions}\label{subsec:reduc_pre}
 
@@ -288,19 +287,17 @@ and for \iraf\ through the \texttt{?|:.help} `cursor commands' while running an 
     \label{fig:polsalt_pre_wav_cal}
 \end{figure}
 
-The \polsalt\ reduction process requires a file structure such that the raw data received from \gls{SALT} is located in a folder labelled using the observing date with a sub-folder labelled raw, such as \texttt{./YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory named \texttt{./YYYYMMDD/sci/} which contains all the files modified during the reduction process. Multiple reduction procedures using the same data may therefore be separated by simply renaming the \texttt{sci/} sub-folder.
+The \polsalt\ reduction process requires a file structure such that the raw data received from \gls{SALT} is located in a folder labelled using the observing date with a sub-folder labelled raw, such as \texttt{YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory named \texttt{YYYYMMDD/sci/} which contains all the files modified during the reduction process. Multiple reduction procedures using the same data may therefore be separated by simply renaming the \texttt{sci/} sub-folder.
 
 The \polsalt\ \gls{GUI} may be launched by opening a \gls{CLI} and running Listing~\ref{code:polsalt_launch}. Once the window, depicted in Figure~\ref{fig:polsalt_gui}, has launched, ensure that the first two paths at the top of the window point to the \polsalt\ and working directories. The `raw image reduction' may then be selected from the dropdown and run.
 
-% Alternately, the \polsalt\ \gls{CLI} command:
-% \begin{lstlisting}[language=bash]
-% \end{lstlisting}
-% {\parskip=0pt}
-% \begin{lstlisting}[language=bash]
-% $ python ~/polsalt/scripts/reducepoldata.py <.../>YYYYMMDD
-% \end{lstlisting}
-% {\parskip=0pt}
-% then runs the raw image reduction process. It should be noted that the \polsalt\ \gls{CLI} command will, by default, attempt to run the wavelength calibration process. This behavior may be stopped by using the \texttt{-w} flag when running the command.
+Alternatively, if the data already includes `mxgbp' \gls{FITS} files in the \texttt{YYYYMMDD/sci/} working directory, a \gls{CLI} may be used to complete the initial pre-reductions using
+\begin{lstlisting}[language=bash]
+$ cd (*@<\textit{OBSDATE}>@*)/sci
+$ conda activate salt
+$ python ~/polsalt/scripts/reducepoldata_sc.py (*@<\textit{OBSDATE}>@*)
+\end{lstlisting}
+{\parskip=0pt which} will attempt to run the entire reduction process. The script may be quit once the \polsalt\ \texttt{wavelength calibration} \gls{GUI} opens and the rest of the reduction procedure followed.
 
 \subsection{Wavelength Calibration} \label{subsec:reduc_wav}
 
@@ -319,9 +316,7 @@ cl> reidentify reference images
 cl> fitcoords images fitname
 cl> transform images output fitname
 \end{lstlisting}
-{\parskip=0pt
-where `images' refer to a list or file containing the \gls{FITS} files relevant to the task, `reference' refers to the \gls{FITS} file previously identified, `fitname' refers to the name to be used for the final two-dimensional wavelength solution, and `output' refers to the new file name for the transformed input images.
-}
+{\parskip=0pt where} `images' refer to a list or file containing the \gls{FITS} files relevant to the task, `reference' refers to the \gls{FITS} file previously identified, `fitname' refers to the name to be used for the final two-dimensional wavelength solution, and `output' refers to the new file name for the transformed input images.
 
 The interactive tasks take up the bulk of the reduction time as this is where the fine-tuning of the reduction is done, through the use of cursor (or colon) commands, which allow modification of the parameters mid-reduction. Task parameters may, however, be edited beforehand within the \iraf\ terminal using the \texttt{eparam} task, and optionally saved, and quit or run using a combination of \texttt{:w}, and \texttt{:q} or \texttt{:go} cursor commands, respectively.
 
@@ -329,9 +324,7 @@ The reduction process in Appendix~\ref{app:reduction}, namely Listings~\ref{code
 \begin{lstlisting}[language=bash]
 cl> cl < script_name.cl
 \end{lstlisting}
-{\parskip=0pt
-but is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file to the \iraf\ terminal.
-}
+{\parskip=0pt but} is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file to the \iraf\ terminal.
 
 \subsubsection{Preparing data for \polsalt}
 
@@ -349,71 +342,55 @@ A final reminder is made here about the clash of default naming schemes and the 
 \begin{lstlisting}[language=bash]
 $ rm obeam* ebeam*
 \end{lstlisting}
-{\parskip=0pt
-while moving the files to a new subfolder may be done following Listing~\ref{code:gen_clean}.
-}
+{\parskip=0pt while} moving the files to a new subfolder may be done following Listing~\ref{code:gen_clean}.
 
 The \texttt{correlate} method is run in the \gls{CLI} following Listing~\ref{code:stops_corr}. The input of the \texttt{correlate} method takes the output of the \polsalt\ \texttt{spectra extraction} and is thus only run thereafter, but is mentioned here as the completion of the \polsalt\ reductions is not discussed in much depth. If the user wishes to compare the $O$- and $E$-beams of a single file then only that image name is to be provided, otherwise it is assumed that the user wishes to compare the same polarization beam across each file provided.
 
 \subsection{\polsalt\ Reduction Completion} \label{subsec:reduc_com}
-\todo{The order was messed up with the rewrite. Fix and find GUI explanation. Ensure `beta' and basic versions kept separate!}
 
 Reductions may now be completed using \polsalt. The reduction process consists of correcting for the wollaston tilt, extracting the spectra, creating the Stokes files, and displaying the results. The `beta' version of \polsalt\ provides access to a \gls{GUI} but may also be handled entirely through a \gls{CLI} as scripts.
 
+\subsubsection{\polsalt\ beta in a \gls{GUI}}
+
+The reduction process using the \polsalt\ \gls{GUI} is completed by selecting and, when applicable, interactively modifying the reduction step through the interactive windows, one-by-one, from the \glspl{GUI} dropdown menu, as explained in Appendix~\ref{app:reduction} (pages~\pageref{code:stops_corr} onwards). As no commands are necessary, save for those to launch the \gls{GUI}, not much can be said of the reduction process. Excellent resources, created by the \gls{SALT}~/~\gls{SAAO} team, are available online for any queries about the reduction process using any version of \polsalt, including the \gls{GUI}.\footnote{See the official \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ wiki} or alternative online resources such as \href{https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf}{\gls{SALT} workshop slides}.}
+
+% Covering the \gls{CLI} implementation first, the wavelength solution needs to be applied to all the \gls{FITS} files and the tilt introduced by the wollaston prism must be corrected for. This is done through the command:
+% \begin{lstlisting}[language=bash]
+% $ python ~/polsalt/scripts/correct_files.py w*fits
+% \end{lstlisting}
+% {\parskip=0pt where} the `w*.fits' is a wildcard expression that lists the \gls{FITS} files that have a wavelength extension and returns it to the \polsalt\ script.
+
+% Next, the spectra in each \gls{FITS} file are extracted using the command:
+% \begin{lstlisting}[language=bash]
+% $ python ~/polsalt/scripts/pol_extract.py c*.fits \
+% > --yo A --ye B --dy C
+% \end{lstlisting}
+% {\parskip=0pt where} the center row of the spectra for the $O$- and $E$-beams, \texttt{A} and \texttt{B}, as well as the spectral width, \texttt{C}, are compulsory integer values. These may be found through \gls{FITS} viewing software such as ds9\footnote{Available at \protect\url{https://sites.google.com/cfa.harvard.edu/saoimageds9}} or more manually through python.
+
+% The Stokes files may then be calculated and created using the command:
+% \begin{lstlisting}[language=bash]
+% $ python ~/polsalt/scripts/pol_stokes.py
+% \end{lstlisting}
+% {\parskip=0pt which} automatically detects the \gls{FITS} files using the wildcards `e*fits' for raw Stokes and `*\_h*.fits' for the final Stokes calculations. The deletion of the \gls{FITS} files created in the supplementary \texttt{split} method may be deleted in the \texttt{join} method specifically to avoid this naming convention clash, but may also be avoided by providing an alternate default subscript to the supplementary methods.
+
+% Finally, the results of the Stokes calculations may be viewed using the command:
+% \begin{lstlisting}[language=bash]
+% $ python polsalt/specpolview.py *_stokes.fits
+% \end{lstlisting}
+% {\parskip=0pt where} a file name, which may also use a wildcard, is provided as well as optional para\-meters to define the binning (\texttt{bin=[int]A} where [int] refers to an actual integer value), error bars (\texttt{errors=True|False}), choice of plot (\texttt{type=Ipt|Iqu} for unbinned intensity and either polarization percentage and polarization angle, or $Q$ and $U$ Stokes parameters), save options (\texttt{save=[text][plot] where either or both `text' and `plot' may be provided}), and a debug mode (\texttt{debug=False|True}).
+
 \subsubsection{\polsalt\ beta in a \gls{CLI}}
 
-Covering the \gls{CLI} implementation first, the wavelength solution needs to be applied to all the \gls{FITS} files and the tilt introduced by the wollaston prism must be corrected for. This is done through the command:
-\begin{lstlisting}[language=bash]
-$ python ~/polsalt/scripts/correct_files.py w*fits
-\end{lstlisting}
-{\parskip=0pt
-where the `w*.fits' is a wildcard expression that lists the \gls{FITS} files that have a wavelength extension and returns it to the \polsalt\ script.
-}
-
-Next, the spectra in each \gls{FITS} file are extracted using the command:
-\begin{lstlisting}[language=bash]
-$ python ~/polsalt/scripts/pol_extract.py c*.fits --yo A --ye B --dy C
-\end{lstlisting}
-{\parskip=0pt
-where the center row of the spectra for the $O$- and $E$-beams, \texttt{A} and \texttt{B}, as well as the spectral width, \texttt{C}, are integer values and must be provided. These may be found through \gls{FITS} viewing software such as ds9\footnote{Available at \protect\url{https://sites.google.com/cfa.harvard.edu/saoimageds9}} or more manually through python.
-}
-
-The Stokes files may then be calculated and created using the command:
-\begin{lstlisting}[language=bash]
-$ python ~/polsalt/scripts/pol_stokes.py
-\end{lstlisting}
-{\parskip=0pt
-which automatically detects the \gls{FITS} files using the wildcards `e*fits' for raw Stokes and `*\_h*.fits' for the final Stokes calculations. The deletion of the \gls{FITS} files created in the supplementary \texttt{split} method may be deleted in the \texttt{join} method specifically to avoid this naming convention clash, but may also be avoided by providing an alternate default subscript to the supplementary methods.
-}
-
-Finally, the results of the Stokes calculations may be viewed using the command:
-\begin{lstlisting}[language=bash]
-$ python polsalt/specpolview.py *_stokes.fits
-\end{lstlisting}
-{\parskip=0pt
-where a file name, which may also use a wildcard, is provided as well as optional para\-meters to define the binning (\texttt{bin=[int]A} where [int] refers to an actual integer value), error bars (\texttt{errors=True|False}), choice of plot (\texttt{type=Ipt|Iqu} for unbinned intensity and either polarization percentage and polarization angle, or $Q$ and $U$ Stokes parameters), save options (\texttt{save=[text][plot] where either or both `text' and `plot' may be provided}), and a debug mode (\texttt{debug=False|True}).
-}
-
-\subsubsection{\polsalt\ beta in the \gls{GUI}}
-
-Firstly, to run the \polsalt\ beta script, it is suggested to copy over the \texttt{reducepol\-data\_sc.py} to the working directory. In general, running the script as:
+The reduction script may be run using:
 \begin{lstlisting}[language=bash]
 $ python reducepoldata_sc.py YYYYMMDD
 \end{lstlisting}
-{\parskip=0pt
-will run the entire reduction process interactively without the need to select which process to run next. For the purposes of using the script alongside \iraf\ wavelength calibrations, a few changes must be made. The script may either be run with a break inserted before the call to the wavelength calibration, \texttt{specpolwavmap}, and later rerun with all processes before spectral extraction, \texttt{specpolextract\_sc}, commented out, or may be split into two seperate files which cover the pre- and post- wavelength calibration steps and run when appropriate.
-}
+{\parskip=0pt which} will run the entire reduction process interactively without the need to select which process to run next. For the purposes of using the script alongside \iraf\ wavelength calibrations, a few changes must be made. The \texttt{imred} and \texttt{specpolwavmap} function calls before \texttt{specpolextract\_sc} should be commented out, since the raw images have already been processed and the wavelength calibrations were dealt with using \iraf.
 
-The \polsalt\ beta \texttt{reducepoldata\_sc.py} copies a \texttt{script.py} file into the science working directory, `YYYYMMDD/sci/', which provides analysis scripts for analysis and modification of the \polsalt\ beta results. These tools consist of data culling for the final Stokes calculations, text and plot output (the same as the basic version of \polsalt's \texttt{specpolview.py}), relative flux calibration corrections, and synthetic filtering of polarization results. The \polsalt\ analysis scripts may be run using:
+The \polsalt\ beta \texttt{reducepoldata\_sc.py} copies a \texttt{script.py} file into the science working directory, `YYYYMMDD/sci/', which provides analysis scripts for analysis and modification of the \polsalt\ beta results. These tools consist of data culling for the final Stokes calculations, text and plot output, relative flux calibration corrections, and synthetic filtering of polarization results. The \polsalt\ analysis scripts may be run using:
 \begin{lstlisting}[language=bash]
 $ python script.py
 \end{lstlisting}
-{\parskip=0pt
-followed by \texttt{specpolfinalstokes.py}, \texttt{specpolview.py}, \texttt{specpolflux.py}, or \texttt{specpol\-filter.py}, respectively, for the analysis modes mentioned previously. Each mode has its own usage parameters, and it is suggested that a user look up the documentation before attempting to use any of them.\footnote{A description of the use of each analysis script is available from \url{https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version} and is exhaustive enough for general use, but the source code is also made available and should be consulted before usage.}
-}
-
-Finally, the reduction process using the \polsalt\ \gls{GUI} is completed by selecting and, when applicable, interactively modifying the reduction step through the interactive windows, one-by-one, from the \glspl{GUI} dropdown menu.
-
-The reduction process when using the \polsalt\ beta version is straightforward and is made even more so by the inclusion of the \gls{GUI}. As no commands are necessary, save for those to launch the \gls{GUI} window, not much can be said of the reduction process. Excellent resources, created by the \gls{SALT}~/~\gls{SAAO} team, are available online for any queries about the reduction process using any version of \polsalt, including the \gls{GUI}.\footnote{See the official \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ wiki} or alternative online resources such as \href{https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf}{\gls{SALT} workshop slides}.}
+{\parskip=0pt followed} by \texttt{specpolfinalstokes.py}, \texttt{specpolview.py}, \texttt{specpolflux.py}, or \texttt{specpol\-filter.py}, respectively, for the different analysis modes. A description of the use for each mode of the analysis script is available from \url{https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version} and is exhaustive enough for general use, with the source code also publically available for in depth queries.
 
 \todo{From appendix → Discuss - salt/py3 env, add polsalt GUI spectra extract and visualisation windows as images}
