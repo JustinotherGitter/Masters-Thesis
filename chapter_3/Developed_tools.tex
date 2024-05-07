@@ -151,12 +151,23 @@ The \texttt{transform} task is an optional step in the \iraf\ wavelength calibra
 \end{figure}
 
 \section[\stops]{\stops\ - \glsxtrlong{STOPS}} \label{sec:stops}
+% G:/STOPS/ in Windows
+\lstset{inputpath=/media/justin/Transcend/STOPS/}
 
 \stops\ allows an alternate method for wavelength calibrations, namely \iraf, to be used instead of the \polsalt\ \texttt{wavelength calibrations} method. The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining} respectively, is performed by \stops. In order to implement the alternate wavelength calibrations, methods to check the wavelength solution were implemented to verify the sky line positions across the frame and correlate the $O$- and $E$-beams, named \texttt{skyline} and \texttt{correlate}, respectively.
 
 Before creating the supplementary tool's \texttt{split} and \texttt{join} methods used to perform wavelength calibrations in \iraf, it was deemed necessary to create a tool to allow for the comparison of the wavelength solutions between the extracted spectra of the $O$ and $E$ beams, referred to as \texttt{correlate}. The scope was later expanded to allow for the inspection of the cross-row and cross-column axes of the wavelength solutions as the \iraf\ wavelength calibration procedure provided much more flexibility.
 
 \subsection{Splitting}
+
+\lstinputlisting[
+    language=python,
+    style=sourceStyle,
+    caption={The docstring for \textbf{split.py}},
+    label=doc:split,
+    firstline=25,
+    lastline=95]
+{split.py}
 
 % Why necessary
 As mentioned previously, the format of the \gls{FITS} file created by \polsalt\ after basic \gls{CCD} reductions and the format expected by \iraf\ to be used for the wavelength calibrations are incompatible. Basic \polsalt\ \gls{CCD} reductions return \gls{FITS} files which contain a primary header along with extensions for the science, variance, and \gls{BPM} images. These extensions carry the image of the trace for both polarimetry beams (see Figure~\ref{fig:polsalt_pre_wav_cal}), the variance of the image, and a map of the pixels to be masked out, respectively.
@@ -180,6 +191,15 @@ As the intent was always to parse the wavelength function back into \polsalt\ it
 To aid the \iraf\ wavelength calibrations, row cropping and file list creation were introduced into the \texttt{split} method to ignore the regions without a trace either side of the frame, and to list the $O$- and $E$-beam \gls{FITS} files, respectively. The row cropping was decided on as \iraf\ does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
 
 \subsection{Joining}
+
+\lstinputlisting[
+    language=python,
+    style=sourceStyle,
+    caption={The docstring for \textbf{join.py}},
+    label=doc:join,
+    firstline=31,
+    lastline=131]
+{split.py}
 
 As mentioned previously, the format of the \gls{FITS} file created by \iraf\ after wavelength calibrations and that expected by \polsalt\ for the \texttt{spectra extraction} are incompatible. A typical \gls{FITS} file expected by the \polsalt\ \texttt{spectra extraction} contains a primary header along with the various image extensions, the most notable extension being the newly added wavelength extension. All images contained within the extensions have the trace for both polarimetry beams split, as seen in Figure~\ref{fig:polsalt_post_wav_cal} and the headers of each extension updated.
 
@@ -220,6 +240,15 @@ The wavelength extension is masked to remove any impossible wavelengths and also
 
 \subsection{Sky line checks}\label{subsec:stops_skyline}
 
+\lstinputlisting[
+    language=python,
+    style=sourceStyle,
+    caption={The docstring for \textbf{skylines.py}},
+    label=doc:skylines,
+    firstline=29,
+    lastline=86]
+{skylines.py}
+
 \begin{figure}[t]
     \centering
     % \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
@@ -238,6 +267,15 @@ Determining if there is an inaccuracy in the wavelength solution in the spatial 
 As no features, other than the trace of sources exposed across a frame, exist that uniformly cover the wavelength ($x$, horizontal) axis of a typical frame, determining if the horizontal fit of the wavelength solution is more challenging. Thankfully, \gls{SALT} has published a sky line atlas which we may make use of. By first considering the spatial fit of the wavelength solution, it is ensured that the wavelength positions of all sky lines are well-defined. Comparisons may now be made to the wavelength positions measured by \gls{SALT}. Minor variations in the comparison of the sky lines are expected, but any uniform trends indicate an underlying poor fit across the wavelength axis of the wavelength solution. A poor horizontal fit is difficult to spot without supplementary tools and may have drastic adverse effect on the final polarization results.
 
 \subsection{Cross correlation}
+
+\lstinputlisting[
+    language=python,
+    style=sourceStyle,
+    caption={The docstring for \textbf{cross\_correlate.py}},
+    label=doc:corr,
+    firstline=33,
+    lastline=128]
+{cross_correlate.py}
 
 \begin{figure}[t]
     \centering
