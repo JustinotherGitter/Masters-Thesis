@@ -1,70 +1,112 @@
-\documentclass{thesis} %[a4paper, 10pt, aas_macros]{report} %[a4paper, 11pt, oneside]{thesis}
+\documentclass{thesis}
+
 \usepackage{geometry}
 \geometry{a4paper, margin=25mm}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MOVE THE PACKAGE IMPORTS AT YOU OWN RISK!!!
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-
 % Suppress scsl font not found error
 \usepackage{silence}
 \WarningFilter{latexfont}{Font shape `T1/cmr/m/scsl' undefined}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MOVE THE PACKAGE IMPORTS AT YOUR OWN RISK!!! %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Set paragraph seperation and indentation
 \usepackage[%
     skip=1.0\baselineskip plus2pt,
     indent=20pt
 ]{parskip}
-% No lineskip in itemize
+% Remove lineskip in itemize environment
 \usepackage{enumitem}
 \setlist[itemize]{nosep}
-% \usepackage{setspace} %set space and onehalfspacing set the spacing of the text
-% \onehalfspacing
 
 % Set the styling of captions
-\usepackage[font=scriptsize, labelfont=bf, hypcap=true]{caption}
+\usepackage[%
+    font=scriptsize,
+    labelfont=bf,
+    hypcap=true
+]{caption}
 
-%Math packages
-% textcomp is imported by gensymb, adding it suppresses warnings about \perthousand and \micro
-\usepackage{textcomp, gensymb}%Addws: \degree and \micro symbols,among others
-% \usepackage{amsmath} %to get matrixes
-\usepackage{amssymb} %this adds additional math support like \lesssim
-
+% Math packages
+% =============
+% Add: \degree and \micro,etc.
+\usepackage{textcomp, gensymb}
+% To get matrixes
+% \usepackage{amsmath}
+% Add additional math support, eg.: \lesssim
+\usepackage{amssymb}
 \usepackage{comment}
 % \usepackage{mathtools}
 \usepackage{siunitx}
+% Provide sfrac command: $\sfrac{a}{b}$ -> a/b
+% \usepackage{xfrac}
 
-%Graphic packages
-\usepackage{pgfplots} % this allows for custom in-text plots
-\pgfplotsset{compat=1.15}
-\usepackage{graphicx} %this allows you to work with graphics 
-% \usepackage{float}% Adds support for floats. As in floating
-% \usepackage[farskip=0pt]{subfig}% programmatic-like interface to create highly customizable subfloats/subfigures
-% \usepackage{wrapfig}% Allows you to wrap text around figures
-% \usepackage{rotating}  %this allows the table to be rotated
-% \usepackage{ctable}% enhanced table setup
-% %\usepackage{longtable}% create tables that continues to next page
-
-%Other packages
+% Graphic packages
+% ================
 \usepackage{svg}
-\usepackage{multirow} %% Adds support to split a table cell into multiple rows
-\usepackage{array} %% Formats tabular environments. Used by math and table packages
+% Convert eps figures to pdf
+% \usepackage{epstopdf}
+% Allow custom in-text plots
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+% Include pdf documents in latex. Eg. for publications included in the appendix
+% \usepackage{pdfpages}
+% Allows you to work with graphics 
+\usepackage{graphicx}
+% Add support for floats. I.E. floating
+% \usepackage{float}
+% programmatic-like interface to create highly customizable subfloats/subfigures
+% \usepackage[farskip=0pt]{subfig}
+% Allow figure text wrapping
+% \usepackage{wrapfig}
+% Allow rotation of tables
+% \usepackage{rotating}
+% Enhanced table setup
+% \usepackage{ctable}
+% Create tables that may continue to the next page
+% \usepackage{longtable}
+% \graphicspath{{Figures1/}{Figures2/}}
 
-% Allows strikethrough using \sout{text here...}
+% Other packages
+% ==============
+% Add support to split a table cell into multiple rows
+\usepackage{multirow}
+% Format tabular environments. Used by math and table packages
+\usepackage{array}
+% Allow strikethrough, eg.: \sout{example strikethrough text}
 \usepackage{ulem}
-
-% \usepackage{epstopdf}% converts eps figures to pdf
-% \setcounter{secnumdepth}{5}% Section depth. e.g. 1.1.1.1
-\usepackage[hyperfootnotes=false, pdftitle={Cooper Dissertation}]{hyperref}% embed hyperlinks in citations and fig references, but not footnotes (it breaks the footnote command)
-% \usepackage[bottom, hang, flushmargin]{footmisc}% Control footnote layouts
-% \usepackage{xfrac}% Provides sfrac command: $\sfrac{a}{b}$ -> a/b
-% \usepackage{pdfpages}%Include pdf documents in latex. eg. for publications in the appendix
-% \usepackage{upgreek}% Upright greek letters
-% \robustify{\subref}% robusify the \subref command so it doesn't break on a whim
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Justin Cooper %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section depth, e.g.: \S 1.1.1.1
+% \setcounter{secnumdepth}{5}
+% Embed hyperlinks in citations and fig references
+% (it breaks the footnote command)
+\usepackage[hyperfootnotes=false]{hyperref}
+\hypersetup{%
+    pdftitle={Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations},
+    pdfauthor={Justin Cooper},
+    pdfsubject={POLSALT alternate wavelength calibrations, created via IRAF and Python; parsing and validation handled via STOPS.},
+    pdfkeywords={%
+        STOPS,
+        SALT,
+        POLSALT,
+        RSS,
+        IRAF,
+        Python,
+        Wavelength Calibration,
+        Spectropolarimetry,
+        Astrophysics,
+        Astronomy
+    },
+    pdfstartview=Fit,
+}
+% Control footnote layouts
+% \usepackage[bottom, hang, flushmargin]{footmisc}
+% Upright greek letters
+% \usepackage{upgreek}
+% 'robusify' the \subref command so it doesn't break on a whim
+% \robustify{\subref}
+% List 'include' files (compile time improvement)
 \includeonly{
     chapter_0/Abstract,
     chapter_0/Acknowledgements,
@@ -78,13 +120,10 @@
     chapter_6/Conclusions
 }
 
-% Include directory `tree' structures
+% Allow directory `tree' structures
 \usepackage{dirtree}
-
-% Access to relative font resizing for '\Chapter' and listings commands
+% Allow relative font resizing.
 \usepackage{relsize}
-\newcommand{\Chapter}[2]{\chapter[#1]{#1:\\ \smallskip {\smaller[1] #2}}}
-
 % Allow insertion of syntax highlighted code
 \usepackage{listings}
 \lstloadlanguages{bash, Python}
@@ -100,37 +139,73 @@
     literate={~}{{\raisebox{0.5ex}{\texttildelow}}}{1}{-}{-}{1},
     escapeinside={(*@}{@*)},
     postbreak=\mbox{\larger[1]\texttt{>\->\->}\space},
+    rangeprefix=\#----------,
+    rangesuffix=----------,
+    includerangemarker=false,
 }
 \lstdefinestyle{sourceStyle}{%
     belowcaptionskip=1\baselineskip,
     basicstyle=\footnotesize\ttfamily,
     identifierstyle=\color{blue},
     keywordstyle=\bfseries\color{green!40!black},
+    morecomment=[s]{"""}{"""},
     numbers=left,
     numbersep=5pt,
     numberstyle=\tiny\textcolor{gray},
     stringstyle=\ttfamily\color{red!50!brown},
     breakautoindent=true,
     postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
-    tabsize=2,
+    tabsize=4,
 }
 
-
-% Todo and coloring:
 % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX &
 % https://www.overleaf.com/learn/latex/Environments
+% Allow text coloring
 \usepackage{xcolor}
-\newcommand\todo[1]{{\noindent}\textcolor{red}{\textbf{TODO: #1}}}
-% \renewcommand\todo[1]{} % Hide TODO's
 
+% Custom commands
+% ===============
+\newcommand\todo[1]{{\noindent}\textcolor{red}{\textbf{TODO: #1}}}
+% Hide TODO's
+% \renewcommand\todo[1]{}
+\newcommand{\Chapter}[2]{\chapter[#1]{#1:\\ \smallskip {\smaller[1] #2}}}
 \newcommand{\iraf}{\textsc{iraf}}
 \newcommand{\polsalt}{\textsc{polsalt}}
 \newcommand{\stops}{\textsc{stops}}
 
-% Page numbering alteration:
+\newcommand{\angstrom}{\AA}
+\newcommand{\arcmin}{\hbox{$^\prime$} }
+\newcommand{\arcsec}{\hbox{$^{\prime\prime}$} }
+\newcommand{\avg}[1]{\left< #1 \right> }
+\newcommand{\degr}{\hbox{$^\circ$}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+
+% Shorthand for blank line after a paragraph
+% \newcommand{\prgph}%{}%{\vspace{\baselineskip}}
+
+% Use numeric counting for footnotes
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+\newcommand{\super}[1]{\textsuperscript{#1}}
+\newcommand{\rmn}[1]{{\mathrm{#1}}}
+
+% \renewcommand{\arraystretch}{0.8}
+% \renewcommand{\floatpagefraction}{.9}
+
 % https://www.overleaf.com/learn/latex/Page_numbering
+% Page numbering alteration
+% \pagenumbering{Roman}
+
 % Add the \gls command to keep track of acronyms
-\usepackage[nomain, acronym, automake, nonumberlist, nogroupskip, style=super, shortcuts]{glossaries-extra}
+\usepackage[%
+    nomain,
+    acronym,
+    automake,
+    nonumberlist,
+    nogroupskip,
+    style=super,
+    shortcuts
+]{glossaries-extra}
 % Make latex compile acronyms to use in document section
 \makeglossaries[acronym]
 % Set the style of the abbreviation to use in paragraphs
@@ -170,43 +245,22 @@
 \newacronym{VPH}{VPH}{Volume Phase Holographic}
 
 % Set the bibliography references
-\usepackage[round,colon,authoryear,sort&compress]{natbib}
+\usepackage[%
+    round,
+    colon,
+    authoryear,
+    sort&compress
+]{natbib}
 % Add bibliography to ToC
 \usepackage[nottoc]{tocbibind}
-% Set macros for NASA ADS journal abbrevations
+% Set NASA ADS journal abbrevation macros
 \usepackage{journal_macros}
 
-% Fix Underfull \hbox (badness 10000) in Bibliography
+% Fix Bibliography Underfull \hbox (badness 10000)
 \usepackage{etoolbox}
 \apptocmd{\sloppy}{\hbadness 10000\relax}{}{}
 
-% Commands for commonly used symbols
-\newcommand{\angstrom}{\AA}
-\newcommand{\arcmin}{\hbox{$^\prime$} }
-\newcommand{\arcsec}{\hbox{$^{\prime\prime}$} }
-\newcommand{\avg}[1]{\left< #1 \right> }
-\newcommand{\degr}{\hbox{$^\circ$}}
-\newcommand{\matr}[1]{\mathbf{#1}}
-
-% Shorthand for blank line after a paragraph
-% \newcommand{\prgph}%{}%{\vspace{\baselineskip}}
-
-% Use numeric counting for footnotes
-\renewcommand{\thefootnote}{\arabic{footnote}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \graphicspath{{Figures1/}{Figures2/}}
-\newcommand{\super}[1]{\textsuperscript{#1}}
-\newcommand{\rmn}[1]{{\mathrm{#1}}}
-
-
-%Hanno's commands
-%-------------------------------------------------
-
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
-
-% \renewcommand{\arraystretch}{0.8}
-% \renewcommand{\floatpagefraction}{.9}
 
 % \setabbreviationstyle[longonly]{long}
 % \setabbreviationstyle[shortonly]{short}
@@ -214,10 +268,12 @@
 % \newabbreviation[category=longonly]{FSRQ}{FSRQ}{Flat Spectrum Radio Quasar}
 % \newabbreviation[description={Interstellar Magnetic Fields}]{ISMF}{ISMF}{Interstellar Magnetic Fields}
 % \newabbreviation[category=shortonly]{GRB}{GRB}{Gamma-ray Burst}
-%-------------------------------------------------
 
-\title{\textbf{Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations}}
-
+\title{%
+    \textbf{%
+        Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations
+    }
+}
 \author{Justin Cooper}
 \Cdegree{B.Sc. (Hons)}
 \Sdegree{Magister Scienti\ae}
@@ -225,11 +281,10 @@
 \faculty{Faculty of Natural and Agricultural Sciences}
 \department{Department of Physics}
 \country{South Africa}
-
-% TODO: Change \today to MONTH, YEAR at final submission
-\degreedate{Date of submission: \today} 
+\degreedate{Date of submission: \today} % TODO: Change \today to MONTH, YEAR at final submission
 \supervisor{Prof. B. van Soelen}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 \frontmatter
@@ -240,7 +295,6 @@
 \include{chapter_0/Acknowledgements}
 
 \tableofcontents
-
 
 \mainmatter
 \include{chapter_1/Introduction}
@@ -256,12 +310,14 @@
 \include{chapter_0/Appendix_reduction}
 \include{chapter_0/Appendix_code}
 
-\backmatter %% No chapter count type
-\bibliographystyle{plainnat} %{aasjournal} (surnames first) %{humannat}
+% No chapter count type
+\backmatter
+\bibliographystyle{plainnat}
 \bibliography{references}
 
 % Longest abbreviation so the column width can be set
 \glssetwidest{\gls{STOPS}}
-\printglossary[type=acronym, title={List of Acronyms}] %[type=abbreviations, style=alttree]
+\printglossary[type=acronym, title={List of Acronyms}]
+% \printglossary[type=abbreviations, style=alttree]
 
 \end{document}

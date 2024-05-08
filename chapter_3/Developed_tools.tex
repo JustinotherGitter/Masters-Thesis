@@ -107,7 +107,7 @@ Unfortunately, \iraf\ is unable to natively parse the file structure implemented
 \section[\iraf]{\iraf\ - \glsxtrlong{IRAF}} \label{sec:iraf}
 
 % What is IRAF and why necessary
-\iraf\ is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here as every researcher, university, and research group have their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf\ tasks (e.g. the order and type of the polynomial used in \texttt{identify}, etc.).
+\iraf\ is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here as every institute has their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf\ tasks (e.g. the order and type of the polynomial used in \texttt{identify}, etc.).
 
 A useful \iraf\ task that will not be discussed but nevertheless deserves a mention is the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script. It is instrumental as a scripting aid and is what allows \iraf\ its rapid recalibrations of the wavelength solutions.
 
@@ -165,9 +165,9 @@ Before creating the supplementary tool's \texttt{split} and \texttt{join} method
     style=sourceStyle,
     caption={The docstring for \textbf{split.py}},
     label=doc:split,
-    firstline=25,
-    lastline=95]
-{split.py}
+    linerange=split0-split1,
+    gobble=4,
+]{split.py}
 
 % Why necessary
 As mentioned previously, the format of the \gls{FITS} file created by \polsalt\ after basic \gls{CCD} reductions and the format expected by \iraf\ to be used for the wavelength calibrations are incompatible. Basic \polsalt\ \gls{CCD} reductions return \gls{FITS} files which contain a primary header along with extensions for the science, variance, and \gls{BPM} images. These extensions carry the image of the trace for both polarimetry beams (see Figure~\ref{fig:polsalt_pre_wav_cal}), the variance of the image, and a map of the pixels to be masked out, respectively.
@@ -178,7 +178,7 @@ As mentioned previously, the format of the \gls{FITS} file created by \polsalt\ 
 The files with \polsalt\ pre-reductions applied, namely \gls{FITS} files with an `mxgbp' prefix (\S~\ref{sec:polsalt}), are used as the starting point for the supplementary tool's \texttt{split} method. Running \texttt{split} finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each sub-extension of the \gls{FITS} file, and appends all science and header data necessary for wavelength calibration to the relevant \gls{HDU} structure.
 
 % Focus on minimizing changes and optimizing size
-As the intent was always to parse the wavelength function back into \polsalt\ it was decided to keep these temporary \gls{FITS} files as light as possible. This is especially necessary when considering the amount of exposures that are taken for a single spectropolarimetric observation run, and then how the number of observations increases for long term studies.
+As the intent was always to parse the wavelength function back into \polsalt\ it was decided to keep these temporary \gls{FITS} files as small as possible. This is especially necessary when considering the amount of exposures that are taken for a single spectropolarimetric observation run, and then how the number of observations increases for long term studies.
 
 \begin{figure}[t]
     \centering
@@ -188,7 +188,7 @@ As the intent was always to parse the wavelength function back into \polsalt\ it
 \end{figure}
 
 % Any changes from how polsalt would do it
-To aid the \iraf\ wavelength calibrations, row cropping and file list creation were introduced into the \texttt{split} method to ignore the regions without a trace either side of the frame, and to list the $O$- and $E$-beam \gls{FITS} files, respectively. The row cropping was decided on as \iraf\ does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
+To aid the scripting of the \iraf\ wavelength calibration process, the \texttt{split} method also performs row cropping to exclude \gls{CCD} regions with no exposure and creates files listing the split $O$- and $E$-beam \gls{FITS} files to simplify the task inputs. The row cropping was decided on as \iraf\ does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
 
 \subsection{Joining}
 
@@ -197,9 +197,9 @@ To aid the \iraf\ wavelength calibrations, row cropping and file list creation w
     style=sourceStyle,
     caption={The docstring for \textbf{join.py}},
     label=doc:join,
-    firstline=31,
-    lastline=131]
-{split.py}
+    linerange=join0-join1,
+    gobble=4,
+]{join.py}
 
 As mentioned previously, the format of the \gls{FITS} file created by \iraf\ after wavelength calibrations and that expected by \polsalt\ for the \texttt{spectra extraction} are incompatible. A typical \gls{FITS} file expected by the \polsalt\ \texttt{spectra extraction} contains a primary header along with the various image extensions, the most notable extension being the newly added wavelength extension. All images contained within the extensions have the trace for both polarimetry beams split, as seen in Figure~\ref{fig:polsalt_post_wav_cal} and the headers of each extension updated.
 
@@ -245,9 +245,9 @@ The wavelength extension is masked to remove any impossible wavelengths and also
     style=sourceStyle,
     caption={The docstring for \textbf{skylines.py}},
     label=doc:skylines,
-    firstline=29,
-    lastline=86]
-{skylines.py}
+    linerange=sky0-sky1,
+    gobble=4,
+]{skylines.py}
 
 \begin{figure}[t]
     \centering
@@ -273,9 +273,9 @@ As no features, other than the trace of sources exposed across a frame, exist th
     style=sourceStyle,
     caption={The docstring for \textbf{cross\_correlate.py}},
     label=doc:corr,
-    firstline=33,
-    lastline=128]
-{cross_correlate.py}
+    linerange=corr0-corr1,
+    gobble=4,
+]{cross_correlate.py}
 
 \begin{figure}[t]
     \centering
