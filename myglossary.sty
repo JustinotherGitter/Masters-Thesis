@@ -1,0 +1,67 @@
+\ProvidesPackage{myglossary}
+
+% Add the \gls command to keep track of acronyms
+\usepackage[%
+    nomain,
+    acronym,
+    automake,
+    nonumberlist,
+    nogroupskip,
+    style=super,
+    shortcuts
+]{glossaries-extra}
+
+% Make latex compile acronyms to use in document section
+\makeglossaries[acronym]
+
+% Set the style of the abbreviation to use in paragraphs
+\setabbreviationstyle[acronym]{long-short}
+
+% Add any acronyms below
+
+\newacronym{ADC}{ADC}{Analog-to-Digital Converter}
+
+\newacronym{BPM}{BPM}{Bad Pixel Map}
+
+\newacronym{CCD}{CCD}{Charged-Coupled Device}
+\newacronym{cgs}{cgs}{centimeter-gram-second}
+\newacronym{CLI}{CLI}{Command Line Interface}
+\newacronym{CMOS}{CMOS}{Complementary Metal-Oxide-Semiconductor}
+
+\newacronym{FITS}{FITS}{Flexible Image Transport System}
+\newacronym{FWHM}{FWHM}{Full Width at Half Maximum}
+
+\newacronym{GUI}{GUI}{Graphical User Interface}
+
+\newacronym{HDU}{HDU}{Header Data Unit}
+\newacronym{HET}{HET}{Hobby-Eberly Telescope}
+\newacronym{HRS}{HRS}{High Resolution Spectrograph}
+
+\newacronym{IRAF}{\iraf}{Image Reduction and Analysis Facility}
+
+\newacronym{L-45P}{L$-45^\circ$}{Linear $-45^\circ$ Polarized}
+\newacronym{L45P}{L$+45^\circ$}{Linear $+45^\circ$ Polarized}
+\newacronym{LCP}{LCP}{Left Circularly Polarized}
+\newacronym{LHP}{LHP}{Linear Horizontally Polarized}
+\newacronym{LVP}{LVP}{Linear Vertically Polarized}
+
+\newacronym{NIR}{NIR}{Near Infra-Red}
+\newacronym{NIRWALS}{NIRWALS}{Near Infra-Red Washburn Labs Spectrograph}
+
+\newacronym{POLSALT}{\polsalt}{Polarimetric reductions for SALT}
+
+\newacronym{QE}{QE}{Quantum Efficiency}
+
+\newacronym{RCP}{RCP}{Right Circularly Polarized}
+\newacronym{RSS}{RSS}{Robert Stobie Spectrograph}
+
+\newacronym{SAAO}{SAAO}{South African Astronomical Observatory}
+\newacronym{SAC}{SAC}{Spherical Aberration Corrector}
+\newacronym{SALT}{SALT}{Southern African Large Telescope}
+\newacronym{SALTICAM}{SALTICAM}{SALT Imaging Camera}
+\newacronym{SNR}{S/N}{Signal-to-Noise Ratio}
+\newacronym{STOPS}{\stops}{Supplementary Tools for \textsc{polsalt} Spectro\-polarimetry}
+
+\newacronym{UV}{UV}{Ultraviolet}
+
+\newacronym{VPH}{VPH}{Volume Phase Holographic}

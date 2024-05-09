@@ -1,5 +1,7 @@
+% MARK: Appendix - Reduction
 \chapter{The Modified Reduction Process} \label{app:reduction}
 
+% MARK: listings variables
 \newcommand{\obj}{<\textit{OBJ}>}
 \newcommand{\obsdate}{<\textit{OBSDATE}>}
 \newcommand{\oarc}{<\textit{O-beam ARC}>}
@@ -19,7 +21,7 @@ General instructions for the reduction process which might not necessarily be li
 
 As a final note, some parameters are distinguished using a `<\texttt{\dots}>' notation. They signify parameters that may vary from reduction to reduction, such as filenames, but which are necessary in each reduction process. Notable uses of this notation include the date of observation, \obsdate\ (formatted `YYYYMMDD'), and the filenames for the science and arc \gls{FITS} files, \oarc\ and \ofiles\ (or \earc\ and \efiles\ for the other polarimetric beam), respectively.
 
-% Reduction Procedure
+% MARK: Reduction Procedure
 \vspace{\baselineskip}\hrule\vspace{\baselineskip}
 
 \begin{figure}[h!]
@@ -48,7 +50,7 @@ $ conda activate salt
 $ python -W ignore reducepoldataGUI.py &
 \end{lstlisting}
 
-\noindent Refer to Figure~\ref{fig:polsalt_gui} for a depiction of the \polsalt\ \gls{GUI}. To complete the \polsalt\ pre-calibrations and with the \gls{GUI} in focus:
+Refer to Figure~\ref{fig:polsalt_gui} for a depiction of the \polsalt\ \gls{GUI}. To complete the \polsalt\ pre-calibrations and with the \gls{GUI} in focus:
 \begin{itemize}
     \item Ensure that the `POLSALT code directory' is correct
     \item Set the `Top level data directory' to \obsdate

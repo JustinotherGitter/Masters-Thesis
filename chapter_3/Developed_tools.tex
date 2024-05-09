@@ -140,7 +140,7 @@ The process of using \texttt{fitcoords}, follows closely to that of \texttt{iden
 % https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html
 \subsection{Transform}
 
-The \texttt{transform} task is an optional step in the \iraf\ wavelength calibration process but is good to perform since it is quick to run and easy to script. \texttt{transform} converts the ($pixel$, $pixel$) units stored in the exposure to ($wavelength$, $pixel$) units which allows for an immediate check of whether the wavelength solution was found correctly. Any error in the wavelength solution will be easily spotted in the transformed images and may range from minor, such as the arc exposure's arc lines or science exposure's sky lines not being straight across the columns of the frame, to more severe, such as the wavelength solution completely readjusting the frame to an incoherent mess.
+The \texttt{transform} task is an optional step in the \iraf\ wavelength calibration process and is quick to run and easy to script. \texttt{transform} converts the (pixel, pixel) units stored of an exposure to (wavelength, pixel) units which allows for an immediate check as to whether the wavelength solution is consistent across the frame. Any general error in the wavelength solution may be spotted in the transformed images; ranging from minor errors, such as the arc exposure's arc lines or science exposure's sky lines not being straight across the columns of the frame, to more major errors, such as an incorrect wavelength solution skewing the exposure beyond recognition.
 
 \begin{figure}[t]
     \centering
@@ -151,8 +151,6 @@ The \texttt{transform} task is an optional step in the \iraf\ wavelength calibra
 \end{figure}
 
 \section[\stops]{\stops\ - \glsxtrlong{STOPS}} \label{sec:stops}
-% G:/STOPS/ in Windows
-\lstset{inputpath=/media/justin/Transcend/STOPS/}
 
 \stops\ allows an alternate method for wavelength calibrations, namely \iraf, to be used instead of the \polsalt\ \texttt{wavelength calibrations} method. The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining} respectively, is performed by \stops. In order to implement the alternate wavelength calibrations, methods to check the wavelength solution were implemented to verify the sky line positions across the frame and correlate the $O$- and $E$-beams, named \texttt{skyline} and \texttt{correlate}, respectively.
 
@@ -219,22 +217,22 @@ The wavelength extension is created entirely by \texttt{join} by appending a bla
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_pol_wav_ext.pdf}
-    \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline.}
+    \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline. The colorbar displays the wavelength in \AA as displayed by the $O$- and $E$-beam sub-extentions.}
     \label{fig:pol_wav_ext}
 \end{figure}
 
 % cosmic ray cleaning
-\texttt{join} cleans the science extension of cosmic rays using the \texttt{lacosmic} python package which was specifically designed for this purpose and uses the L.A. Cosmic algorithm, based on Laplacian edge detection. The parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, specifically the read noise and gain, as well as a publication and \hyperlink{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions} by the algorithm's creator \citep{lacosmic}. The chosen parameters work well for all but the worst of cosmic rays, as can be seen when comparing Figures~\ref{fig:OE_split} and \ref{fig:polsalt_post_wav_cal}.
+The \texttt{join} method cleans the science extension of cosmic rays using the \texttt{lacosmic} python package which was specifically designed for this purpose and uses the L.A. Cosmic algorithm, based on Laplacian edge detection. The read noise and gain parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, while the rest were chosen following the publication and \hyperlink{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions} by the algorithm's creator, as well as the implementation of the algorithm in the python \texttt{ccdproc} package \citep{lacosmic,astroscrappy}. The chosen parameters work well for all but the worst of cosmic rays, as can be seen when comparing Figures~\ref{fig:OE_split} and \ref{fig:polsalt_post_wav_cal}.
 
 % polsalt specific cropping (wav mask)
 % mask wavelength using wollaston curve for polsalt `parsability'
 % update BPM to reflect wavelength cropping
-The wavelength extension is masked to remove any impossible wavelengths and also corrected for the skewing of the trace introduced by the wollaston element. The skewing must be added to the wavelength extension since \polsalt\ introduces a wollaston correction in the \texttt{spectra extraction} process. Finally, the \gls{BPM} extension is masked to reflect the valid wavelength calibrated regions for both spectropolarimetric beams and the files are saved with the \polsalt\ wavelength calibrated `wmxgbp' prefix.
+The wavelength extension is masked to remove any wavelength regions not calibrated for by \gls{SALT} as well as masked for the skewing of the trace introduced by the wollaston element. The masking of the wollaston skewing is necessary since \polsalt\ introduces a wollaston correction in the \texttt{spectra extraction} process. Finally, the \gls{BPM} extension is masked to reflect the valid wavelength calibrated regions for both spectropolarimetric beams and the files are saved with the \polsalt\ wavelength calibrated `wmxgbp' prefix.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_post_wav_cal.pdf}
-    \caption{The science extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline.}
+    \caption{A representative science extension of a \gls{FITS} file capable of being parsed by the \polsalt\ pipeline. The intensity of the $O$- and $E$-beam sub-extentions are displayed via the greyscale value at each pixel. Note the inclusion of regions of: solid black demarkating the chip gaps, horizontal stripes of high intensity demarkating the trace, and (curved) vertical stripes of high intensity demarkating the sky lines.}
     \label{fig:polsalt_post_wav_cal}
 \end{figure}
 
@@ -258,7 +256,7 @@ The wavelength extension is masked to remove any impossible wavelengths and also
 \end{figure}
 
 
-Sky line comparisons serve two unique yet interconnected services. Firstly, they naively transform the wavelength calibrated frames, without conserving flux, allowing the user confirmation of the variation of sky lines across the columns of the frame, and secondly, they compare the wavelength position of the sky lines with the \gls{SALT} sky lines,\footnote{The first iteration of a sky line atlas is available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}} allowing confirmation of the wavelength solution at positions across the rows of the frame. The file used for skyline comparisons may be the \iraf\ \texttt{transform} \gls{FITS} file, which allows for flux conservation through the `\texttt{flux}' parameter.
+Sky line comparisons serve two unique yet interconnected services. Firstly, they naively transform the wavelength calibrated frames, without conserving flux, allowing the user confirmation of the variation of sky lines across the columns of the frame, and secondly, they compare the observed wavelength positions of the sky lines with the calibrated wavelength positions of the \gls{SALT} sky lines,\footnote{The first iteration of a sky line atlas is available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}} allowing confirmation of the wavelength solution at positions across the rows of the frame. The file used for skyline comparisons may be the \iraf\ \texttt{transform} \gls{FITS} file, which allows for flux conservation through the `\texttt{flux}' parameter.
 
 The \texttt{skyline} method loads the wavelength calibrated files, transforms the frames (as described above) if the frame was not transformed by \iraf's \texttt{transform} method, divides out the continua, compares the cross-column sky lines to those of a single row, and compares the wavelength position of said sky lines to a list of sky lines known by \gls{SALT}.
 
@@ -285,7 +283,7 @@ As no features, other than the trace of sources exposed across a frame, exist th
     \label{fig:stops_corr_eg}
 \end{figure}
 
-The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from one another. The difficulty arises in comparing the two spectra since variations between the two are expected and are what define the Stokes, and thus final polarization, results. The \texttt{correlate} method was created for this express purpose.
+The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from each other. The difficulty arises in comparing the two spectra since variations between the two are expected and are what define the Stokes, and thus final polarization, results. The \texttt{correlate} method was created for this express purpose.
 
 The \texttt{correlate} method loads the provided \gls{FITS} files created by the \polsalt\ \texttt{spectra extraction}, removes the continuum and separates the \gls{CCD} regions. The relevant, separated, \gls{CCD} regions are then cross correlated and any offset between the spectra may be plotted.
 

@@ -1,3 +1,4 @@
+% MARK: Preamble
 \documentclass{thesis}
 
 \usepackage{geometry}
@@ -8,10 +9,6 @@
 % Suppress scsl font not found error
 \usepackage{silence}
 \WarningFilter{latexfont}{Font shape `T1/cmr/m/scsl' undefined}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MOVE THE PACKAGE IMPORTS AT YOUR OWN RISK!!! %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Set paragraph seperation and indentation
 \usepackage[%
@@ -29,8 +26,7 @@
     hypcap=true
 ]{caption}
 
-% Math packages
-% =============
+% MARK: Math packages
 % Add: \degree and \micro,etc.
 \usepackage{textcomp, gensymb}
 % To get matrixes
@@ -43,8 +39,7 @@
 % Provide sfrac command: $\sfrac{a}{b}$ -> a/b
 % \usepackage{xfrac}
 
-% Graphic packages
-% ================
+% MARK: Graphics packages
 \usepackage{svg}
 % Convert eps figures to pdf
 % \usepackage{epstopdf}
@@ -69,8 +64,7 @@
 % \usepackage{longtable}
 % \graphicspath{{Figures1/}{Figures2/}}
 
-% Other packages
-% ==============
+% MARK: Other packages
 % Add support to split a table cell into multiple rows
 \usepackage{multirow}
 % Format tabular environments. Used by math and table packages
@@ -83,9 +77,13 @@
 % (it breaks the footnote command)
 \usepackage[hyperfootnotes=false]{hyperref}
 \hypersetup{%
-    pdftitle={Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations},
+    pdftitle={%
+        Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations
+    },
     pdfauthor={Justin Cooper},
-    pdfsubject={POLSALT alternate wavelength calibrations, created via IRAF and Python; parsing and validation handled via STOPS.},
+    pdfsubject={%
+        POLSALT alternate wavelength calibrations, created via IRAF and Python; parsing and validation handled via STOPS.
+    },
     pdfkeywords={%
         STOPS,
         SALT,
@@ -106,8 +104,9 @@
 % \usepackage{upgreek}
 % 'robusify' the \subref command so it doesn't break on a whim
 % \robustify{\subref}
-% List 'include' files (compile time improvement)
-\includeonly{
+
+% MARK: List 'include' files
+\includeonly{%
     chapter_0/Abstract,
     chapter_0/Acknowledgements,
     chapter_0/Appendix_reduction,
@@ -124,6 +123,8 @@
 \usepackage{dirtree}
 % Allow relative font resizing.
 \usepackage{relsize}
+
+% MARK: Listings package
 % Allow insertion of syntax highlighted code
 \usepackage{listings}
 \lstloadlanguages{bash, Python}
@@ -142,6 +143,7 @@
     rangeprefix=\#----------,
     rangesuffix=----------,
     includerangemarker=false,
+    inputpath=/media/justin/Transcend/STOPS/, % G:/STOPS/ (Windows)
 }
 \lstdefinestyle{sourceStyle}{%
     belowcaptionskip=1\baselineskip,
@@ -163,8 +165,7 @@
 % Allow text coloring
 \usepackage{xcolor}
 
-% Custom commands
-% ===============
+% MARK: Custom commands
 \newcommand\todo[1]{{\noindent}\textcolor{red}{\textbf{TODO: #1}}}
 % Hide TODO's
 % \renewcommand\todo[1]{}
@@ -196,53 +197,8 @@
 % Page numbering alteration
 % \pagenumbering{Roman}
 
-% Add the \gls command to keep track of acronyms
-\usepackage[%
-    nomain,
-    acronym,
-    automake,
-    nonumberlist,
-    nogroupskip,
-    style=super,
-    shortcuts
-]{glossaries-extra}
-% Make latex compile acronyms to use in document section
-\makeglossaries[acronym]
-% Set the style of the abbreviation to use in paragraphs
-\setabbreviationstyle[acronym]{long-short}
-% Add any acronyms below
-\newacronym{ADC}{ADC}{Analog-to-Digital Converter}
-\newacronym{BPM}{BPM}{Bad Pixel Map}
-\newacronym{CCD}{CCD}{Charged-Coupled Device}
-\newacronym{cgs}{cgs}{centimeter-gram-second}
-\newacronym{CLI}{CLI}{Command Line Interface}
-\newacronym{CMOS}{CMOS}{Complementary Metal-Oxide-Semiconductor}
-\newacronym{FITS}{FITS}{Flexible Image Transport System}
-\newacronym{FWHM}{FWHM}{Full Width at Half Maximum}
-\newacronym{GUI}{GUI}{Graphical User Interface}
-\newacronym{HDU}{HDU}{Header Data Unit}
-\newacronym{HET}{HET}{Hobby-Eberly Telescope}
-\newacronym{HRS}{HRS}{High Resolution Spectrograph}
-\newacronym{IRAF}{\iraf}{Image Reduction and Analysis Facility}
-\newacronym{L-45P}{L$-45^\circ$}{Linear $-45^\circ$ Polarized}
-\newacronym{L45P}{L$+45^\circ$}{Linear $+45^\circ$ Polarized}
-\newacronym{LCP}{LCP}{Left Circularly Polarized}
-\newacronym{LHP}{LHP}{Linear Horizontally Polarized}
-\newacronym{LVP}{LVP}{Linear Vertically Polarized}
-\newacronym{NIR}{NIR}{Near Infra-Red}
-\newacronym{NIRWALS}{NIRWALS}{Near Infra-Red Washburn Labs Spectrograph}
-\newacronym{POLSALT}{\polsalt}{Polarimetric reductions for SALT}
-\newacronym{QE}{QE}{Quantum Efficiency}
-\newacronym{RCP}{RCP}{Right Circularly Polarized}
-\newacronym{RSS}{RSS}{Robert Stobie Spectrograph}
-\newacronym{SAAO}{SAAO}{South African Astronomical Observatory}
-\newacronym{SAC}{SAC}{Spherical Aberration Corrector}
-\newacronym{SALT}{SALT}{Southern African Large Telescope}
-\newacronym{SALTICAM}{SALTICAM}{SALT Imaging Camera}
-\newacronym{SNR}{S/N}{Signal-to-Noise Ratio}
-\newacronym{STOPS}{\stops}{Supplementary Tools for \textsc{polsalt} Spectro\-polarimetry}
-\newacronym{UV}{UV}{Ultraviolet}
-\newacronym{VPH}{VPH}{Volume Phase Holographic}
+% MARK: Custom glossary
+\usepackage{myglossary}
 
 % Set the bibliography references
 \usepackage[%
@@ -260,15 +216,15 @@
 \usepackage{etoolbox}
 \apptocmd{\sloppy}{\hbadness 10000\relax}{}{}
 
+% Remnants from Hanno commands
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
-
 % \setabbreviationstyle[longonly]{long}
 % \setabbreviationstyle[shortonly]{short}
-
 % \newabbreviation[category=longonly]{FSRQ}{FSRQ}{Flat Spectrum Radio Quasar}
 % \newabbreviation[description={Interstellar Magnetic Fields}]{ISMF}{ISMF}{Interstellar Magnetic Fields}
 % \newabbreviation[category=shortonly]{GRB}{GRB}{Gamma-ray Burst}
 
+% MARK: 'thesis.cls' constants
 \title{%
     \textbf{%
         Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations
@@ -281,12 +237,12 @@
 \faculty{Faculty of Natural and Agricultural Sciences}
 \department{Department of Physics}
 \country{South Africa}
-\degreedate{Date of submission: \today} % TODO: Change \today to MONTH, YEAR at final submission
+\degreedate{Date of submission: \today} % MARK: TODO: Change \today to MONTH, YEAR at final submission
 \supervisor{Prof. B. van Soelen}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% MARK: Main document
 \begin{document}
+% MARK: Front matter
 \frontmatter
 \maketitle
 \clearpage
@@ -296,6 +252,7 @@
 
 \tableofcontents
 
+% MARK: Main matter
 \mainmatter
 \include{chapter_1/Introduction}
 \include{chapter_2/SALT_RSS_pipeline}
@@ -304,12 +261,15 @@
 \include{chapter_5/Science_applications}
 \include{chapter_6/Conclusions}
 
-\appendix %% New chapter count type
+% MARK: Appendix
+% New chapter count type
+\appendix
 % Roman numerals for Appendix numbering
 \renewcommand{\thechapter}{\Roman{chapter}}
 \include{chapter_0/Appendix_reduction}
 \include{chapter_0/Appendix_code}
 
+% MARK: Back matter
 % No chapter count type
 \backmatter
 \bibliographystyle{plainnat}
