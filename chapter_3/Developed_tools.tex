@@ -21,7 +21,7 @@ This chapter contains an overview of \polsalt\ (\S~\ref{sec:polsalt}) and the li
 Newer versions of the software, aptly named the `beta version' (`version' 23 January 2020), include a \gls{GUI} as well as limited interactivity during key steps in the reduction process and was the version adapted in this study.%
 \footnote{Installation files and instructions for the `beta version' utilizing the \gls{GUI} are available at \url{http://www.saao.ac.za/~ejk/polsalt/code/} in a TAR GZIP file.}
 
-The steps that make up the \polsalt\ reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw Stokes calculations, final Stokes calculations, and visualization of the results. Accurate reductions in each step are crucial for accurate results and thus briefly discussed. Further detailed documentation for help with the reduction steps may be found at the \href{https://github.com/saltastro/polsalt/wiki}{GitHub wiki for \polsalt}.%
+The steps that make up the \polsalt\ reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw Stokes calculations, final Stokes calculations, and visualization of the results. Accurate reductions in each step are crucial for accurate results and thus briefly discussed. Further, detailed documentation for help with the reduction steps may be found at the \href{https://github.com/saltastro/polsalt/wiki}{GitHub wiki for \polsalt}.%
 \footnote{The GitHub wiki for \polsalt\ is available at \url{https://github.com/saltastro/polsalt/wiki}.}
 
 % MARK: Basic CCD reductions
@@ -108,7 +108,7 @@ The chosen solution was to use a well established tool to perform the wavelength
 
 Unfortunately, \iraf\ is unable to natively parse the file structure implemented by \polsalt\ `as is' and formatting of the data structures are necessary for integration purposes. This restructuring works both ways as once the \iraf\ reductions are complete the format must be reformatted to match that of the \polsalt\ \texttt{wavelength calibration} output such that the reduction process may be completed in \polsalt.
 
-Another option to perform the wavelength calibration is Python which allows for a more modern and flexible approach, but is not discussed here. What will be discussed, however, is the structure of the wavelength solutions created through Python to be later reintroduced to the \polsalt\ pipeline. The solutions must be stored such that the `$x$' and `$y$' orders of the solution, as well as all of the coefficients ($C_{00}$ to $C_{xy}$) making up the solution, separated by new lines, are included. The only limitations to the names of the solution files is that they must make mention of the specific $O$- or $E$-beam as well as the wavelength solution type (e.g. `chebyshev', `legendre', etc.).
+Another option to perform the wavelength calibration is Python which allows for a more modern and flexible approach, but is not discussed here. What will be discussed, however, is the structure of the wavelength solutions created through Python to be later reintroduced to the \polsalt\ pipeline. The solutions must be stored such that the `$x$' and `$y$' orders of the solution, as well as all the coefficients ($C_{00}$ to $C_{xy}$) making up the solution, separated by new lines, are included. The only limitations to the names of the solution files is that they must make mention of the specific $O$- or $E$-beam as well as the wavelength solution type (e.g. `Chebyshev', `Legendre', etc.).
 
 \begin{figure}[t]
     \centering
@@ -122,44 +122,50 @@ Another option to perform the wavelength calibration is Python which allows for 
 \section[\iraf]{\iraf\ - \glsxtrlong{IRAF}} \label{sec:iraf}
 
 % What is IRAF and why necessary
-\iraf\ is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here as every institute has their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf\ tasks (e.g. the order and type of the polynomial used in \texttt{identify}, etc.).
+\iraf\ is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here as every institute and individual has their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf\ tasks (e.g. the order and type of the polynomial used in \texttt{identify}, etc.).
 
 A useful \iraf\ task that will not be discussed but nevertheless deserves a mention is the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script. It is instrumental as a scripting aid and is what allows \iraf\ its rapid recalibrations of the wavelength solutions.
 
-For wavelength calibrations of spectropolarimetric observations taken with the \gls{SALT} \gls{RSS}, the relevant tasks, in order, are the \texttt{identify} and \texttt{reidentify} tasks located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and optionally the \texttt{transform} tasks located under the \texttt{noao.twodspec.longslit} package. These tasks produce a two-dimensional wavelength solution and must all be run twice to find the wavelength solutions for each of the two spectropolarimetric beams.
+Help documentation for any of the \iraf\ tasks may be found online under \url{https://iraf.net/irafdocs/} or through the \iraf\ \gls{CLI} through the \texttt{?} or \texttt{:.help} `cursor commands' when running interactive tasks.
+
+For wavelength calibrations of spectropolarimetric observations taken with the \gls{SALT} \gls{RSS}, the relevant tasks, in order, are the \texttt{identify} and \texttt{reidentify} tasks located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and optionally the \texttt{transform} tasks located under the \texttt{noao.twodspec.longslit} package. These tasks produce a two-dimensional wavelength solution and must each be run twice to find the wavelength solutions for both spectropolarimetric beams.
 
 % MARK: Identify
-% What it does -> Primary focus
-% https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.identify.html#h_29
-% https://iraf.net/irafdocs/formats/identify.php
 \subsection{Identify}
 
-The \texttt{identify} task is used to interactively determine a one-dimensional wavelength function across a chosen row of an arc exposure by identifying features in the spectrum with known wavelengths. \texttt{identify} gives the first approximation of the wavelength solution, which is saved to a local database, and is built on in subsequent tasks. It is thus imperative that the initial fit is done well to minimize errors further down the calibration process.
+The \texttt{identify} task is used to interactively determine a one-dimensional wavelength function across a chosen row of an arc exposure by identifying features in the spectrum with known wavelengths.%
+\footnote{Help documentation for the \texttt{identify} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.identify.html}.}
+The task creates the first approximation of the wavelength solution as well as a local database in which the solution is saved.%
+\footnote{The structure of the \texttt{identify} database entry may be found at \url{https://iraf.net/irafdocs/formats/identify.php}.}
+Both solution and database are built on in subsequent tasks, and it is therefore imperative that the initial solution is well-fit to minimize errors further down the calibration process.
 
-The process of using \texttt{identify} consists of identifying known features spanning the entire wavelength range and then removing identified features which negatively impact the wavelength solution. A balance must be found between the number of identified features and parameters of the fit against the deviation of the fit from the known features. % RMS
+The process of using \texttt{identify} consists of identifying known features spanning the entire wavelength range and then removing identified features which negatively impact the wavelength solution. A balance must be found between the number of identified features and parameters of the fit against the deviation of the fit from the known features.% RMS
 
 % MARK: Reidentify
-% https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html#h_29
 \subsection{Reidentify}
 
-The \texttt{reidentify} task is used to run the \texttt{identify} task autonomously and repeatedly across the entirety of the arc exposure at a defined interval. \texttt{reidentify} uses the one-dimensional wavelength solution stored in the database created by the initial \texttt{identify} call and refits the previously identified points to match the new positions of the relevant spectral features. The task may fail based on a number of defined conditions, most common of which is the loss of features as the task moves further from the row at which the user ran \texttt{identify}.
+The \texttt{reidentify} task is used to run the \texttt{identify} task autonomously and repeatedly across the entirety of the arc exposure at a defined interval.%
+\footnote{Help documentation for the \texttt{reidentify} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html}.}
+The task uses the one-dimensional wavelength solution stored in the database created by the initial \texttt{identify} call and refits the previously identified points to match the new positions of the relevant spectral features. The task may fail based on a number of defined conditions, most common of which is the loss of features as the task moves further from the row at which the user ran \texttt{identify}.
 
-When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will provide immediate confirmation of whether the task quit early or not. Regardless of where the task ended, the newly defined wavelength solutions are appended to the local database.
+When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will provide immediate confirmation of whether the task quit early or not. Regardless of whether the task quit successfully or not, the newly defined wavelength solutions are appended to the local database following the \texttt{identify} task database format.
 
 % MARK: Fitcoords
-% https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html
-% https://iraf.net/irafdocs/formats/fitcoords.php
 \subsection{Fitcoords}
 
-The \texttt{fitcoords} task is used to combine the collection of one-dimensional wavelength solutions in the local database to a two-dimensional surface function. This surface function is the final two-dimensional wavelength solution and is what is needed to convert the \iraf\ formatted wavelength calibrated \gls{FITS} files back into the \polsalt\ format.
+The \texttt{fitcoords} task is used to combine the collection of one-dimensional wavelength solutions in the local database to a two-dimensional surface function.%
+\footnote{Help documentation for the \texttt{fitcoords} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html}.}
+This surface function is the final two-dimensional wavelength solution and is what is needed to convert the \iraf\ formatted wavelength calibrated \gls{FITS} files back into the \polsalt\ format. The solution is stored in the local \iraf\ database and is the solution used by the \stops\ \texttt{join} method.%
+\footnote{The structure of the \texttt{fitcoords} database entry may be found at \url{https://iraf.net/irafdocs/formats/fitcoords.php}.}
 
-The process of using \texttt{fitcoords}, follows closely to that of \texttt{identify} and consists of examining the distribution of identified points and eliminating any points that \texttt{reidentify} may have misidentified. By eliminating outliers with bad residuals and modifying the two-dimensional surface function type and degree, the overall error of the fit decreases, matching more closely to what the `true' wavelength solution is.
+The process of using \texttt{fitcoords}, follows closely to that of \texttt{identify} and consists of examining the distribution of identified points and eliminating any points that \texttt{reidentify} may have misidentified. By eliminating outliers with bad residuals and modifying the two-dimensional surface function's type and degree, the overall error of the fit decreases, aligning more closely to what the `true' wavelength solution is.
 
 % MARK: Transform
-% https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html
 \subsection{Transform}
 
-The \texttt{transform} task is an optional step in the \iraf\ wavelength calibration process and is quick to run and easy to script. \texttt{transform} converts the (pixel, pixel) units stored of an exposure to (wavelength, pixel) units which allows for an immediate check as to whether the wavelength solution is consistent across the frame. Any general error in the wavelength solution may be spotted in the transformed images; ranging from minor errors, such as the arc exposure's arc lines or science exposure's sky lines not being straight across the columns of the frame, to more major errors, such as an incorrect wavelength solution skewing the exposure beyond recognition.
+The \texttt{transform} task is the optional final step in the \iraf\ wavelength calibration process and is quick to run and easy to script.%
+\footnote{Help documentation for the \texttt{transform} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html}.}
+The task converts the (pixel, pixel) units of an exposure to (wavelength, pixel) units which allows for an immediate check whether the wavelength solution is consistent across the frame. Any general error in the wavelength solution may be spotted in the transformed images; ranging from minor errors, such as the arc exposure's arc lines or science exposure's sky lines not being straight across the columns of the frame, to more major errors, such as an incorrect wavelength solution skewing the exposure beyond recognition.
 
 \begin{figure}[t]
     \centering
@@ -172,9 +178,15 @@ The \texttt{transform} task is an optional step in the \iraf\ wavelength calibra
 % MARK: STOPS
 \section[\stops]{\stops\ - \glsxtrlong{STOPS}} \label{sec:stops}
 
-\stops\ allows an alternate method for wavelength calibrations, namely \iraf, to be used instead of the \polsalt\ \texttt{wavelength calibrations} method. The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining} respectively, is performed by \stops. In order to implement the alternate wavelength calibrations, methods to check the wavelength solution were implemented to verify the sky line positions across the frame and correlate the $O$- and $E$-beams, named \texttt{skyline} and \texttt{correlate}, respectively.
+\stops\ allows an alternate method for wavelength calibrations, namely \iraf, to be used instead of \polsalt\ \texttt{wavelength calibrations}. The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining}, is performed by the \stops\ \texttt{split} and \texttt{join} methods, respectively. Methods to verify the validity of the alternate wavelength calibrations were added which check the sky line positions across the frame as well as check the correlation of the $O$- and $E$-beams, named \texttt{skyline} and \texttt{correlate}, respectively.
 
 Before creating the supplementary tool's \texttt{split} and \texttt{join} methods used to perform wavelength calibrations in \iraf, it was deemed necessary to create a tool to allow for the comparison of the wavelength solutions between the extracted spectra of the $O$ and $E$ beams, referred to as \texttt{correlate}. The scope was later expanded to allow for the inspection of the cross-row and cross-column axes of the wavelength solutions as the \iraf\ wavelength calibration procedure provided much more flexibility.
+
+% \begin{lstlisting}[language=bash]
+% $ python ~/STOPS --help
+% $ # OR
+% $ python ~/STOPS [split|join|correlate|skylines] --help
+% \end{lstlisting}
 
 % MARK: Split
 \subsection{Splitting}
@@ -239,7 +251,7 @@ The wavelength extension is created entirely by \texttt{join} by appending a bla
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_pol_wav_ext.pdf}
-    \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline. The colorbar displays the wavelength in \AA as displayed by the $O$- and $E$-beam sub-extentions.}
+    \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline. The color bar displays the wavelength in \AA as displayed by the $O$- and $E$-beam sub-extensions.}
     \label{fig:pol_wav_ext}
 \end{figure}
 
@@ -254,7 +266,7 @@ The wavelength extension is masked to remove any wavelength regions not calibrat
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_post_wav_cal.pdf}
-    \caption{A representative science extension of a \gls{FITS} file capable of being parsed by the \polsalt\ pipeline. The intensity of the $O$- and $E$-beam sub-extentions are displayed via the greyscale value at each pixel. Note the inclusion of regions of: solid black demarkating the chip gaps, horizontal stripes of high intensity demarkating the trace, and (curved) vertical stripes of high intensity demarkating the sky lines.}
+    \caption{A representative science extension of a \gls{FITS} file capable of being parsed by the \polsalt\ pipeline. The intensity of the $O$- and $E$-beam sub-extensions are displayed via the grayscale value at each pixel. Note the inclusion of regions of: solid black demarcating the chip gaps, horizontal stripes of high intensity demarcating the trace, and (curved) vertical stripes of high intensity demarcating the sky lines.}
     \label{fig:polsalt_post_wav_cal}
 \end{figure}
 
@@ -331,14 +343,6 @@ Cross correlation is useful when dealing with spectropolarimetric spectra as it 
 This section aims to provide a comprehensive discussion of the modified reduction procedure, an example of which is provided in Appendix~\ref{app:reduction}. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files: instead, the commands necessary to complete each step of the reduction process are discussed, assuming that the software is running as intended.
 
 It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu, as seen in Figure~\ref{fig:polsalt_gui}. Reductions are possible, however, purely through the \gls{CLI} using the \polsalt\ `beta' scripts.
-
-Help documentation, primarily describing the possible arguments, is available in the \gls{CLI} for \stops\ using the \texttt{-h|--help} flag, invoked as:
-\begin{lstlisting}[language=bash]
-$ python ~/STOPS --help
-$ # OR
-$ python ~/STOPS [split|join|correlate|skylines] --help
-\end{lstlisting}
-{\parskip=0pt and} for \iraf\ through the \texttt{?|:.help} `cursor commands' while running an interactive task.
 
 % MARK: Pre-reductions
 \subsection{\polsalt\ Pre-reductions}\label{subsec:reduc_pre}
