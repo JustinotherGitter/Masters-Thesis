@@ -178,18 +178,23 @@ The task converts the (pixel, pixel) units of an exposure to (wavelength, pixel)
 % MARK: STOPS
 \section[\stops]{\stops\ - \glsxtrlong{STOPS}} \label{sec:stops}
 
-\stops\ allows an alternate method for wavelength calibrations, namely \iraf, to be used instead of \polsalt\ \texttt{wavelength calibrations}. The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining}, is performed by the \stops\ \texttt{split} and \texttt{join} methods, respectively. Methods to verify the validity of the alternate wavelength calibrations were added which check the sky line positions across the frame as well as check the correlation of the $O$- and $E$-beams, named \texttt{skyline} and \texttt{correlate}, respectively.
+\stops\ allows an alternate method for wavelength calibrations, namely \iraf, to be used instead of \polsalt's \texttt{wavelength calibration}. The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining}, is performed by the \stops\ \texttt{split} and \texttt{join} methods, respectively.
 
-Before creating the supplementary tool's \texttt{split} and \texttt{join} methods used to perform wavelength calibrations in \iraf, it was deemed necessary to create a tool to allow for the comparison of the wavelength solutions between the extracted spectra of the $O$ and $E$ beams, referred to as \texttt{correlate}. The scope was later expanded to allow for the inspection of the cross-row and cross-column axes of the wavelength solutions as the \iraf\ wavelength calibration procedure provided much more flexibility.
+Methods to verify the validity of the alternate wavelength calibrations were also added to \stops. The first of these methods checks the sky line wavelength ($x$) positions across the frame as well as the variation of the sky lines across the positional ($y$) axis of the frame, named \texttt{skyline}. The second of these methods checks the correlation of the $O$- and $E$-beams either within a given \gls{FITS} file or across multiple files (comparing only the $O$- and $E$-beams for each), named \texttt{correlate}. With these two additional methods, a user is able to verify that the wavelength solutions do not conflict across the $O$- and $E$-beams and that no unexpected deviations are included in the wavelength solutions.
 
-% \begin{lstlisting}[language=bash]
-% $ python ~/STOPS --help
-% $ # OR
-% $ python ~/STOPS [split|join|correlate|skylines] --help
-% \end{lstlisting}
+Help for the \stops\ \gls{CLI} commands may be found either by running:
+\begin{lstlisting}[language=bash]
+$ python ~/STOPS --help
+\end{lstlisting}
+{\parskip=0pt or} in Listing~\ref{source:main}.
+Help for the \stops\ specific mode commands may be found by running:
+\begin{lstlisting}[language=bash]
+$ python ~/STOPS [split|join|correlate|skylines] --help
+\end{lstlisting}
+{\parskip=0pt Finally}, help documentation for the \stops\ methods may be found within this section (Listings~\ref{doc:split} to \ref{doc:corr}) or in \S~\ref{app:code}.
 
 % MARK: Split
-\subsection{Splitting}
+\subsection{Splitting} \label{subsec:stops_split}
 
 \lstinputlisting[
     language=python,
@@ -203,7 +208,7 @@ Before creating the supplementary tool's \texttt{split} and \texttt{join} method
 % Why necessary
 As mentioned previously, the format of the \gls{FITS} file created by \polsalt\ after basic \gls{CCD} reductions and the format expected by \iraf\ to be used for the wavelength calibrations are incompatible. Basic \polsalt\ \gls{CCD} reductions return \gls{FITS} files which contain a primary header along with extensions for the science, variance, and \gls{BPM} images. These extensions carry the image of the trace for both polarimetry beams (see Figure~\ref{fig:polsalt_pre_wav_cal}), the variance of the image, and a map of the pixels to be masked out, respectively.
 
-\iraf\ is capable of dealing with multiple traces in an extension or lists of input files but is not as proficient when dealing with multiple wavelength solutions contained in a single extension (as expected by the \polsalt\ \texttt{wavelength calibration}) or extensions containing sub-extensions (as expected by the \polsalt\ \texttt{spectral extraction}). To simplify the \iraf\ reduction procedure it was decided to separate the perpendicular polarization beams into their own files.
+\iraf\ is capable of dealing with multiple traces in an extension or lists of input files but is not as capable when dealing with multiple wavelength solutions contained in a single extension (as expected by the \polsalt\ \texttt{wavelength calibration}) or extensions containing sub-extensions (as expected by the \polsalt\ \texttt{spectral extraction}). To simplify the \iraf\ reduction procedure it was decided to separate the perpendicular polarization beams into their own files.
 
 % What it does -> Primary focus
 The files with \polsalt\ pre-reductions applied, namely \gls{FITS} files with an `mxgbp' prefix (\S~\ref{sec:polsalt}), are used as the starting point for the supplementary tool's \texttt{split} method. Running \texttt{split} finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each sub-extension of the \gls{FITS} file, and appends all science and header data necessary for wavelength calibration to the relevant \gls{HDU} structure.
@@ -219,10 +224,12 @@ As the intent was always to parse the wavelength function back into \polsalt\ it
 \end{figure}
 
 % Any changes from how polsalt would do it
-To aid the scripting of the \iraf\ wavelength calibration process, the \texttt{split} method also performs row cropping to exclude \gls{CCD} regions with no exposure and creates files listing the split $O$- and $E$-beam \gls{FITS} files to simplify the task inputs. The row cropping was decided on as \iraf\ does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task. Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
+To aid the scripting of the \iraf\ wavelength calibration process, the \texttt{split} method also performs row cropping to exclude \gls{CCD} regions with no exposure and creates files listing the split $O$- and $E$-beam \gls{FITS} files to simplify the \iraf\ task inputs.%
+\footnote{Row cropping was decided on as \iraf\ does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task.}
+Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
 
 % MARK: Join
-\subsection{Joining}
+\subsection{Joining} \label{subsec:stops_join}
 
 \lstinputlisting[
     language=python,
@@ -271,7 +278,7 @@ The wavelength extension is masked to remove any wavelength regions not calibrat
 \end{figure}
 
 % MARK: Skyline
-\subsection{Sky line checks}\label{subsec:stops_skyline}
+\subsection{Sky line checks} \label{subsec:stops_skyline}
 
 \lstinputlisting[
     language=python,
@@ -301,7 +308,7 @@ Determining if there is an inaccuracy in the wavelength solution in the spatial 
 As no features, other than the trace of sources exposed across a frame, exist that uniformly cover the wavelength ($x$, horizontal) axis of a typical frame, determining if the horizontal fit of the wavelength solution is more challenging. Thankfully, \gls{SALT} has published a sky line atlas which we may make use of. By first considering the spatial fit of the wavelength solution, it is ensured that the wavelength positions of all sky lines are well-defined. Comparisons may now be made to the wavelength positions measured by \gls{SALT}. Minor variations in the comparison of the sky lines are expected, but any uniform trends indicate an underlying poor fit across the wavelength axis of the wavelength solution. A poor horizontal fit is difficult to spot without supplementary tools and may have drastic adverse effect on the final polarization results.
 
 % MARK: Correlate
-\subsection{Cross correlation}
+\subsection{Cross correlation} \label{subsec:stops_correlate}
 
 \lstinputlisting[
     language=python,

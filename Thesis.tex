@@ -21,9 +21,11 @@
 
 % Set the styling of captions
 \usepackage[%
+    hypcap=true,
     font=scriptsize,
     labelfont=bf,
-    hypcap=true
+    figurename=Figure,
+    tablename=Table,
 ]{caption}
 
 % MARK: Math packages
@@ -98,6 +100,13 @@
     },
     pdfstartview=Fit,
 }
+\def\sectionautorefname{\S}
+\def\subsectionautorefname{\S}
+\def\subsubsectionautorefname{\S}
+% \providecommand*{\listingautorefname}{Listing}
+% \renewcommand{\lstlistingname}{Code}
+% \providecommand*{\lstlistingautorefname}{code}
+
 % Control footnote layouts
 % \usepackage[bottom, hang, flushmargin]{footmisc}
 % Upright greek letters
