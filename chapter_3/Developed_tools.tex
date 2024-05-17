@@ -11,8 +11,8 @@ This chapter contains an overview of \polsalt\ (\S~\ref{sec:polsalt}) and the li
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
-    \caption{The layout of the \polsalt\ \gls{GUI}}
+    \includegraphics[width = 0.8\textwidth]{figures/3_polsalt_GUI.png}
+    \caption{The layout of the \polsalt\ \gls{GUI}, including the contents of the reduction steps accessible via the dropdown box. Note that there is no trailing forward slash after the `Top level data directory'. Figure created from local instance of the \polsalt\ \gls{GUI}.}
     \label{fig:polsalt_gui}
 \end{figure}
 
@@ -39,9 +39,8 @@ Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpol
 
 \begin{figure}[t]
     \centering
-    % \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
-    \todo{Include \polsalt\ spectra extraction GUI}
-    \caption{The layout of the interactive \polsalt\ \texttt{spectra extraction} \gls{GUI}}
+    \includegraphics[width = 0.8\textwidth]{figures/3_polsalt_tilt.png}
+    \caption{The layout of the interactive \polsalt\ \texttt{spectra extraction} \gls{GUI} after selecting the `update tilt correction and windows' button along the bottom border of the window. Figure created from local instance of the \polsalt\ \gls{GUI}.}
     \label{fig:polsalt_gui_spec}
 \end{figure}
 
@@ -69,9 +68,8 @@ The Final Stokes calculations are performed via \textbf{specpolfinalstokes.py} a
 
 \begin{figure}[t]
     \centering
-    % \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
-    \todo{Include \polsalt\ visualisation GUI}
-    \caption{The layout of the interactive \polsalt\ \texttt{visualisation} \gls{GUI}}
+    \includegraphics[width = 0.8\textwidth]{figures/3_polsalt_viz.png}
+    \caption{The layout of the interactive \polsalt\ \texttt{visualization} \gls{GUI} after selecting the `Plot results' button along the bottom border of the window. Figure created from local instance of the \polsalt\ \gls{GUI}.}
     \label{fig:polsalt_gui_vis}
 \end{figure}
 
@@ -79,8 +77,8 @@ Plotting the results of the spectropolarimetric reduction process uses \textbf{s
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_plot.pdf}
-    \caption{A typical plot resulting from the reduction process. Figure adapted from \citep{cooper_HEASA2022}}
+    \includegraphics[width = 0.8\textwidth]{figures/3_polsalt_plot.pdf}
+    \caption{A typical plot resulting from the reduction process. Figure adapted from \citep{cooper_HEASA2022}.}
     \label{fig:polsalt_plot}
 \end{figure}
 
@@ -151,7 +149,7 @@ The task uses the one-dimensional wavelength solution stored in the database cre
 When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will provide immediate confirmation of whether the task quit early or not. Regardless of whether the task quit successfully or not, the newly defined wavelength solutions are appended to the local database following the \texttt{identify} task database format.
 
 % MARK: Fitcoords
-\subsection{Fitcoords}
+\subsection{Fitcoords} \label{subsec:pol_fitcoords}
 
 The \texttt{fitcoords} task is used to combine the collection of one-dimensional wavelength solutions in the local database to a two-dimensional surface function.%
 \footnote{Help documentation for the \texttt{fitcoords} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html}.}
@@ -161,7 +159,7 @@ This surface function is the final two-dimensional wavelength solution and is wh
 The process of using \texttt{fitcoords}, follows closely to that of \texttt{identify} and consists of examining the distribution of identified points and eliminating any points that \texttt{reidentify} may have misidentified. By eliminating outliers with bad residuals and modifying the two-dimensional surface function's type and degree, the overall error of the fit decreases, aligning more closely to what the `true' wavelength solution is.
 
 % MARK: Transform
-\subsection{Transform}
+\subsection{Transform} \label{subsec:iraf_transform}
 
 The \texttt{transform} task is the optional final step in the \iraf\ wavelength calibration process and is quick to run and easy to script.%
 \footnote{Help documentation for the \texttt{transform} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html}.}
@@ -170,8 +168,8 @@ The task converts the (pixel, pixel) units of an exposure to (wavelength, pixel)
 \begin{figure}[t]
     \centering
     % \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
-    \todo{Include poor and good transformed image examples}
-    \caption{Examples of a terrible-, poorly-, and well-fit wavelength solution as presented by the \iraf\ \texttt{transform} task.}
+    \todo{Include poor, dubious, and well transformed image examples}
+    \caption{Examples of a terrible-, poorly-, and well-fit wavelength solution. Figures created by the \iraf\ \texttt{transform} task.}
     \label{fig:iraf_tran_eg}
 \end{figure}
 
@@ -219,13 +217,13 @@ As the intent was always to parse the wavelength function back into \polsalt\ it
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_OEsplit.pdf}
-    \caption{The split $O$- and $E$-beams as handed to \iraf.}
+    \caption{The split $O$- and $E$-beams as handed to \iraf. Figure created from the \stops\ \texttt{split} method output.}
     \label{fig:OE_split}
 \end{figure}
 
 % Any changes from how polsalt would do it
 To aid the scripting of the \iraf\ wavelength calibration process, the \texttt{split} method also performs row cropping to exclude \gls{CCD} regions with no exposure and creates files listing the split $O$- and $E$-beam \gls{FITS} files to simplify the \iraf\ task inputs.%
-\footnote{Row cropping was decided on as \iraf\ does not handle the empty rows well, specifically when it comes to the \texttt{reidentify} task.}
+\footnote{Row cropping was decided on as \iraf\ does not handle rows with no exposure well, specifically when it comes to the \texttt{reidentify} task.}
 Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
 
 % MARK: Join
@@ -240,30 +238,29 @@ Otherwise, defaults, such as which row to split the beams along, were kept as cl
     gobble=4,
 ]{join.py}
 
-As mentioned previously, the format of the \gls{FITS} file created by \iraf\ after wavelength calibrations and that expected by \polsalt\ for the \texttt{spectra extraction} are incompatible. A typical \gls{FITS} file expected by the \polsalt\ \texttt{spectra extraction} contains a primary header along with the various image extensions, the most notable extension being the newly added wavelength extension. All images contained within the extensions have the trace for both polarimetry beams split, as seen in Figure~\ref{fig:polsalt_post_wav_cal} and the headers of each extension updated.
+As mentioned previously, the format of the \gls{FITS} file created by \iraf\ after wavelength calibrations and that expected by \polsalt\ for the \texttt{spectra extraction} are incompatible. A typical \gls{FITS} file expected by the \polsalt\ \texttt{spectra extraction} contains a primary header along with the various image extensions, the most notable extension being the newly created wavelength extension. All images contained within the extensions have the trace for both polarimetry beams split, as seen in Figure~\ref{fig:polsalt_post_wav_cal} and the headers of each extension updated.
 
 All pieces necessary to recreate the \polsalt\ wavelength calibrated \gls{FITS} files exist once the \iraf\ procedure to generate the database entry for the two-dimensional wavelength solution is complete. The \texttt{join} method of the supplementary tools is used at this point and, once run, automatically creates the desired files.
 
 Running \texttt{join} finds all the relevant \gls{FITS} and local database files necessary to run the \polsalt\ \texttt{spectra extraction}, creates an empty \gls{HDU} structure for each pair of matching spectropolarimetric beams, copies over the extensions and their respective image and header information, checks and corrects the trace splitting to best match that of \polsalt, appends a new extension and parses the database wavelength solutions into the \polsalt\ intensity-wavelength format, cleans the science extension for cosmic rays, and does some house-cleaning to align the finalized \gls{FITS} files to those created when using the `pure' \polsalt\ pipeline.
 
+The wavelength database file, described in \autoref{subsec:pol_fitcoords}, is parsed by \texttt{join} which creates a function that provides the corresponding wavelength when provided with a ($pixel$, $pixel$) position. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in Figure~\ref{fig:pol_wav_ext}. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls{BPM} extensions to $0$.
+
 % update headers
 % copy data, double check shape change
-The \gls{FITS} files created by the \texttt{join} method and \polsalt\ pipeline's \texttt{wavelength calibration} methods are almost identical. The only difference between the \gls{FITS} files is the shape of the images stored within them, reflected also through specifically the `NAXIS2' header keyword, since \texttt{split} introduces a cropping. It was deemed unnecessary to reintroduce the cropped region as it is promptly discarded in the following \polsalt\ \texttt{spectra extraction} process and raises no issues when left out. Otherwise, both the \texttt{join} method and \polsalt\ \texttt{wavelength calibration} update the headers to reflect the new shape of the data and data type, through header keywords `CTYPE3' and `BITPIX', respectively.
-
-% append new extensions
-% How db converted to wav func
-% parse and save wavelength functions as image
-The wavelength extension is created entirely by \texttt{join} by appending a blank extension to the \gls{HDU} and filling the image pixels with their respective wavelength value. This is done entirely by \texttt{join} which parses the wavelength database file and creates a function which provides the corresponding wavelength when provided with a ($pixel$, $pixel$) position. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in Figure~\ref{fig:pol_wav_ext}. Note that regions that fall outside the trace are masked by setting the wavelength extensions corresponding pixel value to $0$.
+The \gls{FITS} files created by the \texttt{join} method and \polsalt\ pipeline's \texttt{wavelength calibration} method are almost identical. The only difference between the \gls{FITS} files is the shape of the images stored within them, reflected also through specifically the `NAXIS2' header keyword, since \texttt{split} introduces a cropping. It was deemed unnecessary to reintroduce the cropped region as it is promptly discarded in the following \polsalt\ \texttt{spectra extraction} process and raises no issues when left out. Otherwise, both the \texttt{join} method and \polsalt\ \texttt{wavelength calibration} update the headers to reflect the new shape of the data and data type, through header keywords `CTYPE3' and `BITPIX', respectively.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_pol_wav_ext.pdf}
-    \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline. The color bar displays the wavelength in \AA as displayed by the $O$- and $E$-beam sub-extensions.}
+    \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline. The color bar displays the wavelength in \AA\ as displayed by the $O$- and $E$-beam sub-extensions. Figure created from the \stops\ \texttt{join} method output.}
     \label{fig:pol_wav_ext}
 \end{figure}
 
 % cosmic ray cleaning
-The \texttt{join} method cleans the science extension of cosmic rays using the \texttt{lacosmic} python package which was specifically designed for this purpose and uses the L.A. Cosmic algorithm, based on Laplacian edge detection. The read noise and gain parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, while the rest were chosen following the publication and \hyperlink{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions} by the algorithm's creator, as well as the implementation of the algorithm in the python \texttt{ccdproc} package \citep{lacosmic,astroscrappy}. The chosen parameters work well for all but the worst of cosmic rays, as can be seen when comparing Figures~\ref{fig:OE_split} and \ref{fig:polsalt_post_wav_cal}.
+The \texttt{join} method cleans the science extension of cosmic rays using the \texttt{lacosmic} python package which was specifically designed for this purpose and uses the L.A. Cosmic algorithm, based on Laplacian edge detection. The read noise and gain parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, while the rest were chosen following the publication and \href{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions}%
+\footnote{Suggested parameters for the \texttt{lacosmic} algorithm may be found at \url{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}.}
+by the algorithm's creator, as well as the implementation of the algorithm in the python \texttt{ccdproc} package \citep{lacosmic,astroscrappy}. The chosen parameters work well for most cosmic rays, as can be seen when comparing Figures~\ref{fig:OE_split} and \ref{fig:polsalt_post_wav_cal}, but may be modified as needed.
 
 % polsalt specific cropping (wav mask)
 % mask wavelength using wollaston curve for polsalt `parsability'
@@ -273,7 +270,7 @@ The wavelength extension is masked to remove any wavelength regions not calibrat
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_post_wav_cal.pdf}
-    \caption{A representative science extension of a \gls{FITS} file capable of being parsed by the \polsalt\ pipeline. The intensity of the $O$- and $E$-beam sub-extensions are displayed via the grayscale value at each pixel. Note the inclusion of regions of: solid black demarcating the chip gaps, horizontal stripes of high intensity demarcating the trace, and (curved) vertical stripes of high intensity demarcating the sky lines.}
+    \caption{A representative science extension of a \gls{FITS} file capable of being parsed by the \polsalt\ pipeline. The intensity of the $O$- and $E$-beam sub-extensions are displayed via the grayscale value at each pixel. Note the inclusion of regions of: solid black demarcating the chip gaps, horizontal stripes of high intensity demarcating the trace, and (curved) vertical stripes of high intensity demarcating the sky lines. Figure created from the \stops\ \stops{join} method output.}
     \label{fig:polsalt_post_wav_cal}
 \end{figure}
 
@@ -293,17 +290,17 @@ The wavelength extension is masked to remove any wavelength regions not calibrat
     \centering
     % \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
     \todo{Include example of skyline result}
-    \caption{The resultant output plot of the \stops\ \texttt{skylines} method.}
+    \caption{The resultant output plot of the \stops\ \texttt{skylines} method. Figure created via the \stops\ \texttt{skyline} method.}
     \label{fig:stops_sky_eg}
 \end{figure}
 
-Sky line comparisons serve two unique yet interconnected services. Firstly, they naively transform the wavelength calibrated frames, without conserving flux, allowing the user confirmation of the variation of sky lines across the columns of the frame, and secondly, they compare the observed wavelength positions of the sky lines with the calibrated wavelength positions of the \gls{SALT} sky lines,%
+Sky line comparisons serve two unique yet interconnected functions. Firstly, they naively transform the wavelength calibrated frames, without conserving flux, allowing the user to confirm the variation of sky lines across the columns of the frame, and secondly, they compare the observed wavelength positions of the sky lines with the calibrated wavelength positions of the \gls{SALT} sky lines,%
 \footnote{The first iteration of a sky line atlas is available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
-allowing confirmation of the wavelength solution at positions across the rows of the frame. The file used for skyline comparisons may be the \iraf\ \texttt{transform} \gls{FITS} file, which allows for flux conservation through the `\texttt{flux}' parameter.
+allowing confirmation of the wavelength solution at positions across the rows of the frame. The file used for skyline comparisons may either be the \iraf\ \texttt{transform} \gls{FITS} file, which allows for flux conservation through the `\texttt{flux}' parameter, or the `wmxgbp' files created by \texttt{join}.
 
-The \texttt{skyline} method loads the wavelength calibrated files, transforms the frames (as described above) if the frame was not transformed by \iraf's \texttt{transform} method, divides out the continua, compares the cross-column sky lines to those of a single row, and compares the wavelength position of said sky lines to a list of sky lines known by \gls{SALT}.
+The \texttt{skyline} method loads the wavelength calibrated files, transforms the frames if the frame was not transformed by \iraf's \texttt{transform} method, removes the continuum, compares the cross-column sky lines to those of a single row, and compares the wavelength position of said sky lines to the reference sky lines as measured by \gls{SALT}.
 
-Determining if there is an inaccuracy in the wavelength solution in the spatial ($y$, or vertical) axis is relatively straightforward as a perfect wavelength solution will remove any horizontal variation of the sky lines. Any horizontal deviation of the sky lines after transformation reflects a poor fit of the wavelength solution. Any vertical variation may be found through a quick visual inspection of a transformed frame, as mentioned previously, but may be inspected more thoroughly using the \texttt{skyline} method. As mentioned, the sky lines are averaged and compared to sky lines of a typical row. A wavelength solution exhibiting a poor fit across the spatial axis will display broader averaged sky lines than that of a relatively good fit.
+Determining if there is any inaccuracy in the wavelength solution in the spatial ($y$, or vertical) axis is relatively straightforward as a perfect wavelength solution will remove any horizontal variation of the sky lines. Any horizontal deviation of the sky lines after transformation reflects a poor fit of the wavelength solution. Any vertical variation may be found through a quick visual inspection of a transformed frame, as mentioned in \autoref{subsec:iraf_transform}, but may be inspected more thoroughly using the \texttt{skyline} method. As mentioned, the sky lines are averaged and compared to sky lines of a typical row. A wavelength solution exhibiting a poor fit across the spatial axis will display broader averaged sky lines than those of a relatively good fit.
 
 As no features, other than the trace of sources exposed across a frame, exist that uniformly cover the wavelength ($x$, horizontal) axis of a typical frame, determining if the horizontal fit of the wavelength solution is more challenging. Thankfully, \gls{SALT} has published a sky line atlas which we may make use of. By first considering the spatial fit of the wavelength solution, it is ensured that the wavelength positions of all sky lines are well-defined. Comparisons may now be made to the wavelength positions measured by \gls{SALT}. Minor variations in the comparison of the sky lines are expected, but any uniform trends indicate an underlying poor fit across the wavelength axis of the wavelength solution. A poor horizontal fit is difficult to spot without supplementary tools and may have drastic adverse effect on the final polarization results.
 
@@ -321,21 +318,20 @@ As no features, other than the trace of sources exposed across a frame, exist th
 
 \begin{figure}[t]
     \centering
-    % \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
-    \todo{Include example of correlate result}
-    \caption{The resultant output plot of the \stops\ \texttt{correlate} method.}
+    \includegraphics[width = 1.0\textwidth]{figures/3_stops_correlate.png}
+    \caption{The resultant output plot of the \stops\ \texttt{correlate} method. Figure created via the \stops\ \texttt{correlate} method.}
     \label{fig:stops_corr_eg}
 \end{figure}
 
 The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from each other. The difficulty arises in comparing the two spectra since variations between the two are expected and are what define the Stokes, and thus final polarization, results. The \texttt{correlate} method was created for this express purpose.
 
-The \texttt{correlate} method loads the provided \gls{FITS} files created by the \polsalt\ \texttt{spectra extraction}, removes the continuum and separates the \gls{CCD} regions. The relevant, separated, \gls{CCD} regions are then cross correlated and any offset between the spectra may be plotted.
+The \texttt{correlate} method loads the provided \gls{FITS} files created by the \polsalt\ \texttt{spectra extraction}, removes the continuum and separates the \gls{CCD} regions. The relevant, separated, \gls{CCD} regions are then cross correlated and any offset between the spectra may be plotted, as seen in \autoref{fig:stops_corr_eg}.
 
-As the Stokes results, and thus final polarization results, are determined and are heavily influenced by the differences in the spectra of the different $O$ and $E$ beams, a direct comparison is not appropriate. Any observed unpolarized light, however, will reflect equally in both polarization beams and so the general trend of the two spectra may reasonably be expected to follow one another. Cross correlation of the two spectra for the different, $O$ and $E$, polarization beams allows for a comparison of the features within the spectra as a function of the wavelength displacement.
+As the Stokes results, and thus final polarization results, are determined and are heavily influenced by the differences in the spectra of the different $O$- and $E$-beams, a direct comparison is not appropriate. Any observed unpolarized light, however, will reflect equally in both polarization beams and so the general trend of the two spectra may reasonably be expected to follow one another. Cross correlation of the two spectra for the different, $O$ and $E$, polarization beams allows for a comparison of the features within the spectra as a function of the wavelength displacement.
 
-Sources under spectropolarimetric observation are often expected to vary over time and as such as the ratio of polarized to unpolarized light varies. The accuracy of correlation may decrease as features with differences in the polarized component of the polarization beams change. The differences in the features of the different spectra are often negligible when compared to the overall trend of the spectra and are generally only reflected in a change in the intensity of said features.
+Sources under spectropolarimetric observation are generally expected to vary over time and, as such, the ratio of polarized to unpolarized light is also expected to vary. The accuracy of correlation may decrease as features with differences in the polarized component of the polarization beams change, and it is up to the user to determine the validity of the correlation result taking into consideration the two spectra being correlated. The differences in the features of the different spectra are often negligible when compared to the overall continuum of the spectra and are generally only reflected in a change in the intensity of said features when the continuum is removed.
 
-Cross correlation is useful when dealing with spectropolarimetric spectra as it allows a comparison of how well aligned the notable features of the spectra are wavelength-wise. Minor deviations between spectra weight the cross correlation less than the more prominent features, and therefore, cross correlation results acquired when using the \texttt{correlate} method more accurately reflect any general offset between polarization beams that may not necessarily be found when using the \texttt{skyline} method.
+Cross correlation is useful when dealing with spectropolarimetric spectra as it allows a comparison of how well aligned the notable features of the spectra are wavelength-wise. Minor deviations between spectra weight the cross correlation less than the more prominent features, and therefore, cross correlation results acquired when using the \texttt{correlate} method more accurately reflect any general offset between polarization beams that may not necessarily be found when using the \stops\ \texttt{skyline} method.
 
 % MARK: General Reduction Procedure
 \section{General Reduction Procedure}\label{sec:red_proc}
@@ -343,11 +339,13 @@ Cross correlation is useful when dealing with spectropolarimetric spectra as it 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 0.8\textwidth]{figures/3_new_workflow.pdf}
-    \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and the developed supplementary tools.}
+    \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and the developed supplementary tools. Diagram adapted from \cite{cooper_HEASA2022}.}
     \label{fig:new_workflow}
 \end{figure}
 
 This section aims to provide a comprehensive discussion of the modified reduction procedure, an example of which is provided in Appendix~\ref{app:reduction}. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files: instead, the commands necessary to complete each step of the reduction process are discussed, assuming that the software is running as intended.
+
+One note of importance is that the \polsalt\ pipeline is not compatible with Python 3, and as such, the \gls{CLI} must be run in a Python 2 environment. When code Listings are provided (see for example \autoref{code:polsalt_launch} or the Listing in \autoref{subsec:reduc_pre} below), the python version to be used is specified as an \texttt{anaconda} environment, but a user may use any Python version control method they prefer. The \texttt{anaconda} environments are aliased `\textbf{salt}' for Python 2 and `\textbf{stops}' for Python 3. When no environment is specified, it is assumed the previously specified environment is still active.
 
 It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu, as seen in Figure~\ref{fig:polsalt_gui}. Reductions are possible, however, purely through the \gls{CLI} using the \polsalt\ `beta' scripts.
 
@@ -357,13 +355,13 @@ It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-f
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{figures/3_pre_wav_cal.pdf}
-    \caption{The science extension of a typical spectropolarimetric \acs{FITS} file taken with the \gls{SALT} \gls{RSS}, after basic \polsalt\ \gls{CCD} reductions have been completed.}
+    \caption{The science extension of a typical spectropolarimetric \acs{FITS} file taken with the \gls{SALT} \gls{RSS}, after basic \polsalt\ \gls{CCD} reductions have been completed. Figure created from the \stops\ \texttt{split} output.}
     \label{fig:polsalt_pre_wav_cal}
 \end{figure}
 
-The \polsalt\ reduction process requires a file structure such that the raw data received from \gls{SALT} is located in a folder labelled using the observing date with a sub-folder labelled raw, such as \texttt{YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory named \texttt{YYYYMMDD/sci/} which contains all the files modified during the reduction process. Multiple reduction procedures using the same data may therefore be separated by simply renaming the \texttt{sci/} sub-folder.
+The \polsalt\ reduction process requires a file structure such that the raw data received from \gls{SALT} is located in a folder labelled using the observing date with a sub-folder labelled raw, following \texttt{YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory named \texttt{YYYYMMDD/sci/} which contains all the files modified during the reduction process. Multiple reduction procedures using the same data may therefore be separated by simply renaming the \texttt{sci/} sub-folder.
 
-The \polsalt\ \gls{GUI} may be launched by opening a \gls{CLI} and running Listing~\ref{code:polsalt_launch}. Once the window, depicted in Figure~\ref{fig:polsalt_gui}, has launched, ensure that the first two paths at the top of the window point to the \polsalt\ and working directories. The `raw image reduction' may then be selected from the dropdown and run.
+The \polsalt\ \gls{GUI} may be launched by opening a \gls{CLI} and running Listing~\ref{code:polsalt_launch}. Once the window, depicted in Figure~\ref{fig:polsalt_gui}, has launched, ensure that the first two paths at the top of the window point to the \polsalt\ and working directories, as seen in \autoref{fig:polsalt_gui}. The `raw image reduction' entry may then be selected from the dropdown and run.
 
 Alternatively, if the data already includes `mxgbp' \gls{FITS} files in the \texttt{YYYYMMDD/sci/} working directory, a \gls{CLI} may be used to complete the initial pre-reductions using
 \begin{lstlisting}[language=bash]
@@ -371,17 +369,17 @@ $ cd (*@<\textit{OBSDATE}>@*)/sci
 $ conda activate salt
 $ python ~/polsalt/scripts/reducepoldata_sc.py (*@<\textit{OBSDATE}>@*)
 \end{lstlisting}
-{\parskip=0pt which} will attempt to run the entire reduction process. The script may be quit once the \polsalt\ \texttt{wavelength calibration} \gls{GUI} opens and the rest of the reduction procedure followed.
+{\parskip=0pt which} will attempt to run the entire reduction process. The script may be quit once the \polsalt\ \texttt{wavelength calibration} \gls{GUI} opens, and the rest of the reduction procedure followed.
 
 % MARK: Wavelength Calibration
 \subsection{Wavelength Calibration} \label{subsec:reduc_wav}
 
-The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to be read by \iraf\ and \polsalt\ as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented in Listings~\ref{code:stops_split}~-~\ref{code:stops_join}, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a good calibration function. This process depends heavily and varies greatly based on the user and as such not all use cases can be discussed herein.
+The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to be read by \iraf\ and \polsalt\ as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented in Listings~\ref{code:stops_split}~-~\ref{code:stops_join}, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a well-fit calibration function. This process depends heavily and varies greatly based on the user and as such not all use cases can be discussed herein.
 
 % MARK: Prep for IRAF
-\subsubsection{Preparing data for \iraf}
+\subsubsection{Preparing the data for \iraf}
 
-Splitting the data is presented in Lisiting~\ref{code:stops_split}. The \stops\ \texttt{split} method may take multiple parameters, as seen in \S~\ref{sec:stops}, but default parameters should be used where ever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}.
+Splitting the data is presented in Lisiting~\ref{code:stops_split}. The \stops\ \texttt{split} method may take multiple parameters, as seen in \S~\ref{sec:stops}, but default parameters should be used where ever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}, which would include the split `wmxgbp' \gls{FITS} files (ebeam*.fits). This naming conflict is revisited and addressed later on in the reduction process and is thus not of any concern.
 
 % MARK: IRAF wavelength calibrations
 \subsubsection{\iraf\ wavelength calibrations}
@@ -405,16 +403,16 @@ cl> cl < script_name.cl
 {\parskip=0pt but} is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file to the \iraf\ terminal.
 
 % MARK: Post IRAF
-\subsubsection{Preparing data for \polsalt}
+\subsubsection{Preparing the data for \polsalt}
 
-The results of the wavelength calibrations may now be parsed back into the format expected by \polsalt\. Joining the separate beams with their respective wavelength solutions is once again performed in the \gls{CLI}following Listing~\ref{code:stops_join}.
+The results of the wavelength calibrations may now be parsed back into the format expected by \polsalt. Joining the separate beams with their respective wavelength solutions is once again performed in the \gls{CLI}following Listing~\ref{code:stops_join}.
 
-Similar to the \texttt{split} procedure mentioned before, the \texttt{join} procedure has the same defaults defined and so the responsibility falls on a user to keep track of which defaults were changed, and to keep the parameters consistent between the two tasks. Note that \stops\ has logging implemented, see \S~\ref{sec:stops}, and so the onus of tracking the parameters may be passed on to a logging file.
+Similar to the \texttt{split} procedure mentioned above, the \texttt{join} procedure has the same defaults defined and so the responsibility falls on a user to keep track of which defaults were changed, and to keep the parameters consistent between the two tasks. Note that \stops\ has logging implemented, see \S~\ref{sec:stops}, and so the onus of tracking the parameters may be passed on to a logging file.
 
 % MARK: Skyline checks
 \subsubsection{Sky line checks of the wavelength solution}
 
-The optional \iraf\ \texttt{transform} task and \stops\ \texttt{skylines} method are used to confirm the wavelength solution across the frame, as described in \S~\ref{subsec:stops_skyline}, by comparing known and observed sky line wavelength positions.
+The optional \iraf\ \texttt{transform} task and \stops\ \texttt{skylines} method are used to confirm the wavelength solution across the frame, as described in \S~\ref{subsec:stops_skyline}, by transforming and comparing known and observed sky line wavelength positions, respectively.
 
 The \texttt{skyline} method is run in the \gls{CLI} following Listing~\ref{code:stops_sky}. The difference in the flux conservation when \texttt{skyline} transforms the frames is discussed in \S~\ref{subsec:stops_skyline}. Otherwise, as with the rest of \stops, default parameters describe the overplotting behavior for the $O$- and $E$-beams, the skylines provided by \gls{SALT}, and the calculated variation of the wavelength axis of a frame.
 
@@ -422,7 +420,7 @@ A final reminder is made here about the clash of default naming schemes and the 
 \begin{lstlisting}[language=bash]
 $ rm obeam* ebeam*
 \end{lstlisting}
-{\parskip=0pt while} moving the files to a new subfolder may be done following Listing~\ref{code:gen_clean}.
+{\parskip=0pt while} moving the files to a new subfolder, which is the recommended course of action, may be done following Listing~\ref{code:gen_clean}.
 
 The \texttt{correlate} method is run in the \gls{CLI} following Listing~\ref{code:stops_corr}. The input of the \texttt{correlate} method takes the output of the \polsalt\ \texttt{spectra extraction} and is thus only run thereafter, but is mentioned here as the completion of the \polsalt\ reductions is not discussed in much depth. If the user wishes to compare the $O$- and $E$-beams of a single file then only that image name is to be provided, otherwise it is assumed that the user wishes to compare the same polarization beam across each file provided.
 
@@ -434,8 +432,8 @@ Reductions may now be completed using \polsalt. The reduction process consists o
 % MARK: POLSALT GUI
 \subsubsection{\polsalt\ beta in a \gls{GUI}}
 
-The reduction process using the \polsalt\ \gls{GUI} is completed by selecting and, when applicable, interactively modifying the reduction step through the interactive windows, one-by-one, from the \glspl{GUI} dropdown menu, as explained in Appendix~\ref{app:reduction} (pages~\pageref{code:stops_corr} onwards). As no commands are necessary, save for those to launch the \gls{GUI}, not much can be said of the reduction process. Excellent resources, created by the \gls{SALT}~/~\gls{SAAO} team, are available online for any queries about the reduction process using any version of \polsalt, including the \gls{GUI}.%
-\footnote{See the official \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ wiki} or alternative online resources such as \href{https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf}{\gls{SALT} workshop slides}.}
+The reduction process using the \polsalt\ \gls{GUI} is completed by selecting and, when applicable, interactively modifying the reduction step through the interactive windows, one-by-one, from the \glspl{GUI} dropdown menu, as explained in Appendix~\ref{app:reduction} (pages~\pageref{code:stops_corr} onwards). As no commands are necessary, save for those to launch the \polsalt\ \gls{GUI}, there is not much discussion to be had that is not either covered in \autoref{sec:polsalt} or \autoref{app:reduction}. Excellent resources, created by the \gls{SALT}~/~\gls{SAAO} team, are available online for any queries about the reduction process using any version of \polsalt, including the \gls{GUI}.%
+\footnote{See the official \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ wiki} or alternative online resources such as the \href{https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf}{\gls{SALT} workshop slides}.}
 
 % Covering the \gls{CLI} implementation first, the wavelength solution needs to be applied to all the \gls{FITS} files and the tilt introduced by the wollaston prism must be corrected for. This is done through the command:
 % \begin{lstlisting}[language=bash]
@@ -464,18 +462,17 @@ The reduction process using the \polsalt\ \gls{GUI} is completed by selecting an
 % {\parskip=0pt where} a file name, which may also use a wildcard, is provided as well as optional para\-meters to define the binning (\texttt{bin=[int]A} where [int] refers to an actual integer value), error bars (\texttt{errors=True|False}), choice of plot (\texttt{type=Ipt|Iqu} for unbinned intensity and either polarization percentage and polarization angle, or $Q$ and $U$ Stokes parameters), save options (\texttt{save=[text][plot] where either or both `text' and `plot' may be provided}), and a debug mode (\texttt{debug=False|True}).
 
 % MARK: POLSALT CLI
-\subsubsection{\polsalt\ beta in a \gls{CLI}}
+\subsubsection{\polsalt\ beta through a \gls{CLI}}
 
-The reduction script may be run using:
+Both \gls{GUI} and \gls{CLI} implementations of the \polsalt\ beta pipeline access the same script files. Although the \gls{GUI} is more user-friendly, the \gls{CLI} offers a more streamlined approach to the reduction process, allowing the reduction process to be automated once the \iraf\ wavelength solution is known. The \polsalt\ beta \texttt{reducepoldata\_sc.py} script is used to run the entire reduction process, as seen in Listing~\ref{code:stops_reduce}. The script may be run using:
 \begin{lstlisting}[language=bash]
 $ python reducepoldata_sc.py YYYYMMDD
 \end{lstlisting}
-{\parskip=0pt which} will run the entire reduction process interactively without the need to select which process to run next. For the purposes of using the script alongside \iraf\ wavelength calibrations, a few changes must be made. The \texttt{imred} and \texttt{specpolwavmap} function calls before \texttt{specpolextract\_sc} should be commented out, since the raw images have already been processed and the wavelength calibrations were dealt with using \iraf.
+{\parskip=0pt which} will run the entire reduction process without needing to select which process to run next. For the purposes of using the script alongside \iraf\ wavelength calibrations, a few changes must be made to the script file. The \texttt{imred} and \texttt{specpolwavmap} function calls before \texttt{specpolextract\_sc} should be commented out, since the raw images have already been processed and the wavelength calibrations were completed using \stops\ and \iraf.
 
 The \polsalt\ beta \texttt{reducepoldata\_sc.py} copies a \texttt{script.py} file into the science working directory, `YYYYMMDD/sci/', which provides analysis scripts for analysis and modification of the \polsalt\ beta results. These tools consist of data culling for the final Stokes calculations, text and plot output, relative flux calibration corrections, and synthetic filtering of polarization results. The \polsalt\ analysis scripts may be run using:
 \begin{lstlisting}[language=bash]
 $ python script.py
 \end{lstlisting}
-{\parskip=0pt followed} by \texttt{specpolfinalstokes.py}, \texttt{specpolview.py}, \texttt{specpolflux.py}, or \texttt{specpol\-filter.py}, respectively, for the different analysis modes. A description of the use for each mode of the analysis script is available from \url{https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version} and is exhaustive enough for general use, with the source code also publically available for in depth queries.
-
-\todo{From appendix → Discuss - salt/py3 env, add polsalt GUI spectra extract and visualisation windows as images}
+{\parskip=0pt followed} by \texttt{specpolfinalstokes.py}, \texttt{specpolview.py}, \texttt{specpolflux.py}, or \texttt{specpol\-filter.py}, for the different analysis modes, respectively. A description of the use for each mode of the analysis script is available and is exhaustive enough for general use, with the source code also publically available for further in depth queries or troubleshooting.%
+\footnote{Please see \url{https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version} for a comprehensive discussion of the \polsalt\ beta analysis scripts.}
