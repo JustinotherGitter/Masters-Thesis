@@ -1,21 +1,81 @@
+% MARK: Testing
 \chapter{Testing}
 
-\todo{Short introduction to chapter}
+This chapter contains an overview of the testing performed for and during the development of \stops. The tests are divided into two main categories: \stops\ software tests (\autoref{sec:test_stops}) and reduction specific tests (\autoref{sec:test_reduction}). Tests relating to the software cover the methods implemented in \stops, specifically \texttt{split} (\autoref{subsec:test_split}), \texttt{join} (\autoref{subsec:test_join}), \texttt{correlate} (\autoref{subsec:test_correlate}), and \texttt{skylines} (\autoref{subsec:test_skylines}). Tests relating to the reduction process cover verifying the alternate wavelength solutions (\autoref{subsec:test_wavelength}) and polarization parameters (\autoref{subsec:test_polarization}).
 
-\section{Testing Spectropolarimetric Standards}
-\todo{Spectropolarimetric standards (4 highly polarised, 2 non-polarised)
-    \begin{itemize}
-        \item (Bulleted list same as ch05, but without the science results) 
-        \item Background on objects
-        \item Reductions
-        \item Actual results - comparison of polsalt results to supplementary pipeline results
+% MARK: Software tests
+\section{\stops\ as software} \label{sec:test_stops}
+
+Software tests refer to tests performed to ensure that the software is functioning correctly and producing the expected results. That is to say, the input to \stops\ is being parsed correctly and that the output of the relevant \stops\ methods align with the expected input for the relevant \iraf\ or \polsalt\ tasks.
+
+\todo{Tests performed to match \stops\ output to match that of \iraf\ / \polsalt. Non-source specific tests.}
+
+\todo{
+    \begin{itemize}  
+        \item Mention all checks to get pipeline up and running
+            \item why the pipeline is better
+            \item which tools were used/replaced/improved/created
     \end{itemize}
 }
+
+% MARK: Split tests
+\subsection{Split} \label{subsec:test_split}
+
+
+% MARK: Join tests
+\subsection{Join} \label{subsec:test_join}
+
+
+% MARK: Cross Correlate tests
+\subsection{Cross Correlate} \label{subsec:test_correlate}
+
+
+% MARK: Sky Lines tests
+\subsection{Sky Lines} \label{subsec:test_skylines}
+
+
+% MARK: Reduction tests
+\section{Reduction specific tests} \label{sec:test_reduction}
+
+Reduction specific tests refer to tests performed to ensure no errant effects are introduced during the reduction process.
+
+\todo{
+    \begin{itemize}
+        \item Brief discussion of sources used as part of testing.
+        \item General discussion of testing (I.E. not this test was done specifically this source, more along the lines of these tests were done to check this issue, seen here using this source for example.)
+    \end{itemize}
+}
+
+% MARK: Wavelength tests
+\subsection{Wavelength Solutions} \label{subsec:test_wavelength}
+
+\todo{Wavelength solution tests
+    \begin{itemize}
+        \item Full frame wavelength solution checks
+        \item O/E correlation checks
+        \item RMS comparisons of polsalt to stops
+    \end{itemize}
+}
+
+% MARK: Polarization tests
+\subsection{Polarization Parameters} \label{subsec:test_polarization}
 
 \todo{Add all tests done and comparisons.
     \begin{itemize}
         \item 3C 279
         \item 4C+01.02
         \item David data (not in next section publications because still during pipeline development. Reductions done through polsalt, but after publication used as preliminary testing data)
+    \end{itemize}
+}
+
+% MARK: Spectropolarimetric Standards
+\subsubsection{Spectropolarimetric Standards}
+
+\todo{Testing Spectropolarimetric standards (4 highly polarised, 2 non-polarised)
+    \begin{itemize}
+        \item (Bulleted list same as ch05, but without the science results) 
+        \item Background on objects
+        \item Reductions
+        \item Actual results - comparison of polsalt results to supplementary pipeline results
     \end{itemize}
 }
