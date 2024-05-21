@@ -1,0 +1,79 @@
+\ProvidesPackage{mylistings}
+\RequirePackage{listings}
+\RequirePackage{kvoptions}
+
+% Use /media/... if no option specified
+% Use ../../STOPS/ if path specified but undefined
+% Use value if path=value
+\DeclareStringOption[/media/justin/Transcend/STOPS/]{path}[../../STOPS/]
+
+\ProcessKeyvalOptions*
+
+% Allow for custom symbols in code
+\def\mybacktick{\`{}}
+\def\mytilde{{\raisebox{0.5ex}{\texttildelow}}}
+
+% Allow insertion of syntax highlighted code
+\lstloadlanguages{bash, Python}
+
+% Set defaults
+\lstset{%
+    inputpath=\mylistings@path,
+    literate={~}{\mytilde}{1}{-}{-}{1},
+    literate={`}{\mybacktick}{1},
+    backgroundcolor=\color{gray!10!white},
+    basicstyle=\ttfamily,
+    frame={lines},
+    showstringspaces=false,
+    escapeinside={(*@}{@*)},
+}
+
+% - Line break behaviour
+\lstset{%
+    breaklines=true,
+    breakatwhitespace=true,
+    breakautoindent=false,
+    breakindent=0pt,
+    postbreak=\mbox{\larger[1]\texttt{>\->\->}\space},
+}
+
+% - Range behaviour
+\lstset{%
+    rangeprefix=\#----------,
+    rangesuffix=----------,
+    includerangemarker=false,
+}
+
+% % Define custom style for IRAF
+% \lstdefinestyle{IRAF}{%
+
+% }
+
+% % Define custom style for terminal
+% \lstdefinestyle{term}{%
+
+% }
+
+% Define custom style for STOPS
+\lstdefinestyle{STOPS}{%
+    belowcaptionskip=1\baselineskip,
+    basicstyle=\footnotesize\ttfamily,
+    identifierstyle=\color{blue},
+    keywordstyle=\bfseries\color{green!40!black},
+    morecomment=[s]{"""}{"""},
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\tiny\textcolor{gray},
+    stringstyle=\ttfamily\color{red!50!brown},
+    breakautoindent=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    tabsize=4,
+}
+
+% Define custom style for STOPS docstrings
+\lstdefinestyle{STOPS_docs}{%
+    style=STOPS,
+    framexleftmargin=-16pt,
+    numbersep=-8pt,
+    xleftmargin=-18pt,
+}

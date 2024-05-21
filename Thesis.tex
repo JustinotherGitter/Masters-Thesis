@@ -75,42 +75,9 @@
 \usepackage{ulem}
 % Section depth, e.g.: \S 1.1.1.1
 % \setcounter{secnumdepth}{5}
-% Embed hyperlinks in citations and fig references
-% (it breaks the footnote command)
-\usepackage[hyperfootnotes=false]{hyperref}
-\hypersetup{%
-    pdftitle={%
-        Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations
-    },
-    pdfauthor={Justin Cooper},
-    pdfsubject={%
-        POLSALT alternate wavelength calibrations, created via IRAF and Python; parsing and validation handled via STOPS.
-    },
-    pdfkeywords={%
-        STOPS,
-        Supplementary Tools for Polsalt Spectropolarimetry,
-        SALT,
-        Southern African Large Telescope,
-        POLSALT,
-        Polarimetric reductions for SALT,
-        RSS,
-        Robert Stobie Spectrograph,
-        IRAF,
-        Image Reduction and Analysis Facility,
-        Python,
-        Wavelength Calibration,
-        Spectropolarimetry,
-        Astrophysics,
-        Astronomy,
-    },
-    pdfstartview=Fit,
-}
-% Redefine autoref defaults
-\renewcommand{\sectionautorefname}{\S}
-\renewcommand{\subsectionautorefname}{\S}
-\renewcommand{\subsubsectionautorefname}{\S}
-% \renewcommand{\lstlistingautorefname}{Listing}
-% \providecommand*{\lstnumberautorefname}{line}
+
+% MARK: Custom hyperref
+\usepackage{myhyperref}
 
 % Control footnote layouts
 % \usepackage[bottom, hang, flushmargin]{footmisc}
@@ -130,7 +97,7 @@
     chapter_3/Developed_tools,
     chapter_4/Testing,
     chapter_5/Science_applications,
-    chapter_6/Conclusions
+    chapter_6/Conclusions,
 }
 
 % Allow directory `tree' structures
@@ -138,41 +105,9 @@
 % Allow relative font resizing.
 \usepackage{relsize}
 
-% MARK: Listings package
-% Allow insertion of syntax highlighted code
-\usepackage{listings}
-\lstloadlanguages{bash, Python}
-\lstset{%
-    backgroundcolor=\color{gray!10!white},
-    basicstyle=\ttfamily,
-    breaklines=true,
-    breakatwhitespace=true,
-    breakautoindent=false,
-    breakindent=0pt,
-    frame={lines},
-    showstringspaces=false,
-    literate={~}{{\raisebox{0.5ex}{\texttildelow}}}{1}{-}{-}{1},
-    escapeinside={(*@}{@*)},
-    postbreak=\mbox{\larger[1]\texttt{>\->\->}\space},
-    rangeprefix=\#----------,
-    rangesuffix=----------,
-    includerangemarker=false,
-    inputpath=/media/justin/Transcend/STOPS/, % G:/STOPS/ (Windows)
-}
-\lstdefinestyle{sourceStyle}{%
-    belowcaptionskip=1\baselineskip,
-    basicstyle=\footnotesize\ttfamily,
-    identifierstyle=\color{blue},
-    keywordstyle=\bfseries\color{green!40!black},
-    morecomment=[s]{"""}{"""},
-    numbers=left,
-    numbersep=5pt,
-    numberstyle=\tiny\textcolor{gray},
-    stringstyle=\ttfamily\color{red!50!brown},
-    breakautoindent=true,
-    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
-    tabsize=4,
-}
+% MARK: Custom listings
+\usepackage{mylistings}
+% \usepackage[path=G:/STOPS/]{mylistings}
 
 % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX &
 % https://www.overleaf.com/learn/latex/Environments

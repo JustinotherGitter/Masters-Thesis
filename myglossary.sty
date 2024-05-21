@@ -1,14 +1,12 @@
 \ProvidesPackage{myglossary}
-
-% Add the \gls command to keep track of acronyms
-\usepackage[%
+\RequirePackage[%
     nomain,
     acronym,
     automake,
     nonumberlist,
     nogroupskip,
     style=super,
-    shortcuts
+    shortcuts,
 ]{glossaries-extra}
 
 % Make latex compile acronyms to use in document section

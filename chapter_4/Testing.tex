@@ -1,12 +1,12 @@
 % MARK: Testing
 \chapter{Testing}
 
-This chapter contains an overview of the testing performed for and during the development of \stops. The tests are divided into two main categories: \stops\ software tests (\autoref{sec:test_stops}) and reduction specific tests (\autoref{sec:test_reduction}). Tests relating to the software cover the methods implemented in \stops, specifically \texttt{split} (\autoref{subsec:test_split}), \texttt{join} (\autoref{subsec:test_join}), \texttt{correlate} (\autoref{subsec:test_correlate}), and \texttt{skylines} (\autoref{subsec:test_skylines}). Tests relating to the reduction process cover verifying the alternate wavelength solutions (\autoref{subsec:test_wavelength}) and polarization parameters (\autoref{subsec:test_polarization}).
+This chapter contains an overview of the testing performed for and during the development of \stops. The tests are divided into two main categories: \stops\ software tests (\autoref{sec:test_stops}) and reduction specific tests (\autoref{sec:test_reduction}). Tests relating to the software cover the methods implemented in \stops, specifically \texttt{split} (\autoref{subsec:test_split}), \texttt{join} (\autoref{subsec:test_join}), \texttt{correlate} (\autoref{subsec:test_correlate}), and \texttt{skylines} (\autoref{subsec:test_skylines}), while tests relating to the reduction process cover verifying the alternate wavelength solutions (\autoref{subsec:test_wavelength}) and polarization parameters (\autoref{subsec:test_polarization}).
 
 % MARK: Software tests
 \section{\stops\ as software} \label{sec:test_stops}
 
-Software tests refer to tests performed to ensure that the software is functioning correctly and producing the expected results. That is to say, the input to \stops\ is being parsed correctly and that the output of the relevant \stops\ methods align with the expected input for the relevant \iraf\ or \polsalt\ tasks.
+Software tests refer to the tests that were performed to ensure that the software is functioning correctly and produces expected results. That is to say, the input to \stops\ is being parsed correctly and that the output of the relevant \stops\ methods align with the expected input for the relevant \iraf\ or \polsalt\ tasks.
 
 \todo{Tests performed to match \stops\ output to match that of \iraf\ / \polsalt. Non-source specific tests.}
 
@@ -19,7 +19,7 @@ Software tests refer to tests performed to ensure that the software is functioni
 }
 
 % MARK: Split tests
-\subsection{Split} \label{subsec:test_split}
+\subsection{The \stops\ \texttt{split} method} \label{subsec:test_split}
 
 
 % MARK: Join tests
@@ -60,6 +60,9 @@ Reduction specific tests refer to tests performed to ensure no errant effects ar
 % MARK: Polarization tests
 \subsection{Polarization Parameters} \label{subsec:test_polarization}
 
+% \todo{}
+
+% \subsubsection{}
 \todo{Add all tests done and comparisons.
     \begin{itemize}
         \item 3C 279
