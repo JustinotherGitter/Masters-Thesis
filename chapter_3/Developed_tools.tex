@@ -11,7 +11,7 @@ This chapter contains an overview of \polsalt\ (\autoref{sec:polsalt}) and the l
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.8\textwidth]{figures/3_polsalt_GUI.png}
+    \includegraphics[width = 0.8\textwidth]{3_polsalt_GUI.png}
     \caption{The layout of the \polsalt\ \gls{GUI}, including the contents of the reduction steps accessible via the dropdown box. Note that there is no trailing forward slash after the `Top level data directory'. Figure created from local instance of the \polsalt\ \gls{GUI}.}
     \label{fig:polsalt_gui}
 \end{figure}
@@ -39,7 +39,7 @@ Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpol
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.8\textwidth]{figures/3_polsalt_tilt.png}
+    \includegraphics[width = 0.8\textwidth]{3_polsalt_tilt.png}
     \caption{The layout of the interactive \polsalt\ \texttt{spectra extraction} \gls{GUI} after selecting the `update tilt correction and windows' button along the bottom border of the window. Figure created from local instance of the \polsalt\ \gls{GUI}.}
     \label{fig:polsalt_gui_spec}
 \end{figure}
@@ -68,7 +68,7 @@ The Final Stokes calculations are performed via \textbf{specpolfinalstokes.py} a
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.8\textwidth]{figures/3_polsalt_viz.png}
+    \includegraphics[width = 0.8\textwidth]{3_polsalt_viz.png}
     \caption{The layout of the interactive \polsalt\ \texttt{visualization} \gls{GUI} after selecting the `Plot results' button along the bottom border of the window. Figure created from local instance of the \polsalt\ \gls{GUI}.}
     \label{fig:polsalt_gui_vis}
 \end{figure}
@@ -77,7 +77,7 @@ Plotting the results of the spectropolarimetric reduction process uses \textbf{s
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.8\textwidth]{figures/3_polsalt_plot.pdf}
+    \includegraphics[width = 0.8\textwidth]{3_polsalt_plot.pdf}
     \caption{A typical plot resulting from the reduction process. Figure adapted from \citep{cooper_HEASA2022}.}
     \label{fig:polsalt_plot}
 \end{figure}
@@ -110,7 +110,7 @@ Another option to perform the wavelength calibration is Python which allows for 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.98\textwidth]{figures/3_arc_spectrum.png}
+    \includegraphics[width = 0.98\textwidth]{3_arc_spectrum.png}
     \caption{One of many Argon arc lamp spectra as provided by \gls{SALT} for line identification. Plot adapted from \gls{SALT}'s published Longslit Line Atlases (as of 2024), resized to fit within the document margins but otherwise unchanged.\protect\footnotemark}
     \label{fig:ar_arc_salt}
 \end{figure}
@@ -167,7 +167,7 @@ The task converts the (pixel, pixel) units of an exposure to (wavelength, pixel)
 
 \begin{figure}[t]
     \centering
-    % \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
+    % \includegraphics[width = 0.8\textwidth]{2_polsalt_gui.png}
     \todo{Include poor, dubious, and well transformed image examples}
     \caption{Examples of a terrible-, poorly-, and well-fit wavelength solution. Figures created by the \iraf\ \texttt{transform} task.}
     \label{fig:iraf_tran_eg}
@@ -197,7 +197,7 @@ $ python ~/STOPS [split|join|correlate|skylines] --help
 \lstinputlisting[
     language=python,
     style=STOPS_docs,
-    caption={The docstring for \textbf{split.py}},
+    caption={The `docstring' for \textbf{split.py}},
     label=doc:split,
     linerange=split0-split1,
     gobble=4,
@@ -216,7 +216,7 @@ As the intent was always to parse the wavelength function back into \polsalt\ it
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{figures/3_OEsplit.pdf}
+    \includegraphics[width = 1.0\textwidth]{3_OEsplit.pdf}
     \caption{The split $O$- and $E$-beams as handed to \iraf. Figure created from the \stops\ \texttt{split} method output.}
     \label{fig:OE_split}
 \end{figure}
@@ -232,7 +232,7 @@ Otherwise, defaults, such as which row to split the beams along, were kept as cl
 \lstinputlisting[
     language=python,
     style=STOPS_docs,
-    caption={The docstring for \textbf{join.py}},
+    caption={The `docstring' for \textbf{join.py}},
     label=doc:join,
     linerange=join0-join1,
     gobble=4,
@@ -252,7 +252,7 @@ The \gls{FITS} files created by the \texttt{join} method and \polsalt\ pipeline'
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{figures/3_pol_wav_ext.pdf}
+    \includegraphics[width = 1.0\textwidth]{3_pol_wav_ext.pdf}
     \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline. The color bar displays the wavelength in \AA\ as displayed by the $O$- and $E$-beam sub-extensions. Figure created from the \stops\ \texttt{join} method output.}
     \label{fig:pol_wav_ext}
 \end{figure}
@@ -269,7 +269,7 @@ The wavelength extension is masked to remove any wavelength regions not calibrat
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{figures/3_post_wav_cal.pdf}
+    \includegraphics[width = 1.0\textwidth]{3_post_wav_cal.pdf}
     \caption{A representative science extension of a \gls{FITS} file capable of being parsed by the \polsalt\ pipeline. The intensity of the $O$- and $E$-beam sub-extensions are displayed via the grayscale value at each pixel. Note the inclusion of regions of: solid black demarcating the chip gaps, horizontal stripes of high intensity demarcating the trace, and (curved) vertical stripes of high intensity demarcating the sky lines. Figure created from the \stops\ \stops{join} method output.}
     \label{fig:polsalt_post_wav_cal}
 \end{figure}
@@ -280,7 +280,7 @@ The wavelength extension is masked to remove any wavelength regions not calibrat
 \lstinputlisting[
     language=python,
     style=STOPS_docs,
-    caption={The docstring for \textbf{skylines.py}},
+    caption={The `docstring' for \textbf{skylines.py}},
     label=doc:skylines,
     linerange=sky0-sky1,
     gobble=4,
@@ -288,7 +288,7 @@ The wavelength extension is masked to remove any wavelength regions not calibrat
 
 \begin{figure}[t]
     \centering
-    % \includegraphics[width = 0.8\textwidth]{figures/2_polsalt_gui.png}
+    % \includegraphics[width = 0.8\textwidth]{2_polsalt_gui.png}
     \todo{Include example of skyline result}
     \caption{The resultant output plot of the \stops\ \texttt{skylines} method. Figure created via the \stops\ \texttt{skyline} method.}
     \label{fig:stops_sky_eg}
@@ -310,7 +310,7 @@ As no features, other than the trace of sources exposed across a frame, exist th
 \lstinputlisting[
     language=python,
     style=STOPS_docs,
-    caption={The docstring for \textbf{cross\_correlate.py}},
+    caption={The `docstring' for \textbf{cross\_correlate.py}},
     label=doc:corr,
     linerange=corr0-corr1,
     gobble=4,
@@ -318,7 +318,7 @@ As no features, other than the trace of sources exposed across a frame, exist th
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{figures/3_stops_correlate.png}
+    \includegraphics[width = 1.0\textwidth]{3_stops_correlate.png}
     \caption{The resultant output plot of the \stops\ \texttt{correlate} method. Figure created via the \stops\ \texttt{correlate} method.}
     \label{fig:stops_corr_eg}
 \end{figure}
@@ -338,7 +338,7 @@ Cross correlation is useful when dealing with spectropolarimetric spectra as it 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.8\textwidth]{figures/3_new_workflow.pdf}
+    \includegraphics[width = 0.8\textwidth]{3_new_workflow.pdf}
     \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and the developed supplementary tools. Diagram adapted from \cite{cooper_HEASA2022}.}
     \label{fig:new_workflow}
 \end{figure}
@@ -354,7 +354,7 @@ It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-f
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{figures/3_pre_wav_cal.pdf}
+    \includegraphics[width = 1.0\textwidth]{3_pre_wav_cal.pdf}
     \caption{The science extension of a typical spectropolarimetric \acs{FITS} file taken with the \gls{SALT} \gls{RSS}, after basic \polsalt\ \gls{CCD} reductions have been completed. Figure created from the \stops\ \texttt{split} output.}
     \label{fig:polsalt_pre_wav_cal}
 \end{figure}

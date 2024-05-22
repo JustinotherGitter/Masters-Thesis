@@ -2,13 +2,13 @@
 
 This chapter gives an overview of the basics of spectropolarimetry (\autoref{sec:spectropolarimetry}), and how it functions, following from the principles of both spectroscopy (\autoref{sec:spectroscopy}) and polarimetry (\autoref{sec:polarimetry}). Further, it is discussed how these techniques are practically implemented for \gls{SALT} (\autoref{sec:SALT}), using the \gls{RSS} (\autoref{subsubsec:RSS}), and how the spectropolarimetric reduction process is completed (\autoref{sec:RSS_reductions}).
 
-\section{Spectroscopy}\label{sec:spectroscopy}
+\section{Spectroscopy} \label{sec:spectroscopy}
 
 Spectroscopy originated in its most basic form with Newton's examinations of sunlight through a prism \citep{opticks} but came to prominence as a field of scientific study with Wollaston's improvements to the optics elements \citep{WollPrism}, Fraunhofer's use of a diffraction grating instead of a prism \citep{FraunGrating}, and Bunsen and Kirchoff's classifications of spectral features to their respective chemical elements \citep{KirBunSpec}.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.9\textwidth]{figures/2_spectrometer.pdf}
+    \includegraphics[width = 0.9\textwidth]{2_spectrometer.pdf}
     \caption{Layout depicting the light path through a spectrometer. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:spectrometer}
 \end{figure}
@@ -75,7 +75,7 @@ where $\lambda$ is the wavelength of an incident monochromatic beam and \gls{FWH
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 7cm]{figures/2_prism_diagram.pdf}
+    \includegraphics[width = 7cm]{2_prism_diagram.pdf}
     \caption{Geometry of a prism refracting an incident monochromatic beam at a minimum deviation angle. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:prism_diagram}
 \end{figure}
@@ -100,11 +100,11 @@ which shows that the angular dispersion of a prism is wavelength dependent and f
 Multiple prisms can be used to increase the angular dispersion but as the dispersion is non-linear it becomes increasingly more difficult to calibrate. The more material and material boundaries the light must pass through, the more its intensity decreases due to attenuation effects and Fresnel losses. Even so, the transmittance of modern prisms for their selected wavelength range is generally very high due to improved manufacturing methods as well as improved transmitting materials.\footnote{See manufacturers technical specifications, \href{https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=148}{THORLABS}, or \href{https://www.edmundoptics.eu/c/prisms/607/}{Edmund Optics} for example.}
 \enlargethispage{-2\baselineskip}
 
-\subsubsection{Diffraction grating}\label{subsubsec:diff_grat}
+\subsubsection{Diffraction grating} \label{subsubsec:diff_grat}
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 9cm]{figures/2_grating_diagram.pdf}
+    \includegraphics[width = 9cm]{2_grating_diagram.pdf}
     \caption{Geometry of a reflective blazed grating refracting an incident monochromatic beam. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:grating_diagram}
 \end{figure}
@@ -147,7 +147,7 @@ As mentioned before, multiple subgroups exist for both dispersive prisms and dif
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 10cm]{figures/2_grism.pdf}
+    \includegraphics[width = 10cm]{2_grism.pdf}
     \caption{Diagram of a grism for an incident monochromatic beam of light and a diffracted beam of order $m = 1$. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:grism}
 \end{figure}
@@ -157,12 +157,12 @@ Other types of gratings include the \gls{VPH} grating as well as the echelle gra
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 10cm]{figures/2_vph_grating.pdf}
+    \includegraphics[width = 10cm]{2_vph_grating.pdf}
     \caption{Diagram of a \gls{VPH} grating for an incident monochromatic beam of light. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:vph_grating}
 \end{figure}
 
-\subsection{Detector and Spectroscopic Calibrations}\label{subsec:calibration}
+\subsection{Detector and Spectroscopic Calibrations} \label{subsec:calibration}
 
 Acquiring a spectrum from observations is more involved than simply reading out the data recorded on the \gls{CCD}. A raw science image, which is the raw counts of the observed source read from the \gls{CCD} with no calibrations applied, has on it a combination of useful science data as well as noise. The noise is a combination of random noise introduced through statistical processes and systematic noise introduced through the instrumentation and the observation conditions the source was observed under. This noise causes an uncertainty in the useful data and can be minimized, predominantly by calibrating for the systematic noise, but never fully removed \citep{CCDhandbook}.
 
@@ -170,7 +170,7 @@ The dominant source of noise in a raw image is detector noise. \glspl{CCD} are m
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 10cm]{figures/2_ccd.jpg}
+    \includegraphics[width = 10cm]{2_ccd.jpg}
     \caption{Diagram of the inner logic of a \gls{CCD}. Figure adapted from \cite{ccd_fig}.}
     \label{fig:ccd_diagram}
 \end{figure}
@@ -202,7 +202,7 @@ When multichannel \glspl{CCD} are used, which consist of multiple \glspl{CCD} or
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 16cm]{figures/2_Ne_arc.pdf}
+    \includegraphics[width = 16cm]{2_Ne_arc.pdf}
     \caption{Example of an arc spectrum for NeAr taken with \gls{SALT}'s \gls{RSS} using the PG1800 grating at a grating angle of $34.625$\degr, an articulation angle of $69.258$\degr, and covering a wavelength range of $\sim5600 - 6900$ \angstrom. Plot adapted from \gls{SALT}'s published Longslit Line Atlases, (2023).\protect\footnotemark}
     \label{fig:Ne_arc}
 \end{figure}
@@ -218,7 +218,7 @@ The wavelength calibrations then consist of defining a two-dimensional pixel-to-
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 12cm]{figures/2_chebyshev.pdf}
+    \includegraphics[width = 12cm]{2_chebyshev.pdf}
     \caption{The first seven Chebyshev polynomials ($T_0$ through $T_{6}$) as defined by \autoref{eq:chebypoly} over the region $[-1, 1]$ for which they are orthogonal. Plot adapted from \citep{numerical_recipes} (2023)\protect\footnotemark}
     \label{fig:chebyshev}
 \end{figure}
@@ -234,7 +234,7 @@ or recursively as:
         T_{0}(x) = 1\,,\\
         T_{1}(x) = x\,,\rlap{\quad and}\\
         T_{n}(x) = 2 x T_{n - 1}(x) - T_{n - 2}(x)\,,\rlap{\quad for $n > 1$\,,}
-    \end{gathered}\label{eq:chebypoly}
+    \end{gathered} \label{eq:chebypoly}
 \end{equation}
 where $T$ is a Chebyshev polynomial of order $n$.\footnote{Chebyshev polynomials are denoted $T$ as a hold-over from the alternate spelling of `Tchebycheff'.}
 An important property of Chebyshev polynomials is that they are orthogonal polynomials. This means that the inner product of any two differing Chebyshev polynomials, $T_{i}(x)$ and $T_{j}(x)$, over the range $[-1, 1]$ is zero, as shown by:
@@ -244,7 +244,7 @@ An important property of Chebyshev polynomials is that they are orthogonal polyn
         0,       & i \neq j     \\
         \pi / 2, & i = j \neq 0 \\
         \pi,     & i = j = 0
-    \end{cases}\label{eq:chebyorth}
+    \end{cases} \label{eq:chebyorth}
 \end{equation}
 where $1 / \sqrt{1 - x^{2}}$ is the weighting factor for Chebyshev polynomials. This property is important because it means that the coefficients in the Chebyshev polynomial expansion are independent of one another, allowing for a unique solution when approximating an unknown function \citep{numerical_recipes, cheby}.
 
@@ -280,7 +280,7 @@ The Chebyshev polynomials are more suited for wavelength calibrations than stand
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 12cm]{figures/2_legendre.pdf}
+    \includegraphics[width = 12cm]{2_legendre.pdf}
     \caption{The first six Legendre polynomials ($P_0$ through $P_{5}$) as defined by \autoref{eq:legendre} over the region $[-1, 1]$ for which they are orthogonal. Plot adapted from Geek3, \protect\href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Legendrepolynomials6.svg}{Wikimedia Commons} (2023).}
     \label{fig:legendre}
 \end{figure}
@@ -295,7 +295,7 @@ or recursively as:
         P_{0}(x) = 1\,,\\
         P_{1}(x) = x\,,\rlap{\quad and}\\
         P_{n}(x) = \frac{2 n + 1}{n + 1} x P_{n - 1}(x) - \frac{n}{n + 1} P_{n - 2}(x)\,,\rlap{\quad for $n > 1$\,,}
-    \end{gathered}\label{eq:legpoly}
+    \end{gathered} \label{eq:legpoly}
 \end{equation}
 where $P$ is a Legendre polynomial of order $n$. Legendre polynomials also hold the property of orthogonality. This means that the inner product of any two differing Legendre polynomials, $P_{i}(x)$ and $P_{j}(x)$, over the range $[-1, 1]$ is zero, as shown by:
 \begin{equation}
@@ -303,7 +303,7 @@ where $P$ is a Legendre polynomial of order $n$. Legendre polynomials also hold 
     \begin{cases}
         0,                 & i \neq j \\
         \frac{2}{2 n + 1}, & i = j
-    \end{cases}\label{eq:legorth}
+    \end{cases} \label{eq:legorth}
 \end{equation}
 where a weight of $1$ is the weighting factor for Legendre polynomials \citep{numerical_recipes, leg}.
 
@@ -323,7 +323,7 @@ Legendre polynomials benefit from having the orthogonality condition with no wei
 Regardless of which method of polynomial approximation is chosen, the polynomials are fit by varying the relevant coefficients using the least squares method. The resultant minimized function may then be used to convert the science frames from an $(x$-pixel$, y$-pixel$)$ coordinate system to a $(\lambda, y$-pixel$)$ coordinate system.
 
 
-\section{Polarimetry}\label{sec:polarimetry}
+\section{Polarimetry} \label{sec:polarimetry}
 
 % Origin of polarimetry (short history)
 Both Huygens and Newton came to the conclusion that light demonstrates transversal properties \citep{Huygens, opticks}, which was later further investigated and coined as `polarization' by Malus \citep{Pol_Malus}. Malus also investigated the polarization effects of multiple materials including some of which were birefringent, such as optical calcite, which he referred to as Iceland spar after Bartholinus' investigations of the material \citep{Bartholinus}.
@@ -342,7 +342,7 @@ Fresnel built on Malus' work showing that two beams of light, polarized at a rig
         R_{p} = \left\lvert \frac{Z_{2} \cos{\theta_{t}} - Z_{1} \cos{\theta_{i}}}{Z_{2} \cos{\theta_{t}} + Z_{1} \cos{\theta_{i}}} \right\rvert^{2}\,,\\
         T_{s} = 1 - R_{s}\,,\quad\text{and}\\
         T_{p} = 1 - R_{p},
-    \end{gathered}\label{eq:Fresnel}
+    \end{gathered} \label{eq:Fresnel}
 \end{equation}
 where $s$ and $p$ are the two polarized components of light perpendicular to one another, $Z_{1}$ and $Z_{2}$ are the impedance of the two media, and $\theta_{i}$, $\theta_{t}$, and $\theta_{r}$ are the angles of incidence, transmission, and reflection, respectively \citep{Fresnel}.
 
@@ -350,14 +350,14 @@ Nicol was the first to create a polarizer, aptly named the Nicol prism, where th
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=10cm]{figures/2_Nicol_prism.pdf}
+    \includegraphics[width=10cm]{2_Nicol_prism.pdf}
     \caption{Diagram of a Nicol prism for incident non-polarized light. Diagram adapted from Fred the Oyster, \protect\href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}, via \protect\href{https://en.m.wikipedia.org/wiki/File:Nicol_prism.svg}{Wikimedia Commons} (2023).}
     \label{fig:Nicol_prism}
 \end{figure}
 
 Stokes' work created the first consistent description of polarization and gave us the Stokes parameters which describe an operational approach to measuring polarization (discussed further in \autoref{subsec:pol}) \citep{Stokes}. Hale was the first to apply polarization to astronomical observations, using a Fresnel rhomb and Nicol prism as a quarter-wave plate and polarizer, respectively \citep{Hale_pre,Hale_post}. Wollaston also created a prism, similarly named the Wollaston prism, which allowed simultaneous observation of the ordinary and extraordinary beams due to the smaller deviation angle \citep{WollPrism}. Finally, Chandrasekhar's work furthered our understanding of astrophysical polarimetry by explaining the origin of polarization observed in starlight as well as mathematically modeling the polarization of rotating stars, which came to be named Chandrasekhar polarization \citep{chandrasekhar}.
 
-\subsection{Polarization}\label{subsec:pol}
+\subsection{Polarization} \label{subsec:pol}
 
 Maxwell's equations for an electromagnetic field propagating through a vacuum are given as:
 \begin{equation}
@@ -366,7 +366,7 @@ Maxwell's equations for an electromagnetic field propagating through a vacuum ar
         \nabla \cdot \matr{B} = 0\,,\\
         \nabla \times \matr{E} = - \frac{1}{c} \frac{\partial \matr{B}}{\partial t}\,,\rlap{\quad and}\\
         \nabla \times \matr{B} = \frac{1}{c} \frac{\partial \matr{E}}{\partial t},
-    \end{gathered}\label{eq:Maxwell}
+    \end{gathered} \label{eq:Maxwell}
 \end{equation}
 where $\matr{E}$ and $\matr{B}$ are the electric and magnetic field vectors, and $c$ is the speed of light. In a right-handed $(x, y, z)$ coordinate system, a non-trivial solution of an electromagnetic wave following \hyperref[eq:Maxwell]{Maxwell's Equations} propagating along the $z$-axis, towards a hypothetical observer, is described by:
 \begin{equation}
@@ -375,7 +375,7 @@ where $\matr{E}$ and $\matr{B}$ are the electric and magnetic field vectors, and
         E_{y} \cos(kz - \omega t + \Phi_{y}) \hat{\boldsymbol{y}}\,,\rlap{\quad and}\\
         \matr{B} = \frac{1}{c} E_{y} \cos(kz - \omega t + \Phi_{y}) \hat{\boldsymbol{x}} +
         \frac{1}{c} E_{x} \cos(kz - \omega t + \Phi_{x}) \hat{\boldsymbol{y}}\,,
-    \end{gathered}\label{eq:Maxwell_sol}
+    \end{gathered} \label{eq:Maxwell_sol}
 \end{equation}
 where $E_{x}$, $E_{y}$, $\Phi_{x}$, and $\Phi_{y}$ are all parameters describing the amplitude and phase of the electric field vector in the $(x, y)$ plane, and with the magnetic field vector proportional and perpendicular to the electric field vector \citep{Griffiths}.
 
@@ -393,7 +393,7 @@ and is referred to as the polarization vector since it neatly contains the param
 % Polarizing Ellipse
 \begin{figure}[t]
     \centering
-    \includegraphics[width=6cm]{figures/2_pol_ellipse.pdf}
+    \includegraphics[width=6cm]{2_pol_ellipse.pdf}
     \caption{The polarization ellipse for an electric field vector propagating through free space. Diagram adapted from Inductiveload, \protect\href{https://creativecommons.org/publicdomain/mark/1.0/}{PDM 1.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Polarisation_ellipse2.svg}{Wikimedia Commons} (2023).}
     \label{fig:pol_ellipse}
 \end{figure}
@@ -464,13 +464,13 @@ Similar to the polarization ellipse, the Stokes parameters may be depicted using
         P = \frac{\sqrt{S_{1}^2 + S_{2}^2 + S_{3}^2}}{S_{0}}\,,\rlap{\quad for $0 \leq P \leq 1$\,,}\\
         2 \Psi = \arctan \frac{S_{3}}{\sqrt{S_{1}^{2} + S_{2}^{2}}}\,,\rlap{\quad and}\\
         2 \chi = \arctan \frac{S_{2}}{S_{1}}\,,
-    \end{gathered}\label{eq:poincare_coords}
+    \end{gathered} \label{eq:poincare_coords}
 \end{equation}
 where $I$ denotes the total intensity, $P$ denotes the degree of polarization, or the ratio of polarized to non-polarized light in the wave-packet, $\chi$ denotes the polarization angle, and $\Psi$ denotes the ellipticity angle of the polarization ellipse.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=6cm]{figures/2_poincare_sphere.pdf}
+    \includegraphics[width=6cm]{2_poincare_sphere.pdf}
     \caption{The Poincar{\'e} sphere describing the polarization properties of a wave-packet propagating through free space. Diagram adapted from Inductiveload, \protect\href{https://creativecommons.org/publicdomain/mark/1.0/}{PDM 1.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Poincaré_sphere.svg}{Wikimedia Commons} (2023).}
     \label{fig:poincare}
 \end{figure}
@@ -481,14 +481,14 @@ where $I$ denotes the total intensity, $P$ denotes the degree of polarization, o
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=1\textwidth]{figures/2_polarimeter.pdf}
+    \includegraphics[width=1\textwidth]{2_polarimeter.pdf}
     \caption{A diagram of an ideal polarimeter. Diagram adapted from \cite{pol_in_spectra}.}
     \label{fig:polarimeter}
 \end{figure}
 
 % - practically
 % Waveplate and polarizer
-\subsection{Polarization Measurement}\label{subsec:pol_measure}
+\subsection{Polarization Measurement} \label{subsec:pol_measure}
 
 Except for polarimetry in the radio-wavelength regime, the polarization of a beam can not be directly measured. The polarization properties may, however, be recovered from the beam through the manipulation of the four parameters given in \autoref{eq:Maxwell_sol}. This so-called manipulation is achieved by passing the beam through optical elements which vary the beam for differing amplitudes and phases. These matrix operations may be represented by their corresponding Mueller matrices.
 
@@ -520,7 +520,7 @@ The Mueller matrix for retardance where $\alpha$ is the angle between the incomi
         0 & \cos^{2} 2 \alpha + \sin^{2} 2 \alpha \cos \delta & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \sin 2 \alpha \sin \delta  \\
         0 & \cos 2 \alpha \sin 2 \alpha  (1 - \cos \delta)    & \cos^{2} 2 \alpha \cos \delta + \sin^{2} 2 \alpha & -\cos 2 \alpha \sin \delta \\
         0 & -\sin 2 \alpha \sin \delta                        & \cos 2 \alpha \sin \delta                         & \cos \delta                \\
-    \end{bmatrix}\rlap{.}\label{matrix:retarder}
+    \end{bmatrix}\rlap{.} \label{matrix:retarder}
 \end{equation}
 The retarder is often referred to by this retardance, e.g. if the retardance is $\delta = \pi$ or $\pi / 2$, the retarder is referred to as a half- or quarter-wave plate, respectively.
 
@@ -559,7 +559,7 @@ where $\Delta n$ and $L$ refer to the birefringence and thickness of the wave pl
 
 This relative phase difference determines the name of the wave plate, such that the $\gamma = m(\pi/2) $ and $\gamma = m(\pi/4)$ phase differences, for $m \in Z^{+}$, refer to the half- and quarter-wave plates (which are the most common wave plate phases), respectively. Phase differences with an integer multiple of one another relate to the same phase difference and are referred to as multiple-order wave plates, while wave plates with a phase difference less than an integer multiple are referred to as zero-order wave plates. Several multiple-order wave plates can be combined by alternatively aligning the fast axis of one to the slow axis of another to create a compound zero-order wave plate \citep{Hale_birefringence}.
 
-\paragraph{Polarizers}\label{par:polarizer}
+\paragraph{Polarizers} \label{par:polarizer}
 Polarizers are typically made from two prisms, of a birefringent material, cemented together with an optically transparent adhesive. The actual effect of separating the perpendicular polarization components is achieved using varying effects, namely through:
 \begin{itemize}
     \item absorption of one of the polarized components, such as in Polaroid polarizing filters,
@@ -570,14 +570,14 @@ Polarizers are typically made from two prisms, of a birefringent material, cemen
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/2_rochon.pdf}
+    \includegraphics[width=0.5\textwidth]{2_rochon.pdf}
     \caption{Diagram of a Rochon prism. Included in the diagram are the optical axes of the differing sections of the birefringent material as well as polarizing directions of the incident beam, denoted using the $\leftrightarrow$ and $\odot$ symbols, for the $O$- and $E$-beams, respectively. Figure adapted from ChrisHodgesUK, \protect\href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Rochon_Prism.svg}{Wikimedia Commons} (2023).}
     \label{fig:Rochon_prism}
 \end{figure}
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/2_wollaston.pdf}
+    \includegraphics[width=0.5\textwidth]{2_wollaston.pdf}
     \caption{Diagram of a Wollaston prism. Included in the diagram are the optical axes of the differing sections of the birefringent material as well as polarizing directions of the incident beam, denoted using the $\leftrightarrow$ and $\updownarrow$ symbols, for the $O$- and $E$-beams, respectively. Diagram adapted from fgalore, \protect\href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Wollaston-prism.svg}{Wikimedia Commons} (2023).}
     \label{fig:Wollaston_prism}
 \end{figure}
@@ -587,11 +587,11 @@ The Wollaston prism consists of two right-angle prisms consisting of a birefring
 
 Wollaston prisms benefit over simpler elements (such as those listed in the \hyperref[par:polarizer]{polarizer} paragraph) since a single frame allows for the observation of both orthogonal polarization components. This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty \citep{wollaston}.
 
-\subsection{Polarimetric calibrations}\label{subsec:pol_cal}
+\subsection{Polarimetric calibrations} \label{subsec:pol_cal}
 
 The raw science images acquired during polarimetric observations contain a combination of useful science data as well as noise, similar to \autoref{subsec:calibration}. Corrections and calibrations related to the detector remain unchanged from those described in \autoref{subsec:calibration}, while those related to correcting for the optical elements relate to corrections for spurious polarization effects.
 
-\subsubsection{Flat Fielding}\label{subsubsec:pol_flat}
+\subsubsection{Flat Fielding} \label{subsubsec:pol_flat}
 
 Once the \gls{CCD} calibrations have been completed, the polarization intrinsic to the optical elements needs to be accounted for such that the pixel-to-pixel response is made uniform. Flat-fielding is, once again, used to correct for this. The flats taken for polarimetry, however, introduce an additional challenge as the targets for conventional flats are polarized, such as twilight and dome flats which are polarized by light scattering in the atmosphere and the reflective surface of the dome, respectively.
 
@@ -601,14 +601,14 @@ Observing additional `redundant' exposures for the science and flat images incre
 
 Increasing the amount of redundant observations proportionally increases the time needed to observe all the exposures, which in turn introduces time-dependent effects such as fringing or intensity variations of the flat source. As such, a middle ground must be found for the amount of redundant frames observed. \citep{polarimetry_error, pol_optimize}.
 
-\subsubsection{Dual-beam Extraction and Alignment}\label{subsubsec:pol_oe_extract}
+\subsubsection{Dual-beam Extraction and Alignment} \label{subsubsec:pol_oe_extract}
 
 After calibrations for the \gls{CCD} and light path are accounted for, the $O$- and $E$-beams can be extracted and further reduced. The extraction depends heavily on the layout of the polarimeter but often a simple cropping of the differing sections is enough to separate the two images.
 
 % Image Alignment
 After extracting the $O$- and $E$-beams for a specific half-wave plate angle, the images need to be aligned such that the sources present in them overlap. The Wollaston prism needs to be corrected for as it introduces a beam deviation which differs across both images. The aligning of the $O$- and $E$-beams is crucial as the comparison of the dual images is what allows for the calculation of the polarization properties.
 
-\subsubsection{Sky Subtraction}\label{subsubsec:pol_sky_subtract}
+\subsubsection{Sky Subtraction} \label{subsubsec:pol_sky_subtract}
 
 The polarization introduced by the sky introduces a difference in the intensity of the background sky and needs to be removed as it will influence the polarization results of the target source. Thankfully, the background polarization is an additive type of noise and may be subtracted out across the frames. This subtraction is done independently for both beams in a frame and for each frame since the background intensity of all observed polarimetric beams will differ based on the observational parameters.
 
@@ -620,7 +620,7 @@ The most notable historical contributions of spectropolarimetry are those of spe
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/2_specpol_sci.pdf}
+    \includegraphics[width=1.0\textwidth]{2_specpol_sci.pdf}
     \caption{A spectropolarimetric target exposure as observed by the \gls{SALT} \gls{RSS} in spectropolarimetry mode.}
     \label{fig:specpol_exp}
 \end{figure}
@@ -638,7 +638,7 @@ For linear spectropolarimetry using a dual-beam polarizing element, an exposure 
     \begin{gathered}
         f_{O, i}(\lambda) = \frac{1}{2} [I(\lambda) + Q(\lambda)\cos(4\theta_{i}) + U(\lambda)\sin(4\theta_{i})]\,,\rlap{\quad and} \\
         f_{E, i}(\lambda) = \frac{1}{2} [I(\lambda) - Q(\lambda)\cos(4\theta_{i}) - U(\lambda)\sin(4\theta_{i})]\,.
-    \end{gathered}\label{eq:specpol_flux_to_Stokes}
+    \end{gathered} \label{eq:specpol_flux_to_Stokes}
 \end{equation}
 At least four linear equations are required to solve for three variables in a system of linear equations and thus at least two exposures must be taken to solve for the linear ($I(\lambda)$, $Q(\lambda)$, and $U(\lambda)$) polarization parameters \citep{pol_std, keller_instr}.
 
@@ -663,7 +663,7 @@ The optimal change in wave plate angle is $\Delta\theta_{i} = \pi/8$ as it allow
     \begin{gathered}
         \bar{Q}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \cos\left(\frac{\pi}{2} i\right)\,,\rlap{\quad and}\\
         \bar{U}(\lambda) = \frac{2}{N} \sum_{i = 0}^{N - 1} F_{i}(\lambda) \sin\left(\frac{\pi}{2} i\right)\,,
-    \end{gathered}\label{eq:specpol_Stokes_sol}
+    \end{gathered} \label{eq:specpol_Stokes_sol}
 \end{equation}
 where $N$ is the number of exposures taken, limited such that $N \in [2, 16]$ \citep{polarimetry_error}.
 
@@ -679,7 +679,7 @@ where $N$ is the number of exposures taken, limited such that $N \in [2, 16]$ \c
 
 % \noindent which is derived from \autoref{eq:poincare_coords} or by solving a system of linear equations of \autoref{eq:specpol_F_to_params} \citep{pol_std,keller_instr}.
 
-\subsection{Spectropolarimetric calibrations}\label{subsec:specpol_cal}
+\subsection{Spectropolarimetric calibrations} \label{subsec:specpol_cal}
 
 % The calibrations necessary for the measurement to take place are, as always, seemingly more involved than the calculation of the results themselves.
 Just as the elements of a spectropolarimeter are an amalgamation of both a spectrometer and polarimeter, it naturally follows that the calibrations necessary to reduce spectropolarimetric data are a combination of the calibrations needed for spectroscopy and polarimetry, discussed further in \autoref{subsec:calibration} and \autoref{subsec:pol_cal}. Even though the spectrometer and polarimeter components both have an effect on an incident beam following the light-path through the spectropolarimeter, the calibration procedures for both methods remain mostly independent of one another and as such need not be repeated here.
@@ -692,7 +692,7 @@ Spectropolarimetric calibrations are, however, more involved when compared to th
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 15cm]{figures/2_SALT_telescope.png}
+    \includegraphics[width = 15cm]{2_SALT_telescope.png}
     \caption{The tracker, supporting structure, and primary mirror of SALT. Figure adapted from the SALT call for proposals (2022).\protect\footnotemark}
     \label{fig:SALT_telescope}
 \end{figure}
@@ -708,7 +708,7 @@ During observations the primary mirror is stationary and the tracker tracks cele
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0 \textwidth]{figures/2_SALT_visibility.png}
+    \includegraphics[width = 1.0 \textwidth]{2_SALT_visibility.png}
     \caption{The visibility annulus of objects observable by SALT. Figure adapted from the SALT call for proposals (2013).\protect\footnotemark}
     \label{fig:SALT_visibility}
 \end{figure}
@@ -723,7 +723,7 @@ The tracker is equipped with a spherical aberration corrector \citep{SALT_SAC}, 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{figures/2_RSS_optical_path.png}
+    \includegraphics[width = 1.0\textwidth]{2_RSS_optical_path.png}
     \caption{The optical path of the \gls{SALT} \gls{RSS}. Figure adapted from the SALT call for proposals (2023).\protect\footnotemark}
     \label{fig:RSS_layout}
 \end{figure}
@@ -753,10 +753,10 @@ The \gls{RSS} detector consists of a mosaic of 3 \gls{CCD} chips with a total pi
 \paragraph{The Available Gratings}
 The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, as listed in \autoref{table:RSS_gratings}. Observations may be planned using \href{https://astronomers.salt.ac.za/software/}{simulator tools} provided by \gls{SALT} and are performed in the first order only. The \gls{RSS} has a clear filter, as well as three \gls{UV} (with differing lower filtering ranges) and one blue order blocking filter available, used in conjunction with the various gratings to block out contamination from the second order.
 
-\input{tables/2_RSS_gratings.tex}
+\input{chapter_2/tables/2_RSS_gratings.tex}
 
 \paragraph{\gls{RSS} Spectropolarimetry} \label{sec:RSS_reductions}
 
 Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit linear spectro\-polarimetry, $(I, Q, U)$, where observations are taken following the waveplate pattern lists as in \autoref{table:RSS_specpol_patterns}. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter.\footnote{Commission status sighted from the latest \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{`Polarimetry Observers Guide' (2024)}.}
 
-\input{tables/2_Polarimetry_patterns.tex}
+\input{chapter_2/tables/2_Polarimetry_patterns.tex}

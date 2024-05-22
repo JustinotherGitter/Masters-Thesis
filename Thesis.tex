@@ -18,6 +18,8 @@
 % Remove lineskip in itemize environment
 \usepackage{enumitem}
 \setlist[itemize]{nosep}
+% Shorthand for blank line after a paragraph
+% \newcommand{\prgph}%{}%{\vspace{\baselineskip}}
 
 % Set the styling of captions
 \usepackage[%
@@ -52,6 +54,15 @@
 % \usepackage{pdfpages}
 % Allows you to work with graphics 
 \usepackage{graphicx}
+\graphicspath{%
+    {chapter_0/figures/}%
+    {chapter_1/figures/}%
+    {chapter_2/figures/}%
+    {chapter_3/figures/}%
+    {chapter_4/figures/}%
+    {chapter_5/figures/}%
+    {chapter_6/figures/}%
+}
 % Add support for floats. I.E. floating
 % \usepackage{float}
 % programmatic-like interface to create highly customizable subfloats/subfigures
@@ -64,7 +75,6 @@
 % \usepackage{ctable}
 % Create tables that may continue to the next page
 % \usepackage{longtable}
-% \graphicspath{{Figures1/}{Figures2/}}
 
 % MARK: Other packages
 % Add support to split a table cell into multiple rows
@@ -73,9 +83,9 @@
 \usepackage{array}
 % Allow strikethrough, eg.: \sout{example strikethrough text}
 \usepackage{ulem}
+
 % Section depth, e.g.: \S 1.1.1.1
 % \setcounter{secnumdepth}{5}
-
 % MARK: Custom hyperref
 \usepackage{myhyperref}
 
@@ -119,6 +129,7 @@
 % Hide TODO's
 % \renewcommand\todo[1]{}
 \newcommand{\Chapter}[2]{\chapter[#1]{#1:\\ \smallskip {\smaller[1] #2}}}
+
 \newcommand{\iraf}{\textsc{iraf}}
 \newcommand{\polsalt}{\textsc{polsalt}}
 \newcommand{\stops}{\textsc{stops}}
@@ -129,9 +140,6 @@
 \newcommand{\avg}[1]{\left< #1 \right> }
 \newcommand{\degr}{\hbox{$^\circ$}}
 \newcommand{\matr}[1]{\mathbf{#1}}
-
-% Shorthand for blank line after a paragraph
-% \newcommand{\prgph}%{}%{\vspace{\baselineskip}}
 
 % Use numeric counting for footnotes
 \renewcommand{\thefootnote}{\arabic{footnote}}
@@ -186,7 +194,7 @@
 \faculty{Faculty of Natural and Agricultural Sciences}
 \department{Department of Physics}
 \country{South Africa}
-\degreedate{Date of submission: \today} % MARK: TODO: Change \today to MONTH, YEAR at final submission
+\degreedate{Date of submission: \today}
 \supervisor{Prof. B. van Soelen}
 
 % MARK: Main document
