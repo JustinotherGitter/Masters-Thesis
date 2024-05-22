@@ -18,7 +18,13 @@ This file stands to track any final edits needed before the submission of the th
 
 Included herein are the style guides I have followed during the course of writing my thesis. Custom styles (`my*.sty files`) have been included to both simplify the preamble (located in `Thesis.tex`) and to create a more homogeneous styling throughout when dealing with the relevant packages contained in the style files.
 
-### Equations style guide
+### Headings
+
+```Latex
+\section{Section Title} \label{sec:sec_title}
+```
+
+### Equations
 
 Equations are written in-text and are a part of sentences unless otherwise indicated. To this end, there is no new line before `\begin` or after `\end` (unless the sentence ends with the equation and the equation is punctuated) and multiple equations in a single environment are properly punctuated.
 
@@ -56,7 +62,7 @@ or a collection of equations:
 
 See references (Wikibooks) for more configurations of equations.
 
-### Figures style guide
+### Figures
 
 Figures are located in their relevant chapter (`chapter_*/figures/`) and have the chapter number, $i$, prepended to their name (`<i>_<name>.[pdf|svg]`).
 
@@ -101,7 +107,7 @@ Figures created by myself are (generally) made using Inkscape. To keep line widt
 
 Figures are first saved as an `svg` before being exported as either a `png` or `pdf` to 'play well' with the Latex `\includegraphics[]{}` command.
 
-### Table style guide
+### Tables
 
 Tables can be generated using a [Table Generator](https://www.tablesgenerator.com/). Tables are located in their relevant chapter (`chapter_*/tables/`) and have the chapter number, $i$, prepended to their name (`<i>_<name>.tex`). The contents of the file are structured similar to:
 

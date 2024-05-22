@@ -1,43 +1,39 @@
 % MARK: Testing
 \chapter{Testing}
 
-This chapter contains an overview of the testing performed for and during the development of \stops. The tests are divided into two main categories: \stops\ software tests (\autoref{sec:test_stops}) and reduction specific tests (\autoref{sec:test_reduction}). Tests relating to the software cover the methods implemented in \stops, specifically \texttt{split} (\autoref{subsec:test_split}), \texttt{join} (\autoref{subsec:test_join}), \texttt{correlate} (\autoref{subsec:test_correlate}), and \texttt{skylines} (\autoref{subsec:test_skylines}), while tests relating to the reduction process cover verifying the alternate wavelength solutions (\autoref{subsec:test_wavelength}) and polarization parameters (\autoref{subsec:test_polarization}).
+This chapter contains an overview of the testing performed for and during the development of \stops. The tests are divided into two main categories: \stops\ software tests (\autoref{sec:test_stops}) and reduction specific tests (\autoref{sec:test_reduction}). Software tests cover the methods implemented and error handling in \stops, specifically for \texttt{split} (\autoref{subsec:test_split}), \texttt{join} (\autoref{subsec:test_join}), \texttt{correlate} and \texttt{skylines} (\autoref{subsec:test_corr_sky}), while reduction tests cover verifying the alternate wavelength solutions (\autoref{subsec:test_wavelength}) and polarization parameters (\autoref{subsec:test_polarization}).
 
 % MARK: Software tests
-\section{\stops\ as software} \label{sec:test_stops}
+\section{\stops\ Development} \label{sec:test_stops}
 
-Software tests refer to the tests that were performed to ensure that the software is functioning correctly and produces expected results. That is to say, the input to \stops\ is parsed correctly and that the output of the relevant \stops\ methods align with the expected input for the relevant \iraf\ or \polsalt\ tasks.
+As development is an iterative process, only the major tests that were performed are discussed. The tests were, predominantly, to ensure that the input to \stops\ is parsed correctly and that the output of the relevant \stops\ methods align with the expected input for the relevant \iraf\ or \polsalt\ tasks.
 
-\todo{Tests performed to match \stops\ output to match that of \iraf\ / \polsalt. Non-source specific tests.}
+% Why the pipeline is better
+The rigorous error handling in \stops\ ensures that the user is informed of any issues that arise during the reduction process. This is particularly important as \stops\ was developed to enable a faster reduction process compared to that of pure \iraf\ or \polsalt.
 
-\todo{
-    \begin{itemize}  
-        \item Mention all checks to get pipeline up and running
-            \item why the pipeline is better
-            \item which tools were used/replaced/improved/created
-    \end{itemize}
-}
+% Which tools were used/replaced/improved
+
 
 % MARK: Split tests
-\subsection{The \stops\ \texttt{split} method} \label{subsec:test_split}
+\subsection{Testing the \stops\ \texttt{split} method} \label{subsec:test_split}
 
+\todo{Tests performed to match \stops\ output to that of \iraf\.}
 
 % MARK: Join tests
-\subsection{Join} \label{subsec:test_join}
+\subsection{Testing the \stops\ \texttt{join} method} \label{subsec:test_join}
 
+\todo{Tests performed to match \stops\ output to that of \polsalt\.}
+\todo{JOIN uses direct function of \polsalt, specifically the wollaston corrections, but updated to python3.}
 
-% MARK: Cross Correlate tests
-\subsection{Cross Correlate} \label{subsec:test_correlate}
+% MARK: Cross Correlate/Skylines tests
+\subsection{Testing the \stops\ \texttt{correlate} and \texttt{skylines} methods} \label{subsec:test_corr_sky}
 
-
-% MARK: Sky Lines tests
-\subsection{Sky Lines} \label{subsec:test_skylines}
-
+\todo{}
 
 % MARK: Reduction tests
 \section{Reduction specific tests} \label{sec:test_reduction}
 
-Reduction specific tests refer to tests performed to ensure no errant effects are introduced during the reduction process.
+\todo{Reduction specific tests refer to tests performed to ensure no errant effects are introduced during the reduction process...}
 
 \todo{
     \begin{itemize}
@@ -62,7 +58,6 @@ Reduction specific tests refer to tests performed to ensure no errant effects ar
 
 % \todo{}
 
-% \subsubsection{}
 \todo{Add all tests done and comparisons.
     \begin{itemize}
         \item 3C 279
@@ -74,7 +69,7 @@ Reduction specific tests refer to tests performed to ensure no errant effects ar
 % MARK: Spectropolarimetric Standards
 \subsubsection{Spectropolarimetric Standards}
 
-\todo{Testing Spectropolarimetric standards (4 highly polarised, 2 non-polarised)
+\todo{Testing Spectropolarimetric standards (4 highly polarized, 2 non-polarized)
     \begin{itemize}
         \item (Bulleted list same as ch05, but without the science results) 
         \item Background on objects
