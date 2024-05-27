@@ -16,18 +16,18 @@ This chapter contains an overview of \polsalt\ (\autoref{sec:polsalt}) and the l
     \label{fig:polsalt_gui}
 \end{figure}
 
-\polsalt\ is the current reduction package being constantly developed and used within the \gls{SAAO}/\gls{SALT} research group as the official reduction pipeline for spectropolarimetric data taken using the \gls{SALT} \gls{RSS}.%
+\polsalt\ is developed by \gls{SALT} and is the official reduction pipeline for spectropolarimetric data taken using the \gls{SALT} \gls{RSS}.%
 \footnote{\polsalt\ is made freely available via the \polsalt\ GitHub repository, available at \url{https://github.com/saltastro/polsalt}. It is strongly advised to follow the wiki for installation instructions.}
-Newer versions of the software, aptly named the `beta version' (`version' 23 January 2020), include a \gls{GUI} as well as limited interactivity during key steps in the reduction process and was the version adapted in this study.%
+The newest version of the software, aptly named the `beta version' (`version' 23 January 2020), includes a \gls{GUI} as well as limited interactivity during key steps in the reduction process and was the version adapted in this study.%
 \footnote{Installation files and instructions for the `beta version' utilizing the \gls{GUI} are available at \url{http://www.saao.ac.za/~ejk/polsalt/code/} in a TAR GZIP file.}
 
-The steps that make up the \polsalt\ reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw Stokes calculations, final Stokes calculations, and visualization of the results. Accurate reductions in each step are crucial for accurate results and thus briefly discussed. Further, detailed documentation for help with the reduction steps may be found at the \href{https://github.com/saltastro/polsalt/wiki}{GitHub wiki for \polsalt}.%
+The steps that make up the \polsalt\ reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw Stokes calculations, final Stokes calculations, and visualization of the results. Accurate reductions in each step are crucial for accurate results and thus briefly discussed below. Further details for the reduction process may be found at the \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ GitHub wiki}.%
 \footnote{The GitHub wiki for \polsalt\ is available at \url{https://github.com/saltastro/polsalt/wiki}.}
 
 % MARK: Basic CCD reductions
 \subsection{Basic CCD reductions}
 
-Basic \gls{CCD} reductions are run via \textbf{imred.py} and apply the necessary basic reductions to the raw data before any calibrations may be applied. These corrections include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and pixel variance information. Files with basic reductions performed have ``mxgbp'' prepended to their names. As of February 2022, basic \gls{CCD} reductions are automatically run for all RSS spectropolarimetric observations as part of the default SALT basic reduction pipeline that is run each day.
+Basic \gls{CCD} reductions are run via \textbf{imred.py} and apply the necessary basic reductions to the raw data before any calibrations are applied. These reductions include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and pixel variance information. Files with basic reductions performed have ``mxgbp'' prepended to their names. As of February 2022, basic \gls{CCD} reductions are automatically run for all RSS spectropolarimetric observations as part of the default SALT basic reduction pipeline that is run daily.
 
 % MARK: Wavelength calibrations
 \subsection{Wavelength calibrations}
@@ -50,12 +50,10 @@ Background subtraction and spectral extraction is run via \textbf{spec\-pol\-ext
 \subsection{Raw Stokes calculations}
 
 Raw Stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw Stokes' signal, $S$, are calculated as:
-\begin{equation}
-    \begin{gathered}
-        I = \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2})\,,\rlap{\quad and}\\
-        S = \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right]\,,
-    \end{gathered}\label{eq:polsalt_rawstokes}
-\end{equation}
+\begin{align} \label{eq:polsalt_rawstokes}
+    I &= \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2})\,,\rlap{\quad and}\\
+    S &= \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right]\,,
+\end{align}
 respectively. The raw Stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw Stokes information have a very specific naming style, which need not be discussed here but with most notably the pair of frames being used included in the file names.
 
 % MARK: Final Stokes calculations

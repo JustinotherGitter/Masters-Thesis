@@ -4,10 +4,13 @@
 % MARK: listings variables
 \newcommand{\obj}{<\textit{OBJ}>}
 \newcommand{\obsdate}{<\textit{OBSDATE}>}
-\newcommand{\oarc}{<\textit{O-beam ARC}>}
-\newcommand{\earc}{<\textit{E-beam ARC}>}
-\newcommand{\ofiles}{<\textit{O-beam FILES}>}
-\newcommand{\efiles}{<\textit{E-beam FILES}>}
+
+\newcommand{\oarc}{<\textit{O-beam~ARC}>}
+\newcommand{\earc}{<\textit{E-beam~ARC}>}
+\newcommand{\ofiles}{<\textit{O-beam~FILES}>}
+\newcommand{\efiles}{<\textit{E-beam~FILES}>}
+\newcommand{\file}{<\textit{FILE(S)}>}
+
 \newcommand{\id}{01\_identify.cl}
 \newcommand{\reid}{02\_reidentify.cl}
 \newcommand{\fit}{03\_fitcoords.cl}
@@ -15,11 +18,11 @@
 
 This section of the Appendix aims to provide a minimum working example of the commands necessary to reduce \polsalt\ data using \stops\ and \iraf. It contains the commands necessary to activate all software and run through the reduction process but makes no attempt at discussion.
 
-Both \polsalt\ and \iraf\ are launched from the default \gls{CLI} but use independent interfaces during the reduction process. To distinguish which window is in focus, the `\texttt{\$}' token is used for default \gls{CLI} commands while the `\texttt{cl>}' or `\texttt{>\->\->}' tokens are used for \iraf's xgterm single- and multi-line commands.
+Both \polsalt\ and \iraf\ are launched from the default \gls{CLI} but use independent interfaces during the reduction process. To distinguish which window is in focus, the `\texttt{\$}' token is used for default \gls{CLI} commands while the `\texttt{cl>}' and `\texttt{>\->\->}' tokens are used for \iraf's `xgterm' single- and multi-line commands, respectively.
 
 General instructions for the reduction process which might not necessarily be line-fed commands passed to a \gls{CLI} may either be discussed outside a `Listing' environment or included as part of the `Listing' environment with a preceding `\texttt{\#}' token. Finally, \polsalt\ implements a \gls{GUI} and thus takes no line-fed commands. As such, the instructions when using the \polsalt\ \gls{GUI} follow those of the general instructions with the added exception that they relate to the \gls{GUI}.
 
-As a final note, some parameters are distinguished using a `<\texttt{\dots}>' notation. They signify parameters that may vary from reduction to reduction, such as filenames, but which are necessary in each reduction process. Notable uses of this notation include the date of observation, \obsdate\ (formatted `YYYYMMDD'), and the filenames for the science and arc \gls{FITS} files, \oarc\ and \ofiles\ (or \earc\ and \efiles\ for the other polarimetric beam), respectively.
+As a final note, some parameters are distinguished using an `<angle brackets>' notation. They signify necessary parameters that may vary from reduction to reduction. Notable uses of this notation include the date of observation, \obsdate\ (formatted `YYYYMMDD'), the split science \gls{FITS} files, \ofiles\ or \efiles, the split arc \gls{FITS} files, \oarc\ or \earc, and a wildcard symbol, <\texttt{*}>.
 
 % MARK: Reduction Procedure
 \vspace{\baselineskip}\hrule\vspace{\baselineskip}
@@ -39,7 +42,7 @@ As a final note, some parameters are distinguished using a `<\texttt{\dots}>' no
     \label{dir:pre_red}
 \end{figure}
 
-Ensure the data is formatted in a file structure similar to that in \autoref{dir:pre_red}. Data located in the `sci' folder is often provided by \gls{SALT} but does not form part of the minimal file structure necessary to begin the reduction process. If `mxgbp' prefixed data is available, the reduction may be begun starting at \autoref{code:stops_split}.
+Ensure the data is formatted in a file structure similar to that in \autoref{dir:pre_red}. Data located in the `sci' folder is often provided by \gls{SALT} but is not strictly necessary to begin the reduction process. If `mxgbp' prefixed data is available, the reductions may be begun starting at \autoref{code:stops_split}. The \polsalt\ \gls{GUI} is launched from the default \gls{CLI} running the commands in \autoref{code:polsalt_launch}.
 
 \begin{lstlisting}[
     language=bash,
@@ -50,16 +53,18 @@ $ conda activate salt
 $ python -W ignore reducepoldataGUI.py &
 \end{lstlisting}
 
-Refer to \autoref{fig:polsalt_gui} for a depiction of the \polsalt\ \gls{GUI}. To complete the \polsalt\ pre-calibrations and with the \gls{GUI} in focus:
+Refer to \autoref{fig:polsalt_gui} for a depiction of the \polsalt\ \gls{GUI}. To complete the \polsalt\ pre-calibrations, and with the \gls{GUI} in focus:
 \begin{itemize}
-    \item Ensure that the `POLSALT code directory' is correct
-    \item Set the `Top level data directory' to \obsdate
-    \item Ensure `Raw data directory' is correct
-    \item Ensure `Science data directory' is correct
-    \item Select `Raw image reduction' from the `Data reduction step' drop down menu
+    \item Ensure that the `POLSALT code directory' is correct.
+    \item Set the `Top level data directory' to \obsdate.
+    \item Ensure `Raw data directory' is correct.
+    \item Ensure `Science data directory' is correct.
+    \item Select `Raw image reduction' from the `Data reduction step' drop down menu.
     \item Check the tick boxes of all raw images to be processed (include the arc) in the display box covering the lower half of the \gls{GUI}.
-    \item Proceed with the reductions by clicking the `OK' button
+    \item Proceed with the reductions by clicking the `OK' button.
 \end{itemize}
+
+The pre-calibrated `mxgbp' \gls{FITS} files are now available in the `sci' folder. The files may be split using \stops\ by running the commands in \autoref{code:stops_split}.
 
 \begin{lstlisting}[
     language=bash,
@@ -69,6 +74,8 @@ $ cd (*@\obsdate@*)/sci
 $ conda activate stops
 $ python ~/STOPS . split
 \end{lstlisting}
+
+The split $O$- and $E$-beam \gls{FITS} files are now available. The \iraf\ wavelength calibrations are now run. The \iraf\ xgterm \gls{CLI} is launched using \autoref{code:iraf_launch}.
 
 \begin{lstlisting}[
     language=bash,
@@ -85,11 +92,15 @@ cl> unlearn longslit
 cl> longslit.dispaxis=1
 \end{lstlisting}
 
-The \texttt{identify} task requires an average feature width, `fwidth', as a parameter. The width of a feature may be found in \iraf\ using the \texttt{implot} task along with the cursor commands, but may also be found using any \gls{FITS} viewing software capable of displaying rows of image data.\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/plot.implot.html} for documentation on the \texttt{implot} task.}
+The \iraf\ \texttt{identify} task requires an average feature width, `fwidth', as a parameter. The width of a feature may be found in \iraf\ using the \texttt{implot} task%
+\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/plot.implot.html} for documentation on the \texttt{implot} task.}
+along with cursor commands, but may also be found using \gls{FITS} viewing software, such as \texttt{ds9}.%
+\footnote{See \protect\url{https://sites.google.com/cfa.harvard.edu/saoimageds9} for documentation on the \texttt{ds9} software.}
+The \texttt{identify} task may be run using the commands in \autoref{code:iraf_id}.
 
 \begin{lstlisting}[
     language=bash,
-    caption={The \iraf\ \texttt{identify} task},
+    caption={Running the \iraf\ \texttt{identify} task},
     label=code:iraf_id]
 cl> mkscript (*@\id@*)
 cl> # Add identify to (*@\id@*) twice, for both beams
@@ -99,12 +110,15 @@ cl>
 cl> identify ("(*@\oarc@*)",
 >>> "", "", section="middle line", database="database", coordlist="linelists$idhenear.dat", units="", nsum="10", match=-3., maxfeatures=50, zwidth=100., ftype="emission", fwidth=8., cradius=5., threshold=0., minsep=2., function="spline3", order=2, sample="*", niterate=0, low_reject=3., high_reject=3., grow=0., autowrite=no, graphics="stdgraph", cursor="", aidpars="")
 \end{lstlisting}
+{\parskip=0pt The} \texttt{identify} task will launch an interactive window. Cursor commands refer to keys that provide unique functionality to the interactive \iraf\ tasks. The cursor commands for \texttt{identify} allow the arc lines to be identified using `m' (and typing the relevant wavelength), while `d' and `i' will delete a single and all identified arc lines, respectively. The `f' cursor command will perform a preliminary fit which can be quit using the `q' cursor command. The `l' cursor command will attempt to identify any unidentified arc lines. Once complete, a figure of the identified lines may be saved using `:labels coord' and `:.snap eps', and the task safely quit with the `q' cursor command.%
+\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.identify.html} for documentation on the \texttt{identify} task.}
+The \texttt{identify} procedure is repeated, replacing \oarc\ with \earc.
 
-\iraf\ will launch an interactive window for the \texttt{identify} task. Cursor commands allow the arc lines to be identified using `m' (and typing the relevant wavelength), while `d' and `i' will delete a single and all identified arc lines, respectively. The `f' cursor command will perform a preliminary fit which can be quit using the `q' cursor command. The `l' cursor command will attempt to identify any unidentified arc lines. Once complete, a figure of the identified lines may be saved using `\texttt{:labels coord}' and `\texttt{:.snap eps}', and the task safely quit with the `q' cursor command.\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.identify.html} for documentation on the \texttt{identify} task.} Repeat the \texttt{identify} procedure, replacing \oarc\ with \earc.
+The \texttt{reidentify} task may be run using the commands in \autoref{code:iraf_reid}.
 
 \begin{lstlisting}[
     language=bash,
-    caption={The \iraf\ \texttt{reidentify} task},
+    caption={Running the \iraf\ \texttt{reidentify} task},
     label=code:iraf_reid]
 cl> mkscript (*@\reid@*)
 cl> # Add reidentify to (*@\reid@*) twice, for both beams
@@ -114,12 +128,15 @@ cl>
 cl> reidentify ("(*@\oarc@*)",
 >>> "(*@\oarc@*)", "yes", "", "", interactive="no", section="middle line", newaps=yes, override=no, refit=yes, trace=yes, step="10", nsum="10", shift="0.", search=0., nlost=0, cradius=5., threshold=0., addfeatures=no, coordlist="linelists$idhenear.dat", match=-3., maxfeatures=50, minsep=2., database="database", logfiles="logfile", plotfile="", verbose=yes, graphics="stdgraph", cursor="", aidpars="")
 \end{lstlisting}
+{\parskip=0pt The} \texttt{reidentify} task will run autonomously so long as the \texttt{interactive} parameter is set to ``no''.%
+\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html} for documentation on the \texttt{reidentify} task.}
+Repeat the \texttt{reidentify} procedure, replacing \oarc\ with \earc\ at both the `reference' and `image' parameter locations.
 
-The \texttt{reidentify} task will run autonomously so long as the \texttt{interactive} parameter is set to ``no''.\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html} for documentation on the \texttt{reidentify} task.} Repeat the \texttt{reidentify} procedure, replacing \oarc\ with \earc\ at both the `reference' and `image' parameter locations.
+The \texttt{fitcoords} task may be run using the commands in \autoref{code:iraf_fitcoords}.
 
 \begin{lstlisting}[
     language=bash,
-    caption={The \iraf\ \texttt{fitcoords} task},
+    caption={Running the \iraf\ \texttt{fitcoords} task},
     label=code:iraf_fitcoords]
 cl> mkscript (*@\fit@*)
 cl> # Add fitcoords to (*@\fit@*) twice, for both beams
@@ -129,12 +146,15 @@ cl>
 cl> fitcoords ("(*@\oarc\ (exclude the file extension)@*)",
 >>> fitname="", interactive=yes, combine=no, database="database", deletions="deletions.db", function="chebyshev", xorder=6, yorder=6, logfiles="STDOUT,logfile", plotfile="plotfile", graphics="stdgraph", cursor="")
 \end{lstlisting}
+{\parskip=0pt The} \texttt{fitcoords} task will launch an interactive window. The x- and y-axis being plotted may be changed using the `x' or `y' cursor commands followed by the desired data axis (`x' for the x-axis, `y' for the y-axis, or `r' for the residuals).%
+\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html} for documentation on the \texttt{fitcoords} task.}
+Repeat the \texttt{fitcoords} procedure, replacing \oarc\ with \earc.
 
-\iraf\ will launch an interactive window for the \texttt{fitcoords} task. The interactive window allows the parameters to be optimized without having to rerun the task. The x- and y-axis being plotted may be changed using the `x' or `y' cursor commands followed by the desired data axis (such as `x', `y', or `r' for residuals).\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html} for documentation on the \texttt{fitcoords} task.} Repeat the \texttt{fitcoords} procedure, replacing \oarc\ with \earc.
+The \texttt{transform} task may be run using the commands in \autoref{code:iraf_transform}.
 
 \begin{lstlisting}[
     language=bash,
-    caption={The \iraf\ \texttt{transform} task},
+    caption={Running the \iraf\ \texttt{transform} task},
     label=code:iraf_transform]
 cl> mkscript (*@\tran@*)
 cl> # Add transform to (*@\tran@*) twice, for both beams
@@ -145,9 +165,15 @@ cl> transform ("(*@@\ofiles@*)",
 >>> "(*@t//@\ofiles@*)", "(*@\oarc@*) (exclude the file extension)", minput="", moutput="", database="database", interptype="linear", x1="INDEF", x2="INDEF", dx="INDEF", nx="INDEF", xlog="no", y1="INDEF", y2="INDEF", dy="INDEF", ny="INDEF", ylog="no", flux="yes", blank="INDEF", logfiles="STDOUT,logfile")
 \end{lstlisting}
 
-Inspect the transformed images, notably the arc images, using any \gls{FITS} viewer as a cursory check that the wavelength calibrations were completed without error.\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html} for documentation on the \texttt{transform} task.}
+Inspect the transformed images, most notably the arc images, using any \gls{FITS} viewer as a cursory check that the wavelength calibrations were completed without error.%
+\footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html} for documentation on the \texttt{transform} task.}
 
-The gain and read noise is now needed since part of the \stops\ \texttt{join} method, the cosmic ray rejection, may need them as parameters. Determining these parameters may be done using the `\textit{GAINSET}' and `\textit{ROSPEED}' \gls{FITS} keywords, where the cosmic ray rejection defaults to \textit{GAINSET}=`FAINT', and \textit{ROSPEED}=`SLOW'. If the values for the keywords differ the gain and read noise parameters should be updated.\footnote{The read noise and gain may be determined from \protect\url{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}, specifically Tables~6.1 and 6.2.}
+The `gain' and `read noise' are now needed as the cosmic-ray rejection of the \stops\ \texttt{join} method accepts them as parameters. These parameters may be found using the `\textit{GAINSET}' and `\textit{ROSPEED}' keywords in the \gls{FITS} headers. The cosmic ray rejection defaults to \textit{GAINSET}$ = $`FAINT', and \textit{ROSPEED}$ = $`SLOW'. If the gain and read noise values differ from the defaults, the parameters should be updated when running \texttt{join}.%
+\footnote{The read noise and gain may be determined from \protect\url{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}, specifically \href{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html\#t.4}{Table 6.1} and \href{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html\#t.5}{Table 6.2}.}
+
+\pagebreak
+
+The \stops\ \texttt{join} method may be run using the commands in \autoref{code:stops_join}.
 
 \begin{lstlisting}[
     language=bash,
@@ -158,56 +184,64 @@ $ conda activate stops
 $ python ~/STOPS . join
 \end{lstlisting}
 
-\begin{lstlisting}[
-    language=bash,
-    caption={The \stops\ \texttt{skylines} method},
-    label=code:stops_sky]
-$ cd (*@\obsdate@*)/sci
-$ conda activate stops
-$ python ~/STOPS . skylines (*@<\textit{O-beam SCI}>@*)
-\end{lstlisting}
+The \stops\ \texttt{skylines} method may be run on any `joined' or transformed \gls{FITS} files, \file, using the commands in \autoref{code:stops_sky}.
 
 \begin{lstlisting}[
     language=bash,
-    caption={File cleanup for \polsalt},
+    caption={Running the \stops\ \texttt{skylines} method},
+    label=code:stops_sky]
+$ cd (*@\obsdate@*)/sci
+$ conda activate stops
+$ python ~/STOPS . skylines (*@\file@*)
+\end{lstlisting}
+
+The `\texttt{sci/}' directory may now be slightly organized by running the commands in \autoref{code:gen_clean}, moving all the files relevant to the wavelength calibrations into either the `\texttt{database}' or `\texttt{split\_files}' directories.
+
+\begin{lstlisting}[
+    language=bash,
+    caption={Directory cleanup for \polsalt},
     label=code:gen_clean]
 $ cd (*@\obsdate@*)/sci
 $ mkdir split_files
-$ mv *obeam* *ebeam* *oarc* *earc* split_files/
+$ mv *beamO* *beamE* *arcO* *arcE* split_files/
 $ mv *.eps *.cl *.db database/
 \end{lstlisting}
 
 The \polsalt\ \texttt{spectra extraction} is now run. If the \polsalt\ \gls{GUI} was closed it should now be reopened using \autoref{code:polsalt_launch}. With the \gls{GUI} in focus:
 \begin{itemize}
-    \item Ensure all directories are still correct
-    \item Select `Spectra extraction' from the `Data reduction step' drop down menu
+    \item Ensure all directories are still correct.
+    \item Select `Spectra extraction' from the `Data reduction step' drop down menu.
     \item Check the tick boxes of all wavelength calibrated images to be processed (exclude the arc) in the display box covering the lower half of the \gls{GUI}.
-    \item Proceed with the reductions by clicking `OK'
+    \item Proceed with the reductions by clicking `OK'.
 \end{itemize}
 
-The \polsalt\ \texttt{spectra extraction} is interactive and will launch a separate \gls{GUI} for the background subtraction and spectral extraction (See \autoref{fig:polsalt_gui_spec}). The background and spectral regions to be extracted may be adjusted, noting that adjustments affect both $O$- and $E$-beams. Once both background regions contain no trace and the spectral region fully contains only the science trace, the reduction may be completed by clicking `OK'.
+The \polsalt\ \texttt{spectra extraction} is interactive and will launch a separate \gls{GUI} for the background subtraction and spectral extraction (see \autoref{fig:polsalt_gui_spec}). The background and spectral regions to be extracted may be adjusted, noting that adjustments affect both $O$- and $E$-beams. Once both background regions contain no trace and the spectral region fully contains only the science trace, the reduction may be completed by clicking `OK'.
+
+The \stops\ \texttt{correlate} method may now be run on any `joined' \gls{FITS} files by running the commands in \autoref{code:stops_corr}.
 
 \begin{lstlisting}[
     language=bash,
-    caption={The \stops\ \texttt{correlate} method},
+    caption={Running the \stops\ \texttt{correlate} method},
     label=code:stops_corr]
 $ cd (*@\obsdate@*)/sci
 $ conda activate stops
-$ python ~/STOPS . correlate (*@<\textit{O-beam SCI}>@*)
+$ python ~/STOPS . correlate (*@\file@*)
 \end{lstlisting}
 
-The \polsalt\ \texttt{raw Stokes calculation}, \texttt{final Stokes calculation}, and \texttt{results visualisation} can now be completed. For the last time, if the \polsalt\ \gls{GUI} was closed it should now be reopened using \autoref{code:polsalt_launch}. With the \gls{GUI} in focus:
+\pagebreak
+
+The \polsalt\ \texttt{raw Stokes calculation}, \texttt{final Stokes calculation}, and \texttt{results visualisation} may now be completed. For the last time, if the \polsalt\ \gls{GUI} was closed it should now be reopened using \autoref{code:polsalt_launch}. With the \gls{GUI} in focus:
 \begin{itemize}
-    \item Ensure all directories are still correct
-    \item Select `Raw Stokes calculation' from the `Data reduction step' drop down menu
+    \item Ensure all directories are still correct.
+    \item Select `Raw Stokes calculation' from the `Data reduction step' drop down menu.
     \item Check the tick boxes of all the extracted spectra images to be processed in the display box covering the lower half of the \gls{GUI}.
-    \item Proceed with the \texttt{raw Stokes calculation} by clicking `OK'
-    \item Select `Final Stokes calculation' from the `Data reduction step' drop down menu
+    \item Proceed with the \texttt{raw Stokes calculation} by clicking `OK'.
+    \item Select `Final Stokes calculation' from the `Data reduction step' drop down menu.
     \item Check the tick boxes of all the ``raw Stokes'' images to be processed in the display box covering the lower half of the \gls{GUI}.
-    \item Proceed with the \texttt{Final Stokes calculation} by clicking `OK'
-    \item Select `Results visualisation - interactive' from the `Data reduction step' drop down menu
+    \item Proceed with the \texttt{Final Stokes calculation} by clicking `OK'.
+    \item Select `Results visualisation - interactive' from the `Data reduction step' drop down menu.
     \item Check the tick boxes of the ``final Stokes'' image to be visualized in the display box covering the lower half of the \gls{GUI}.
-    \item Proceed with the \texttt{visualisation} by clicking `OK'
+    \item Proceed with the \texttt{visualisation} by clicking `OK'.
 \end{itemize}
 
 The \polsalt\ \texttt{visualisation} is interactive and will launch a separate \gls{GUI} (See \autoref{fig:polsalt_gui_vis}). The \gls{GUI} may be used to change the binning and parameters of the plot before saving the plot to a PDF file.
@@ -228,20 +262,20 @@ This concludes the minimum working example of the \polsalt\ reduction process wh
             .4 \fit .
             .4 \tran .
             .4 deletions.db .
-            .4 fcearc00<\#\#> .
-            .4 fcoarc00<\#\#> .
-            .4 idearc00<\#\#> .
-            .4 idoarc00<\#\#> .
+            .4 fcarcE00<\#\#> .
+            .4 fcarcO00<\#\#> .
+            .4 idarcE00<\#\#> .
+            .4 idarcO00<\#\#> .
             .4 <*>.eps .
             .3 split\_files .
-            .4 oarc00<\#\#>.fits .
-            .4 earc00<\#\#>.fits .
-            .4 obeam<*>.fits .
-            .4 ebeam<*>.fits .
-            .4 toarc00<\#\#>.fits .
-            .4 tearc00<\#\#>.fits .
-            .4 tobeam<*>.fits .
-            .4 tebeam<*>.fits .
+            .4 arcE00<\#\#>.fits .
+            .4 arcO00<\#\#>.fits .
+            .4 beamE<*>.fits .
+            .4 beamO<*>.fits .
+            .4 tarcE00<\#\#>.fits .
+            .4 tarcO00<\#\#>.fits .
+            .4 tbeamE<*>.fits .
+            .4 tbeamO<*>.fits .
             .3 \obsdate\_geom.txt .
             .3 \obsdate\_filtered.txt .
             .3 cwmxgbpP\obsdate<*>.fits .

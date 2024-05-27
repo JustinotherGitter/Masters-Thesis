@@ -13,6 +13,7 @@ This file stands to track any final edits needed before the submission of the th
 * Use the `minted` package instead of the `listings` `STOPS_docs` style workaround
 * \$O\$- and \$E\$-beam(s)
 * Unify usage of exposure / frame / extension and add to glossary (see references)
+* Edit created plots to use Latex font (both python and inkscape figures)
 
 ## Style guides
 
