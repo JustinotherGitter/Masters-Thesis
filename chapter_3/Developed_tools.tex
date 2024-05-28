@@ -51,10 +51,10 @@ Background subtraction and spectral extraction is run via \textbf{spec\-pol\-ext
 
 Raw Stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw Stokes' signal, $S$, are calculated as:
 \begin{align} \label{eq:polsalt_rawstokes}
-    I &= \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2})\,,\rlap{\quad and}\\
-    S &= \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right]\,,
+    I &= \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2})\,,\ \text{and}\\
+    S &= \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right]\,.
 \end{align}
-respectively. The raw Stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw Stokes information have a very specific naming style, which need not be discussed here but with most notably the pair of frames being used included in the file names.
+The raw Stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw Stokes information have a very specific naming style, with most notably the pair of frames being used included in the file names.
 
 % MARK: Final Stokes calculations
 \subsection{Final Stokes calculations}

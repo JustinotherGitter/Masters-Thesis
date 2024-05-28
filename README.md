@@ -14,6 +14,7 @@ This file stands to track any final edits needed before the submission of the th
 * \$O\$- and \$E\$-beam(s)
 * Unify usage of exposure / frame / extension and add to glossary (see references)
 * Edit created plots to use Latex font (both python and inkscape figures)
+* Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
 
 ## Style guides
 
@@ -31,33 +32,26 @@ Equations are written in-text and are a part of sentences unless otherwise indic
 
 ```Latex
 % Align center
-\begin{equation}
-    'equation1' \,,\quad 'equation2'
+\begin{equation} \label{eq:name}
+    eq \,[,|.]
 \end{equation}
 
 % Align center, ignore end text
-\begin{equation}
-    'equation1' \,,\rlap{\quad text\,,}
-\end{equation}
-```
-
-The equation can either be a single- or multi-line equation:
-
-```Latex
-\begin{equation}
-    R = \frac{\lambda}{FWHM}\,,\label{eq:resolving_power}
-\end{equation}
-```
-
-or a collection of equations:
-
-```Latex
-\begin{equation}
+\begin{equation} \label{eq:name}
     \begin{gathered}
-        T_{0}(x) = 1\,,\\
-        T_{1}(x) = x\,,\rlap{\quad and}\\
-        T_{n}(x) = 2 x T_{n - 1}(x) - T_{n - 2}(x)\,,\rlap{\quad for $n > 1$\,,}
-    \end{gathered} \label{eq:chebypoly}
+      eq1 = ... \,,\\
+      eq2 = ... \rlap{\,,\ and}\\
+      eq3 = ...
+    \end{gathered}
+\end{equation}
+
+% Align by `=', ignore end text
+\begin{equation} \label{eq:name}
+    \begin{aligned}
+      eq1 &= ... \,,\\
+      eq2 &= ... \rlap{\,,\ and}\\
+      eq3 &= ...
+    \end{aligned}
 \end{equation}
 ```
 
