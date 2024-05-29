@@ -103,7 +103,7 @@ which shows that the angular dispersion of a prism is wavelength dependent and f
 Multiple prisms can be used to increase the angular dispersion but as the dispersion is non-linear it becomes increasingly more difficult to calibrate. The more material and material boundaries the light must pass through, the more its intensity decreases due to attenuation effects and Fresnel losses. Even so, the transmittance of modern prisms for their selected wavelength range is generally very high due to improved manufacturing methods as well as improved transmitting materials.\footnote{See manufacturers technical specifications, \href{https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=148}{THORLABS}, or \href{https://www.edmundoptics.eu/c/prisms/607/}{Edmund Optics} for example.}
 \enlargethispage{-2\baselineskip}
 
-\subsubsection{Diffraction grating} \label{subsubsec:diff_grat}
+\subsubsection{Diffraction Grating} \label{subsubsec:diff_grat}
 
 \begin{figure}[t]
     \centering
@@ -219,7 +219,7 @@ Finally, since the dispersion element breaks the incident light into its constit
 
 The wavelength calibrations then consist of defining a two-dimensional pixel-to-wave\-length conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations.
 
-\paragraph{Chebyshev polynomials}
+\paragraph{Chebyshev Polynomials}
 
 \begin{figure}[t]
     \centering
@@ -273,7 +273,7 @@ The Chebyshev polynomials are more suited for wavelength calibrations than stand
 %     x_{n} = \cos{\left(  \frac{\pi}{2} \frac{2 n + 1}{N} \right)}
 % \end{equation}
 
-\paragraph{Legendre polynomials}
+\paragraph{Legendre Polynomials}
 
 \begin{figure}[t]
     \centering
@@ -487,7 +487,7 @@ For ideal components, the resultant beam $\matr{S}^{\prime}$ after passing throu
 
 Some Mueller Matrices are given below with angles related to those in \autoref{fig:polarimeter}, measured counter-clockwise in a right-handed coordinate system.
 
-\paragraph{General rotation}
+\paragraph{General Rotation}
 The Mueller matrix for coordinate space rotations about the origin by an angle $\theta$,
 \begin{equation} \label{matrix:rotate}
     \matr{R}(\theta) =
@@ -499,7 +499,7 @@ The Mueller matrix for coordinate space rotations about the origin by an angle $
     \end{bmatrix}\,.
 \end{equation}
 
-\paragraph{General linear retardance}
+\paragraph{General Linear Retardance}
 The Mueller matrix for retardance where $\alpha$ is the angle between the incoming vector and fast axis, and $\delta$ is the retardance introduced by the retarder,
 \begin{equation} \label{matrix:retarder}
     \matr{W}(\alpha, \delta) =
@@ -512,7 +512,7 @@ The Mueller matrix for retardance where $\alpha$ is the angle between the incomi
 \end{equation}
 The retarder is often referred to by this retardance, e.g. if the retardance is $\delta = \pi$ or $\pi / 2$, the retarder is referred to as a half- or quarter-wave plate, respectively.
 
-\paragraph{General linear polarization}
+\paragraph{General Linear Polarization}
 The Mueller matrix for linear polarization where $\beta$ is the angle between the incoming vector and transmission axis,
 \begin{equation} \label{matrix:polarizer}
     \matr{P}(\beta) = \frac{1}{2}
@@ -538,7 +538,7 @@ Several or more frames taken under differing configurations may be used to reduc
 
 From \autoref{eq:Stokes_intensity} we see that the linear retarder element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$, or $I$, $Q$, and $U$) may be found by changing only the angle of retardance, $\alpha$.
 
-\paragraph{Wave plates}
+\paragraph{Wave Plates}
 Wave plates, also commonly referred to as retarders, are generally made from optically transparent birefringent crystals. A wave plate has a fast and slow axis, which are perpendicular to one another and both perpendicular to an incident beam. Due to the birefringence of the wave plate medium, the phase velocity of the beam polarized parallel to the fast axis, namely the extraordinary beam, slightly increases while that of the beam polarized parallel to the slow axis, namely the ordinary beam, remains unaffected. This difference in the perpendicular component's phase velocities introduces a relative phase difference between the two beams, $\gamma$, which is given by:
 \begin{equation}
     \gamma = \frac{2 \pi \Delta n L}{\lambda_{0}}
@@ -570,12 +570,12 @@ Polarizers are typically made from two prisms, of a birefringent material, cemen
     \label{fig:Wollaston_prism}
 \end{figure}
 
-\paragraph{Wollaston prisms}
+\paragraph{Wollaston Prisms}
 The Wollaston prism consists of two right-angle prisms consisting of a birefringent monoaxial material, cemented together with an optically transparent adhesive along their hypotenuses with their optical axes orthogonal, as seen in \autoref{fig:Wollaston_prism}. The Wollaston prism is a common optical polarizing element in astrophysical polarimetry which separates an incident beam into two linearly polarized $O$- and $E$-beams, orthogonal to one another, and deviated from their common axis equally. The deviation angle of the polarized beams is determined by the wedge angle which is defined as the angle from the common hypotenuse to that of the outer transmission face of either prism.
 
 Wollaston prisms benefit over simpler elements (such as those listed in the \hyperref[par:polarizer]{polarizer} paragraph) since a single frame allows for the observation of both orthogonal polarization components. This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty \citep{wollaston}.
 
-\subsection{Polarimetric calibrations} \label{subsec:pol_cal}
+\subsection{Polarimetric Calibrations} \label{subsec:pol_cal}
 
 The raw science images acquired during polarimetric observations contain a combination of useful science data as well as noise, similar to \autoref{subsec:calibration}. Corrections and calibrations related to the detector remain unchanged from those described in \autoref{subsec:calibration}, while those related to correcting for the optical elements relate to corrections for spurious polarization effects.
 
@@ -589,7 +589,7 @@ Observing additional `redundant' exposures for the science and flat images incre
 
 Increasing the amount of redundant observations proportionally increases the time needed to observe all the exposures, which in turn introduces time-dependent effects such as fringing or intensity variations of the flat source. As such, a middle ground must be found for the amount of redundant frames observed. \citep{polarimetry_error, pol_optimize}.
 
-\subsubsection{Dual-beam Extraction and Alignment} \label{subsubsec:pol_oe_extract}
+\subsubsection{Dual-Beam Extraction and Alignment} \label{subsubsec:pol_oe_extract}
 
 After calibrations for the \gls{CCD} and light path are accounted for, the $O$- and $E$-beams can be extracted and further reduced. The extraction depends heavily on the layout of the polarimeter but often a simple cropping of the differing sections is enough to separate the two images.
 
@@ -617,7 +617,7 @@ Along with common points of consideration when developing any instrumentation fo
 
 \autoref{fig:specpol_exp} illustrates a typical science image taken with a spectropolarimeter. The image contains the $O$- and $E$-beams which are both dispersed into their spectra. Spectropolarimetric results are acquired from measurements and calibrations of these images alongside any necessary calibration images.
 
-\subsection{Spectropolarimetric measurement}
+\subsection{Spectropolarimetric Measurement}
 
 The derived relations given in \autoref{subsec:pol}, such as the \hyperref[eq:Stokes_params]{Stokes parameters}, describe polarization in general and are valid for both polarimetry and spectropolarimetry. Due to the time averaging of the observed light (\autoref{eq:pol_t_avg}), any minor temporal variation, partial polarization, or monochromatic nature of the spectropolarimetric polarization parameters are accounted for.
 
@@ -664,7 +664,7 @@ where $N$ is the number of exposures taken, limited such that $N \in [2, 16]$ \c
 % \end{equation}
 % which is derived from \autoref{eq:poincare_coords} or by solving a system of linear equations of \autoref{eq:specpol_F_to_params} \citep{pol_std,keller_instr}.
 
-\subsection{Spectropolarimetric calibrations} \label{subsec:specpol_cal}
+\subsection{Spectropolarimetric Calibrations} \label{subsec:specpol_cal}
 
 % The calibrations necessary for the measurement to take place are, as always, seemingly more involved than the calculation of the results themselves.
 Just as the elements of a spectropolarimeter are an amalgamation of both a spectrometer and polarimeter, it naturally follows that the calibrations necessary to reduce spectropolarimetric data are a combination of the calibrations needed for spectroscopy and polarimetry, discussed further in \autoref{subsec:calibration} and \autoref{subsec:pol_cal}. Even though the spectrometer and polarimeter components both have an effect on an incident beam following the light-path through the spectropolarimeter, the calibration procedures for both methods remain mostly independent of one another and as such need not be repeated here.
@@ -683,11 +683,11 @@ Spectropolarimetric calibrations are, however, more involved when compared to th
 \end{figure}
 \footnotetext{\protect\url{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}}
 
-\subsection{The primary mirror}
+\subsection{The Primary Mirror}
 
 The primary mirror is composed of 91 individual 1 m hexagonal mirrors which together form an 11 m segmented spherical mirror. Each mirror segment can be adjusted by actuators allowing the individual mirrors to approximate a single monolithic spherical mirror. The fixed elevation means that SALT's primary mirror has a fixed gravity vector allowing for a lighter, cost-effective supporting structure when compared to those of a more traditional altitude-azimuthal mount but with the trade-off that the control mechanism and tracking have increased complexity \citep{SALT_design}.
 
-\subsection{Tracker and tracking}
+\subsection{Tracker and Tracking}
 
 During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of ~5 $\mu$m and is capable of tracking $\pm$6$\degree$ from the optimal central track position. Targets at declinations from 10.5$\degree$ to -75.3$\degree$, as shown in \autoref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of $\sim7$ m to 9 m when the tracker is furthest and closest to the optimal central position, respectively.
 

@@ -9,12 +9,16 @@ This file stands to track any final edits needed before the submission of the th
 
 ## Minor `TODOs`
 
-* Update tables `\input{}` to use relative pathing
+* Update tables `\input{}` to use relative pathing (`import` package?)
 * Use the `minted` package instead of the `listings` `STOPS_docs` style workaround
-* \$O\$- and \$E\$-beam(s)
 * Unify usage of exposure / frame / extension and add to glossary (see references)
 * Edit created plots to use Latex font (both python and inkscape figures)
 * Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
+* Limit paragraph breaks to only `left-to-right` pages, not across a page turn.
+* Check common errors:
+  * \$O\$- and \$E\$-beam(s)
+  * extension
+  * the user vs a user
 
 ## Style guides
 
@@ -22,8 +26,13 @@ Included herein are the style guides I have followed during the course of writin
 
 ### Headings
 
+Headings use `Title Case`. Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
+
 ```Latex
+% Note case is `Title Case`
+\chapter{Chapter Title}
 \section{Section Title} \label{sec:sec_title}
+\dots
 ```
 
 ### Equations

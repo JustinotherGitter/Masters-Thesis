@@ -1,3 +1,9 @@
 \chapter{Conclusions}
 
 \todo{A summary of the dissertation, main focus on the results and that the supplementary pipeline is a success since it allows an alternate method using IRAF to wavelength calibrate the polsalt data.}
+
+\section{Future Work}
+
+\todo{Edit paragraph below to mention python wavelength solutions implemented to `future-proof' the pipeline.}
+
+Another option to perform the wavelength calibration is Python which allows for a more modern and flexible approach, but is not discussed here. What will be discussed, however, is the structure of the wavelength solutions created through Python to be later reintroduced to the \polsalt\ pipeline. The solutions must be stored such that the `$x$' and `$y$' orders of the solution, as well as all the coefficients ($C_{00}$ to $C_{xy}$) making up the solution, separated by new lines, are included. The only limitations to the names of the solution files is that they must make mention of the specific $O$- or $E$-beam as well as the wavelength solution type (e.g. `Chebyshev', `Legendre', etc.).

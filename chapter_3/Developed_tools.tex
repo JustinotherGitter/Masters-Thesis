@@ -25,17 +25,17 @@ The steps that make up the \polsalt\ reduction pipeline include basic \gls{CCD} 
 \footnote{The GitHub wiki for \polsalt\ is available at \url{https://github.com/saltastro/polsalt/wiki}.}
 
 % MARK: Basic CCD reductions
-\subsection{Basic CCD reductions}
+\subsection{Basic CCD Reductions}
 
 Basic \gls{CCD} reductions are run via \textbf{imred.py} and apply the necessary basic reductions to the raw data before any calibrations are applied. These reductions include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and pixel variance information. Files with basic reductions performed have ``mxgbp'' prepended to their names. As of February 2022, basic \gls{CCD} reductions are automatically run for all RSS spectropolarimetric observations as part of the default SALT basic reduction pipeline that is run daily.
 
 % MARK: Wavelength calibrations
-\subsection{Wavelength calibrations}
+\subsection{Wavelength Calibrations}
 
 Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpolwavmap.py} and separately calibrates the $O$- and $E$-beams, based on the arc frames, and applies a simple cosmic-ray rejection for all science frames. This step is interactive and allows the user to individually fit wavelength calibration maps to each beam. The importance of an accurate correlation between both beams has been touched on previously (\autoref{subsec:specpol_cal}) and will be further discussed in \autoref{subsec:polsalt_limits}. The wavelength calibrated results are saved as an additional extension to each science FITS file, which are prefixed with a ``w'', and the $O$- and $E$-beams of the extensions are split into their own sub-extensions.
 
 % MARK: Background subtraction and spectral extraction
-\subsection{Spectral extraction}
+\subsection{Spectral Extraction}
 
 \begin{figure}[t]
     \centering
@@ -47,7 +47,7 @@ Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpol
 Background subtraction and spectral extraction is run via \textbf{spec\-pol\-extract\_dev.py} which corrects for the beam-splitter distortion and tilt, performs sky subtraction, and extracts a one dimensional wavelength dependent spectrum for each beam sub-extension. This step is interactive and, using the brightest trace in the images, allows the user to define regions which span the wavelength axis and which define the background and trace regions for the sky subtraction and spectral extraction. Files with corrections applied are saved with ``c'' prepended to their names and files which contain the extracted one dimensional spectrum have ``e'' further prepended to their names.
 
 % MARK: Raw Stokes calculations
-\subsection{Raw Stokes calculations}
+\subsection{Raw Stokes Calculations}
 
 Raw Stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw Stokes' signal, $S$, are calculated as:
 \begin{align} \label{eq:polsalt_rawstokes}
@@ -57,9 +57,9 @@ Raw Stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} an
 The raw Stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The files generated containing the raw Stokes information have a very specific naming style, with most notably the pair of frames being used included in the file names.
 
 % MARK: Final Stokes calculations
-\subsection{Final Stokes calculations}
+\subsection{Final Stokes Calculations}
 
-The Final Stokes calculations are performed via \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw Stokes signals, calibrate for polarimetric zero-point and waveplate efficiency calibrations and calculates the final Stokes parameters. Before the final Stokes calculations are performed, data culling is applied to the raw Stokes to eliminate outlier results which may arise due to, for example, atmospheric conditions. Data culling compares observation cycles against one another, compares the deviation of the means which estimate the systematic polarization baseline fluctuations (due to imperfections in repeatability), and performs a chi-squared analysis to eliminate outliers.
+The Final Stokes calculations are performed via \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw Stokes signals, calibrates for the polarimetric zero-point and waveplate efficiency, and calculates the final Stokes parameters. Before the final Stokes calculations are performed and when a sufficient amount of redundant exposures are taken, the raw Stokes signals are culled to eliminate outlier signals which may arise due to, for example, temporary atmospheric conditions affecting the signal. The data culling compares observation cycles against one another, compares the deviation of the signal means which estimate the baseline systematic polarization fluctuations (due to imperfections in repeatability), and performs a $\chi^2$ analysis to eliminate outliers.
 
 % MARK: Visualization
 \subsection{Visualization}
@@ -81,30 +81,28 @@ Plotting the results of the spectropolarimetric reduction process uses \textbf{s
 \end{figure}
 
 % MARK: Post-processing analysis
-\subsection{Post-processing analysis}
+\subsection{Post-Processing Analysis}
 
 Generally, the plot of the spectropolarimetric results is the stopping point for most reduction procedures as it contains or creates the desired results. However, additional tools exist which may be used after the polarization reductions, and which are not represented in the \gls{GUI}, namely, flux calibration and synthetic filtering.
 
-Flux-calibrations are performed via \textbf{specpolflux.py} and are only intended for shape corrections of the spectrum. Additionally, the flux database file must exist for the standard observed and must be copied over to the working science directory.
+Flux-calibrations are performed via \textbf{specpolflux.py} and are only intended for shape corrections of the spectrum. Additionally, a flux database file must exist for the observed standard and must be included in the working science directory.
 % MARK: TODO: Flux Calibrations - errors in GUI - make 100\% sure about division error and notify Dani\'el
 
 Synthetic filtering is calculated via \textbf{specpolfilter.py} and computes the synthetically filtered polarization results. The filters which can be synthesized are the Johnson $U$, $B$, and $V$ filter curves from the \gls{SALTICAM} filters, as well as the Cousins $R$ and $I$ filter curves, along with any user defined wavelength dependent throughput filter curves.
 
 % MARK: Need for POLSALT
-\subsection{Limitations of \polsalt\ and the Need for Supplementary Tools} \label{subsec:polsalt_limits}
+\subsection{\polsalt\ Limitations and the Need for Supplementary Tools} \label{subsec:polsalt_limits}
 
 % Why
-The creation of supplementary tools for \polsalt\ spectropolarimetric reductions stemmed from the limitations of the wavelength calibration process and a need for a way to compare wavelength solutions across matching $O$ and $E$ polarization beams. The process of calibrating wavelength solutions using the \polsalt\ pipeline is time-consuming for the average user, and often results in unexpected crashes when receiving erroneous inputs or key presses. Due to the time-consuming process of recalibrating the wavelength solutions it is not feasible to perform the wavelength calibrations time and time again for any amount of reductions larger than a handful of observations.
+The creation of supplementary tools for \polsalt\ spectropolarimetric reductions stemmed from the limitations of the wavelength calibration process and a need to compare wavelength solutions across the perpendicular $O$ and $E$ polarization beams. The process of calibrating wavelength solutions using the \polsalt\ pipeline is time-consuming for the average user, and often results in unexpected crashes when receiving erroneous inputs or key presses. Due to the time-consuming process of recalibrating the wavelength solutions it is not feasible to perform the wavelength calibrations time and time again for any amount of reductions larger than a handful of observations. This is particularly true for observations performed with the \gls{SALT} PG$0300$ grating as the sparse spectral features of the Ar arc lamp are not handled well by the \polsalt\ pipeline.
 
 % PG0300 reasoning
-The prime motivation of finding an alternate method to wavelength calibrate \gls{SALT} spectropolarimetric data stemmed from a large backlog of unused data taken using the PG$0300$. The only arc available for the PG$0300$ with a close enough articulation and grating angle ($\sim 10.68\degr$ and $\sim 5.38\degr$, respectively) was \gls{SALT}'s Argon lamp which displayed sparse spectral features with large gaps over the wavelength range at these grating and articulation angles (\autoref{fig:ar_arc_salt}). This often lead the \polsalt\ pipeline to create inconsistent wavelength solutions, or fail to create a wavelength solution altogether, since minor deviations of identified spectral features result in large deviations in regions with no spectral features. To only further compound the difficulty of the wavelength calibrations, the spectrum of the Ar arc lamp contains a partial overlap of a differing order at higher wavelengths and is thus not a purely free spectral range (\autoref{subsubsec:diff_grat}, \autoref{eq:grating_equation}).
+Since PG$0300$ provided the widest wavelength range and highest throughput, it was almost exclusively used for observations of flaring blazars, resulting in a large backlog of unanalyzed data. The only arc available for the PG$0300$ grating with a close enough articulation and grating angle ($\sim 10.68\degr$ and $\sim 5.38\degr$, respectively), was the Argon arc lamp which displays sparse spectral features with large gaps over the wavelength range at these grating and articulation angles (\autoref{fig:ar_arc_salt}). This often leads the \polsalt\ pipeline to create inconsistent wavelength solutions, or to fail to create a wavelength solution altogether, since minor deviations of identified spectral features result in large deviations in regions with no spectral features. To only further compound the difficulty of the wavelength calibrations, the spectrum of the Ar arc lamp contains a partial overlap of a differing order at higher wavelengths (\autoref{subsubsec:diff_grat}, \autoref{eq:grating_equation}).
 
 % How
-The chosen solution was to use a well established tool to perform the wavelength calibration - one which allows for rapid recalibrations as well as provides a familiar interface with which the user can analyze their wavelength solutions. \iraf\ provides this familiar environment and reliability, even when considering its age and \href{https://github.com/iraf-community/iraf}{limited community development}.
+The chosen solution to overcome the limitations of the wavelength calibration process was to use well established wavelength calibration software which allows for rapid recalibrations and provides a familiar interface. \iraf\ provides this familiar environment and reliability, in part thanks to its \href{https://github.com/iraf-community/iraf}{continued community development}.
 
-Unfortunately, \iraf\ is unable to natively parse the file structure implemented by \polsalt\ `as is' and formatting of the data structures are necessary for integration purposes. This restructuring works both ways as once the \iraf\ reductions are complete the format must be reformatted to match that of the \polsalt\ \texttt{wavelength calibration} output such that the reduction process may be completed in \polsalt.
-
-Another option to perform the wavelength calibration is Python which allows for a more modern and flexible approach, but is not discussed here. What will be discussed, however, is the structure of the wavelength solutions created through Python to be later reintroduced to the \polsalt\ pipeline. The solutions must be stored such that the `$x$' and `$y$' orders of the solution, as well as all the coefficients ($C_{00}$ to $C_{xy}$) making up the solution, separated by new lines, are included. The only limitations to the names of the solution files is that they must make mention of the specific $O$- or $E$-beam as well as the wavelength solution type (e.g. `Chebyshev', `Legendre', etc.).
+Unfortunately, \iraf\ is unable to natively parse the data structure implemented by \polsalt\ `as is' and so the files must be restructured. This restructuring works both ways as once the \iraf\ reductions are complete the data structure must be restructured to match that of the \polsalt\ \texttt{wavelength calibration} output such that the reduction process may be completed in \polsalt.
 
 \begin{figure}[t]
     \centering
@@ -112,42 +110,117 @@ Another option to perform the wavelength calibration is Python which allows for 
     \caption{One of many Argon arc lamp spectra as provided by \gls{SALT} for line identification. Plot adapted from \gls{SALT}'s published Longslit Line Atlases (as of 2024), resized to fit within the document margins but otherwise unchanged.\protect\footnotemark}
     \label{fig:ar_arc_salt}
 \end{figure}
-\footnotetext{\protect\href{https://pysalt.salt.ac.za/lineatlas/plot_line_argon_lores.pdf}{`low resolution' Ar plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
+\footnotetext{\protect\href{https://pysalt.salt.ac.za/lineatlas/plot_line_argon_lores.pdf}{The `low resolution' Ar plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
 
 % MARK: IRAF
 \section[\iraf]{\iraf\ - \glsxtrlong{IRAF}} \label{sec:iraf}
 
 % What is IRAF and why necessary
-\iraf\ is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here as every institute and individual has their own preferred wavelength calibration procedures and often use specific parameters for the various \iraf\ tasks (e.g. the order and type of the polynomial used in \texttt{identify}, etc.).
+\iraf\ is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here. Help documentation for any of the \iraf\ tasks may be found online under \url{https://iraf.net/irafdocs/} or through the \iraf\ \gls{CLI} through the \texttt{?} or \texttt{:.help} `cursor commands' when running interactive tasks, with more specific help documentation provided in the relevant section.
 
-A useful \iraf\ task that will not be discussed but nevertheless deserves a mention is the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script. It is instrumental as a scripting aid and is what allows \iraf\ its rapid recalibrations of the wavelength solutions.
+Useful \iraf\ tasks that deserve a brief mention before the wavelength calibration related tasks are: the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script,%
+\footnote{Help documentation for the \texttt{mkscript} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/system.mkscript.html}.}
+the \texttt{implot} task in the \texttt{plot} package which allows the rows or columns of an image to be interactively displayed,%
+\footnote{Help documentation for the \texttt{implot} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/plot.implot.html}.}
+and the \texttt{eparam} task in the \texttt{language} package which allows the parameters of a task to be edited within the \iraf\ \gls{CLI}.%
+\footnote{Help documentation for the \texttt{eparam} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/language.eparam.html}.}
 
-Help documentation for any of the \iraf\ tasks may be found online under \url{https://iraf.net/irafdocs/} or through the \iraf\ \gls{CLI} through the \texttt{?} or \texttt{:.help} `cursor commands' when running interactive tasks.
-
-For wavelength calibrations of spectropolarimetric observations taken with the \gls{SALT} \gls{RSS}, the relevant tasks, in order, are the \texttt{identify} and \texttt{reidentify} tasks located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and optionally the \texttt{transform} tasks located under the \texttt{noao.twodspec.longslit} package. These tasks produce a two-dimensional wavelength solution and must each be run twice to find the wavelength solutions for both spectropolarimetric beams.
+For wavelength calibrations taken with the \gls{SALT} \gls{RSS}, the relevant tasks, in order, are the \texttt{identify} and \texttt{reidentify} tasks located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and optionally the \texttt{transform} tasks located under the \texttt{noao.twodspec.long\-slit} package. These tasks produce a two-dimensional wavelength solution which must be obtained separately for the $O$- and $E$-beam.
 
 % MARK: Identify
 \subsection{Identify}
 
 The \texttt{identify} task is used to interactively determine a one-dimensional wavelength function across a chosen row of an arc exposure by identifying features in the spectrum with known wavelengths.%
 \footnote{Help documentation for the \texttt{identify} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.identify.html}.}
-The task creates the first approximation of the wavelength solution as well as a local database in which the solution is saved.%
-\footnote{The structure of the \texttt{identify} database entry may be found at \url{https://iraf.net/irafdocs/formats/identify.php}.}
-Both solution and database are built on in subsequent tasks, and it is therefore imperative that the initial solution is well-fit to minimize errors further down the calibration process.
+The task creates the first approximation of the wavelength solution as well as a local database in which the solution is saved. The initial identify solution is built on in subsequent tasks, and it is therefore imperative that the initial solution is well-fit to minimize errors further along the calibration process.
 
-The process of using \texttt{identify} consists of identifying known features spanning the entire wavelength range and then removing identified features which negatively impact the wavelength solution. A balance must be found between the number of identified features and parameters of the fit against the deviation of the fit from the known features.% RMS
+% RMS
+The process of using \texttt{identify} consists of identifying known features spanning the entire wavelength range and then removing identified features which negatively impact the wavelength solution. A balance must be found between the number of identified features and parameters of the fit against the deviation of the fit from the known features.
+
+\begin{lstlisting}[
+    language=bash,
+    style=IRAF_DB,
+    caption={An example of the \texttt{identify} database contents.\protect\footnotemark},
+    label=lst:iraf_id_db]
+    # Mon 13:17:28 24-May-2021
+    begin	identify arcO0076[*,237]
+        id	arcO0076
+        task	identify
+        image	arcO0076[*,237]
+        units	Angstroms
+        features	19
+                914.36 4200.62622  4200.6738  10.0 1 1 400    acs: add
+                949.49 4300.17348   4300.101  10.0 1 1 129
+               1252.55 5187.39422   5187.746  10.0 1 1 31
+               1263.96 5221.54994   5221.271  10.0 1 1 17
+               1355.15  5495.8234   5495.874  10.0 1 1 43
+               1446.51 5772.17078  5772.1162  10.0 1 1 8      acs: add
+               1532.34 6032.45797   6032.127  10.0 1 1 170
+               1658.91 6415.91265   6416.307  10.0 1 1 164
+               1699.40 6538.31025   6538.112  10.0 1 1 13
+               1745.28 6676.79911   6677.282  10.0 1 1 434
+               1841.17 6965.65775   6965.431  10.0 1 1 56184
+               1875.01 7067.44604   7067.218  10.0 1 1 25987
+               1901.56 7147.21544   7147.042  10.0 1 1 4072
+               1943.46 7273.03561   7272.936  10.0 1 1 4000   20225
+               1980.36 7383.72456   7383.981  10.0 1 1 1000    acs: decrease
+               2064.22  7634.9396   7635.106  10.0 1 1 600    326550
+               2169.03 7948.26801   7948.176  10.0 1 1 1000    acs: decrease
+               2275.03 8264.51799   8264.523  10.0 1 1 3000    acs: decrease
+               2408.84   8667.944   8667.944  10.0 1 1 10    acs: decrease
+        function spline3
+        order 4
+        sample *
+        naverage 1
+        niterate 0
+        low_reject 3.
+        high_reject 3.
+        grow 0.
+        coefficients	11
+            3.
+            4.
+            1.
+            3199.
+            0.
+            312.7201779363406
+            632.5595745458978
+            1041.274659628964
+            1439.95238024928
+            1834.037933236409
+            3151798.515215079
+\end{lstlisting}
+\footnotetext{See also \url{https://iraf.net/irafdocs/formats/identify.php} for an explanation of the database contents.}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3_id.eps}
+        \caption{Identified features.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3_id_resids.eps}
+        \caption{\gls{RMS} of the identified features.}
+    \end{subfigure}
+    \caption{A plot and the \gls{RMS} of the identified features found using the \iraf\ \texttt{identify} task. Figures created using the \iraf\ \texttt{identify} task.}
+    \label{fig:iraf_id_plot}
+\end{figure}
+
+\pagebreak
 
 % MARK: Reidentify
 \subsection{Reidentify}
 
 The \texttt{reidentify} task is used to run the \texttt{identify} task autonomously and repeatedly across the entirety of the arc exposure at a defined interval.%
 \footnote{Help documentation for the \texttt{reidentify} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html}.}
-The task uses the one-dimensional wavelength solution stored in the database created by the initial \texttt{identify} call and refits the previously identified points to match the new positions of the relevant spectral features. The task may fail based on a number of defined conditions, most common of which is the loss of features as the task moves further from the row at which the user ran \texttt{identify}.
+The task uses the one-dimensional wavelength solution stored in the database created by the initial \texttt{identify} call and refits the previously identified points to match the new positions of the relevant spectral features. The task may fail based on a number of conditions, most common of which is the loss of features as the task moves further from the row at which the user manually ran \texttt{identify}.
 
-When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will provide immediate confirmation of whether the task quit early or not. Regardless of whether the task quit successfully or not, the newly defined wavelength solutions are appended to the local database following the \texttt{identify} task database format.
+When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will provide immediate confirmation of whether the task quit early or not. Regardless of whether or not the task quit successfully, the newly defined wavelength solutions are appended to the local database following the \texttt{identify} task database format (see \autoref{lst:iraf_id_db}).
 
 % MARK: Fitcoords
-\subsection{Fitcoords} \label{subsec:pol_fitcoords}
+\subsection{Fitcoords} \label{subsec:iraf_fitcoords}
 
 The \texttt{fitcoords} task is used to combine the collection of one-dimensional wavelength solutions in the local database to a two-dimensional surface function.%
 \footnote{Help documentation for the \texttt{fitcoords} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html}.}
@@ -273,7 +346,7 @@ The wavelength extension is masked to remove any wavelength regions not calibrat
 \end{figure}
 
 % MARK: Skyline
-\subsection{Sky line checks} \label{subsec:stops_skyline}
+\subsection{Sky Line Checks} \label{subsec:stops_skyline}
 
 \lstinputlisting[
     language=python,
@@ -303,7 +376,7 @@ Determining if there is any inaccuracy in the wavelength solution in the spatial
 As no features, other than the trace of sources exposed across a frame, exist that uniformly cover the wavelength ($x$, horizontal) axis of a typical frame, determining if the horizontal fit of the wavelength solution is more challenging. Thankfully, \gls{SALT} has published a sky line atlas which we may make use of. By first considering the spatial fit of the wavelength solution, it is ensured that the wavelength positions of all sky lines are well-defined. Comparisons may now be made to the wavelength positions measured by \gls{SALT}. Minor variations in the comparison of the sky lines are expected, but any uniform trends indicate an underlying poor fit across the wavelength axis of the wavelength solution. A poor horizontal fit is difficult to spot without supplementary tools and may have drastic adverse effect on the final polarization results.
 
 % MARK: Correlate
-\subsection{Cross correlation} \label{subsec:stops_correlate}
+\subsection{Cross Correlation} \label{subsec:stops_correlate}
 
 \lstinputlisting[
     language=python,
@@ -348,7 +421,7 @@ One note of importance is that the \polsalt\ pipeline is not compatible with Pyt
 It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu, as seen in \autoref{fig:polsalt_gui}. Reductions are possible, however, purely through the \gls{CLI} using the \polsalt\ `beta' scripts.
 
 % MARK: Pre-reductions
-\subsection{\polsalt\ Pre-reductions}\label{subsec:reduc_pre}
+\subsection{\polsalt\ Pre-Reductions}\label{subsec:reduc_pre}
 
 \begin{figure}[t]
     \centering
@@ -375,12 +448,12 @@ $ python ~/polsalt/scripts/reducepoldata_sc.py (*@<\textit{OBSDATE}>@*)
 The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to be read by \iraf\ and \polsalt\ as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented in \autoref{code:stops_split} to \ref{code:stops_join}, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a well-fit calibration function. This process depends heavily and varies greatly based on the user and as such not all use cases can be discussed herein.
 
 % MARK: Prep for IRAF
-\subsubsection{Preparing the data for \iraf}
+\subsubsection{Preparing the Data for \iraf}
 
 Splitting the data is presented in \autoref{code:stops_split}. The \stops\ \texttt{split} method may take multiple parameters, as seen in \autoref{sec:stops}, but default parameters should be used where ever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}, which would include the split `wmxgbp' \gls{FITS} files (ebeam*.fits). This naming conflict is revisited and addressed later on in the reduction process and is thus not of any concern.
 
 % MARK: IRAF wavelength calibrations
-\subsubsection{\iraf\ wavelength calibrations}
+\subsubsection{\iraf\ Wavelength Calibrations}
 
 The \iraf\ wavelength calibrations are performed using the tasks described in \autoref{sec:iraf}, namely \texttt{identify}, \texttt{reidentify}, \texttt{fitcoords}, and optionally \texttt{transform}. In general, these tasks are run directly in the \iraf\ terminal using:%
 \footnote{Please see the \iraf\ help docs, available at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/iraf.html}, on the relevant tasks for a comprehensive discussion of the parameters available.}
@@ -401,14 +474,14 @@ cl> cl < script_name.cl
 {\parskip=0pt but} is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file to the \iraf\ terminal.
 
 % MARK: Post IRAF
-\subsubsection{Preparing the data for \polsalt}
+\subsubsection{Preparing the Data for \polsalt}
 
 The results of the wavelength calibrations may now be parsed back into the format expected by \polsalt. Joining the separate beams with their respective wavelength solutions is once again performed in the \gls{CLI}following \autoref{code:stops_join}.
 
 Similar to the \texttt{split} procedure mentioned above, the \texttt{join} procedure has the same defaults defined and so the responsibility falls on a user to keep track of which defaults were changed, and to keep the parameters consistent between the two tasks. Note that \stops\ has logging implemented, see \autoref{sec:stops}, and so the onus of tracking the parameters may be passed on to a logging file.
 
 % MARK: Skyline checks
-\subsubsection{Sky line checks of the wavelength solution}
+\subsubsection{Wavelength Solution Sky Line Checks}
 
 The optional \iraf\ \texttt{transform} task and \stops\ \texttt{skylines} method are used to confirm the wavelength solution across the frame, as described in \autoref{subsec:stops_skyline}, by transforming and comparing known and observed sky line wavelength positions, respectively.
 
@@ -428,7 +501,7 @@ The \texttt{correlate} method is run in the \gls{CLI} following \autoref{code:st
 Reductions may now be completed using \polsalt. The reduction process consists of correcting for the wollaston tilt, extracting the spectra, creating the Stokes files, and displaying the results. The `beta' version of \polsalt\ provides access to a \gls{GUI} but may also be handled entirely through a \gls{CLI} as scripts.
 
 % MARK: POLSALT GUI
-\subsubsection{\polsalt\ beta in a \gls{GUI}}
+\subsubsection{\polsalt\ Beta in a \gls{GUI}}
 
 The reduction process using the \polsalt\ \gls{GUI} is completed by selecting and, when applicable, interactively modifying the reduction step through the interactive windows, one-by-one, from the \glspl{GUI} dropdown menu, as explained in \autoref{app:reduction} (pages~\pageref{code:stops_corr} onwards). As no commands are necessary, save for those to launch the \polsalt\ \gls{GUI}, there is not much discussion to be had that is not either covered in \autoref{sec:polsalt} or \autoref{app:reduction}. Excellent resources, created by the \gls{SALT}~/~\gls{SAAO} team, are available online for any queries about the reduction process using any version of \polsalt, including the \gls{GUI}.%
 \footnote{See the official \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ wiki} or alternative online resources such as the \href{https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf}{\gls{SALT} workshop slides}.}
@@ -460,7 +533,7 @@ The reduction process using the \polsalt\ \gls{GUI} is completed by selecting an
 % {\parskip=0pt where} a file name, which may also use a wildcard, is provided as well as optional para\-meters to define the binning (\texttt{bin=[int]A} where [int] refers to an actual integer value), error bars (\texttt{errors=True|False}), choice of plot (\texttt{type=Ipt|Iqu} for unbinned intensity and either polarization percentage and polarization angle, or $Q$ and $U$ Stokes parameters), save options (\texttt{save=[text][plot] where either or both `text' and `plot' may be provided}), and a debug mode (\texttt{debug=False|True}).
 
 % MARK: POLSALT CLI
-\subsubsection{\polsalt\ beta through a \gls{CLI}}
+\subsubsection{\polsalt\ Beta through a \gls{CLI}}
 
 Both \gls{GUI} and \gls{CLI} implementations of the \polsalt\ beta pipeline access the same script files. Although the \gls{GUI} is more user-friendly, the \gls{CLI} offers a more streamlined approach to the reduction process, allowing the reduction process to be automated once the \iraf\ wavelength solution is known. The \polsalt\ beta \texttt{reducepoldata\_sc.py} script is used to run the entire reduction process, using:
 \begin{lstlisting}[language=bash]
