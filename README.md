@@ -24,17 +24,6 @@ This file stands to track any final edits needed before the submission of the th
 
 Included herein are the style guides I have followed during the course of writing my thesis. Custom styles (`my*.sty files`) have been included to both simplify the preamble (located in `Thesis.tex`) and to create a more homogeneous styling throughout when dealing with the relevant packages contained in the style files.
 
-### Headings
-
-Headings use `Title Case`. Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
-
-```Latex
-% Note case is `Title Case`
-\chapter{Chapter Title}
-\section{Section Title} \label{sec:sec_title}
-\dots
-```
-
 ### Equations
 
 Equations are written in-text and are a part of sentences unless otherwise indicated. To this end, there is no new line before `\begin` or after `\end` (unless the sentence ends with the equation and the equation is punctuated) and multiple equations in a single environment are properly punctuated.
@@ -111,6 +100,44 @@ Figures created by myself are (generally) made using Inkscape. To keep line widt
 
 Figures are first saved as an `svg` before being exported as either a `png` or `pdf` to 'play well' with the Latex `\includegraphics[]{}` command.
 
+### Headings
+
+Headings use `Title Case`. Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
+
+```Latex
+% Note case is `Title Case`
+\chapter{Chapter Title}
+\section{Section Title} \label{sec:sec_title}
+\dots
+```
+
+### Glossary and Acronyms
+
+Glossary and acronym entries are implemented throughout the thesis. Glossaries allow keywords to be defined while acronyms allow acronyms to be used and stated in full on first use. Note that acronyms used for software use a display text in the small caps font.
+
+```Latex
+% Glossary entries
+\newglossaryentry{maths}
+{%
+    name=mathematics,
+    description={Mathematics is what mathematicians do}
+}
+
+\gls{maths} -> mathematics
+\Gls{maths} -> Mathematics
+\glspl{maths} -> mathematics
+\Glspl{maths} -> mathematics
+
+% Acronym entries
+\newacronym{gcd}{GCD}{Greatest Common Divisor}
+
+\acrlong{} -> Greatest Common Divisor
+\acrshort{} -> GCD
+\acrfull{} -> Greatest Common Divisor (GCD)
+```
+
+New commands for the most common glossary/acronym keys may improve 'writablility' (`\acr{POLSALT}` vs `\polsalt`). This was implemented for all software acronyms.
+
 ### Tables
 
 Tables can be generated using a [Table Generator](https://www.tablesgenerator.com/). Tables are located in their relevant chapter (`chapter_*/tables/`) and have the chapter number, $i$, prepended to their name (`<i>_<name>.tex`). The contents of the file are structured similar to:
@@ -135,7 +162,11 @@ To insert a table within the document, use the command:
 ## Useful external References
 
 * Markdown (for this document): <https://www.markdownguide.org/basic-syntax/>
-* Glossaries ( minor to-do's): <https://www.overleaf.com/learn/latex/Glossaries>
+* Glossaries (minor to-do's): <https://www.overleaf.com/learn/latex/Glossaries>
 * Latex docs: <https://en.wikibooks.org/wiki/LaTeX>
 
 See 'preamble' of `references.bib` for further useful links relevant to specific chapters.
+
+Regex to replace Name {Surname} wiTh {Surname}, N.
+([A-Z])[a-z]*?\s(\{[A-Z].+?\})
+$2, $1.

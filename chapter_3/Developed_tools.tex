@@ -142,52 +142,66 @@ The process of using \texttt{identify} consists of identifying known features sp
     style=IRAF_DB,
     caption={An example of the \texttt{identify} database contents.\protect\footnotemark},
     label=lst:iraf_id_db]
-    # Mon 13:17:28 24-May-2021
-    begin	identify arcO0076[*,237]
-        id	arcO0076
-        task	identify
-        image	arcO0076[*,237]
-        units	Angstroms
-        features	19
-                914.36 4200.62622  4200.6738  10.0 1 1 400    acs: add
-                949.49 4300.17348   4300.101  10.0 1 1 129
-               1252.55 5187.39422   5187.746  10.0 1 1 31
-               1263.96 5221.54994   5221.271  10.0 1 1 17
-               1355.15  5495.8234   5495.874  10.0 1 1 43
-               1446.51 5772.17078  5772.1162  10.0 1 1 8      acs: add
-               1532.34 6032.45797   6032.127  10.0 1 1 170
-               1658.91 6415.91265   6416.307  10.0 1 1 164
-               1699.40 6538.31025   6538.112  10.0 1 1 13
-               1745.28 6676.79911   6677.282  10.0 1 1 434
-               1841.17 6965.65775   6965.431  10.0 1 1 56184
-               1875.01 7067.44604   7067.218  10.0 1 1 25987
-               1901.56 7147.21544   7147.042  10.0 1 1 4072
-               1943.46 7273.03561   7272.936  10.0 1 1 4000   20225
-               1980.36 7383.72456   7383.981  10.0 1 1 1000    acs: decrease
-               2064.22  7634.9396   7635.106  10.0 1 1 600    326550
-               2169.03 7948.26801   7948.176  10.0 1 1 1000    acs: decrease
-               2275.03 8264.51799   8264.523  10.0 1 1 3000    acs: decrease
-               2408.84   8667.944   8667.944  10.0 1 1 10    acs: decrease
-        function spline3
-        order 4
-        sample *
-        naverage 1
-        niterate 0
-        low_reject 3.
-        high_reject 3.
-        grow 0.
-        coefficients	11
-            3.
-            4.
-            1.
-            3199.
-            0.
-            312.7201779363406
-            632.5595745458978
-            1041.274659628964
-            1439.95238024928
-            1834.037933236409
-            3151798.515215079
+# Thu 15:19:16 13-May-2021
+begin	identify arcO0057[*,237]
+    id	arcO0057
+    task	identify
+    image	arcO0057[*,237]
+    units	Angstroms
+    features	35
+              53.61 5944.74989   5944.834  13.0 1 1 15257
+             140.19 6029.9793    6029.997  13.0 1 1  4652
+             185.30 6074.34644   6074.338  13.0 1 1 13396
+             207.49 6096.15873   6096.161  13.0 1 1 21700
+             255.23 6143.0493    6143.063  13.0 1 1 33330
+             276.13 6163.56995   6163.594  13.0 1 1 11344
+             330.89 6217.29293   6217.281  13.0 1 1 13705
+             381.10 6266.51524   6266.495  13.0 1 1 21747
+             420.21 6304.8113    6304.789  13.0 1 1 10226
+             450.49 6334.45415   6334.428  13.0 1 1 36235
+             500.18 6383.04826   6382.991  13.0 1 1 35824
+             519.85 6402.26802   6402.248  13.0 1 1 70163
+             626.70 6506.56147   6506.528  13.0 1 1 46165
+             653.73 6532.91083   6532.882  13.0 1 1 21413
+             721.60 6598.98642   6598.953  13.0 1 1 26396
+             803.21 6678.31069   6678.277  13.0 1 1 51338
+             843.15 6717.0732    6717.043  13.0 1 1 36780
+            1099.95 6965.36335   6965.431  13.0 1 1  5618.4   ar
+            1169.57 7032.38598   7032.413  13.0 1 1 100000
+            1317.05 7173.89814   7173.938  13.0 1 1  5000    decrease
+            1391.52 7245.11148   7245.167  13.0 1 1 73545
+            1537.20 7383.93022   7383.981  13.0 1 1  5557.5	ar
+            1595.02 7438.83545   7438.898  13.0 1 1 15000   decrease
+            1663.64 7503.86263   7503.869  13.0 1 1 30000	ar; increase
+            1697.46 7535.84584   7535.774  13.0 1 1  8000   increase
+            1802.64 7635.07335   7635.106  13.0 1 1 20000	ar; decrease
+            2209.19 8014.79559   8014.786  13.0 1 1  3000	ar; decrease
+            2604.58 8377.66137   8377.607  13.0 1 1 14543
+            2734.54 8495.41423   8495.359  13.0 1 1  8765
+            2763.48 8521.52355   8521.442  13.0 1 1 4537.5   ar
+            2840.92 8591.20799   8591.258  13.0 1 1  2000    decrease
+            2889.39 8634.67334   8634.647  13.0 1 1  3059
+            2911.42 8654.39264   8654.383  13.0 1 1  3000    decrease
+            2926.56 8667.93501   8667.944  13.0 1 1   702.5  ar
+            3135.72 8853.77575   8853.867  13.0 1 1  1820
+    function legendre
+    order 4
+    sample *
+    naverage 1
+    niterate 0
+    low_reject 3.
+    high_reject 3.
+    grow 0.
+    coefficients	8
+        2.
+        4.
+        53.60757446289061
+        3135.715576171875
+        7425.420339270724
+        1457.513831286474
+        -26.15751926622308
+        -3.000903509842187
+
 \end{lstlisting}
 \footnotetext{See also \url{https://iraf.net/irafdocs/formats/identify.php} for an explanation of the database contents.}
 
@@ -195,13 +209,13 @@ The process of using \texttt{identify} consists of identifying known features sp
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{3_id.eps}
+        \includegraphics[width=\textwidth]{3_id.pdf}
         \caption{Identified features.}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{3_id_resids.eps}
+        \includegraphics[width=\textwidth]{3_id_resids.pdf}
         \caption{\gls{RMS} of the identified features.}
     \end{subfigure}
     \caption{A plot and the \gls{RMS} of the identified features found using the \iraf\ \texttt{identify} task. Figures created using the \iraf\ \texttt{identify} task.}
@@ -217,37 +231,127 @@ The \texttt{reidentify} task is used to run the \texttt{identify} task autonomou
 \footnote{Help documentation for the \texttt{reidentify} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html}.}
 The task uses the one-dimensional wavelength solution stored in the database created by the initial \texttt{identify} call and refits the previously identified points to match the new positions of the relevant spectral features. The task may fail based on a number of conditions, most common of which is the loss of features as the task moves further from the row at which the user manually ran \texttt{identify}.
 
-When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will provide immediate confirmation of whether the task quit early or not. Regardless of whether or not the task quit successfully, the newly defined wavelength solutions are appended to the local database following the \texttt{identify} task database format (see \autoref{lst:iraf_id_db}).
+When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will provide immediate confirmation of if the task quit early. Regardless of whether or not the task quit successfully, the newly defined wavelength solutions are appended to the local database following the \texttt{identify} task database format (see \autoref{lst:iraf_id_db}).
 
 % MARK: Fitcoords
 \subsection{Fitcoords} \label{subsec:iraf_fitcoords}
 
-The \texttt{fitcoords} task is used to combine the collection of one-dimensional wavelength solutions in the local database to a two-dimensional surface function.%
+The \texttt{fitcoords} task is used to combine the identified one-dimensional wavelength solutions in the database directory into a two-dimensional surface function.%
 \footnote{Help documentation for the \texttt{fitcoords} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.fitcoords.html}.}
-This surface function is the final two-dimensional wavelength solution and is what is needed to convert the \iraf\ formatted wavelength calibrated \gls{FITS} files back into the \polsalt\ format. The solution is stored in the local \iraf\ database and is the solution used by the \stops\ \texttt{join} method.%
-\footnote{The structure of the \texttt{fitcoords} database entry may be found at \url{https://iraf.net/irafdocs/formats/fitcoords.php}.}
+The usage of \texttt{fitcoords} is similar to that of \texttt{identify} and consists of examining the distribution of identified points and eliminating any points that \texttt{reidentify} may have misidentified.
 
-The process of using \texttt{fitcoords}, follows closely to that of \texttt{identify} and consists of examining the distribution of identified points and eliminating any points that \texttt{reidentify} may have misidentified. By eliminating outliers with bad residuals and modifying the two-dimensional surface function's type and degree, the overall error of the fit decreases, aligning more closely to what the `true' wavelength solution is.
+By eliminating outliers with bad residuals and modifying the two-dimensional surface function's type and degree, the overall error of the fit is decreased, aligning more closely to what the `true' wavelength solution is.
+This surface function is the final two-dimensional wavelength solution and is what is needed to convert the \iraf\ formatted wavelength calibrated \gls{FITS} files back into the \polsalt\ format. The solution is stored in the local \iraf\ database and is the solution used by the \stops\ \texttt{join} method.
+
+\begin{lstlisting}[
+    language=bash,
+    style=IRAF_DB,
+    caption={An example of the \texttt{fitcoords} database contents.\protect\footnotemark},
+    label=lst:iraf_fc_db]
+# Thu 15:26:55 13-May-2021
+begin	arcO0057
+	task	fitcoords
+	axis	1
+	units	angstroms
+	surface	33
+		1.
+		5.
+		5.
+		1.
+		1.
+		3199.
+		1.
+		474.
+		7419.096745914063
+		1510.03933621895
+		-21.10886852752348
+		-2.079553916887794
+		0.06772631420528228
+		0.7720164913117386
+		-1.506773900054024
+		0.1341878190232142
+		-0.01659697703758917
+		0.0251087019569153
+		-3.318493303995171
+		-0.3612632489821799
+		0.003270665801371641
+		-0.0157962041414068
+		-0.003073690871589242
+		0.007533453962924031
+		0.02839687304474069
+		-0.003233465769521899
+		0.00174111456659807
+		0.00645177595090841
+		0.0105080093855621
+		-0.01157827440314294
+		-0.007789479002470706
+		-0.006562085282926231
+		-0.002321476801926803
+
+\end{lstlisting}
+\footnotetext{See also \url{https://iraf.net/irafdocs/formats/fitcoords.php} for an explanation of the database contents.}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        % \includegraphics[width=\textwidth]{3_fc.pdf}
+        \todo{Include fitcoords plot example}
+        \caption{Features identified across an exposure.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        % \includegraphics[width=\textwidth]{3_fc_resids.pdf}
+        \todo{Include fitcoords residuals example}
+        \caption{\gls{RMS} of the identified features.}
+    \end{subfigure}
+    \caption{A plot and the \gls{RMS} of the features identified across the exposure using the \iraf\ \texttt{fitcoords} task. Figures created using the \iraf\ \texttt{fitcoords} task.}
+    \label{fig:iraf_fc_plot}
+\end{figure}
 
 % MARK: Transform
 \subsection{Transform} \label{subsec:iraf_transform}
 
-The \texttt{transform} task is the optional final step in the \iraf\ wavelength calibration process and is quick to run and easy to script.%
+The \texttt{transform} task is the optional final step in the \iraf\ wavelength calibration process.%
 \footnote{Help documentation for the \texttt{transform} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html}.}
-The task converts the (pixel, pixel) units of an exposure to (wavelength, pixel) units which allows for an immediate check whether the wavelength solution is consistent across the frame. Any general error in the wavelength solution may be spotted in the transformed images; ranging from minor errors, such as the arc exposure's arc lines or science exposure's sky lines not being straight across the columns of the frame, to more major errors, such as an incorrect wavelength solution skewing the exposure beyond recognition.
+Simply put, \texttt{transform} converts the (pixel, pixel) units of an exposure to (wavelength, pixel) units which allows for an immediate check whether the wavelength solution is consistent across the frame. Any general error in the wavelength solution may be spotted in the transformed images (see \autoref{fig:iraf_trans_plot}); ranging from minor errors, such as the arc exposure's arc lines or science exposure's sky lines not being straight across the columns of the frame, to more major errors, such as an incorrect wavelength solution skewing the exposure beyond recognition.
 
-\begin{figure}[t]
+\begin{figure}
     \centering
-    % \includegraphics[width = 0.8\textwidth]{2_polsalt_gui.png}
-    \todo{Include poor, dubious, and well transformed image examples}
-    \caption{Examples of a terrible-, poorly-, and well-fit wavelength solution. Figures created by the \iraf\ \texttt{transform} task.}
-    \label{fig:iraf_tran_eg}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \centering
+        % \includegraphics[width=\textwidth]{3_fc.pdf}
+        \todo{Include bad transform plot example}
+        \caption{A badly fit wavelength solution.}
+    \end{subfigure}
+    \hfill
+    \centering
+    \begin{subfigure}[b]{0.31\textwidth}
+        \centering
+        % \includegraphics[width=\textwidth]{3_fc.pdf}
+        \todo{Include poor transform plot example}
+        \caption{A poorly fit wavelength solution.}
+    \end{subfigure}
+    \hfill
+    \centering
+    \begin{subfigure}[b]{0.31\textwidth}
+        \centering
+        % \includegraphics[width=\textwidth]{3_fc.pdf}
+        \todo{Include good transform plot example}
+        \caption{A well-fit wavelength solution.}
+    \end{subfigure}
+    \caption{Examples of a bad, poor, and well-fit wavelength solution. Figures created by the \iraf\ \texttt{transform} task.}
+    \label{fig:iraf_trans_plot}
 \end{figure}
 
 % MARK: STOPS
 \section[\stops]{\stops\ - \glsxtrlong{STOPS}} \label{sec:stops}
 
-\stops\ allows an alternate method for wavelength calibrations, namely \iraf, to be used instead of \polsalt's \texttt{wavelength calibration}. The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining}, is performed by the \stops\ \texttt{split} and \texttt{join} methods, respectively.
+\stops\ provides supplementary tools which convert the \polsalt\ and \iraf\ formats back and forth, allowing \iraf\ to be used for wavelength calibrations of \gls{SALT} spectropolarimetric data. It also provides additional tools to check the accuracy of the wavelength calibration.
+\stops\ is written in Python and requires Python $3.11+$ to run, as well as \texttt{Astropy} ($6.0.0+$) \citep{astropy:2013, astropy:2018, astropy:2022}, \texttt{ccdproc} ($2.4.1+$) \citep{ccdproc}, \texttt{Matplotlib} ($3.5.2+$) \citep{matplotlib}, \texttt{NumPy} ($1.26.4+$) \citep{numpy}, and \texttt{SciPy} ($1.13.0+$) \citep{scipy}.
+
+The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining}, is performed by the \stops\ \texttt{split} and \texttt{join} methods, respectively.
 
 Methods to verify the validity of the alternate wavelength calibrations were also added to \stops. The first of these methods checks the sky line wavelength ($x$) positions across the frame as well as the variation of the sky lines across the positional ($y$) axis of the frame, named \texttt{skyline}. The second of these methods checks the correlation of the $O$- and $E$-beams either within a given \gls{FITS} file or across multiple files (comparing only the $O$- and $E$-beams for each), named \texttt{correlate}. With these two additional methods, a user is able to verify that the wavelength solutions do not conflict across the $O$- and $E$-beams and that no unexpected deviations are included in the wavelength solutions.
 
@@ -315,7 +419,7 @@ All pieces necessary to recreate the \polsalt\ wavelength calibrated \gls{FITS} 
 
 Running \texttt{join} finds all the relevant \gls{FITS} and local database files necessary to run the \polsalt\ \texttt{spectra extraction}, creates an empty \gls{HDU} structure for each pair of matching spectropolarimetric beams, copies over the extensions and their respective image and header information, checks and corrects the trace splitting to best match that of \polsalt, appends a new extension and parses the database wavelength solutions into the \polsalt\ intensity-wavelength format, cleans the science extension for cosmic rays, and does some house-cleaning to align the finalized \gls{FITS} files to those created when using the `pure' \polsalt\ pipeline.
 
-The wavelength database file, described in \autoref{subsec:pol_fitcoords}, is parsed by \texttt{join} which creates a function that provides the corresponding wavelength when provided with a ($pixel$, $pixel$) position. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in \autoref{fig:pol_wav_ext}. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls{BPM} extensions to $0$.
+The wavelength database file, described in \autoref{subsec:iraf_fitcoords}, is parsed by \texttt{join} which creates a function that provides the corresponding wavelength when provided with a ($pixel$, $pixel$) position. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in \autoref{fig:pol_wav_ext}. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls{BPM} extensions to $0$.
 
 % update headers
 % copy data, double check shape change
