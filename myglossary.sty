@@ -70,3 +70,48 @@
 \newcommand{\iraf}{\gls{IRAF}}
 \newcommand{\polsalt}{\gls{POLSALT}}
 \newcommand{\stops}{\gls{STOPS}}
+
+
+% Command to create a glossary entry with correspondent acronym.
+% Args : 1: acronym/name, 2: long name, 3: description
+\newcommand{\newglossaryentrywithacronym}[3]{
+    %%% The glossary entry the acronym links to   
+    \newglossaryentry{#1_gls}{
+        name={#1},
+        long={#2},
+        description={#3}
+    }
+
+    % Acronym pointing to glossary
+    \newglossaryentry{#1}{
+        type=\acronymtype,
+        name={#1},
+        description={#2},
+        first={#2 (#1)\glsadd{#1_gls}},
+        see=[Glossary:]{#1_gls}
+    }
+}
+
+% Add any glossary entries below
+
+% extension
+% exposure
+% 
+
+\newglossaryentry{science}{
+    name={science},
+    description={A science frame is an image taken of the object of interest.},
+    plural={science},
+}
+
+\newglossaryentry{graphical user interface}{
+    name={graphical user interface},
+    description={A user interface that allows users to interact with a computer using graphical elements.},
+    plural={graphical user interfaces},
+}
+
+\newglossaryentry{command line interface}{
+    name={command line interface},
+    description={A user interface that allows users to interact with a computer using text commands.},
+    plural={command line interfaces},
+}

@@ -4,6 +4,7 @@ This file stands to track any final edits needed before the submission of the th
 
 ## Final `TODOs`
 
+* Cite STOPS as repo? (See `.cff` references)
 * Change \today to MONTH, YEAR at final submission [Thesis.tex:197]
 * Ask for read through from friends to ensure no spelling/grammar errors
 
@@ -12,9 +13,11 @@ This file stands to track any final edits needed before the submission of the th
 * Update tables `\input{}` to use relative pathing (`import` package?)
 * Use the `minted` package instead of the `listings` `STOPS_docs` style workaround
 * Unify usage of exposure / frame / extension and add to glossary (see references)
+* Unify (x-pixel/y-pixel/x/y/wavelength/)
 * Edit created plots to use Latex font (both python and inkscape figures)
 * Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
 * Limit paragraph breaks to only `left-to-right` pages, not across a page turn.
+* O[arc/beam/etc.] → [arc/beam/etc.]O
 * Check common errors:
   * \$O\$- and \$E\$-beam(s)
   * extension
@@ -136,7 +139,7 @@ Glossary and acronym entries are implemented throughout the thesis. Glossaries a
 \acrfull{} -> Greatest Common Divisor (GCD)
 ```
 
-New commands for the most common glossary/acronym keys may improve 'writablility' (`\acr{POLSALT}` vs `\polsalt`). This was implemented for all software acronyms.
+New commands for the most common glossary/acronym keys may improve 'writability' (`\acr{POLSALT}` vs `\polsalt`). This was implemented for all software acronyms.
 
 ### Tables
 
@@ -163,10 +166,12 @@ To insert a table within the document, use the command:
 
 * Markdown (for this document): <https://www.markdownguide.org/basic-syntax/>
 * Glossaries (minor to-do's): <https://www.overleaf.com/learn/latex/Glossaries>
+  * Useful glossary and acronym simultaneous addition: <https://tex.stackexchange.com/questions/8946/how-to-combine-acronym-and-glossary>
 * Latex docs: <https://en.wikibooks.org/wiki/LaTeX>
+* GitHub `.cff` file references: <https://citation-file-format.github.io/>
 
 See 'preamble' of `references.bib` for further useful links relevant to specific chapters.
 
-Regex to replace Name {Surname} wiTh {Surname}, N.
-([A-Z])[a-z]*?\s(\{[A-Z].+?\})
-$2, $1.
+Regex to replace `Name {Surname}` with `{Surname}, N.`
+* Regex find: ([A-Z])[a-z]*?\s(\{[A-Z].+?\})
+* Regex replace: $2, $1.
