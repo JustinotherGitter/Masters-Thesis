@@ -15,6 +15,7 @@ This file stands to track any final edits needed before the submission of the th
 * Unify usage of exposure / frame / extension and add to glossary (see references)
 * Unify (x-pixel/y-pixel/x/y/wavelength/)
 * Edit created plots to use Latex font (both python and inkscape figures)
+* Edit plots to use `subfigures` where possible
 * Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
 * Limit paragraph breaks to only `left-to-right` pages, not across a page turn.
 * O[arc/beam/etc.] → [arc/beam/etc.]O

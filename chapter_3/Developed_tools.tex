@@ -12,7 +12,7 @@ This chapter contains an overview of \polsalt\ (\autoref{sec:polsalt}) and the l
 \begin{figure}[t]
     \centering
     \includegraphics[width = 0.8\textwidth]{3_polsalt_GUI.png}
-    \caption{The layout of the \polsalt\ \gls{GUI}, including the contents of the reduction steps accessible via the dropdown box. Note that there is no trailing forward slash after the `Top level data directory'. Figure created from local instance of the \polsalt\ \gls{GUI}.}
+    \caption{The layout of the \polsalt\ \gls{GUI}, including the contents of the reduction steps accessible via the dropdown menu. Note that there is no trailing forward slash after the `Top level data directory'. Figure created from local instance of the \polsalt\ \gls{GUI}.}
     \label{fig:polsalt_gui}
 \end{figure}
 
@@ -209,13 +209,13 @@ begin	identify arcO0057[*,237]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{3_id.pdf}
+        \includegraphics[width=\textwidth]{3_id.png}
         \caption{Identified features.}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{3_id_resids.pdf}
+        \includegraphics[width=\textwidth]{3_id_resids.png}
         \caption{\gls{RMS} of the identified features.}
     \end{subfigure}
     \caption{A plot and the \gls{RMS} of the identified features found using the \iraf\ \texttt{identify} task. Figures created using the \iraf\ \texttt{identify} task.}
@@ -295,15 +295,13 @@ begin	arcO0057
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        % \includegraphics[width=\textwidth]{3_fc.pdf}
-        \todo{Include fitcoords plot example}
+        \includegraphics[width=\textwidth]{3_fc.png}
         \caption{Features identified across an exposure.}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        % \includegraphics[width=\textwidth]{3_fc_resids.pdf}
-        \todo{Include fitcoords residuals example}
+        \includegraphics[width=\textwidth]{3_fc_resids.png}
         \caption{\gls{RMS} of the identified features.}
     \end{subfigure}
     \caption{A plot and the \gls{RMS} of the features identified across the exposure using the \iraf\ \texttt{fitcoords} task. Figures created using the \iraf\ \texttt{fitcoords} task.}
@@ -319,29 +317,20 @@ Simply put, \texttt{transform} converts the (pixel, pixel) units of an exposure 
 
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.31\textwidth}
+    \begin{subfigure}[b]{1.0 \textwidth}
         \centering
-        % \includegraphics[width=\textwidth]{3_fc.pdf}
-        \todo{Include bad transform plot example}
-        \caption{A badly fit wavelength solution.}
-    \end{subfigure}
-    \hfill
-    \centering
-    \begin{subfigure}[b]{0.31\textwidth}
-        \centering
-        % \includegraphics[width=\textwidth]{3_fc.pdf}
-        \todo{Include poor transform plot example}
-        \caption{A poorly fit wavelength solution.}
-    \end{subfigure}
-    \hfill
-    \centering
-    \begin{subfigure}[b]{0.31\textwidth}
-        \centering
-        % \includegraphics[width=\textwidth]{3_fc.pdf}
-        \todo{Include good transform plot example}
+        \includegraphics[width=\textwidth]{3_tarcO.pdf}
         \caption{A well-fit wavelength solution.}
+        \label{fig:trans_O}
     \end{subfigure}
-    \caption{Examples of a bad, poor, and well-fit wavelength solution. Figures created by the \iraf\ \texttt{transform} task.}
+    \centering
+    \begin{subfigure}[b]{1.0\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3_tarcE.pdf}
+        \caption{A poorly fit wavelength solution with a region of no exposure (top of frame) displaying a terribly fit wavelength solution.}
+        \label{fig:trans_E}
+    \end{subfigure}
+    \caption{Examples of a well- and poor fit wavelength solution applied to the $O$- (\subref{fig:trans_O}) and $E$-beams (\subref{fig:trans_E}) of an arc image. The figures were scaled to best capture any deviation of the arc lines. Figures created by the \iraf\ \texttt{transform} task.}
     \label{fig:iraf_trans_plot}
 \end{figure}
 
@@ -534,9 +523,9 @@ It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-f
     \label{fig:polsalt_pre_wav_cal}
 \end{figure}
 
-The \polsalt\ reduction process requires a file structure such that the raw data received from \gls{SALT} is located in a folder named using the observing date with a sub-folder named raw, following \texttt{YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory named \texttt{YYYYMMDD/sci/} which contains all the files modified during the reduction process. Multiple reduction procedures using the same data may therefore be separated by simply renaming the \texttt{sci/} sub-folder.
+The \polsalt\ reduction process requires a file structure such that the raw data received from \gls{SALT} is located in a folder named using the observing date with a sub-folder named raw, following the format \texttt{YYYYMMDD/raw/}. This directory structure allows \polsalt\ to create a `working' directory following the format \texttt{YYYYMMDD/sci/} which contains all the files modified during the reduction process. Multiple reduction procedures using the same data may therefore be separated by simply renaming the \texttt{sci/} sub-folder.
 
-The \polsalt\ \gls{GUI} may be launched by opening a \gls{CLI} and running \autoref{code:polsalt_launch}. Once the window, depicted in \autoref{fig:polsalt_gui}, has launched, ensure that the first two paths at the top of the window point to the \polsalt\ and working directories, as seen in \autoref{fig:polsalt_gui}. The `raw image reduction' entry may then be selected from the dropdown and run.
+The \polsalt\ \gls{GUI} may be launched by opening a \gls{CLI} and running the commands given in \autoref{code:polsalt_launch}. Once the window, depicted in \autoref{fig:polsalt_gui}, has launched, ensure that the first two paths at the top of the window point to the \polsalt\ and working directories, as seen in \autoref{fig:polsalt_gui}. The `raw image reduction' entry may then be selected from the dropdown menu and the pre-reductions run.
 
 Alternatively, if the data already includes `mxgbp' \gls{FITS} files in the \texttt{YYYYMMDD/sci/} working directory, a \gls{CLI} may be used to complete the initial pre-reductions using
 \begin{lstlisting}[language=bash]
@@ -544,17 +533,18 @@ $ cd (*@<\textit{OBSDATE}>@*)/sci
 $ conda activate salt
 $ python ~/polsalt/scripts/reducepoldata_sc.py (*@<\textit{OBSDATE}>@*)
 \end{lstlisting}
-{\parskip=0pt which} will attempt to run the entire reduction process. The script may be quit once the \polsalt\ \texttt{wavelength calibration} \gls{GUI} opens, and the rest of the reduction procedure followed.
+{\parskip=0pt which} will start the full \polsalt\ reduction process. This process is quit once the \polsalt\ \texttt{wavelength calibration} \gls{GUI} opens, and the alternate wavelength calibration procedure is followed.
 
 % MARK: Wavelength Calibration
 \subsection{Wavelength Calibration} \label{subsec:reduc_wav}
 
-The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to be read by \iraf\ and \polsalt\ as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented in \autoref{code:stops_split} to \ref{code:stops_join}, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a well-fit calibration function. This process depends heavily and varies greatly based on the user and as such not all use cases can be discussed herein.
+The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to and from both \iraf\ and \polsalt, as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented in \autoref{code:stops_split} to \ref{code:stops_join}, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a well-fit calibration function. This process depends heavily, and varies greatly, based on the user and as such not all use cases can be discussed.
 
 % MARK: Prep for IRAF
 \subsubsection{Preparing the Data for \iraf}
 
-Splitting the data is presented in \autoref{code:stops_split}. The \stops\ \texttt{split} method may take multiple parameters, as seen in \autoref{sec:stops}, but default parameters should be used where ever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'. As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}, which would include the split `wmxgbp' \gls{FITS} files (ebeam*.fits). This naming conflict is revisited and addressed later on in the reduction process and is thus not of any concern.
+Splitting the data is presented in \autoref{code:stops_split}. The \stops\ \texttt{split} method may take multiple parameters, as seen in \autoref{sec:stops}, but default parameters should be used wherever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'.
+% As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}, which would include the split `wmxgbp' \gls{FITS} files (ebeam*.fits). This naming conflict is revisited and addressed later on in the reduction process and is thus not of any concern.
 
 % MARK: IRAF wavelength calibrations
 \subsubsection{\iraf\ Wavelength Calibrations}
@@ -562,16 +552,16 @@ Splitting the data is presented in \autoref{code:stops_split}. The \stops\ \text
 The \iraf\ wavelength calibrations are performed using the tasks described in \autoref{sec:iraf}, namely \texttt{identify}, \texttt{reidentify}, \texttt{fitcoords}, and optionally \texttt{transform}. In general, these tasks are run directly in the \iraf\ terminal using:%
 \footnote{Please see the \iraf\ help docs, available at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/iraf.html}, on the relevant tasks for a comprehensive discussion of the parameters available.}
 \begin{lstlisting}[language=bash]
-cl> identify images
-cl> reidentify reference images
-cl> fitcoords images fitname
-cl> transform images output fitname
+cl> identify arc_files
+cl> reidentify arc_ref arc_files
+cl> fitcoords arc_files fit_2d
+cl> transform files tr_file fit_2d
 \end{lstlisting}
-{\parskip=0pt where} `images' refer to a list or file containing the \gls{FITS} files relevant to the task, `reference' refers to the \gls{FITS} file previously identified, `fitname' refers to the name to be used for the final two-dimensional wavelength solution, and `output' refers to the new file name for the transformed input images.
+{\parskip=0pt where} `arc\_files' refers to a list or file containing the \gls{FITS} files relevant to the task, `arc\_ref' refers to the \gls{FITS} file previously identified, `fit\_2d' refers to the name to be used for the final two-dimensional wavelength solution, and `tr\_file' refers to the new name for the transformed input `files'.
 
 The interactive tasks take up the bulk of the reduction time as this is where the fine-tuning of the reduction is done, through the use of cursor (or colon) commands, which allow modification of the parameters mid-reduction. Task parameters may, however, be edited beforehand within the \iraf\ terminal using the \texttt{eparam} task, and optionally saved, and quit or run using a combination of \texttt{:w}, and \texttt{:q} or \texttt{:go} cursor commands, respectively.
 
-The reduction process in \autoref{app:reduction}, namely \autoref{code:iraf_id} to \ref{code:iraf_transform}, describes how to script the tasks for posterity. It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations, but this is not strictly necessary. The scripts are created using the \texttt{mkscript} task which interactively asks for a task to script and parameters to use. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked. Running an \iraf\ script may be done by running:
+The reduction process in \autoref{app:reduction}, namely \autoref{code:iraf_id} to \ref{code:iraf_transform}, describes how to script the tasks for posterity. It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using the \texttt{mkscript} task which interactively asks for a task to script and parameters to use. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked. Running an \iraf\ script may be done by running:
 \begin{lstlisting}[language=bash]
 cl> cl < script_name.cl
 \end{lstlisting}
@@ -580,9 +570,9 @@ cl> cl < script_name.cl
 % MARK: Post IRAF
 \subsubsection{Preparing the Data for \polsalt}
 
-The results of the wavelength calibrations may now be parsed back into the format expected by \polsalt. Joining the separate beams with their respective wavelength solutions is once again performed in the \gls{CLI}following \autoref{code:stops_join}.
+After the wavelength calibrations have been completed, the wavelength solution is parsed back into the format expected by \polsalt. Joining the separate beams with their respective wavelength solutions is performed in the \gls{CLI} following \autoref{code:stops_join}.
 
-Similar to the \texttt{split} procedure mentioned above, the \texttt{join} procedure has the same defaults defined and so the responsibility falls on a user to keep track of which defaults were changed, and to keep the parameters consistent between the two tasks. Note that \stops\ has logging implemented, see \autoref{sec:stops}, and so the onus of tracking the parameters may be passed on to a logging file.
+Similar to the \texttt{split} procedure, the \texttt{join} procedure has the same defaults defined. The onus of keeping track of any previously changed default parameters falls to the user, but logging is implemented in \stops\, see \autoref{sec:stops}, which allows for later reference of any changed parameters.
 
 % MARK: Skyline checks
 \subsubsection{Wavelength Solution Sky Line Checks}

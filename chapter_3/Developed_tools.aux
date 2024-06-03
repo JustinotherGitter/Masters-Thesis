@@ -6,8 +6,8 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}\textsc  {polsalt}}{31}{section.3.1}\protected@file@percent }
 \newlabel{sec:polsalt}{{3.1}{31}{\textsc {polsalt}}{section.3.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces The layout of the \gls {POLSALT}\ \gls {GUI}, including the contents of the reduction steps accessible via the dropdown box. Note that there is no trailing forward slash after the `Top level data directory'. Figure created from local instance of the \gls {POLSALT}\ \gls {GUI}.}}{32}{figure.caption.45}\protected@file@percent }
-\newlabel{fig:polsalt_gui}{{3.1}{32}{The layout of the \polsalt \ \gls {GUI}, including the contents of the reduction steps accessible via the dropdown box. Note that there is no trailing forward slash after the `Top level data directory'. Figure created from local instance of the \polsalt \ \gls {GUI}}{figure.caption.45}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces The layout of the \gls {POLSALT}\ \gls {GUI}, including the contents of the reduction steps accessible via the dropdown menu. Note that there is no trailing forward slash after the `Top level data directory'. Figure created from local instance of the \gls {POLSALT}\ \gls {GUI}.}}{32}{figure.caption.45}\protected@file@percent }
+\newlabel{fig:polsalt_gui}{{3.1}{32}{The layout of the \polsalt \ \gls {GUI}, including the contents of the reduction steps accessible via the dropdown menu. Note that there is no trailing forward slash after the `Top level data directory'. Figure created from local instance of the \polsalt \ \gls {GUI}}{figure.caption.45}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Basic CCD Reductions}{32}{subsection.3.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Wavelength Calibrations}{32}{subsection.3.1.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The layout of the interactive \gls {POLSALT}\ \texttt  {spectra extraction} \gls {GUI} after selecting the `update tilt correction and windows' button along the bottom border of the window. Figure created from local instance of the \gls {POLSALT}\ \gls {GUI}.}}{33}{figure.caption.46}\protected@file@percent }
@@ -48,12 +48,16 @@
 \citation{scipy}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces A plot and the \gls {RMS} of the features identified across the exposure using the \gls {IRAF}\ \texttt  {fitcoords} task. Figures created using the \gls {IRAF}\ \texttt  {fitcoords} task.}}{40}{figure.caption.51}\protected@file@percent }
 \newlabel{fig:iraf_fc_plot}{{3.7}{40}{A plot and the \gls {RMS} of the features identified across the exposure using the \iraf \ \texttt {fitcoords} task. Figures created using the \iraf \ \texttt {fitcoords} task}{figure.caption.51}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Examples of a bad, poor, and well-fit wavelength solution. Figures created by the \gls {IRAF}\ \texttt  {transform} task.}}{40}{figure.caption.52}\protected@file@percent }
-\newlabel{fig:iraf_trans_plot}{{3.8}{40}{Examples of a bad, poor, and well-fit wavelength solution. Figures created by the \iraf \ \texttt {transform} task}{figure.caption.52}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Transform}{40}{subsection.3.2.4}\protected@file@percent }
 \newlabel{subsec:iraf_transform}{{3.2.4}{40}{Transform}{subsection.3.2.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}\textsc  {stops}}{40}{section.3.3}\protected@file@percent }
 \newlabel{sec:stops}{{3.3}{40}{\textsc {stops}}{section.3.3}{}}
+\newlabel{fig:trans_O}{{3.8a}{41}{A well-fit wavelength solution}{figure.caption.52}{}}
+\newlabel{sub@fig:trans_O}{{a}{41}{A well-fit wavelength solution}{figure.caption.52}{}}
+\newlabel{fig:trans_E}{{3.8b}{41}{A poorly fit wavelength solution with a region of no exposure (top of frame) displaying a terribly fit wavelength solution}{figure.caption.52}{}}
+\newlabel{sub@fig:trans_E}{{b}{41}{A poorly fit wavelength solution with a region of no exposure (top of frame) displaying a terribly fit wavelength solution}{figure.caption.52}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Examples of a well- and poor fit wavelength solution applied to the $O$- (\subref  {fig:trans_O}) and $E$-beams (\subref  {fig:trans_E}) of an arc image. The figures were scaled to best capture any deviation of the arc lines. Figures created by the \gls {IRAF}\ \texttt  {transform} task.}}{41}{figure.caption.52}\protected@file@percent }
+\newlabel{fig:iraf_trans_plot}{{3.8}{41}{Examples of a well- and poor fit wavelength solution applied to the $O$- (\subref {fig:trans_O}) and $E$-beams (\subref {fig:trans_E}) of an arc image. The figures were scaled to best capture any deviation of the arc lines. Figures created by the \iraf \ \texttt {transform} task}{figure.caption.52}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Splitting}{41}{subsection.3.3.1}\protected@file@percent }
 \newlabel{subsec:stops_split}{{3.3.1}{41}{Splitting}{subsection.3.3.1}{}}
 \newlabel{doc:split}{{3.3}{41}{The `docstring' for \textbf {split.py}}{lstlisting.3.3}{}}
@@ -65,44 +69,44 @@
 \newlabel{doc:join}{{3.4}{43}{The `docstring' for \textbf {join.py}}{lstlisting.3.4}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {3.4}{\ignorespaces The `docstring' for \textbf  {join.py}}}{43}{lstlisting.3.4}\protected@file@percent }
 \citation{lacosmic,astroscrappy}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces The wavelength extension of a \gls {FITS} file ready to be handed back to the \gls {POLSALT}\ pipeline. The color bar displays the wavelength in \r A\ as displayed by the $O$- and $E$-beam sub-extensions. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls {BPM} extensions to $0$. Figure created from the \gls {STOPS}\ \texttt  {join} method output.}}{45}{figure.caption.54}\protected@file@percent }
-\newlabel{fig:pol_wav_ext}{{3.10}{45}{The wavelength extension of a \gls {FITS} file ready to be handed back to the \polsalt \ pipeline. The color bar displays the wavelength in \AA \ as displayed by the $O$- and $E$-beam sub-extensions. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls {BPM} extensions to $0$. Figure created from the \stops \ \texttt {join} method output}{figure.caption.54}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Sky Line Checks}{45}{subsection.3.3.3}\protected@file@percent }
 \newlabel{subsec:stops_skyline}{{3.3.3}{45}{Sky Line Checks}{subsection.3.3.3}{}}
 \newlabel{doc:skylines}{{3.5}{45}{The `docstring' for \textbf {skylines.py}}{lstlisting.3.5}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {3.5}{\ignorespaces The `docstring' for \textbf  {skylines.py}}}{45}{lstlisting.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces The wavelength extension of a \gls {FITS} file ready to be handed back to the \gls {POLSALT}\ pipeline. The color bar displays the wavelength in \r A\ as displayed by the $O$- and $E$-beam sub-extensions. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls {BPM} extensions to $0$. Figure created from the \gls {STOPS}\ \texttt  {join} method output.}}{46}{figure.caption.54}\protected@file@percent }
+\newlabel{fig:pol_wav_ext}{{3.10}{46}{The wavelength extension of a \gls {FITS} file ready to be handed back to the \polsalt \ pipeline. The color bar displays the wavelength in \AA \ as displayed by the $O$- and $E$-beam sub-extensions. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls {BPM} extensions to $0$. Figure created from the \stops \ \texttt {join} method output}{figure.caption.54}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces A representative science extension of a \gls {FITS} file capable of being parsed by the \gls {POLSALT}\ pipeline. The intensity of the $O$- and $E$-beam sub-extensions are displayed via the grayscale value at each pixel. Note the inclusion of regions of: solid black demarcating the chip gaps, horizontal stripes of high intensity demarcating the trace, and (curved) vertical stripes of high intensity demarcating the sky lines. Figure created from the \gls {STOPS}\ \gls {STOPS}{join} method output.}}{46}{figure.caption.55}\protected@file@percent }
 \newlabel{fig:polsalt_post_wav_cal}{{3.11}{46}{A representative science extension of a \gls {FITS} file capable of being parsed by the \polsalt \ pipeline. The intensity of the $O$- and $E$-beam sub-extensions are displayed via the grayscale value at each pixel. Note the inclusion of regions of: solid black demarcating the chip gaps, horizontal stripes of high intensity demarcating the trace, and (curved) vertical stripes of high intensity demarcating the sky lines. Figure created from the \stops \ \stops {join} method output}{figure.caption.55}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces The resultant output plot of the \gls {STOPS}\ \texttt  {skylines} method. Figure created via the \gls {STOPS}\ \texttt  {skyline} method.}}{46}{figure.caption.56}\protected@file@percent }
-\newlabel{fig:stops_sky_eg}{{3.12}{46}{The resultant output plot of the \stops \ \texttt {skylines} method. Figure created via the \stops \ \texttt {skyline} method}{figure.caption.56}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Cross Correlation}{47}{subsection.3.3.4}\protected@file@percent }
-\newlabel{subsec:stops_correlate}{{3.3.4}{47}{Cross Correlation}{subsection.3.3.4}{}}
-\newlabel{doc:corr}{{3.6}{47}{The `docstring' for \textbf {cross\_correlate.py}}{lstlisting.3.6}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.6}{\ignorespaces The `docstring' for \textbf  {cross\_correlate.py}}}{47}{lstlisting.3.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces The resultant output plot of the \gls {STOPS}\ \texttt  {skylines} method. Figure created via the \gls {STOPS}\ \texttt  {skyline} method.}}{47}{figure.caption.56}\protected@file@percent }
+\newlabel{fig:stops_sky_eg}{{3.12}{47}{The resultant output plot of the \stops \ \texttt {skylines} method. Figure created via the \stops \ \texttt {skyline} method}{figure.caption.56}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Cross Correlation}{48}{subsection.3.3.4}\protected@file@percent }
+\newlabel{subsec:stops_correlate}{{3.3.4}{48}{Cross Correlation}{subsection.3.3.4}{}}
+\newlabel{doc:corr}{{3.6}{48}{The `docstring' for \textbf {cross\_correlate.py}}{lstlisting.3.6}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.6}{\ignorespaces The `docstring' for \textbf  {cross\_correlate.py}}}{48}{lstlisting.3.6}\protected@file@percent }
 \citation{cooper_HEASA2022}
 \citation{cooper_HEASA2022}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces The resultant output plot of the \gls {STOPS}\ \texttt  {correlate} method. Figure created via the \gls {STOPS}\ \texttt  {correlate} method.}}{49}{figure.caption.57}\protected@file@percent }
 \newlabel{fig:stops_corr_eg}{{3.13}{49}{The resultant output plot of the \stops \ \texttt {correlate} method. Figure created via the \stops \ \texttt {correlate} method}{figure.caption.57}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}General Reduction Procedure}{49}{section.3.4}\protected@file@percent }
 \newlabel{sec:red_proc}{{3.4}{49}{General Reduction Procedure}{section.3.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Initial Setup}{49}{subsection.3.4.1}\protected@file@percent }
-\newlabel{subsec:reduc_setup}{{3.4.1}{49}{Initial Setup}{subsection.3.4.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces A general workflow for data reductions using a combination of \gls {POLSALT}, \gls {IRAF}, and the developed supplementary tools. Diagram adapted from \cite  {cooper_HEASA2022}.}}{50}{figure.caption.58}\protected@file@percent }
 \newlabel{fig:new_workflow}{{3.14}{50}{A general workflow for data reductions using a combination of \polsalt , \iraf , and the developed supplementary tools. Diagram adapted from \cite {cooper_HEASA2022}}{figure.caption.58}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}\textsc  {polsalt} Pre-Reductions}{50}{subsection.3.4.2}\protected@file@percent }
-\newlabel{subsec:reduc_pre}{{3.4.2}{50}{\textsc {polsalt} Pre-Reductions}{subsection.3.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Initial Setup}{50}{subsection.3.4.1}\protected@file@percent }
+\newlabel{subsec:reduc_setup}{{3.4.1}{50}{Initial Setup}{subsection.3.4.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.15}{\ignorespaces The science extension of a typical spectropolarimetric \glsxtrshort {FITS} file taken with the \gls {SALT} \gls {RSS}, after basic \gls {POLSALT}\ \gls {CCD} reductions have been completed. Figure created from the \gls {STOPS}\ \texttt  {split} output.}}{51}{figure.caption.59}\protected@file@percent }
 \newlabel{fig:polsalt_pre_wav_cal}{{3.15}{51}{The science extension of a typical spectropolarimetric \acs {FITS} file taken with the \gls {SALT} \gls {RSS}, after basic \polsalt \ \gls {CCD} reductions have been completed. Figure created from the \stops \ \texttt {split} output}{figure.caption.59}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}\textsc  {polsalt} Pre-Reductions}{51}{subsection.3.4.2}\protected@file@percent }
+\newlabel{subsec:reduc_pre}{{3.4.2}{51}{\textsc {polsalt} Pre-Reductions}{subsection.3.4.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Wavelength Calibration}{51}{subsection.3.4.3}\protected@file@percent }
 \newlabel{subsec:reduc_wav}{{3.4.3}{51}{Wavelength Calibration}{subsection.3.4.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Preparing the Data for \gls {IRAF}}{51}{section*.60}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\gls {IRAF}\ Wavelength Calibrations}{51}{section*.61}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Preparing the Data for \gls {IRAF}}{52}{section*.60}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\gls {IRAF}\ Wavelength Calibrations}{52}{section*.61}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{Preparing the Data for \gls {POLSALT}}{52}{section*.62}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Wavelength Solution Sky Line Checks}{52}{section*.63}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Wavelength Solution Sky Line Checks}{53}{section*.63}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4.4}\textsc  {polsalt} Reduction Completion}{53}{subsection.3.4.4}\protected@file@percent }
 \newlabel{subsec:reduc_com}{{3.4.4}{53}{\textsc {polsalt} Reduction Completion}{subsection.3.4.4}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\gls {POLSALT}\ Beta in a \gls {GUI}}{53}{section*.64}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\gls {POLSALT}\ Beta through a \gls {CLI}}{53}{section*.65}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\gls {POLSALT}\ Beta through a \gls {CLI}}{54}{section*.65}\protected@file@percent }
 \@setckpt{chapter_3/Developed_tools}{
 \setcounter{page}{55}
 \setcounter{equation}{2}
