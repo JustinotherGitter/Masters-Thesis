@@ -138,6 +138,7 @@ The task creates the first approximation of the wavelength solution as well as a
 The process of using \texttt{identify} consists of identifying known features spanning the entire wavelength range and then removing identified features which negatively impact the wavelength solution. A balance must be found between the number of identified features and parameters of the fit against the deviation of the fit from the known features.
 
 \begin{lstlisting}[
+    float,
     language=bash,
     style=IRAF_DB,
     caption={An example of the \texttt{identify} database contents.\protect\footnotemark},
@@ -244,6 +245,7 @@ By eliminating outliers with bad residuals and modifying the two-dimensional sur
 This surface function is the final two-dimensional wavelength solution and is what is needed to convert the \iraf\ formatted wavelength calibrated \gls{FITS} files back into the \polsalt\ format. The solution is stored in the local \iraf\ database and is the solution used by the \stops\ \texttt{join} method.
 
 \begin{lstlisting}[
+    float,
     language=bash,
     style=IRAF_DB,
     caption={An example of the \texttt{fitcoords} database contents.\protect\footnotemark},
@@ -344,16 +346,13 @@ The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting 
 
 Methods to verify the validity of the alternate wavelength calibrations were also added to \stops. The \texttt{skyline} method checks the sky line wavelength ($x$) positions across the frame as well as the variation of the sky lines across the positional ($y$) axis of the frame. The \texttt{correlate} method checks the correlation of the $O$- and $E$-beams either within a given \gls{FITS} file or across multiple files (comparing only the $O$- and $E$-beams for each). With these two additional methods, a user is able to verify that the wavelength solutions do not conflict across the $O$- and $E$-beams and that no unexpected deviations are included in the wavelength solutions.
 
-Help for the \stops\ \gls{CLI} commands may be found either by running:
+Help for the \gls{CLI} commands for general \stops\ usage or the specific modes may be found by running:
 \begin{lstlisting}[language=bash]
 $ python ~/STOPS --help
-\end{lstlisting}
-{\parskip=0pt or} in \autoref{source:main} (in \autoref{app:code}).
-Help for the \stops\ specific mode commands may be found by running:
-\begin{lstlisting}[language=bash]
+# OR
 $ python ~/STOPS [split|join|correlate|skylines] --help
 \end{lstlisting}
-{\parskip=0pt Finally}, help documentation for the \stops\ methods may be found within this section (\autoref{doc:split} to \ref{doc:corr}) or in \autoref{app:code}.
+{\parskip=0pt or} in \autoref{source:main} (in \autoref{app:code}). Finally, help documentation for the specific \stops\ methods may be found within this section (\autoref{doc:split} to \ref{doc:corr}) or in \autoref{app:code}.
 
 % MARK: Split
 \subsection{Splitting} \label{subsec:stops_split}
@@ -390,10 +389,13 @@ To aid the scripting of the \iraf\ wavelength calibration process, the \texttt{s
 \footnote{Row cropping was decided on as \iraf\ does not handle rows with no exposure well, specifically when it comes to the \texttt{reidentify} task.}
 Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
 
+\pagebreak
+
 % MARK: Join
 \subsection{Joining} \label{subsec:stops_join}
 
 \lstinputlisting[
+    float,
     language=python,
     style=STOPS_docs,
     caption={The `docstring' for \textbf{join.py}},
@@ -437,10 +439,13 @@ Finally, the wavelength extension is masked to remove any uncalibrated wavelengt
     \label{fig:polsalt_post_wav_cal}
 \end{figure}
 
+\pagebreak
+
 % MARK: Skyline
 \subsection{Sky Line Checks} \label{subsec:stops_skyline}
 
 \lstinputlisting[
+    float,
     language=python,
     style=STOPS_docs,
     caption={The `docstring' for \textbf{skylines.py}},
@@ -451,7 +456,7 @@ Finally, the wavelength extension is masked to remove any uncalibrated wavelengt
 
 \begin{figure}[t]
     \centering
-    % \includegraphics[width = 0.8\textwidth]{2_polsalt_gui.png}
+    \includegraphics[width = 1.0\textwidth]{3_stops_correlate.png}
     \todo{Include example of skyline result}
     \caption{The resultant output plot of the \stops\ \texttt{skylines} method. Figure created via the \stops\ \texttt{skyline} method.}
     \label{fig:stops_sky_eg}
@@ -472,6 +477,7 @@ Lastly, determining if there is any inaccuracy in the wavelength solution in the
 \subsection{Cross Correlation} \label{subsec:stops_correlate}
 
 \lstinputlisting[
+    float,
     language=python,
     style=STOPS_docs,
     caption={The `docstring' for \textbf{cross\_correlate.py}},
@@ -638,6 +644,8 @@ $ python reducepoldata_sc.py YYYYMMDD
 \end{lstlisting}
 {\parskip=0pt where} the only modification made to the \texttt{reducepoldata\_sc.py} script file is the removal of a call to the \texttt{specpolwavmap} method.
 % The \texttt{imred} and \texttt{specpolwavmap} function calls before \texttt{specpolextract\_sc} should be commented out, since the raw images have already been processed and the wavelength calibrations were completed using \stops\ and \iraf.
+
+\pagebreak
 
 \newcommand*{\Comment}[1]{\hfill\makebox[7.0cm][l]{#1}}%
 \begin{lstlisting}[
