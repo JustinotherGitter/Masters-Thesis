@@ -2,7 +2,10 @@
 Thesis*
 !Thesis.tex
 !Thesis.pdf
+!Thesis.cls
 
 # Misc files/folders that aren't crucial to rerun Thesis.tex
 eg_chapters/
 .vscode/
+*/*.aux
+*.log
