@@ -456,11 +456,32 @@ Finally, the wavelength extension is masked to remove any uncalibrated wavelengt
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{3_stops_correlate.png}
-    \todo{Include example of skyline result}
-    \caption{The resultant output plot of the \stops\ \texttt{skylines} method. Figure created via the \stops\ \texttt{skyline} method.}
+    \includegraphics[width = 1.0\textwidth]{3_stops_skylines.pdf}
+    \caption{The resultant output plot of the \stops\ \texttt{skylines} method, specifically for science images. Figure created via the \stops\ \texttt{skyline} method.}
     \label{fig:stops_sky_eg}
 \end{figure}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 1.0\textwidth]{3_stops_skylines_arc.pdf}
+    \caption{The resultant output plot of the \stops\ \texttt{skylines} method, specifically for arc images. Figure created via the \stops\ \texttt{skyline} method.}
+    \label{fig:stops_sky__arc_eg}
+\end{figure}
+% \begin{figure}
+%     \centering
+%     \begin{subfigure}[b]{1.0\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{3_stops_skylines.png}
+%         \caption{}
+%     \end{subfigure}
+%     \vfill
+%     \begin{subfigure}[b]{1.0\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{3_stops_skylines_arc.png}
+%         \caption{}
+%     \end{subfigure}
+%     \caption{The resultant output plot of the \stops\ \texttt{skylines} method. Figure created via the \stops\ \texttt{skyline} method.}
+%     \label{fig:stops_sky_eg}
+% \end{figure}
 
 Sky line comparisons allow the user to confirm the accuracy of the wavelength solution across both the rows and columns of the frame. The \texttt{skyline} method naively transforms the wavelength calibrated files,%
 \footnote{The transformation applied by the \texttt{skyline} method uses linear interpolation and is thus less accurate at flux conservation than the transformation applied by the \texttt{transform} method.}
