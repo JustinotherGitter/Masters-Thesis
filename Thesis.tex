@@ -229,9 +229,10 @@
 \bibliographystyle{plainnat}
 \bibliography{references}
 
+% \printglossaries
 % Longest abbreviation so the column width can be set
-\glssetwidest{\gls{STOPS}}
-\printglossary[type=acronym, title={List of Acronyms}]
-% \printglossary[type=abbreviations, style=alttree]
+% \glssetwidest{\gls{STOPS}}
+\printglossary[type=\acronymtype, style=super, title={List of Acronyms}]
+\printglossary[type=main, title={Glossary}]
 
 \end{document}

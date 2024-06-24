@@ -1,21 +1,16 @@
 \ProvidesPackage{myglossary}
 \RequirePackage[%
-    nomain,
-    acronym,
+    % nomain,
+    acronyms,
     automake,
     nonumberlist,
     nogroupskip,
-    style=super,
+    style=tree,
     shortcuts,
 ]{glossaries-extra}
 
-% Make latex compile acronyms to use in document section
-\makeglossaries[acronym]
-
-% Set the style of the abbreviation to use in paragraphs
-\setabbreviationstyle[acronym]{long-short}
-
 % Add any acronyms below
+\setabbreviationstyle[acronym]{long-short}
 
 \newacronym{ADC}{ADC}{Analog-to-Digital Converter}
 
@@ -35,7 +30,6 @@
 \newacronym{HET}{HET}{Hobby-Eberly Telescope}
 \newacronym{HRS}{HRS}{High Resolution Spectrograph}
 
-\newacronym{IRAF}{\textsc{iraf}}{Image Reduction and Analysis Facility}
 
 \newacronym{L-45P}{L$-45^\circ$}{Linear $-45^\circ$ Polarized}
 \newacronym{L45P}{L$+45^\circ$}{Linear $+45^\circ$ Polarized}
@@ -46,7 +40,6 @@
 \newacronym{NIR}{NIR}{Near Infra-Red}
 \newacronym{NIRWALS}{NIRWALS}{Near Infra-Red Washburn Labs Spectrograph}
 
-\newacronym{POLSALT}{\textsc{polsalt}}{Polarimetric reductions for SALT}
 
 \newacronym{QE}{QE}{Quantum Efficiency}
 
@@ -59,12 +52,37 @@
 \newacronym{SALT}{SALT}{Southern African Large Telescope}
 \newacronym{SALTICAM}{SALTICAM}{SALT Imaging Camera}
 \newacronym{SNR}{S/N}{Signal-to-Noise Ratio}
-\newacronym{STOPS}{\textsc{stops}}{Supplementary Tools for \textsc{polsalt} Spectro\-polarimetry}
 
 \newacronym{UV}{UV}{Ultraviolet}
 
 \newacronym{VPH}{VPH}{Volume Phase Holographic}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setabbreviationstyle[code]{long-short-sc}
+% \newglossaryentry{software}{
+%     name={Software},
+%     description={},
+%     type=main
+% }
+\newacronym[category={code}]{IRAF}{iraf}{Image Reduction and Analysis Facility}
+\newacronym[category={code}]{POLSALT}{polsalt}{Polarimetric reductions for SALT}
+\newacronym[category={code}]{STOPS}{stops}{Supplementary Tools for \textsc{polsalt} Spectro\-polarimetry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setabbreviationstyle[elements]{short}
+% \newglossaryentry{arc}{
+%     name={\gls{SALT} Arc lamps},
+%     description={},
+%     type=main
+% }
+\newacronym[category={elements}]{Ar}{Ar}{Argon}
+\newacronym[category={elements}]{CuAr}{CuAr}{Copper-Argon}
+\newacronym[category={elements}]{HgAr}{HgAr}{Mercury-Argon}
+\newacronym[category={elements}]{NeAr}{Ne}{Neon-Argon}
+\newacronym[category={elements}]{ThAr}{ThAr}{Thorium-Argon}
+\newacronym[category={elements}]{Xe}{Xe}{Xenon}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Commonly used acronyms
 \newcommand{\iraf}{\gls{IRAF}}
@@ -72,34 +90,55 @@
 \newcommand{\stops}{\gls{STOPS}}
 
 
-% Command to create a glossary entry with correspondent acronym.
-% Args : 1: acronym/name, 2: long name, 3: description
-\newcommand{\newglossaryentrywithacronym}[3]{
-    %%% The glossary entry the acronym links to   
-    \newglossaryentry{#1_gls}{
-        name={#1},
-        long={#2},
-        description={#3}
-    }
-
-    % Acronym pointing to glossary
-    \newglossaryentry{#1}{
-        type=\acronymtype,
-        name={#1},
-        description={#2},
-        first={#2 (#1)\glsadd{#1_gls}},
-        see=[Glossary:]{#1_gls}
-    }
-}
-
 % Add any glossary entries below
-
 % cursor commands
 % exposure
 % extension (SCI, VAR, BPM) and sub-extension ($O$ and $E$)
 % frame
 % CLI (terminal) (UNIX -> bash, Windows -> Powershell/cmd, macOS -> Zsh)
 % wildcard
+
+\setabbreviationstyle[filters]{short}
+\newglossaryentry{Johnson-Cousins}{%
+    name=Johnson-Cousins photometric system,
+    description={},
+}
+\newglossaryentry{U}{%
+    name=\ensuremath{U},
+    description={The ultraviolet filter, typically centered around $3640$ \AA.},
+    parent={Johnson-Cousins},
+    category={filters},
+    sort={a}
+}
+\newglossaryentry{B}{%
+    name=\ensuremath{B},
+    description={The blue filter, typically centered around $4420$ \AA.},
+    parent={Johnson-Cousins},
+    category={filters},
+    sort={b}
+}
+\newglossaryentry{V}{%
+    name=\ensuremath{V},
+    description={The visual filter, designed to approximate human visual sensitivity and typically centered around $5400$ \AA.},
+    parent={Johnson-Cousins},
+    category={filters},
+    sort={c}
+}
+\newglossaryentry{R}{%
+    name=\ensuremath{R},
+    description={The red filter, typically centered around $6580$ \AA.},
+    parent={Johnson-Cousins},
+    category={filters},
+    sort={d}
+}
+\newglossaryentry{I}{%
+    name=\ensuremath{I},
+    description={The infrared filter, typically centered around $8060$ \AA.},
+    parent={Johnson-Cousins},
+    category={filters},
+    sort={e}
+}
+
 
 % \newglossaryentry{science}{
 %     name={science},
@@ -118,3 +157,6 @@
 %     description={A user interface that allows users to interact with a computer using text commands.},
 %     plural={command line interfaces},
 % }
+
+% Make latex compile acronyms to use in document section
+\makeglossaries
