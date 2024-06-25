@@ -345,24 +345,25 @@ For example, \autoref{fig:trans_O} shows a good fit to the wavelength solution, 
 \section[\textsc{stops}]{\stops\ - \glsfmtlong{STOPS}} \label{sec:stops}
 
 \glsxtrfull{STOPS} provides supplementary tools which convert the \polsalt\ and \iraf\ formats back and forth, allowing \iraf\ to be used for wavelength calibrations of \gls{SALT} spectropolarimetric data. It also provides additional tools to check the accuracy of the wavelength calibration.
-\stops\ is written in, and requires, Python ($3.11+$) to run, as well as \texttt{Astropy} ($6.0.0+$) \citep{astropy:2013, astropy:2018, astropy:2022}, \texttt{ccdproc} ($2.4.1+$) \citep{ccdproc}, \texttt{Matplotlib} ($3.5.2+$) \citep{matplotlib}, \texttt{NumPy} ($1.26.4+$) \citep{numpy}, and \texttt{SciPy} ($1.13.0+$) \citep{scipy}.
+\stops\ is written in, and requires, Python~$3$ ($3.11+$) to run, as well as \texttt{Astropy} ($6.0.0+$) \citep{astropy:2013, astropy:2018, astropy:2022}, \texttt{ccdproc} ($2.4.1+$) \citep{ccdproc}, \texttt{Matplotlib} ($3.5.2+$) \citep{matplotlib}, \texttt{NumPy} ($1.26.4+$) \citep{numpy}, and \texttt{SciPy} ($1.13.0+$) \citep{scipy}.
 
 The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining}, is performed by the \stops\ \texttt{split} and \texttt{join} methods, respectively.
 
 Methods to verify the validity of the wavelength calibrations were also added to \stops. The \texttt{skyline} method checks the sky line wavelength ($x$) positions across the frame as well as the variation of the sky lines across the positional ($y$) axis of the frame. The \texttt{correlate} method checks the correlation of the $O$- and $E$-beams either within a given \gls{FITS} file or across multiple files (comparing only the $O$- and $E$-beams for each). With these two additional methods, a user is able to verify that the wavelength solutions do not conflict across the $O$- and $E$-beams and that no unexpected deviations are included in the wavelength solutions.
 
-Help for the \gls{CLI} commands for general \stops\ usage or the specific modes may be found by running:
+Help on the usage of \stops\ in a \gls{CLI} can be viewed by running:
 \begin{lstlisting}[language=bash]
 $ python ~/STOPS --help
 # OR
 $ python ~/STOPS [split|join|correlate|skylines] --help
 \end{lstlisting}
-{\parskip=0pt or} in \autoref{source:main} (in \autoref{app:code}). Finally, help documentation for the specific \stops\ methods may be found within this section (\autoref{doc:split} to \ref{doc:corr}) or in \autoref{app:code}.
+{\parskip=0pt which} retrieves and prints the help documentation to the \gls{CLI} from \autoref{source:main} (in \autoref{app:code}), such as how to enable logging or increase the verbosity, or change default parameters of the various methods. Finally, help documentation for the specific \stops\ methods may be found within this section (\autoref{doc:split} to \ref{doc:corr}) or in \autoref{app:code}.
 
 % MARK: Split
 \subsection{Splitting} \label{subsec:stops_split}
 
 \lstinputlisting[
+    float,
     language=python,
     style=STOPS_docs,
     caption={The `docstring' for \textbf{split.py}},
@@ -372,15 +373,15 @@ $ python ~/STOPS [split|join|correlate|skylines] --help
 ]{split.py}
 
 % Why necessary
-As mentioned previously, the format of the \gls{FITS} file created by \polsalt\ after basic \gls{CCD} reductions and the format expected by \iraf\ to be used for the wavelength calibrations are incompatible. Basic \polsalt\ \gls{CCD} reductions return \gls{FITS} files which contain a primary header along with extensions for the science, variance, and \gls{BPM} images. These extensions carry the image of the trace for both polarimetry beams (see \autoref{fig:OE_split}), the variance of the image, and a map of the pixels to be masked out, respectively.
+As mentioned previously, the format of the \gls{FITS} file created by \polsalt\ after basic \gls{CCD} reductions and the format expected by \iraf\ to be used for the wavelength calibrations are incompatible. Basic \polsalt\ \gls{CCD} reductions return \gls{FITS} files which contain a primary header along with extensions for the science, variance, and \gls{BPM} images. These extensions carry the image of the trace (see \autoref{fig:OE_split}), the variance of the image, and a map of the pixels to be masked out, split into sub-extensions for both polarimetry beams, respectively.
 
-\iraf\ is capable of dealing with multiple traces in an extension or lists of input files but is not as capable when dealing with multiple wavelength solutions contained in a single extension (as expected by the \polsalt\ \texttt{wavelength calibration}) or extensions containing sub-extensions (as expected by the \polsalt\ \texttt{spectral extraction}). To simplify the \iraf\ reduction procedure it was decided to separate the perpendicular polarization beams into their own files.
+While \iraf\ is capable of dealing with multiple traces in an extension or lists of input files, it is not as capable when dealing with multiple wavelength solutions contained in a single extension (as expected by the \polsalt\ \texttt{wavelength calibration}) or extensions containing sub-extensions (as expected by the \polsalt\ \texttt{spectral extraction}). To simplify the \iraf\ reduction procedure it was decided to separate the perpendicular polarization beams into their own files.
 
 % What it does -> Primary focus
-The files with \polsalt\ pre-reductions applied, namely \gls{FITS} files with an `mxgbp' prefix (\autoref{sec:polsalt}), are used as the starting point for the supplementary tool's \texttt{split} method. Running \texttt{split} finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each sub-extension of the \gls{FITS} file, and appends all science and header data necessary for wavelength calibration to the relevant \gls{HDU} structure.
+The files with \polsalt\ pre-reductions applied, namely \gls{FITS} files with an `mxgbp' prefix (\autoref{sec:polsalt}), are used as the starting point for the supplementary tool's \texttt{split} method. Running \texttt{split} finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each \gls{FITS} file (i.e. for both the $O$- and $E$-beam), and appends all header and science data necessary for wavelength calibration to the relevant \gls{HDU} structure. Otherwise, defaults, such as which row to split the image along to separate the beams, were kept as close to the \polsalt\ pipeline as possible.
 
 % Focus on minimizing changes and optimizing size
-As the intent was always to parse the wavelength function back into \polsalt\ it was decided to keep these temporary \gls{FITS} files as small as possible. This is especially necessary when considering the amount of exposures that are taken for a single spectropolarimetric observation run, and how the number of observations increases for long term studies.
+As the intent was always to parse the wavelength function back into \polsalt\ it was decided to keep these temporary \gls{FITS} files as small as possible by only including the header and science extension. This is especially necessary when considering the amount of exposures taken for long term studies. % for a single spectropolarimetric observation run, and how the number of observations increases 
 
 \begin{figure}[t]
     \centering
@@ -390,11 +391,8 @@ As the intent was always to parse the wavelength function back into \polsalt\ it
 \end{figure}
 
 % Any changes from how polsalt would do it
-To aid the scripting of the \iraf\ wavelength calibration process, the \texttt{split} method also performs row cropping to exclude \gls{CCD} regions with no exposure and creates files listing the split $O$- and $E$-beam \gls{FITS} files to simplify the \iraf\ task inputs.%
-\footnote{Row cropping was decided on as \iraf\ does not handle rows with no exposure well, specifically when it comes to the \texttt{reidentify} task.}
-Otherwise, defaults, such as which row to split the beams along, were kept as close to the \polsalt\ pipeline as possible.
-
-\pagebreak
+To aid the scripting of the \iraf\ wavelength calibration process, the \texttt{split} method also performs row cropping to exclude \gls{CCD} regions which are not exposed to light, and creates files listing the split $O$- and $E$-beam \gls{FITS} files which may be passed to the \iraf\ task inputs. Row cropping was decided on as \iraf\ does not handle rows with no exposure well, specifically when it comes to the autonomous \texttt{reidentify} task.
+The full \stops\ \texttt{split} class docstring is given in \autoref{doc:split}.
 
 % MARK: Join
 \subsection{Joining} \label{subsec:stops_join}
@@ -409,26 +407,26 @@ Otherwise, defaults, such as which row to split the beams along, were kept as cl
     gobble=4,
 ]{join.py}
 
-As mentioned previously, the \gls{FITS} file formats created by \iraf\ after wavelength calibrations versus that expected by the \polsalt\ \texttt{spectra extraction} are incompatible. The \stops\ \texttt{join} method is used at this point since all pieces necessary to recreate the \polsalt\ wavelength calibrated \gls{FITS} files exist once \texttt{fitcoords} has been successfully run. A typical \gls{FITS} file expected by the \polsalt\ \texttt{spectra extraction} contains a primary header along with the various image extensions, with most importantly a newly created wavelength extension.
+% Running \texttt{join} finds all the relevant \gls{FITS} and local \iraf\ database files, creates an empty \gls{HDU} structure for each pair of matching spectropolarimetric beams, copies over the extensions and their respective image and header information, appends a new extension and parses the database wavelength solutions into the \polsalt\ intensity-wavelength format, performs cosmic ray cleaning, and masks the \gls{BPM} to reflect the wavelength calibrated regions.
+After the \iraf\ \texttt{fitcoords} task has been successfully run for both the $O$- and $E$-beams, the \stops\ \texttt{join} method is used to extract and parse the wavelength solution from the \iraf\ database, and to create the wavelength calibrated \gls{FITS} files required by the \polsalt\ pipeline. More specifically, the \texttt{join} method performs the following steps:
 
-Running \texttt{join} finds all the relevant \gls{FITS} and local \iraf\ database files, creates an empty \gls{HDU} structure for each pair of matching spectropolarimetric beams, copies over the extensions and their respective image and header information, appends a new extension and parses the database wavelength solutions into the \polsalt\ intensity-wavelength format, performs cosmic ray cleaning, and masks the \gls{BPM} to reflect the wavelength calibrated region.
-
-Firstly, \texttt{join} parses the wavelength database file, described in \autoref{subsec:iraf_fitcoords}, for specifically either `Chebyshev' or `Legendre' solutions, and creates a function to convert a ($pixel$, $pixel$) position to a wavelength value. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in \autoref{fig:pol_wav_ext}.
+First, \texttt{join} parses the wavelength database file, described in \autoref{subsec:iraf_fitcoords}, for either a `Chebyshev' or `Legendre' solution, and calculates the wavelength at each ($x_{p}$, $y_{p}$) pixel position. This is new image containing the corresponding wavelength values, seen in \autoref{fig:pol_wav_ext}, is appended to the wavelength calibrated \gls{FITS} file as the `WAV' extension.
+% and creates a function to convert a ($pixel$, $pixel$) position to a wavelength value. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in \autoref{fig:pol_wav_ext}.
 
 % cosmic ray cleaning
-Next, the \texttt{join} method cleans the science extension of cosmic rays using the \texttt{lacosmic} python package which uses the L.A. Cosmic algorithm, based on Laplacian edge detection. The read noise and gain parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, while the rest of the parameters were left as the default, following the publication and \href{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions}%
+Second, cosmic-ray cleaning is performed on the science extension using the \texttt{ccdproc} implementation of the \texttt{lacosmic} Python package which implements the L.A. Cosmic algorithm, based on Laplacian edge detection. The read noise and gain parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, while the rest of the parameters were left as the default, following the publication and \href{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions}%
 \footnote{Suggested parameters for the \texttt{lacosmic} algorithm may be found at \url{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}.}
 by the algorithm's creator, as well as the implementation of the algorithm in the python \texttt{ccdproc} package \citep{lacosmic,astroscrappy}. The chosen parameters work well for most cosmic rays, as can be seen when comparing \autoref{fig:OE_split} to \autoref{fig:polsalt_post_wav_cal}, but may be modified as needed.
 
 % update headers
 % copy data, double check shape change
-Thereafter, \texttt{join} updates the headers to be near-identical to those created by the \polsalt\ \texttt{wavelength calibration}, most notably updating the data shape, `CTYPE3', and data type, `BITPIX', keywords.
+Next, \texttt{join} updates the headers to be near-identical to those created by the \polsalt\ \texttt{wavelength calibration}, most notably updating the data shape, `CTYPE3', and data type, `BITPIX', keywords.
 The only difference in the header is the  `NAXIS2' keyword, due to the cropping performed by \texttt{split}. The cropped region could be reintroduced but would be masked out and further discarded in the following \polsalt\ \texttt{spectra extraction} process, making it redundant.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{3_pol_wav_ext.pdf}
-    \caption{The wavelength extension of a \gls{FITS} file ready to be handed back to the \polsalt\ pipeline. The color bar displays the wavelength in \AA\ as displayed by the $O$- and $E$-beam sub-extensions. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls{BPM} extensions to $0$. Figure created from the \stops\ \texttt{join} method output.}
+    \caption{A representative wavelength extension of a \gls{FITS} file, for the $O$- (top) and $E$-beam (bottom), ready to be processed by the \polsalt\ pipeline. The color bar shows the wavelength in \AA. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls{BPM} extensions to $0$. Figure created from the \stops\ \texttt{join} method output.}
     \label{fig:pol_wav_ext}
 \end{figure}
 
@@ -436,15 +434,16 @@ The only difference in the header is the  `NAXIS2' keyword, due to the cropping 
 % mask wavelength using wollaston curve for polsalt `parsability'
 % update BPM to reflect wavelength cropping
 Finally, the wavelength extension is masked to remove any uncalibrated wavelength regions as well as masked for the skewing of the trace introduced by the wollaston element. The masking of the wollaston skewing is necessary since \polsalt\ introduces a wollaston correction in the \texttt{spectra extraction} process. The \gls{BPM} extension is masked to reflect the valid wavelength calibrated region, and the files are saved with the \polsalt\ wavelength calibrated `wmxgbp' prefix.
+The full \stops\ \texttt{join} class docstring is given in \autoref{doc:join}.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{3_post_wav_cal.pdf}
-    \caption{A representative science extension of a \gls{FITS} file capable of being parsed by the \polsalt\ pipeline. The intensity of the $O$- and $E$-beam sub-extensions are displayed via the grayscale value at each pixel. Note the inclusion of regions of: solid black demarcating the chip gaps, horizontal stripes of high intensity demarcating the trace, and (curved) vertical stripes of high intensity demarcating the sky lines. Figure created from the \stops\ \stops{join} method output.}
+    \caption{A representative science extension of a \gls{FITS} file, for the $O$- (top) and $E$-beam (bottom), ready to be processed by the \polsalt\ pipeline. The observed intensity is displayed via the grayscale value at each pixel.
+    % Note the: chip gaps demarcated by regions of no exposure, traces which are regions of higher intensity spanning the horizontal axis, and sky lines which are the (slightly curved) regions of higher intensity strectching the vertical axis.
+    Figure created from the \stops{join} method output.}
     \label{fig:polsalt_post_wav_cal}
 \end{figure}
-
-\pagebreak
 
 % MARK: Skyline
 \subsection{Sky Line Checks} \label{subsec:stops_skyline}
@@ -469,7 +468,7 @@ Finally, the wavelength extension is masked to remove any uncalibrated wavelengt
     \centering
     \includegraphics[width = 1.0\textwidth]{3_stops_skylines_arc.pdf}
     \caption{The resultant output plot of the \stops\ \texttt{skylines} method, specifically for arc images. Figure created via the \stops\ \texttt{skyline} method.}
-    \label{fig:stops_sky__arc_eg}
+    \label{fig:stops_sky_arc_eg}
 \end{figure}
 % \begin{figure}
 %     \centering
@@ -488,16 +487,21 @@ Finally, the wavelength extension is masked to remove any uncalibrated wavelengt
 %     \label{fig:stops_sky_eg}
 % \end{figure}
 
-Sky line comparisons allow the user to confirm the accuracy of the wavelength solution across both the rows and columns of the frame. The \texttt{skyline} method naively transforms the wavelength calibrated files,%
+% Sky line comparisons allow the user to confirm the accuracy of the wavelength solution across both the rows and columns of the frame. The \texttt{skyline} method naively transforms the wavelength calibrated files, allowing the deviation of a skyline spanning multiple rows to be measured, and compares the observed sky line wavelength positions to those measured by \gls{SALT}, allowing the wavelength deviation of the skylines to be measured.%
+The \texttt{skyline} method has been implemented to compare the position of the sky lines on the science extension, or arc lines in the arc exposure, to the known positions of the sky lines, or arc lines, as measured by \gls{SALT}, respectively.%
+\footnote{Both sky and arc lines are available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/} .}
+This provides an additional check of the accuracy of the wavelength solution across the frame. This method accepts both the \iraf\ \texttt{transform} \gls{FITS} file or the `wmxgbp' \gls{FITS} files created by the \texttt{join} method as the input.
+
+The \texttt{skyline} method loads the wavelength calibrated files, masks the traces present in the frames, transforms the frames from ($x_p$, $y_p$) pixel to (\AA, $y_p$) wavelength units if the frame was not transformed by \texttt{transform},%
 \footnote{The transformation applied by the \texttt{skyline} method uses linear interpolation and is thus less accurate at flux conservation than the transformation applied by the \texttt{transform} method.}
-allowing the deviation of a skyline spanning multiple rows to be measured, and compares the observed sky line wavelength positions to those measured by \gls{SALT}, allowing the wavelength deviation of the skylines to be measured.%
-\footnote{The first iteration of a sky line atlas is available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
+and compares the peak wavelength position of the sky lines to the reference sky lines as measured by \gls{SALT}.
 
-The file used for sky line comparisons may either be the \iraf\ \texttt{transform} \gls{FITS} file or the `wmxgbp' \gls{FITS} files created by \texttt{join}. The \texttt{skyline} method loads the wavelength calibrated files, transforms the frames if the frame was not transformed by \texttt{transform}, removes the continuum, compares the width of the sky lines before and after transformation, and compares the wavelength position of the sky lines to the reference sky lines as measured by \gls{SALT}.
-
-Firstly, determining if there is any inaccuracy in the wavelength solution in the spatial ($y$, or vertical) axis is relatively straightforward as a perfect wavelength solution will remove any horizontal variation of a sky line spanning multiple rows. The variation may be seen in the transformed frame, as mentioned in \autoref{subsec:iraf_transform}, but is more accurately measured by the \texttt{skyline} method which compares the averaged sky line width before and after transformation. A wavelength solution exhibiting a poor fit across the spatial axis will display broader averaged sky lines than those of a relatively good fit.
-
-Lastly, determining if there is any inaccuracy in the wavelength solution in the wavelength ($x$, or horizontal) axis is more challenging as no features, other than the trace of the observed sources, are exposed across a frame. Thankfully, \gls{SALT} has published a sky line atlas which may be used to verify and measure the deviation of the observed sky line wavelength positions. Minor variations in the comparison of the sky lines are expected, but any uniform trends indicate an underlying poor fit across the horizontal axis of the wavelength solution. A poor horizontal fit is difficult to spot without supplementary tools and has adverse effect on the final polarization results.
+A spectrum is created after accounting for the \gls{BPM} extension, masking out rows which contain a trace, and transformation, by averaging across the rows of the frames.
+Any inaccuracies of the wavelength solution in the wavelength ($x$, or horizontal) axis are determined by detecting peaks in the spectrum after transformation and comparing their positions to those provided by \gls{SALT}. Minor variations in the comparison of the sky lines are expected, such as those seen in \autoref{fig:stops_sky_eg}, but any uniform trends, such as those in \autoref{fig:stops_sky_arc_eg} (bottom left), indicate an underlying poor fit across the horizontal axis of the wavelength solution.
+% A poor horizontal fit is difficult to spot without supplementary tools.
+% 
+% Second, any inaccuracies in the wavelength solution in the spatial ($y$, or vertical) axis are determined by comparing the feature widths before and after transformation. Since the sky lines curve slightly across the frame (see \autoref{fig:polsalt_post_wav_cal}), the initial feature widths %relatively straightforward as a perfect wavelength solution will remove any horizontal variation of a sky line spanning multiple rows. The variation may be seen in the transformed frame, as mentioned in \autoref{subsec:iraf_transform}, but is more accurately measured by the \texttt{skyline} method which compares the averaged sky line width before and after transformation. A wavelength solution exhibiting a poor fit across the spatial axis will display broader averaged sky lines than those of a relatively good fit.
+The full \stops\ \texttt{skyline} class docstring is given in \autoref{doc:skylines}.
 
 % MARK: Correlate
 \subsection{Cross Correlation} \label{subsec:stops_correlate}
@@ -524,6 +528,7 @@ The \texttt{skyline} method allows for confirmation of a single wavelength solut
 The \texttt{correlate} method loads the \polsalt\ \texttt{spectra extraction} \gls{FITS} files, removes the continuum and separates the \gls{CCD} regions. The relevant \gls{CCD} regions are cross correlated and the correlation peak is plotted and specified in the plot legend, as seen in \autoref{fig:stops_corr_eg}.
 
 Sources under spectropolarimetric observation are generally expected to vary over time and, as such, the ratio of polarized to unpolarized light is also expected to vary. The accuracy of correlation may decrease as features with differences in the polarized component of the polarization beams change, and it is up to the user to determine the validity of the correlation result taking into consideration the two spectra being correlated. The differences in the features of the different spectra are often negligible when compared to the overall continuum of the spectra and are generally only reflected in a change in the intensity of said features when the continuum is removed.
+The full \stops\ \texttt{split} class docstring is given in \autoref{doc:corr}.
 
 % MARK: General Reduction Procedure
 \section{General Reduction Procedure}\label{sec:red_proc}
@@ -535,11 +540,11 @@ Sources under spectropolarimetric observation are generally expected to vary ove
     \label{fig:new_workflow}
 \end{figure}
 
-This section aims to provide a comprehensive discussion of the modified reduction procedure, an example of which is provided in \autoref{app:reduction}. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files: instead, the commands necessary to complete each step of the reduction process are discussed, assuming that the software is running as intended.
+This section aims to provide a comprehensive discussion of the modified reduction procedure, an example of which is provided in \autoref{app:reduction}. As users all employ a variety of operating systems, language environments, and software setups, not much emphasis will be placed on how to get the software running or the managing of files; instead, the general order, seen in \autoref{fig:new_workflow}, and commands necessary to complete each step of the reduction process are discussed, assuming that the software is running as intended.
 
 \subsection{Initial Setup} \label{subsec:reduc_setup}
 
-It is important to note that while \polsalt\ was developed in Python $2.7$, the \stops\ supplementary tools were developed in, and require, Python $3.11+$, as well as other requirements mentioned in \autoref{sec:stops}. While managing multiple versions of Python introduces some extra complication, it would not have been reasonable to develop \stops\ in Python $2$, as it is no longer supported, nor would it have been reasonable to update \polsalt\ to Python $3$.
+It is important to note that while \polsalt\ was developed in Python~$2$ ($2.7$), the \stops\ supplementary tools were developed in, and require, Python~$3$ ($3.11+$), as well as the other requirements mentioned in \autoref{sec:stops}. While managing multiple versions of Python introduces some extra complication, it would not have been reasonable to develop \stops\ in Python~$2$, as it has been deprecated, nor would it have been reasonable to update \polsalt\ to Python~$3$.
 
 It is therefore recommended that the different versions of Python are managed using separate virtual environments. While the \texttt{anaconda} package manager was used in this study and is recommended, any package manager may be used. The \texttt{anaconda} environments are aliased `\textbf{salt}' for Python $2.7$ and `\textbf{stops}' for Python $3.11$. When Listings are provided (see for example \autoref{code:polsalt_launch} or the Listing in \autoref{subsec:reduc_pre} below), the \texttt{anaconda} environment is activated at the start of the Listing, otherwise it is assumed the previously specified environment is still active.
 
@@ -570,7 +575,7 @@ $ python ~/polsalt/scripts/reducepoldata_sc.py (*@<\textit{OBSDATE}>@*)
 % MARK: Wavelength Calibration
 \subsection{Wavelength Calibration} \label{subsec:reduc_wav}
 
-The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to and from both \iraf\ and \polsalt, as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented in \autoref{code:stops_split} to \ref{code:stops_join}, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a well-fit calibration function. This process depends heavily, and varies greatly, based on the user and as such not all use cases can be discussed.
+The wavelength calibrations may now be completed in \iraf. This section concerns the procedure for parsing the \gls{FITS} files to and from both \iraf\ and \polsalt, as well as the relevant task names and methods to be run to complete the calibrations. A base working case of each of the tasks and methods are presented in \autoref{code:stops_split} to \ref{code:stops_join}, but it should be noted that the art of wavelength calibration consists of modifying the parameters to achieve a well-fit calibration function.% This process depends heavily, and varies greatly, based on the user and as such not all use cases can be discussed.
 
 % MARK: Prep for IRAF
 \subsubsection{Preparing the Data for \iraf}
@@ -593,7 +598,7 @@ cl> transform files tr_file fit_2d
 
 The interactive tasks take up the bulk of the reduction time as this is where the fine-tuning of the reduction is done, through the use of cursor (or colon) commands, which allow modification of the parameters mid-reduction. Task parameters may, however, be edited beforehand within the \iraf\ terminal using the \texttt{eparam} task, and optionally saved, and quit or run using a combination of \texttt{:w}, and \texttt{:q} or \texttt{:go} cursor commands, respectively.
 
-The reduction process in \autoref{app:reduction}, namely \autoref{code:iraf_id} to \ref{code:iraf_transform}, describes how to script the tasks for posterity. It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using the \texttt{mkscript} task which interactively asks for a task to script and parameters to use. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked. Running an \iraf\ script may be done by running:
+The reduction process in \autoref{app:reduction}, namely \autoref{code:iraf_id} to \ref{code:iraf_transform}, describes how the tasks may be scripted and saved for posterity. It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using the \texttt{mkscript} task which interactively asks for a task to script and parameters to use. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked. Running an \iraf\ script may be done by running:
 \begin{lstlisting}[language=bash]
 cl> cl < script_name.cl
 \end{lstlisting}
@@ -604,14 +609,14 @@ cl> cl < script_name.cl
 
 After the wavelength calibrations have been completed, the wavelength solution is parsed back into the format expected by \polsalt. Joining the separate beams with their respective wavelength solutions is performed in the \gls{CLI} following \autoref{code:stops_join}.
 
-Similar to the \texttt{split} procedure, the \texttt{join} procedure has the same defaults defined. The onus of keeping track of any previously changed default parameters falls to the user, but logging is implemented in \stops\, see \autoref{sec:stops}, which allows for later reference of any changed parameters.
+Similar to the \texttt{split} procedure, the \texttt{join} procedure has the same defaults defined. The onus of keeping track of any previously changed default parameters falls to the user, but logging is implemented in \stops\ (see the discussion on help documentation in \autoref{sec:stops}) which allows for later reference of any changed parameters.
 
 % MARK: Skyline checks
 \subsubsection{Sky Line Checks} \label{subsec:reduc_sky}
 
 The optional \iraf\ \texttt{transform} task and \stops\ \texttt{skylines} method are used to confirm the wavelength solution across the frame (see \autoref{subsec:stops_skyline}) by transforming and comparing known and observed sky line wavelength positions, respectively.
 
-The \texttt{skyline} method is run in the \gls{CLI} following \autoref{code:stops_sky}. The difference in the flux conservation when \texttt{skyline} transforms the frames is discussed in \autoref{subsec:stops_skyline}. Otherwise, as with the rest of \stops, default parameters describe the overplotting behavior for the $O$- and $E$-beams, the skylines provided by \gls{SALT}, and the calculated variation of the wavelength axis of a frame.
+The \texttt{skyline} method is run in the \gls{CLI} following \autoref{code:stops_sky}. As with the rest of \stops, default parameters describe the overplotting behavior for the $O$- and $E$-beams, the skylines provided by \gls{SALT}, and the calculated variation of the wavelength axis of a frame.
 
 \subsubsection{Cross Correlation Checks} \label{subsec:reduc_corr}
 
@@ -621,7 +626,7 @@ The \texttt{correlate} method is run in the \gls{CLI} following \autoref{code:st
 
 Before the final \polsalt\ reductions, it is recommended that the user `clean up' the \texttt{sci/} directory of all \iraf\ and \stops\ files since the `wmxgbp' \gls{FITS} files are all that is expected by \polsalt. The \polsalt\ methods use wildcard file collection and as such any errant detections of files added by the user will result in unexpected crashes. It is suggested to move any additional files to a new subfolder following \autoref{code:gen_clean}, but a remove command may also be used, for example, following:
 \begin{lstlisting}[language=bash]
-$ rm beamO* beamE* arcO* arcE*
+$ rm beam*.fits arc*.fits frame*
 \end{lstlisting}
 
 % MARK: Complete reductions

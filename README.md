@@ -1,23 +1,19 @@
-# Thesis overview document
+# Thesis Overview and Design Organizer (TODO 😝)
 
-This file stands to track any final edits needed before the submission of the thesis, any minor improvements that may be made at a later date, any styles and style preferences to keep the file/document structure neat and logical, as well as any useful external references.
+This file stands to track any minor improvements (at least I think they would be) or final edits needed before the submission of my thesis, my local setup (In case, I don't know, my laptop is stolen 🙄), any styles and style preferences to keep the file/document structure neat and logical, as well as any useful external references.
 
-## Final `TODOs`
+To any reading, I hope this document serves to improve your write-up experience. ❤️
 
-* Organize Glossary entries:
-  * Glossary (Alphabetical)
-  * Abbreviations, Acronyms, and Symbols (By group(?)/category, then Alphabetical)
-  * Unify usage of exposure / frame / extension and add to glossary (see references)
-* Cite STOPS as repo? (See `.cff` references)
-* Change \today to MONTH, YEAR at final submission [Thesis.tex:197]
-* Ask for read through from friends to ensure no spelling/grammar errors
+Worm Regards,
+
+Justin Cooper
 
 ## Minor `TODOs`
 
 * Update tables `\input{}` to use relative pathing (`import` package?)
 * Use the `minted` package instead of the `listings` `STOPS_docs` style workaround
-* Unify (x-pixel/y-pixel/x/y/wavelength/)
-* Edit created plots to use Latex font (both python and inkscape figures)
+* Unify (x-pixel/y-pixel/x/y/wavelength/) or vertical/horizontal axis or rows/columns → (?) ($x_p$, $y_p$)/(\AA, $y_p$)
+* Edit created plots to use Latex font (both Python and Inkscape figures)
 * Edit plots to use `subfigures` where possible
 * Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
 * Limit paragraph breaks to only `left-to-right` pages, not across a page turn.
@@ -26,6 +22,34 @@ This file stands to track any final edits needed before the submission of the th
   * \$O\$- and \$E\$-beam(s)
   * `extension`
   * use `the user` instead of `a user`
+
+## Final `TODOs`
+
+* Organize Glossary entries:
+  * Glossary (Alphabetical)
+  * Abbreviations, Acronyms, and Symbols (By group(?)/category, then Alphabetical)
+  * Unify usage of exposure / frame / extension and add to glossary (see references)
+* Cite STOPS as repo? (See `.cff` references)
+* Change \today to MONTH, YEAR at final submission [Thesis.tex:197~ish]
+* Ask for read through from friends to ensure no spelling/grammar errors
+
+## VSCode setup
+
+This section contains the setup I've found irreplaceable while writing my thesis in VSCode.
+1. My Python setup includes the full `Python` and `Jupyter Notebook` extensions as well as the `Black` formatting extension.
+    * Python must still be installed locally
+1. I use a private GitHub repo, shared with my supervisor, for backing up and version control of my thesis, as well as for my developed software, in a separate repo (goodbye `backup_thesis_(copy)_v1` folders).
+    * Look up `GitHub Education` if you are a registered student (You're welcome)
+1. I use the `Latex Workshop` and the `LTex - ...` extensions to use Latex in VSCode.
+    * Latex must still be installed locally (I use `Tex Live` as recommended by `Latex Workshop`)
+1. I use GitHub Copilot for its predictive text and as a first stop for problem shooting as the currently open file is included in its context.
+
+| Keyboard Shortcut | Use |
+|------------------:|:----|
+| <kbd>Ctrl</kbd> + <kbd>k</kbd>, <kbd>v</kbd> | View rendered markdown in VSCode. |
+| (Hold) <kbd>Alt</kbd> + <kbd>Click(s)</kbd> | Multiple cursors |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>↑</kbd>/<kbd>↓</kbd> | Insert cursor above / below |
+
 
 ## Style guides
 
