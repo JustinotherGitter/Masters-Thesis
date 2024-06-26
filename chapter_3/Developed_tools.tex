@@ -118,18 +118,17 @@ Unfortunately, \iraf\ is unable to natively parse the data structure implemented
 \section[\textsc{iraf}]{\iraf\ - \glsfmtlong{IRAF}} \label{sec:iraf}
 
 % What is IRAF and why necessary
-\glsxtrfull{IRAF} is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra \citep{iraf:1986, iraf:1993}. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here. Help documentation for any of the \iraf\ tasks may be found online%
-\footnote{\url{https://iraf.net/irafdocs/}}
-or through the \iraf\ \gls{CLI} through the \texttt{?} or \texttt{:.help} `cursor commands' when running interactive tasks, with more specific help documentation provided in the relevant section.
+The \iraf\ (\glsxtrlong{IRAF}) software is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra \citep{iraf:1986, iraf:1993}. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here. Help documentation for any of the \iraf\ tasks may be found online or through the \iraf\ \gls{CLI} through the \texttt{?} or \texttt{:.help} `cursor commands' when running interactive tasks, with more specific help documentation provided in the relevant section.%
+\footnote{Online help for \iraf\ is available at \url{https://iraf.net/irafdocs/}}
 
-Useful \iraf\ tasks that deserve a brief mention before the wavelength calibration related tasks are: the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script,%
+Useful \iraf\ tasks that deserve a brief mention are: the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script,%
 \footnote{Help documentation for the \texttt{mkscript} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/system.mkscript.html}.}
 the \texttt{implot} task in the \texttt{plot} package which allows the rows or columns of an image to be interactively displayed,%
 \footnote{Help documentation for the \texttt{implot} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/plot.implot.html}.}
 and the \texttt{eparam} task in the \texttt{language} package which allows the parameters of a task to be edited within the \iraf\ \gls{CLI}.%
 \footnote{Help documentation for the \texttt{eparam} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/language.eparam.html}.}
 
-For wavelength calibrations of \gls{SALT} spectropolarimetric data, the relevant tasks are the \texttt{identify} and \texttt{reidentify} tasks located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and (optionally) the \texttt{transform} tasks located under the \texttt{noao.twodspec.long\-slit} package. These tasks produce a two-dimensional wavelength solution which must be obtained separately for the $O$- and $E$-beam.
+For wavelength calibrations of \gls{SALT} spectropolarimetric data, the relevant tasks are the \texttt{identify} and \texttt{reidentify} tasks located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and the (optional) \texttt{transform} tasks located under the \texttt{noao.twodspec.long\-slit} package. These tasks produce a two-dimensional wavelength solution which must be obtained separately for the $O$- and $E$-beam.
 
 % MARK: Identify
 \subsection{Identify}
@@ -171,19 +170,19 @@ begin	identify arcO0057[*,237]
              721.60 6598.98642   6598.953  13.0 1 1 26396
              803.21 6678.31069   6678.277  13.0 1 1 51338
              843.15 6717.0732    6717.043  13.0 1 1 36780
-            1099.95 6965.36335   6965.431  13.0 1 1  5618.4   ar
+            1099.95 6965.36335   6965.431  13.0 1 1  5618.4  ar
             1169.57 7032.38598   7032.413  13.0 1 1 100000
             1317.05 7173.89814   7173.938  13.0 1 1  5000    decrease
             1391.52 7245.11148   7245.167  13.0 1 1 73545
-            1537.20 7383.93022   7383.981  13.0 1 1  5557.5	ar
-            1595.02 7438.83545   7438.898  13.0 1 1 15000   decrease
-            1663.64 7503.86263   7503.869  13.0 1 1 30000	ar; increase
-            1697.46 7535.84584   7535.774  13.0 1 1  8000   increase
-            1802.64 7635.07335   7635.106  13.0 1 1 20000	ar; decrease
-            2209.19 8014.79559   8014.786  13.0 1 1  3000	ar; decrease
+            1537.20 7383.93022   7383.981  13.0 1 1  5557.5  ar
+            1595.02 7438.83545   7438.898  13.0 1 1 15000    decrease
+            1663.64 7503.86263   7503.869  13.0 1 1 30000    ar; increase
+            1697.46 7535.84584   7535.774  13.0 1 1  8000    increase
+            1802.64 7635.07335   7635.106  13.0 1 1 20000    ar; decrease
+            2209.19 8014.79559   8014.786  13.0 1 1  3000    ar; decrease
             2604.58 8377.66137   8377.607  13.0 1 1 14543
             2734.54 8495.41423   8495.359  13.0 1 1  8765
-            2763.48 8521.52355   8521.442  13.0 1 1 4537.5   ar
+            2763.48 8521.52355   8521.442  13.0 1 1  4537.5  ar
             2840.92 8591.20799   8591.258  13.0 1 1  2000    decrease
             2889.39 8634.67334   8634.647  13.0 1 1  3059
             2911.42 8654.39264   8654.383  13.0 1 1  3000    decrease
@@ -319,7 +318,8 @@ begin	arcO0057
 
 The \texttt{transform} task is the optional final step in the \iraf\ wavelength calibration process.%
 \footnote{Help documentation for the \texttt{transform} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html}.}
-Simply put, \texttt{transform} converts the (pixel, pixel) units of an exposure to (wavelength, pixel) units which allows for an immediate check of whether the wavelength solution is consistent across the frame. Any general error in the wavelength solution may be spotted in the transformed images; ranging from minor errors, such as the arc lines or sky lines not being purely vertical across the frame, to more major errors, such as an incorrect wavelength solution skewing the exposure beyond recognition.
+Simply put, \texttt{transform} converts the ($x_p$, $y_p$) pixel units of an exposure to ($\lambda$, $y_p$) wavelength units which allows for an immediate check of whether the wavelength solution is consistent across the frame. Any general error in the wavelength solution may be spotted in the transformed images; ranging from minor errors, such as the arc lines or sky lines not being purely vertical across the frame, to more major errors, such as an incorrect wavelength solution skewing the exposure beyond recognition.
+
 For example, \autoref{fig:trans_O} shows a good fit to the wavelength solution, as after transformation all the sky lines run exactly vertical. \autoref{fig:trans_E}, on the other hand, shows a seemingly good fit, but closer inspection reveals that the sky lines (especially towards the right of the frame) deviate from the vertical, indicating a poor fit to the wavelength solution.
 
 \begin{figure}
@@ -492,6 +492,8 @@ The \texttt{skyline} method has been implemented to compare the position of the 
 \footnote{Both sky and arc lines are available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/} .}
 This provides an additional check of the accuracy of the wavelength solution across the frame. This method accepts both the \iraf\ \texttt{transform} \gls{FITS} file or the `wmxgbp' \gls{FITS} files created by the \texttt{join} method as the input.
 
+\pagebreak
+
 The \texttt{skyline} method loads the wavelength calibrated files, masks the traces present in the frames, transforms the frames from ($x_p$, $y_p$) pixel to (\AA, $y_p$) wavelength units if the frame was not transformed by \texttt{transform},%
 \footnote{The transformation applied by the \texttt{skyline} method uses linear interpolation and is thus less accurate at flux conservation than the transformation applied by the \texttt{transform} method.}
 and compares the peak wavelength position of the sky lines to the reference sky lines as measured by \gls{SALT}.
@@ -529,6 +531,8 @@ The \texttt{correlate} method loads the \polsalt\ \texttt{spectra extraction} \g
 
 Sources under spectropolarimetric observation are generally expected to vary over time and, as such, the ratio of polarized to unpolarized light is also expected to vary. The accuracy of correlation may decrease as features with differences in the polarized component of the polarization beams change, and it is up to the user to determine the validity of the correlation result taking into consideration the two spectra being correlated. The differences in the features of the different spectra are often negligible when compared to the overall continuum of the spectra and are generally only reflected in a change in the intensity of said features when the continuum is removed.
 The full \stops\ \texttt{split} class docstring is given in \autoref{doc:corr}.
+
+\pagebreak
 
 % MARK: General Reduction Procedure
 \section{General Reduction Procedure}\label{sec:red_proc}
@@ -572,6 +576,8 @@ $ python ~/polsalt/scripts/reducepoldata_sc.py (*@<\textit{OBSDATE}>@*)
 \end{lstlisting}
 {\parskip=0pt which} will start the full \polsalt\ reduction process. This process is quit once the \polsalt\ \texttt{wavelength calibration} \gls{GUI} opens, and the alternate wavelength calibration procedure is followed.
 
+\pagebreak
+
 % MARK: Wavelength Calibration
 \subsection{Wavelength Calibration} \label{subsec:reduc_wav}
 
@@ -598,7 +604,11 @@ cl> transform files tr_file fit_2d
 
 The interactive tasks take up the bulk of the reduction time as this is where the fine-tuning of the reduction is done, through the use of cursor (or colon) commands, which allow modification of the parameters mid-reduction. Task parameters may, however, be edited beforehand within the \iraf\ terminal using the \texttt{eparam} task, and optionally saved, and quit or run using a combination of \texttt{:w}, and \texttt{:q} or \texttt{:go} cursor commands, respectively.
 
-The reduction process in \autoref{app:reduction}, namely \autoref{code:iraf_id} to \ref{code:iraf_transform}, describes how the tasks may be scripted and saved for posterity. It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using the \texttt{mkscript} task which interactively asks for a task to script and parameters to use. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked. Running an \iraf\ script may be done by running:
+The reduction process in \autoref{app:reduction}, namely \autoref{code:iraf_id} to \ref{code:iraf_transform}, describes how the tasks may be scripted and saved for posterity. It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using the \texttt{mkscript} task which interactively asks for a task to script and parameters to use. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked.
+
+\pagebreak
+
+Running an \iraf\ script may be done by running:
 \begin{lstlisting}[language=bash]
 cl> cl < script_name.cl
 \end{lstlisting}
@@ -624,9 +634,9 @@ The \texttt{correlate} method is run in the \gls{CLI} following \autoref{code:st
 
 \subsubsection{Cleaning Up the \iraf\ and \stops\ Output}
 
-Before the final \polsalt\ reductions, it is recommended that the user `clean up' the \texttt{sci/} directory of all \iraf\ and \stops\ files since the `wmxgbp' \gls{FITS} files are all that is expected by \polsalt. The \polsalt\ methods use wildcard file collection and as such any errant detections of files added by the user will result in unexpected crashes. It is suggested to move any additional files to a new subfolder following \autoref{code:gen_clean}, but a remove command may also be used, for example, following:
+Before the final \polsalt\ reductions, it is recommended that the user `clean up' the \texttt{sci/} directory of all \iraf\ and \stops\ files since the `wmxgbp' \gls{FITS} files are all that is expected by \polsalt. The \polsalt\ methods use wildcard file collection and as such any errant detections of files added by the user will result in unexpected crashes. It is suggested to move any additional files to a new subfolder following \autoref{code:gen_clean}, but they may also be removed using:
 \begin{lstlisting}[language=bash]
-$ rm beam*.fits arc*.fits frame*
+$ rm beam*.fits arc*.fits frame* <any user created files>
 \end{lstlisting}
 
 % MARK: Complete reductions
@@ -676,10 +686,9 @@ $ python reducepoldata_sc.py YYYYMMDD
 {\parskip=0pt where} the only modification made to the \texttt{reducepoldata\_sc.py} script file is the removal of a call to the \texttt{specpolwavmap} method.
 % The \texttt{imred} and \texttt{specpolwavmap} function calls before \texttt{specpolextract\_sc} should be commented out, since the raw images have already been processed and the wavelength calibrations were completed using \stops\ and \iraf.
 
-\pagebreak
-
 \newcommand*{\Comment}[1]{\hfill\makebox[7.0cm][l]{#1}}%
 \begin{lstlisting}[
+    float,
     language=Python,
     style=IRAF_DB,
     caption={The modified \texttt{reducepoldata\_sc.py} script file.},

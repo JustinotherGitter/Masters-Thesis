@@ -182,15 +182,19 @@ The dominant source of noise in a raw image is detector noise. \glspl{CCD} are m
 
 The \gls{CCD} is not a perfect detector and the efficiency of it and the optics of the telescope also contribute noise to the image. The efficiency of a \gls{CCD} is referred to as the Quantum Efficiency, and it is a measure of what percentage of light striking the detector is actually recorded and converted to a charge. The efficiency of the \gls{CCD} and telescope optics is also wavelength dependent and so the noise that results from them is more complex than that of additive noise. This type of noise is referred to as multiplicative noise.
 
+\pagebreak
+
 Additive noise, such as bias and dark currents, is inherent to \gls{CCD} images, and as such needs to be subtracted out first when performing calibrations. Bias currents can be found by taking a bias image or by adding an overscan region to each image. A bias image is an image where the charges on the \gls{CCD} are reset and then immediately read off without exposing anything on the detector, effectively taking an image with zero exposure time. Alternatively, to save time during an observational run, overscan regions may be added to the images. An overscan region refers to adding a few cycles to the readout of each column of the \gls{CCD} such that the base current is read out and appended to each image.
 
 Dark currents can be found by taking an image with nothing exposed onto the detector for a certain exposure time. This resultant dark image can then be scaled to the science images exposure time since the dark current should be linearly proportional to exposure time. When the detector is capable of being held at precise temperatures, dark images may be taken over multiple hours during the day to produce a high quality master dark image that may then be scaled and subtracted from all subsequent images.
 
 Next, multiplicative noise, such as a \gls{CCD}'s pixel-to-pixel response, should be accounted for. This pixel-to-pixel response should be uniform across the image and to achieve this an average response may be divided out. The average response is referred to as a `flat' image or flat-field and may be acquired by observing a uniformly illuminated surface to determine the pixel-to-pixel response.
 
-Dome flats are images taken of a relatively flat surface, usually the inside a telescopes dome, and are used in both photometry and spectroscopy. The surface is uniformly and indirectly illuminated by a projector lamp, ideal for flat-field images. Alternate flat-fielding methods, such as night sky and twilight flats, are available but are suited solely for photometry.
+Dome flats are images taken of a relatively flat surface, usually the inside of a telescopes dome, and are used in both photometry and spectroscopy. The surface is uniformly and indirectly illuminated by a projector lamp, ideal for flat-field images. Alternate flat-fielding methods, such as night sky and twilight flats, are available but are suited solely for photometry.
+
 Night sky flats are produced from science images containing mostly sky. The science images are combined using the `mode' statistic which removes any celestial objects at the cost of a low \gls{SNR} flat-field.
-Twilight flats are produced from images of the twilight (or dawn) sky. They are taken when the Sun has just set, in the opposite direction, at $\sim 20\degr$ from zenith and provide a better \glspl{SNR} at the cost of careful timing of the images.
+
+Twilight flats are produced from images of the twilight (or dawn) sky. They are taken when the Sun has just set, in the opposite direction, at $\sim 20\degr$ from zenith and provide a better \gls{SNR} at the cost of careful timing of the images.
 
 A flat-field must be normalized before being used to correct any science images since it only acts to account for the pixel-to-pixel response and not for the additive errors. A  normalized spectroscopic flat image, $F^{n}_{\lambda}(x,y)$, can be calculated as:
 \begin{equation} \label{eq:norm_flat}
@@ -215,11 +219,11 @@ When multichannel \glspl{CCD} are used, which consist of multiple \glspl{CCD} or
 
 \subsubsection{Wavelength Calibration}
 
-Finally, since the dispersion element breaks the incident light into its constituent wavelengths non-linearly (\autoref{subsec:dispersion}), the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modelled to produce a reliable pixel to wavelength calibration \citep[see E.g.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths. Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in \autoref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc-lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run. It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames.
+Finally, since the dispersion element breaks the incident light into its constituent wavelengths non-linearly (\autoref{subsec:dispersion}), the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modelled to produce a reliable pixel to wavelength calibration \citep[see E.g.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths.
 
-The wavelength calibrations then consist of defining a two-dimensional pixel-to-wave\-length conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations.
+Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in \autoref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc-lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run.
 
-\paragraph{Chebyshev Polynomials}
+It is important that the arc frame is observed at the same observing conditions and parameters as the science frames since the optical path will vary over the course of an observing run and for different observing parameters, invalidating previously acquired arc frames. The wavelength calibrations then consist of defining a two-dimensional pixel-to-wave\-length conversion function from the arc frame which may later be applied to calibrate the science frames. The two most common approximations for wavelength calibrations are the Chebyshev and Legendre polynomial approximations.
 
 \begin{figure}[t]
     \centering
@@ -229,14 +233,20 @@ The wavelength calibrations then consist of defining a two-dimensional pixel-to-
 \end{figure}
 \footnotetext{Excellent resources on Chebyshev and Legendre polynomials are available digitally at \protect\href{http://numerical.recipes/book}{www.numerical.recipes/book}.}
 
+\paragraph{Chebyshev Polynomials}
+
 The Chebyshev polynomials are defined explicitly as:
 \begin{align} \label{eq:chebypolyexplicit}
-    T_{n}(x) &= \cos(n \cos^{-1}(x)) \rlap{\,,\ \text{or recursively as}}\\
+    T_{n}(x) &= \cos(n \cos^{-1}(x))\,,
+\end{align}
+or recursively as:
+\begin{align}
     T_{0}(x) &= 1 \,,\notag\\
     T_{1}(x) &= x \rlap{\,,\ and} \label{eq:chebypoly}\\
     T_{n+1}(x) &= 2xT_n(x) - T_{n-1}(x) \rlap{\,,\ for $n \geq 1$\,,}\notag
 \end{align}
-where $T$ is a Chebyshev polynomial of order $n$.\footnote{Chebyshev polynomials are denoted $T$ as a hold-over from the alternate spelling of `Tchebycheff'.}
+where $T$ is a Chebyshev polynomial of order $n$.%
+\footnote{Chebyshev polynomials are denoted $T$ as a hold-over from the alternate spelling of `Tchebycheff'.}
 An important property of Chebyshev polynomials is that they are orthogonal polynomials. This means that the inner product of any two differing Chebyshev polynomials, $T_{i}(x)$ and $T_{j}(x)$, over the range $[-1, 1]$ is zero, as shown by:
 \begin{equation} \label{eq:chebyorth}
     \int_{-1}^{1} T_{i}(x) T_{j}(x) \frac{1}{\sqrt{1-x^{2}}} \,dx =
@@ -246,9 +256,7 @@ An important property of Chebyshev polynomials is that they are orthogonal polyn
         \pi,     & i = j = 0
     \end{cases}\,,
 \end{equation}
-where $1 / \sqrt{1 - x^{2}}$ is the weighting factor for Chebyshev polynomials. This property is important because it means that the coefficients in the Chebyshev polynomial expansion are independent of one another, allowing for a unique solution when approximating an unknown function \citep{numerical_recipes, cheby}.
-
-An approximation, using Chebyshev polynomials, of an unknown wavelength calibration function is given by:
+where $1 / \sqrt{1 - x^{2}}$ is the weighting factor for Chebyshev polynomials. This property is important because it means that the coefficients in the Chebyshev polynomial expansion are independent of one another, allowing for a unique solution when approximating an unknown function \citep{numerical_recipes, cheby}. A Chebyshev approximation of an unknown wavelength calibration function is given by:
 \begin{align} \label{eq:chebyshev}
     f(x) &\approx \sum_{i = 0}^{N}  c_{i} T_{i}(u)\rlap{\,,\ or}\\
     F(x, y) &\approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} c_{ij} T_{i}(u) T_{j}(v)\,,\label{eq:chebyshev2D}
@@ -258,22 +266,16 @@ for a one- or a two-dimensional wavelength surface function, respectively. Here 
     (u, v) = \frac{2 (x, y) - a - b}{b - a}\,.
     % (x, y) &= \frac{b - a}{2} (u, v) + \frac{a+b}{2}
 \end{equation}
+The Chebyshev polynomials are more suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in \autoref{fig:chebyshev}. This means that the Chebyshev approximation is exact when $x = x_{n}$, where $x_{n}$ are the positions of the $n - 1$ $x$-intercepts of $T_{N}(x)$. These properties greatly minimize the error in the Chebyshev approximation, even at lower orders \citep{cheby}.
 
 % When the calibration function is known but the function cannot be evaluated, the coefficients, $c_{n}$, may be approximated by:
 % \begin{equation}
 %     c_{n} \approx \frac{2}{N} \sum_{k = 0}^{N - 1} f(x_{k}) T_{n}(x_{k})\,,\label{eq:chebycoeff}
 % \end{equation}
-% where:
-
-% which returns the positions of the  x-intercepts.
-
-The Chebyshev polynomials are more suited for wavelength calibrations than standard polynomials since they are orthogonal and have minima and maxima located at $[-1, 1]$, as seen in \autoref{fig:chebyshev}. This means that the Chebyshev approximation is exact when $x = x_{n}$, where $x_{n}$ are the positions of the $n - 1$ $x$-intercepts of $T_{N}(x)$. These properties greatly minimize the error in the Chebyshev approximation, even at lower order approximations \citep{cheby}.
 
 % \begin{equation}
 %     x_{n} = \cos{\left(  \frac{\pi}{2} \frac{2 n + 1}{N} \right)}
 % \end{equation}
-
-\paragraph{Legendre Polynomials}
 
 \begin{figure}[t]
     \centering
@@ -282,9 +284,14 @@ The Chebyshev polynomials are more suited for wavelength calibrations than stand
     \label{fig:legendre}
 \end{figure}
 
+\paragraph{Legendre Polynomials}
+
 Similar to the Chebyshev polynomials, the Legendre polynomials may be defined explicitly as:
 \begin{align} \label{eq:legpolyexplicit}
-    P_{n}(x) &= \frac{1}{2^{n} n!} \frac{d^{n}}{d x^{n}} (x^{2} - 1)^{n} \rlap{\,,\ or recursively as}\\
+    P_{n}(x) &= \frac{1}{2^{n} n!} \frac{d^{n}}{d x^{n}} (x^{2} - 1)^{n}\,,
+\end{align}
+or recursively as:
+\begin{align}
     P_{0}(x) &= 1 \,,\notag\\
     P_{1}(x) &= x \rlap{\,,\ and} \label{eq:legpoly}\\
     (n+1)P_{n+1}(x) &= (2n+1)xP_n(x) - nP_{n-1}(x) \rlap{\,,\ for $n \geq 1$\,,}\notag
@@ -297,9 +304,7 @@ where $P$ is a Legendre polynomial of order $n$. Legendre polynomials also hold 
         \frac{2}{2 n + 1}, & i = j
     \end{cases}\,,
 \end{equation}
-where a weight of $1$ is the weighting factor for Legendre polynomials \citep{numerical_recipes, leg}.
-
-An approximation, using Legendre polynomials, of an unknown wavelength calibration function is given by:
+where a weight of $1$ is the weighting factor for Legendre polynomials \citep{numerical_recipes, leg}. A Legendre approximation of an unknown wavelength calibration function is given by:
 \begin{align} \label{eq:legendre}
     f(x) &\approx \sum_{n = 0}^{N} a_{n} P_{n}(u) \rlap{\,,\ or}\\
     F(x, y) &\approx \sum_{i = 0}^{N} \sum_{j = 0}^{M} a_{ij} P_{i}(u) P_{j}(v)\,,\label{eq:Legendre2D}
@@ -337,14 +342,16 @@ where $s$ and $p$ are the two polarized components of light perpendicular to one
 
 Nicol was the first to create a polarizer, aptly named the Nicol prism, where the incident light is split into its two perpendicular polarization components, namely the ordinary and extraordinary beams. Faraday discovered the phenomenon where the polarization plane of light is rotated when under the influence of a magnetic field, known as the Faraday effect. Brewster calculated the angle of incidence, $\theta_{B} = \arctan{n_{2} / n_{1}}$, at which incident polarized light is perfectly transmitted through a transparent surface, with refractive indexes of $n_{1}$ and $n_{2}$, while non-polarized incident light is perfectly polarized when reflected and partially polarized when refracted.
 
+\pagebreak
+
+Stokes' work created the first consistent description of polarization and gave us the Stokes parameters which describe an operational approach to measuring polarization (discussed further in \autoref{subsec:pol}) \citep{Stokes}. Hale was the first to apply polarization to astronomical observations, using a Fresnel rhomb and Nicol prism as a quarter-wave plate and polarizer, respectively \citep{Hale_pre,Hale_post}. Wollaston also created a prism, similarly named the Wollaston prism, which allowed simultaneous observation of the ordinary and extraordinary beams due to the smaller deviation angle \citep{WollPrism}. Finally, Chandrasekhar's work furthered our understanding of astrophysical polarimetry by explaining the origin of polarization observed in starlight as well as mathematically modeling the polarization of rotating stars, which came to be named Chandrasekhar polarization \citep{chandrasekhar}.
+
 \begin{figure}[t]
     \centering
     \includegraphics[width=10cm]{2_Nicol_prism.pdf}
     \caption{Diagram of a Nicol prism for incident non-polarized light. Diagram adapted from Fred the Oyster, \protect\href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}, via \protect\href{https://en.m.wikipedia.org/wiki/File:Nicol_prism.svg}{Wikimedia Commons} (2023).}
     \label{fig:Nicol_prism}
 \end{figure}
-
-Stokes' work created the first consistent description of polarization and gave us the Stokes parameters which describe an operational approach to measuring polarization (discussed further in \autoref{subsec:pol}) \citep{Stokes}. Hale was the first to apply polarization to astronomical observations, using a Fresnel rhomb and Nicol prism as a quarter-wave plate and polarizer, respectively \citep{Hale_pre,Hale_post}. Wollaston also created a prism, similarly named the Wollaston prism, which allowed simultaneous observation of the ordinary and extraordinary beams due to the smaller deviation angle \citep{WollPrism}. Finally, Chandrasekhar's work furthered our understanding of astrophysical polarimetry by explaining the origin of polarization observed in starlight as well as mathematically modeling the polarization of rotating stars, which came to be named Chandrasekhar polarization \citep{chandrasekhar}.
 
 \subsection{Polarization} \label{subsec:pol}
 
@@ -499,6 +506,8 @@ The Mueller matrix for coordinate space rotations about the origin by an angle $
     \end{bmatrix}\,.
 \end{equation}
 
+\pagebreak
+
 \paragraph{General Linear Retardance}
 The Mueller matrix for retardance where $\alpha$ is the angle between the incoming vector and fast axis, and $\delta$ is the retardance introduced by the retarder,
 \begin{equation} \label{matrix:retarder}
@@ -529,14 +538,12 @@ These matrices in combination with \autoref{eq:mueller_train} allow us to descri
     \begin{split}
         S^{\prime}(\alpha, \beta, \gamma) \propto \frac{1}{2} \{ I & + [Q \cos2\alpha + U \sin2\alpha] \cos(2\beta - 2\alpha) \\
         & - [Q \sin2\alpha + U \cos2\alpha] \sin(2\beta - 2\alpha) \cos\gamma\\
-        & + V \sin(2\beta - 2\alpha)\sin\gamma \}\,,
+        & + \,V \sin(2\beta - 2\alpha)\sin\gamma \}\,,
     \end{split}
 \end{equation}
 where the retandance angle, $\alpha$, polarization angle, $\beta$, for a wave plate with a relative phase difference, $\gamma$, may be varied to acquire a system of equations that can be solved to retrieve the Stokes polarization parameters \citep{waveplate_in_specpol}.
 
-Several or more frames taken under differing configurations may be used to reduce a system of equations to extract all four Stokes polarization parameters, but it is possible to extract the $I$, $Q$ and $U$ polarization parameters using only four frames, or two dual-beam frames, for well-chosen configurations and assuming ideal components. This ideal configuration varies the retarder angle such that $\Delta\alpha = \pi / 8$ while keeping the polarizer stationary. More frames for additional retarder angles are advisable and often necessary, however, as they correct for any differences in sensitivity, such as may arise in a polarized flat field and which is further discussed in \autoref{subsubsec:pol_flat} \citep{polarimetry_error}.
-
-From \autoref{eq:Stokes_intensity} we see that the linear retarder element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$, or $I$, $Q$, and $U$) may be found by changing only the angle of retardance, $\alpha$.
+Several or more frames taken under differing configurations may be used to reduce a system of equations to extract all four Stokes polarization parameters, but it is possible to extract the $I$, $Q$ and $U$ polarization parameters using only four frames, or two dual-beam frames, for well-chosen configurations and assuming ideal components. This ideal configuration varies the retarder angle such that $\Delta\alpha = \pi / 8$ while keeping the polarizer stationary. More frames for additional retarder angles are advisable and often necessary, however, as they correct for any differences in sensitivity, such as may arise in a polarized flat field and which is further discussed in \autoref{subsubsec:pol_flat} \citep{polarimetry_error}. From \autoref{eq:Stokes_intensity} we see that the linear retarder element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$, or $I$, $Q$, and $U$) may be found by changing only the angle of retardance, $\alpha$.
 
 \paragraph{Wave Plates}
 Wave plates, also commonly referred to as retarders, are generally made from optically transparent birefringent crystals. A wave plate has a fast and slow axis, which are perpendicular to one another and both perpendicular to an incident beam. Due to the birefringence of the wave plate medium, the phase velocity of the beam polarized parallel to the fast axis, namely the extraordinary beam, slightly increases while that of the beam polarized parallel to the slow axis, namely the ordinary beam, remains unaffected. This difference in the perpendicular component's phase velocities introduces a relative phase difference between the two beams, $\gamma$, which is given by:
@@ -577,7 +584,7 @@ Wollaston prisms benefit over simpler elements (such as those listed in the \hyp
 
 \subsection{Polarimetric Calibrations} \label{subsec:pol_cal}
 
-The raw science images acquired during polarimetric observations contain a combination of useful science data as well as noise, similar to \autoref{subsec:calibration}. Corrections and calibrations related to the detector remain unchanged from those described in \autoref{subsec:calibration}, while those related to correcting for the optical elements relate to corrections for spurious polarization effects.
+The raw science images acquired during polarimetric observations contain a combination of useful science data as well as noise. Corrections and calibrations related to the detector remain unchanged from those described in \autoref{subsec:calibration}, while those related to correcting for the optical elements relate to corrections for spurious polarization effects.
 
 \subsubsection{Flat Fielding} \label{subsubsec:pol_flat}
 
