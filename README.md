@@ -33,9 +33,12 @@ Justin Cooper
 * Change \today to MONTH, YEAR at final submission [Thesis.tex:197~ish]
 * Ask for read through from friends to ensure no spelling/grammar errors
 
-## VSCode setup
+## VSCode
 
-This section contains the setup I've found irreplaceable while writing my thesis in VSCode.
+This section contains the setup I've found irreplaceable while writing my thesis in VSCode, or anything useful in general.
+
+### General setup
+
 1. My Python setup includes the full `Python` and `Jupyter Notebook` extensions as well as the `Black` formatting extension.
     * Python must still be installed locally
 1. I use a private GitHub repo, shared with my supervisor, for backing up and version control of my thesis, as well as for my developed software, in a separate repo (goodbye `backup_thesis_(copy)_v1` folders).
@@ -44,12 +47,39 @@ This section contains the setup I've found irreplaceable while writing my thesis
     * Latex must still be installed locally (I use `Tex Live` as recommended by `Latex Workshop`)
 1. I use GitHub Copilot for its predictive text and as a first stop for problem shooting as the currently open file is included in its context.
 
-| Keyboard Shortcut | Use |
-|------------------:|:----|
-| <kbd>Ctrl</kbd> + <kbd>k</kbd>, <kbd>v</kbd> | View rendered markdown in VSCode. |
-| (Hold) <kbd>Alt</kbd> + <kbd>Click(s)</kbd> | Multiple cursors |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>↑</kbd>/<kbd>↓</kbd> | Insert cursor above / below |
+### [Useful shortcuts](https://code.visualstudio.com/docs/getstarted/tips-and-tricks)
+<div align=center>
 
+  | Keyboard Shortcut | Use |
+  |------------------:|:----|
+  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd> | Open Command Palette |
+  | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>v</kbd> | VSCode View rendered [md](https://www.markdownguide.org/basic-syntax/) |
+  | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>Ctrl</kbd>+<kbd>s</kbd> | View VSCode shortcuts |
+  |<kbd>Ctrl</kbd>+<kbd>`</kbd>| Open Terminal |
+  | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>z</kbd> | Zen mode |
+  | (Hold) <kbd>Alt</kbd>, <kbd>Click(s)</kbd> | Multiple cursors |
+  | <kbd>Alt</kbd>+(<kbd>↑</kbd>\|<kbd>↓</kbd>) | Move line up/down |
+  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+(<kbd>↑</kbd>\|<kbd>↓</kbd>) | Insert cursor above/below |
+
+</div>
+
+### Useful regex patterns
+
+Regex allows for complex find and replace functionality.
+
+* `()` represent capture groups which may be referred to later using `$1`, etc.
+* `[]` represent character groups
+* Quantifiers such as `+`, `*`, etc. allow for more complex behaviour, especially combined with greedy and lazy matching
+
+Here are some useful regex patterns I have needed:
+
+<div align=center>
+
+  | Regex use | Find | Replace |
+  |:----------|:----:|--------:|
+  |`Name {Surname}` → `{Surname}, N.`| ([A-Z])[a-z]*?\s(\{[A-Z].+?\}) | $2, $1. |
+
+</div>
 
 ## Style guides
 
@@ -175,7 +205,7 @@ Tables can be generated using a [Table Generator](https://www.tablesgenerator.co
 
 ```Latex
 \begin{table}[t]
-    \begin{tabular}{c(* the amount of colums)}
+    \begin{tabular}{c(* the amount of columns)}
         ...
     \end{tabular}
     \caption{A suitable caption and relevant reference.\protect\footnotemark}
@@ -192,15 +222,10 @@ To insert a table within the document, use the command:
 
 ## Useful external References
 
-* Markdown (for this document): <https://www.markdownguide.org/basic-syntax/>
 * Glossaries (minor to-do's): <https://www.overleaf.com/learn/latex/Glossaries>
   * Useful glossary and acronym simultaneous addition: <https://tex.stackexchange.com/questions/8946/how-to-combine-acronym-and-glossary>
   * Glossary style <https://www.dickimaw-books.com/gallery/glossaries-styles/>
 * Latex docs: <https://en.wikibooks.org/wiki/LaTeX>
 * GitHub `.cff` file references: <https://citation-file-format.github.io/>
 
-See 'preamble' of `references.bib` for further useful links relevant to specific chapters.
-
-Regex to replace `Name {Surname}` with `{Surname}, N.`
-* Regex find: ([A-Z])[a-z]*?\s(\{[A-Z].+?\})
-* Regex replace: $2, $1.
+See 'preamble' of `references.bib` for further useful links relevant to specific chapters of thesis.

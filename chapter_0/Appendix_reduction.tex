@@ -92,6 +92,8 @@ cl> unlearn longslit
 cl> longslit.dispaxis=1
 \end{lstlisting}
 
+\pagebreak
+
 The \iraf\ \texttt{identify} task requires an average feature width, `fwidth', as a parameter. The width of a feature may be found in \iraf\ using the \texttt{implot} task%
 \footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/plot.implot.html} for documentation on the \texttt{implot} task.}
 along with cursor commands, but may also be found using \gls{FITS} viewing software, such as \texttt{ds9}.%
@@ -128,7 +130,10 @@ cl>
 cl> reidentify ("(*@\oarc@*)",
 >>> "(*@\oarc@*)", "yes", "", "", interactive="no", section="middle line", newaps=yes, override=no, refit=yes, trace=yes, step="10", nsum="10", shift="0.", search=0., nlost=0, cradius=5., threshold=0., addfeatures=no, coordlist="linelists$idhenear.dat", match=-3., maxfeatures=50, minsep=2., database="database", logfiles="logfile", plotfile="", verbose=yes, graphics="stdgraph", cursor="", aidpars="")
 \end{lstlisting}
-{\parskip=0pt The} \texttt{reidentify} task will run autonomously so long as the \texttt{interactive} parameter is set to ``no''.%
+
+\pagebreak
+
+\noindent The \texttt{reidentify} task will run autonomously so long as the \texttt{interactive} parameter is set to ``no''.%
 \footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html} for documentation on the \texttt{reidentify} task.}
 Repeat the \texttt{reidentify} procedure, replacing \oarc\ with \earc\ at both the `reference' and `image' parameter locations.
 
@@ -164,14 +169,13 @@ cl>
 cl> transform ("(*@@\ofiles@*)",
 >>> "(*@t//@\ofiles@*)", "(*@\oarc@*) (exclude the file extension)", minput="", moutput="", database="database", interptype="linear", x1="INDEF", x2="INDEF", dx="INDEF", nx="INDEF", xlog="no", y1="INDEF", y2="INDEF", dy="INDEF", ny="INDEF", ylog="no", flux="yes", blank="INDEF", logfiles="STDOUT,logfile")
 \end{lstlisting}
-
-Inspect the transformed images, most notably the arc images, using any \gls{FITS} viewer as a cursory check that the wavelength calibrations were completed without error.%
+{\parskip=0pt The} \texttt{transform} task will run autonomously.%
 \footnote{See \protect\url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html} for documentation on the \texttt{transform} task.}
+Repeat the \texttt{transform} procedure, replacing the \ofiles\ and \oarc\ with \efiles\ and \earc\ at both parameter locations. Inspect the transformed images, most notably the arc images, using any \gls{FITS} viewer as a cursory check that the wavelength calibrations were completed without error.
+
 
 The `gain' and `read noise' are now needed as the cosmic-ray rejection of the \stops\ \texttt{join} method accepts them as parameters. These parameters may be found using the `\textit{GAINSET}' and `\textit{ROSPEED}' keywords in the \gls{FITS} headers. The cosmic ray rejection defaults to \textit{GAINSET}$ = $`FAINT', and \textit{ROSPEED}$ = $`SLOW'. If the gain and read noise values differ from the defaults, the parameters should be updated when running \texttt{join}.%
 \footnote{The read noise and gain may be determined from \protect\url{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}, specifically \href{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html\#t.4}{Table 6.1} and \href{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html\#t.5}{Table 6.2}.}
-
-\pagebreak
 
 The \stops\ \texttt{join} method may be run using the commands in \autoref{code:stops_join}.
 
@@ -217,6 +221,8 @@ The \polsalt\ \texttt{spectra extraction} is now run. If the \polsalt\ \gls{GUI}
 
 The \polsalt\ \texttt{spectra extraction} is interactive and will launch a separate \gls{GUI} for the background subtraction and spectral extraction (see \autoref{fig:polsalt_gui_spec}). The background and spectral regions to be extracted may be adjusted, noting that adjustments affect both $O$- and $E$-beams. Once both background regions contain no trace and the spectral region fully contains only the science trace, the reduction may be completed by clicking `OK'.
 
+\pagebreak
+
 The \stops\ \texttt{correlate} method may now be run on any `joined' \gls{FITS} files by running the commands in \autoref{code:stops_corr}.
 
 \begin{lstlisting}[
@@ -227,8 +233,6 @@ $ cd (*@\obsdate@*)/sci
 $ conda activate stops
 $ python ~/STOPS . correlate (*@\file@*)
 \end{lstlisting}
-
-\pagebreak
 
 The \polsalt\ \texttt{raw Stokes calculation}, \texttt{final Stokes calculation}, and \texttt{results visualisation} may now be completed. For the last time, if the \polsalt\ \gls{GUI} was closed it should now be reopened using \autoref{code:polsalt_launch}. With the \gls{GUI} in focus:
 \begin{itemize}

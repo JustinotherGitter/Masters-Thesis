@@ -106,9 +106,8 @@
     chapter_1/Introduction,
     chapter_2/SALT_RSS_pipeline,
     chapter_3/Developed_tools,
-    chapter_4/Testing,
-    chapter_5/Science_applications,
-    chapter_6/Conclusions,
+    chapter_4/Testing_Application,
+    chapter_5/Conclusions,
 }
 
 % Allow directory `tree' structures
@@ -185,7 +184,7 @@
     }
 }
 \author{Justin Cooper}
-\Cdegree{B.Sc. (Hons)}
+\Cdegree{}% B.Sc. (Hons)}
 \Sdegree{Magister Scienti\ae}
 \university{University of the Free State}
 \faculty{Faculty of Natural and Agricultural Sciences}
@@ -206,14 +205,15 @@
 
 \tableofcontents
 
+\printglossary[type=\acronymtype, style=super, title={List of Acronyms and Symbols}]
+
 % MARK: Main matter
 \mainmatter
 \include{chapter_1/Introduction}
 \include{chapter_2/SALT_RSS_pipeline}
 \include{chapter_3/Developed_tools}
-\include{chapter_4/Testing}
-\include{chapter_5/Science_applications}
-\include{chapter_6/Conclusions}
+\include{chapter_4/Testing_Application}
+\include{chapter_5/Conclusions}
 
 % MARK: Appendix
 % New chapter count type
@@ -232,7 +232,6 @@
 % \printglossaries
 % Longest abbreviation so the column width can be set
 % \glssetwidest{\gls{STOPS}}
-\printglossary[type=\acronymtype, style=super, title={List of Acronyms}]
 \printglossary[type=main, title={Glossary}]
 
 \end{document}

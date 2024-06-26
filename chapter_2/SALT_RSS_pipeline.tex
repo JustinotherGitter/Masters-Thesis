@@ -696,7 +696,7 @@ The primary mirror is composed of 91 individual 1 m hexagonal mirrors which toge
 
 \subsection{Tracker and Tracking}
 
-During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of ~5 $\mu$m and is capable of tracking $\pm$6$\degree$ from the optimal central track position. Targets at declinations from 10.5$\degree$ to -75.3$\degree$, as shown in \autoref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of $\sim7$ m to 9 m when the tracker is furthest and closest to the optimal central position, respectively.
+During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of ~5 $\mu$m and is capable of tracking $\pm\,$6$\degree$ from the optimal central track position. Targets at declinations from 10.5$\degree$ to -75.3$\degree$, as shown in \autoref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of $\sim7$ m to 9 m when the tracker is furthest and closest to the optimal central position, respectively.
 
 \begin{figure}[t]
     \centering
@@ -708,8 +708,7 @@ During observations the primary mirror is stationary and the tracker tracks cele
 
 % Mention Center of Curvature Alignment System? : https://en.wikipedia.org/wiki/Shack%E2%80%93Hartmann_wavefront_sensor
 
-The tracker is equipped with a spherical aberration corrector \citep{SALT_SAC}, and an atmospheric dispersion compensator \citep{SALT_ADC}, which corrects for the spherical aberration caused by the geometry of the primary mirror and allows access to wavelengths as short as 3200 \AA. These return a corrected flat focal plane with an 8\arcmin diameter field of view at prime focus on to the science instruments, with a 1\arcmin annulus around it used by the Tracker in a closed-loop guidance system.
-
+The tracker is equipped with a \gls{SAC} \citep{SALT_SAC}, and an \gls{ADComp} \citep{SALT_ADC}, which corrects for the spherical aberration caused by the geometry of the primary mirror and allows access to wavelengths as short as 3200 \AA. These return a corrected flat focal plane with an 8\arcmin diameter field of view at prime focus on to the science instruments, with a 1\arcmin annulus around it used by the tracker in a closed-loop guidance system. The tracker also houses the calibration system which contains the \gls{Ar}, \gls{CuAr}, \gls{HgAr}, \gls{NeAr}, \gls{ThAr}, and \gls{Xe} wavelength calibration lamps \citep{SALT_cal_sys}.
 
 \subsection{SALT Instrumentation} \label{subsec:SALT_instr}
 
@@ -749,6 +748,6 @@ The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, a
 
 \paragraph{\gls{RSS} Spectropolarimetry} \label{sec:RSS_reductions}
 
-Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit linear spectro\-polarimetry, $(I, Q, U)$, where observations are taken following the waveplate pattern lists as in \autoref{table:RSS_specpol_patterns}. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter.\footnote{Commission status sighted from the latest \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{`Polarimetry Observers Guide' (2024)}.}
+Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit linear spectro\-polarimetry, $(I, Q, U)$, where observations are taken following the waveplate pattern lists as in \autoref{table:RSS_specpol_patterns}. Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter.\footnote{Commission status sourced from the latest \href{https://astronomers.salt.ac.za/wp-content/uploads/sites/71/2022/06/3170AM0013_Polarimetry_Observers_Guide_V1.2.pdf}{`Polarimetry Observers Guide' (2024)}.}
 
 \input{chapter_2/tables/2_Polarimetry_patterns.tex}
