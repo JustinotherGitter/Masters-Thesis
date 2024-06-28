@@ -12,16 +12,19 @@ Justin Cooper
 
 * Update tables `\input{}` to use relative pathing (`import` package?)
 * Use the `minted` package instead of the `listings` `STOPS_docs` style workaround
-* Unify (x-pixel/y-pixel/x/y/wavelength/) or vertical/horizontal axis or rows/columns → (?) ($x_p$, $y_p$)/(\AA, $y_p$)
+* Unify (x-pixel/y-pixel/x/y/wavelength/) or vertical/horizontal axis or rows/columns
+  * → (?) ($x_p$, $y_p$)/(\AA, $y_p$)
 * Edit created plots to use Latex font (both Python and Inkscape figures)
-* Edit plots to use `subfigures` where possible
+  * Edit plots to use `subfigures` where possible (?)
+  * (?) <https://jwalton.info/Matplotlib-latex-PGF/>
 * Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
 * Limit paragraph breaks to only `left-to-right` pages, not across a page turn.
 * O[arc/beam/etc.] → [arc/beam/etc.]O
 * Check common errors:
   * \$O\$- and \$E\$-beam(s)
   * `extension`
-  * use `the user` instead of `a user`
+  * `the user` instead of `a user`
+  * `$#$~unit` instead of `# $unit$`
 
 ## Final `TODOs`
 
@@ -69,7 +72,7 @@ Regex allows for complex find and replace functionality.
 
 * `()` represent capture groups which may be referred to later using `$1`, etc.
 * `[]` represent character groups
-* Quantifiers such as `+`, `*`, etc. allow for more complex behaviour, especially combined with greedy and lazy matching
+* Quantifiers such as `+`, `*`, etc. allow for more complex behavior, especially combined with greedy and lazy matching
 
 Here are some useful regex patterns I have needed:
 

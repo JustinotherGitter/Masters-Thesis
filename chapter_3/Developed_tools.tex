@@ -461,13 +461,13 @@ The full \stops\ \texttt{join} class docstring is given in \autoref{doc:join}.
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{3_stops_skylines.pdf}
-    \caption{The resultant output plot of the \stops\ \texttt{skylines} method, specifically for science images. Figure created via the \stops\ \texttt{skyline} method.}
+    \caption{An example of a well calibrated wavelength solution, specifically shown for science images. Figure created via the \stops\ \texttt{skyline} method.}
     \label{fig:stops_sky_eg}
 \end{figure}
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{3_stops_skylines_arc.pdf}
-    \caption{The resultant output plot of the \stops\ \texttt{skylines} method, specifically for arc images. Figure created via the \stops\ \texttt{skyline} method.}
+    \caption{An example of a wavelength solution with a poor fit at lower wavelengths (bottom left), specifically shown for an arc image. Figure created via the \stops\ \texttt{skyline} method.}
     \label{fig:stops_sky_arc_eg}
 \end{figure}
 % \begin{figure}
@@ -498,8 +498,9 @@ The \texttt{skyline} method loads the wavelength calibrated files, masks the tra
 \footnote{The transformation applied by the \texttt{skyline} method uses linear interpolation and is thus less accurate at flux conservation than the transformation applied by the \texttt{transform} method.}
 and compares the peak wavelength position of the sky lines to the reference sky lines as measured by \gls{SALT}.
 
-A spectrum is created after accounting for the \gls{BPM} extension, masking out rows which contain a trace, and transformation, by averaging across the rows of the frames.
-Any inaccuracies of the wavelength solution in the wavelength ($x$, or horizontal) axis are determined by detecting peaks in the spectrum after transformation and comparing their positions to those provided by \gls{SALT}. Minor variations in the comparison of the sky lines are expected, such as those seen in \autoref{fig:stops_sky_eg}, but any uniform trends, such as those in \autoref{fig:stops_sky_arc_eg} (bottom left), indicate an underlying poor fit across the horizontal axis of the wavelength solution.
+% A spectrum is created after accounting for the \gls{BPM} extension, masking out rows which contain a trace, and transformation, by averaging across the rows of the frames.
+% Any inaccuracies of the wavelength solution in the wavelength ($x$, or horizontal) axis are determined by detecting peaks in the spectrum after transformation and comparing their positions to those provided by \gls{SALT}.
+Minor variations in the comparison of the sky lines are expected, such as those seen in \autoref{fig:stops_sky_eg}, but any uniform trends, such as those in \autoref{fig:stops_sky_arc_eg} (bottom left), indicate an underlying poor fit across the horizontal axis of the wavelength solution.
 % A poor horizontal fit is difficult to spot without supplementary tools.
 % 
 % Second, any inaccuracies in the wavelength solution in the spatial ($y$, or vertical) axis are determined by comparing the feature widths before and after transformation. Since the sky lines curve slightly across the frame (see \autoref{fig:polsalt_post_wav_cal}), the initial feature widths %relatively straightforward as a perfect wavelength solution will remove any horizontal variation of a sky line spanning multiple rows. The variation may be seen in the transformed frame, as mentioned in \autoref{subsec:iraf_transform}, but is more accurately measured by the \texttt{skyline} method which compares the averaged sky line width before and after transformation. A wavelength solution exhibiting a poor fit across the spatial axis will display broader averaged sky lines than those of a relatively good fit.
