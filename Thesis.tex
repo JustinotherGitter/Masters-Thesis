@@ -91,6 +91,9 @@
 % MARK: Custom hyperref
 \usepackage{myhyperref}
 
+\usepackage{datetime}
+\newdateformat{monthyear}{\monthname[\THEMONTH] \THEYEAR}
+
 % Control footnote layouts
 % \usepackage[bottom, hang, flushmargin]{footmisc}
 % Upright greek letters
@@ -98,7 +101,7 @@
 % 'robusify' the \subref command so it doesn't break on a whim
 % \robustify{\subref}
 
-% MARK: List 'include' files
+% MARK: 'include' files
 \includeonly{%
     chapter_0/Abstract,
     chapter_0/Acknowledgements,
@@ -178,7 +181,7 @@
 % \newabbreviation[description={Interstellar Magnetic Fields}]{ISMF}{ISMF}{Interstellar Magnetic Fields}
 % \newabbreviation[category=shortonly]{GRB}{GRB}{Gamma-ray Burst}
 
-% MARK: 'thesis.cls' constants
+% MARK: Title constants
 \title{%
     \textbf{%
         Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations
@@ -191,7 +194,7 @@
 \faculty{Faculty of Natural and Agricultural Sciences}
 \department{Department of Physics}
 \country{South Africa}
-\degreedate{Date of submission: \today}
+\degreedate{Date of submission: \monthyear\today}
 \supervisor{Prof. B. van Soelen}
 
 % MARK: Main document

@@ -1,20 +1,29 @@
 # Thesis Overview and Design Organizer (TODO 😝)
+<details>
+<summary>Useful Thesis Links</summary>
+
+  * <https://www.ufs.ac.za/docs/default-source/regulations-documents/rubric-masters-dissertation-1004-eng.pdf>
+
+</details>
+<br>
 
 This file stands to track any minor improvements (at least I think they would be) or final edits needed before the submission of my thesis, my local setup (In case, I don't know, my laptop is stolen 🙄), any styles and style preferences to keep the file/document structure neat and logical, as well as any useful external references.
 
 To any reading, I hope this document serves to improve your write-up experience. ❤️
 
-Worm Regards,
+Worm Regards, 🪱
 
 Justin Cooper
 
+<!-- MARK: Minor TODO's -->
 ## Minor `TODOs`
 
 * Update tables `\input{}` to use relative pathing (`import` package?)
 * Use the `minted` package instead of the `listings` `STOPS_docs` style workaround
 * Unify (x-pixel/y-pixel/x/y/wavelength/) or vertical/horizontal axis or rows/columns
-  * → (?) ($x_p$, $y_p$)/(\AA, $y_p$)
-* Edit created plots to use Latex font (both Python and Inkscape figures)
+  * → (?) ($x_p$, $y_p$)/(\AA, $y_p$) | ($u$, $v$) for pixel position and $s_{u|v}$ for pixel ($x$|$y$) size
+* STOPS: skylines legend use [double markers](https://matplotlib.org/stable/users/explain/axes/legend_guide.html#legend-handlers "matplotlib.org")
+* Edit created plots to use $\LaTeX$ font (both Python and Inkscape figures)
   * Edit plots to use `subfigures` where possible (?)
   * (?) <https://jwalton.info/Matplotlib-latex-PGF/>
 * Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
@@ -26,6 +35,7 @@ Justin Cooper
   * `the user` instead of `a user`
   * `$#$~unit` instead of `# $unit$`
 
+<!-- MARK: Final TODO's -->
 ## Final `TODOs`
 
 * Organize Glossary entries:
@@ -33,61 +43,122 @@ Justin Cooper
   * Abbreviations, Acronyms, and Symbols (By group(?)/category, then Alphabetical)
   * Unify usage of exposure / frame / extension and add to glossary (see references)
 * Cite STOPS as repo? (See `.cff` references)
-* Change \today to MONTH, YEAR at final submission [Thesis.tex:197~ish]
+* Change \today to MONTH, YEAR at final submission in [Thesis text](/Thesis.tex#L194)
 * Ask for read through from friends to ensure no spelling/grammar errors
 
+<!-- MARK: VSCode -->
 ## VSCode
 
 This section contains the setup I've found irreplaceable while writing my thesis in VSCode, or anything useful in general.
 
+<!-- MARK: 1. setup -->
 ### General setup
 
 1. My Python setup includes the full `Python` and `Jupyter Notebook` extensions as well as the `Black` formatting extension.
     * Python must still be installed locally
 1. I use a private GitHub repo, shared with my supervisor, for backing up and version control of my thesis, as well as for my developed software, in a separate repo (goodbye `backup_thesis_(copy)_v1` folders).
     * Look up `GitHub Education` if you are a registered student (You're welcome)
-1. I use the `Latex Workshop` and the `LTex - ...` extensions to use Latex in VSCode.
-    * Latex must still be installed locally (I use `Tex Live` as recommended by `Latex Workshop`)
+1. I use the `Latex Workshop` and the `LTex - ...` extensions to use $\LaTeX$ in VSCode.
+    * $\LaTeX$ must still be installed locally (I use `Tex Live` as recommended by `Latex Workshop`)
 1. I use GitHub Copilot for its predictive text and as a first stop for problem shooting as the currently open file is included in its context.
 
+<!-- MARK: 2. shortcuts -->
 ### [Useful shortcuts](https://code.visualstudio.com/docs/getstarted/tips-and-tricks)
 <div align=center>
 
   | Keyboard Shortcut | Use |
   |------------------:|:----|
-  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd> | Open Command Palette |
-  | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>v</kbd> | VSCode View rendered [md](https://www.markdownguide.org/basic-syntax/) |
+  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | Open Command Palette |
+  | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>v</kbd> | VSCode View rendered markdown |
   | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>Ctrl</kbd>+<kbd>s</kbd> | View VSCode shortcuts |
-  |<kbd>Ctrl</kbd>+<kbd>`</kbd>| Open Terminal |
+  | <kbd>Ctrl</kbd>+<kbd>`</kbd>| Open Terminal |
   | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>z</kbd> | Zen mode |
   | (Hold) <kbd>Alt</kbd>, <kbd>Click(s)</kbd> | Multiple cursors |
   | <kbd>Alt</kbd>+(<kbd>↑</kbd>\|<kbd>↓</kbd>) | Move line up/down |
   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+(<kbd>↑</kbd>\|<kbd>↓</kbd>) | Insert cursor above/below |
+  | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>j</kbd> | SyncTex: Link from source to PDF |
+  | <kbd>Ctrl</kbd>+<kbd>Click</kbd> | SyncTex: Link from PDF to source |
 
 </div>
 
+<!-- MARK: 3. regex -->
 ### Useful regex patterns
 
-Regex allows for complex find and replace functionality.
+Regex allows for complex `find` and `replace` functionality. It may also be used in the VSCode `Search` tab in the primary sidebar (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>)
 
-* `()` represent capture groups which may be referred to later using `$1`, etc.
-* `[]` represent character groups
-* Quantifiers such as `+`, `*`, etc. allow for more complex behavior, especially combined with greedy and lazy matching
+* `()` represent capture groups in `find` which may be referred to later in `replace` using `$1`, etc.
+* `[]` represent character groups in `find`
+* Quantifiers such as `+`, `*`, etc. allow for more complex behavior, especially combined with [greedy and lazy quantifiers](https://javascript.info/regexp-greedy-and-lazy)
 
 Here are some useful regex patterns I have needed:
 
 <div align=center>
 
   | Regex use | Find | Replace |
-  |:----------|:----:|--------:|
-  |`Name {Surname}` → `{Surname}, N.`| ([A-Z])[a-z]*?\s(\{[A-Z].+?\}) | $2, $1. |
+  |:---------:|-----:|:--------|
+  | `John {Smith}` → `{Smith}, J.` | `([A-Z])[a-z]*?\s(\{[A-Z].+?\})` | `$2, $1.` |
+  | `1 \| 1.1` → `$1$ \| $1.1$` | `\s([0-9][\.]*[0-9]*)\s*` | `$$$1$` |
 
 </div>
 
-## Style guides
+<!-- MARK: 4. md -->
+### Markdown
+<details>
+<summary>Useful Links</summary>
+
+  * <https://www.markdownguide.org/basic-syntax/>
+  * <https://ashki23.github.io/markdown-latex.html>
+  * <https://daringfireball.net/projects/markdown/syntax>
+
+</details>
+<br>
+
+This section contains any markdown not used in this document but deemed useful nonetheless.
+
+* Use `[//]: # (Comment)` or `<!-- Comment -->` on a separate line for comments not meant for rendering.
+* Comments that link to a separate file may link to a specific line within the file using the `#L` suffix.
+  * [Thesis.tex line 20 (Hover)](/Thesis.tex#L20 "[Link text](/Thesis.tex#L20 'Hover text')")
+
+<!-- MARK: 5. Tips/Tricks -->
+### Tips and Tricks
+
+Here are some general tips and tricks related to VSCode that do not fit neatly into any of the other sections.
+
+* `MARK: Heading` within a comment of a document allows for headings in the VSCode code map, allowing for navigation at a glance
+
+<!-- MARK: LaTeX Styles -->
+## $\LaTeX$ Style guides
+<details>
+<summary>Useful Links</summary>
+
+  * <https://www.learnlatex.org/en/>
+  * <https://en.wikibooks.org/wiki/LaTeX>
+  * <https://github.com/James-Yu/LaTeX-Workshop/wiki>
+  * <https://ashki23.github.io/markdown-latex.html>
+
+</details>
+<br>
 
 Included herein are the style guides I have followed during the course of writing my thesis. Custom styles (`my*.sty files`) have been included to both simplify the preamble (located in `Thesis.tex`) and to create a more homogeneous styling throughout when dealing with the relevant packages contained in the style files.
 
+General Notes:
+* Inline values [with][] units should be formatted as: `$val$~unit`
+
+[with]: <> "or without"
+
+<!-- MARK: 1. Headings -->
+### Headings
+
+Headings use `Title Case`. Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
+
+```Latex
+% Note case is `Title Case`
+\chapter{Chapter Title}
+\section{Section Title} \label{sec:sec_title}
+\dots
+```
+
+<!-- MARK: 2. Equations -->
 ### Equations
 
 Equations are written in-text and are a part of sentences unless otherwise indicated. To this end, there is no new line before `\begin` or after `\end` (unless the sentence ends with the equation and the equation is punctuated) and multiple equations in a single environment are properly punctuated.
@@ -119,13 +190,14 @@ Equations are written in-text and are a part of sentences unless otherwise indic
 
 See references (Wikibooks) for more configurations of equations.
 
+<!-- MARK: 3. Figures -->
 ### Figures
 
 Figures are located in their relevant chapter (`chapter_*/figures/`) and have the chapter number, $i$, prepended to their name (`<i>_<name>.[pdf|svg]`).
 
 The figures included in the document are `pdf`'s, but it is useful to save a copy of self-generated figures as `svg`'s for when edits to the figure will naturally arise. See 'Custom Figures' for further constraints on generated figures.
 
-To use the figures in the Latex document, use:
+To use the figures in the $\LaTeX$ document, use:
 
 ```Latex
 \begin{figure}[t]
@@ -142,39 +214,53 @@ To use the figures in the Latex document, use:
 Figures created by myself are (generally) made using Inkscape. To keep line widths / text size / etc. consistent the following document properties are used:
 
 * Document properties
-  * ~10 cm x ? cm (depends on figure aspect ratio)
-  * Before saving, use `resize to content`
-  * scale = 0.1
+  * $6.28$ x ? inches
+    * $x$-size set to the $\LaTeX$ `\textwidth` (usually in inches)
+    * $y$-size depends on figure aspect ratio, usually left undefined
+  * Before saving, use `resize to content` (if no text included in custom figure)
+  * scale = $0.1$
 
 * Grid properties
-  * X_s, Y_s = 1 mm
-  * Major Grid every 5
+  * $s_x$, $s_y$ = $1$ mm
+  * Major Grid every $5$
 
 * Fill properties
-  * Lightness = 66
-  * (I.E. 0, 0, 66, 100)
+  * Lightness = $66$
+  * (I.E. $0$, $0$, $66$, $100$)
 
 * Font properties
   * name = cmr10
   * weight = normal
-  * size = 16 px
+  * size = $16$ px
 
 * Stroke properties
-  * width = 1 px
+  * width = $1$ px
 
-Figures are first saved as an `svg` before being exported as either a `png` or `pdf` to 'play well' with the Latex `\includegraphics[]{}` command.
+Figures are first saved as an `svg` before being exported as either a `png` or `pdf` to 'play well' with the $\LaTeX$ `\includegraphics[]{}` command.
 
-### Headings
+<!-- MARK: 4. Tables -->
+### Tables
 
-Headings use `Title Case`. Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
+Tables can be generated using a [Table Generator](https://www.tablesgenerator.com/). Tables are located in their relevant chapter (`chapter_*/tables/`) and have the chapter number, $i$, prepended to their name (`<i>_<name>.tex`). The contents of the file are structured similar to:
 
 ```Latex
-% Note case is `Title Case`
-\chapter{Chapter Title}
-\section{Section Title} \label{sec:sec_title}
-\dots
+\begin{table}[t]
+    \begin{tabular}{c(* the amount of columns)}
+        ...
+    \end{tabular}
+    \caption{A suitable caption and relevant reference.\protect\footnotemark}
+    \label{table:'suitable_label'}
+\end{table}
+\footnotetext{Link or further description of reference or discussion of footnotemark in text.}
 ```
 
+To insert a table within the document, use the command:
+
+```Latex
+\input{chapter_<i>/tables/'table_name'}
+```
+
+<!-- MARK: 5. Glossaries -->
 ### Glossary and Acronyms
 
 Glossary and acronym entries are implemented throughout the thesis. Glossaries allow keywords to be defined while acronyms allow acronyms to be used and stated in full on first use. Note that acronyms used for software use a display text in the small caps font.
@@ -202,33 +288,12 @@ Glossary and acronym entries are implemented throughout the thesis. Glossaries a
 
 New commands for the most common glossary/acronym keys may improve 'writability' (`\acr{POLSALT}` vs `\polsalt`). This was implemented for all software acronyms.
 
-### Tables
-
-Tables can be generated using a [Table Generator](https://www.tablesgenerator.com/). Tables are located in their relevant chapter (`chapter_*/tables/`) and have the chapter number, $i$, prepended to their name (`<i>_<name>.tex`). The contents of the file are structured similar to:
-
-```Latex
-\begin{table}[t]
-    \begin{tabular}{c(* the amount of columns)}
-        ...
-    \end{tabular}
-    \caption{A suitable caption and relevant reference.\protect\footnotemark}
-    \label{table:'suitable_label'}
-\end{table}
-\footnotetext{Link or further description of reference or discussion of footnotemark in text.}
-```
-
-To insert a table within the document, use the command:
-
-```Latex
-\input{chapter_<i>/tables/'table_name'}
-```
-
+<!-- MARK: References -->
 ## Useful external References
 
 * Glossaries (minor to-do's): <https://www.overleaf.com/learn/latex/Glossaries>
   * Useful glossary and acronym simultaneous addition: <https://tex.stackexchange.com/questions/8946/how-to-combine-acronym-and-glossary>
   * Glossary style <https://www.dickimaw-books.com/gallery/glossaries-styles/>
-* Latex docs: <https://en.wikibooks.org/wiki/LaTeX>
 * GitHub `.cff` file references: <https://citation-file-format.github.io/>
 
 See 'preamble' of `references.bib` for further useful links relevant to specific chapters of thesis.
