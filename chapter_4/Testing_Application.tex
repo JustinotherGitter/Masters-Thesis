@@ -1,17 +1,32 @@
-% MARK: Test. and App.
 \chapter{Testing and Application}
 
-\hrule
+This chapter contains an overview of the testing performed for the development of \stops\ (\autoref{sec:test_stops}) and the testing of the replaced wavelength calibration (\autoref{sec:test_wav}), as well as the application of \stops\ to both unpublished (\autoref{sec:results_unpub}) and published (\autoref{sec:results_pub}) results.
 
-This chapter contains an overview of the testing performed for and during the development of \stops\ as well as its application in publications.
-Software tests cover \dots % the methods implemented and error handling in \stops, specifically for \texttt{split} (\autoref{subsec:test_split}), \texttt{join} (\autoref{subsec:test_join}), \texttt{correlate} and \texttt{skylines} (\autoref{subsec:test_corr_sky}), while reduction tests cover verifying the alternate wavelength solutions (\autoref{subsec:test_wavelength}) and polarization parameters (\autoref{subsec:test_polarization}).
-The tests cover \dots
+% MARK: Test STOPS
+\section[Testing \textsc{stops}]{Testing \stops} \label{sec:test_stops}
+\hrulefill
+
+No \polsalt\ tests or tests on pre-reduced \gls{FITS} files. \polsalt\ is trusted to be accurate. See (reference tests of \polsalt, i.e. published papers, etc.)
+\stops\ tests consist of software and data tests. 
+
+
+% MARK: Test Wav. Cal.'s
+\section{Testing Wavelength Calibrations} \label{sec:test_wav}
+
+
+
+% MARK: Results Unpub.
+\section{Own Application} \label{sec:results_unpub}
+
+
+
+% MARK: Results Pub.
+\section{Application in Publications} \label{sec:results_pub}
+
+
+
 
 \begin{itemize}
-    \item No \polsalt\ or data tests
-    \begin{itemize}
-        \item \polsalt\ is trusted to be accurate. See \dots (reference tests of \polsalt, i.e. published papers, etc.)
-    \end{itemize}
     
     \item Testing \texttt{split}
     \begin{itemize}
@@ -81,7 +96,6 @@ The tests cover \dots
     \end{itemize}
 \end{itemize}
 
-% % MARK: Software tests
 % \section{\stops\ Development} \label{sec:test_stops}
 
 % As development is an iterative process, only the major tests that were performed are discussed. The tests were, predominantly, to ensure that the input to \stops\ is parsed correctly and that the output of the relevant \stops\ methods align with the expected input for the relevant \iraf\ or \polsalt\ tasks.
@@ -136,6 +150,7 @@ The tests cover \dots
 % \todo{Insert figure illustrating skyline identification accuracy.}
 
 % % MARK: Reduction tests
+
 % \section{Reduction Specific Tests} \label{sec:test_reduction}
 
 % Reduction specific tests refer to tests performed to ensure no errant effects are introduced during the reduction process. These tests were designed to validate the accuracy and reliability of the \stops\ pipeline in producing scientifically accurate results.

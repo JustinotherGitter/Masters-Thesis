@@ -86,6 +86,8 @@ Plotting the results of the spectropolarimetric reduction process is done using 
 
 Generally, the plot of the spectropolarimetric results is the stopping point for most reduction procedures as it contains or creates the desired results. However, additional tools exist which may be used after the polarization reductions, and which are not represented in the \gls{GUI}, namely, flux calibration and synthetic filtering.
 
+\pagebreak
+
 Flux-calibrations are performed via \textbf{specpolflux.py} and are only intended for shape corrections of the spectrum. Additionally, a flux database file must exist for the observed standard and must be included in the working science directory.
 % MARK: TODO: Flux Calibrations - errors in GUI - make 100\% sure about division error and notify Dani\'el
 
@@ -226,14 +228,14 @@ begin	identify arcO0057[*,237]
     \label{fig:iraf_id_plot}
 \end{figure}
 
-\pagebreak
-
 % MARK: Reidentify
 \subsection{Reidentify}
 
 The \texttt{reidentify} task is used to run the \texttt{identify} task autonomously and repeatedly across the entirety of the arc frame at defined (row) intervals.%
 \footnote{Help documentation for the \texttt{reidentify} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html}.}
 The task uses the one-dimensional wavelength solution stored in the database created by the initial \texttt{identify} call and refits the positions of the relevant spectral features. The task may fail based on a number of conditions, most common of which is the loss of features as the task moves further from the row at which the user manually ran \texttt{identify}.
+
+\pagebreak
 
 When running \texttt{reidentify} non-interactively, it is recommended to set the \texttt{verbose} parameter to `\texttt{yes}' as this will provide immediate confirmation if the task quit early. Regardless of whether the task quit successfully, the newly defined wavelength solutions are appended to the local database following the \texttt{identify} task database format, an example of which is given in \autoref{lst:iraf_id_db}.
 
@@ -342,7 +344,7 @@ For example, \autoref{fig:trans_O} shows a good fit to the wavelength solution, 
 \end{figure}
 
 % MARK: STOPS
-\section[\textsc{stops}]{\stops\ - \glsfmtlong{STOPS}} \label{sec:stops}
+\section[\textsc{stops}]{\stops\ - \textit{Supplementary Tools for \textsc{polsalt}\\Spectropolarimetry}} \label{sec:stops}
 
 \glsxtrfull{STOPS} provides supplementary tools which convert the \polsalt\ and \iraf\ formats back and forth, allowing \iraf\ to be used for wavelength calibrations of \gls{SALT} spectropolarimetric data. It also provides additional tools to check the accuracy of the wavelength calibration.
 \stops\ is written in, and requires, Python~$3$ ($3.11+$) to run, as well as \texttt{Astropy} ($6.0.0+$) \citep{astropy:2013, astropy:2018, astropy:2022}, \texttt{ccdproc} ($2.4.1+$) \citep{ccdproc}, \texttt{Matplotlib} ($3.5.2+$) \citep{matplotlib}, \texttt{NumPy} ($1.26.4+$) \citep{numpy}, and \texttt{SciPy} ($1.13.0+$) \citep{scipy}.
@@ -413,6 +415,8 @@ After the \iraf\ \texttt{fitcoords} task has been successfully run for both the 
 
 First, \texttt{join} parses the wavelength database file, described in \autoref{subsec:iraf_fitcoords}, for either a `Chebyshev' or `Legendre' solution, and calculates the wavelength at each ($x_{p}$, $y_{p}$) pixel position. This new image containing the corresponding wavelength values, seen in \autoref{fig:pol_wav_ext}, is appended to the wavelength calibrated \gls{FITS} file as the `WAV' extension.
 % and creates a function to convert a ($pixel$, $pixel$) position to a wavelength value. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in \autoref{fig:pol_wav_ext}.
+
+\pagebreak
 
 % cosmic ray cleaning
 Second, cosmic-ray cleaning is performed on the science extension using the \texttt{ccdproc} implementation of the \texttt{lacosmic} Python package which implements the L.A. Cosmic algorithm, based on Laplacian edge detection. The read noise and gain parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, while the rest of the parameters were left as the default, following the publication and \href{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions}%
@@ -493,11 +497,9 @@ The \texttt{skyline} method has been implemented to compare the position of the 
 \footnote{Both sky and arc lines are available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/} .}
 This provides an additional check of the accuracy of the wavelength solution across the frame. This method accepts both the \iraf\ \texttt{transform} \gls{FITS} file or the `wmxgbp' \gls{FITS} files created by the \texttt{join} method as the input.
 
-\pagebreak
-
 The \texttt{skyline} method loads the wavelength calibrated files, masks the traces present in the frames, transforms the frames from ($x_p$, $y_p$) pixel to (\AA, $y_p$) wavelength units if the frame was not transformed by \texttt{transform},%
 \footnote{The transformation applied by the \texttt{skyline} method uses linear interpolation and is thus less accurate at flux conservation than the transformation applied by the \texttt{transform} method.}
-and compares the peak wavelength position of the sky lines to the reference sky lines as measured by \gls{SALT}.
+and compares the peak wavelength position of the sky lines to the reference sky lines as measured by \gls{SALT}. Finally, a figure is created containing a plot of the background spectra (offset by the respective legend entries superscript) with the known sky lines marked with a vertical line, and a plot of the closest identified peaks of said spectra.
 
 % A spectrum is created after accounting for the \gls{BPM} extension, masking out rows which contain a trace, and transformation, by averaging across the rows of the frames.
 % Any inaccuracies of the wavelength solution in the wavelength ($x$, or horizontal) axis are determined by detecting peaks in the spectrum after transformation and comparing their positions to those provided by \gls{SALT}.
@@ -527,7 +529,9 @@ The full \stops\ \texttt{skyline} class docstring is given in \autoref{doc:skyli
     \label{fig:stops_corr_eg}
 \end{figure}
 
-The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from each other. As the Stokes results, and thus final polarization results, are determined by the difference between the $O$- and $E$-beams, a direct comparison is not appropriate. Any observed unpolarized light, however, will reflect equally in both polarization beams and so the general trend of the two spectra may reasonably be expected to follow one another. The \texttt{correlate} method was created to allow for comparisons between the wavelength solutions of the $O$- and $E$-beams of a single exposure or the $O$- or $E$-beams of differing exposures by cross correlating the spectra.
+The \texttt{skyline} method allows for confirmation of a single wavelength solution, but has no means for comparing how the wavelength solutions of two polarization beams differ from each other. As the Stokes results, and thus final polarization results, are determined by the difference between the $O$- and $E$-beams, a direct comparison is not appropriate.
+
+Any observed unpolarized light, however, will reflect equally in both polarization beams and so the general trend of the two spectra may reasonably be expected to follow one another. The \texttt{correlate} method was created to allow for comparisons between the wavelength solutions of the $O$- and $E$-beams of a single exposure or the $O$- or $E$-beams of differing exposures by cross correlating the spectra.
 
 The \texttt{correlate} method loads the \polsalt\ \texttt{spectra extraction} \gls{FITS} files, removes the continuum and separates the \gls{CCD} regions. The relevant \gls{CCD} regions are cross correlated and the correlation peak is plotted and specified in the plot legend, as seen in \autoref{fig:stops_corr_eg}.
 
@@ -553,6 +557,8 @@ This section aims to provide a comprehensive discussion of the modified reductio
 It is important to note that while \polsalt\ was developed in Python~$2$ ($2.7$), the \stops\ supplementary tools were developed in, and require, Python~$3$ ($3.11+$), as well as the other requirements mentioned in \autoref{sec:stops}. While managing multiple versions of Python introduces some extra complication, it would not have been reasonable to develop \stops\ in Python~$2$, as it has been deprecated, nor would it have been reasonable to update \polsalt\ to Python~$3$.
 
 It is therefore recommended that the different versions of Python are managed using separate virtual environments. While the \texttt{anaconda} package manager was used in this study and is recommended, any package manager may be used. The \texttt{anaconda} environments are aliased `\textbf{salt}' for Python $2.7$ and `\textbf{stops}' for Python $3.11$. When Listings are provided (see for example \autoref{code:polsalt_launch} or the Listings in \autoref{subsec:reduc_pre} below), the \texttt{anaconda} environment is activated at the start of the Listing, otherwise it is assumed the previously specified environment is still active.
+
+\pagebreak
 
 It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu, as seen in \autoref{fig:polsalt_gui}. Reductions are possible, however, purely through the \gls{CLI} using the \polsalt\ `beta' scripts.
 
@@ -596,6 +602,9 @@ Splitting the data is presented in \autoref{code:stops_split}. The \stops\ \text
 
 The \iraf\ wavelength calibrations are performed using the tasks described in \autoref{sec:iraf}, namely \texttt{identify}, \texttt{reidentify}, \texttt{fitcoords}, and optionally \texttt{transform}. In general, these tasks are run directly in the \iraf\ terminal using:%
 \footnote{Please see the \iraf\ help docs, available at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/iraf.html}, on the relevant tasks for a comprehensive discussion of the parameters available.}
+
+\pagebreak
+
 \begin{lstlisting}[language=bash]
 cl> identify arc_files
 cl> reidentify arc_ref arc_files
@@ -607,8 +616,6 @@ cl> transform files tr_file fit_2d
 The interactive tasks take up the bulk of the reduction time as this is where the fine-tuning of the reduction is done, through the use of cursor (or colon) commands, which allow modification of the parameters mid-reduction. Task parameters may, however, be edited beforehand within the \iraf\ terminal using the \texttt{eparam} task, and optionally saved, and quit or run using a combination of \texttt{:w}, and \texttt{:q} or \texttt{:go} cursor commands, respectively.
 
 The reduction process in \autoref{app:reduction}, namely \autoref{code:iraf_id} to \ref{code:iraf_transform}, describes how the tasks may be scripted and saved for posterity. It is recommended to create an \iraf\ Command Language (cl) script for each task to keep track of which parameters were used and for simple recalibrations. The scripts are created using the \texttt{mkscript} task which interactively asks for a task to script and parameters to use. Multiple tasks may be appended to an \iraf\ script, allowing for the parameters of both beams to be tracked.
-
-\pagebreak
 
 Running an \iraf\ script may be done by running:
 \begin{lstlisting}[language=bash]
@@ -752,7 +759,9 @@ specpolfinalstokes(infilelist, logfile=logfile)
 
 \end{lstlisting}
 
-The \polsalt\ beta \texttt{reducepoldata\_sc.py} copies a \texttt{script.py} file into the science working directory, `YYYYMMDD/sci/', which provides analysis scripts for analysis and modification of the \polsalt\ beta results. These tools consist of data culling for the final Stokes calculations, text and plot output, relative flux calibration corrections, and synthetic filtering of polarization results. The \polsalt\ analysis scripts may be run using:
+The \polsalt\ beta \texttt{reducepoldata\_sc.py} copies a \texttt{script.py} file into the science working directory, `YYYYMMDD/sci/', which provides analysis scripts for analysis and modification of the \polsalt\ beta results. These tools consist of data culling for the final Stokes calculations, text and plot output, relative flux calibration corrections, and synthetic filtering of polarization results.
+
+The \polsalt\ analysis scripts may be run using:
 \begin{lstlisting}[language=bash]
 $ python script.py
 \end{lstlisting}
