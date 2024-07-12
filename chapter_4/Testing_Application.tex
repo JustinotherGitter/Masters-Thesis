@@ -6,27 +6,11 @@ This chapter contains an overview of the testing performed for the development o
 \section[Testing \textsc{stops}]{Testing \stops} \label{sec:test_stops}
 
 % No \polsalt\ tests or tests on pre-reduced \gls{FITS} files. (Trusted accurate)
-Testing was performed throughout the development of \stops\ to ensure that no errant effects were introduced during the reduction process. As the \stops\ \texttt{split} and \texttt{join} methods are designed to convert between the \polsalt\ and \iraf\ file structures, much care was taken to ensure that the output of both methods provided accurate and consistent results.
+Firstly, as the development of \stops\ was an iterative process, the software was continually checked to ensure compatibility such that the varying \stops\ method inputs were correctly parsed, and their outputs were parsable by the relevant \iraf\ tasks or \polsalt\ methods. As the \stops\ \texttt{split} and \texttt{join} methods are designed to convert between the \polsalt\ and \iraf\ file structures, much care was taken to ensure that the output of both methods provided accurate and consistent results.
 
-% Testing reduction results not negatively impacted by \stops.
-% \begin{itemize}
-%     \item General discussion of testing (I.E. not this test was done specifically this source, more along the lines of these tests were done to check this issue, seen here using this source for example.)
-%     \item Wavelength solution validation from correlate and skylines results.
-%     \begin{itemize}
-%         \item Figures showing Correlate and Skyline results.
-%         \item RMS comparisons between \polsalt\ and \iraf\ to quantify differences.
-%         \item Any Figures for RMS comparisons or wavelength validation?
-%     \end{itemize}
-%     \item Polarization parameters validation from known sources.
-%     \begin{itemize}
-%         \item Polarization tested using 3C 279, 4C+01.02, and preliminary testing data provided by David.
-%         \item Polarization tested using spectropolarimetric standards (4 highly polarized, 2 non-polarized).
-%         \item Tabulate sources used, with their properties.
-%         \item Figures showing comparison plots of polarization parameters from \polsalt\ and \stops.
-%     \end{itemize}
-% \end{itemize}
+Secondly, testing was performed throughout the development of \stops\ to ensure that no errant effects were introduced to the reduction process. Most notably the \stops\ \texttt{split} and \texttt{join} methods which are directly involved in the reduction process when implementing \stops.
 
-% As development is an iterative process, only the major tests that were performed are discussed. The tests were, predominantly, to ensure that the input to \stops\ is parsed correctly and that the output of the relevant \stops\ methods align with the expected input for the relevant \iraf\ or \polsalt\ tasks.
+% General discussion of testing (I.E. not this test was done specifically this source, more along the lines of these tests were done to check this issue, seen here using this source for example.)
 
 % % Which tools were used/replaced/improved
 % The key improvements and replacements made during the development of \stops\ included optimizing the file parsing process to streamline the swapping between the required \polsalt\ and \iraf\ file structures. Additionally, legacy functions used in \polsalt\ which were re-implemented in \stops\ were updated to Python 3 to ensure compatibility with the latest Python versions.
@@ -37,9 +21,9 @@ Testing was performed throughout the development of \stops\ to ensure that no er
 % MARK: STOPS split tests
 \subsection{Testing the \texttt{split} Method} \label{subsec:test_split}
 
-% Testing \texttt{split}
+The \stops\ \texttt{split} method had to accept any \polsalt\ pre-reduced \gls{FITS} files as input and output an \iraf\ compatible file structure.
+
 % \begin{itemize}
-%     \item \polsalt\ to \iraf\ file structure conversion.
 %     \item Show changes to data files are intended (I.E. only splitting the data, no changes to the data itself)
 %     \item Tested over multiple grating/articulation angles to ensure robustness.
 %     \item Mention any header updates skipped specific to \polsalt\ (if any)
@@ -59,6 +43,8 @@ Testing was performed throughout the development of \stops\ to ensure that no er
 
 % MARK: STOPS join tests
 \subsection{Testing the \texttt{join} Method} \label{subsec:test_join}
+
+The \texttt{join} method had to accept \iraf\ wavelength solution database files as well as the \polsalt\ pre-reduced files and output a \polsalt\ \texttt{spectra extraction} compatible file structure. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method would not be able to process the files otherwise, thus halting the reduction process.
 
 % Testing \texttt{join}
 % \begin{itemize}
@@ -87,6 +73,13 @@ Testing was performed throughout the development of \stops\ to ensure that no er
 % No \iraf\ tests or tests on \iraf\ \gls{FITS} files. (Trusted accurate)
 Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavelength calibrations, the accuracy of the new wavelength solutions needed to be validated. This was done both through the \iraf\ tasks, ensuring an accurate wavelength solution, and through the \stops\ \texttt{correlate} and \texttt{skylines} methods, allowing the integration of the wavelength solutions to be validated.
 % \gls{RMS} results returned from each
+
+% Wavelength solution validation from correlate and skylines results.
+%     \begin{itemize}
+%         \item Figures showing Correlate and Skyline results.
+%         \item RMS comparisons between \polsalt\ and \iraf\ to quantify differences.
+%         \item Any Figures for RMS comparisons or wavelength validation?
+%     \end{itemize}
 
 % Testing \iraf\ wavelength solution
 % \begin{itemize}
@@ -118,6 +111,8 @@ Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavel
 % MARK: WAV Corr. Checks
 \subsection{Cross Correlation Checks} \label{subsec:test_corr}
 
+The \texttt{correlate} method returns plots validating the wavelength solutions and so only had to accept the \polsalt\ \texttt{spectra extraction} method output files as input.
+
 % \begin{itemize}
 %     \item Testing correlate functionality using `offset', comparisons of arcs, FSRQ's and BLLac's.
 %     \item Any figures showing correlation tests?
@@ -125,6 +120,8 @@ Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavel
 
 % MARK: WAV Sky. Checks
 \subsection{Sky Line Checks} \label{subsec:test_sky}
+
+The \texttt{skylines} method returns plots validating the wavelength solutions and so only had to accept either the \iraf\ \texttt{transform} task or \stops\ \texttt{join} method output files as input.
 
 % \begin{itemize}
 %     \item Testing skylines using known spectral sky lines.
@@ -158,7 +155,15 @@ Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavel
 % }
 
 % % MARK: Polarization tests
-% \subsection{Polarization Parameters} \label{subsec:test_polarization}
+\subsection{Polarization Parameters} \label{subsec:test_polarization}
+
+% Polarization parameters validation from known sources.
+%     \begin{itemize}
+%         \item Polarization tested using 3C 279, 4C+01.02, and preliminary testing data provided by David.
+%         \item Polarization tested using spectropolarimetric standards (4 highly polarized, 2 non-polarized).
+%         \item Tabulate sources used, with their properties.
+%         \item Figures showing comparison plots of polarization parameters from \polsalt\ and \stops.
+%     \end{itemize}
 
 % The accuracy of polarization parameters was tested using several known sources, including:
 % \begin{itemize}
