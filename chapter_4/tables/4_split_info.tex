@@ -1,0 +1,18 @@
+\newcommand\mc[1]{\multicolumn{1}{c|}{#1}} % handy shortcut macro
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{ccccccc}
+        \hline
+        Filename            & No. & Name    & Type       & Cards & Dimensions   & Format  \\ \hline
+        \mc{\multirow{4}{*}{\parbox[c]{1.8cm}{mxgbpP\-20170328\-0054.fits}}}
+                            & $0$   & PRIMARY & Primary\gls{HDU} & $161$   & ()           &  \\
+        \mc{}               & $1$   & SCI     & Image\gls{HDU}   & $19$    & ($3199$, $1028$) & float32 \\
+        \mc{}               & $2$   & VAR     & Image\gls{HDU}   & $8$     & ($3199$, $1028$) & float32 \\
+        \mc{}               & $3$   & BPM     & Image\gls{HDU}   & $8$     & ($3199$, $1028$) & uint8   \\
+        \mc{beamo0054.fits} & $0$   & PRIMARY & Primary\gls{HDU} & $162$   & ($3199$, $474$)  & float32 \\
+        \mc{beame0054.fits} & $0$   & PRIMARY & Primary\gls{HDU} & $162$   & ($3199$, $474$)  & float32 \\ \hline
+    \end{tabular}
+    \caption{A comparison of the \polsalt\ pre-reduced \texttt{mxgbpP201703280054.fits} file, and the \stops\ \texttt{split} \texttt{beamo0054.fits} and \texttt{beame0054.fits} file contents.}
+    \label{table:split_info}
+\end{table}

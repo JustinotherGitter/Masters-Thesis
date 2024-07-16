@@ -81,8 +81,8 @@ This section contains the setup I've found irreplaceable while writing my thesis
 
 </div>
 
-<!-- MARK: 3. regex -->
-### Useful regex patterns
+<!-- MARK: 3. RegEx -->
+### Useful RegEx patterns
 
 Regex allows for complex `find` and `replace` functionality. It may also be used in the VSCode `Search` tab in the primary sidebar (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>)
 
@@ -90,7 +90,7 @@ Regex allows for complex `find` and `replace` functionality. It may also be used
 * `[]` represent character groups in `find`
 * Quantifiers such as `+`, `*`, etc. allow for more complex behavior, especially combined with [greedy and lazy quantifiers](https://javascript.info/regexp-greedy-and-lazy)
 
-Here are some useful regex patterns I have needed:
+Here are some useful RegEx patterns I have needed:
 
 <div align=center>
 
@@ -142,14 +142,15 @@ Here are some general tips and tricks related to VSCode that do not fit neatly i
 Included herein are the style guides I have followed during the course of writing my thesis. Custom styles (`my*.sty files`) have been included to both simplify the preamble (located in `Thesis.tex`) and to create a more homogeneous styling throughout when dealing with the relevant packages contained in the style files.
 
 General Notes:
-* Inline values [with][] units should be formatted as: `$val$~unit`
+* Inline values with units should be formatted as: `$val$~unit`
+  * If the value is a quantifier, consider writing it out
+    * i.e. `... 7 filters ...` becomes `... seven filters ...`
 
-[with]: <> "or without"
 
 <!-- MARK: 1. Headings -->
 ### Headings
 
-Headings use `Title Case`. Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
+My headings use `Title Case`.[^1] Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
 
 ```Latex
 % Note case is `Title Case`
@@ -157,6 +158,8 @@ Headings use `Title Case`. Generally, labels are only included when necessary an
 \section{Section Title} \label{sec:sec_title}
 \dots
 ```
+
+[^1]: `Sentence case` may also be used, just stick to whichever style is chosen.
 
 <!-- MARK: 2. Equations -->
 ### Equations
@@ -245,6 +248,7 @@ Tables can be generated using a [Table Generator](https://www.tablesgenerator.co
 
 ```Latex
 \begin{table}[t]
+    \centering
     \begin{tabular}{c(* the amount of columns)}
         ...
     \end{tabular}

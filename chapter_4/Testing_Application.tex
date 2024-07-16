@@ -6,14 +6,10 @@ This chapter contains an overview of the testing performed for the development o
 \section[Testing \textsc{stops}]{Testing \stops} \label{sec:test_stops}
 
 % No \polsalt\ tests or tests on pre-reduced \gls{FITS} files. (Trusted accurate)
-Firstly, as the development of \stops\ was an iterative process, the software was continually checked to ensure compatibility such that the varying \stops\ method inputs were correctly parsed, and their outputs were parsable by the relevant \iraf\ tasks or \polsalt\ methods. As the \stops\ \texttt{split} and \texttt{join} methods are designed to convert between the \polsalt\ and \iraf\ file structures, much care was taken to ensure that the output of both methods provided accurate and consistent results.
-
-Secondly, testing was performed throughout the development of \stops\ to ensure that no errant effects were introduced to the reduction process. Most notably the \stops\ \texttt{split} and \texttt{join} methods which are directly involved in the reduction process when implementing \stops.
-
 % General discussion of testing (I.E. not this test was done specifically this source, more along the lines of these tests were done to check this issue, seen here using this source for example.)
+The main challenge faced when developing \stops\ was ensuring that the software was compatible with both the \polsalt\ and \iraf\ file structures. As development is an iterative process, \stops\ was continually checked to ensure compatibility such that the varying \stops\ method inputs were correctly parsed, and that their outputs were parsable by the relevant \iraf\ tasks or \polsalt\ methods.
 
-% % Which tools were used/replaced/improved
-% The key improvements and replacements made during the development of \stops\ included optimizing the file parsing process to streamline the swapping between the required \polsalt\ and \iraf\ file structures. Additionally, legacy functions used in \polsalt\ which were re-implemented in \stops\ were updated to Python 3 to ensure compatibility with the latest Python versions.
+To this end, observations which were verified to have been accurately reduced were duplicated for testing purposes, allowing for continual checks of the \stops\ pipeline to be made during the development process. As the \stops\ \texttt{split} and \texttt{join} methods are designed to convert between the \polsalt\ and \iraf\ file structures, greater emphasis was made to ensure that the output of both methods provided accurate and consistent results.
 
 % % Why the pipeline is better
 % The rigorous error handling in \stops\ ensures that the user is informed of any issues that arise during the reduction process. This is particularly important as \stops\ was developed to enable a faster reduction process compared to that of pure \iraf\ or \polsalt.
@@ -21,7 +17,11 @@ Secondly, testing was performed throughout the development of \stops\ to ensure 
 % MARK: STOPS split tests
 \subsection{Testing the \texttt{split} Method} \label{subsec:test_split}
 
-The \stops\ \texttt{split} method had to accept any \polsalt\ pre-reduced \gls{FITS} files as input and output an \iraf\ compatible file structure.
+The \stops\ \texttt{split} method accepts any \polsalt\ pre-reduced (`mxgbp-' prefixed) \gls{FITS} files as input and outputs \iraf\ compatible file structures. As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} methods output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
+
+\input{chapter_4/tables/4_split_info.tex}
+
+\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting. The split `beam*.fits' files contain the split `SCI' extension data as well as the same header as the pre-reduced file. The only changes to the data, other than the exclusion of the perpendicular polarization beam, is a cropping introduced to the top and bottom most rows of the data (see \autoref{subsec:stops_split}), while the only changes to the header are the removal of the `EXTEND' keyword and the addition of the `NAXIS1' and `NAXIS2' keywords.\footnote{The `EXTEND' keyword indicates that the \gls{FITS} file contains multiple extensions while the `NAXIS1' and `NAXIS2' keywords indicate the shape and size of the stored data.}
 
 % \begin{itemize}
 %     \item Show changes to data files are intended (I.E. only splitting the data, no changes to the data itself)
@@ -44,7 +44,7 @@ The \stops\ \texttt{split} method had to accept any \polsalt\ pre-reduced \gls{F
 % MARK: STOPS join tests
 \subsection{Testing the \texttt{join} Method} \label{subsec:test_join}
 
-The \texttt{join} method had to accept \iraf\ wavelength solution database files as well as the \polsalt\ pre-reduced files and output a \polsalt\ \texttt{spectra extraction} compatible file structure. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method would not be able to process the files otherwise, thus halting the reduction process.
+The \texttt{join} method accepts \iraf\ wavelength solution database files as well as the \polsalt\ pre-reduced files and outputs a \polsalt\ \texttt{spectra extraction} compatible file structure. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method would not be able to process the files otherwise, thus halting the reduction process.
 
 % Testing \texttt{join}
 % \begin{itemize}
@@ -71,6 +71,8 @@ The \texttt{join} method had to accept \iraf\ wavelength solution database files
 \section{Wavelength Solution Checks} \label{sec:test_wav}
 
 % No \iraf\ tests or tests on \iraf\ \gls{FITS} files. (Trusted accurate)
+The secondary challenge encountered when developing \stops\ was ensuring that the wavelength solutions parsed by \stops\ were unaffected by the pipeline and that they were consistent with those created by \polsalt. This was achieved through the \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the wavelength solutions produced by \iraf.
+
 Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavelength calibrations, the accuracy of the new wavelength solutions needed to be validated. This was done both through the \iraf\ tasks, ensuring an accurate wavelength solution, and through the \stops\ \texttt{correlate} and \texttt{skylines} methods, allowing the integration of the wavelength solutions to be validated.
 % \gls{RMS} results returned from each
 
@@ -111,7 +113,7 @@ Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavel
 % MARK: WAV Corr. Checks
 \subsection{Cross Correlation Checks} \label{subsec:test_corr}
 
-The \texttt{correlate} method returns plots validating the wavelength solutions and so only had to accept the \polsalt\ \texttt{spectra extraction} method output files as input.
+The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the \polsalt\ \texttt{spectra extraction} method output files as input.
 
 % \begin{itemize}
 %     \item Testing correlate functionality using `offset', comparisons of arcs, FSRQ's and BLLac's.
@@ -121,7 +123,7 @@ The \texttt{correlate} method returns plots validating the wavelength solutions 
 % MARK: WAV Sky. Checks
 \subsection{Sky Line Checks} \label{subsec:test_sky}
 
-The \texttt{skylines} method returns plots validating the wavelength solutions and so only had to accept either the \iraf\ \texttt{transform} task or \stops\ \texttt{join} method output files as input.
+The \texttt{skylines} method returns plots validating the wavelength solutions and so only has to accept either the \iraf\ \texttt{transform} task or \stops\ \texttt{join} method output files as input.
 
 % \begin{itemize}
 %     \item Testing skylines using known spectral sky lines.
