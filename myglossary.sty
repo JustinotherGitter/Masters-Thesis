@@ -16,7 +16,6 @@
 \newacronym{ADC}{A-DC}{Analog-to-Digital Converter}
 \newacronym{ADComp}{ADC}{Atmospheric Dispersion Compensator}
 
-\newacronym{BPM}{BPM}{Bad Pixel Map}
 
 \newacronym{CCD}{CCD}{Charged-Coupled Device}
 \newacronym{cgs}{cgs}{centimeter-gram-second}
@@ -32,7 +31,6 @@
 \newacronym{HET}{HET}{Hobby-Eberly Telescope}
 \newacronym{HRS}{HRS}{High Resolution Spectrograph}
 
-
 \newacronym{L-45P}{L$-45^\circ$}{Linear $-45^\circ$ Polarized}
 \newacronym{L45P}{L$+45^\circ$}{Linear $+45^\circ$ Polarized}
 \newacronym{LCP}{LCP}{Left Circularly Polarized}
@@ -41,7 +39,6 @@
 
 \newacronym{NIR}{NIR}{Near Infra-Red}
 \newacronym{NIRWALS}{NIRWALS}{Near Infra-Red Washburn Labs Spectrograph}
-
 
 \newacronym{QE}{QE}{Quantum Efficiency}
 
@@ -70,6 +67,10 @@
 \newacronym[category={code}]{POLSALT}{polsalt}{\textit{Polarimetric reductions for SALT}}
 \newacronym[category={code}]{STOPS}{stops}{\textit{Supplementary Tools for \textsc{polsalt} Spectro\-polarimetry}}
 
+\newcommand{\iraf}{\gls{IRAF}}
+\newcommand{\polsalt}{\gls{POLSALT}}
+\newcommand{\stops}{\gls{STOPS}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setabbreviationstyle[elements]{short}
 % \newglossaryentry{arc}{
@@ -86,16 +87,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Commonly used acronyms
-\newcommand{\iraf}{\gls{IRAF}}
-\newcommand{\polsalt}{\gls{POLSALT}}
-\newcommand{\stops}{\gls{STOPS}}
 
 
 % Add any glossary entries below
 % cursor commands
 % exposure
-% extension (SCI, VAR, BPM) and sub-extension ($O$ and $E$)
 % frame
 % CLI (terminal) (UNIX -> bash, Windows -> Powershell/cmd, macOS -> Zsh)
 % wildcard
@@ -103,7 +99,7 @@
 \setabbreviationstyle[filters]{short}
 \newglossaryentry{Johnson-Cousins}{%
     name=Johnson-Cousins photometric system,
-    description={},
+    description={A widely-used system of broad-band photometry that uses a set of standard filters to measure the magnitudes of stars and other astronomical objects.},
 }
 \newglossaryentry{U}{%
     name=\ensuremath{U},
@@ -141,13 +137,53 @@
     sort={e}
 }
 
+\setabbreviationstyle[extensions]{short}
+\newglossaryentry{FITS-extensions}{%
+    name={FITS extensions},
+    description={Extensions used in \gls{FITS} files to store different types of data.}
+}
+\newglossaryentry{PRIMARY}{%
+    name={`Primary'},
+    description={The Primary extension of a \gls{FITS} file which contains the file Header.},
+    parent={FITS-extensions},
+    category={extensions},
+}
+\newglossaryentry{SCI}{%
+    name={`SCI'},
+    description={The Science data extension in a FITS file.},
+    parent={FITS-extensions},
+    category={extensions},
+}
+\newglossaryentry{VAR}{%
+    name={`VAR'},
+    description={The Variance data extension in a FITS file.},
+    parent={FITS-extensions},
+    category={extensions},
+}
+\newglossaryentry{BPM}{%
+    name={`BPM'},
+    description={The Bad Pixel Map extension in a FITS file.},
+    parent={FITS-extensions},
+    category={extensions},
+}
+\newglossaryentry{WAV}{%
+    name={`WAV'},
+    description={The Wavelength extension in a FITS file.},
+    parent={FITS-extensions},
+    category={extensions},
+}
+\newglossaryentry{OE-beams}{%
+    name={$O$- and $E$-beam},
+    description={The Ordinary and Extraordinary (perpendicular) polarization beams, stored either in a single extension or as sub-extensions in a FITS file.}
+}
+
 
 % \newglossaryentry{science}{
 %     name={science},
 %     description={A science frame is an image taken of the object of interest.},
 %     plural={science},
 % }
-
+    
 % \newglossaryentry{graphical user interface}{
 %     name={graphical user interface},
 %     description={A user interface that allows users to interact with a computer using graphical elements.},

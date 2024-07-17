@@ -21,11 +21,16 @@ The \stops\ \texttt{split} method accepts any \polsalt\ pre-reduced (`mxgbp-' pr
 
 \input{chapter_4/tables/4_split_info.tex}
 
-\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting. The split `beam*.fits' files contain the split `SCI' extension data as well as the same header as the pre-reduced file. The only changes to the data, other than the exclusion of the other perpendicular polarization beam, is a cropping which defaults to $40$~pixels, introduced to the top- and bottom-most rows of the data (see \autoref{subsec:stops_split}). The header is left mostly untouched, and only updated to represent the new data type and shape:
+\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting. The split `beam*.fits' files contain the split \gls{SCI} extension data as well as the same header as the pre-reduced file. The only changes to the data of each file is the exclusion of the opposing perpendicular polarization beam, as well as a cropping, which defaults to $40$~pixels, introduced to the top- and bottom-most rows of the data (see \autoref{subsec:stops_split}). This accounts for the discrepancy in the `Dimensions' between the input and output files in \autoref{table:split_info}.
+
+The header is left mostly untouched, and only updated to represent the new data type and shape:
 the `BITPIX' value is updated, from $8$ to $-32$, and the `NAXIS' value is updated, from $0$ to $2$;
 the `NAXIS1' and `NAXIS2' keywords are added, and their values are set to the data shape;
 and the `EXTEND' keyword is removed.%
 \footnote{The `EXTEND' keyword indicates that the \gls{FITS} file contains multiple extensions while the `NAXIS1' and `NAXIS2' keywords indicate the shape and size of the data stored in the relevant extension.}
+This accounts for the discrepancy in the `Cards' between the input and output file header entries in \autoref{table:split_info}.
+
+\todo{\iraf\ compatibility tests}
 
 % \begin{itemize}
 %     \item Tested over multiple grating/articulation angles to ensure robustness.

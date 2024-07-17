@@ -244,7 +244,7 @@ Figures are first saved as an `svg` before being exported as either a `png` or `
 <!-- MARK: 4. Tables -->
 ### Tables
 
-Tables can be generated using a [Table Generator](https://www.tablesgenerator.com/). Tables are located in their relevant chapter (`chapter_*/tables/`) and have the chapter number, $i$, prepended to their name (`<i>_<name>.tex`). The contents of the file are structured similar to:
+Tables can be generated using a [$\LaTeX$ Table Generator](https://www.tablesgenerator.com/). Tables are located in their relevant chapter (`chapter_*/tables/`) and have the chapter number, $i$, prepended to their name (`<i>_<name>.tex`). The contents of the file are structured similar to:
 
 ```Latex
 \begin{table}[t]
@@ -301,3 +301,5 @@ New commands for the most common glossary/acronym keys may improve 'writability'
 * GitHub `.cff` file references: <https://citation-file-format.github.io/>
 
 See 'preamble' of `references.bib` for further useful links relevant to specific chapters of thesis.
+
+[FITS]: https://fits.gsfc.nasa.gov/standard40/fits_standard40aa-le.pdf (The FITS Standard)

@@ -32,7 +32,7 @@ Basic \gls{CCD} reductions are run via \textbf{imred.py} and apply the necessary
 % MARK: Wavelength calibrations
 \subsection{Wavelength Calibrations}
 
-Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpolwavmap.py} and separately calibrates the $O$- and $E$-beams, based on the arc frames, and applies a simple cosmic-ray rejection for all science frames. This step is interactive and allows the user to individually fit wavelength calibration maps to each beam. The importance of an accurate correlation between both beams has been touched on previously (\autoref{subsec:specpol_cal}) and will be further discussed in \autoref{subsec:polsalt_limits}. The wavelength calibrated results are saved as an additional extension to each science FITS file, which are prefixed with a ``w'', and the $O$- and $E$-beams of the extensions are split into their own sub-extensions.
+Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpolwavmap.py} and separately calibrates the $O$- and $E$-beams, based on the arc frames, and applies a simple cosmic-ray rejection for all science frames. This step is interactive and allows the user to individually fit wavelength calibration maps to each beam. The importance of an accurate correlation between both beams has been touched on previously (\autoref{subsec:specpol_cal}) and will be further discussed in \autoref{subsec:polsalt_limits}. The wavelength calibrated results are saved as an additional \gls{WAV} wavelength extension to each science FITS file, which are prefixed with a ``w'', and the $O$- and $E$-beams of the extensions are split into their own sub-extensions.
 
 % MARK: Background subtraction and spectral extraction
 \subsection{Spectral Extraction}
@@ -247,7 +247,7 @@ The \texttt{fitcoords} task is used to find a two-dimensional surface function f
 The usage of \texttt{fitcoords} is similar to that of \texttt{identify} and consists of examining the distribution of identified points and eliminating any points that \texttt{reidentify} may have misidentified (see \autoref{fig:iraf_fc_plot}).
 
 By eliminating outliers with bad residuals and modifying the two-dimensional surface function's type and degree, the overall error of the fit is decreased, aligning more closely to what the `true' wavelength solution is.
-This surface function is the final two-dimensional wavelength solution for each two-dimensional spectrum. It is saved using the \texttt{fitcoords} database format, an example of which is given in \autoref{lst:iraf_fc_db}, as the list of parameters and function coefficients required to recreate the closest two-dimensional model. The \iraf\ wavelength solution is used by the \stops\ \texttt{join} method to create the wavelength extension required by \polsalt, further described in \autoref{subsec:stops_join}.
+This surface function is the final two-dimensional wavelength solution for each two-dimensional spectrum. It is saved using the \texttt{fitcoords} database format, an example of which is given in \autoref{lst:iraf_fc_db}, as the list of parameters and function coefficients required to recreate the closest two-dimensional model. The \iraf\ wavelength solution is used by the \stops\ \texttt{join} method to create the \gls{WAV} extension required by \polsalt, further described in \autoref{subsec:stops_join}.
 
 \begin{lstlisting}[
     float,
@@ -390,7 +390,7 @@ The files with \polsalt\ pre-reductions applied, namely \gls{FITS} files with an
 \end{figure}
 
 % Focus on minimizing changes and optimizing size
-As the intent was always to parse the wavelength function back into \polsalt\ it was decided to keep these temporary \gls{FITS} files as small as possible by only including the header and science extension.
+As the intent was always to parse the wavelength function back into \polsalt\ it was decided to keep these temporary \gls{FITS} files as small as possible by only including the header and \gls{SCI} science extension.
 % This is especially necessary when considering the amount of exposures taken for long term studies. % for a single spectropolarimetric observation run, and how the number of observations increases
 %
 % Any changes from how polsalt would do it
@@ -410,16 +410,16 @@ The full \stops\ \texttt{split} class docstring is given in \autoref{doc:split}.
     gobble=4,
 ]{join.py}
 
-% Running \texttt{join} finds all the relevant \gls{FITS} and local \iraf\ database files, creates an empty \gls{HDU} structure for each pair of matching spectropolarimetric beams, copies over the extensions and their respective image and header information, appends a new extension and parses the database wavelength solutions into the \polsalt\ intensity-wavelength format, performs cosmic ray cleaning, and masks the \gls{BPM} to reflect the wavelength calibrated regions.
+% Running \texttt{join} finds all the relevant \gls{FITS} and local \iraf\ database files, creates an empty \gls{HDU} structure for each pair of matching spectropolarimetric beams, copies over the extensions and their respective image and header information, appends a new \gls {WAV} extension and parses the database wavelength solutions into the \polsalt\ intensity-wavelength format, performs cosmic ray cleaning, and masks the \gls{BPM} to reflect the wavelength calibrated regions.
 After the \iraf\ \texttt{fitcoords} task has been successfully run for both the $O$- and $E$-beams, the \stops\ \texttt{join} method is used to extract and parse the wavelength solution from the \iraf\ database, and to create the wavelength calibrated \gls{FITS} files required by the \polsalt\ pipeline. More specifically, the \texttt{join} method performs the following steps:
 
-First, \texttt{join} parses the wavelength database file, described in \autoref{subsec:iraf_fitcoords}, for either a `Chebyshev' or `Legendre' solution, and calculates the wavelength at each ($x_{p}$, $y_{p}$) pixel position. This new image containing the corresponding wavelength values, seen in \autoref{fig:pol_wav_ext}, is appended to the wavelength calibrated \gls{FITS} file as the `WAV' extension.
-% and creates a function to convert a ($pixel$, $pixel$) position to a wavelength value. This is used to fill the pixels of the wavelength extension with their respective wavelength, as seen in \autoref{fig:pol_wav_ext}.
+First, \texttt{join} parses the wavelength database file, described in \autoref{subsec:iraf_fitcoords}, for either a `Chebyshev' or `Legendre' solution, and calculates the wavelength at each ($x_{p}$, $y_{p}$) pixel position. This new image containing the corresponding wavelength values, seen in \autoref{fig:pol_wav_ext}, is appended to the wavelength calibrated \gls{FITS} file as the \gls{WAV} extension.
+% and creates a function to convert a ($pixel$, $pixel$) position to a wavelength value. This is used to fill the pixels of the \gls{WAV} extension with their respective wavelength, as seen in \autoref{fig:pol_wav_ext}.
 
 \pagebreak
 
 % cosmic ray cleaning
-Second, cosmic-ray cleaning is performed on the science extension using the \texttt{ccdproc} implementation of the \texttt{lacosmic} Python package which implements the L.A. Cosmic algorithm, based on Laplacian edge detection. The read noise and gain parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, while the rest of the parameters were left as the default, following the publication and \href{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions}%
+Second, cosmic-ray cleaning is performed on the \gls{SCI} extension using the \texttt{ccdproc} implementation of the \texttt{lacosmic} Python package which implements the L.A. Cosmic algorithm, based on Laplacian edge detection. The read noise and gain parameters used for cosmic ray cleaning were chosen based on the properties of the \gls{RSS}, while the rest of the parameters were left as the default, following the publication and \href{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}{suggestions}%
 \footnote{Suggested parameters for the \texttt{lacosmic} algorithm may be found at \url{http://www.astro.yale.edu/dokkum/lacosmic/pars.html}.}
 by the algorithm's creator, as well as the implementation of the algorithm in the python \texttt{ccdproc} package \citep{lacosmic,astroscrappy}. The chosen parameters work well for most cosmic rays, as can be seen when comparing \autoref{fig:OE_split} to \autoref{fig:polsalt_post_wav_cal}, but may be modified as needed.
 
@@ -431,20 +431,20 @@ The only difference in the header is the  `NAXIS2' keyword, due to the cropping 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{3_pol_wav_ext.pdf}
-    \caption{A representative wavelength extension of a \gls{FITS} file, for the $O$- (top) and $E$-beam (bottom), ready to be processed by the \polsalt\ pipeline. The color bar shows the wavelength in \AA. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls{BPM} extensions to $0$. Figure created from the \stops\ \texttt{join} method output.}
+    \caption{A representative \gls{WAV} extension of a \gls{FITS} file, for the $O$- (top) and $E$-beam (bottom), ready to be processed by the \polsalt\ pipeline. The color bar shows the wavelength in \AA. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls{BPM} extensions to $0$. Figure created from the \stops\ \texttt{join} method output.}
     \label{fig:pol_wav_ext}
 \end{figure}
 
 % polsalt specific cropping (wav mask)
 % mask wavelength using wollaston curve for polsalt `parsability'
 % update BPM to reflect wavelength cropping
-Finally, the wavelength extension is masked to remove any uncalibrated wavelength regions as well as masked for the skewing of the trace introduced by the wollaston element. The masking of the wollaston skewing is necessary since \polsalt\ introduces a wollaston correction in the \texttt{spectra extraction} process. The \gls{BPM} extension is masked to reflect the valid wavelength calibrated region, and the files are saved with the \polsalt\ wavelength calibrated `wmxgbp' prefix.
+Finally, the \gls{WAV} extension is masked to remove any uncalibrated wavelength regions as well as masked for the skewing of the trace introduced by the wollaston element. The masking of the wollaston skewing is necessary since \polsalt\ introduces a wollaston correction in the \texttt{spectra extraction} process. The \gls{BPM} extension is masked to reflect the valid wavelength calibrated region, and the files are saved with the \polsalt\ wavelength calibrated `wmxgbp' prefix.
 The full \stops\ \texttt{join} class docstring is given in \autoref{doc:join}.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{3_post_wav_cal.pdf}
-    \caption{A representative science extension of a \gls{FITS} file, for the $O$- (top) and $E$-beam (bottom), ready to be processed by the \polsalt\ pipeline. The observed intensity is displayed via the grayscale value at each pixel.
+    \caption{A representative \gls{SCI} extension of a \gls{FITS} file, for the $O$- (top) and $E$-beam (bottom), ready to be processed by the \polsalt\ pipeline. The observed intensity is displayed via the grayscale value at each pixel.
     % Note the: chip gaps demarcated by regions of no exposure, traces which are regions of higher intensity spanning the horizontal axis, and sky lines which are the (slightly curved) regions of higher intensity strectching the vertical axis.
     Figure created from the \stops{join} method output.}
     \label{fig:polsalt_post_wav_cal}
@@ -493,7 +493,7 @@ The full \stops\ \texttt{join} class docstring is given in \autoref{doc:join}.
 % \end{figure}
 
 % Sky line comparisons allow the user to confirm the accuracy of the wavelength solution across both the rows and columns of the frame. The \texttt{skyline} method naively transforms the wavelength calibrated files, allowing the deviation of a skyline spanning multiple rows to be measured, and compares the observed sky line wavelength positions to those measured by \gls{SALT}, allowing the wavelength deviation of the skylines to be measured.%
-The \texttt{skyline} method has been implemented to compare the position of the sky lines on the science extension, or arc lines in the arc exposure, to the known positions of the sky lines, or arc lines, as measured by \gls{SALT}, respectively.%
+The \texttt{skyline} method has been implemented to compare the position of the sky lines on the \gls{SCI} extension, or arc lines in the arc exposure, to the known positions of the sky lines, or arc lines, as measured by \gls{SALT}, respectively.%
 \footnote{Both sky and arc lines are available at \url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/} .}
 This provides an additional check of the accuracy of the wavelength solution across the frame. This method accepts both the \iraf\ \texttt{transform} \gls{FITS} file or the `wmxgbp' \gls{FITS} files created by the \texttt{join} method as the input.
 
@@ -568,7 +568,7 @@ It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-f
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{3_pre_wav_cal.pdf}
-    \caption{The science extension of a typical spectropolarimetric \acs{FITS} file taken with the \gls{SALT} \gls{RSS}, after basic \polsalt\ \gls{CCD} reductions have been completed. Figure created from the \stops\ \texttt{split} output.}
+    \caption{The \gls{SCI} extension of a typical spectropolarimetric \acs{FITS} file taken with the \gls{SALT} \gls{RSS}, after basic \polsalt\ \gls{CCD} reductions have been completed. Figure created from the \stops\ \texttt{split} output.}
     \label{fig:polsalt_pre_wav_cal}
 \end{figure}
 
@@ -663,7 +663,7 @@ The reduction process using the \polsalt\ \gls{GUI} is completed by selecting an
 % \begin{lstlisting}[language=bash]
 % $ python ~/polsalt/scripts/correct_files.py w*fits
 % \end{lstlisting}
-% {\parskip=0pt where} the `w*.fits' is a wildcard expression that lists the \gls{FITS} files that have a wavelength extension and returns it to the \polsalt\ script.
+% {\parskip=0pt where} the `w*.fits' is a wildcard expression that lists the \gls{FITS} files that have a \gls{WAV} extension and returns it to the \polsalt\ script.
 
 % Next, the spectra in each \gls{FITS} file are extracted using the command:
 % \begin{lstlisting}[language=bash]
