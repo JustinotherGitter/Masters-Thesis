@@ -17,54 +17,47 @@ To this end, observations which were verified to have been accurately reduced we
 % MARK: STOPS split tests
 \subsection{Testing the \texttt{split} Method} \label{subsec:test_split}
 
-The \stops\ \texttt{split} method accepts any \polsalt\ pre-reduced (`mxgbp-' prefixed) \gls{FITS} files as input and outputs \iraf\ compatible file structures. As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} methods output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
+The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp-' prefixed) \gls{FITS} files as input and outputs \iraf\ compatible file structures. As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} methods output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
 
 \input{chapter_4/tables/4_split_info.tex}
 
-\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting. The split `beam*.fits' files contain the split \gls{SCI} extension data as well as the same header as the pre-reduced file. The only changes to the data of each file is the exclusion of the opposing perpendicular polarization beam, as well as a cropping, which defaults to $40$~pixels, introduced to the top- and bottom-most rows of the data (see \autoref{subsec:stops_split}). This accounts for the discrepancy in the `Dimensions' between the input and output files in \autoref{table:split_info}.
+\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting. The split `beam*.fits' files contain the split \gls{SCI} extension data as well as the same header as the pre-reduced file. The only changes to the data of each file is the exclusion of the opposing perpendicular polarization beam, as well as a cropping, which defaults to $40$~pixels (see \autoref{subsec:stops_split}), introduced to the top- and bottom-most rows of the data. This accounts for the discrepancy in the `Dimensions' between the input and output files in \autoref{table:split_info}.
 
 The header is left mostly untouched, and only updated to represent the new data type and shape:
 the `BITPIX' value is updated, from $8$ to $-32$, and the `NAXIS' value is updated, from $0$ to $2$;
-the `NAXIS1' and `NAXIS2' keywords are added, and their values are set to the data shape;
+the `NAXIS1' and `NAXIS2' keywords are added, and their values are set to the split \gls{SCI} data shape;
 and the `EXTEND' keyword is removed.%
 \footnote{The `EXTEND' keyword indicates that the \gls{FITS} file contains multiple extensions while the `NAXIS1' and `NAXIS2' keywords indicate the shape and size of the data stored in the relevant extension.}
 This accounts for the discrepancy in the `Cards' between the input and output file header entries in \autoref{table:split_info}.
 
-\todo{\iraf\ compatibility tests}
+This output file shape was chosen for \iraf\ compatibility, and was tested for robustness over multiple grating and articulation angles, as well as with various data sets to ensure that the \texttt{split} method was robust and reliable.
 
-% \begin{itemize}
-%     \item Tested over multiple grating/articulation angles to ensure robustness.
-%     \item Testing with various data sets to ensure robustness.
-%     \item Figure showing split fits file contents difference (cropped rows shown, etc.)
-% \end{itemize}
-
-% \todo{Insert figure showing example output files from both methods.}
+\todo{Insert figure showing comparison of 2D spectra \&| header before and after split operation? Would be a very boring figure.}
 
 % MARK: STOPS join tests
 \subsection{Testing the \texttt{join} Method} \label{subsec:test_join}
 
-The \texttt{join} method accepts \iraf\ wavelength solution database files as well as the \polsalt\ pre-reduced files and outputs a \polsalt\ \texttt{spectra extraction} compatible file structure. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method would not be able to process the files otherwise, thus halting the reduction process.
+The \texttt{join} method requires both \iraf\ wavelength solution database files (or a custom wavelength solution) and the \polsalt\ pre-reduced files as input and outputs a \polsalt\ \texttt{spectra extraction} compatible file structure. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method would not be able to process the files otherwise, thus halting the reduction process.
 
-% Testing \texttt{join}
+% \input{chapter_4/tables/4_join_info.tex}
+
+% The \stops\ \texttt{join} method was tested to ensure compatibility and correctness of the output data in comparison to \polsalt. This involved:
+% \iraf\ to \polsalt\ file structure conversion
+% Matching the joined output with \polsalt\ outputs.
+% Show changes to data files are intended (I.E. only joining the data, and `WAV' appended. No changes to the data itself)
+
+
+
 % \begin{itemize}
-%     \item \iraf\ to \polsalt\ file structure conversion
-%     \item Show changes to data files are intended (I.E. only joining the data, and `WAV' appended. No changes to the data itself)
-%     \item Wollaston correction of wavelength and bpm extensions
+%     \item Ensuring the Wollaston correction was accurately applied to wavelength and bpm extensions.
 %     \item update to python 3 of `polsalt' functions
 %     \item Mention any header differences (if any)
 %     \item Figure showing joined fits file contents difference (cropped rows shown once again, bpm differences due to CRR and NO wollaston bpm differences, etc.)
 % \end{itemize}
 
-% The \texttt{join} method in \stops\ was tested to ensure compatibility and correctness of the output data in comparison to \polsalt. This involved:
-% \begin{itemize}
-%     \item Matching the joined output with \polsalt\ outputs.
-%     \item Ensuring the Wollaston correction was accurately applied.
-%     \item Testing the integration of Python 3 updates.
-% \end{itemize}
+% \todo{Insert table summarizing differences in outputs (if any) between \stops\ and \polsalt.}
 
 % \todo{Insert figure showing comparison of spectra before and after join operation.}
-
-% \todo{Insert table summarizing differences in outputs (if any) between \stops\ and \polsalt.}
 
 % MARK: Check Wav. Cal.'s
 \section{Wavelength Solution Checks} \label{sec:test_wav}
