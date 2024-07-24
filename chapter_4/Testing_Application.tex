@@ -25,21 +25,21 @@ The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp-' p
 
 The header is left mostly untouched, and only updated to represent the new data type and shape:
 the `BITPIX' value is updated, from $8$ to $-32$, and the `NAXIS' value is updated, from $0$ to $2$;
-the `NAXIS1' and `NAXIS2' keywords are added, and their values are set to the split \gls{SCI} data shape;
+the `NAXIS1' and `NAXIS2' keywords are added, and their values are set to the new split \gls{SCI} data shape;
 and the `EXTEND' keyword is removed.%
 \footnote{The `EXTEND' keyword indicates that the \gls{FITS} file contains multiple extensions while the `NAXIS1' and `NAXIS2' keywords indicate the shape and size of the data stored in the relevant extension.}
 This accounts for the discrepancy in the `Cards' between the input and output file header entries in \autoref{table:split_info}.
 
 This output file shape was chosen for \iraf\ compatibility, and was tested for robustness over multiple grating and articulation angles, as well as with various data sets to ensure that the \texttt{split} method was robust and reliable.
 
-\todo{Insert figure showing comparison of 2D spectra \&| header before and after split operation? Would be a very boring figure.}
-
 % MARK: STOPS join tests
 \subsection{Testing the \texttt{join} Method} \label{subsec:test_join}
 
-The \texttt{join} method requires both \iraf\ wavelength solution database files (or a custom wavelength solution) and the \polsalt\ pre-reduced files as input and outputs a \polsalt\ \texttt{spectra extraction} compatible file structure. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method would not be able to process the files otherwise, thus halting the reduction process.
+The \texttt{join} method requires both \iraf\ wavelength solution database files (or a custom wavelength solutions) and the \polsalt\ pre-reduced files as input and outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp-' prefixed) \gls{FITS} file structures. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method is unable to process the files otherwise, thus halting the reduction process.
 
-% \input{chapter_4/tables/4_join_info.tex}
+\input{chapter_4/tables/4_join_info.tex}
+
+\autoref{table:join_info} shows the \gls{FITS} file information for the files with both \polsalt\ and \iraf\ wavelength calibrations. %The joined `wbeam*.fits' files contain the joined \gls{SCI} extension data as well as the same header as the pre-reduced file. The only changes to the data of each file is the addition of the wavelength solution data, which is appended to the end of the \gls{SCI} extension data. This accounts for the discrepancy in the `Dimensions' between the input and output files in \autoref{table:join_info}.
 
 % The \stops\ \texttt{join} method was tested to ensure compatibility and correctness of the output data in comparison to \polsalt. This involved:
 % \iraf\ to \polsalt\ file structure conversion

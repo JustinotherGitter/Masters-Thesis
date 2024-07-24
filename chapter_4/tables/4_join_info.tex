@@ -1,12 +1,22 @@
-\newcommand\mc[1]{\multicolumn{1}{c|}{#1}} % handy shortcut macro
 
 \begin{table}[t]
     \centering
-    \begin{tabular}{}
+    \begin{tabular}{c|cccccc}
         \hline
-        \\ \hline
-        \hline
+        Filename & No. & Name & Type & Cards & Dimensions & Format \\ \hline
+        \multirow{5}{*}{\polsalt} % \multirow{5}{*}{\parbox[c]{1.8cm}{\polsalt\-wmxgbpP\-20170328\-0054.fits}}
+        & $0$ & \gls{PRIMARY} & PrimaryHDU & $161$ & () &  \\
+        & $1$ & \gls{SCI} & ImageHDU & $21$ & ($3199$, $514$, $2$) & float32 \\
+        & $2$ & \gls{VAR} & ImageHDU & $10$ & ($3199$, $514$, $2$) & float32 \\
+        & $3$ & \gls{BPM} & ImageHDU & $10$ & ($3199$, $514$, $2$) & uint8 \\
+        & $4$ & \gls{WAV} & ImageHDU & $21$ & ($3199$, $514$, $2$) & float32 \\ \cline{1-1}
+        \multirow{5}{*}{\stops\ \texttt{join}} % \multirow{5}{*}{\parbox[c]{1.8cm}{\iraf\-wmxgbpP\-20170328\-0054.fits}}
+        & $0$ & \gls{PRIMARY} & PrimaryHDU & $161$ & () &  \\
+        & $1$ & \gls{SCI} & ImageHDU & $21$ & ($3199$, $474$, $2$) & float32 \\
+        & $2$ & \gls{VAR} & ImageHDU & $10$ & ($3199$, $474$, $2$) & float32 \\
+        & $3$ & \gls{BPM} & ImageHDU & $10$ & ($3199$, $474$, $2$) & uint8 \\
+        & $4$ & \gls{WAV} & ImageHDU & $21$ & ($3199$, $474$, $2$) & float32 \\ \hline
     \end{tabular}
-    \caption{}
+    \caption{A comparison of the \polsalt\ wavelength calibrated file, and the \stops\ \texttt{join} file containing an \iraf\ wavelength solution, both applied to \texttt{wmxgbpP201703280054.fits}. Table created using the \texttt{Astropy} \texttt{fitsinfo} \gls{CLI} tool.}
     \label{table:join_info}
 \end{table}
