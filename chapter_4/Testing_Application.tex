@@ -21,7 +21,7 @@ The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp-' p
 
 \input{chapter_4/tables/4_split_info.tex}
 
-\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting. The split `beam*.fits' files contain the split \gls{SCI} extension data as well as the same header as the pre-reduced file. The only changes to the data of each file is the exclusion of the opposing perpendicular polarization beam, as well as a cropping, which defaults to $40$~pixels (see \autoref{subsec:stops_split}), introduced to the top- and bottom-most rows of the data. This accounts for the discrepancy in the `Dimensions' between the input and output files in \autoref{table:split_info}.
+\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting. The split `beam*.fits' files contain the split \gls{SCI} extension data as well as the same header as the pre-reduced file. The only changes to the data of each file is the exclusion of the opposing perpendicular polarization beam, as well as a cropping which defaults to $40$~pixels (see \autoref{subsec:stops_split}), introduced to the top- and bottom-most rows of the data. This accounts for the discrepancy in the `Dimensions' between the input and output files in \autoref{table:split_info}.
 
 The header is left mostly untouched, and only updated to represent the new data type and shape:
 the `BITPIX' value is updated, from $8$ to $-32$, and the `NAXIS' value is updated, from $0$ to $2$;
@@ -35,7 +35,7 @@ This output file shape was chosen for \iraf\ compatibility, and was tested for r
 % MARK: STOPS join tests
 \subsection{Testing the \texttt{join} Method} \label{subsec:test_join}
 
-The \texttt{join} method requires both \iraf\ wavelength solution database files (or a custom wavelength solutions) and the \polsalt\ pre-reduced files as input and outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp-' prefixed) \gls{FITS} file structures. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method is unable to process the files otherwise, thus halting the reduction process.
+The \texttt{join} method requires both an \iraf\ database with wavelength solutions (or a custom wavelength solution) for both polarimetric beams and the \polsalt\ pre-reduced files as input and outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp-' prefixed) \gls{FITS} file structures. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method is unable to process the files otherwise, thus halting the reduction process.
 
 \input{chapter_4/tables/4_join_info.tex}
 

@@ -1,11 +1,11 @@
 # Ignore all but the important 'Thesis' files
 Thesis*
-!Thesis.tex
-!Thesis.pdf
 !Thesis.cls
+!Thesis.ipynb
+!Thesis.pdf
+!Thesis.tex
 
 # Misc files/folders that aren't crucial to rerun Thesis.tex
-eg_chapters/
 .vscode/
 */*.aux
 *.log
