@@ -150,7 +150,7 @@ General Notes:
 <!-- MARK: 1. Headings -->
 ### Headings
 
-My headings use `Title Case`.[^1] Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
+My headings use `Title Case`.$^{[1]}$ Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
 
 ```Latex
 % Note case is `Title Case`
@@ -159,7 +159,7 @@ My headings use `Title Case`.[^1] Generally, labels are only included when neces
 \dots
 ```
 
-[^1]: `Sentence case` may also be used, just stick to whichever style is chosen.
+[1]: <> (`Sentence case` may also be used, just stick to whichever style is chosen.)
 
 <!-- MARK: 2. Equations -->
 ### Equations
@@ -210,6 +210,29 @@ To use the figures in the $\LaTeX$ document, use:
     \label{fig:'suitable_label'}
 \end{figure}
 \footnotetext{\protect\url{(link)}}
+```
+
+or, for sub-figures, use:
+
+```Latex
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{fig1.extension}
+        \caption{fig1 caption}
+        \label{subfig:fig1_label}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{fig2.extension}
+        \caption{fig2 caption}
+        \label{subfig:fig2_label}
+    \end{subfigure}
+    \caption{Overall caption}
+    \label{fig:fig_caption}
+\end{figure}
 ```
 
 #### Custom Figures
