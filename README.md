@@ -264,6 +264,49 @@ Figures created by myself are (generally) made using Inkscape. To keep line widt
 
 Figures are first saved as an `svg` before being exported as either a `png` or `pdf` to 'play well' with the $\LaTeX$ `\includegraphics[]{}` command.
 
+#### $TikZ$ Figures
+<details>
+<summary>Useful Links</summary>
+
+  * <https://www.baeldung.com/cs/latex-flowcharts>
+  * <https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ%3A_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Creating_Flowcharts>
+
+</details>
+<br>
+
+$TikZ$ refers to the `tikz` package (which may include libraries) which can generate figures and diagrams, etc. The relevant preamble commands are:
+
+```Latex
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows} % specifically for flowcharts
+```
+
+The preamble must also include the definitions of any required `tikzstyle` definitions. Styles may include nodes and lines:
+
+```Latex
+\tikzstyle{ends} = [rectangle, draw, text centered, rounded corners, minimum height=2em]
+\tikzstyle{step} = [rectangle, draw, text centered, minimum height=2em]
+\tikzstyle{choice} = [diamond, draw, text centered, minimum height=2em]
+\tikzstyle{data}=[trapezium, draw, text centered, trapezium left angle=60, trapezium right angle=120, minimum height=2em]
+\tikzstyle{to} = [draw, -latex']
+```
+
+and may be included in a document using:
+
+```Latex
+\begin{figure}[t]
+    \centering
+    \begin{tikzpicture}
+        \node (name) [type, right of=(name), below of=(name), xshift=2cm, yshift=2cm] {text};
+        \draw [to] (name_from) -- (name_to);
+        \draw [arrow] (name_from) -- node[anchor=east] {yes} (name_to_yes);
+        \draw [arrow] (name_from) -- node {no} (name_to_no);
+    \end{tikzpicture}
+    \caption{File caption}
+    \label{fig:file_label}
+\end{figure}
+```
+
 <!-- MARK: 4. Tables -->
 ### Tables
 

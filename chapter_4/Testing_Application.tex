@@ -14,10 +14,12 @@ To this end, observations which were verified to have been accurately reduced we
 % % Why the pipeline is better
 % The rigorous error handling in \stops\ ensures that the user is informed of any issues that arise during the reduction process. This is particularly important as \stops\ was developed to enable a faster reduction process compared to that of pure \iraf\ or \polsalt.
 
+% Reduction specific tests refer to tests performed to ensure no errant effects are introduced during the reduction process. These tests were designed to validate the accuracy and reliability of the \stops\ pipeline in producing scientifically accurate results.
+
 % MARK: STOPS split tests
 \subsection{Testing the \texttt{split} Method} \label{subsec:test_split}
 
-The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp-' prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`(beam|arc)(O|E)-' prefixed) \gls{FITS} file structures. As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} method's output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
+The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`(arc|beam)(O|E)'- prefixed) \gls{FITS} file structures. As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} method's output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
 
 \input{chapter_4/tables/4_split_info.tex}
 
@@ -30,14 +32,33 @@ and the `EXTEND' keyword is removed.%
 \footnote{The `EXTEND' keyword indicates that the \gls{FITS} file contains multiple extensions while the `NAXIS1' and `NAXIS2' keywords indicate the shape and size of the data stored in the relevant extension.}
 This accounts for the discrepancy in the `Cards' between the \polsalt\ and \stops\ file header entries in \autoref{table:split_info}.
 
-The \polsalt\ \gls{SCI} data is unmodified when copying the data to the \stops\ \gls{FITS} file, but only includes half of the data, of the relevant polarization beam, with a cropping which defaults to $40$~pixels (see \autoref{subsec:stops_split}), introduced to the top- and bottom-most rows of the \polsalt\ data. This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{4_diff_O.pdf}
+        \caption{The difference in the \gls{SCI} extensions, for the `O' polarization beam.}
+        \label{subfig:diff_split_O}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{4_diff_E.pdf}
+        \caption{The difference in the \gls{SCI} extensions, for the `E' polarization beam.}
+        \label{subfig:diff_split_E}
+    \end{subfigure}
+    \caption{The difference between the \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files and the \stops\ `split' (`(arc|beam)(O|E)'- prefixed) files. Figures created using both the \polsalt\ \texttt{Raw image reduction} and \stops\ \texttt{split} method outputs.}
+    \label{fig:split_diff}
+\end{figure}
+
+\autoref{fig:split_diff} shows that the \polsalt\ \gls{SCI} data is unmodified when copying the data to the \stops\ \gls{FITS} file, but only includes half of the data, for the relevant $O$- or $E$-polarization beam, \autoref{subfig:diff_split_O} and \autoref{subfig:diff_split_E}, respectively, with a cropping which defaults to $40$~pixels (see \autoref{subsec:stops_split}), introduced to the top- and bottom-most rows of the \polsalt\ data. This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
 
 This output file structure was chosen for \iraf\ compatibility, and was tested for robustness over multiple grating and articulation angles, as well as with various data sets to ensure that the \texttt{split} method was robust and reliable.
 
 % MARK: STOPS join tests
 \subsection{Testing the \texttt{join} Method} \label{subsec:test_join}
 
-The \texttt{join} method requires both an \iraf\ database with wavelength solutions (or a custom wavelength solution) for both polarimetric beams and the \polsalt\ pre-reduced files as input and outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp-' prefixed) \gls{FITS} file structures. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method is unable to process the files otherwise, thus halting the reduction process. Thankfully, the \texttt{join} method output could be compared to the \polsalt\ \texttt{wavelength calibration} method output files, ensuring that any changes introduced by the \stops\ pipeline were well characterized.
+The \texttt{join} method requires both an \iraf\ database with wavelength solutions (or a custom wavelength solution) for both polarimetric beams and the \polsalt\ pre-reduced files as input and outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp'- prefixed) \gls{FITS} file structures. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method is unable to process the files otherwise, thus halting the reduction process. Thankfully, the \texttt{join} method output could be compared to the \polsalt\ \texttt{wavelength calibration} method output files, ensuring that any changes introduced by the \stops\ pipeline were well characterized.
 
 \input{chapter_4/tables/4_join_info.tex}
 
@@ -78,11 +99,11 @@ Although \stops\ performs cosmic ray cleaning (see \autoref{subsec:stops_join}),
         \caption{The difference in the \gls{WAV} extensions.}
         \label{subfig:join_WAV}
     \end{subfigure}
-    \caption{The difference of the \gls{FITS} file extensions between the \polsalt\ and \stops\ (`wmxgbp-' prefixed) wavelength calibrated files. Figures created using both the \polsalt\ and \stops versions of the \polsalt\ \texttt{spectral extraction} input.}
+    \caption{The difference of the \gls{FITS} file extensions between the \polsalt\ and \stops\ (`wmxgbp'- prefixed) wavelength calibrated files. Figures created using both the \polsalt\ and \stops versions of the \polsalt\ \texttt{spectral extraction} input.}
     \label{fig:join_in_out_diff}
 \end{figure}
 
-\autoref{fig:join_in_out_diff} shows the differences in the data between the \polsalt\ and \stops\ wavelength calibrated files. It can be seen in \autoref{subfig:join_VAR} that the \gls{VAR} extensions are identical. The \gls{SCI} extensions differ only in that the cosmic ray cleaning has been applied to the \stops\ data, whereas the \polsalt\ data applies a mask to the cosmic rays using the \gls{BPM} extension. The \gls{BPM} extensions are also masked to account for the valid wavelength calibrated region (\autoref{subfig:join_WAV}). The \gls{WAV} extensions contain the differing wavelength solutions and as such naturally differ. This accounts for the differences in the data between the \polsalt\ and \stops\ files.
+\autoref{fig:join_in_out_diff} shows the differences in the data between the \polsalt\ and \stops\ wavelength calibrated files. It can be seen that the \gls{VAR} extensions (\autoref{subfig:join_VAR}) are identical. The \gls{SCI} extensions (\autoref{subfig:join_SCI}) differ only in that the cosmic ray cleaning has been applied to the \stops\ data, whereas the \polsalt\ data applies a mask to the cosmic rays using the \gls{BPM} extension (\autoref{subfig:join_BPM}). The \gls{BPM} and \gls{WAV} extensions (\autoref{subfig:join_WAV}) are also masked to account for the valid wavelength calibrated region. The \gls{WAV} extensions contain the differing wavelength solutions and as such naturally differ. This accounts for the differences in the data between the \polsalt\ and \stops\ files.
 
 Finally, the \stops\ \texttt{join} method was tested to ensure compatibility and correctness of the output data in comparison to \polsalt. This involved testing the \texttt{join} method with various data sets to ensure that the output files were accurate and consistent.
 
@@ -97,7 +118,6 @@ Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavel
 
 % Wavelength solution validation from correlate and skylines results.
 %     \begin{itemize}
-%         \item Figures showing Correlate and Skyline results.
 %         \item RMS comparisons between \polsalt\ and \iraf\ to quantify differences.
 %         \item Any Figures for RMS comparisons or wavelength validation?
 %     \end{itemize}
@@ -127,17 +147,17 @@ Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavel
 
 % \todo{Insert graph showing correlation results with known standards.}
 
-% \todo{Insert figure illustrating skyline identification accuracy.}
-
 % MARK: WAV Corr. Checks
 \subsection{Cross Correlation Checks} \label{subsec:test_corr}
 
-The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the \polsalt\ \texttt{spectra extraction} method output files as input.
+The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the \polsalt\ \texttt{spectra extraction} (`ecwmxgbp'- prefixed) method output files as input.
 
 % \begin{itemize}
 %     \item Testing correlate functionality using `offset', comparisons of arcs, FSRQ's and BLLac's.
 %     \item Any figures showing correlation tests?
 % \end{itemize}
+
+% \todo{Insert figure illustrating cross correlation accuracy.}
 
 % MARK: WAV Sky. Checks
 \subsection{Sky Line Checks} \label{subsec:test_sky}
@@ -149,93 +169,63 @@ The \texttt{skylines} method returns plots validating the wavelength solutions a
 %     \item Any figures showing skyline tests?
 % \end{itemize}
 
+% \todo{Insert figure illustrating skyline identification accuracy.}
+
 % MARK: Results Unpub.
 \section[Application of \textsc{stops}]{Application of \stops} \label{sec:results_unpub}
 
-% \begin{itemize}
-%     \item Background information on each object.
-%     \item Detailed reductions steps performed on each object.
-%     \item Comparison of \polsalt\ results to those obtained using the \stops\ pipeline.
-% \end{itemize}
+% MARK: Science Targets
+\subsection{Spectropolarimetric Science Targets}
 
-% Application to Spectropolarimetric Standards
-% \begin{itemize}
-%     \item Science results, what the results can tell us and why it is useful, also comparison of results to FORS1/2 published data, focus on the polarization results.
-% \end{itemize}
+% Tested using 3C 279, 4C+01.02, and preliminary testing data provided by David. \todo{VERIFY CORRECT}
 
+\subsubsection{Background Information}
 
-% Reduction specific tests refer to tests performed to ensure no errant effects are introduced during the reduction process. These tests were designed to validate the accuracy and reliability of the \stops\ pipeline in producing scientifically accurate results.
+% Background information on each object.
+% \todo{Tabulate sources used, with their properties.}
 
-% % General discussion of sources used as part of testing
-% The sources used for testing included a range of spectropolarimetric standards, both highly polarized and non-polarized objects. The tests aimed to check for issues such as data integrity, consistency of wavelength calibration, and accuracy of polarization measurements.
+\subsubsection{Reduction Steps}
 
-% \todo{
-%     \begin{itemize}
-%         \item General discussion of testing (I.E. not this test was done specifically this source, more along the lines of these tests were done to check this issue, seen here using this source for example.)
-%     \end{itemize}
-% }
+% Detailed reductions steps performed on each object.
 
-% % MARK: Polarization tests
-\subsection{Polarization Parameters} \label{subsec:test_polarization}
+\subsubsection{Results and Comparison}
 
-% Polarization parameters validation from known sources.
-%     \begin{itemize}
-%         \item Polarization tested using 3C 279, 4C+01.02, and preliminary testing data provided by David.
-%         \item Polarization tested using spectropolarimetric standards (4 highly polarized, 2 non-polarized).
-%         \item Tabulate sources used, with their properties.
-%         \item Figures showing comparison plots of polarization parameters from \polsalt\ and \stops.
-%     \end{itemize}
+% Comparison of \polsalt\ results to those obtained using the \stops\ pipeline.
+% \todo{Insert figures showing comparison plots of polarization parameters from \polsalt\ and \stops.}
 
-% The accuracy of polarization parameters was tested using several known sources, including:
-% \begin{itemize}
-%     \item 3C 279
-%     \item 4C+01.02
-%     \item Data provided by David (preliminary testing data, not included in publications but used during pipeline development)
-% \end{itemize}
-
-% % MARK: Spectropolarimetric Standards
+% MARK: Spec.pol. Standards
 \subsection{Spectropolarimetric Standards}
 
-% Testing included the use of spectropolarimetric standards, comprising four highly polarized and two non-polarized objects. The specific tests performed were:
-% \begin{itemize}
-%     \item Background information on each object.
-%     \item Detailed reductions steps performed on each object.
-%     \item Comparison of \polsalt\ results to those obtained using the \stops\ pipeline.
-% \end{itemize}
+% Testing included the use of spectropolarimetric standards, comprising four highly polarized and two non-polarized objects. \todo{VERIFY CORRECT}
 
+\subsubsection{Background Information}
+
+% Background information on each object. / General discussion of sources used as part of testing
 % \todo{Insert table listing the spectropolarimetric standards used, with their properties.}
 
-% \todo{Insert figure showing comparison plots of polarization parameters from \polsalt\ and \stops.}
+% The sources used for testing included a range of spectropolarimetric standards, both highly polarized and non-polarized objects. The tests aimed to check for issues such as data integrity, consistency of wavelength calibration, and accuracy of polarization measurements.
 
-% \todo{Spectropolarimetric standards (4 highly polarized, 2 non-polarized)
-%     \begin{itemize}
-%         \item (Same as ch04 with science results)
-%         \item Background on objects
-%         \item Reductions
-%         \item Actual results - comparison of polsalt results to supplementary pipeline results
-%         \item Science results, what the results can tell us and why it is useful, also comparison of results to FORS1/2 published data, focus on the polarization results
-%     \end{itemize}
-% }
+\subsubsection{Reduction Steps}
+
+% Detailed reductions steps performed on each object. Highlight any differences in reduction steps compared to science targets.
+
+\subsubsection{Results and Comparison}
+
+% Comparison of \polsalt\ results to those obtained using the \stops\ pipeline.
+% Science results, what the results can tell us and why it is useful,
+% also comparison of results to FORS1/2 published data, focus on the polarization results.
+
+% \todo{Insert figures showing comparison plots of polarization parameters from \polsalt\ and \stops.}
 
 % MARK: Results Pub.
 \section{Application in Publications} \label{sec:results_pub}
 
-% Application in Publications
+% \subsection{} for each publication
+% Summarize the results of the publications appended to appendix.
+
+
 % \begin{itemize}
-%     \item Summarize the results of the publications appended to appendix.
+%     \item Hester paper(s)
+%     \item Joleen proceedings and work
+%     \item My proceedings
 % \end{itemize}
-
-% \todo{Summary of results from papers in appendix.
-%     \begin{itemize}
-%         \item Hester paper(s)
-%         \item Joleen proceedings and work
-%         \item My proceedings
-%     \end{itemize}
-% }
-
-% \todo{3C 279 and 4C+01.02
-%     \begin{itemize}
-%         \item Give Background on objects, Reduction steps, and Science results (what the results can tell us and why it is useful)
-%         \item (comparison of polsalt results to supplementary pipeline results will be in testing)
-%     \end{itemize}
-% }

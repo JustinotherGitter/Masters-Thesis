@@ -322,24 +322,24 @@ The \texttt{transform} task is the optional final step in the \iraf\ wavelength 
 \footnote{Help documentation for the \texttt{transform} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.twodspec.longslit.transform.html}.}
 Simply put, \texttt{transform} converts the ($x_p$, $y_p$) pixel units of an exposure to ($\lambda$, $y_p$) wavelength units which allows for an immediate check of whether the wavelength solution is consistent across the frame. Any general error in the wavelength solution may be spotted in the transformed images; ranging from minor errors, such as the arc lines or sky lines not being purely vertical across the frame, to more major errors, such as an incorrect wavelength solution skewing the exposure beyond recognition.
 
-For example, \autoref{fig:trans_O} shows a good fit to the wavelength solution, as after transformation all the sky lines run exactly vertical. \autoref{fig:trans_E}, on the other hand, shows a seemingly good fit, but closer inspection reveals that the sky lines (especially towards the right of the frame) deviate from the vertical, indicating a poor fit to the wavelength solution.
+For example, \autoref{subfig:trans_O} shows a good fit to the wavelength solution, as after transformation all the sky lines run exactly vertical. \autoref{subfig:trans_E}, on the other hand, shows a seemingly good fit, but closer inspection reveals that the sky lines (especially towards the right of the frame) deviate from the vertical, indicating a poor fit to the wavelength solution.
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \begin{subfigure}[b]{1.0 \textwidth}
         \centering
         \includegraphics[width=\textwidth]{3_tarcO.pdf}
-        \caption{A well-fit wavelength solution.}
-        \label{fig:trans_O}
+        \caption{A poorly fit wavelength solution with a region of no exposure (top of frame).}
+        \label{subfig:trans_O}
     \end{subfigure}
     \centering
     \begin{subfigure}[b]{1.0\textwidth}
         \centering
         \includegraphics[width=\textwidth]{3_tarcE.pdf}
-        \caption{A poorly fit wavelength solution with a region of no exposure (top of frame).}
-        \label{fig:trans_E}
+        \caption{A well-fit wavelength solution.}
+        \label{subfig:trans_E}
     \end{subfigure}
-    \caption{Examples of a well-fit (\subref{fig:trans_O}) and poor fit (\subref{fig:trans_E}) wavelength solution applied to the $O$- and $E$-beams  of an arc image. The contrast of the figures were scaled to best capture any deviation of the arc lines. Figures created by the \iraf\ \texttt{transform} task.}
+    \caption{Examples of a poor fit (\subref{subfig:trans_O}) and well-fit (\subref{subfig:trans_E}) wavelength solution applied to the $O$- and $E$-beams of an arc image. The contrast of the figures were scaled to best capture any deviation of the arc lines. Figures created by the \iraf\ \texttt{transform} task.}
     \label{fig:iraf_trans_plot}
 \end{figure}
 
@@ -384,8 +384,20 @@ The files with \polsalt\ pre-reductions applied, namely \gls{FITS} files with an
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{3_OEsplit.pdf}
-    \caption{The split $O$- and $E$-beams as handed to \iraf. Figure created from the \stops\ \texttt{split} method output.}
+    \begin{subfigure}[b]{1.0 \textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3_splitO.pdf}
+        \caption{The $O$-beam region of the \gls{FITS} file.}
+        \label{subfig:split_O}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}[b]{1.0\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3_splitE.pdf}
+        \caption{The $E$-beam region of the \gls{FITS} file.}
+        \label{subfig:split_E}
+    \end{subfigure}
+    \caption{The split $O$- (\subref{subfig:split_O}) and $E$-beams (\subref{subfig:split_E}) as handed to \iraf. Figure created from the \stops\ \texttt{split} method output.}
     \label{fig:OE_split}
 \end{figure}
 
@@ -430,8 +442,20 @@ The only difference in the header is the  `NAXIS2' keyword, due to the cropping 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{3_pol_wav_ext.pdf}
-    \caption{A representative \gls{WAV} extension of a \gls{FITS} file, for the $O$- (top) and $E$-beam (bottom), ready to be processed by the \polsalt\ pipeline. The color bar shows the wavelength in \AA. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls{BPM} extensions to $0$. Figure created from the \stops\ \texttt{join} method output.}
+    \begin{subfigure}[b]{1.0 \textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3_pol_wav_O.pdf}
+        \caption{The $O$ polarimetric beam.}
+        \label{subfig:pol_O}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}[b]{1.0\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3_pol_wav_E.pdf}
+        \caption{The $E$ polarimetric beam.}
+        \label{subfig:pol_E}
+    \end{subfigure}
+    \caption{A representative \gls{WAV} extension of a \gls{FITS} file, for the $O$- (\subref{subfig:pol_O}) and $E$-beam (\subref{subfig:pol_E}), ready to be processed by the \polsalt\ pipeline. The color bars show the wavelength in \AA. Note that regions which fall outside the exposed region are masked by setting the corresponding pixel values of the wavelength and \gls{BPM} extensions to $0$. Figure created from the \stops\ \texttt{join} method output.}
     \label{fig:pol_wav_ext}
 \end{figure}
 
@@ -443,12 +467,23 @@ The full \stops\ \texttt{join} class docstring is given in \autoref{doc:join}.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{3_post_wav_cal.pdf}
-    \caption{A representative \gls{SCI} extension of a \gls{FITS} file, for the $O$- (top) and $E$-beam (bottom), ready to be processed by the \polsalt\ pipeline. The observed intensity is displayed via the grayscale value at each pixel.
-    % Note the: chip gaps demarcated by regions of no exposure, traces which are regions of higher intensity spanning the horizontal axis, and sky lines which are the (slightly curved) regions of higher intensity strectching the vertical axis.
-    Figure created from the \stops{join} method output.}
+    \begin{subfigure}[b]{1.0 \textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3_post_wav_cal_O.pdf}
+        \caption{The $O$ polarimetric beam.}
+        \label{subfig:post_wav_O}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}[b]{1.0\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3_post_wav_cal_E.pdf}
+        \caption{The $E$ polarimetric beam.}
+        \label{subfig:post_wav_E}
+    \end{subfigure}
+    \caption{A representative \gls{SCI} extension of a \gls{FITS} file, for the $O$- (\subref{subfig:post_wav_O}) and $E$-beam (\subref{subfig:post_wav_E}), ready to be processed by the \polsalt\ pipeline. The observed intensity is displayed via the grayscale value at each pixel. Figure created from the \stops{join} method output.}
     \label{fig:polsalt_post_wav_cal}
 \end{figure}
+% Note the: chip gaps demarcated by regions of no exposure, traces which are regions of higher intensity spanning the horizontal axis, and sky lines which are the (slightly curved) regions of higher intensity strectching the vertical axis.
 
 % MARK: Skyline
 \subsection{Sky Line Checks} \label{subsec:stops_skyline}
@@ -543,9 +578,21 @@ The full \stops\ \texttt{split} class docstring is given in \autoref{doc:corr}.
 % MARK: General Reduction Procedure
 \section{General Reduction Procedure}\label{sec:red_proc}
 
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width = 0.8\textwidth]{3_new_workflow.pdf}
+%     \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and the developed supplementary tools. Diagram adapted from \cite{cooper_HEASA2022}.}
+%     \label{fig:new_workflow}
+% \end{figure}
+% \input{chapter_3/figures/3_reduction_flowchart.tex}
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.8\textwidth]{3_new_workflow.pdf}
+    \begin{tikzpicture}
+        \node (start) [ends] {Start};
+        \node (stop) [ends, right of=start, xshift=1cm] {Stop};
+    
+        \draw [to] (start) -- (stop);
+    \end{tikzpicture}
     \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and the developed supplementary tools. Diagram adapted from \cite{cooper_HEASA2022}.}
     \label{fig:new_workflow}
 \end{figure}
