@@ -84,7 +84,7 @@ This section contains the setup I've found irreplaceable while writing my thesis
 <!-- MARK: 3. RegEx -->
 ### Useful RegEx patterns
 
-Regex allows for complex `find` and `replace` functionality. It may also be used in the VSCode `Search` tab in the primary sidebar (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>)
+RegEx allows for complex `find` and `replace` functionality. It may also be used in the VSCode `Search` tab in the primary sidebar (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>)
 
 * `()` represent capture groups in `find` which may be referred to later in `replace` using `$1`, etc.
 * `[]` represent character groups in `find`
@@ -159,7 +159,7 @@ My headings use `Title Case`.$^{[1]}$ Generally, labels are only included when n
 \dots
 ```
 
-[1]: <> (`Sentence case` may also be used, just stick to whichever style is chosen.)
+[1]: `Sentence case` may also be used, just stick to whichever style is chosen.
 
 <!-- MARK: 2. Equations -->
 ### Equations
@@ -264,6 +264,7 @@ Figures created by myself are (generally) made using Inkscape. To keep line widt
 
 Figures are first saved as an `svg` before being exported as either a `png` or `pdf` to 'play well' with the $\LaTeX$ `\includegraphics[]{}` command.
 
+<!-- MARK: TikZ -->
 #### $TikZ$ Figures
 <details>
 <summary>Useful Links</summary>

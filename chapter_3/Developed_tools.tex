@@ -21,21 +21,21 @@ The \polsalt\ (\glsxtrlong{POLSALT}) pipeline is the official reduction pipeline
 The newest version of the software, aptly named the `beta version' (`version' 23 January 2020), was the version adapted in this study. It includes a \gls{GUI}, depicted in \autoref{fig:polsalt_gui}, which allows for limited interactivity during key steps in the reduction process.%
 \footnote{Installation files and instructions for the `beta version' utilizing the \gls{GUI} are available at \url{http://www.saao.ac.za/~ejk/polsalt/code/} in a TAR GZIP file.}
 
-The steps that make up the \polsalt\ reduction pipeline include basic \gls{CCD} reductions, wavelength calibrations, background subtraction and spectral extraction, raw Stokes calculations, final Stokes calculations, and visualization of the results. Accurate reductions at each step are crucial for accurate results and are thus briefly discussed below. Further details for the reduction process may be found at the \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ GitHub wiki}.%
+The steps that make up the \polsalt\ reduction pipeline include raw image reductions, wavelength calibrations, background subtraction and spectral extraction, raw Stokes calculations, final Stokes calculations, and visualization of the results. Accurate reductions at each step are crucial for accurate results and are thus briefly discussed below. Further details for the reduction process may be found at the \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ GitHub wiki}.%
 \footnote{The GitHub wiki for \polsalt\ is available at \url{https://github.com/saltastro/polsalt/wiki}.}
 
 % MARK: Basic CCD reductions
-\subsection{Basic CCD Reductions}
+\subsection{Raw Image Reductions} \label{subsec:pol_raw}
 
-Basic \gls{CCD} reductions are run via \textbf{imred.py} and apply the necessary basic reductions to the raw data before any calibrations are applied. These reductions include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and pixel variance information. Files with basic reductions performed have ``mxgbp'' prepended to their names. As of February 2022, basic \gls{CCD} reductions are automatically run for all RSS spectropolarimetric observations as part of the default SALT basic reduction pipeline that is run daily.
+Raw image reductions are run via \textbf{imred.py} and apply the necessary basic reductions to the raw data before any calibrations are applied. These reductions include overscan subtractions, gain corrections, crosstalk corrections, and mosaicking as well as attaching the bad pixel maps and pixel variance information. Files with raw image reductions performed have ``mxgbp'' prepended to their names. As of February 2022, raw image reductions are automatically run for all RSS spectropolarimetric observations as part of the default SALT basic reduction pipeline that is run daily.
 
 % MARK: Wavelength calibrations
-\subsection{Wavelength Calibrations}
+\subsection{Wavelength Calibrations} \label{subsec:pol_wav}
 
 Wavelength calibration and cosmic-ray rejection is performed via \textbf{specpolwavmap.py} and separately calibrates the $O$- and $E$-beams, based on the arc frames, and applies a simple cosmic-ray rejection for all science frames. This step is interactive and allows the user to individually fit wavelength calibration maps to each beam. The importance of an accurate correlation between both beams has been touched on previously (\autoref{subsec:specpol_cal}) and will be further discussed in \autoref{subsec:polsalt_limits}. The wavelength calibrated results are saved as an additional \gls{WAV} wavelength extension to each science FITS file, which are prefixed with a ``w'', and the $O$- and $E$-beams of the extensions are split into their own sub-extensions.
 
 % MARK: Background subtraction and spectral extraction
-\subsection{Spectral Extraction}
+\subsection{Spectral Extraction} \label{subsec:pol_spec}
 
 \begin{figure}[t]
     \centering
@@ -48,7 +48,7 @@ Background subtraction and spectral extraction is run via \textbf{spec\-pol\-ext
 The user, using the brightest trace in the image as a reference, defines regions which span the wavelength axis which define the background and trace regions for the sky subtraction and spectral extraction. Files with background and geometric corrections applied are saved with ``c'' prepended to their names and files which contain the extracted one dimensional spectrum have ``e'' further prepended to their names.
 
 % MARK: Raw Stokes calculations
-\subsection{Raw Stokes Calculations}
+\subsection{Raw Stokes Calculations} \label{subsec:pol_rstokes}
 
 The raw Stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw Stokes' signal, $S$, are calculated as:
 \begin{align} \label{eq:polsalt_rawstokes}
@@ -58,12 +58,12 @@ The raw Stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py
 The raw Stokes signal is calculated as the normalized difference of the $O$- and $E$-beams, for a waveplate pair, taken perpendicular to one another. The created files contain the raw Stokes information and use a very specific naming style; most notably the indexes of the related waveplate pairs, from \autoref{table:RSS_specpol_patterns}, are included in the file names.
 
 % MARK: Final Stokes calculations
-\subsection{Final Stokes Calculations}
+\subsection{Final Stokes Calculations} \label{subsec:pol_fstokes}
 
 The Final Stokes calculations are performed via \textbf{specpolfinalstokes.py} and, using the waveplate pattern along with the raw Stokes signals, calibrates for the polarimetric zero-point and waveplate efficiency, and calculates the final Stokes parameters. Before the final Stokes calculations are performed, and if a sufficient number of redundant exposures were taken, the raw Stokes signals are culled to eliminate outlier signals which may arise from, for example, temporary atmospheric conditions affecting the signal. The culling is performed by comparing observation cycles against one another, comparing the deviation of the signal means which estimate the baseline systematic polarization fluctuations (due to imperfections in repeatability), and performing a $\chi^2$ analysis to eliminate any statistical outliers.
 
 % MARK: Visualization
-\subsection{Visualization}
+\subsection{Visualization} \label{subsec:pol_viz}
 
 \begin{figure}[t]
     \centering
@@ -133,7 +133,7 @@ and the \texttt{eparam} task in the \texttt{language} package which allows the p
 For the wavelength calibration of \gls{SALT} spectropolarimetric data, the relevant tasks are the \texttt{identify} and \texttt{reidentify} tasks located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and the (optional) \texttt{transform} tasks located under the \texttt{noao.twodspec.long\-slit} package. These tasks produce a two-dimensional wavelength solution which must be obtained separately for the $O$- and $E$-beam.
 
 % MARK: Identify
-\subsection{Identify}
+\subsection{Identify} \label{subsec:iraf_identify}
 
 The \texttt{identify} task is used to interactively determine a one-dimensional wavelength function across a chosen row of an arc exposure by identifying features in the spectrum with known wavelengths.%
 \footnote{Help documentation for the \texttt{identify} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.identify.html}.}
@@ -229,7 +229,7 @@ begin	identify arcO0057[*,237]
 \end{figure}
 
 % MARK: Reidentify
-\subsection{Reidentify}
+\subsection{Reidentify} \label{subsec:iraf_reidentify}
 
 The \texttt{reidentify} task is used to run the \texttt{identify} task autonomously and repeatedly across the entirety of the arc frame at defined (row) intervals.%
 \footnote{Help documentation for the \texttt{reidentify} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/noao.onedspec.reidentify.html}.}
@@ -588,12 +588,71 @@ The full \stops\ \texttt{split} class docstring is given in \autoref{doc:corr}.
 \begin{figure}[t]
     \centering
     \begin{tikzpicture}
-        \node (start) [ends] {Start};
-        \node (stop) [ends, right of=start, xshift=1cm] {Stop};
-    
-        \draw [to] (start) -- (stop);
+        \tikzstyle{ends}    = [rectangle, draw, text centered, minimum height=1.5em, rounded corners]
+        \tikzstyle{polsalt} = [rectangle, draw, text centered, minimum height=1.5em, minimum width=6em, fill=cyan]
+        \tikzstyle{stops}   = [rectangle, draw, text centered, minimum height=1.5em, minimum width=6em, fill=orange]
+        \tikzstyle{iraf}    = [rectangle, draw, text centered, minimum height=1.5em, minimum width=6em, fill=green!50!gray]
+        \tikzstyle{choice}  = [diamond,   draw, text centered, text width=5em, aspect=3]
+        \tikzstyle{step}    = [rectangle, draw, text centered, minimum height=1.5em]
+        \tikzstyle{data}    = [trapezium, draw, text centered, minimum height=1.5em, trapezium left angle=60, trapezium right angle=120]
+        \tikzstyle{to}      = [draw, -latex']
+
+        \node (start) [ends] {\hyperref[subsec:reduc_setup]{\textbf{Start}}};
+
+        \node (key_pol) [polsalt, right of=start, xshift=2cm, yshift=1cm] {\textbf{\polsalt}};
+        \node (key_stops) [stops, right of=key_pol, xshift=3cm] {\textbf{\stops}};
+        \node (key_iraf) [iraf, right of=key_stops, xshift=3cm] {\textbf{\iraf}};
+
+        \node (pol_pre) [polsalt, below of=key_pol] {\hyperref[subsec:pol_raw]{Raw image reduction}};
+        \draw [to] (start) -- (pol_pre);
+        \node (wav_check) [choice, right of=pol_pre, xshift=3cm, yshift=-1cm] {\polsalt?};
+        \draw [to] (pol_pre) -| (wav_check);
+        \node (pol_wav) [polsalt, below of=pol_pre, yshift=-1cm] {\hyperref[subsec:pol_wav]{Wavelength calibration}};
+        \draw [to] (wav_check) -| node[anchor=south] {Yes} (pol_wav);
+        \node (pol_spec) [polsalt, below of=pol_wav, yshift=-3cm] {\hyperref[subsec:pol_spec]{Spectra extraction}};
+        \draw [to] (pol_wav) -- (pol_spec);
+        \node (pol_rstokes) [polsalt, below of=pol_spec, yshift=-2cm] {\hyperref[subsec:pol_rstokes]{Raw Stokes calculation}};
+        \draw [to] (pol_spec) -- (pol_rstokes);
+        \node (pol_fstokes) [polsalt, below of=pol_rstokes] {\hyperref[subsec:pol_fstokes]{Final Stokes calculation}};
+        \draw [to] (pol_rstokes) -- (pol_fstokes);
+        \node (pol_vis) [polsalt, below of=pol_fstokes] {\hyperref[subsec:pol_viz]{Results visualisation}};
+        \draw [to] (pol_fstokes) -- (pol_vis);
+        \node (stop) [ends, left of=pol_vis, xshift=-2cm] {\textbf{Stop}};
+        \draw [to] (pol_vis) -- (stop);
+
+        \node (stops_split) [stops, below of=wav_check, yshift=-1cm] {\hyperref[subsec:stops_split]{\texttt{split}}};
+        \draw [to] (wav_check) -- node[anchor=west] {No} (stops_split);
+        \node (iraf_id) [iraf, right of=stops_split, xshift=3cm] {\hyperref[subsec:iraf_identify]{\texttt{identify}}};
+        \draw [to] (stops_split) -- (iraf_id);
+        \node (iraf_reid) [iraf, below of=iraf_id] {\hyperref[subsec:iraf_reidentify]{\texttt{reidentify}}};
+        \draw [to] (iraf_id) -- (iraf_reid);
+        \node (iraf_fit) [iraf, below of=iraf_reid] {\hyperref[subsec:iraf_fitcoords]{\texttt{fitcoords}}};
+        \draw [to] (iraf_reid) -- (iraf_fit);
+
+        \node (stops_join) [stops, left of=iraf_fit, xshift=-3cm] {\hyperref[subsec:stops_join]{\texttt{join}}};
+        \draw [to] (iraf_fit) -- (stops_join);
+        
+        % Make optional node
+        \node (iraf_trans)  [iraf, below of=iraf_fit] {\hyperref[subsec:iraf_transform]{\texttt{transform}}};
+        % Make optional path
+        \draw [to] (iraf_fit) -- (iraf_trans);
+        
+        \node (stops_sky)   [stops, left of=iraf_trans, xshift=-3cm, yshift=-1cm] {\hyperref[subsec:stops_skyline]{\texttt{skyline}}};
+        \draw [to] (stops_join) -- (stops_sky);
+        % Make optional path
+        \draw [to] (iraf_trans) -| (stops_sky);
+        
+        \node (stops_corr)  [stops, right of=pol_spec, xshift=3cm, yshift=-2cm] {\hyperref[subsec:stops_correlate]{\texttt{correlate}}};
+        \draw [to] (stops_join) -| (pol_spec.east) |- (stops_corr);
+        
+        \node (corr_check)  [choice, below of=iraf_trans, yshift=-1cm] {Good $f(\lambda)$?};
+        \draw [to] (stops_sky) -| (corr_check);
+        \draw [to] (stops_corr) -- (corr_check);
+        \draw [to] (corr_check) |- node[anchor=west] {Yes} (pol_rstokes);
+        \draw [to] (corr_check) -| node[anchor=north] {No} ++(2.5cm, 5cm) -- (iraf_id);
+
     \end{tikzpicture}
-    \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and the developed supplementary tools. Diagram adapted from \cite{cooper_HEASA2022}.}
+    \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and \stops. Diagram adapted from \cite{cooper_HEASA2022}.}
     \label{fig:new_workflow}
 \end{figure}
 
@@ -647,10 +706,10 @@ Splitting the data is presented in \autoref{code:stops_split}. The \stops\ \text
 % MARK: IRAF wavelength calibrations
 \subsubsection{\iraf\ Wavelength Calibrations}
 
-The \iraf\ wavelength calibrations are performed using the tasks described in \autoref{sec:iraf}, namely \texttt{identify}, \texttt{reidentify}, \texttt{fitcoords}, and optionally \texttt{transform}. In general, these tasks are run directly in the \iraf\ terminal using:%
-\footnote{Please see the \iraf\ help docs, available at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/iraf.html}, on the relevant tasks for a comprehensive discussion of the parameters available.}
+The \iraf\ wavelength calibrations are performed using the tasks described in \autoref{sec:iraf}, namely the \texttt{identify}, \texttt{reidentify}, \texttt{fitcoords}, and optionally \texttt{transform} tasks.
 
-\pagebreak
+{\noindent In} general, these tasks are run directly in the \iraf\ terminal using:%
+\footnote{Please see the \iraf\ help docs, available at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/iraf.html}, on the relevant tasks for a comprehensive discussion of the parameters available.}
 
 \begin{lstlisting}[language=bash]
 cl> identify arc_files
@@ -669,6 +728,8 @@ Running an \iraf\ script may be done by running:
 cl> cl < script_name.cl
 \end{lstlisting}
 {\parskip=0pt but} is not suggested for interactive scripts, which run best when simply copied from the \texttt{<.../>sci/script\_name.cl} file to the \iraf\ terminal.
+
+\pagebreak
 
 % MARK: Post IRAF
 \subsubsection{Preparing the Data for \polsalt}
