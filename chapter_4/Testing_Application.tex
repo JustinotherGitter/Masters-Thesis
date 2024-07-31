@@ -111,7 +111,7 @@ Finally, the \stops\ \texttt{join} method was tested to ensure compatibility and
 \section{Wavelength Solution Checks} \label{sec:test_wav}
 
 % No \iraf\ tests or tests on \iraf\ \gls{FITS} files. (Trusted accurate)
-The secondary challenge encountered when developing \stops\ was ensuring that the wavelength solutions parsed by \stops\ were unaffected by the pipeline and that they were consistent with those created by \polsalt. This was achieved through the \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the wavelength solutions produced by \iraf.
+The secondary challenge encountered when developing \stops\ was ensuring that the wavelength solutions parsed by \stops\ were unaffected by the pipeline and that they were consistent with those created by \polsalt. This was achieved through the \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the wavelength solutions produced by \iraf, but were later modified to parse both the \iraf\ and \polsalt\ wavelength solutions.
 
 Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavelength calibrations, the accuracy of the new wavelength solutions needed to be validated. This was done both through the \iraf\ tasks, ensuring an accurate wavelength solution, and through the \stops\ \texttt{correlate} and \texttt{skylines} methods, allowing the integration of the wavelength solutions to be validated.
 % \gls{RMS} results returned from each
@@ -121,11 +121,6 @@ Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavel
 %         \item RMS comparisons between \polsalt\ and \iraf\ to quantify differences.
 %         \item Any Figures for RMS comparisons or wavelength validation?
 %     \end{itemize}
-
-% Testing \iraf\ wavelength solution
-% \begin{itemize}
-%     \item The \texttt{skylines} and \texttt{correlate} outputs are tests of the wavelength calibration.
-% \end{itemize}
 
 % Wavelength solution tests were conducted to validate the accuracy of the \stops\ wavelength calibration process. This included:
 % \begin{itemize}
@@ -153,7 +148,7 @@ Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavel
 The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the \polsalt\ \texttt{spectra extraction} (`ecwmxgbp'- prefixed) method output files as input.
 
 % \begin{itemize}
-%     \item Testing correlate functionality using `offset', comparisons of arcs, FSRQ's and BLLac's.
+%     \item Testing correlate functionality using `offset', comparisons of arcs, FSRQ's (few features) and BLLac's (many features).
 %     \item Any figures showing correlation tests?
 % \end{itemize}
 
