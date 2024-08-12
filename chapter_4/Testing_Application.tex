@@ -53,7 +53,7 @@ This accounts for the discrepancy in the `Cards' between the \polsalt\ and \stop
 
 \autoref{fig:split_diff} shows that the \polsalt\ \gls{SCI} data is unmodified when copying the data to the \stops\ \gls{FITS} file, but only includes half of the data, for the relevant $O$- or $E$-polarization beam, \autoref{subfig:diff_split_O} and \autoref{subfig:diff_split_E}, respectively, with a cropping which defaults to $40$~pixels (see \autoref{subsec:stops_split}), introduced to the top- and bottom-most rows of the \polsalt\ data. This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
 
-This output file structure was chosen for \iraf\ compatibility, and was tested for robustness over multiple grating and articulation angles, as well as with various data sets to ensure that the \texttt{split} method was robust and reliable.
+This output file structure was chosen for \iraf\ compatibility, and was tested over multiple grating and articulation angles, as well as with various data sets to ensure that the \texttt{split} method was robust and reliable.
 
 % MARK: STOPS join tests
 \subsection{Testing the \texttt{join} Method} \label{subsec:test_join}
@@ -111,116 +111,99 @@ Finally, the \stops\ \texttt{join} method was tested to ensure compatibility and
 \section{Wavelength Solution Checks} \label{sec:test_wav}
 
 % No \iraf\ tests or tests on \iraf\ \gls{FITS} files. (Trusted accurate)
-The secondary challenge encountered when developing \stops\ was ensuring that the wavelength solutions parsed by \stops\ were unaffected by the pipeline and that they were consistent with those created by \polsalt. This was achieved through the \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the wavelength solutions produced by \iraf, but were later modified to parse both the \iraf\ and \polsalt\ wavelength solutions.
+The secondary challenge encountered when developing \stops\ was ensuring that the wavelength solutions parsed by \stops\ were unaffected by the pipeline and that they were similar to those created by \polsalt. This was achieved through the \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the wavelength solutions produced by \iraf, but were later modified to parse both the \iraf\ and \polsalt\ wavelength solutions, allowing for further inspection of the two-dimensional wavelength solution.
 
 Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavelength calibrations, the accuracy of the new wavelength solutions needed to be validated. This was done both through the \iraf\ tasks, ensuring an accurate wavelength solution, and through the \stops\ \texttt{correlate} and \texttt{skylines} methods, allowing the integration of the wavelength solutions to be validated.
-% \gls{RMS} results returned from each
 
-% Wavelength solution validation from correlate and skylines results.
-%     \begin{itemize}
-%         \item RMS comparisons between \polsalt\ and \iraf\ to quantify differences.
-%         \item Any Figures for RMS comparisons or wavelength validation?
-%     \end{itemize}
+\todo{Add \gls{RMS} results (Table / Figures / Both?) from wavelength solution checks (\iraf\ \gls{RMS}, \polsalt\ \gls{RMS}) to quantify differences.}
 
-% Wavelength solution tests were conducted to validate the accuracy of the \stops\ wavelength calibration process. This included:
-% \begin{itemize}
-%     \item Full frame wavelength solution checks to ensure comprehensive calibration.
-%     \item O/E correlation checks to verify the consistency of the wavelength solutions.
-%     \item RMS comparisons between \polsalt\ and \stops\ to quantify differences.
-% \end{itemize}
-
-% \todo{Insert table comparing RMS values of wavelength solutions from \polsalt\ and \stops.}
-
-% \todo{Insert figure showing full frame wavelength solution plots.}
-
-% The \texttt{correlate} and \texttt{skylines} methods were tested for accuracy and performance. Key aspects of the testing included:
-% \begin{itemize}
-%     \item Verifying the accuracy of the cross-correlation function against known standards.
-%     \item Ensuring skyline identification was accurate and consistent.
-%     \item Performance testing with large data sets to ensure efficiency.
-% \end{itemize}
-
-% \todo{Insert graph showing correlation results with known standards.}
+\todo{Plot \iraf\ vs \polsalt\ \gls{RMS} for sources?}
 
 % MARK: WAV Corr. Checks
 \subsection{Cross Correlation Checks} \label{subsec:test_corr}
 
+% O/E correlation checks to verify the consistency of the wavelength solutions.
 The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the \polsalt\ \texttt{spectra extraction} (`ecwmxgbp'- prefixed) method output files as input.
 
-% \begin{itemize}
-%     \item Testing correlate functionality using `offset', comparisons of arcs, FSRQ's (few features) and BLLac's (many features).
-%     \item Any figures showing correlation tests?
-% \end{itemize}
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{4_corr_test.pdf}
+        \caption{fig1 caption}
+        \label{subfig:fig1_label}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{4_corr_spec.pdf}
+        \caption{fig2 caption}
+        \label{subfig:fig2_label}
+    \end{subfigure}
+    \caption{Overall caption}
+    \label{fig:fig_caption}
+\end{figure}
 
-% \todo{Insert figure illustrating cross correlation accuracy.}
+\todo{Show testing `correlate' functionality using `offset', comparisons of arcs, FSRQ's (few features) and BLLac's (many features).}
+
+\todo{Insert figure(s) illustrating cross correlation accuracy.}
 
 % MARK: WAV Sky. Checks
 \subsection{Sky Line Checks} \label{subsec:test_sky}
 
+% Full frame wavelength solution checks to ensure comprehensive calibration.
+% Verifying the accuracy of the cross-correlation function against known standards.
 The \texttt{skylines} method returns plots validating the wavelength solutions and so only has to accept either the \iraf\ \texttt{transform} task or \stops\ \texttt{join} method output files as input.
 
-% \begin{itemize}
-%     \item Testing skylines using known spectral sky lines.
-%     \item Any figures showing skyline tests?
-% \end{itemize}
+\todo{Compare skylines from \stops\ to `poor' \polsalt\ spectral extraction (I.E. spectral extraction with no trace in the `target' window and the `background' window on region with no skylines).}
 
-% \todo{Insert figure illustrating skyline identification accuracy.}
+\todo{Test `skylines' using known spectral sky lines / telluric lines.}
 
-% MARK: Results Unpub.
-\section[Application of \textsc{stops}]{Application of \stops} \label{sec:results_unpub}
+\todo{Insert figure illustrating skyline identification accuracy.}
+
+% MARK: Application
+\section[Application of \textsc{stops}]{Application of \stops}
+% https://ui.adsabs.harvard.edu/search/fq=%7B!type%3Daqp%20v%3D%24fq_database%7D&fq_database=database%3Aastronomy&p_=0&q=%20author%3A%22Cooper%2C%20J.%22%20spectropolarimetry&sort=date%20desc%2C%20bibcode%20desc
+
+\todo{1-2 paragraph intro mentioning both standards used for testing and (flaring blazar) science targets used. Mention results discussed for optical region, and briefly why (\gls{SALT}).}
+
+% MARK: spec. pol. std.'s
+\subsection{Spectropolarimetric Standards} \label{sec:results_unpub}
+
+Testing included the use of spectropolarimetric standards, comprising four highly polarized and two non-polarized objects. \todo{VERIFY CORRECT}
+
+\todo{Insert table listing the spectropolarimetric standards used, with their properties.}
+
+\subsubsection{Source}
+
+\todo{For each standard:}
+
+\todo{Mention basic background information and a general discussion for source (A little more detail than included in paper).}
+
+\todo{General reduction steps performed (not necessary to constantly repeat self). Highlight any differences in reduction steps compared to science targets.}
+
+\todo{Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops (or leave out \polsalt\ and just show comparison to ($FORS1/2$) published results). Also short discussion (what the results can tell us and why it is useful). Focus on polarization results.}
+
+\todo{Add a `see \ ref{reference}' to final paragraph and, if one of my papers, mention attached in appendix.}
 
 % MARK: Science Targets
-\subsection{Spectropolarimetric Science Targets}
+\subsection{Spectropolarimetric Science Targets} \label{sec:results_pub}
 
-% Tested using 3C 279, 4C+01.02, and preliminary testing data provided by David. \todo{VERIFY CORRECT}
-
-\subsubsection{Background Information}
-
-% Background information on each object.
-% \todo{Tabulate sources used, with their properties.}
-
-\subsubsection{Reduction Steps}
-
-% Detailed reductions steps performed on each object.
-
-\subsubsection{Results and Comparison}
-
-% Comparison of \polsalt\ results to those obtained using the \stops\ pipeline.
-% \todo{Insert figures showing comparison plots of polarization parameters from \polsalt\ and \stops.}
-
-% MARK: Spec.pol. Standards
-\subsection{Spectropolarimetric Standards}
-
-% Testing included the use of spectropolarimetric standards, comprising four highly polarized and two non-polarized objects. \todo{VERIFY CORRECT}
-
-\subsubsection{Background Information}
-
-% Background information on each object. / General discussion of sources used as part of testing
-% \todo{Insert table listing the spectropolarimetric standards used, with their properties.}
-
-% The sources used for testing included a range of spectropolarimetric standards, both highly polarized and non-polarized objects. The tests aimed to check for issues such as data integrity, consistency of wavelength calibration, and accuracy of polarization measurements.
-
-\subsubsection{Reduction Steps}
-
-% Detailed reductions steps performed on each object. Highlight any differences in reduction steps compared to science targets.
-
-\subsubsection{Results and Comparison}
-
-% Comparison of \polsalt\ results to those obtained using the \stops\ pipeline.
-% Science results, what the results can tell us and why it is useful,
-% also comparison of results to FORS1/2 published data, focus on the polarization results.
-
-% \todo{Insert figures showing comparison plots of polarization parameters from \polsalt\ and \stops.}
-
-% MARK: Results Pub.
-\section{Application in Publications} \label{sec:results_pub}
-
-% \subsection{} for each publication
-% Summarize the results of the publications appended to appendix.
-
+Tested using 3C 279, 4C+01.02, and preliminary testing data provided by David. \todo{VERIFY CORRECT}
 
 % \begin{itemize}
 %     \item Hester paper(s)
 %     \item Joleen proceedings and work
 %     \item My proceedings
 % \end{itemize}
+\todo{Insert table listing the spectropolarimetric targets used, with their properties.}
+
+\subsubsection{Source}
+
+\todo{For each published target:}
+
+\todo{Mention basic background information and a general discussion for source (summary of paper + and necessary extra).}
+
+\todo{General reduction steps performed (not necessary to constantly repeat self).}
+
+\todo{Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops (or leave out \polsalt\ and just show published results). Also short discussion (what the results can tell us and why it is useful). Focus on polarization results.}

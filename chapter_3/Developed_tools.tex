@@ -645,7 +645,7 @@ The full \stops\ \texttt{split} class docstring is given in \autoref{doc:corr}.
         \node (stops_corr)  [stops, right of=pol_spec, xshift=3cm, yshift=-2cm] {\hyperref[subsec:stops_correlate]{\texttt{correlate}}};
         \draw [to] (stops_join) -| (pol_spec.east) |- (stops_corr);
         
-        \node (corr_check)  [choice, below of=iraf_trans, yshift=-1cm] {Good $f(\lambda)$?};
+        \node (corr_check)  [choice, below of=iraf_trans, yshift=-1cm] {Good~$f_\lambda(x, y)$?};
         \draw [to] (stops_sky) -| (corr_check);
         \draw [to] (stops_corr) -- (corr_check);
         \draw [to] (corr_check) |- node[anchor=west] {Yes} (pol_rstokes);
