@@ -5,7 +5,7 @@
 % Use /media/... if no option specified
 % Use ../../STOPS/ if path specified but undefined
 % Use value if path=value
-\DeclareStringOption[/media/justin/Transcend/STOPS/]{path}[../../STOPS/]
+\DeclareStringOption[/media/justin/Transcend/STOPS/src/STOPS]{path}[../../STOPS/]
 
 \ProcessKeyvalOptions*
 
@@ -57,6 +57,7 @@
 
 % Define custom style for STOPS
 \lstdefinestyle{STOPS}{%
+    basicstyle=\ttfamily\scriptsize,
     belowcaptionskip=1\baselineskip,
     identifierstyle=\color{blue},
     keywordstyle=\bfseries\color{green!40!black},

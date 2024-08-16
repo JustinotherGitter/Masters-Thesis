@@ -129,24 +129,24 @@ The \texttt{correlate} method returns plots validating the wavelength solutions 
     \centering
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{4_corr_test.pdf}
-        \caption{fig1 caption}
-        \label{subfig:fig1_label}
+        \includegraphics[width=\textwidth]{4_corr_spec.pdf}
+        \caption{Generated $O$- and $E$-beam spectra.}
+        \label{subfig:corr_test_spec}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{4_corr_spec.pdf}
-        \caption{fig2 caption}
-        \label{subfig:fig2_label}
+        \includegraphics[width=\textwidth]{4_corr_test.pdf}
+        \caption{The \stops\ \texttt{correlate} result for the spectra displayed in \subref{subfig:corr_test_spec}.}
+        \label{subfig:corr_test_corr}
     \end{subfigure}
-    \caption{Overall caption}
-    \label{fig:fig_caption}
+    \caption{Reacquisition of the offsets introduced to the $O$- and $E$-beam spectra (\subref{subfig:corr_test_spec}) by cross-correlation (\subref{subfig:corr_test_corr}).}
+    \label{fig:corr_test}
 \end{figure}
 
-\todo{Show testing `correlate' functionality using `offset', comparisons of arcs, FSRQ's (few features) and BLLac's (many features).}
+The \stops\ \texttt{correlate} method was tested by cross correlating generated $O$- and $E$-beam spectra with known offsets, with the aim of reacquiring said offsets, as shown in \autoref{fig:corr_test}. The spectra were generated with a feature in each \gls{CCD} region, randomly offset in both the wavelength and intensity axes, \autoref{subfig:corr_test_spec}.
 
-\todo{Insert figure(s) illustrating cross correlation accuracy.}
+Through cross correlation, \autoref{subfig:corr_test_corr}, the introduced offsets , or `max lag', were reacquired. For spectral regions with few features or features not much more significant than the continuum noise (such as the left most \gls{CCD} region of \autoref{subfig:corr_test_corr}), correlation may fail to determine the correct offset. It is clear that the returned `max lag' is incorrect when the `max lag' peak is not significantly larger than any noise of the continuum in the correlation plot.
 
 % MARK: WAV Sky. Checks
 \subsection{Sky Line Checks} \label{subsec:test_sky}
