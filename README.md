@@ -1,8 +1,10 @@
 # Thesis Overview and Design Organizer (TODO 😝)
+
+<!-- markdownlint-disable MD033-->
 <details>
 <summary>Useful Thesis Links</summary>
 
-  * <https://www.ufs.ac.za/docs/default-source/regulations-documents/rubric-masters-dissertation-1004-eng.pdf>
+* <https://www.ufs.ac.za/docs/default-source/regulations-documents/rubric-masters-dissertation-1004-eng.pdf>
 
 </details>
 <br>
@@ -64,6 +66,7 @@ This section contains the setup I've found irreplaceable while writing my thesis
 
 <!-- MARK: 2. shortcuts -->
 ### [Useful shortcuts](https://code.visualstudio.com/docs/getstarted/tips-and-tricks)
+
 <div align=center>
 
   | Keyboard Shortcut | Use |
@@ -80,6 +83,10 @@ This section contains the setup I've found irreplaceable while writing my thesis
   | <kbd>Ctrl</kbd>+<kbd>Click</kbd> | SyncTex: Link from PDF to source |
 
 </div>
+
+[VSCode] also includes the ability to insert code snippets. I've set up a few frequently used code snippets, but there is, as always, much to be improved upon. See [this file](./.vscode/Writeup_snippets.code-snippets 'My Writeup code snippets') for where to implement them as well as my code snippets.[^vs_snip]
+
+[^vs_snip]: If the relative link breaks due to the `.gitignore` file, see [this page](https://code.visualstudio.com/docs/editor/userdefinedsnippets 'Snippets in VSCode') for more information on [VSCode] code snippets.
 
 <!-- MARK: 3. RegEx -->
 ### Useful RegEx patterns
@@ -103,12 +110,13 @@ Here are some useful RegEx patterns I have needed:
 
 <!-- MARK: 4. md -->
 ### Markdown
+
 <details>
 <summary>Useful Links</summary>
 
-  * <https://www.markdownguide.org/basic-syntax/>
-  * <https://ashki23.github.io/markdown-latex.html>
-  * <https://daringfireball.net/projects/markdown/syntax>
+* <https://www.markdownguide.org/basic-syntax/>
+* <https://ashki23.github.io/markdown-latex.html>
+* <https://daringfireball.net/projects/markdown/syntax>
 
 </details>
 <br>
@@ -128,13 +136,14 @@ Here are some general tips and tricks related to VSCode that do not fit neatly i
 
 <!-- MARK: LaTeX Styles -->
 ## $\LaTeX$ Style guides
+
 <details>
 <summary>Useful Links</summary>
 
-  * <https://www.learnlatex.org/en/>
-  * <https://en.wikibooks.org/wiki/LaTeX>
-  * <https://github.com/James-Yu/LaTeX-Workshop/wiki>
-  * <https://ashki23.github.io/markdown-latex.html>
+* <https://www.learnlatex.org/en/>
+* <https://en.wikibooks.org/wiki/LaTeX>
+* <https://github.com/James-Yu/LaTeX-Workshop/wiki>
+* <https://ashki23.github.io/markdown-latex.html>
 
 </details>
 <br>
@@ -142,15 +151,15 @@ Here are some general tips and tricks related to VSCode that do not fit neatly i
 Included herein are the style guides I have followed during the course of writing my thesis. Custom styles (`my*.sty files`) have been included to both simplify the preamble (located in `Thesis.tex`) and to create a more homogeneous styling throughout when dealing with the relevant packages contained in the style files.
 
 General Notes:
+
 * Inline values with units should be formatted as: `$val$~unit`
   * If the value is a quantifier, consider writing it out
     * i.e. `... 7 filters ...` becomes `... seven filters ...`
 
-
 <!-- MARK: 1. Headings -->
 ### Headings
 
-My headings use `Title Case`.$^{[1]}$ Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
+My headings use `Title Case`.[^head_case] Generally, labels are only included when necessary and are not compulsory when creating a new section, etc.
 
 ```Latex
 % Note case is `Title Case`
@@ -159,7 +168,7 @@ My headings use `Title Case`.$^{[1]}$ Generally, labels are only included when n
 \dots
 ```
 
-[1]: `Sentence case` may also be used, just stick to whichever style is chosen.
+[^head_case]: `Sentence case` may also be used, just stick to whichever style is chosen.
 
 <!-- MARK: 2. Equations -->
 ### Equations
@@ -175,9 +184,9 @@ Equations are written in-text and are a part of sentences unless otherwise indic
 % Align center, ignore end text
 \begin{equation} \label{eq:name}
     \begin{gathered}
-      eq1 = ... \,,\\
-      eq2 = ... \rlap{\,,\ and}\\
-      eq3 = ...
+        eq1 = ... \,,\\
+        eq2 = ... \rlap{\,,\ and}\\
+        eq3 = ...
     \end{gathered}
 \end{equation}
 
@@ -198,7 +207,7 @@ See references (Wikibooks) for more configurations of equations.
 
 Figures are located in their relevant chapter (`chapter_*/figures/`) and have the chapter number, $i$, prepended to their name (`<i>_<name>.[pdf|svg]`).
 
-The figures included in the document are `pdf`'s, but it is useful to save a copy of self-generated figures as `svg`'s for when edits to the figure will naturally arise. See 'Custom Figures' for further constraints on generated figures.
+The figures included in the document are `pdf`'s, but it is useful to save a copy of self-generated figures as `svg`'s for when edits to the figure will naturally arise. See 'Custom Figures' for further constraints on generated figures. [FITS] images are also saved as `pdf`, but may have a lower `dpi` as compared to other figures when not much detail is needed for the figure.
 
 To use the figures in the $\LaTeX$ document, use:
 
@@ -215,18 +224,18 @@ To use the figures in the $\LaTeX$ document, use:
 or, for sub-figures, use:
 
 ```Latex
-\begin{figure}
+\begin{figure}[t]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{fig1.extension}
+        \includegraphics[width = 1.0\textwidth]{fig1.extension}
         \caption{fig1 caption}
         \label{subfig:fig1_label}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{fig2.extension}
+        \includegraphics[width = 1.0\textwidth]{fig2.extension}
         \caption{fig2 caption}
         \label{subfig:fig2_label}
     \end{subfigure}
@@ -266,11 +275,12 @@ Figures are first saved as an `svg` before being exported as either a `png` or `
 
 <!-- MARK: TikZ -->
 #### $TikZ$ Figures
+
 <details>
 <summary>Useful Links</summary>
 
-  * <https://www.baeldung.com/cs/latex-flowcharts>
-  * <https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ%3A_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Creating_Flowcharts>
+* <https://www.baeldung.com/cs/latex-flowcharts>
+* <https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ%3A_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Creating_Flowcharts>
 
 </details>
 <br>
@@ -369,4 +379,6 @@ New commands for the most common glossary/acronym keys may improve 'writability'
 
 See 'preamble' of `references.bib` for further useful links relevant to specific chapters of thesis.
 
-[FITS]: https://fits.gsfc.nasa.gov/standard40/fits_standard40aa-le.pdf (The FITS Standard)
+<!-- Hidden References -->
+[FITS]: <https://fits.gsfc.nasa.gov/standard40/fits_standard40aa-le.pdf> (The FITS Standard)
+[VSCode]: <https://code.visualstudio.com/> (VSCode Homepage)
