@@ -56,13 +56,14 @@ This section contains the setup I've found irreplaceable while writing my thesis
 <!-- MARK: 1. setup -->
 ### General setup
 
-1. My Python setup includes the full `Python` and `Jupyter Notebook` extensions as well as the `Black` formatting extension.
-    * Python must still be installed locally
+1. My Python setup includes the full `Python` and `Jupyter Notebook` extensions as well as the `Black` and `autopep8` formatting extensions.
+    * Python must still be installed locally.
 1. I use a private GitHub repo, shared with my supervisor, for backing up and version control of my thesis, as well as for my developed software, in a separate repo (goodbye `backup_thesis_(copy)_v1` folders).
-    * Look up `GitHub Education` if you are a registered student (You're welcome)
-1. I use the `Latex Workshop` and the `LTex - ...` extensions to use $\LaTeX$ in VSCode.
-    * $\LaTeX$ must still be installed locally (I use `Tex Live` as recommended by `Latex Workshop`)
+    * Look up [`GitHub Education`](https://github.com/education "GitHub Education Homepage") if you are a registered student. It provides both a pro version of GitHub (Private repository advanced features, such as sharing) as well as access to GitHub's Copilot (You're welcome).
+1. I use the `Latex Workshop` and the `LTex - LanguageTool grammar/spell chacking` extensions to use $\LaTeX$ in VSCode.
+    * $\LaTeX$ must still be installed locally (I use `Tex Live` as recommended by `Latex Workshop`).
 1. I use GitHub Copilot for its predictive text and as a first stop for problem shooting as the currently open file is included in its context.
+1. I use `markdownlint` for linting Markdown documents.
 
 <!-- MARK: 2. shortcuts -->
 ### [Useful shortcuts](https://code.visualstudio.com/docs/getstarted/tips-and-tricks)
@@ -71,16 +72,18 @@ This section contains the setup I've found irreplaceable while writing my thesis
 
   | Keyboard Shortcut | Use |
   |------------------:|:----|
-  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | Open Command Palette |
   | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>v</kbd> | VSCode View rendered markdown |
+  | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | Open Command Palette |
   | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>Ctrl</kbd>+<kbd>s</kbd> | View VSCode shortcuts |
   | <kbd>Ctrl</kbd>+<kbd>`</kbd>| Open Terminal |
   | <kbd>Ctrl</kbd>+<kbd>k</kbd>, <kbd>z</kbd> | Zen mode |
   | (Hold) <kbd>Alt</kbd>, <kbd>Click(s)</kbd> | Multiple cursors |
   | <kbd>Alt</kbd>+(<kbd>↑</kbd>\|<kbd>↓</kbd>) | Move line up/down |
   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+(<kbd>↑</kbd>\|<kbd>↓</kbd>) | Insert cursor above/below |
-  | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>j</kbd> | SyncTex: Link from source to PDF |
   | <kbd>Ctrl</kbd>+<kbd>Click</kbd> | SyncTex: Link from PDF to source |
+  | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>j</kbd> | SyncTex: Link from source to PDF |
+  | <kbd>Ctrl</kbd>+<kbd>,</kbd>, Search: `invert` | Latex Workshop: Invert PDF color scheme |
+  |  |  |
 
 </div>
 
@@ -94,8 +97,8 @@ This section contains the setup I've found irreplaceable while writing my thesis
 RegEx allows for complex `find` and `replace` functionality. It may also be used in the VSCode `Search` tab in the primary sidebar (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>)
 
 * `()` represent capture groups in `find` which may be referred to later in `replace` using `$1`, etc.
-* `[]` represent character groups in `find`
-* Quantifiers such as `+`, `*`, etc. allow for more complex behavior, especially combined with [greedy and lazy quantifiers](https://javascript.info/regexp-greedy-and-lazy)
+* `[]` represent character groups in `find`.
+* Quantifiers such as `+`, `*`, etc. allow for more complex behavior, especially combined with [greedy and lazy quantifiers](https://javascript.info/regexp-greedy-and-lazy).
 
 Here are some useful RegEx patterns I have needed:
 
@@ -124,6 +127,8 @@ Here are some useful RegEx patterns I have needed:
 This section contains any markdown not used in this document but deemed useful nonetheless.
 
 * Use `[//]: # (Comment)` or `<!-- Comment -->` on a separate line for comments not meant for rendering.
+* Use `[^end_text]: A comment that renders as an endnote.`
+  * Only works in some Markdown viewers (I.E. GitHub)
 * Comments that link to a separate file may link to a specific line within the file using the `#L` suffix.
   * [Thesis.tex line 20 (Hover)](/Thesis.tex#L20 "[Link text](/Thesis.tex#L20 'Hover text')")
 
@@ -132,7 +137,7 @@ This section contains any markdown not used in this document but deemed useful n
 
 Here are some general tips and tricks related to VSCode that do not fit neatly into any of the other sections.
 
-* `MARK: Heading` within a comment of a document allows for headings in the VSCode code map, allowing for navigation at a glance
+* `MARK: Heading` within a comment of a document allows for headings in the VSCode code map, allowing for navigation at a glance.
 
 <!-- MARK: LaTeX Styles -->
 ## $\LaTeX$ Style guides
