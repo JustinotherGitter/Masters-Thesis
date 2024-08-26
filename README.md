@@ -256,6 +256,8 @@ Figures created by myself are (generally) made using Inkscape. To keep line widt
 * Document properties
   * $6.28$ x ? inches
     * $x$-size set to the $\LaTeX$ `\textwidth` (usually in inches)
+      * (`\textwidth` found by using `\the\textwidth` anywhere in the $\LaTeX$ document)
+      * $6.28$ inches == $A4$ page with uniform $1$ inch border.
     * $y$-size depends on figure aspect ratio, usually left undefined
   * Before saving, use `resize to content` (if no text included in custom figure)
   * scale = $0.1$
