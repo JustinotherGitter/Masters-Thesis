@@ -1,6 +1,6 @@
 \chapter{Testing and Application}
 
-This chapter contains an overview of the testing performed for the development of \stops\ (\autoref{sec:test_stops}) and the checking of the replaced wavelength solutions (\autoref{sec:test_wav}), as well as the application of \stops\ on observations (\autoref{sec:results_unpub}) and its application in publications (\autoref{sec:results_pub}).
+This chapter contains an overview of the testing performed for the development of \stops\ (\autoref{sec:test_stops}) and the checking of the replaced wavelength solutions (\autoref{sec:test_wav}), as well as the application of \stops\ on observations of both spectropolarimetric standards (\autoref{sec:specpol_stds}) and science targets (\autoref{sec:specpol_sci}).
 
 % MARK: Test STOPS
 \section[Testing \textsc{stops}]{Testing \stops} \label{sec:test_stops}
@@ -165,14 +165,17 @@ The \texttt{skylines} method returns plots validating the wavelength solutions a
 \section[Application of \textsc{stops}]{Application of \stops}
 % https://ui.adsabs.harvard.edu/search/fq=%7B!type%3Daqp%20v%3D%24fq_database%7D&fq_database=database%3Aastronomy&p_=0&q=%20author%3A%22Cooper%2C%20J.%22%20spectropolarimetry&sort=date%20desc%2C%20bibcode%20desc
 
-\todo{1-2 paragraph intro mentioning both standards used for testing and (flaring blazar) science targets used. Mention results discussed for optical region, and briefly why (\gls{SALT}).}
+% Sources are blazars
+The \stops\ pipeline has been utilized in the reduction of a number of sources, both for calibration tests using spectropolarimetric standards, \autoref{sec:specpol_stds}, and for science observations of mostly flaring blazars, \autoref{sec:specpol_sci}.
 
 % MARK: spec. pol. std.'s
-\subsection{Spectropolarimetric Standards} \label{sec:results_unpub}
+\subsection{Spectropolarimetric Standards} \label{sec:specpol_stds}
 
-Testing included the use of spectropolarimetric standards, comprising four highly polarized and two non-polarized objects. \todo{VERIFY CORRECT}
+\input{chapter_4/tables/4_specpol_stds.tex}
 
-\todo{Insert table listing the spectropolarimetric standards used, with their properties.}
+Spectropolarimetric standards must show little to no variability in both their spectroscopic and polarimetric properties. It is thus clear that blazars are not recommended as spectropolarimetric standards due to their high degree of variability.
+
+% Testing included the use of spectropolarimetric standards, comprising four highly polarized and two non-polarized objects. \todo{VERIFY CORRECT}
 
 \subsubsection{Source}
 
@@ -184,43 +187,33 @@ Testing included the use of spectropolarimetric standards, comprising four highl
 
 \todo{Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops (or leave out \polsalt\ and just show comparison to ($FORS1/2$) published results). Also short discussion (what the results can tell us and why it is useful). Focus on polarization results.}
 
-\todo{Add a `see \ ref{reference}' to final paragraph and, if one of my papers, mention attached in appendix.}
+\todo{Add a `see \ ref{reference}' to final paragraph.}
 
 % MARK: Science Targets
-\subsection{Spectropolarimetric Science Targets} \label{sec:results_pub}
+\subsection{Spectropolarimetric Science Targets} \label{sec:specpol_sci}
 
-Tested using 3C 279, 4C+01.02, and preliminary testing data provided by David. \todo{VERIFY CORRECT}
+\input{chapter_4/tables/4_sci_targets.tex}
 
-% \begin{itemize}
-%     \item Hester paper(s)
-%     \item Joleen proceedings and work
-%     \item My proceedings
-% \end{itemize}
-\todo{Insert table listing the spectropolarimetric targets used, with their properties. (?)}
+The \stops\ pipeline has been utilized in the reduction of a number of science targets, specifically focused on blazars. Blazars are a subset of \gls{AGN} with relativistic jets closely aligned to our line of sight, and are known for their rapid and high degree of variability across the electromagnetic spectrum.
 
-% \subsubsection{Source}
+% What blazars are and how they are observed
+Observations of these sources were performed using \gls{SALT}, specifically using the \gls{RSS} in spectropolarimetry mode (\autoref{sec:RSS_reductions}). \gls{SALT}, and more specifically the \gls{RSS} grating used (\autoref{table:RSS_gratings}), limits the wavelength range to the optical and \gls{NIR} regions. This allows for the study of the polarization properties of blazars within these wavelength regimes, which are often dominated by a polarized, non-thermal emission component arising in the jets, with an underlying non-polarized, thermal emission component arising from the host galaxy, dusty torus, and accretion disk components.
 
-% \todo{For each published target:}
+% Tested using 3C 279, 4C+01.02, and preliminary testing data provided by David. \todo{VERIFY CORRECT}
 
-% \todo{Mention basic background information and a general discussion for source (summary of paper + necessary extra).}
-
-% \todo{General reduction steps performed (not necessary to constantly repeat self).}
-
-% \todo{Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops (or leave out \polsalt\ and just show published results). Also short discussion (what the results can tell us and why it is useful). Focus on polarization results.}
-
-% MARK: HEASA 2021 
+% MARK: HEASA 2021
 \subsubsection[Development of \textsc{stops}: Application to the blazar 3C 279]{Development of Tools for the \gls{SALT}/\gls{RSS} Spectropolarimetry Reductions:\\Application to the Blazar 3C 279\hfill(\glsxtrshort{HEASA} 2021)}
 
-\todo{Mention in appendix.}
+As discussed in \cite[][see also \autoref{app:papers}]{cooper_HEASA2021}, the \stops\ pipeline was used during the reduction of the blazar $3$C~$279$, showing that \gls{SALT} spectropolarimetric data was capable of being wavelength calibrated using alternative wavelength calibration methods, such as those provided by \iraf.
 
 \todo{Mention basic background information and a general discussion for source (summary of paper + necessary extra).}
 
 \todo{Brief/unique reduction steps performed.}
 
-\todo{Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops (or leave out \polsalt\ and just show published results). Also short discussion (what the results can tell us and why it is useful). Focus on polarization results.}
+\todo{Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops\ (or leave out \polsalt\ and just show published results). Also short discussion (what the results can tell us and why it is useful). Focus on polarization results.}
 
 % MARK: HEASA 2022
-\subsubsection[SALT Spectropolarimetric Pipeline Comparisons]{\gls{SALT} Spectropolarimetric Pipeline Comparisons\\\strut\hfill(\glsxtrshort{HEASA} 2022)}
+\subsubsection[SALT Spectropolarimetric Pipeline Comparisons]{\gls{SALT} Spectropolarimetric Pipeline Comparisons\hfill(\glsxtrshort{HEASA} 2022)}
 
 \todo{Mention in appendix.}
 
@@ -229,3 +222,17 @@ Tested using 3C 279, 4C+01.02, and preliminary testing data provided by David. \
 \todo{Brief/unique reduction steps performed.}
 
 \todo{Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops (or leave out \polsalt\ and just show published results). Also short discussion (what the results can tell us and why it is useful). Focus on polarization results.}
+
+% MARK: Hester paper(s)
+% \subsubsection{Source}
+% \todo{For each published target:}
+% \todo{Mention basic background information and a general discussion for source (summary of paper + necessary extra).}
+% \todo{General reduction steps performed (not necessary to constantly repeat self).}
+% \todo{Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops (or leave out \polsalt\ and just show published results). Also short discussion (what the results can tell us and why it is useful). Focus on polarization results.}
+
+% MARK: Joleen proceedings and paper(s)
+% \subsubsection{Source}
+% \todo{For each published target:}
+% \todo{Mention basic background information and a general discussion for source (summary of paper + necessary extra).}
+% \todo{General reduction steps performed (not necessary to constantly repeat self).}
+% \todo{Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops (or leave out \polsalt\ and just show published results). Also short discussion (what the results can tell us and why it is useful). Focus on polarization results.}

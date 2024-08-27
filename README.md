@@ -345,7 +345,7 @@ Tables can be generated using a [$\LaTeX$ Table Generator](https://www.tablesgen
 To insert a table within the document, use the command:
 
 ```Latex
-\input{chapter_<i>/tables/'table_name'}
+\input{chapter_<i>/tables/table_name.tex}
 ```
 
 <!-- MARK: 5. Glossaries -->
