@@ -140,7 +140,7 @@ The \texttt{correlate} method returns plots validating the wavelength solutions 
         \caption{The \stops\ \texttt{correlate} result for the spectra displayed in \subref{subfig:corr_test_spec}.}
         \label{subfig:corr_test_corr}
     \end{subfigure}
-    \caption{Reacquisition of the offsets introduced to the $O$- and $E$-beam spectra (\subref{subfig:corr_test_spec}) by cross-correlation (\subref{subfig:corr_test_corr}).}
+    \caption{Reacquisition of synthetic offsets introduced to the $O$- and $E$-beam spectra (\subref{subfig:corr_test_spec}) by cross-correlation (\subref{subfig:corr_test_corr}, bottom row).}
     \label{fig:corr_test}
 \end{figure}
 
@@ -194,6 +194,8 @@ Spectropolarimetric standards must show little to no variability in both their s
 
 \input{chapter_4/tables/4_sci_targets.tex}
 
+\todo{Move to Introduction?}
+
 The \stops\ pipeline has been utilized in the reduction of a number of science targets, specifically focused on blazars. Blazars are a subset of \gls{AGN} with relativistic jets closely aligned to our line of sight, and are known for their rapid and high degree of variability across the electromagnetic spectrum.
 
 % What blazars are and how they are observed
@@ -205,7 +207,9 @@ Observations of these sources were performed using \gls{SALT}, specifically usin
 \subsubsection[Development of \textsc{stops}: Application to the blazar 3C 279]{Development of Tools for the \gls{SALT}/\gls{RSS} Spectropolarimetry Reductions:\\Application to the Blazar 3C 279\hfill(\glsxtrshort{HEASA} 2021)}
 
 % Basic background information
-As discussed in \cite[][see also \autoref{app:papers}]{cooper_HEASA2021}, the \stops\ pipeline was used during the reduction of the blazar $3$C~$279$, showcasing alternate wavelength calibrations applied to \gls{SALT} spectropolarimetric data.
+As discussed in \cite[][see also \autoref{app:papers}]{cooper_HEASA2021}, the \stops\ pipeline was used during the reduction of the blazar $3$C~$279$. It was shown that alternative wavelength solutions, such as those created using \iraf, are capable of being applied to \gls{SALT} spectropolarimetric data.
+
+The blazar $3$C~$279$ was observed in linear spectropolarimetry mode, on 2017 May 17, using the PG$0900$ grating with two different grating angles ($12.5$\degree\ and $19.5$\degree).
 
 \todo{Brief/unique reduction steps performed.}
 

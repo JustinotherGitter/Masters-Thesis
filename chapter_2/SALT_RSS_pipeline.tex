@@ -194,7 +194,7 @@ Dome flats are images taken of a relatively flat surface, usually the inside of 
 
 Night sky flats are produced from science images containing mostly sky. The science images are combined using the `mode' statistic which removes any celestial objects at the cost of a low \gls{SNR} flat-field.
 
-Twilight flats are produced from images of the twilight (or dawn) sky. They are taken when the Sun has just set, in the opposite direction, at $\sim 20\degr$ from zenith and provide a better \gls{SNR} at the cost of careful timing of the images.
+Twilight flats are produced from images of the twilight (or dawn) sky. They are taken when the Sun has just set, in the opposite direction, at $\sim 20$\degree\ from zenith and provide a better \gls{SNR} at the cost of careful timing of the images.
 
 A flat-field must be normalized before being used to correct any science images since it only acts to account for the pixel-to-pixel response and not for the additive errors. A  normalized spectroscopic flat image, $F^{n}_{\lambda}(x,y)$, can be calculated as:
 \begin{equation} \label{eq:norm_flat}
@@ -212,7 +212,7 @@ When multichannel \glspl{CCD} are used, which consist of multiple \glspl{CCD} or
 \begin{figure}[t]
     \centering
     \includegraphics[width = 16cm]{2_Ne_arc.pdf}
-    \caption{Example of an arc spectrum for NeAr taken with \gls{SALT}'s \gls{RSS} using the PG1800 grating at a grating angle of $34.625$\degr, an articulation angle of $69.258$\degr, and covering a wavelength range of $\sim5600 - 6900$ \angstrom. Plot adapted from \gls{SALT}'s published Longslit Line Atlases, (2023).\protect\footnotemark}
+    \caption{Example of an arc spectrum for NeAr taken with \gls{SALT}'s \gls{RSS} using the PG1800 grating at a grating angle of $34.625$\degree, an articulation angle of $69.258$\degree, and covering a wavelength range of $\sim 5600 - 6900$~\angstrom. Plot adapted from \gls{SALT}'s published Longslit Line Atlases, (2023).\protect\footnotemark}
     \label{fig:Ne_arc}
 \end{figure}
 \footnotetext{\protect\href{http://pysalt.salt.ac.za/lineatlas/plot_line_neon.pdf}{NeAr plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
@@ -680,7 +680,7 @@ Spectropolarimetric calibrations are, however, more involved when compared to th
 
 \section{The Southern African Large Telescope} \label{sec:SALT} % Basics, not in depth
 
-\glsfirst{SALT} is a 10 m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}. The operational design was based on the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation (37$\degree$ from zenith in the case of SALT) while still allowing for full azimuthal rotation \citep{HET}. Both SALT and HET utilize a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path. \autoref{fig:SALT_telescope} depicts \gls{SALT}'s tracker (top left), supporting structure, and primary mirror (bottom right).
+\glsfirst{SALT} is a 10 m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}. The operational design was based on the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation ($37$\degree\ from zenith in the case of SALT) while still allowing for full azimuthal rotation \citep{HET}. Both SALT and HET utilize a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path. \autoref{fig:SALT_telescope} depicts \gls{SALT}'s tracker (top left), supporting structure, and primary mirror (bottom right).
 
 \begin{figure}[t]
     \centering
@@ -696,7 +696,7 @@ The primary mirror is composed of 91 individual 1 m hexagonal mirrors which toge
 
 \subsection{Tracker and Tracking}
 
-During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of ~5 $\mu$m and is capable of tracking $\pm\,$6$\degree$ from the optimal central track position. Targets at declinations from 10.5$\degree$ to -75.3$\degree$, as shown in \autoref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of $\sim7$ m to 9 m when the tracker is furthest and closest to the optimal central position, respectively.
+During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus. The tracker is capable of 6 degrees of freedom with an accuracy of $\sim 5$~$\mu$m and is capable of tracking $\pm 6$\degree\ from the optimal central track position. Targets at declinations from $10.5$\degree\ to $-75.3$\degree, as shown in \autoref{fig:SALT_visibility} are accessible during windows of opportunity. As the tracker moves along the track the effective collecting area varies and thus SALT has a varying effective diameter of $\sim 7$~m to $9$~m when the tracker is furthest and closest to the optimal central position, respectively.
 
 \begin{figure}[t]
     \centering
