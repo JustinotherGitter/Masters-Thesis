@@ -203,12 +203,15 @@ The \stops\ pipeline has been utilized in the reduction of a number of science t
 Observations of these sources were performed using \gls{SALT}, specifically using the \gls{RSS} in spectropolarimetry mode (\autoref{sec:RSS_reductions}). \gls{SALT}, and more specifically the \gls{RSS} grating used (\autoref{table:RSS_gratings}), limits the wavelength range to the optical and \gls{NIR} regions. This allows for the study of the polarization properties of blazars within these wavelength regimes, which are often dominated by a polarized, non-thermal emission component arising in the jets, with an underlying non-polarized, thermal emission component arising from the host galaxy, dusty torus, and accretion disk components.
 
 % MARK: HEASA 2021
-\subsubsection[Development of \textsc{stops}: Application to the blazar 3C 279]{Development of Tools for the \gls{SALT}/\gls{RSS} Spectropolarimetry Reductions:\\Application to the Blazar 3C 279\hfill(Proceedings of Science, \glsxtrshort{HEASA} 2021)}
+\subsection[Development of \textsc{stops}: Application to the blazar 3C 279]{%
+    Development of Tools for the \gls{SALT}/\gls{RSS} Spectro\-polari\-metry Reductions: Application to the Blazar 3C 279\\
+    (Proceedings of Science, \glsxtrshort{HEASA} 2021)
+}
 
 % Basic background information
-In \cite[][see also \autoref{app:papers}]{cooper_HEASA2021}, it was shown that alternative wavelength solutions, such as those created using \iraf, are capable of being applied to \gls{SALT} spectro\-polarimetric data. The `additional tools' mentioned therein, which were the precursor to the \stops\ pipeline, were used for the reduction of the blazar $3$C~$279$.
+As discussed in \cite[][see also \autoref{app:papers}]{cooper_HEASA2021}, it was shown that alternative wavelength solutions, such as those created using \iraf, are capable of being applied to \gls{SALT} spectro\-polarimetric data. The `additional tools' mentioned therein, which were the precursor to the \stops\ pipeline, were used during the reduction of the blazar 3C~279.
 
-The blazar $3$C~$279$ was observed in linear spectropolarimetry mode, on $2017$ May $17$, using the PG$0900$ grating with two different grating angles ($12.5$\degree\ and $19.5$\degree). The grating and articulation angles used for the observations, as shown in \autoref{table:sci_targets}, matched those of observations of the spectrophotometric standard star, Hiltner $600$, observed on $2017$ February $24$, allowing the intensity to be relatively flux calibrated.
+The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May $17$, using the PG$0900$ grating with two different grating angles ($12.5$\degree\ and $19.5$\degree). The grating and articulation angles used for the observations, as shown in \autoref{table:sci_targets}, matched those of observations of the spectrophotometric standard star, Hiltner $600$, observed on $2017$ February $24$, allowing the intensity to be relatively flux calibrated.
 
 \begin{figure}[t]
     \centering
@@ -224,40 +227,63 @@ The blazar $3$C~$279$ was observed in linear spectropolarimetry mode, on $2017$ 
     \begin{subfigure}[b]{1.0\textwidth}
         \centering
         \includegraphics[width = 1.0\textwidth]{4_HEASA_2021_spec.pdf}
-        \caption{The relative flux calibration of the $3$C~$279$ spectra.}
+        \caption{The relative flux calibration of the 3C~279 spectra.}
         \label{subfig:HEASA2021_spec}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{1.0\textwidth}
         \centering
         \includegraphics[width = 1.0\textwidth]{4_HEASA_2021_pol.pdf}
-        \caption{The linear polarization percentage of the $3$C~$279$ spectra.}
+        \caption{The linear polarization percentage of the 3C~279 spectra.}
         \label{subfig:HEASA2021_pol}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{1.0\textwidth}
         \centering
         \includegraphics[width = 1.0\textwidth]{4_HEASA_2021_pol_ang.pdf}
-        \caption{The polarization angle of the $3$C~$279$ spectra, polarization relative to the instrument.}
+        \caption{The polarization angle of the 3C~279 spectra, polarization relative to the instrument.}
         \label{subfig:HEASA2021_pol_ang}
     \end{subfigure}
-    \caption{The relative flux calibrated spectra (\subref{subfig:HEASA2021_spec}), linear polarization percentage (\subref{subfig:HEASA2021_pol}), and polarization angle (\subref{subfig:HEASA2021_pol_ang}) of the blazar $3$C~$279$ observed on $2017$ May $17$. Figure adapted from \cite{cooper_HEASA2021}.}
+    \caption{The relative flux calibrated spectra (\subref{subfig:HEASA2021_spec}), linear polarization percentage (\subref{subfig:HEASA2021_pol}), and polarization angle (\subref{subfig:HEASA2021_pol_ang}) of the blazar 3C~279 observed on $2017$ May $17$. Figure adapted from \cite{cooper_HEASA2021}.}
     \label{fig:HEASA2021}
 \end{figure}
 
-\autoref{fig:HEASA2021} shows the relative flux calibrated intensity, percentage of linear polarization, and polarization angle of the blazar $3$C~$279$, across the visible spectrum. The spectra show a good overlap between the two grating angles, especially when considering the variable nature of blazars. Both the percentage of linear polarization and the polarization angle generally agree across the grating angle overlap.
+\autoref{fig:HEASA2021} shows the relative flux calibrated intensity, percentage of linear polarization, and polarization angle of the blazar 3C~279, across the visible spectrum. The spectra show a good overlap between the two grating angles, especially when considering the variable nature of blazars. Both the percentage of linear polarization and the polarization angle generally agree across the grating angle overlap.
 
 % MARK: HEASA 2022
-\subsubsection[SALT Spectropolarimetric Pipeline Comparisons]{\gls{SALT} Spectropolarimetric Pipeline Comparisons\\\strut\hfill(Proceedings of Science, \glsxtrshort{HEASA} 2022)}
+\subsection[SALT Spectropolarimetric Pipeline Comparisons]{%
+    \gls{SALT} Spectropolarimetric Pipeline Comparisons\\
+    (Proceedings of Science, \glsxtrshort{HEASA} 2022)
+}
 
-As discussed in \cite[][see also \autoref{app:papers}]{cooper_HEASA2022}, \todo{\dots}
+As discussed in \cite[][see also \autoref{app:papers}]{cooper_HEASA2022}, as well as expanding on the work presented in \cite{cooper_HEASA2021}, the \stops\ pipeline was used to reduce the blazar 3C~279, as observed on the dates presented in \autoref{table:sci_targets}. Presented were the observations with grating and articulation angles matching those of the spectrophotometric standard star, Hiltner $600$.
+
+\todo{Insert figures from HEASA2022 (specpol and stokes-params)}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 1.0\textwidth]{4_3C_279_LCR.pdf}
+    \caption{The photon flux of 3C~279. Figure created using the Fermi Light Curve Repository.\protect\footnotemark}
+    \label{fig:3C_279_LCR}
+\end{figure}
+\footnotetext{\protect\url{link}}
+
+\todo{Discuss results from HEASA2022}
+
+\todo{Insert figure of from LCR}
 
 % MARK: Buckley 191221B
-\subsubsection{Spectropolarimetry and Photometry of the Early Afterglow of the Gamma-ray Burst GRB~191221B\hfill\mbox{\citep{Buckley191221B}}}
+\subsection[Spectropolarimetry and Photometry of the Early Afterglow of the Gamma-ray Burst GRB~191221B]{%
+    Spectropolarimetry and Photometry of the Early Afterglow of the Gamma-ray Burst GRB~191221B\\
+    \citep{Buckley191221B}
+}
 
 
 % MARK: Schutte - 4C+01.02
-\subsubsection{Modeling the Spectral Energy Distributions and Spectropolarimetry of Blazars - Application to 4C+01.02 in 2016 - 2017\hfill\citep{Schutte4C0102}}
+\subsection[Modeling the Spectral Energy Distributions and Spectropolarimetry of Blazars - Application to 4C+01.02 in 2016 - 2017]{%
+    Modeling the Spectral Energy Distributions and Spectro\-polari\-metry of Blazars - Application to 4C+01.02 in 2016 - 2017\\
+    \citep{Schutte4C0102}
+}
 
 % Mention basic background information
 % Provide a general discussion for source (summary of paper + necessary extra).

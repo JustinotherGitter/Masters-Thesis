@@ -1,12 +1,25 @@
-% Source | RA | DEC | Observation Date | Grating | Grating Angle | Articulation Angle | Exposure Time
 \begin{table}[t]
     \centering
-    \begin{tabular}{cccccccc}
-        Source & RA                & DEC               & Observation Date & Grating & Grating Angle & Articulation Angle & Exposure Time \\ \hline
-        3C 279 & 12 56 11.16657958 & -05 47 21.5251510 &                  &         &               &                    &               \\ % http://simbad.u-strasbg.fr/simbad/sim-id?Ident=3C%20279&NbIdent=1
-               &                   &                   &                  &         &               &                    &               \\ \hline
+    \begin{tabular}{cccccc}
+        \toprule
+        Source & \begin{tabular}[c]{@{}c@{}}Observation\\ Date\end{tabular} & Grating & \begin{tabular}[c]{@{}c@{}}Grating\\ Angle (\degree)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Articulation\\ Angle (\degree)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Exposure\\ Time (sec)\end{tabular} \\
+        \midrule
+        \multirow[t]{2}{*}{Hiltner 600} & \multirow[t]{2}{*}{2017-02-24} & \multirow[t]{2}{*}{PG0900} & $12.500$ & $24.91$ & $135.60$ \\
+        &  &  & $19.625$ & $39.16$ & $135.60$ \\ % \cline{1-6}
+        \multirow[t]{9}{*}{3C~279} & \multirow[t]{2}{*}{2017-03-28} & \multirow[t]{2}{*}{PG0900} & $12.498$ & $24.91$ & $480.81$ \\
+        &  &  & $19.625$ & $39.16$ & $480.80$ \\ % \cline{2-6}
+        & \multirow[t]{2}{*}{2017-04-01} & \multirow[t]{2}{*}{PG0900} & $12.500$ & $24.92$ & $480.78$ \\
+        &  &  & $19.625$ & $39.17$ & $480.85$ \\ % \cline{2-6}
+        & \multirow[t]{3}{*}{2017-05-17} & PG0300 & $5.375$ & $10.68$ & $720.84$ \\ % \cline{3-6}
+        &  & \multirow[t]{2}{*}{PG0900} & $12.500$ & $24.92$ & $720.83$ \\
+        &  &  & $19.625$ & $39.17$ & $901.05$ \\ % \cline{2-6}
+        & 2017-05-21 & PG0300 & $5.375$ & $10.66$ & $1200.81$ \\ % \cline{2-6}
+        & 2018-06-05 & PG0300 & $5.375$ & $10.72$ & $1200.81$ \\ % \cline{1-6}
+        Hiltner 652 & 2022-06-10 & PG0900 & $12.878$ & $25.71$ & $\;\:48.50$ \\
+        \bottomrule
     \end{tabular}
+
     \caption{Sources discussed from proceedings and publications within this section.}
     \label{table:sci_targets}
-    \todo{Complete table of science targets.}
+
 \end{table}
