@@ -220,7 +220,7 @@ The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May 
     \label{fig:HEASA2021_oecorr}
 \end{figure}
 
-\autoref{fig:HEASA2021_oecorr} shows the spectra and cross correlation of the $O$- and $E$-beams of the \gls{ThAr} and \gls{NeAr} arc lamps, with grating angles of $12.5$\degree\ and $19.5$\degree, respectively. The cross correlation of the arc lamps perpendicular polarization beams show clear peaks at $0$ lag, indicating that the wavelength solutions are consistent across the two polarization beams.
+\autoref{fig:HEASA2021_oecorr} shows the spectra and cross correlation of the $O$- and $E$-beams of the \gls{ThAr} and \gls{NeAr} arc lamps, also with grating angles of $12.5$\degree\ and $19.5$\degree, respectively. The cross correlation of the arc lamps perpendicular polarization beams show clear peaks at $0$ lag, indicating that the wavelength solutions are consistent across the two polarization beams.
 
 \begin{figure}[t]
     \centering
@@ -248,7 +248,7 @@ The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May 
     \label{fig:HEASA2021}
 \end{figure}
 
-\autoref{fig:HEASA2021} shows the relative flux calibrated intensity, percentage of linear polarization, and polarization angle of the blazar 3C~279, across the visible spectrum. The spectra show a good overlap between the two grating angles, especially when considering the variable nature of blazars. Both the percentage of linear polarization and the polarization angle generally agree across the grating angle overlap.
+\autoref{fig:HEASA2021} shows the relative flux calibrated intensity, percentage of linear polarization, and polarization angle of the blazar 3C~279, across the visible spectrum. The spectra display a good overlap between the two grating angles, especially when considering the variable nature of blazars as well as the fact that the spectra are only relatively flux calibrated. Both the percentage of linear polarization and the polarization angle agree well across the grating angle overlap.
 
 % MARK: HEASA 2022
 \subsection[SALT Spectropolarimetric Pipeline Comparisons]{%
@@ -256,7 +256,17 @@ The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May 
     (Proceedings of Science, \glsxtrshort{HEASA} 2022)
 }
 
-As discussed in \cite[][see also \autoref{app:papers}]{cooper_HEASA2022}, as well as expanding on the work presented in \cite{cooper_HEASA2021}, the \stops\ pipeline was used to reduce the blazar 3C~$279$ and the spectropolarimetric standard star, Hiltner-$652$, as observed on the dates tabulated in \autoref{table:sci_targets}. Presented are the observations of 3C~$279$ with grating and articulation angles matching those of the spectrophotometric standard star, Hiltner-$600$, such that the intensity spectra could be relatively flux calibrated, as well as an observation of Hiltner-$652$ for Stokes parameter comparisons.
+As discussed in \cite[][see also \autoref{app:papers}]{cooper_HEASA2022}, as well as expanding on the work presented in \cite{cooper_HEASA2021}, it was shown that the \stops\ pipeline has no noticeable effect on the polarization properties of spectropolarimetric data and that the measure of the goodness of fit for the wavelength solutions could be measured, both through correlation and measuring the position of skyline features. The blazar 3C~$279$, the spectrophotometric standard star Hiltner~$600$, and the spectropolarimetric standard star Hiltner~$652$, were observed on the dates tabulated in \autoref{table:sci_targets}. Observations of 3C~$279$ were taken during periods of enhanced and flaring $\gamma$-ray activity.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 1.0\textwidth]{4_3C_279_LCR.pdf}
+    \caption{The photon flux of 3C~279. Figure adapted from data provided via the \glsxtrshort{FermiLCR}.\protect\footnotemark}
+    \label{fig:3C_279_LCR}
+\end{figure}
+\footnotetext{\protect\url{https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/source.html?source_name=4FGL_J1256.1-0547}}
+
+\autoref{fig:3C_279_LCR} shows the photon flux of 3C~$279$ for energies of $0.1 - 100$~GeV as provided by the \glsxtrfull{FermiLCR} \citep{FermiLCR}. The figure shows that during the optical observations of 3C~$279$, the source was likely at $\gamma$-ray fluxes of $1.59 \times 10^{-6}$, $2.87 \times 10^{-6}$, and $2.00 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.46 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
 
 \begin{figure}[t]
     \centering
@@ -265,20 +275,14 @@ As discussed in \cite[][see also \autoref{app:papers}]{cooper_HEASA2022}, as wel
     \label{fig:3C_279_specpol}
 \end{figure}
 
+% Presented are the observations of 3C~$279$ with grating and articulation angles matching those of Hiltner~$600$, such that the intensity spectra could be relatively flux calibrated, as well as an observation of Hiltner-$652$ for Stokes parameter comparisons.
+
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{4_Hiltner_652.pdf}
     \caption{The reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$, pre$-2006$ for {FORS1} \citep{FORS1}, $2010 - 2016$ for {FORS2} \citep{FORS2}, and post$-2022$ for \gls{SALT}. Figure sourced from \citep{cooper_HEASA2022}.}
     \label{fig:Hilt652}
 \end{figure}
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width = 1.0\textwidth]{4_3C_279_LCR.pdf}
-    \caption{The photon flux of 3C~279. Figure created using data sourced from the Fermi Light Curve Repository \citep{FermiLCR}.\protect\footnotemark}
-    \label{fig:3C_279_LCR}
-\end{figure}
-\footnotetext{\protect\url{https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/source.html?source_name=4FGL_J1256.1-0547}}
 
 \todo{Discuss results from HEASA2022}
 
