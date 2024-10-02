@@ -18,14 +18,15 @@
 
 This section of the Appendix aims to provide a minimum working example of the commands necessary to reduce \polsalt\ data using \stops\ and \iraf. It contains the commands necessary to activate all software and run through the reduction process but makes no attempt at discussion.
 
-Both \polsalt\ and \iraf\ are launched from the default \gls{CLI} but use independent interfaces during the reduction process. To distinguish which window is in focus, the `\texttt{\$}' token is used for default \gls{CLI} commands while the `\texttt{cl>}' and `\texttt{>\->\->}' tokens are used for \iraf's `xgterm' single- and multi-line commands, respectively.
+Both \polsalt\ and \iraf\ are launched from the default \gls{CLI} but use independent interfaces during the reduction process. To distinguish which window is in focus, the `\texttt{\$}' token is used for default \gls{CLI} commands while the `\texttt{cl>}' and `\texttt{>\->\->}' tokens are used for \iraf's `xgterm' single- and multi-line commands, respectively. \gls{CLI} commands may also require a specific Python environment. The environment being used is denoted using the `\texttt{(salt)\$}' or `\texttt{(base)\$}' tokens for the `salt' or default `base' environments.%
+\footnote{It is assumed a Python environment manager, such as `conda', is installed.}
 
-General instructions for the reduction process which might not necessarily be line-fed commands passed to a \gls{CLI} may either be discussed outside a `Listing' environment or included as part of the `Listing' environment with a preceding `\texttt{\#}' token. Finally, \polsalt\ implements a \gls{GUI} and thus takes no line-fed commands. As such, the instructions when using the \polsalt\ \gls{GUI} follow those of the general instructions with the added exception that they relate to the \gls{GUI}.
+General instructions for the reduction process (I.E. not \gls{CLI} line-fed commands) may either be discussed outside a `Listing' environment or included as part of a `Listing' environment preceded with a comment `\texttt{\#}' token. Finally, \polsalt\ implements a \gls{GUI} and thus takes no line-fed commands. As such, instructions referring to the \polsalt\ \gls{GUI} also follow those of the general instructions.
 
-As a final note, some parameters are distinguished using an `<angle brackets>' notation. They signify necessary parameters that may vary from reduction to reduction. Notable uses of this notation include the date of observation, \obsdate\ (formatted `YYYYMMDD'), the split science \gls{FITS} files, \ofiles\ or \efiles, the split arc \gls{FITS} files, \oarc\ or \earc, and a wildcard symbol, <\texttt{*}>.
+As a final note, some parameters are distinguished using `<angle brackets>'. They signify necessary parameters that may vary from reduction to reduction. Notable uses of this notation include the date of observation, \obsdate\ (formatted `YYYYMMDD'), the split science \gls{FITS} files, \ofiles\ or \efiles, the split arc \gls{FITS} files, \oarc\ or \earc, and a wildcard symbol, <\texttt{*}>.
 
 % MARK: Reduction Procedure
-\vspace{\baselineskip}\hrule\vspace{\baselineskip}
+\vspace{0.5\baselineskip}\hrule
 
 \begin{figure}[h!]
     \centering
@@ -50,7 +51,7 @@ Ensure the data is formatted in a file structure similar to that in \autoref{dir
     label=code:polsalt_launch]
 $ cd ~/polsalt
 $ conda activate salt
-$ python -W ignore reducepoldataGUI.py &
+(salt)$ python -W ignore reducepoldataGUI.py &
 \end{lstlisting}
 
 Refer to \autoref{fig:polsalt_gui} for a depiction of the \polsalt\ \gls{GUI}. To complete the \polsalt\ pre-calibrations, and with the \gls{GUI} in focus:
@@ -71,8 +72,8 @@ The pre-calibrated `mxgbp' \gls{FITS} files are now available in the `sci' folde
     caption={Splitting data using \stops},
     label=code:stops_split]
 $ cd (*@\obsdate@*)/sci
-$ conda activate stops
-$ python ~/STOPS . split
+$ conda activate
+(base)$ python -m STOPS . split
 \end{lstlisting}
 
 The split $O$- and $E$-beam \gls{FITS} files are now available. The \iraf\ wavelength calibrations are now run. The \iraf\ xgterm \gls{CLI} is launched using \autoref{code:iraf_launch}.
@@ -184,8 +185,8 @@ The \stops\ \texttt{join} method may be run using the commands in \autoref{code:
     caption={Joining the data using \stops},
     label=code:stops_join]
 $ cd (*@\obsdate@*)/sci
-$ conda activate stops
-$ python ~/STOPS . join
+$ conda activate
+(base)$ python -m STOPS . join
 \end{lstlisting}
 
 The \stops\ \texttt{skylines} method may be run on any `joined' or transformed \gls{FITS} files, \file, using the commands in \autoref{code:stops_sky}.
@@ -195,11 +196,11 @@ The \stops\ \texttt{skylines} method may be run on any `joined' or transformed \
     caption={Running the \stops\ \texttt{skylines} method},
     label=code:stops_sky]
 $ cd (*@\obsdate@*)/sci
-$ conda activate stops
-$ python ~/STOPS . skylines (*@\file@*)
+$ conda activate
+(base)$ python -m STOPS . skylines (*@\file@*)
 \end{lstlisting}
 
-The `\texttt{sci/}' directory may now be slightly organized by running the commands in \autoref{code:gen_clean}, moving all the files relevant to the wavelength calibrations into either the `\texttt{database}' or `\texttt{split\_files}' directories.
+The `\texttt{sci/}' directory may now be optionally organized by running the commands in \autoref{code:gen_clean}, moving all the files relevant to the wavelength calibrations into either the `\texttt{database}' or `\texttt{split\_files}' directories.
 
 \begin{lstlisting}[
     language=bash,
@@ -230,8 +231,8 @@ The \stops\ \texttt{correlate} method may now be run on any `joined' \gls{FITS} 
     caption={Running the \stops\ \texttt{correlate} method},
     label=code:stops_corr]
 $ cd (*@\obsdate@*)/sci
-$ conda activate stops
-$ python ~/STOPS . correlate (*@\file@*)
+$ conda activate
+(base)$ python -m STOPS . correlate (*@\file@*)
 \end{lstlisting}
 
 The \polsalt\ \texttt{raw Stokes calculation}, \texttt{final Stokes calculation}, and \texttt{results visualisation} may now be completed. For the last time, if the \polsalt\ \gls{GUI} was closed it should now be reopened using \autoref{code:polsalt_launch}. With the \gls{GUI} in focus:

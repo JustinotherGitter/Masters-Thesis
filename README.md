@@ -36,6 +36,7 @@ Justin Cooper
   * `extension`
   * `the user` instead of `a user`
   * `$#$~unit` instead of `# $unit$`
+  * tables should use `\toprule` `\midrule`, and `\botomrule`
 
 <!-- MARK: Final TODO's -->
 ## Final `TODOs`
@@ -44,6 +45,7 @@ Justin Cooper
   * Glossary (Alphabetical)
   * Abbreviations, Acronyms, and Symbols (By group(?)/category, then Alphabetical)
   * Unify usage of exposure / frame / extension and add to glossary (see references)
+  * Use `\ion{}` for acronym underline
 * Cite STOPS as repo? (See `.cff` references)
 * Change \today to MONTH, YEAR at final submission in [Thesis text](/Thesis.tex#L194)
 * Ask for read through from friends to ensure no spelling/grammar errors

@@ -20,6 +20,7 @@ The \polsalt\ (\glsxtrlong{POLSALT}) pipeline is the official reduction pipeline
 \footnote{\polsalt\ is made freely available via the \polsalt\ GitHub repository, available at \url{https://github.com/saltastro/polsalt}. It is strongly advised to follow the wiki for installation instructions.}
 The newest version of the software, aptly named the `beta version' (`version' 23 January 2020), was the version adapted in this study. It includes a \gls{GUI}, depicted in \autoref{fig:polsalt_gui}, which allows for limited interactivity during key steps in the reduction process.%
 \footnote{Installation files and instructions for the `beta version' utilizing the \gls{GUI} are available at \url{http://www.saao.ac.za/~ejk/polsalt/code/} in a TAR GZIP file.}
+The \polsalt\ pipeline is written in Python~$2$, and it is suggested that a Python environment manager, such as \texttt{anaconda} \citep{anaconda}, is installed.
 
 The steps that make up the \polsalt\ reduction pipeline include raw image reductions, wavelength calibrations, background subtraction and spectral extraction, raw Stokes calculations, final Stokes calculations, and visualization of the results. Accurate reductions at each step are crucial for accurate results and are thus briefly discussed below. Further details for the reduction process may be found at the \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ GitHub wiki}.%
 \footnote{The GitHub wiki for \polsalt\ is available at \url{https://github.com/saltastro/polsalt/wiki}.}
@@ -77,7 +78,7 @@ Plotting the results of the spectropolarimetric reduction process is done using 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 0.8\textwidth]{3_polsalt_plot.pdf}
-    \caption{A typical plot resulting from the reduction process. Figure adapted from \citep{cooper_HEASA2021}.}
+    \caption{A typical plot resulting from the reduction process. Figure adapted from \citep{Cooper_HEASA2021}.}
     \label{fig:polsalt_plot}
 \end{figure}
 
@@ -581,7 +582,7 @@ The full \stops\ \texttt{split} class docstring is given in \autoref{doc:corr}.
 % \begin{figure}[t]
 %     \centering
 %     \includegraphics[width = 0.8\textwidth]{3_new_workflow.pdf}
-%     \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and the developed supplementary tools. Diagram adapted from \cite{cooper_HEASA2021}.}
+%     \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and the developed supplementary tools. Diagram adapted from \cite{Cooper_HEASA2021}.}
 %     \label{fig:new_workflow}
 % \end{figure}
 % \input{chapter_3/figures/3_reduction_flowchart.tex}
@@ -652,7 +653,7 @@ The full \stops\ \texttt{split} class docstring is given in \autoref{doc:corr}.
         \draw [to] (corr_check) -| node[anchor=north] {No} ++(2.5cm, 5cm) -- (iraf_id);
 
     \end{tikzpicture}
-    \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and \stops. Diagram adapted from \cite{cooper_HEASA2021}.}
+    \caption{A general workflow for data reductions using a combination of \polsalt, \iraf, and \stops. Diagram adapted from \cite{Cooper_HEASA2021}.}
     \label{fig:new_workflow}
 \end{figure}
 
