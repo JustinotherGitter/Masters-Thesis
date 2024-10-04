@@ -21,7 +21,7 @@ As the \stops\ \texttt{split} and \texttt{join} methods are designed to convert 
 % MARK: STOPS split tests
 \subsection{Testing the \texttt{split} Method} \label{subsec:test_split}
 
-The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`(arc|beam)(O|E)'- prefixed) \gls{FITS} file structures.
+The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`[arc|beam][O|E]'- prefixed) \gls{FITS} file structures.
 As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} method's output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
 
 \input{chapter_4/tables/4_split_info.tex}
