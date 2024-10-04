@@ -1,21 +1,31 @@
-\newcommand\mc[1]{\multicolumn{1}{c|}{#1}} % handy shortcut macro
+% \newcommand\mc[1]{\multicolumn{1}{c|}{#1}} % handy shortcut macro
+
 \begin{table}[t]
+
     \centering
-    \begin{tabular}{c|cccccc}
-        \hline
-        Filename & No. & Name & Type & Cards & Dimensions & Format \\ \hline
-        \multirow{4}{*}{\polsalt} % \multirow{4}{*}{\parbox[c]{1.8cm}{mxgbpP\-20170328\-0054.fits}}
-        & $0$ & \gls{PRIMARY} & PrimaryHDU & $161$   & ()           &  \\
-        & $1$ & \gls{SCI}     & ImageHDU   & $19$    & ($3199$, $1028$) & float32 \\
-        & $2$ & \gls{VAR}     & ImageHDU   & $8$     & ($3199$, $1028$) & float32 \\
-        & $3$ & \gls{BPM}     & ImageHDU   & $8$     & ($3199$, $1028$) & uint8   \\ \cline{1-1}
-        \stops\ \texttt{split} `$O$' % beamo0054.fits
-        & $0$ & \gls{PRIMARY} & PrimaryHDU & $162$   & ($3199$, $474$)  & float32 \\ \cline{1-1}
-        \stops\ \texttt{split} `$E$' % beame0054.fits
-        & $0$ & \gls{PRIMARY} & PrimaryHDU & $162$   & ($3199$, $474$)  & float32 \\ \hline
-    \end{tabular}
+
     \caption{A comparison of the contents of a \polsalt\ pre-reduced \gls{FITS} file to the \stops\ \texttt{split} $O$- and $E$-beam \gls{FITS} files. Table created using the \texttt{Astropy} \texttt{fitsinfo} \gls{CLI} tool.}
     \label{table:split_info}
+
+    \begin{tabular}{lcccccc}
+        \toprule
+        Filename &
+        No. &
+        Name &
+        Type &
+        Cards &
+        Dimensions &
+        Format \\
+        \midrule
+        \polsalt % mxgbpP201703280054.fits
+        & $0$ & \gls{PRIMARY} & PrimaryHDU & $161$   & -                & -       \\
+        & $1$ & \gls{SCI}     & ImageHDU   & $19$    & ($3199$, $1028$) & float32 \\
+        & $2$ & \gls{VAR}     & ImageHDU   & $8$     & ($3199$, $1028$) & float32 \\
+        & $3$ & \gls{BPM}     & ImageHDU   & $8$     & ($3199$, $1028$) & uint8   \\
+        \stops\ \texttt{split} `$O$' % beamo0054.fits
+        & $0$ & \gls{PRIMARY} & PrimaryHDU & $162$   & ($3199$, $474$)  & float32 \\
+        \stops\ \texttt{split} `$E$' % beame0054.fits
+        & $0$ & \gls{PRIMARY} & PrimaryHDU & $162$   & ($3199$, $474$)  & float32 \\ \bottomrule
+    \end{tabular}
+
 \end{table}
-% \texttt{mxgbpP201703280054.fits}
-% \texttt{beamo0054.fits} and \texttt{beame0054.fits}, respectively

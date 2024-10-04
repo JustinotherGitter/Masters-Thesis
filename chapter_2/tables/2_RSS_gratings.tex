@@ -1,16 +1,26 @@
 \begin{table}[t]
-  \begin{tabular}{ccccc}
-    \hline
-    Grating Name                           & \begin{tabular}[c]{@{}c@{}}Wavelength\\ Coverage (\angstrom)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Usable Angles\\ (\degree)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Bandpass per tilt\\ (\angstrom)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Resolving\\ Power ($1.25\arcsec$ slit)\end{tabular} \\ \hline
-    ~PG0300\footnotemark{}                 & $3700 - 9000$                                                             & $ $                                                             & $3900/4400$                                                             & $250 - 600$                                                                    \\
-    ~PG0700\footnotemark[\value{footnote}] & $3200 - 9000$                                                             & $3.0 - 7.5$                                                     & $4000 - 3200$                                                           & $400 - 1200$                                                                   \\
-    PG0900                                 & $3200 - 9000$                                                             & $12 - 20$                                                       & $\sim3000$                                                              & $600 - 2000$                                                                   \\
-    PG1300                                 & $3900 - 9000$                                                             & $19 - 32$                                                       & $\sim2000$                                                              & $1000 - 3200$                                                                  \\
-    PG1800                                 & $4500 - 9000$                                                             & $28.5 - 50$                                                     & $1500 - 1000$                                                           & $2000 - 5500$                                                                  \\
-    PG2300                                 & $3800 - 7000$                                                             & $30.5 - 50$                                                     & $1000 - 800$                                                            & $2200 - 5500$                                                                  \\
-    PG3000                                 & $3200 - 5400$                                                             & $32 - 50$                                                       & $800 - 600$                                                             & $2200 - 5500$                                                                  \\ \hline
-  \end{tabular}
+
+  \centering
+
   \caption{Gratings available for use with the \gls{RSS}. Table adapted from the \gls{SALT} call for proposals (2023).}
   \label{table:RSS_gratings}
+
+  \begin{tabular}{lcccc}
+    \toprule
+    Grating Name &
+    \begin{tabular}[c]{@{}c@{}}Wavelength\\Coverage (\angstrom)\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}Usable Angles\\(\degree)\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}Bandpass per tilt\\(\angstrom)\end{tabular} &
+    \begin{tabular}[c]{@{}c@{}}Resolving\\Power ($1.25\arcsec$ slit)\end{tabular} \\ \midrule
+    PG0300\footnotemark{} & $3700 - 9000$ & $ $ & $3900/4400$ & $250 - 600$ \\
+    PG0700\footnotemark[\value{footnote}] & $3200 - 9000$ & $3.0 - 7.5$ & $4000 - 3200$ & $400 - 1200$ \\
+    PG0900 & $3200 - 9000$ & $12 - 20$ & $\sim3000$ & $600 - 2000$ \\
+    PG1300 & $3900 - 9000$ & $19 - 32$ & $\sim2000$ & $1000 - 3200$ \\
+    PG1800 & $4500 - 9000$ & $28.5 - 50$ & $1500 - 1000$ & $2000 - 5500$ \\
+    PG2300 & $3800 - 7000$ & $30.5 - 50$ & $1000 - 800$ & $2200 - 5500$ \\
+    PG3000 & $3200 - 5400$ & $32 - 50$ & $800 - 600$ & $2200 - 5500$ \\
+    \bottomrule
+  \end{tabular}
+
 \end{table}
 \footnotetext{The PG0300 surface relief grating has been replaced with the PG0700 \gls{VPH} grating as of November 2022 but has been included here as observations using the PG0300 are used in later sections.}

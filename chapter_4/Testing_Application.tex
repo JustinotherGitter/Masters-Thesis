@@ -7,9 +7,11 @@ This chapter contains an overview of the testing performed for the development o
 
 % No \polsalt\ tests or tests on pre-reduced \gls{FITS} files. (Trusted accurate)
 % General discussion of testing (I.E. not this test was done specifically this source, more along the lines of these tests were done to check this issue, seen here using this source for example.)
-The main challenge faced when developing \stops\ was ensuring that the software was compatible with both the \polsalt\ and \iraf\ file structures. As development is an iterative process, \stops\ was continually checked to ensure compatibility such that the varying \stops\ method inputs were correctly parsed, and that their outputs were parsable by the relevant \iraf\ tasks or \polsalt\ methods.
+The main challenge faced when developing \stops\ was ensuring that the software was compatible with both the \polsalt\ and \iraf\ file structures.
+As development is an iterative process, \stops\ was continually checked to ensure compatibility such that the varying \stops\ method inputs were correctly parsed, and that their outputs were parsable by the relevant \iraf\ tasks or \polsalt\ methods.
 
-To this end, observations which were verified to have been accurately reduced were duplicated for testing purposes, allowing for continual checks of the \stops\ pipeline to be made during the development process. As the \stops\ \texttt{split} and \texttt{join} methods are designed to convert between the \polsalt\ and \iraf\ file structures, greater emphasis was made to ensure that the output of both methods provided accurate and consistent results.
+To this end, observations which were verified to have been accurately reduced were duplicated for testing purposes, allowing for continual checks of the \stops\ pipeline to be made during the development process.
+As the \stops\ \texttt{split} and \texttt{join} methods are designed to convert between the \polsalt\ and \iraf\ file structures, greater emphasis was made to ensure that the output of both methods provided accurate and consistent results.
 
 % % Why the pipeline is better
 % The rigorous error handling in \stops\ ensures that the user is informed of any issues that arise during the reduction process. This is particularly important as \stops\ was developed to enable a faster reduction process compared to that of pure \iraf\ or \polsalt.
@@ -19,11 +21,13 @@ To this end, observations which were verified to have been accurately reduced we
 % MARK: STOPS split tests
 \subsection{Testing the \texttt{split} Method} \label{subsec:test_split}
 
-The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`(arc|beam)(O|E)'- prefixed) \gls{FITS} file structures. As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} method's output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
+The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`(arc|beam)(O|E)'- prefixed) \gls{FITS} file structures.
+As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} method's output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
 
 \input{chapter_4/tables/4_split_info.tex}
 
-\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting. The split \gls{FITS} files contain the split \gls{SCI} extension data and the \gls{PRIMARY} header from the pre-reduced files, with any Header or Data differences mentioned below.
+\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting.
+The split \gls{FITS} files contain the split \gls{SCI} extension data and the \gls{PRIMARY} header from the pre-reduced files, with any Header or Data differences mentioned below.
 
 The header is left mostly untouched, and is only updated to represent the new data type and shape:
 the `BITPIX' value is updated, from $8$ to $-32$, and the `NAXIS' value is updated, from $0$ to $2$;
@@ -47,28 +51,34 @@ This accounts for the discrepancy in the `Cards' between the \polsalt\ and \stop
         \caption{The difference in the \gls{SCI} extensions, for the `E' polarization beam.}
         \label{subfig:diff_split_E}
     \end{subfigure}
-    \caption{The difference between the \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files and the \stops\ `split' (`(arc|beam)(O|E)'- prefixed) files. Figures created using both the \polsalt\ \texttt{Raw image reduction} and \stops\ \texttt{split} method outputs.}
+    \caption{The difference between the \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files and the \stops\ `split' (`[arc|beam][O|E]'- prefixed) files. Figures created using both the \polsalt\ \texttt{Raw image reduction} and \stops\ \texttt{split} method outputs.}
     \label{fig:split_diff}
 \end{figure}
 
-\autoref{fig:split_diff} shows that the \polsalt\ \gls{SCI} data is unmodified when copying the data to the \stops\ \gls{FITS} file, but only includes half of the data, for the relevant $O$- or $E$-polarization beam, \autoref{subfig:diff_split_O} and \autoref{subfig:diff_split_E}, respectively, with a cropping which defaults to $40$~pixels (see \autoref{subsec:stops_split}), introduced to the top- and bottom-most rows of the \polsalt\ data. This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
+\autoref{fig:split_diff} shows that the \polsalt\ \gls{SCI} data is unmodified when copying the data to the \stops\ \gls{FITS} file, but only includes half of the data, for the relevant $O$- or $E$-polarization beam, \autoref{subfig:diff_split_O} and \autoref{subfig:diff_split_E}, respectively, with a cropping which defaults to $40$~pixels (see \autoref{subsec:stops_split}), introduced to the top- and bottom-most rows of the \polsalt\ data.
+This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
 
 This output file structure was chosen for \iraf\ compatibility, and was tested over multiple grating and articulation angles, as well as with various data sets to ensure that the \texttt{split} method was robust and reliable.
 
 % MARK: STOPS join tests
 \subsection{Testing the \texttt{join} Method} \label{subsec:test_join}
 
-The \texttt{join} method requires both an \iraf\ database with wavelength solutions (or a custom wavelength solution) for both polarimetric beams and the \polsalt\ pre-reduced files as input and outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp'- prefixed) \gls{FITS} file structures. Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method is unable to process the files otherwise, thus halting the reduction process. Thankfully, the \texttt{join} method output could be compared to the \polsalt\ \texttt{wavelength calibration} method output files, ensuring that any changes introduced by the \stops\ pipeline were well characterized.
+The \texttt{join} method requires both an \iraf\ database with wavelength solutions (or a custom wavelength solution) for both polarimetric beams and the \polsalt\ pre-reduced files as input and outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp'- prefixed) \gls{FITS} file structures.
+Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method is unable to process the files otherwise, thus halting the reduction process.
+Thankfully, the \texttt{join} method output could be compared to the \polsalt\ \texttt{wavelength calibration} method output files, ensuring that any changes introduced by the \stops\ pipeline were well characterized.
 
 \input{chapter_4/tables/4_join_info.tex}
 
-\autoref{table:join_info} shows the \gls{FITS} file information for both the \polsalt\ and \stops\ wavelength calibrated files. Other than the `Dimensions' of each `ImageHDU' extension,%
+\autoref{table:join_info} shows the \gls{FITS} file information for both the \polsalt\ and \stops\ wavelength calibrated files.
+Other than the `Dimensions' of each `ImageHDU' extension, the \gls{FITS} files are identical in structure.%
 \footnote{The `Dimensions' differ due to the before mentioned cropping of the top- and bottom-most rows of the data.}
-the \gls{FITS} files are identical in structure.
 
-Although the `Cards' count is the same, minor differences across the headers are present. The `HISTORY' keyword, which contains the \polsalt\ `CRCLEAN' parameters and which default to `upper= 4.0, lower= 1.5, sigmaveto= 2.0', is left as `None' in the \stops\ file.%
+Although the `Cards' count is the same, minor differences across the headers are present.
+The `HISTORY' keyword, which contains the \polsalt\ `CRCLEAN' parameters and which default to `upper= 4.0, lower= 1.5, sigmaveto= 2.0', is left as `None' in the \stops\ file.%
 \footnote{The \polsalt\ pipeline performs cosmic ray cleaning using a $10\sigma$ spike to cull cosmic rays. See the \polsalt\ \protect\href{https://github.com/saltastro/polsalt/blob/master/polsalt/specpolwavmap.py\#L132}{source code} for more information.}
-Although \stops\ performs cosmic ray cleaning (see \autoref{subsec:stops_join}), the parameters are not stored in the header as \polsalt\ and \stops\ implement different methods for cosmic ray cleaning. Other minor differences such as the date-times stored in the `SAL-TLM' and `SMOSAIC' keywords may also differ as they contain the date-times relating to the completion of the \polsalt\ pre-reductions. This accounts for the differences in the `Cards' between the \polsalt\ and \stops\ file header entries in \autoref{table:join_info}.
+Although \stops\ performs cosmic ray cleaning (see \autoref{subsec:stops_join}), the parameters are not stored in the header as \polsalt\ and \stops\ implement different methods for cosmic ray cleaning.
+Other minor differences such as the date-times stored in the `SAL-TLM' and `SMOSAIC' keywords may also differ as they contain the date-times relating to the completion of the \polsalt\ pre-reductions.
+This accounts for the differences in the `Cards' between the \polsalt\ and \stops\ file header entries in \autoref{table:join_info}.
 
 \begin{figure}
     \centering
@@ -103,17 +113,25 @@ Although \stops\ performs cosmic ray cleaning (see \autoref{subsec:stops_join}),
     \label{fig:join_in_out_diff}
 \end{figure}
 
-\autoref{fig:join_in_out_diff} shows the differences in the data between the \polsalt\ and \stops\ wavelength calibrated files. It can be seen that the \gls{VAR} extensions (\autoref{subfig:join_VAR}) are identical. The \gls{SCI} extensions (\autoref{subfig:join_SCI}) differ only in that the cosmic ray cleaning has been applied to the \stops\ data, whereas the \polsalt\ data applies a mask to the cosmic rays using the \gls{BPM} extension (\autoref{subfig:join_BPM}). The \gls{BPM} and \gls{WAV} extensions (\autoref{subfig:join_WAV}) are also masked to account for the valid wavelength calibrated region. The \gls{WAV} extensions contain the differing wavelength solutions and as such naturally differ. This accounts for the differences in the data between the \polsalt\ and \stops\ files.
+\autoref{fig:join_in_out_diff} shows the differences in the data between the \polsalt\ and \stops\ wavelength calibrated files.
+It can be seen that the \gls{VAR} extensions (\autoref{subfig:join_VAR}) are identical.
+The \gls{SCI} extensions (\autoref{subfig:join_SCI}) differ only in that the cosmic ray cleaning has been applied to the \stops\ data, whereas the \polsalt\ data applies a mask to the cosmic rays using the \gls{BPM} extension (\autoref{subfig:join_BPM}).
+The \gls{BPM} and \gls{WAV} extensions (\autoref{subfig:join_WAV}) are also masked to account for the valid wavelength calibrated region.
+The \gls{WAV} extensions contain the differing wavelength solutions and as such naturally differ.
+This accounts for the differences in the data between the \polsalt\ and \stops\ files.
 
-Finally, the \stops\ \texttt{join} method was tested to ensure compatibility and correctness of the output data in comparison to \polsalt. This involved testing the \texttt{join} method with various data sets to ensure that the output files were accurate and consistent.
+Finally, the \stops\ \texttt{join} method was tested to ensure compatibility and correctness of the output data in comparison to \polsalt.
+This involved testing the \texttt{join} method with various data sets to ensure that the output files were accurate and consistent.
 
 % MARK: Check Wav. Cal.'s
 \section{Wavelength Solution Checks} \label{sec:test_wav}
 
 % No \iraf\ tests or tests on \iraf\ \gls{FITS} files. (Trusted accurate)
-The secondary challenge encountered when developing \stops\ was ensuring that the wavelength solutions parsed by \stops\ were unaffected by the pipeline and that they were similar to those created by \polsalt. This was achieved through the \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the wavelength solutions produced by \iraf, but were later modified to parse both the \iraf\ and \polsalt\ wavelength solutions, allowing for further inspection of the two-dimensional wavelength solution.
+The secondary challenge encountered when developing \stops\ was ensuring that the wavelength solutions parsed by \stops\ were unaffected by the pipeline and that they were similar to those created by \polsalt.
+This was achieved through the \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the wavelength solutions produced by \iraf, but were later modified to parse both the \iraf\ and \polsalt\ wavelength solutions, allowing for further inspection of the two-dimensional wavelength solution.
 
-Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavelength calibrations, the accuracy of the new wavelength solutions needed to be validated. This was done both through the \iraf\ tasks, ensuring an accurate wavelength solution, and through the \stops\ \texttt{correlate} and \texttt{skylines} methods, allowing the integration of the wavelength solutions to be validated.
+Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavelength calibrations, the accuracy of the new wavelength solutions needed to be validated.
+This was done both through the \iraf\ tasks, ensuring an accurate wavelength solution, and through the \stops\ \texttt{correlate} and \texttt{skylines} methods, allowing the integration of the wavelength solutions to be validated.
 
 \todo{Add \gls{RMS} results (Table / Figures / Both?) from wavelength solution checks (\iraf\ \gls{RMS}, \polsalt\ \gls{RMS}) to quantify differences.}
 
@@ -144,9 +162,12 @@ The \texttt{correlate} method returns plots validating the wavelength solutions 
     \label{fig:corr_test}
 \end{figure}
 
-The \stops\ \texttt{correlate} method was tested by cross correlating generated $O$- and $E$-beam spectra with known offsets, with the aim of reacquiring said offsets, as shown in \autoref{fig:corr_test}. The spectra were generated with a feature in each \gls{CCD} region, randomly offset in both the wavelength and intensity axes, \autoref{subfig:corr_test_spec}.
+The \stops\ \texttt{correlate} method was tested by cross correlating generated $O$- and $E$-beam spectra with known offsets, with the aim of reacquiring said offsets, as shown in \autoref{fig:corr_test}.
+The spectra were generated with a feature in each \gls{CCD} region, randomly offset in both the wavelength and intensity axes, \autoref{subfig:corr_test_spec}.
 
-Through cross correlation, \autoref{subfig:corr_test_corr}, the introduced offsets, or `max lag', were reacquired. For spectral regions with few features or features not much more significant than the continuum noise (such as the left most \gls{CCD} region of \autoref{subfig:corr_test_corr}), correlation may fail to determine the correct offset. It is clear that the returned `max lag' is incorrect when the `max lag' peak is not significantly larger than any noise of the continuum in the correlation plot.
+Through cross correlation, \autoref{subfig:corr_test_corr}, the introduced offsets, or `max lag', were reacquired.
+For spectral regions with few features or features not much more significant than the continuum noise (such as the left most \gls{CCD} region of \autoref{subfig:corr_test_corr}), correlation may fail to determine the correct offset.
+It is clear that the returned `max lag' is incorrect when the `max lag' peak is not significantly larger than any noise of the continuum in the correlation plot.
 
 % MARK: WAV Sky. Checks
 \subsection{Sky Line Checks} \label{subsec:test_sky}
@@ -194,7 +215,8 @@ These low polarization percentages are expected for afterglows this late, when t
     \label{fig:grb_abs}
 \end{figure}
 
-\autoref{fig:grb_abs} shows the normalized spectra of the \gls{SALT} \gls{RSS} and \gls{VLT} \gls{FORS}[2] observations, offset by $\pm 0.05$, respectively. The spectra show a good agreement across the measured position of the proposed absorption features, with the \gls{FORS}[2] spectrum being able to resolve three close pairs of lines, namely, {Fe}{II} $5096/5114$~\AA, {Mg}{II} $5481/5494$~\AA, and {Mg}{II} $6002/6018$~\AA, which were unresolved in the \gls{RSS} spectrum.
+\autoref{fig:grb_abs} shows the normalized spectra of the \gls{SALT} \gls{RSS} and \gls{VLT} \gls{FORS}[2] observations, offset by $\pm 0.05$, respectively.
+The spectra show a good agreement across the measured position of the proposed absorption features, with the \gls{FORS}[2] spectrum being able to resolve three close pairs of lines, namely, {Fe}{II} $5096/5114$~\AA, {Mg}{II} $5481/5494$~\AA, and {Mg}{II} $6002/6018$~\AA, which were unresolved in the \gls{RSS} spectrum.
 
 \input{chapter_4/tables/4_grb191221b_lines.tex}
 
@@ -209,9 +231,11 @@ Initial analysis of the spectrum by the \gls{Swift}/\gls{UVOT} team \citep{Kuin2
 }
 
 % Basic background information
-As discussed in \cite[][see also \autoref{app:papers}]{Cooper_HEASA2021}, it was shown that alternative wavelength solutions, such as those created using \iraf, are capable of being applied to \gls{SALT} spectro\-polarimetric data. The `additional tools' mentioned therein, which were the precursor to the \stops\ pipeline, were used during the reduction of the blazar 3C~279.
+As discussed in \cite[][see also \autoref{app:papers}]{Cooper_HEASA2021}, it was shown that alternative wavelength solutions, such as those created using \iraf, are capable of being applied to \gls{SALT} spectro\-polarimetric data.
+The `additional tools' mentioned therein, which were the precursor to the \stops\ pipeline, were used during the reduction of the blazar 3C~279.
 
-The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May $17$, using the PG$0900$ grating with two different grating angles ($12.5$\degree\ and $19.5$\degree). The grating and articulation angles used for the observations, as shown in \autoref{table:sci_targets}, matched those of observations of the spectrophotometric standard star, Hiltner $600$, observed on $2017$ February $24$, allowing the intensity to be relatively flux calibrated.
+The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May $17$, using the PG$0900$ grating with two different grating angles ($12.5$\degree\ and $19.5$\degree).
+The grating and articulation angles used for the observations, as shown in \autoref{table:sci_targets}, matched those of observations of the spectrophotometric standard star, Hiltner $600$, observed on $2017$ February $24$, allowing the intensity to be relatively flux calibrated.
 
 \begin{figure}[t]
     \centering
@@ -220,7 +244,8 @@ The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May 
     \label{fig:HEASA2021_oecorr}
 \end{figure}
 
-\autoref{fig:HEASA2021_oecorr} shows the spectra and cross correlation of the $O$- and $E$-beams of the \gls{ThAr} and \gls{NeAr} arc lamps, also with grating angles of $12.5$\degree\ and $19.5$\degree, respectively. The cross correlation of the arc lamps perpendicular polarization beams show clear peaks at $0$ lag, indicating that the wavelength solutions are consistent across the two polarization beams.
+\autoref{fig:HEASA2021_oecorr} shows the spectra and cross correlation of the $O$- and $E$-beams of the \gls{ThAr} and \gls{NeAr} arc lamps, also with grating angles of $12.5$\degree\ and $19.5$\degree, respectively.
+The cross correlation of the arc lamps perpendicular polarization beams show clear peaks at $0$ lag, indicating that the wavelength solutions are consistent across the two polarization beams.
 
 \begin{figure}[t]
     \centering
@@ -248,7 +273,9 @@ The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May 
     \label{fig:HEASA2021}
 \end{figure}
 
-\autoref{fig:HEASA2021} shows the relative flux calibrated intensity, percentage of linear polarization, and polarization angle of the blazar 3C~279, across the visible spectrum. The spectra display a good overlap between the two grating angles, especially when considering the variable nature of blazars as well as the fact that the spectra are only relatively flux calibrated. Both the percentage of linear polarization and the polarization angle agree well across the grating angle overlap.
+\autoref{fig:HEASA2021} shows the relative flux calibrated intensity, percentage of linear polarization, and polarization angle of the blazar 3C~279, across the visible spectrum.
+The spectra display a good overlap between the two grating angles, especially when considering the variable nature of blazars as well as the fact that the spectra are only relatively flux calibrated.
+Both the percentage of linear polarization and the polarization angle agree well across the grating angle overlap.
 
 % MARK: HEASA 2022
 \subsection[SALT Spectropolarimetric Pipeline Comparisons]{%
@@ -256,7 +283,9 @@ The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May 
     (Proceedings of Science, \glsxtrshort{HEASA} 2022)
 }
 
-As discussed in \cite[][see also \autoref{app:papers}]{Cooper_HEASA2022}, as well as expanding on the work presented in \cite{Cooper_HEASA2021}, it was shown that the \stops\ pipeline has no noticeable effect on the polarization properties of spectropolarimetric data and that the measure of the goodness of fit for the wavelength solutions could be measured, both through correlation and measuring the position of skyline features for both the $O$- and $E$-beams. The blazar 3C~$279$, the spectrophotometric standard star Hiltner~$600$, and the spectropolarimetric standard star Hiltner~$652$, were observed on the dates tabulated in \autoref{table:sci_targets}. Observations of 3C~$279$ were taken during periods of enhanced and flaring $\gamma$-ray activity.
+As discussed in \cite[][see also \autoref{app:papers}]{Cooper_HEASA2022}, as well as expanding on the work presented in \cite{Cooper_HEASA2021}, it was shown that the \stops\ pipeline has no noticeable effect on the polarization properties of spectropolarimetric data and that the measure of the goodness of fit for the wavelength solutions could be measured, both through correlation and measuring the position of skyline features for both the $O$- and $E$-beams.
+The blazar 3C~$279$, the spectrophotometric standard star Hiltner~$600$, and the spectropolarimetric standard star Hiltner~$652$, were observed on the dates tabulated in \autoref{table:sci_targets}.
+Observations of 3C~$279$ were taken during periods of enhanced and flaring $\gamma$-ray activity.
 
 \begin{figure}[t]
     \centering
@@ -266,7 +295,8 @@ As discussed in \cite[][see also \autoref{app:papers}]{Cooper_HEASA2022}, as wel
 \end{figure}
 \footnotetext{\protect\url{https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/source.html?source_name=4FGL_J1256.1-0547}}
 
-\autoref{fig:3C_279_LCR} shows the photon flux of 3C~$279$ for energies of $0.1 - 100$~GeV as provided by the \glsxtrfull{FermiLCR} \citep{FermiLCR}. The figure shows that during the optical observations of 3C~$279$, the source was likely at $\gamma$-ray fluxes of $1.72 \times 10^{-6}$, $3.58 \times 10^{-6}$, and $2.38 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.45 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
+\autoref{fig:3C_279_LCR} shows the photon flux of 3C~$279$ for energies of $0.1 - 100$~GeV as provided by the \glsxtrfull{FermiLCR} \citep{FermiLCR}.
+The figure shows that during the optical observations of 3C~$279$, the source was likely at $\gamma$-ray fluxes of $1.72 \times 10^{-6}$, $3.58 \times 10^{-6}$, and $2.38 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.45 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
 
 \begin{figure}[t]
     \centering
@@ -293,7 +323,9 @@ The most notable disagreement of the polarization properties is seen, once again
     \label{fig:Hilt652}
 \end{figure}
 
-\autoref{fig:Hilt652} shows the reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$ as observed with the \glsxtrlong{FORS} (\glsxtrshort{FORS}[1]) and \gls{FORS}[2] mounted at the \gls{VLT} \citep{FORS1, FORS2}, as well as observed with \gls{SALT}. The figure shows that the Stokes parameters of Hiltner~$652$ are consistent across the different instruments, mostly falling within a standard deviation of historical results. Minor discrepancies are present, but are likely due to multiple compounding effects, such as differing instrumental setups, varying atmospheric conditions, as well as Hiltner~$652$ being classed as a spectrophotometric, and not spectropolarimetric, standard.
+\autoref{fig:Hilt652} shows the reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$ as observed with the \glsxtrlong{FORS} (\glsxtrshort{FORS}[1]) and \gls{FORS}[2] mounted at the \gls{VLT} \citep{FORS1, FORS2}, as well as observed with \gls{SALT}.
+The figure shows that the Stokes parameters of Hiltner~$652$ are consistent across the different instruments, mostly falling within a standard deviation of historical results.
+Minor discrepancies are present, but are likely due to multiple compounding effects, such as differing instrumental setups, varying atmospheric conditions, as well as Hiltner~$652$ being classed as a spectrophotometric, and not spectropolarimetric, standard.
 
 % MARK: Schutte - 4C+01.02
 \subsection[Modeling the Spectral Energy Distributions and Spectropolarimetry of Blazars - Application to 4C~+01.02 in 2016 - 2017]{%
@@ -301,7 +333,8 @@ The most notable disagreement of the polarization properties is seen, once again
     \citep{Schutte4C0102}
 }
 
-\citep{Schutte4C0102} discusses the results from spectropolarimetric observations and modeling of the \gls{SED} for the blazar 4C~+$01.02$ during a period of flaring and quiescence. The optical spectropolarimetric observations of the blazar were completed using the \gls{SALT} \gls{RSS} in spectropolarimetric mode, with observations taken on $2016$ July $09$ and $2017$ July $25$, also noted in \autoref{table:sci_targets}.
+\citep{Schutte4C0102} discusses the results from spectropolarimetric observations and modeling of the \gls{SED} for the blazar 4C~+$01.02$ during a period of flaring and quiescence.
+The optical spectropolarimetric observations of the blazar were completed using the \gls{SALT} \gls{RSS} in spectropolarimetric mode, with observations taken on $2016$ July $09$ and $2017$ July $25$, also noted in \autoref{table:sci_targets}.
 
 \begin{figure}[t]
     \centering
@@ -311,7 +344,8 @@ The most notable disagreement of the polarization properties is seen, once again
 \end{figure}
 \footnotetext{\protect\url{https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/source.html?source_name=4FGL_J0108.6+0134}}
 
-\autoref{fig:4C_+01.02_LCR} shows the photon flux of 4C~+$01.02$ for energies of $0.1 - 100$~GeV as provided by the \gls{FermiLCR}. The figure shows that during the optical observations of 4C~+$01.02$, the source was likely at $\gamma$-ray fluxes of $1.94 \times 10^{-6}$ and $0.08 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.21 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
+\autoref{fig:4C_+01.02_LCR} shows the photon flux of 4C~+$01.02$ for energies of $0.1 - 100$~GeV as provided by the \gls{FermiLCR}.
+The figure shows that during the optical observations of 4C~+$01.02$, the source was likely at $\gamma$-ray fluxes of $1.94 \times 10^{-6}$ and $0.08 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.21 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
 
 \begin{figure}[t]
     \centering
@@ -320,16 +354,10 @@ The most notable disagreement of the polarization properties is seen, once again
     \label{fig:4C_01.02_specpol}
 \end{figure}
 
-\autoref{fig:4C_01.02_specpol} shows the spectropolarimetric results for 4C~+$01.02$ during the periods of flaring and quiescence in $2016$ July $09$ and $2017$ July $25$, respectively. The figure shows the continuum-subtracted and normalized counts spectra for the two epochs. The identified spectral features in the quiescent state spectrum appear more prominent than those in the flaring state, with the C~IV line being the most prominent feature present in both spectra. This is due to the fainter continuum emission as compared to the flaring state, which dominates the spectrum during the flaring state.
+\autoref{fig:4C_01.02_specpol} shows the spectropolarimetric results for 4C~+$01.02$ during the periods of flaring and quiescence in $2016$ and $2017$, respectively.
+The figure shows the normalized, continuum-subtracted, intensity spectra as well as the polarization percentage for the two epochs.
+The spectral features were identified using the known redshift of 4C~$01.02$ of $z = 2.1$.
+The quiescent state spectrum exhibits more prominent features than those in the flaring state, with the C~IV line being the most prominent feature present in both spectra.
+This is due to the fainter continuum emission as compared to the flaring state, which dominates the spectrum during the flaring state.
 
-% The linear polarization percentage and polarization angle also show variation over the course of the observations, varying by $\sim 1.5\%$ and $\sim 10$\degree, respectively.
-
-% Mention basic background information
-% Provide a general discussion for source (summary of paper + necessary extra).
-
-% Provide the general reduction steps performed, if unique.
-
-% Insert figure(s) showing comparison plots of spectrum/polarization parameters from \polsalt\ and \stops (or leave out \polsalt\ and just show published results).
-
-% Also short discussion (what the results can tell us and why it is useful).
-% Focus on polarization results.
+The linear polarization percentages average $10.04 \pm 1.03\%$ and $1.72 \pm 0.93\%$ during flaring and quiescence, respectively, which agrees with the prediction that blazars release highly polarized synchrotron emission during periods of flaring.
