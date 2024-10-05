@@ -1,35 +1,44 @@
 \chapter{Testing and Application}
 
-This chapter contains an overview of the testing performed for the development of \stops\ (\autoref{sec:test_stops}) and the checking of the replaced wavelength solutions (\autoref{sec:test_wav}), as well as the application of \stops\ on observations of both spectrophotometric standards and science targets \ref{sec:app_stops}.
+This chapter contains an overview of the testing performed for the development of \stops\ and the checking of the replaced wavelength solutions (\autoref{sec:test_stops}), as well as the application of \stops\ on observations of both a spectrophotometric standard and science targets \ref{sec:app_stops}.
 
 % MARK: Test STOPS
 \section[Testing \textsc{stops}]{Testing \stops} \label{sec:test_stops}
 
 % No \polsalt\ tests or tests on pre-reduced \gls{FITS} files. (Trusted accurate)
-% General discussion of testing (I.E. not this test was done specifically this source, more along the lines of these tests were done to check this issue, seen here using this source for example.)
-The main challenge faced when developing \stops\ was ensuring that the software was compatible with both the \polsalt\ and \iraf\ file structures.
-As development is an iterative process, \stops\ was continually checked to ensure compatibility such that the varying \stops\ method inputs were correctly parsed, and that their outputs were parsable by the relevant \iraf\ tasks or \polsalt\ methods.
-
-To this end, observations which were verified to have been accurately reduced were duplicated for testing purposes, allowing for continual checks of the \stops\ pipeline to be made during the development process.
-As the \stops\ \texttt{split} and \texttt{join} methods are designed to convert between the \polsalt\ and \iraf\ file structures, greater emphasis was made to ensure that the output of both methods provided accurate and consistent results.
 
 % % Why the pipeline is better
 % The rigorous error handling in \stops\ ensures that the user is informed of any issues that arise during the reduction process. This is particularly important as \stops\ was developed to enable a faster reduction process compared to that of pure \iraf\ or \polsalt.
 
-% Reduction specific tests refer to tests performed to ensure no errant effects are introduced during the reduction process. These tests were designed to validate the accuracy and reliability of the \stops\ pipeline in producing scientifically accurate results.
+The main objective during the development of \stops\ was ensuring that the software was compatible with both the \polsalt\ and \iraf\ file structures and that the `reduction-specific' methods, namely the \stops\ \texttt{split} and \texttt{join} methods, provided correct and consistent results.
+As development is an iterative process, \stops\ was continually checked to ensure compatibility such that the varying \stops\ method inputs were correctly parsed, and that their outputs were parsable by the relevant \iraf\ tasks or \polsalt\ methods.
+
+To this end, observations which were verified to have been accurately reduced were duplicated for testing the `reduction-specific' methods, allowing for continual checks of the \stops\ pipeline to be made during the development process.
+The testing of the `reduction-specific' methods are discussed in \autoref{subsec:test_split} and \autoref{subsec:test_join}, respectively.
+
+% No \iraf\ tests or tests on \iraf\ \gls{FITS} files. (Trusted accurate)
+The secondary objective during the development of \stops\ was to provide a means to check the wavelength solutions.
+This was achieved through the `check-specific' methods, namely the \stops\ \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the \iraf\ wavelength solutions, specifically after re-insertion of the wavelength solutions back into the \polsalt\ \gls{FITS} file format.
+The file format distinction is necessary as \iraf\ provides immediate confirmation of the wavelength solutions during calibration through interactive \gls{RMS} plots (see e.g. \autoref{fig:iraf_id_plot}, \ref{fig:iraf_fc_plot}), as well as the transformation of the spectra through the \texttt{transform} \iraf\ task, while \polsalt\ only provides confirmation of the \gls{RMS} for the interactive line identification during \texttt{wavelength calibration}.
+
+% The \texttt{correlate} method provides a means to confirm the relative offsets in the wavelength solutions across polarization beams (as well as across the related \gls{CCD}['s]), and as such was tested by correlating two synthetic spectra with a feature in each \gls{CCD} offset by a varying amount.
+% The \texttt{skylines} method provides a means to confirm the accuracy of the wavelength solution by attempting to retrieve and compare the skylines from a spectrum, which are not used during wavelength calibration and thus correlate well to the fit of the wavelength solution, to skylines as measured by \gls{SALT}, and as such was tested using a synthetic spectrum with artificial skylines added which were offset by varying amounts.
+The `check-specific' methods were tested using synthetic spectra, which contained features with known and varying offsets introduced.
+The features refer to emission lines in the \texttt{correlate} related tests and absorption skylines in the \texttt{skylines} related tests.
+The testing of the `check-specific' methods are discussed in \autoref{subsec:test_corr} and \autoref{subsec:test_sky}, respectively.
 
 % MARK: STOPS split tests
 \subsection{Testing the \texttt{split} Method} \label{subsec:test_split}
 
-The \stops\ \texttt{split} method requires any \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`[arc|beam][O|E]'- prefixed) \gls{FITS} file structures.
+The \stops\ \texttt{split} method accepts any \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`[arc|beam][O|E]'- prefixed) \gls{FITS} file structures.
 As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} method's output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
 
 \input{chapter_4/tables/4_split_info.tex}
 
 \autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting.
-The split \gls{FITS} files contain the split \gls{SCI} extension data and the \gls{PRIMARY} header from the pre-reduced files, with any Header or Data differences mentioned below.
+The split \gls{FITS} files \gls{SCI} extension each contain a polarization beams two-dimensional spectrum and the \gls{PRIMARY} header from the pre-reduced files, with the \gls{FITS} header and data differences mentioned below.
 
-The header is left mostly untouched, and is only updated to represent the new data type and shape:
+For the split \gls{FITS} files, the header is left mostly untouched, and is only updated to represent the new data type and shape:
 the `BITPIX' value is updated, from $8$ to $-32$, and the `NAXIS' value is updated, from $0$ to $2$;
 the `NAXIS1' and `NAXIS2' keywords are added, and their values are set to the new split \gls{SCI} data shape;
 and the `EXTEND' keyword is removed.%
@@ -55,7 +64,8 @@ This accounts for the discrepancy in the `Cards' between the \polsalt\ and \stop
     \label{fig:split_diff}
 \end{figure}
 
-\autoref{fig:split_diff} shows that the \polsalt\ \gls{SCI} data is unmodified when copying the data to the \stops\ \gls{FITS} file, but only includes half of the data, for the relevant $O$- or $E$-polarization beam, \autoref{subfig:diff_split_O} and \autoref{subfig:diff_split_E}, respectively, with a cropping which defaults to $40$~pixels (see \autoref{subsec:stops_split}), introduced to the top- and bottom-most rows of the \polsalt\ data.
+\autoref{fig:split_diff} shows that the \polsalt\ \gls{SCI} data is unmodified when copying the data to the \stops\ \gls{FITS} file, although each file only includes half of the data, for the relevant $O$- or $E$-polarization beam, \autoref{subfig:diff_split_O} and \autoref{subfig:diff_split_E}, respectively.
+The split data is also cropped at the top- and bottom-most rows of the \polsalt\ data, with the cropping defaulting to $40$~pixels (see \autoref{subsec:stops_split}).
 This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
 
 This output file structure was chosen for \iraf\ compatibility, and was tested over multiple grating and articulation angles, as well as with various data sets to ensure that the \texttt{split} method was robust and reliable.
@@ -65,19 +75,20 @@ This output file structure was chosen for \iraf\ compatibility, and was tested o
 
 The \texttt{join} method requires both an \iraf\ database with wavelength solutions (or a custom wavelength solution) for both polarimetric beams and the \polsalt\ pre-reduced files as input and outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp'- prefixed) \gls{FITS} file structures.
 Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method is unable to process the files otherwise, thus halting the reduction process.
-Thankfully, the \texttt{join} method output could be compared to the \polsalt\ \texttt{wavelength calibration} method output files, ensuring that any changes introduced by the \stops\ pipeline were well characterized.
+Thankfully, the \texttt{join} method output could be directly compared to the \polsalt\ \texttt{wavelength calibration} method output files, ensuring that any changes introduced by the \stops\ pipeline are well characterized.
 
 \input{chapter_4/tables/4_join_info.tex}
 
 \autoref{table:join_info} shows the \gls{FITS} file information for both the \polsalt\ and \stops\ wavelength calibrated files.
 Other than the `Dimensions' of each `ImageHDU' extension, the \gls{FITS} files are identical in structure.%
-\footnote{The `Dimensions' differ due to the before mentioned cropping of the top- and bottom-most rows of the data.}
+\footnote{The `Dimensions' differ due to the aforementioned cropping of the top- and bottom-most rows of the pre-reduced \gls{FITS} files data.}
 
 Although the `Cards' count is the same, minor differences across the headers are present.
-The `HISTORY' keyword, which contains the \polsalt\ `CRCLEAN' parameters and which default to `upper= 4.0, lower= 1.5, sigmaveto= 2.0', is left as `None' in the \stops\ file.%
-\footnote{The \polsalt\ pipeline performs cosmic ray cleaning using a $10\sigma$ spike to cull cosmic rays. See the \polsalt\ \protect\href{https://github.com/saltastro/polsalt/blob/master/polsalt/specpolwavmap.py\#L132}{source code} for more information.}
-Although \stops\ performs cosmic ray cleaning (see \autoref{subsec:stops_join}), the parameters are not stored in the header as \polsalt\ and \stops\ implement different methods for cosmic ray cleaning.
-Other minor differences such as the date-times stored in the `SAL-TLM' and `SMOSAIC' keywords may also differ as they contain the date-times relating to the completion of the \polsalt\ pre-reductions.
+The `HISTORY' keyword, which would have contained the \polsalt\ `CRCLEAN' parameters, and which default to `upper= 4.0, lower= 1.5, sigmaveto= 2.0', is instead modified to contain the implemented \gls{CRR} parameters.%
+\footnote{The \polsalt\ pipeline performs \gls{CRR} using a $10\sigma$ spike to cull cosmic rays. See the \protect\href{https://github.com/saltastro/polsalt/blob/master/polsalt/specpolwavmap.py\#L132}{source code} of \polsalt\ for more information.}
+% Although \stops\ performs \gls{CRR} (see \autoref{subsec:stops_join}), the parameters are not stored in the header as \polsalt\ and \stops\ implement different methods for \gls{CRR}.  % Deprecated as the parameters *are* now stored in the header.
+
+Other minor differences may arise, such as the date-times stored in the `SAL-TLM' and `SMOSAIC' keywords, as they contain the date-times relating to the completion of the \polsalt\ pre-reductions.
 This accounts for the differences in the `Cards' between the \polsalt\ and \stops\ file header entries in \autoref{table:join_info}.
 
 \begin{figure}
@@ -115,30 +126,18 @@ This accounts for the differences in the `Cards' between the \polsalt\ and \stop
 
 \autoref{fig:join_in_out_diff} shows the differences in the data between the \polsalt\ and \stops\ wavelength calibrated files.
 It can be seen that the \gls{VAR} extensions (\autoref{subfig:join_VAR}) are identical.
-The \gls{SCI} extensions (\autoref{subfig:join_SCI}) differ only in that the cosmic ray cleaning has been applied to the \stops\ data, whereas the \polsalt\ data applies a mask to the cosmic rays using the \gls{BPM} extension (\autoref{subfig:join_BPM}).
-The \gls{BPM} and \gls{WAV} extensions (\autoref{subfig:join_WAV}) are also masked to account for the valid wavelength calibrated region.
+The difference in the \gls{SCI} extensions (\autoref{subfig:join_SCI}) is due to the \gls{CRR} applied by \stops\, which rejects cosmic rays from the \gls{SCI} extension instead of masking the \gls{BPM} extension (\autoref{subfig:join_BPM}) as implemented by \polsalt.
+The valid wavelength calibrated region is used as a mask and applied to the \gls{BPM} and \gls{WAV} extensions (\autoref{subfig:join_WAV}).
+Slight differences arise near the center of the frames since the correction for the wollaston tilt, as implemented by \polsalt, is reimplemented in Python~$3$ by \stops\ and as such may be affected by rounding differences.
+The differences are fortunately minor and are at the edges of the two polarimetric spectral regions
 The \gls{WAV} extensions contain the differing wavelength solutions and as such naturally differ.
 This accounts for the differences in the data between the \polsalt\ and \stops\ files.
 
 Finally, the \stops\ \texttt{join} method was tested to ensure compatibility and correctness of the output data in comparison to \polsalt.
-This involved testing the \texttt{join} method with various data sets to ensure that the output files were accurate and consistent.
-
-% MARK: Check Wav. Cal.'s
-\section{Wavelength Solution Checks} \label{sec:test_wav}
-
-% No \iraf\ tests or tests on \iraf\ \gls{FITS} files. (Trusted accurate)
-The secondary challenge encountered when developing \stops\ was ensuring that the wavelength solutions parsed by \stops\ were unaffected by the pipeline and that they were similar to those created by \polsalt.
-This was achieved through the \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the wavelength solutions produced by \iraf, but were later modified to parse both the \iraf\ and \polsalt\ wavelength solutions, allowing for further inspection of the two-dimensional wavelength solution.
-
-Before the \polsalt\ wavelength calibrations were replaced with the \iraf\ wavelength calibrations, the accuracy of the new wavelength solutions needed to be validated.
-This was done both through the \iraf\ tasks, ensuring an accurate wavelength solution, and through the \stops\ \texttt{correlate} and \texttt{skylines} methods, allowing the integration of the wavelength solutions to be validated.
-
-\todo{Add \gls{RMS} results (Table / Figures / Both?) from wavelength solution checks (\iraf\ \gls{RMS}, \polsalt\ \gls{RMS}) to quantify differences.}
-
-\todo{Plot \iraf\ vs \polsalt\ \gls{RMS} for sources?}
+This involved testing the \texttt{join} method with various data sets, with differing observation configurations, to ensure that the output files were accurate and consistent.
 
 % MARK: WAV Corr. Checks
-\subsection{Cross Correlation Checks} \label{subsec:test_corr}
+\section{Cross Correlation Checks} \label{subsec:test_corr}
 
 % O/E correlation checks to verify the consistency of the wavelength solutions.
 The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the \polsalt\ \texttt{spectra extraction} (`ecwmxgbp'- prefixed) method output files as input.
@@ -170,7 +169,7 @@ For spectral regions with few features or features not much more significant tha
 It is clear that the returned `max lag' is incorrect when the `max lag' peak is not significantly larger than any noise of the continuum in the correlation plot.
 
 % MARK: WAV Sky. Checks
-\subsection{Sky Line Checks} \label{subsec:test_sky}
+\section{Sky Line Checks} \label{subsec:test_sky}
 
 % Full frame wavelength solution checks to ensure comprehensive calibration.
 % Verifying the accuracy of the cross-correlation function against known standards.
