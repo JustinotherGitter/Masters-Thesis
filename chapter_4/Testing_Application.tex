@@ -175,11 +175,23 @@ It is clear that the returned `max lag' is incorrect when the `max lag' peak is 
 % Verifying the accuracy of the cross-correlation function against known standards.
 The \texttt{skylines} method returns plots validating the wavelength solutions and so only has to accept either the \iraf\ \texttt{transform} task or \stops\ \texttt{join} method output files as input.
 
-\todo{Compare skylines from \stops\ to `poor' \polsalt\ spectral extraction (I.E. spectral extraction with no trace in the `target' window and the `background' window on region with no skylines).}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 1.0\textwidth]{4_sky_test_pure.pdf}
+    \caption{The \stops\ \texttt{skylines} output for a synthetic 2D spectrum consisting of only noise, skyline emission features, and the characteristic \gls{RSS} chip gaps. Figure created using the \stops\ \texttt{skylines} method.}
+    \label{fig:sky_test_pure}
+\end{figure}
 
-\todo{Test `skylines' using known spectral sky lines / telluric lines.}
+\todo{Discuss \autoref{fig:sky_test_pure}}
 
-\todo{Insert figure illustrating skyline identification accuracy.}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width = 1.0\textwidth]{4_sky_test_shift.pdf}
+    \caption{The \stops\ \texttt{skylines} output for a two-dimensional spectrum, as described in \autoref{fig:sky_test_pure}, with a constant offset of $4$~\AA applied to all skyline emission features. Figure created using the \stops\ \texttt{skylines} method.}
+    \label{fig:sky_test_shift}
+\end{figure}
+
+\todo{Discuss \autoref{fig:sky_test_shift}}
 
 % MARK: Application
 \section[Application of \textsc{stops}]{Application of \stops} \label{sec:app_stops}
