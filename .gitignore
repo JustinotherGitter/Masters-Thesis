@@ -9,3 +9,6 @@ Thesis*
 .vscode/
 */*.aux
 *.log
+
+# Don't track ipynb
+*.ipynb
