@@ -88,9 +88,6 @@ The `HISTORY' keyword, which would have contained the \polsalt\ `CRCLEAN' parame
 \footnote{The \polsalt\ pipeline performs \gls{CRR} using a $10\sigma$ spike to cull cosmic rays. See the \protect\href{https://github.com/saltastro/polsalt/blob/master/polsalt/specpolwavmap.py\#L132}{source code} of \polsalt\ for more information.}
 % Although \stops\ performs \gls{CRR} (see \autoref{subsec:stops_join}), the parameters are not stored in the header as \polsalt\ and \stops\ implement different methods for \gls{CRR}.  % Deprecated as the parameters *are* now stored in the header.
 
-Other minor differences may arise, such as the date-times stored in the `SAL-TLM' and `SMOSAIC' keywords, as they contain the date-times relating to the completion of the \polsalt\ pre-reductions.
-This accounts for the differences in the `Cards' between the \polsalt\ and \stops\ file header entries in \autoref{table:join_info}.
-
 \begin{figure}
     \centering
     \begin{subfigure}[b]{\textwidth}
@@ -124,6 +121,9 @@ This accounts for the differences in the `Cards' between the \polsalt\ and \stop
     \label{fig:join_in_out_diff}
 \end{figure}
 
+Other minor differences may arise, such as the date-times stored in the `SAL-TLM' and `SMOSAIC' keywords, as they contain the date-times relating to the completion of the \polsalt\ pre-reductions.
+This accounts for the differences in the `Cards' between the \polsalt\ and \stops\ file header entries in \autoref{table:join_info}.
+
 \autoref{fig:join_in_out_diff} shows the differences in the data between the \polsalt\ and \stops\ wavelength calibrated files.
 It can be seen that the \gls{VAR} extensions (\autoref{subfig:join_VAR}) are identical.
 The difference in the \gls{SCI} extensions (\autoref{subfig:join_SCI}) is due to the \gls{CRR} applied by \stops\, which rejects cosmic rays from the \gls{SCI} extension instead of masking the \gls{BPM} extension (\autoref{subfig:join_BPM}) as implemented by \polsalt.
@@ -147,7 +147,7 @@ The \texttt{correlate} method returns plots validating the wavelength solutions 
     \begin{subfigure}[b]{\textwidth}
         \centering
         \includegraphics[width=\textwidth]{4_corr_spec.pdf}
-        \caption{Generated $O$- and $E$-beam spectra.}
+        \caption{Synthetic $O$- and $E$-beam spectra.}
         \label{subfig:corr_test_spec}
     \end{subfigure}
     \hfill
@@ -157,16 +157,16 @@ The \texttt{correlate} method returns plots validating the wavelength solutions 
         \caption{The \stops\ \texttt{correlate} result for the spectra displayed in \subref{subfig:corr_test_spec}.}
         \label{subfig:corr_test_corr}
     \end{subfigure}
-    \caption{Reacquisition of synthetic offsets introduced to the $O$- and $E$-beam spectra (\subref{subfig:corr_test_spec}) by cross-correlation (\subref{subfig:corr_test_corr}, bottom row).}
+    \caption{Reacquisition of offsets introduced to the $O$- and $E$-beam spectral features (\subref{subfig:corr_test_spec}) by cross-correlation (\subref{subfig:corr_test_corr}, bottom row).}
     \label{fig:corr_test}
 \end{figure}
 
-The \stops\ \texttt{correlate} method was tested by cross correlating generated $O$- and $E$-beam spectra with known offsets, with the aim of reacquiring said offsets, as shown in \autoref{fig:corr_test}.
-The spectra were generated with a feature in each \gls{CCD} region, randomly offset in both the wavelength and intensity axes, \autoref{subfig:corr_test_spec}.
+The \stops\ \texttt{correlate} method was tested by cross correlating synthetic $O$- and $E$-beam spectra with known offsets, with the aim of reacquiring said offsets, as shown in \autoref{fig:corr_test}.
+The spectra were generated with a feature in each \gls{CCD} region, randomly offset in both the wavelength and intensity axes, \autoref{subfig:corr_test_spec}. The features were purposefully chosen to be of low \gls{SNR}['s] and \gls{FWHM} to test the robustness of the \texttt{correlate} method. Non-synthetic spectra will include more features, with higher \gls{SNR}['s] and \gls{FWHM}, and as such will be more robust to the \texttt{correlate} method.
 
 Through cross correlation, \autoref{subfig:corr_test_corr}, the introduced offsets, or `max lag', were reacquired.
-For spectral regions with few features or features not much more significant than the continuum noise (such as the left most \gls{CCD} region of \autoref{subfig:corr_test_corr}), correlation may fail to determine the correct offset.
-It is clear that the returned `max lag' is incorrect when the `max lag' peak is not significantly larger than any noise of the continuum in the correlation plot.
+For spectral regions with few features or features with a low \gls{SNR} (such as the left most \gls{CCD} region of \autoref{subfig:corr_test_corr}), correlation may fail to determine the correct offset.
+When a returned `max lag' peak is not significant when compared to the noise in the correlation plots, the \gls{SNR} of the features may be too low for an accurate calculation of the offset.
 
 % MARK: WAV Sky. Checks
 \section{Sky Line Checks} \label{subsec:test_sky}
@@ -177,21 +177,39 @@ The \texttt{skylines} method returns plots validating the wavelength solutions a
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 1.0\textwidth]{4_sky_test_pure.pdf}
-    \caption{The \stops\ \texttt{skylines} output for a synthetic 2D spectrum consisting of only noise, skyline emission features, and the characteristic \gls{RSS} chip gaps. Figure created using the \stops\ \texttt{skylines} method.}
-    \label{fig:sky_test_pure}
+    \begin{subfigure}[b]{1.0 \textwidth}
+        \centering
+        \includegraphics[width = 1.0\textwidth]{4_sky_test.pdf}
+        \caption{A generated two-dimensional spectrum consisting of noise, skyline emission features, and the characteristic \gls{RSS} chip gaps.}
+        \label{subfig:sky_test_spec}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{1.0 \textwidth}
+        \centering
+        \includegraphics[width = 1.0\textwidth]{4_sky_test_pure.pdf}
+        \caption{The \stops\ \texttt{skylines} output for the synthetic spectrum displayed in \subref{subfig:sky_test_spec}.}
+        \label{subfig:sky_test_pure}
+    \end{subfigure}
+    \caption{The \stops\ \texttt{skylines} method output \subref{subfig:sky_test_pure} for a synthetic two-dimensional spectrum \subref{subfig:sky_test_spec}. Figures generated using Python \subref{subfig:sky_test_spec} and the \stops\ \texttt{skylines} method \subref{subfig:sky_test_pure}.}
+    \label{fig:sky_test}
 \end{figure}
 
-\todo{Discuss \autoref{fig:sky_test_pure}}
+\autoref{subfig:sky_test_spec} consists of an average continuum (at $10$~`counts') with noise (normal-sampled, with $\sigma = 4.5$), skyline emission features (as provided by \gls{SALT}, see \autoref{subsec:stops_skyline}), and the characteristic \gls{RSS} chip gaps.
+The two-dimensional spectrum was used to test the \stops\ \texttt{skylines} method.
+\autoref{subfig:sky_test_pure} shows the result, which successfully retrieves the skyline emission features for the synthetic spectrum.
+Note that the closest peaks ($\Delta \lambda$) are nearly never $0$, since the skylines are only as accurate as the spectral pixel resolution ($\sim 1$~\AA in our case) while those as provided by \gls{SALT} are not similarly limited.
+Additionally, the noise in the spectrum may shift a skylines' peak position, further contributing to, albeit small, discrepancies.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{4_sky_test_shift.pdf}
-    \caption{The \stops\ \texttt{skylines} output for a two-dimensional spectrum, as described in \autoref{fig:sky_test_pure}, with a constant offset of $4$~\AA applied to all skyline emission features. Figure created using the \stops\ \texttt{skylines} method.}
+    \caption{The \stops\ \texttt{skylines} output for a two-dimensional spectrum, as described in \autoref{subfig:sky_test_pure}, with a constant offset of $4$~\AA applied to all skyline emission features. Figure created using the \stops\ \texttt{skylines} method.}
     \label{fig:sky_test_shift}
 \end{figure}
 
-\todo{Discuss \autoref{fig:sky_test_shift}}
+\autoref{fig:sky_test_shift} shows the result of the \stops\ \texttt{skylines} method when a constant offset of $4$~\AA\ is applied to all skyline emission features in \autoref{subfig:sky_test_spec}.
+In general, the offset is recovered, with the minor variation in the closest peaks once again noticed.
+The closest peaks near $\Delta \lambda \sim -4$~\AA\ are the most notable outliers, and are due to misidentifications of skyline features with neighbors closer than $8$~\AA.
 
 % MARK: Application
 \section[Application of \textsc{stops}]{Application of \stops} \label{sec:app_stops}
