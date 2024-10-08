@@ -11,7 +11,7 @@
 
 % Allow for custom symbols in code
 \def\mybacktick{\`{}}
-\def\mytilde{{\raisebox{0.5ex}{\texttildelow}}}
+\def\mytilde{\raisebox{0.5ex}{\texttildelow}}
 
 % Allow insertion of syntax highlighted code
 \lstloadlanguages{bash, Python}
@@ -20,8 +20,9 @@
 \lstset{%
     basicstyle=\ttfamily\footnotesize,
     inputpath=\mylistings@path,
-    literate={~}{\mytilde}{1}{-}{-}{1},
-    literate={`}{\mybacktick}{1},
+    literate=
+        {~}{\mytilde}1%
+        {`}{\mybacktick}1,
     backgroundcolor=\color{gray!10!white},
     frame={lines},
     showstringspaces=false,
