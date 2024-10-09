@@ -75,7 +75,8 @@ Constants Imported (See utils.Constants):
 Custom wavelength solutions must be formatted containing:
     `x`, `y`, *coefficients...
 where a solution are of order (`x` by `y`) and must contain x*y coefficients, all separated by newlines.
-The name of the custom wavelength solution file must contain either "cheb" or "leg" for Chebyshev or Legendre wavelength solutions, respectively.
+The name of the custom wavelength solution file must contain either "cheb" or "leg"
+for Chebyshev or Legendre wavelength solutions, respectively.
 
 Cosmic ray rejection is performed using lacosmic [1]_ implemented in ccdproc via astroscrappy [2]_.
 
