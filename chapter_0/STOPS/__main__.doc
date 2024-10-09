@@ -1,0 +1,33 @@
+The Command Line Interface (CLI) for STOPS, handling argument parsing,
+class instantiation, processing, and logging.
+
+Usage
+-----
+`python -m STOPS`
+
+Suffix the above command with `-h` for help on usage.
+
+Description
+-----------
+This module is the entry point for the STOPS package. It provides
+the CLI argument parser for the supplementary tools provided by STOPS.
+The parser is built using the `argparse` module and is designed to be
+user-friendly.
+
+See Also
+--------
+IRAF:
+    For more information on the IRAF package, see the IRAF website:
+    https://iraf-community.github.io/
+
+POLSALT:
+    For more information on the POLSALT pipeline, see the POLSALT website:
+    https://github.com/saltastro/polsalt
+
+PYSALT:
+    For more information on the PYSALT package, see the PYSALT website:
+    https://astronomers.salt.ac.za/software/pysalt-documentation/
+
+PYRAF:
+    For more information on the PYRAF package, see the PYRAF website:
+    https://pyraf.readthedocs.io/en/latest/

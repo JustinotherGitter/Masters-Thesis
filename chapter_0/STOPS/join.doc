@@ -1,0 +1,86 @@
+The `Join` class allows for the joining of previously split files and the appending of
+an external wavelength solution in the `polsalt` FITS file format.
+
+Parameters
+----------
+data_dir : str | Path
+    The path to the data to be joined
+database : str, optional
+    The name of the `IRAF` database folder.
+    (The default is "database")
+fits_list : list[str], optional
+    A list of pre-reduced `polsalt` FITS files to be joined within `data_dir`.
+    (The default is ``None``, `Join` will search for `mxgbp*.fits` files)
+solutions_list: list[str], optional
+    A list of solution filenames from which the wavelength solution is created.
+    (The default is ``None``, `Join` will search for `fc*` files within the `database` directory)
+split_row : int, optional
+    The row along which the data of each extension in the FITS file was split.
+    Necessary when Joining cropped files.
+    (The default is 517, the SALT RSS CCD's middle row)
+save_prefix : dict[str, list[str]], optional
+    The prefix with which the previously split `O`- & `E`-beams were saved.
+    Used for detecting if cropping was applied during the splitting procedure.
+    (The default is SAVE_PREFIX (See Notes))
+verbose : int, optional
+    The level of verbosity to use for the Cosmic ray rejection
+    (The default is 30, I.E. logging.INFO)
+
+Attributes
+----------
+fc_files : list[str]
+    Valid solutions found from `solutions_list`.
+custom : bool
+    Internal flag for whether `solutions_list` uses the `IRAF` or a custom format.
+    See Notes for custom solution formatting.
+    (Default (inherited from `solutions_list`) is False)
+arc : str
+    Deprecated. Name of arc FITS file within `data_dir`.
+data_dir
+database
+fits_list
+split_row
+save_prefix
+
+Methods
+-------
+get_solutions(wavlist: list | None, prefix: str = "fc") -> (fc_files, custom): tuple[list[str], bool]
+    Parse `solutions_list` and return valid solution files and if they are non-`IRAF` solutions.
+parse_solution(fc_file: str, x_shape: int, y_shape: int) -> tuple[dict[str, int], np.ndarray]
+    Loads the wavelength solution file and parses keywords necessary for creating the wavelength extension.
+join_file(file: os.PathLike) -> None
+    Joins the files, attaches the wavelength solutions, performs cosmic ray cleaning, masks the extension,
+    and checks cropping performed in `Split`. Writes the FITS file in a `polsalt` valid format.
+check_crop(hdu: pyfits.HDUList, o_file: str, e_file: str) -> int
+    Opens the split `O`- and `E`-beam FITS files and returns the amount of cropping that was performed.
+process() -> None
+    Calls `join_file` on each file in `fits_list` for automation.
+
+Other Parameters
+----------------
+no_arc : bool, optional
+    Deprecated. Decides whether the arc frames should be processed.
+    (The default is False, `polsalt` has no use for the arc after wavelength calibrations)
+**kwargs : dict
+    keyword arguments. Allows for passing unpacked dictionary to the class constructor.
+
+Notes
+-----
+Constants Imported (See utils.Constants):
+    DATADIR,
+    SAVE_PREFIX,
+    SPLIT_ROW,
+    CR_PARAMS
+
+Custom wavelength solutions must be formatted containing:
+    `x`, `y`, *coefficients...
+where a solution are of order (`x` by `y`) and must contain x*y coefficients, all separated by newlines.
+The name of the custom wavelength solution file must contain either "cheb" or "leg" for Chebyshev or Legendre wavelength solutions, respectively.
+
+Cosmic ray rejection is performed using lacosmic [1]_ implemented in ccdproc via astroscrappy [2]_.
+
+References
+----------
+.. [1] van Dokkum 2001, PASP, 113, 789, 1420
+       (article : https://adsabs.harvard.edu/abs/2001PASP..113.1420V)
+.. [2] https://zenodo.org/records/1482019

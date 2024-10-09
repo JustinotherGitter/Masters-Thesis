@@ -1,0 +1,55 @@
+Class representing the Skylines object.
+
+Parameters
+----------
+data_dir : Path
+    The directory containing the data files.
+filenames : list[str]
+    The list of filenames to be processed.
+beam : str, optional
+    The beam mode, by default "OE".
+plot : bool, optional
+    Flag indicating whether to plot the continuum, by default False.
+save_prefix : Path | None, optional
+    The prefix for saving the data, by default None.
+**kwargs
+    Additional keyword arguments.
+
+Attributes
+----------
+data_dir : Path
+    The directory containing the data files.
+fits_list : list[str]
+    The list of fits file paths.
+beams : str
+    The beam mode.
+can_plot : bool
+    Flag indicating whether to plot the continuum.
+save_prefix : Path | None
+    The prefix for saving the data.
+wav_unit : str
+    The unit of wavelength.
+
+Methods
+-------
+checkLoad(self, path1: str) -> np.ndarray:
+    Checks and loads the data from the given path.
+transform(self, wav_sol: np.ndarray, spec: np.ndarray) -> np.ndarray:
+    Transforms the input wavelength and spectral data based on the given wavelength solution.
+rmvCont(self) -> np.ndarray:
+    Removes the continuum from the spectrum.
+process(self) -> None:
+    Placeholder method for processing the data.
+
+See Also
+--------
+matplotlib custom style:
+    https://matplotlib.org/stable/users/explain/customizing.html
+
+Notes
+-----
+Constants imported (see utils.Constants):
+    SAVE_SKY:
+        The default save name for the skylines plot.
+    FIND_PEAK_PARAMS:
+        The default parameters for finding peaks in the spectrum.

@@ -1,0 +1,59 @@
+The `Split` class allows for the splitting of `polsalt` FITS files based on the polarization beam.
+The FITS files must have basic `polsalt` pre-reductions already applied (`mxgbp...` FITS files).
+
+Parameters
+----------
+data_dir : str | Path
+    The path to the data to be split
+fits_list : list[str], optional
+    A list of pre-reduced `polsalt` FITS files to be split within `data_dir`.
+    (The default is None, `Split` will search for `mxgbp*.fits` files)
+split_row : int, optional
+    The row along which to split the data of each extension in the FITS file.
+    (The default is SPLIT_ROW (See Notes), the SALT RSS CCD's middle row)
+no_arc : bool, optional
+    Decides whether the arc frames should be recombined.
+    (The default is False, `polsalt` has no use for the arc after wavelength calibrations)
+save_prefix : dict[str, list[str]], optional
+    The prefix with which to save the  O & E beams. Setting `save_prefix` = `None` does not save the split O & E beams.
+    (The default is SAVE_PREFIX (See Notes))
+
+Attributes
+----------
+arc : str
+    Name of arc FITS file within `data_dir`. `arc` = `""` if `no_arc` or not detected in `data_dir`.
+o_files, e_files : list[str]
+    A list of the `O`- and `E`-beam FITS file names. The first entry is the arc file if `arc` defined.
+data_dir
+fits_list
+split_row
+save_prefix
+
+Methods
+-------
+split_file(file: os.PathLike) -> tuple[astropy.io.fits.HDUList]
+    Handles creation and saving the separated FITS files
+split_ext(hdulist: astropy.io.fits.HDUList, ext: str = 'SCI') -> astropy.io.fits.HDUList
+    Splits the data in the `ext` extension along the `split_row`
+crop_file(hdulist: astropy.io.fits.HDUList, crop: int = CROP_DEFAULT) -> tuple[numpy.ndarray]
+    Crops the data along the edge of the frame, that is,
+    `O`-beam cropped as [crop:], and
+    `E`-beam cropped as [:-crop].
+update_beam_lists(o_name: str, e_name: str) -> None
+    Updates `o_files` and `e_files`.
+save_beam_lists(file_suffix: str = 'frames') -> None
+    Creates and writes (overwrites if exists) the `[o|e]_files` to files named `[o|e]_{file_suffix}`.
+process() -> None
+    Calls `split_file` and `save_beam_lists` on each file in `fits_list` for automation.
+
+Other Parameters
+----------------
+**kwargs : dict
+    keyword arguments. Allows for passing unpacked dictionary to the class constructor.
+
+Notes
+-----
+Constants Imported (See utils.Constants):
+    SAVE_PREFIX
+    CROP_DEFAULT
+    SPLIT_ROW

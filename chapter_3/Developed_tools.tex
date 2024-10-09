@@ -371,9 +371,9 @@ $ python ~/STOPS [split|join|correlate|skylines] --help
     style=STOPS_docs,
     caption={The `docstring' for \textbf{split.py}},
     label=doc:split,
-    linerange=split0-split1,
-    gobble=4,
-]{split.py}
+    % linerange=split0-split1,
+    % gobble=4,
+]{split.doc}
 
 % Why necessary
 As mentioned previously, the format of the \gls{FITS} file created by \polsalt\ after basic \gls{CCD} reductions and the format expected by \iraf\ to be used for the wavelength calibrations are incompatible. Basic \polsalt\ \gls{CCD} reductions return \gls{FITS} files which contain a primary header along with extensions for the science, variance, and \gls{BPM} images. These extensions carry the image of the trace (see \autoref{fig:OE_split}), the variance of the image, and a map of the pixels to be masked out, split into sub-extensions for both polarimetry beams, respectively.
@@ -419,9 +419,9 @@ The full \stops\ \texttt{split} class docstring is given in \autoref{doc:split}.
     style=STOPS_docs,
     caption={The `docstring' for \textbf{join.py}},
     label=doc:join,
-    linerange=join0-join1,
-    gobble=4,
-]{join.py}
+    % linerange=join0-join1,
+    % gobble=4,
+]{join.doc}
 
 % Running \texttt{join} finds all the relevant \gls{FITS} and local \iraf\ database files, creates an empty \gls{HDU} structure for each pair of matching spectropolarimetric beams, copies over the extensions and their respective image and header information, appends a new \gls {WAV} extension and parses the database wavelength solutions into the \polsalt\ intensity-wavelength format, performs cosmic ray cleaning, and masks the \gls{BPM} to reflect the wavelength calibrated regions.
 After the \iraf\ \texttt{fitcoords} task has been successfully run for both the $O$- and $E$-beams, the \stops\ \texttt{join} method is used to extract and parse the wavelength solution from the \iraf\ database, and to create the wavelength calibrated \gls{FITS} files required by the \polsalt\ pipeline. More specifically, the \texttt{join} method performs the following steps:
@@ -495,9 +495,9 @@ The full \stops\ \texttt{join} class docstring is given in \autoref{doc:join}.
     style=STOPS_docs,
     caption={The `docstring' for \textbf{skylines.py}},
     label=doc:skylines,
-    linerange=sky0-sky1,
-    gobble=4,
-]{skylines.py}
+    % linerange=sky0-sky1,
+    % gobble=4,
+]{skylines.doc}
 
 \begin{figure}[t]
     \centering
@@ -554,9 +554,9 @@ The full \stops\ \texttt{skyline} class docstring is given in \autoref{doc:skyli
     style=STOPS_docs,
     caption={The `docstring' for \textbf{cross\_correlate.py}},
     label=doc:corr,
-    linerange=corr0-corr1,
-    gobble=4,
-]{cross_correlate.py}
+    % linerange=corr0-corr1,
+    % gobble=4,
+]{cross_correlate.doc}
 
 \begin{figure}[t]
     \centering

@@ -2,10 +2,16 @@
 \RequirePackage{listings}
 \RequirePackage{kvoptions}
 
-% Use /media/... if no option specified
-% Use ../../STOPS/ if path specified but undefined
-% Use value if path=value
-\DeclareStringOption[/media/justin/Transcend/STOPS/src/STOPS]{path}[../../STOPS/]
+% \DeclareStringOption[init]{key}[default]
+% `init`    : value used if no option specified, I.E. \usepackage{...}
+% `default` : value used if option called but undefined, I.E. \usepackage[path]{...}
+% Otherwise uses the value specified in the option, I.E. \usepackage[path=...]{...}
+
+\DeclareStringOption[
+    /media/justin/Transcend/Writeup/chapter_0/STOPS/% /media/justin/Transcend/STOPS/src/STOPS
+]{path}[
+    ./chapter_0/STOPS/% ../../STOPS/src/STOPS% ../../STOPS
+]
 
 \ProcessKeyvalOptions*
 
@@ -74,9 +80,9 @@
 
 % Define custom style for STOPS docstrings
 \lstdefinestyle{STOPS_docs}{%
-    style=STOPS,
+    % style=STOPS,
     basicstyle=\ttfamily\tiny,
-    framexleftmargin=-16pt,
-    numbersep=-8pt,
-    xleftmargin=-18pt,
+    % framexleftmargin=-16pt,
+    % numbersep=-8pt,
+    % xleftmargin=-18pt,
 }
