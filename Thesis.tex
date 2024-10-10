@@ -21,14 +21,17 @@
 
 % Set paragraph seperation and indentation
 \usepackage[%
-    skip=1.0\baselineskip plus2pt,
-    indent=20pt
+skip=1.0\baselineskip plus2pt,
+indent=20pt
 ]{parskip}
 % Remove lineskip in itemize environment
 \usepackage{enumitem}
 \setlist[itemize]{nosep}
-% Shorthand for blank line after a paragraph
-% \newcommand{\prgph}%{}%{\vspace{\baselineskip}}
+
+% Allow text coloring
+% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+% https://www.overleaf.com/learn/latex/Environments
+\usepackage{xcolor}
 
 % Set the styling of captions
 \usepackage[%
@@ -93,6 +96,33 @@
 % Create tables that may continue to the next page
 % \usepackage{longtable}
 
+% Section depth, e.g.: \S 1.1.1.1
+% \setcounter{secnumdepth}{5}
+
+% MARK: hyperref
+% Looks for hyperref.cfg
+\usepackage[lowtilde]{url}
+\usepackage{hyperref}
+% Define keywords for use in the document
+% Redefine \autoref{} defaults
+\renewcommand\sectionautorefname{\S}
+\renewcommand\subsectionautorefname{\S}
+\renewcommand\subsubsectionautorefname{\S}
+\renewcommand\pageautorefname{p.}
+\newcommand\mykeywords{\GetDocumentProperties{hyperref/pdfkeywords}}
+
+% MARK: Title constants
+\title{\textbf{\GetDocumentProperties{hyperref/pdftitle}}}
+\author{\GetDocumentProperties{hyperref/pdfauthor}}
+\Cdegree{B.Sc. (Hons) \textit{cum laude}}
+\Sdegree{Magister Scienti\ae}
+\university{University of the Free State}
+\faculty{Faculty of Natural and Agricultural Sciences}
+\department{Department of Physics}
+\country{South Africa}
+\degreedate{Date of submission: \monthyear\today}
+\supervisor{Prof. B. van Soelen}
+
 % MARK: Other packages
 % Add support to split a table cell into multiple rows
 \usepackage{multirow}
@@ -100,11 +130,6 @@
 \usepackage{array}
 % Allow strikethrough, eg.: \sout{example strikethrough text}
 \usepackage{ulem}
-
-% Section depth, e.g.: \S 1.1.1.1
-% \setcounter{secnumdepth}{5}
-% MARK: Custom hyperref
-\usepackage{myhyperref}
 
 \usepackage{datetime}
 \newdateformat{monthyear}{\monthname[\THEMONTH] \THEYEAR}
@@ -134,22 +159,16 @@
 % Allow relative font resizing.
 \usepackage{relsize}
 
-% MARK: Custom listings
+% MARK: My listings
 \usepackage{mylistings}
 % \usepackage[path=G:/STOPS/]{mylistings}
 
-% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX &
-% https://www.overleaf.com/learn/latex/Environments
-% Allow text coloring
-\usepackage{xcolor}
-
-% MARK: Custom commands
+% MARK: Custom cmd's
 \newcommand\todo[1]{{\noindent}\textcolor{red}{\textbf{TODO: #1}}}
 % Hide TODO's
 % \renewcommand\todo[1]{}
 \newcommand{\Chapter}[2]{\chapter[#1]{#1:\\ \smallskip {\smaller[1] #2}}}
 
-\newcommand{\angstrom}{\AA}
 \newcommand{\arcmin}{\hbox{$^\prime$} }
 \newcommand{\arcsec}{\hbox{$^{\prime\prime}$} }
 \newcommand{\avg}[1]{\left< #1 \right> }
@@ -162,6 +181,9 @@
 \newcommand{\super}[1]{\textsuperscript{#1}}
 \newcommand{\rmn}[1]{{\mathrm{#1}}}
 
+% Shorthand for blank line after a paragraph
+% \newcommand{\prgph}%{}%{\vspace{\baselineskip}}
+
 % \renewcommand{\arraystretch}{0.8}
 % \renewcommand{\floatpagefraction}{.9}
 
@@ -169,7 +191,7 @@
 % Page numbering alteration
 % \pagenumbering{Roman}
 
-% MARK: Custom glossary
+% MARK: My Glossary
 \usepackage{myglossary}
 
 % Set the bibliography references
@@ -189,31 +211,12 @@
 \apptocmd{\sloppy}{\hbadness 10000\relax}{}{}
 
 % Remnants from Hanno commands
-\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
-% \setabbreviationstyle[longonly]{long}
-% \setabbreviationstyle[shortonly]{short}
-% \newabbreviation[category=longonly]{FSRQ}{FSRQ}{Flat Spectrum Radio Quasar}
-% \newabbreviation[description={Interstellar Magnetic Fields}]{ISMF}{ISMF}{Interstellar Magnetic Fields}
-% \newabbreviation[category=shortonly]{GRB}{GRB}{Gamma-ray Burst}
+% \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
-% MARK: Title constants
-\title{%
-    \textbf{%
-        Supplementary wavelength calibration methods for SALT/RSS spectropolarimetric observations
-    }
-}
-\author{Justin Cooper}
-\Cdegree{}% B.Sc. (Hons)}
-\Sdegree{Magister Scienti\ae}
-\university{University of the Free State}
-\faculty{Faculty of Natural and Agricultural Sciences}
-\department{Department of Physics}
-\country{South Africa}
-\degreedate{Date of submission: \monthyear\today}
-\supervisor{Prof. B. van Soelen}
 
 % MARK: Main document
 \begin{document}
+
 % MARK: Front matter
 \frontmatter
 \maketitle
@@ -264,6 +267,5 @@ Development of \stops\ and it's application to spectropolarimetric observations 
 % Longest abbreviation so the column width can be set
 % \glssetwidest{\gls{STOPS}}
 \printglossary[type=main, title={Glossary}]
-
 
 \end{document}

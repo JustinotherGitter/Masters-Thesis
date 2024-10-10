@@ -20,8 +20,6 @@ Justin Cooper
 <!-- MARK: Minor TODO's -->
 ## Minor `TODOs`
 
-* Update tables `\input{}` to use relative pathing (`import` package?)
-* Use the `minted` package instead of the `listings` `STOPS_docs` style workaround
 * Unify (x-pixel/y-pixel/x/y/wavelength/) or vertical/horizontal axis or rows/columns
   * → (?) ($x_p$, $y_p$)/(\AA, $y_p$) | ($u$, $v$) for pixel position and $s_{u|v}$ for pixel ($x$|$y$) size
 * STOPS: skylines legend use [double markers](https://matplotlib.org/stable/users/explain/axes/legend_guide.html#legend-handlers "matplotlib.org")
@@ -30,13 +28,13 @@ Justin Cooper
   * (?) <https://jwalton.info/Matplotlib-latex-PGF/>
 * Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
 * Limit paragraph breaks to only `left-to-right` pages, not across a page turn.
-* O[arc/beam/etc.] → [arc/beam/etc.]O
+* Triple Check [O|E] [arc|beam|etc.] → [arc|beam|etc.] [o|e]
 * Check common errors:
-  * \$O\$- and \$E\$-beam(s)
+  * `$O$- and $E$-beam(s)`
   * `extension`
   * `the user` instead of `a user`
   * `$#$~unit` instead of `# $unit$`
-  * tables should use `\toprule` `\midrule`, and `\botomrule`
+  * tables should use `\toprule` `\midrule`, and `\bottomrule`
 
 <!-- MARK: Final TODO's -->
 ## Final `TODOs`
@@ -47,7 +45,6 @@ Justin Cooper
   * Unify usage of exposure / frame / extension and add to glossary (see references)
   * Use `\ion{}` for acronym underline
 * Cite STOPS as repo? (See `.cff` references)
-* Change \today to MONTH, YEAR at final submission in [Thesis text](/Thesis.tex#L194)
 * Ask for read through from friends to ensure no spelling/grammar errors
 
 <!-- MARK: VSCode -->
@@ -162,6 +159,57 @@ General Notes:
 * Inline values with units should be formatted as: `$val$~unit`
   * If the value is a quantifier, consider writing it out
     * i.e. `... 7 filters ...` becomes `... seven filters ...`
+* labels are defined using `\label{}`
+* Commands may be defined with `\def` but may also be defined using `\newcommand\eg{}`, `\renewcommand\eg{}`, or `\providescommand\eg{}`, which all define new commands that may be used, with differing failure states
+  * `\newcommand` crashes when overwriting
+  * `\renewcommand` crashes when **not** overwriting, and
+  * `\providescommand` attempts to create a new command (I believe exclusively in meta files, I.E. `.sty`, etc.)
+
+<!-- MARK: PRE - hyperref -->
+### `hyperref`
+
+$\LaTeX$'s `hyperref` package allows for linking within a PDF as well as setting up the document's metadata properties. The [`hyperref.cfg`](./hyperref.cfg) file is where the metadata is stored.
+
+| Link Types | Description |
+| --- | --- |
+| `\autoref{label}` | internal reference to `label`, prefixed with (I.E. $\S$, etc.) |
+| `\ref{label}` | internal reference to `label`, no prefix text |
+| `autopageref{label}` | internal reference to page of `label`, prefixed with (I.E. p.) |
+| `\pageref{label}` | internal reference to page of `label`, no prefix text |
+| `\href{URL}{text}` | any `URL`'s with anchor `text` |
+| `\url{URL}` | any raw `URL` |
+| `\hyperref{URL}{category}{name}{text}` | `text` link to `URL` |
+| `\hyperref[label]{text}` | `text` link to `label` |
+
+See also the documentation using: `texdoc hyperref`
+
+<!-- MARK: PRE - glossary -->
+### Glossary and Acronyms
+
+$\LaTeX$'s `glossaries-extra` allow keywords and acronyms to be defined and used and stated in full on first use. Note that acronyms used for software use a display text in the small caps font.
+
+```Latex
+% Glossary entries
+\newglossaryentry{maths}
+{%
+    name=mathematics,
+    description={Mathematics is what mathematicians do}
+}
+
+\gls{maths} -> mathematics
+\Gls{maths} -> Mathematics
+\glspl{maths} -> mathematics
+\Glspl{maths} -> Mathematics
+
+% Acronym entries
+\newacronym{gcd}{GCD}{Greatest Common Divisor}
+
+\acrlong{} -> Greatest Common Divisor
+\acrshort{} -> GCD
+\acrfull{} -> Greatest Common Divisor (GCD)
+```
+
+New commands for the most common glossary/acronym keys may improve 'writability' (`\acr{POLSALT}` vs `\polsalt`). This was implemented for all software acronyms. See also the documentation using: `texdoc glossaries-extra`
 
 <!-- MARK: 1. Headings -->
 ### Headings
@@ -349,34 +397,6 @@ To insert a table within the document, use the command:
 ```Latex
 \input{chapter_<i>/tables/table_name.tex}
 ```
-
-<!-- MARK: 5. Glossaries -->
-### Glossary and Acronyms
-
-Glossary and acronym entries are implemented throughout the thesis. Glossaries allow keywords to be defined while acronyms allow acronyms to be used and stated in full on first use. Note that acronyms used for software use a display text in the small caps font.
-
-```Latex
-% Glossary entries
-\newglossaryentry{maths}
-{%
-    name=mathematics,
-    description={Mathematics is what mathematicians do}
-}
-
-\gls{maths} -> mathematics
-\Gls{maths} -> Mathematics
-\glspl{maths} -> mathematics
-\Glspl{maths} -> mathematics
-
-% Acronym entries
-\newacronym{gcd}{GCD}{Greatest Common Divisor}
-
-\acrlong{} -> Greatest Common Divisor
-\acrshort{} -> GCD
-\acrfull{} -> Greatest Common Divisor (GCD)
-```
-
-New commands for the most common glossary/acronym keys may improve 'writability' (`\acr{POLSALT}` vs `\polsalt`). This was implemented for all software acronyms.
 
 <!-- MARK: References -->
 ## Useful external References

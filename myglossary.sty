@@ -10,32 +10,50 @@
     shortcuts,
 ]{glossaries-extra}
 
-% Add any acronyms below
-\setabbreviationstyle[acronym]{long-short}
+% Some set up
+\normalem
+% TODO: Add a glossary style `long-em-short-sc` for `telescopes`
 
+% MARK: Glossary styles
+% https://www.dickimaw-books.com/gallery/index.php?label=sample-abbr-styles
+\setabbreviationstyle[acronym]{long-short} % The default style
+\setabbreviationstyle[code]{long-short-sc}
+\setabbreviationstyle[elements]{short}
+\setabbreviationstyle[extensions]{short}
+\setabbreviationstyle[filters]{short}
+\setabbreviationstyle[telescopes]{long-short-em}
+
+% MARK: ACRONYMS
 \newacronym{ADC}{A-DC}{Analog-to-Digital Converter}
 \newacronym{ADComp}{ADC}{Atmospheric Dispersion Compensator}
 \newacronym{AGN}{AGN}{Active Galactic Nucleus}
+\newacronym[category={elements}, sort={Argon}]{Ar}{Ar}{Argon}
 
 \newacronym{CCD}{CCD}{Charged-Coupled Device}
 \newacronym{cgs}{cgs}{centimeter-gram-second}
 \newacronym{CLI}{CLI}{Command Line Interface}
 \newacronym{CMOS}{CMOS}{Complementary Metal-Oxide-Semiconductor}
 \newacronym{CRR}{CRR}{Cosmic Ray Rejection}
+\newacronym[category={elements}, sort={Copper}]{CuAr}{CuAr}{Copper-Argon}
 
 \newacronym{EW}{EW}{Equivalent Width}
 
 \newacronym{FermiLCR}{Fermi LCR}{Fermi Light Curve Repository}
 \newacronym{FITS}{FITS}{Flexible Image Transport System}
 \newacronym{FORS}{FORS}{Focal Reducer and Low Dispersion Spectrograph}
+\newacronym{FSRQ}{FSRQ}{Flat Spectrum Radio Quasar}
 \newacronym{FWHM}{FWHM}{Full Width at Half Maximum}
 
 \newacronym{GUI}{GUI}{Graphical User Interface}
+\newacronym{GRB}{GRB}{Gamma-ray Burst}
 
 \newacronym{HDU}{HDU}{Header and Data Unit}
 \newacronym{HEASA}{HEASA}{High Energy Astrophysics South Africa}
-\newacronym{HET}{HET}{Hobby-Eberly Telescope}
+\newacronym[category={telescopes}]{HET}{HET}{Hobby-Eberly Telescope}
 \newacronym{HRS}{HRS}{High Resolution Spectrograph}
+
+\newacronym{IMF}{IMF}{Interstellar Magnetic Fields}
+\newacronym[category={code}]{IRAF}{iraf}{\textit{Image Reduction and Analysis Facility}}
 
 \newacronym{L-45P}{L$-45^\circ$}{Linear $-45^\circ$ Polarized}
 \newacronym{L45P}{L$+45^\circ$}{Linear $+45^\circ$ Polarized}
@@ -43,8 +61,13 @@
 \newacronym{LHP}{LHP}{Linear Horizontally Polarized}
 \newacronym{LVP}{LVP}{Linear Vertically Polarized}
 
+\newacronym[category={elements}, sort={Mercury}]{HgAr}{HgAr}{Mercury-Argon}
+
+\newacronym[category={elements}, sort={Neon}]{NeAr}{Ne}{Neon-Argon}
 \newacronym{NIR}{NIR}{Near Infra-Red}
 \newacronym{NIRWALS}{NIRWALS}{Near Infra-Red Washburn Labs Spectrograph}
+
+\newacronym[category={code}]{POLSALT}{polsalt}{\textit{Polarimetric reductions for SALT}}
 
 \newacronym{QE}{QE}{Quantum Efficiency}
 
@@ -52,53 +75,42 @@
 \newacronym{RMS}{RMS}{Root Mean Square}
 \newacronym{RSS}{RSS}{Robert Stobie Spectrograph}
 
-\newacronym{SAAO}{SAAO}{South African Astronomical Observatory}
+\newacronym[category={telescopes}]{SAAO}{SAAO}{South African Astronomical Observatory}
 \newacronym{SAC}{SAC}{Spherical Aberration Corrector}
-\newacronym{SALT}{SALT}{Southern African Large Telescope}
+\newacronym[category={telescopes}]{SALT}{SALT}{Southern African Large Telescope}
 \newacronym{SALTICAM}{SALTICAM}{SALT Imaging Camera}
 \newacronym{SED}{SED}{Spectral Energy Distribution}
 \newacronym{SNR}{S/N}{Signal-to-Noise Ratio}
-\newacronym{Swift}{\textit{Swift}}{Neil Gerhels Swift Observatory}
+\newacronym[category={code}]{STOPS}{stops}{\textit{Supplementary Tools for \textsc{polsalt} Spectro\-polarimetry}}
+\newacronym[category={telescopes}]{Swift}{Swift}{Neil Gerhels Swift Observatory}
 \newacronym{Swift_BAT}{BAT}{Burst Alert Telescope}
 
-\newacronym{UV}{UV}{Ultraviolet}
-\newacronym{UVOT}{UVOT}{Ultraviolet Optical Telescope}
+\newacronym[category={elements}, sort={Thorium}]{ThAr}{ThAr}{Thorium-Argon}
 
-\newacronym{VLT}{VLT}{Very Large Telescope}
+\newacronym{UV}{UV}{Ultraviolet}
+\newacronym[category=telescopes]{UVOT}{UVOT}{Ultraviolet Optical Telescope}
+
+\newacronym[category={telescopes}]{VLT}{VLT}{Very Large Telescope}
 \newacronym{VPH}{VPH}{Volume Phase Holographic}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setabbreviationstyle[code]{long-short-sc}
+\newacronym[category={elements}, sort={Xenon}]{Xe}{Xe}{Xenon}
+
+
+% MARK: Provide cmd's
+\providecommand\iraf{\gls{IRAF}}
+\providecommand\polsalt{\gls{POLSALT}}
+\providecommand\stops{\gls{STOPS}}
+
 % \newglossaryentry{software}{
 %     name={Software},
 %     description={},
 %     type=main
 % }
-\newacronym[category={code}]{IRAF}{iraf}{\textit{Image Reduction and Analysis Facility}}
-\newacronym[category={code}]{POLSALT}{polsalt}{\textit{Polarimetric reductions for SALT}}
-\newacronym[category={code}]{STOPS}{stops}{\textit{Supplementary Tools for \textsc{polsalt} Spectro\-polarimetry}}
-
-\newcommand{\iraf}{\gls{IRAF}}
-\newcommand{\polsalt}{\gls{POLSALT}}
-\newcommand{\stops}{\gls{STOPS}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setabbreviationstyle[elements]{short}
 % \newglossaryentry{arc}{
 %     name={\gls{SALT} Arc lamps},
 %     description={},
 %     type=main
 % }
-\newacronym[category={elements}]{Ar}{Ar}{Argon}
-\newacronym[category={elements}]{CuAr}{CuAr}{Copper-Argon}
-\newacronym[category={elements}]{HgAr}{HgAr}{Mercury-Argon}
-\newacronym[category={elements}]{NeAr}{Ne}{Neon-Argon}
-\newacronym[category={elements}]{ThAr}{ThAr}{Thorium-Argon}
-\newacronym[category={elements}]{Xe}{Xe}{Xenon}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 % Add any glossary entries below
 % cursor commands
@@ -107,7 +119,7 @@
 % CLI (terminal) (UNIX -> bash, Windows -> Powershell/cmd, macOS -> Zsh)
 % wildcard
 
-\setabbreviationstyle[filters]{short}
+% MARK: Johnson-Cousins
 \newglossaryentry{Johnson-Cousins}{%
     name=Johnson-Cousins photometric system,
     description={A widely-used system of broad-band photometry that uses a set of standard filters to measure the magnitudes of stars and other astronomical objects.},
@@ -148,7 +160,7 @@
     sort={e}
 }
 
-\setabbreviationstyle[extensions]{short}
+% MARK: FITS
 \newglossaryentry{FITS-extensions}{%
     name={FITS extensions},
     description={Extensions used in \gls{FITS} files to store different types of data.}
@@ -183,11 +195,12 @@
     parent={FITS-extensions},
     category={extensions},
 }
+
+
 \newglossaryentry{OE-beams}{%
     name={$O$- and $E$-beam},
     description={The Ordinary and Extraordinary (perpendicular) polarization beams, stored either in a single extension or as sub-extensions in a FITS file.}
 }
-
 
 % \newglossaryentry{science}{
 %     name={science},
