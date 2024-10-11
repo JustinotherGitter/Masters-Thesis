@@ -1,6 +1,6 @@
 # Thesis Overview and Design Organizer (TODO 😝)
 
-<!-- markdownlint-disable MD033-->
+<!-- markdownlint-disable MD033 MD038-->
 <details>
 <summary>Useful Thesis Links</summary>
 
@@ -20,6 +20,7 @@ Justin Cooper
 <!-- MARK: Minor TODO's -->
 ## Minor `TODOs`
 
+* `e.g.` and `i.e.` (check both cases) → `e.g.\ ` or `e.g., ` (for both)
 * Unify (x-pixel/y-pixel/x/y/wavelength/) or vertical/horizontal axis or rows/columns
   * → (?) ($x_p$, $y_p$)/(\AA, $y_p$) | ($u$, $v$) for pixel position and $s_{u|v}$ for pixel ($x$|$y$) size
 * STOPS: skylines legend use [double markers](https://matplotlib.org/stable/users/explain/axes/legend_guide.html#legend-handlers "matplotlib.org")
