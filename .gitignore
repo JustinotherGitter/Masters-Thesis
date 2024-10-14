@@ -3,6 +3,7 @@ Thesis*
 !Thesis.cls
 !Thesis.ipynb
 !Thesis.pdf
+!Thesis.py
 !Thesis.tex
 
 # Misc files/folders that aren't crucial to rerun Thesis.tex
