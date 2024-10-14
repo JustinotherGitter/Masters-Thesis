@@ -1,4 +1,4 @@
-\chapter{Testing and Application}
+\chapter{Testing and Application} \label{ch:04}
 
 This chapter contains an overview of the tests performed during the development of \stops\ which includes the verification of the the replaced wavelength solutions method (\autoref{sec:test_stops}), as well as the application of \stops\ on observations of both a spectrophotometric standard and science targets \ref{sec:app_stops}.
 
@@ -139,7 +139,7 @@ Finally, the \stops\ \texttt{join} method was tested to ensure compatibility and
 This involved testing the \texttt{join} method with various data sets, with differing observation configurations, to ensure that the output files were accurate and consistent.
 
 % MARK: WAV Corr. Checks
-\section{Cross Correlation Checks} \label{subsec:test_corr}
+\subsection{Cross Correlation Checks} \label{subsec:test_corr}
 
 % O/E correlation checks to verify the consistency of the wavelength solutions.
 The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the \polsalt\ \texttt{spectra extraction} (`ecwmxgbp'- prefixed) method output files as input.
@@ -171,7 +171,7 @@ For spectral regions with few features or features with a low \gls{SNR} (such as
 When a returned `max lag' peak is not significant when compared to the noise in the correlation plots, the \gls{SNR} of the features may be too low for an accurate calculation of the offset.
 
 % MARK: WAV Sky. Checks
-\section{Sky Line Checks} \label{subsec:test_sky}
+\subsection{Sky Line Checks} \label{subsec:test_sky}
 
 % Full frame wavelength solution checks to ensure comprehensive calibration.
 % Verifying the accuracy of the cross-correlation function against known standards.

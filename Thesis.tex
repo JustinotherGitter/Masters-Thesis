@@ -32,6 +32,8 @@ indent=20pt
 % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
 % https://www.overleaf.com/learn/latex/Environments
 \usepackage{xcolor}
+\definecolor{mylinkcolor}{HTML}{313e80}
+\definecolor{mycitecolor}{HTML}{179b7d}%{0f4636}
 
 % Set the styling of captions
 \usepackage[%
@@ -105,10 +107,12 @@ indent=20pt
 \usepackage{hyperref}
 % Define keywords for use in the document
 % Redefine \autoref{} defaults
+\renewcommand\chapterautorefname{Chapter}
 \renewcommand\sectionautorefname{\S}
 \renewcommand\subsectionautorefname{\S}
 \renewcommand\subsubsectionautorefname{\S}
 \renewcommand\pageautorefname{p.}
+% \renewcommand\pagesautorefname{pp.}
 \newcommand\mykeywords{\GetDocumentProperties{hyperref/pdfkeywords}}
 
 % MARK: Title constants

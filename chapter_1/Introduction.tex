@@ -1,4 +1,4 @@
-\chapter{Introduction}
+\chapter{Introduction} \label{ch:01}
 
 % 1 Section summary of research. More complete abstract without results.
 \todo{
@@ -16,27 +16,24 @@
 % \section{Active Galactic Nuclei}
 
 % \section{GRBs}
+\todo{Problem Statement, \textbf{VERY IMPORTANT}, roughly a sentence but problem thoroughly fleshed out.}
 
 \section{Outline}
-\todo{Problem Statement, \textbf{VERY IMPORTANT}, roughly a sentence but problem thoroughly fleshed out.}
-\todo{General layout of Dissertation}
 
-% MARK: Problem Statement
+\noindent The layout of the rest of the thesis is as follows:
 
+\autoref{ch:02} lays a foundation for spectroscopy, polarimetry, and spectropolarimetry as well as the implementation of these principles through instrumentation, focusing specifically on principles as relating to the \gls{SALT} \gls{RSS}.
+These principles provide an understanding of spectropolarimetric data as well as describe the reduction and calibration processes to be completed for the acquisition of spectropolarimetric results.
 
+\autoref{ch:03} describes the existing software, \polsalt\ (as used for spectropolarimetric reductions) and \iraf (as used for wavelength calibrations), the developed software, \stops, and provides a general reduction process for spectropolarimetric data.
+The principles, application, and challenges faced when using the existing software for spectropolarimetric data reductions are broadly described, with greater emphasis placed on the developed software, \stops, which was designed to streamline the data reduction process and overcome the limitations of the existing software.
 
-% MARK: Outline ch02
-% The layout of the rest of the thesis is as follows.
-% \autoref{ch:02} lays a deeper foundation for spectroscopy, polarimetry, and spectropolarimetry such that these principles may be understood and applied through software to spectropolarimetric reductions.
-% It further describes the \gls{SALT} and the \gls{RSS} and their use in spectropolarimetric observations.
-% MARK: Outline ch03
-% \autoref{ch:03} describes the software tools developed to streamline the data reduction process.
-% MARK: Outline ch04
-% \autoref{ch:04} demonstrates the application of these tools to spectropolarimetric observations of the blazar 3C~279.
-% MARK: Outline ch05
-% \autoref{ch:05} presents the results of the pipeline and the implications of the results.
-% MARK: Outline Appendix
-% Finally, \autoref{ch:Appendix} contains the code used in the pipeline and the data reduction process.
+\autoref{ch:04} provides the testing of the developed software and discusses its application within published articles and proceedings.
+Testing was conducted on a `per-module' basis aligning with the usage of \stops.
+
+\autoref{ch:05} concludes the thesis body and notes future work to improve and expand the \stops\ software. \todo{Revise once this chapter is complete} % presents the results of the pipeline and the implications of the results.
+
+Finally, the appendices, \autoref{app:reduction},~\ref{app:code},~and~\ref{app:papers}, contain a working reduction procedure (referred to in \autoref{ch:03}), the \stops\ source code, and Proceedings produced from conferences (referred to in \autoref{ch:04}), respectively.
 
 
 % HEASA 2021
