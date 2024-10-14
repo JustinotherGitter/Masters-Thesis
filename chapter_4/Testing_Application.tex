@@ -1,6 +1,6 @@
 \chapter{Testing and Application} \label{ch:04}
 
-This chapter contains an overview of the tests performed during the development of \stops\ which includes the verification of the the replaced wavelength solutions method (\autoref{sec:test_stops}), as well as the application of \stops\ on observations of both a spectrophotometric standard and science targets \ref{sec:app_stops}.
+This chapter contains an overview of the tests performed during the development of \stops\ which includes the verification of the modified wavelength solutions (\autoref{sec:test_stops}), as well as the application of \stops\ on observations of both a spectrophotometric standard and science targets \ref{sec:app_stops}.
 
 % MARK: Test STOPS
 \section[Testing \textsc{stops}]{Testing \stops} \label{sec:test_stops}
@@ -35,8 +35,8 @@ As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the
 
 \input{chapter_4/tables/4_split_info.tex}
 
-\autoref{table:split_info} shows the \gls{FITS} file information for the files before and after splitting.
-The split \gls{FITS} files \gls{SCI} extension each contain a polarization beams two-dimensional spectrum and the \gls{PRIMARY} header from the pre-reduced files, with the \gls{FITS} header and data differences mentioned below.
+\autoref{table:split_info} shows the contents of a \gls{FITS} file before and after splitting.
+The split \gls{FITS} files contain a single \gls{PRIMARY} extension which holds the respective polarization beams' two-dimensional spectrum as well as a slightly modified copy of the \gls{PRIMARY} header from the `pre-split' file. The differences in the header and data are detailed below.
 
 For the split \gls{FITS} files, the header is left mostly untouched, and is only updated to represent the new data type and shape:
 the `BITPIX' value is updated, from $8$ to $-32$, and the `NAXIS' value is updated, from $0$ to $2$;
@@ -68,14 +68,17 @@ This accounts for the discrepancy in the `Cards' between the \polsalt\ and \stop
 % The split data is also cropped at the top- and bottom-most rows of the \polsalt\ data, with the cropping defaulting to $40$~pixels (see \autoref{subsec:stops_split}).
 % This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
 
-After splitting it was confirmed that the data were identical to the unmodified file by taking the difference between them. This showed a constant difference of zero.  However, each file only includes half of the data, for the relevant $O$- or $E$-polarization beam, and the  data is also cropped at the top- and bottom-most rows of the \polsalt\ data, with the cropping defaulting to $40$~pixels (see \autoref{subsec:stops_split}). This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
+After splitting it was confirmed that the split data was identical to the \polsalt\ `pre-split' file by taking the difference between them, which showed a constant difference of zero.
+Each split \gls{FITS} file, however, only includes half of the `pre-split' data, for the relevant $O$- or $E$-polarization beam, with the data also being cropped at the top- and bottom-most rows of the \polsalt\ data, with the cropping defaulting to $40$~pixels (see \autoref{subsec:stops_split}). This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
 
 This output file structure was chosen for \iraf\ compatibility, and was tested over multiple grating and articulation angles, as well as with various data sets to ensure that the \texttt{split} method was robust and reliable.
 
 % MARK: STOPS join tests
 \subsection{Testing the \texttt{join} Method} \label{subsec:test_join}
 
-The \texttt{join} method requires both an \iraf\ database with wavelength solutions\footnote{A custom wavelength solution can also be used.} for both polarimetric beams, and the \polsalt\ pre-reduced files as input,  and the outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp'- prefixed) \gls{FITS} files.
+The \texttt{join} method requires both an \iraf\ database with wavelength solutions%
+\footnote{A custom wavelength solution may also be used.}
+for both polarimetric beams, and the \polsalt\ pre-reduced files as input,  and outputs \polsalt\ \texttt{spectra extraction} compatible (`wmxgbp'- prefixed) \gls{FITS} files.
 Ensuring that the output format was correct was paramount as the \polsalt\ \texttt{spectra extraction} method is unable to process the files otherwise, thus halting the reduction process.
 Thankfully, the \texttt{join} method output could be directly compared to the \polsalt\ \texttt{wavelength calibration} method output files, ensuring that any changes introduced by the \stops\ pipeline are well characterized.
 
@@ -130,7 +133,7 @@ This accounts for the differences in the `Cards' between the \polsalt\ and \stop
 It can be seen that the \gls{VAR} extensions (\autoref{subfig:join_VAR}) are identical.
 The difference in the \gls{SCI} extensions (\autoref{subfig:join_SCI}) is due to the \gls{CRR} applied by \stops\, which rejects cosmic rays from the \gls{SCI} extension instead of masking the \gls{BPM} extension (\autoref{subfig:join_BPM}) which is the method implemented by \polsalt.
 The valid wavelength calibrated region is used as a mask and applied to the \gls{BPM} and \gls{WAV} extensions (\autoref{subfig:join_WAV}).
-Slight differences arise near the center of the frames since the correction for the wollaston tilt, as implemented by \polsalt, is reimplemented in Python~$3$ by \stops\ and as such may be affected by rounding differences.
+Slight differences arise near the centre of the frames, specifically \autoref{subfig:join_BPM} and \ref{subfig:join_WAV}, since the correction for the wollaston tilt, as implemented by \polsalt, is re-implemented in Python~$3$ by \stops\ and as such may be affected by rounding differences.
 The differences are fortunately minor and are at the edges of the two polarimetric spectral regions
 The \gls{WAV} extensions contain the differing wavelength solutions and as such naturally differ.
 This accounts for the differences in the data between the \polsalt\ and \stops\ files.
@@ -142,7 +145,7 @@ This involved testing the \texttt{join} method with various data sets, with diff
 \subsection{Cross Correlation Checks} \label{subsec:test_corr}
 
 % O/E correlation checks to verify the consistency of the wavelength solutions.
-The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the \polsalt\ \texttt{spectra extraction} (`ecwmxgbp'- prefixed) method output files as input.
+The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the files output from the \polsalt\ \texttt{spectra extraction}  method (`ecwmxgbp'- prefixed files).
 
 \begin{figure}
     \centering
@@ -175,7 +178,7 @@ When a returned `max lag' peak is not significant when compared to the noise in 
 
 % Full frame wavelength solution checks to ensure comprehensive calibration.
 % Verifying the accuracy of the cross-correlation function against known standards.
-The \texttt{skylines} method returns plots validating the wavelength solutions and so only has to accept either the \iraf\ \texttt{transform} task or \stops\ \texttt{join} method output files as input.
+The \texttt{skylines} method returns plots validating the wavelength solutions and so has to accept as input the files output from the \stops\ \texttt{join} method.
 
 \begin{figure}[t]
     \centering
@@ -196,10 +199,10 @@ The \texttt{skylines} method returns plots validating the wavelength solutions a
     \label{fig:sky_test}
 \end{figure}
 
-\autoref{subfig:sky_test_spec} consists of an average continuum (at $10$~`counts') with noise (normal-sampled, with $\sigma = 4.5$), skyline emission features (as provided by \gls{SALT}, see \autoref{subsec:stops_skyline}), and the characteristic \gls{RSS} chip gaps.
-The two-dimensional spectrum was used to test the \stops\ \texttt{skylines} method.
+In order to validate the \stops\ \texttt{skylines} method, a synthetic two-dimension spectrum was created that contained sky lines. This is shown in \autoref{subfig:sky_test_spec}, and consists of an average continuum ($10$~`counts') with added noise (normal-sampled, $\sigma = 4.5$), skyline emission features (provided by \gls{SALT}, see \autoref{subsec:stops_skyline}), and the characteristic \gls{RSS} chip gaps.
+% The two-dimensional spectrum was used to test the \stops\ \texttt{skylines} method.
 \autoref{subfig:sky_test_pure} shows the result, which successfully retrieves the skyline emission features for the synthetic spectrum.
-Note that the closest peaks ($\Delta \lambda$) are nearly never $0$, since the skylines are only as accurate as the spectral pixel resolution ($\sim~1$~\AA in our case) while those as provided by \gls{SALT} are not similarly limited.
+Note that the closest peaks ($\Delta \lambda$) are nearly never $0$, since the skylines are only as accurate as the spectral pixel resolution ($\sim~1$~\AA\ in our synthetic spectrum) while those as provided by \gls{SALT} are not similarly limited.
 Additionally, the noise in the spectrum may shift a skylines' peak position, further contributing to, albeit small, discrepancies.
 
 \begin{figure}[t]
@@ -218,9 +221,11 @@ The closest peaks near $\Delta \lambda \sim -4$~\AA\ are the most notable outlie
 % https://ui.adsabs.harvard.edu/search/fq=%7B!type%3Daqp%20v%3D%24fq_database%7D&fq_database=database%3Aastronomy&p_=0&q=%20author%3A%22Cooper%2C%20J.%22%20spectropolarimetry&sort=date%20desc%2C%20bibcode%20desc
 
 % Sources are blazars
-The \stops\ pipeline has been utilized in the reduction of a number of science targets, specifically focused on blazars.
-The \stops\ pipeline has been utilized in the reduction of a number of sources, both for calibration tests using spectropolarimetric standards, and for science observations of transient blazars.
-The following sections discuss works from which observations were completed using, in part, the \stops\ pipeline with \iraf\ wavelength calibrations, or from which the \stops\ pipeline was developed.
+% The \stops\ pipeline has been utilized in the reduction of a number of science targets, specifically focused on blazars.
+The \stops\ pipeline has been utilized for the reduction of a number of sources: this includes calibration tests using spectropolarimetric standards; and for scientific observations of transient sources, specifically \gls{GRB}['s] and blazars.
+The following sections summarize works in which observations were analysed using, in part, the \stops\ pipeline with \iraf\ wavelength calibrations, or from which the \stops\ pipeline was developed.
+The list of sources observed are summarized in \autoref{table:sci_targets}.
+In addition to the results discussed here, the \stops\ pipeline has also been extensively used for the analysis of the blazers presented in \citet{Barnard_HEASA2021, Barnard_2024}.
 
 \input{chapter_4/tables/4_sci_targets.tex}
 
@@ -231,12 +236,13 @@ The following sections discuss works from which observations were completed usin
 }
 
 \citet{Buckley191221B} discusses the spectropolarimetric and photometric results of the early afterglow of GRB~$191221$B, a $\gamma$-ray burst initially detected by the \gls{Swift} \gls{Swift_BAT} \citep{swift_bat} on $2019$ December $21$ \citep{grb191221b}.
-The afterglow was observed using the \gls{SALT} \gls{RSS} in spectropolarimetric mode, $\sim 3$~h after the initial burst, with observations carried out during the re-brightening phase.
+The afterglow was observed using the \gls{SALT} \gls{RSS} in spectropolarimetric mode $\sim 3$~h after the initial burst, with observations carried out during the re-brightening phase.
 Follow-up spectropolarimetric observations were also taken $\sim 10$~h after the burst using the \gls{VLT} \gls{FORS}.
 
 The \gls{SALT} spectropolarimetric observations were reduced using a modified version of the \polsalt\ pipeline, allowing for relative flux calibrations of the spectra using the white dwarf, EGGR~$21$.
 GRB~$191221$B was observed at an average polarization level of $1.5 \pm 0.5\%$, and a polarization angle of $60 \pm 10$\degree\ across the $3900 - 8000$~\AA.
-The \gls{FORS}[2] observations showed a similar polarization level and angle across the $3200 - 9200$~\AA\ region, $1.2\%$ and $60$\degree, respectively; slightly less than the polarization properties measured by \gls{SALT} $\sim 7$~h earlier.
+The \gls{FORS}[2] observations showed a similar polarization level ($1.2\%$) and polarization angle ($60$\degree) across the $3200 - 9200$~\AA\ wavelength region.
+% , and , respectively; slightly less than the polarization properties measured by \gls{SALT} $\sim 7$~h earlier.
 These low polarization percentages are expected for afterglows this late, when the emission is understood to be dominated by the forward shock which exhibits no systematic orientation of the magnetic field configuration.
 
 \begin{figure}[t]
@@ -252,8 +258,8 @@ The spectra show a good agreement across the measured position of the proposed a
 \input{chapter_4/tables/4_grb191221b_lines.tex}
 
 \autoref{table:grb_lines} shows the measured absorption line properties, specifically for the \gls{FORS}[2] spectrum due to its higher \gls{SNR} and better line resolution than the \gls{RSS} spectrum.
-The table shows that two distinct redshifts were acquired from the absorption line measurements, $z = 0.960 \pm 0.0017$ and $z = 1.142 \pm 0.0078$.
-Initial analysis of the spectrum by the \gls{Swift}/\gls{UVOT} team \citep{Kuin2019} placed the redshift at $z = 1.19$, which was later further refined by \citet{Vielfaure2019} who reported a redshift for the host galaxy at $z = 1.148$, and a fainter intervening system at $z = 0.961$, firmly agreeing with the measured redshifts found with \gls{RSS} and \gls{FORS}[2].
+Two distinct redshifts were acquired from the absorption line measurements, namely $z = 0.960 \pm 0.0017$ and $z = 1.142 \pm 0.0078$.
+Initial analysis of the spectrum by the \gls{Swift}/\gls{UVOT} team \citep{Kuin2019} placed the redshift at $z = 1.19$, which was later further refined by \citet{Vielfaure2019} who reported a redshift for the host galaxy of $z = 1.148$, as well as a fainter intervening system at $z = 0.961$, firmly agreeing with the measured redshifts found with \gls{RSS} and \gls{FORS}[2].
 
 % MARK: HEASA 2021
 \subsection[Proceeding, HEASA (2021)]{%
@@ -262,11 +268,11 @@ Initial analysis of the spectrum by the \gls{Swift}/\gls{UVOT} team \citep{Kuin2
 }
 
 % Basic background information
-As discussed in \cite[][see also \autoref{app:papers}]{Cooper_HEASA2021}, it was shown that alternative wavelength solutions, such as those created using \iraf, are capable of being applied to \gls{SALT} spectro\-polarimetric data.
+As discussed in \citet[][see also \autoref{app:papers}]{Cooper_HEASA2021}, it was shown that alternative wavelength solutions, such as those created using \iraf, are capable of being applied to \gls{SALT} spectro\-polarimetric data.
 The `additional tools' mentioned therein, which were the precursor to the \stops\ pipeline, were used during the reduction of the blazar 3C~279.
 
 The blazar 3C~279 was observed in linear spectropolarimetry mode, on $2017$ May $17$, using the PG$0900$ grating with two different grating angles ($12.5$\degree\ and $19.5$\degree).
-The grating and articulation angles used for the observations, as shown in \autoref{table:sci_targets}, matched those of observations of the spectrophotometric standard star, Hiltner $600$, observed on $2017$ February $24$, allowing the intensity to be relatively flux calibrated.
+The grating and articulation angles used for the observations (see \autoref{table:sci_targets}) matched those of observations of the spectrophotometric standard star, Hiltner $600$, observed on $2017$ February $24$, allowing the intensity to be relatively flux calibrated.
 
 \begin{figure}[t]
     \centering
@@ -314,20 +320,21 @@ Both the percentage of linear polarization and the polarization angle agree well
     (Proceedings of Science, \glsxtrshort{HEASA} 2022)
 }
 
-As discussed in \cite[][see also \autoref{app:papers}]{Cooper_HEASA2022}, as well as expanding on the work presented in \cite{Cooper_HEASA2021}, it was shown that the \stops\ pipeline has no noticeable effect on the polarization properties of spectropolarimetric data and that the measure of the goodness of fit for the wavelength solutions could be measured, both through correlation and measuring the position of skyline features for both the $O$- and $E$-beams.
+As discussed in \citet[][see also \autoref{app:papers}]{Cooper_HEASA2022}, as well as expanding on the work presented in \cite{Cooper_HEASA2021}, it was shown that the \stops\ pipeline has no noticeable effect on the polarization properties of spectropolarimetric data and that the measure of the goodness of fit for the wavelength solutions could be measured, both through correlation and measuring the position of skyline features for both the $O$- and $E$-beams.
 The blazar 3C~$279$, the spectrophotometric standard star Hiltner~$600$, and the spectropolarimetric standard star Hiltner~$652$, were observed on the dates tabulated in \autoref{table:sci_targets}.
 Observations of 3C~$279$ were taken during periods of enhanced and flaring $\gamma$-ray activity.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{4_3C_279_LCR.pdf}
-    \caption{The photon flux of 3C~$279$ as measured during the presented observation dates. Also included are the `mean' $\gamma$-ray fluxes for the observation dates, calculated using linear interpolation, as well as the non-flaring `mean' $\gamma$-ray photon flux. Figure adapted from data provided via the \glsxtrshort{FermiLCR}.\protect\footnotemark}
+    \caption{The \glsxtrshort{FermiLAT} photon flux [$0.1 - 100$~GeV] for 3C~$279$ as measured around the dates of the \gls{SALT}/\gls{RSS} spectropolarimetric observations (indicated by the vertical lines). Also included are the `mean' $\gamma$-ray fluxes ($\times 10^{-6}$) for the observation dates, calculated using linear interpolation of the \glsxtrshort{FermiLAT} data points. The horizontal turquoise line shows the mean quiescent flux for this source. Figure created using data sourced from the \glsxtrshort{FermiLCR}.\protect\footnotemark}
     \label{fig:3C_279_LCR}
 \end{figure}
 \footnotetext{\protect\url{https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/source.html?source_name=4FGL_J1256.1-0547}}
 
-\autoref{fig:3C_279_LCR} shows the photon flux of 3C~$279$ for energies of $0.1 - 100$~GeV as provided by the \glsxtrfull{FermiLCR} \citep{FermiLCR}.
-The figure shows that during the optical observations of 3C~$279$, the source was likely at $\gamma$-ray fluxes of $1.72 \times 10^{-6}$, $3.58 \times 10^{-6}$, and $2.38 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.45 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
+\autoref{fig:3C_279_LCR} shows the $\gamma$-ray photon flux from 3C~$279$ for energies between $0.1 - 100$~GeV, observed using the \gls{FermiLAT}, as provided by the \glsxtrfull{FermiLCR} \citep{FermiLCR}.
+This shows that on the dates of the optical observations, 3C~$279$ was between $\sim4$ to $\sim8$ times brighter compared to its quiescent state. 
+% was likely at $\gamma$-ray fluxes of $1.72 \times 10^{-6}$, $3.58 \times 10^{-6}$, and $2.38 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.45 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
 
 \begin{figure}[t]
     \centering
@@ -337,11 +344,11 @@ The figure shows that during the optical observations of 3C~$279$, the source wa
 \end{figure}
 
 \autoref{fig:3C_279_specpol} shows the spectropolarimetric results for 3C~$279$ during the periods of enhanced and flaring $\gamma$-ray activity as mentioned above.
-The figure shows, from top to bottom, the normalized, relative flux calibrated, spectra for both grating angles ($12.5$\degree\ (observed first at each epoch) and $19.625$\degree), the percentage of linear polarization, and the polarization angle.
+The figure shows, from top to bottom, the normalized, relative flux calibrated, spectra for both grating angles ($12.5$\degree\ and $19.625$\degree, observed in that order), the percentage of linear polarization, and the polarization angle.
 
 Although the spectral shape does not vary greatly across the wavelength region, the level of $\gamma$-ray activity during observation has a clear effect on the spectra.
 This is most notable for the $2017$ March $31$ observation which displays heightened spectral intensities in the blue.
-The linear polarization percentages and polarization angles also show variation over the course of the observations, varying by $\sim 12.23\%$ and $\sim 24.22$\degree, respectively.
+The linear polarization percentages and polarization angles also show variation over the course of the observations, varying between $\sim 12.23\%$ and $\sim 24.22$\degree.
 There is also good agreement between the polarization properties across the differing grating angles for the same observation dates.
 The difference of the polarization percentage and polarization angle between the two grating angles is $\sim 0.25\%$ and $\sim 1.25$\degree, respectively.
 The most notable disagreement of the polarization properties is seen, once again, during the $2017$ March $31$ observation, but may be explained due to the flaring state of the blazar, the asynchronous times for the two observations, and a lower \gls{SNR} near the edges of the \gls{RSS}.
@@ -350,13 +357,14 @@ The most notable disagreement of the polarization properties is seen, once again
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{4_Hiltner_652.pdf}
-    \caption{The reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$, pre$-2006$ for \glsxtrshort{FORS}[1], $2010 - 2016$ for \glsxtrshort{FORS}[2], and post$-2022$ for \gls{SALT}. Figure sourced from \citep{Cooper_HEASA2022}.}
+    \caption{The reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$, pre$-2006$ for published \glsxtrshort{FORS}[1] data, $2010 - 2016$ for published \glsxtrshort{FORS}[2] data, and post$-2022$ for Stokes parameters observed with \gls{SALT} and convolved with the Johnson-Cousins filter pass-bands. The horizontal lines and shaded regions refer to the \glsxtrshort{FORS} mean and $1\sigma$ regions, respectively. Finally, the bottom plot shows the Johnson-Cousins filter pass-band’s used by \polsalt\ to calculate the Stokes parameters in the different filters. Figure sourced from \citep{Cooper_HEASA2022}.}
     \label{fig:Hilt652}
 \end{figure}
 
-\autoref{fig:Hilt652} shows the reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$ as observed with the \glsxtrlong{FORS} (\glsxtrshort{FORS}[1]) and \gls{FORS}[2] mounted at the \gls{VLT} \citep{FORS1, FORS2}, as well as observed with \gls{SALT}.
-The figure shows that the Stokes parameters of Hiltner~$652$ are consistent across the different instruments, mostly falling within a standard deviation of historical results.
-Minor discrepancies are present, but are likely due to multiple compounding effects, such as differing instrumental setups, varying atmospheric conditions, as well as Hiltner~$652$ being classed as a spectrophotometric, and not spectropolarimetric, standard.
+\autoref{fig:Hilt652} shows the comparison between the reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$ as observed with the %\glsxtrlong{FORS} (\glsxtrshort{FORS}[1]) and \gls{FORS}[2] mounted at the \gls{VLT} \citep{FORS1, FORS2}, as well as observed with \gls{SALT}.
+\glsxtrshort{FORS}[1] and \gls{FORS}[2] \citep[as reported by][]{FORS1, FORS2}, and the \gls{SALT} observations. 
+This shows that the Stokes parameters of Hiltner~$652$ are consistent across the different instruments, mostly falling within a standard deviation of historical results.
+Minor discrepancies are present, but can be due to multiple compounding effects, such as differing instrumental setups, varying atmospheric conditions, as well as Hiltner~$652$ being classed as a spectrophotometric, and not spectropolarimetric, standard.
 
 % MARK: Schutte - 4C+01.02
 \subsection[Schutte et al.\ (2022)]{%
@@ -364,19 +372,19 @@ Minor discrepancies are present, but are likely due to multiple compounding effe
     \citep{Schutte4C0102}
 }
 
-\citep{Schutte4C0102} discusses the results from spectropolarimetric observations and modeling of the \gls{SED} for the blazar 4C~+$01.02$ during a period of flaring and quiescence.
+\citet{Schutte4C0102} presented the results from spectropolarimetric observations and modeling of the \gls{SED} for the blazar 4C~+$01.02$ during a flaring and a quiescent state.
 The optical spectropolarimetric observations of the blazar were completed using the \gls{SALT} \gls{RSS} in spectropolarimetric mode, with observations taken on $2016$ July $09$ and $2017$ July $25$, also noted in \autoref{table:sci_targets}.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{4_4C_+01.02_LCR.pdf}
-    \caption{The photon flux of 4C~+$01.02$ as measured during the presented observation dates. Also included are the `mean' $\gamma$-ray fluxes for the observation dates, calculated using linear interpolation, as well as the non-flaring `mean' $\gamma$-ray photon flux. Figure adapted from publically accessible data via the \gls{FermiLCR}.\protect\footnotemark}
+    \caption{The \gls{FermiLAT} photon flux [$0.1 - 100$~GeV] for 4C~+$01.02$ as measured around the dates of the \gls{SALT}/\gls{RSS} spectropolarimetric observations (indicated by the vertical lines). Also included are the `mean' $\gamma$-ray fluxes ($\times 10^{-6}$) for the observation dates, calculated using linear interpolation of the \gls{FermiLAT} data points. The horizontal turquoise line shows the mean quiescent flux for this source. Figure created using data sourced from the \gls{FermiLCR}.\protect\footnotemark}
     \label{fig:4C_+01.02_LCR}
 \end{figure}
 \footnotetext{\protect\url{https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/source.html?source_name=4FGL_J0108.6+0134}}
 
 \autoref{fig:4C_+01.02_LCR} shows the photon flux of 4C~+$01.02$ for energies of $0.1 - 100$~GeV as provided by the \gls{FermiLCR}.
-The figure shows that during the optical observations of 4C~+$01.02$, the source was likely at $\gamma$-ray fluxes of $1.94 \times 10^{-6}$ and $0.08 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.21 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
+The figure shows that during the optical observations of 4C~+$01.02$, the source was at $\gamma$-ray fluxes of $\approx 1.9 \times 10^{-6}$ and $\approx 0.1 \times 10^{-6}$~ph.\,cm$^{-2}$\,s$^{-1}$, as compared to a quiescent `median' flux of $0.21 \times 10^{-6}$\,ph.\,cm$^{-2}$\,s$^{-1}$.
 
 \begin{figure}[t]
     \centering
@@ -385,10 +393,14 @@ The figure shows that during the optical observations of 4C~+$01.02$, the source
     \label{fig:4C_01.02_specpol}
 \end{figure}
 
-\autoref{fig:4C_01.02_specpol} shows the spectropolarimetric results for 4C~+$01.02$ during the periods of flaring and quiescence in $2016$ and $2017$, respectively.
-The figure shows the normalized, continuum-subtracted, intensity spectra as well as the polarization percentage for the two epochs.
-The spectral features were identified using the known redshift of 4C~$01.02$ of $z = 2.1$.
-The quiescent state spectrum exhibits more prominent features than those in the flaring state, with the C~IV line being the most prominent feature present in both spectra.
-This is due to the fainter continuum emission as compared to the flaring state, which dominates the spectrum during the flaring state.
+% \autoref{fig:4C_01.02_specpol} shows the spectropolarimetric results for 4C~+$01.02$ during the periods of flaring and quiescence in $2016$ and $2017$, respectively.
+% The figure shows 
 
-The linear polarization percentages average $10.04 \pm 1.03\%$ and $1.72 \pm 0.93\%$ during flaring and quiescence, respectively, which agrees with the prediction that blazars release highly polarized synchrotron emission during periods of flaring.
+The normalized, continuum-subtracted, intensity spectra as well as the polarization percentage for the $2016$ and $2017$ epochs are show in \autoref{fig:4C_01.02_specpol}.
+The spectral features were identified using the known redshift of 4C~$01.02$ of $z = 2.1$.
+The quiescent state spectrum exhibits more prominent features than during the flaring state, with the C\,{\sc iv} line being the most prominent feature present in both spectra.
+The increase in the spectral line intensity during the quiescent $\gamma$-ray state is due to the non-thermal continuum emission being fainter, as compared to the flaring state.
+% , which dominates the spectrum during the flaring state.
+
+The linear polarization percentages averaged $10.04 \pm 1.03\%$ and $1.72 \pm 0.93\%$ during flaring and quiescence, respectively.
+% , which agrees with the prediction that blazars release highly polarized synchrotron emission during periods of flaring.
