@@ -231,7 +231,19 @@ indent=20pt
 
 \tableofcontents
 
-\printglossary[type=\acronymtype, style=super, title={List of Acronyms and Symbols}]
+% \printglossaries
+% Longest abbreviation so the column width can be set
+% \glssetwidest{\gls{STOPS}}
+\printglossary[%
+    type=main,
+    title={Glossary}
+]
+
+\printglossary[%
+    type=\acronymtype,
+    style=super,
+    title={List of Acronyms and Symbols}
+]
 
 % MARK: Main matter
 \mainmatter
@@ -240,6 +252,14 @@ indent=20pt
 \include{chapter_3/Developed_tools}
 \include{chapter_4/Testing_Application}
 \include{chapter_5/Conclusions}
+
+% MARK: Back matter
+{
+    % No chapter count type
+    \backmatter
+    \bibliographystyle{plainnat}
+    \bibliography{references}
+}
 
 % MARK: Appendix
 % New chapter count type
@@ -260,16 +280,5 @@ Development of \stops\ and it's application to spectropolarimetric observations 
 
 \includepdf[pages=-]{chapter_4/papers/Cooper_HEASA2021.pdf}
 \includepdf[pages=-]{chapter_4/papers/Cooper_HEASA2022.pdf}
-
-% MARK: Back matter
-% No chapter count type
-\backmatter
-\bibliographystyle{plainnat}
-\bibliography{references}
-
-% \printglossaries
-% Longest abbreviation so the column width can be set
-% \glssetwidest{\gls{STOPS}}
-\printglossary[type=main, title={Glossary}]
 
 \end{document}
