@@ -36,6 +36,10 @@ Justin Cooper
   * `the user` instead of `a user`
   * `$#$~unit` instead of `# $unit$`
   * tables should use `\toprule` `\midrule`, and `\bottomrule`
+* Badges (for GitHub signalling)
+  * <https://simpleicons.org/>
+  * <https://badges.pages.dev/>
+  * <https://github.com/badges/shields>
 
 <!-- MARK: Final TODO's -->
 ## Final `TODOs`

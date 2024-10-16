@@ -15,21 +15,15 @@
 
 \section{Future Work}
 
-% Summarize state of Astronomical software - IRAF & POLSALT
 It is possible to complete the data reductions of \gls{SALT}/\gls{RSS} spectropolarimetric data using only the \polsalt\ pipeline.
 This does not negate the fact that better tools and software better allow us to focus on the results of observations rather than the data reduction process.
 Due to the limitations inherent in software designed for use strictly as a pipeline, there is a lack of flexibility in data reduction processes, an over-reliance on the software to provide accurate results, and a lack of urgency when keeping `completed' software up-to-date.
 % Point in case, \polsalt\ is written in Python~$2$, which was deprecated in $2020$, while \iraf\ is referred to as legacy software, receiving only community driven support.
 
-% New software - Python trend
-Newer software, such as Python~$3$, is trending for data reductions due to the compatibility and maintenance with modern systems, the rich packages available for use, and an active development environment.
-In this regard, the development of the \stops\ software is a step in the right direction, providing a channel for alternate wavelength calibrations to be integrated with \polsalt, while still maintaining the integrity of the data reduction process.
+In this regard, the development of the \stops\ software is a step in the right direction.
+Although \stops\ was developed as a workaround to allow for the integration of alternate wavelength calibrations with \polsalt, it utilizes a well-supported programming language, Python~$3$, as well as actively developed \gls{PyPI} packages, and is compatible with all devices capable of running Python.
 That said, the software is not without its limitations.
 
-% STOPS
-% Future use guaranteed in data reductions
-% Limited by \polsalt\ development
 Future work would involve the continued development and maintenance of the \stops\ software, further integration of the software with \polsalt, and possibly the development of a user-friendly interface or modification of the \polsalt\ \gls{GUI} to include the \stops\ functionality.
-
-Wavelength calibrations completed in Python~$3$, with the help of \gls{PyPI} packages, are already supported, but further integration of non-standard wavelength solutions would also be beneficial, as the current wavelength solutions are limited to Chebyshev and Legendre polynomials.
-% What will be discussed, however, is the structure of the wavelength solutions created through Python to be later reintroduced to the \polsalt\ pipeline. The solutions must be stored such that the `$x$' and `$y$' orders of the solution, as well as all the coefficients ($C_{00}$ to $C_{xy}$) making up the solution, separated by new lines, are included. The only limitations to the names of the solution files is that they must make mention of the specific $O$- or $E$-beam as well as the wavelength solution type (e.g. `Chebyshev', `Legendre', etc.).
+Wavelength calibrations produced using Python are already supported, but further integration of non-standard wavelength solutions would also be beneficial, as the current wavelength solutions are limited to Chebyshev and Legendre polynomials.
+Automation of the wavelength calibration process may also be considered, but development of this functionality depends heavily on the development of the \polsalt\ pipeline.
