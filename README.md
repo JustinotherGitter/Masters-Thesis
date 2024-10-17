@@ -36,6 +36,9 @@ Justin Cooper
   * `the user` instead of `a user`
   * `$#$~unit` instead of `# $unit$`
   * tables should use `\toprule` `\midrule`, and `\bottomrule`
+  * Use:
+    * `\approx` for `≈` \`approximate' symbol, and
+    * `\sim` for `∼` \`on-the-order-of' symbol
 * Badges (for GitHub signalling)
   * <https://simpleicons.org/>
   * <https://badges.pages.dev/>
@@ -51,6 +54,47 @@ Justin Cooper
   * Use `\ion{}` for acronym underline
 * Cite STOPS as repo? (See `.cff` references)
 * Ask for read through from friends to ensure no spelling/grammar errors
+
+<!-- MARK: @Submission -->
+## At Submission
+
+From [General Academic Rules](https://www.ufs.ac.za/docs/default-source/policy-documents-documents/general-academic-rules-and-regulations.pdf?Status=Master&sfvrsn=acb23120_3):
+
+* **Submitted material must contain**:
+  * **Style**:
+    * There is no standard format for the submission of a dissertation or thesis and formatting is at the candidate's discretion.
+    * Reasonable-width margins ($2 - 2.5$ cm)
+    * 1,5 line spacing are desirable to ensure comfortable reading of the text.
+    * Consistent referencing should be applied, according to departmental styling
+    * PDF format (for electronic submission)
+      * embedded fonts
+  * Abstract (<600 words)
+  * ~10 key terms, no less than 5(keywords)
+    * **Title page**:
+      * Registered research title
+      * Student's Full names
+      * Declaration:
+        * “Submitted in fulfillment of the requirements in respect of the Master’s Degree Master of Science in Astrophysics in the Department of Physics in the Faculty of Natural and Agricultural Sciences at the University of the Free State”
+      * Submission date
+      * Names of Supervisor(s) (and co-supervisor(s) / Mentor(s))
+* **Submitted alongside material**:
+  * A summary report compiled in the Turnitin plagiarism search engine
+  * A written declaration of approval by the supervisor
+  * “I, Justin Cooper, declare that the Master’s Degree research dissertation that I herewith submit for the Master’s Degree qualification Master of Science in Astrophysics at the University of the Free State is my independent work, and that I have not previously submitted it for a qualification at another institution of higher
+education” (See [GAR](https://www.ufs.ac.za/docs/default-source/policy-documents-documents/general-academic-rules-and-regulations.pdf?Status=Master&sfvrsn=acb23120_3 "Page 106 for variations"))
+* **Provided by Supervisor(s)**:
+  * A letter that they approve the submission for assessment and that the submitted work has not previously, either in part or in its entirety, been submitted to the examiners or moderators
+  * Proof of the title registration, and
+  * proof of appointment of the examiners, with their acceptance of appointment and their addresses for the dispatching of the examination copy.
+* **Provided for graduation ceremony programme**:
+  * Date of birth
+  * Place of birth
+  * School of matriculation
+  * Professional career
+  * Exceptional achievements
+  * Marital and familial details
+* **And Finally**:
+  * Review [This webpage](https://www.ufs.ac.za/library/library-and-information-services-home/research(unlisted)/online-submission-of-electronic-theses-and-dissertations "Library submission")
 
 <!-- MARK: VSCode -->
 ## VSCode
