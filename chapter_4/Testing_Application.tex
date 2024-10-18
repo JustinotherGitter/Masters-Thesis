@@ -1,6 +1,6 @@
 \chapter{Testing and Application} \label{ch:04}
 
-This chapter contains an overview of the tests performed during the development of \stops\ which includes the verification of the modified wavelength solutions (\autoref{sec:test_stops}), as well as the application of \stops\ on observations of both a spectrophotometric standard and science targets \ref{sec:app_stops}.
+This chapter contains an overview of the tests performed during the development of \stops\ which includes the verification of the modified wavelength solutions (\autoref{sec:test_stops}), as well as the application of \stops\ on observations of both a spectrophotometric standard and science targets \autoref{sec:app_stops}.
 
 % MARK: Test STOPS
 \section[Testing \textsc{stops}]{Testing \stops} \label{sec:test_stops}
@@ -30,8 +30,8 @@ The testing of the `check-specific' methods are discussed in \autoref{subsec:tes
 % MARK: STOPS split tests
 \subsection{Testing the \texttt{split} Method} \label{subsec:test_split}
 
-The \stops\ \texttt{split} method accepts any \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`[arc|beam][O|E]'- prefixed) \gls{FITS} file structures.
-As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} method's output files, ensuring the correct structure and data integrity of the files handed off to \iraf.
+The \stops\ \texttt{split} method accepts any \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files as input and outputs \iraf\ compatible (`[arc|beam][o|e]'- prefixed) \gls{FITS} file structures.
+As no `split' \gls{FITS} files are created during pure \polsalt\ reductions, the \stops\ \texttt{split} method was tested by comparing the pre-reduced \polsalt\ files to the \texttt{split} method's output files, ensuring the correct structure and data integrity of the files to be handed off to \iraf.
 
 \input{chapter_4/tables/4_split_info.tex}
 
@@ -60,7 +60,7 @@ This accounts for the discrepancy in the `Cards' between the \polsalt\ and \stop
 %         \caption{The difference in the \gls{SCI} extensions, for the `E' polarization beam.}
 %         \label{subfig:diff_split_E}
 %     \end{subfigure}
-%     \caption{The difference between the \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files and the \stops\ `split' (`[arc|beam][O|E]'- prefixed) files. Figures created using both the \polsalt\ \texttt{Raw image reduction} and \stops\ \texttt{split} method outputs.}
+%     \caption{The difference between the \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files and the \stops\ `split' (`[arc|beam][o|e]'- prefixed) files. Figures created using both the \polsalt\ \texttt{Raw image reduction} and \stops\ \texttt{split} method outputs.}
 %     \label{fig:split_diff}
 % \end{figure}
 

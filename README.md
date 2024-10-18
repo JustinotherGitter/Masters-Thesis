@@ -20,25 +20,38 @@ Justin Cooper
 <!-- MARK: Minor TODO's -->
 ## Minor `TODOs`
 
-* `e.g.` and `i.e.` (check both cases) → `e.g.\ ` or `e.g., ` (for both)
 * Unify (x-pixel/y-pixel/x/y/wavelength/) or vertical/horizontal axis or rows/columns
   * → (?) ($x_p$, $y_p$)/(\AA, $y_p$) | ($u$, $v$) for pixel position and $s_{u|v}$ for pixel ($x$|$y$) size
+
 * STOPS: skylines legend use [double markers](https://matplotlib.org/stable/users/explain/axes/legend_guide.html#legend-handlers "matplotlib.org")
+
 * Edit created plots to use $\LaTeX$ font (both Python and Inkscape figures)
   * Edit plots to use `subfigures` where possible (?)
   * (?) <https://jwalton.info/Matplotlib-latex-PGF/>
+
 * Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
+
 * Limit paragraph breaks to only `left-to-right` pages, not across a page turn.
-* Triple Check [O|E] [arc|beam|etc.] → [arc|beam|etc.] [o|e]
+
+* Organize Glossary entries:
+  * Glossary (Alphabetical)
+  * Abbreviations, Acronyms, and Symbols (By group(?)/category, then Alphabetical)
+  * Unify usage of exposure / frame / extension and add to glossary (see references)
+  * Use `\ion{}` for acronym underline
+
 * Check common errors:
-  * `$O$- and $E$-beam(s)`
-  * `extension`
+  * `e.g.` should be `e.g., ` (exempli gratia, Latin for \`for example')
+  * `i.e.` should be `i.e., ` (id est, Latin for \`that is')
+  * `[O|E][arc|beam|*]*.[EXT]` should be `[arc|beam|*][o|e]*.[EXT]`
+  * unified `$O$- and $E$-beam(s)`
+  * `extension` is the correct spelling
   * `the user` instead of `a user`
   * `$#$~unit` instead of `# $unit$`
   * tables should use `\toprule` `\midrule`, and `\bottomrule`
-  * Use:
-    * `\approx` for `≈` \`approximate' symbol, and
-    * `\sim` for `∼` \`on-the-order-of' symbol
+  * `\approx` for `≈` \`approximate' symbol, and
+  * `\sim` for `∼` \`on-the-order-of' symbol
+  * `\autoref` instead of `\ref` (unless used in a list of refs)
+
 * Badges (for GitHub signalling)
   * <https://simpleicons.org/>
   * <https://badges.pages.dev/>
@@ -47,11 +60,6 @@ Justin Cooper
 <!-- MARK: Final TODO's -->
 ## Final `TODOs`
 
-* Organize Glossary entries:
-  * Glossary (Alphabetical)
-  * Abbreviations, Acronyms, and Symbols (By group(?)/category, then Alphabetical)
-  * Unify usage of exposure / frame / extension and add to glossary (see references)
-  * Use `\ion{}` for acronym underline
 * Cite STOPS as repo? (See `.cff` references)
 * Ask for read through from friends to ensure no spelling/grammar errors
 

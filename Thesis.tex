@@ -21,8 +21,8 @@
 
 % Set paragraph seperation and indentation
 \usepackage[%
-skip=1.0\baselineskip plus2pt,
-indent=20pt
+    skip=1.0\baselineskip plus2pt,
+    indent=20pt
 ]{parskip}
 % Remove lineskip in itemize environment
 \usepackage{enumitem}
@@ -118,11 +118,11 @@ indent=20pt
 % MARK: Title constants
 \title{\textbf{\GetDocumentProperties{hyperref/pdftitle}}}
 \author{\GetDocumentProperties{hyperref/pdfauthor}}
-\Cdegree{B.Sc. (Hons) \textit{cum laude}}
-\Sdegree{Magister Scienti\ae}
-\university{University of the Free State}
-\faculty{Faculty of Natural and Agricultural Sciences}
+\Cdegree{} %B.Sc. (Hons) \textit{cum laude}
+\Sdegree{Magister Scienti\ae} % Master of Science in Astrophysics
 \department{Department of Physics}
+\faculty{Faculty of Natural and Agricultural Sciences}
+\university{University of the Free State}
 \country{South Africa}
 \degreedate{Date of submission: \monthyear\today}
 \supervisor{Prof. B. van Soelen}
@@ -244,6 +244,9 @@ indent=20pt
     style=super,
     title={List of Acronyms and Symbols}
 ]
+
+% Reset all acronyms to their full form
+\glsresetall
 
 % MARK: Main matter
 \mainmatter

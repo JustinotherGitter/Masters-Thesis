@@ -1,17 +1,53 @@
 \chapter{Conclusions} \label{ch:05}
 
-% • Background and motivation
-% - What are you talking about?
-% - What questions are you trying to answer?
-% - What’s the bigger picture?
-% • What did you do?
-% - What did you observe?
-% - Experimental and analysis method(s)
-% - What theory/models are you using?
-% • What did you find?
-% • What does it mean? What do you conclude?
+% Background and motivation
+%   What are you talking about?
+%   What questions are you trying to answer?
+%   What’s the bigger picture?
+This chapter contains an overview of the \stops\ software, with a focus on its development and testing \autoref{sec:stops_summary}, the findings from the application of \stops\ to \gls{SALT}/\gls{RSS} spectro\-polarimetric data \autoref{sec:findings}, and a discussion on the future of the \stops\ software \autoref{sec:future}.
 
-\section{Future Work}
+% Summary of \stops\ development and testing
+\section[A Broad Overview of \textsc{stops}]{A Broad Overview of \stops} \label{sec:stops_summary}
+
+% What was the goal of \stops?
+A means to provide a more streamlined wavelength calibration process for \gls{SALT}/\gls{RSS} spectropolarimetric data was desired, specifically when working with \gls{SALT} arc~lamps with poor uniform spectral coverage, e.g., the \gls{Ar} arc lamp used in conjunction with the PG$0300$ grating.
+% Why was \stops developed?
+This lead to the development of the \stops\ software, and more specifically the \stops\ \texttt{split} and \texttt{join} methods (see \autoref{subsec:stops_split}, and \ref{subsec:stops_join}), which allows alternate wavelength calibrations to replace the \polsalt\ \texttt{wavelength calibration}.
+
+With the introduction of alternate wavelength solutions, the \stops\ software was further developed to allow the user to quickly identify any faults in the wavelength solutions.
+This was achieved through the development of the \stops\ \texttt{skylines} and \texttt{correlate} methods (see \autoref{subsec:stops_skyline}, and \ref{subsec:stops_correlate}), which allow for the identification of offsets in skyline features and the comparison of the wavelength solutions across $O$- and $E$-beams, respectively.
+
+% What were the results of the reduction-specific testing?
+To ensure the accuracy and reproducibility of the \stops\ software, testing was conducted, for each method, on both synthetic and real-world data (see \autoref{sec:test_stops}).
+Comparisons of the \texttt{split} method's inputs and outputs showed that the data was unaffected during conversion from a dual beam to a single beam format, allowing accurate wavelength solutions to be found.
+The largest discrepancies introduced by the \texttt{split} method, other than the splitting of the $O$- and $E$-beams to separate files, are the cropping of the non-exposed regions of the \gls{CCD}, and the removal of extensions, both of which are not used during \iraf\ wavelength calibrations.
+
+Similarly, when comparing the output of the \stops\ \texttt{join} and \polsalt\ \texttt{wavelength calibration} methods the alternate wavelength solutions are unaffected, although they differ slightly due to the differing wavelength calibration methods, when converted back to the \polsalt\ format, thus providing \polsalt\ with accurate alternate wavelength solutions for both polarimetric beams.
+The largest discrepancies introduced by the \texttt{join} method are the non-wavelength related processes as handled by \stops\ to substitute the \polsalt\ \texttt{wavelength calibration}, specifically the handling of Wollaston corrections near the beam intersection (see \autoref{par:wollaston}) and the \gls{CRR} being applied to the \gls{SCI} extension instead of the \gls{BPM} extension.
+Both of these discrepancies, however, do not affect \polsalt, the rest of the reduction process, or the final results.
+
+% What were the results of the check-specific testing?
+It is possible, and recommended, to ensure the accuracy of the wavelength solutions within whichever alternate wavelength calibration software the user decides to use, e.g., \iraf, or Python.
+In an attempt to standardize determining the accuracy of the wavelength solutions, the \stops\ \texttt{skylines} and \texttt{correlate} methods were developed.
+To eliminate variability inherent in real-world data, synthetic data was generated and used to test these methods.
+By introducing known offsets to the synthetic data, the recovery of these offsets through the \stops\ check-specific methods ensured that the methods were functioning as intended.
+
+The \texttt{skylines} method is able to recover offsets in generated skyline features within a symmetrical $\approx4$~\AA\ region, limited by the nearest-neighbors of the relevant identifiable skyline, with an accuracy of $\approx1$~\AA\ due to the limitations of the spectral resolution.
+The \texttt{correlate} method is able to recover offsets introduced to wavelength calibrated spectra, for each \gls{CCD}, and for comparisons of the $O$- and $E$-beams within a single file, or for the same beam across multiple files, with an accuracy of $\approx1$~\AA, limited once again by the spectral resolution.
+
+% Findings
+\section{Findings} \label{sec:findings}
+%   Summary of contributions (with and without \stops)
+
+
+%   What does it mean? What do you conclude?
+
+
+%   Did \stops\ meet its objectives?
+
+
+% Future work
+\section{Future Development} \label{sec:future}
 
 It is possible to complete the data reductions of \gls{SALT}/\gls{RSS} spectropolarimetric data using only the \polsalt\ pipeline.
 This does not negate the fact that better tools and software better allow us to focus on the results of observations rather than the data reduction process.
