@@ -1,10 +1,6 @@
 \chapter{Conclusions} \label{ch:05}
 
-% Background and motivation
-%   What are you talking about?
-%   What questions are you trying to answer?
-%   What’s the bigger picture?
-This chapter contains an overview of the \stops\ software, with a focus on its development and testing \autoref{sec:stops_summary}, the findings from the application of \stops\ to \gls{SALT}/\gls{RSS} spectro\-polarimetric data \autoref{sec:findings}, and a discussion on the future of the \stops\ software \autoref{sec:future}.
+This chapter contains an overview of the \stops\ software, with a focus on its development and testing (\autoref{sec:stops_summary}), the findings from the application of \stops\ to \gls{SALT}/\gls{RSS} spectro\-polarimetric data (\autoref{sec:findings}), and a discussion on the future of the \stops\ software (\autoref{sec:future}).
 
 % Summary of \stops\ development and testing
 \section[A Broad Overview of \textsc{stops}]{A Broad Overview of \stops} \label{sec:stops_summary}
@@ -12,7 +8,7 @@ This chapter contains an overview of the \stops\ software, with a focus on its d
 % What was the goal of \stops?
 A means to provide a more streamlined wavelength calibration process for \gls{SALT}/\gls{RSS} spectropolarimetric data was desired, specifically when working with \gls{SALT} arc~lamps with poor uniform spectral coverage, e.g., the \gls{Ar} arc lamp used in conjunction with the PG$0300$ grating.
 % Why was \stops developed?
-This lead to the development of the \stops\ software, and more specifically the \stops\ \texttt{split} and \texttt{join} methods (see \autoref{subsec:stops_split}, and \ref{subsec:stops_join}), which allows alternate wavelength calibrations to replace the \polsalt\ \texttt{wavelength calibration}.
+This lead to the development of the \stops\ software, and, more specifically, the \stops\ \texttt{split} and \texttt{join} methods (see \autoref{subsec:stops_split}, and \ref{subsec:stops_join}), which allow alternate wavelength calibrations to replace the \polsalt\ \texttt{wavelength calibration}.
 
 With the introduction of alternate wavelength solutions, the \stops\ software was further developed to allow the user to quickly identify any faults in the wavelength solutions.
 This was achieved through the development of the \stops\ \texttt{skylines} and \texttt{correlate} methods (see \autoref{subsec:stops_skyline}, and \ref{subsec:stops_correlate}), which allow for the identification of offsets in skyline features and the comparison of the wavelength solutions across $O$- and $E$-beams, respectively.
@@ -30,21 +26,39 @@ Both of these discrepancies, however, do not affect \polsalt, the rest of the re
 It is possible, and recommended, to ensure the accuracy of the wavelength solutions within whichever alternate wavelength calibration software the user decides to use, e.g., \iraf, or Python.
 In an attempt to standardize determining the accuracy of the wavelength solutions, the \stops\ \texttt{skylines} and \texttt{correlate} methods were developed.
 To eliminate variability inherent in real-world data, synthetic data was generated and used to test these methods.
-By introducing known offsets to the synthetic data, the recovery of these offsets through the \stops\ check-specific methods ensured that the methods were functioning as intended.
+By introducing known offsets to synthetic data, the recovery of these offsets through the \stops\ check-specific methods ensured that the methods were functioning as intended.
 
 The \texttt{skylines} method is able to recover offsets in generated skyline features within a symmetrical $\approx4$~\AA\ region, limited by the nearest-neighbors of the relevant identifiable skyline, with an accuracy of $\approx1$~\AA\ due to the limitations of the spectral resolution.
-The \texttt{correlate} method is able to recover offsets introduced to wavelength calibrated spectra, for each \gls{CCD}, and for comparisons of the $O$- and $E$-beams within a single file, or for the same beam across multiple files, with an accuracy of $\approx1$~\AA, limited once again by the spectral resolution.
+The \texttt{correlate} method is able to recover offsets introduced to wavelength calibrated spectra, for each \gls{CCD}, and for comparisons of the $O$- and $E$-beams within a single file, or for the same polarimetric beam across multiple files, with an accuracy of $\approx1$~\AA, limited once again by the spectral resolution.
 
 % Findings
 \section{Findings} \label{sec:findings}
-%   Summary of contributions (with and without \stops)
 
+A number of publications have been produced during the development of \stops\ as well as using alternate, \iraf, wavelength solutions.
+Most notably are the results for the papers discussed in \autoref{sec:app_stops}, which present the findings for a selection of sources, i.e., \citet{Buckley191221B, Cooper_HEASA2021, Cooper_HEASA2022, Schutte4C0102}.
+Additionally, the \stops\ software has been used beyond the results presented in \autoref{sec:app_stops}, i.e., in \citet{Barnard_HEASA2021, Barnard_2024, Barnard_thesis}.
 
-%   What does it mean? What do you conclude?
+% Summary of contributions (without \stops)
+% \citet{Buckley191221B} presented the results \dots
 
+% Summary of contributions (with \stops)
+\citet{Cooper_HEASA2021}, and later \citet{Cooper_HEASA2022}, present results for the blazar $3$C~$279$, reduced using alternate \iraf\ wavelength calibrations.
+It was shown that the \stops\ software has no noticeable effect on the spectral and polarization properties, and that the \iraf\ wavelength solutions were accurate and reliable.
 
-%   Did \stops\ meet its objectives?
+The blazar was observed during periods of enhanced and flaring $\gamma$-ray activity.
+The normalized relative flux spectra of $3$C~$279$ showed a consistent spectral shape during differing states of flaring, with heightened activity in the blue during the supposed peak of the flare on 31 March 2017.
 
+\citet{Cooper_HEASA2022} further reported on results for the spectrophotometric standard star, Hiltner~$652$, reduced with alternative \iraf\ wavelength calibrations applied.
+The reduced $Q$ and $U$ Stokes parameters of Hiltner~$652$ showed no systematic deviation from previously published results, indicating that the wavelength calibration process did not introduce any errors into the polarization calculations.
+
+\citet{Schutte4C0102} presented results for the blazar $4$C~+$01.02$, reduced using the \stops\ software.
+The spectropolarimetric results were used, alongside multi-wavelength observations, to model the \gls{SED} of the blazar across periods of quiescent and flaring activity.
+Using the known redshift for $4$C~+$01.02$ of $z = 2.1$, emission features in the normalized, continuum subtracted, spectra were identified.
+These features are more prominent during the quiescent state due to the fainter non-thermal continuum emission as compared to the flaring state.
+Optical spectropolarimetry of $4$C~$01.02$ showed a consistent polarization percentage across the observed wavelength range, averaging $10.04 \pm 1.03 \%$ and $1.72 \pm 0.93 \%$, for the flaring and quiescent state, respectively.
+
+% Did \stops\ meet its objectives?
+It has been shown that the \stops\ software allows for the integration of alternate wavelength calibrations with \polsalt, and that the software is accurate and reliable, meeting the objectives laid out at the offset of its development.
 
 % Future work
 \section{Future Development} \label{sec:future}
