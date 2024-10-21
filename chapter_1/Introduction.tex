@@ -1,23 +1,72 @@
 \chapter{Introduction} \label{ch:01}
 
-% 1 Section summary of research. More complete abstract without results.
-\todo{
-    Very short intro to Spectroscopy, Polarization, and Spectropolarimetry and their importance in astronomy
-}
+% MARK: Background
+% \section{Background and Motivation}
 
-\todo{
-    Focus on AGN implications and implementations such as the types of objects and a short history for each type of object, Blazar focus with specification on BL~Lacs and FSRQs, the Unified Model, \sout{The Blazar sequence}.\\\textit{Brian's comment:} Highlight importance of polarimetry for understanding emission and how that plays a role in AGN.
-}
+% Spectropolarimetry combines spectroscopy and polarimetry to provide valuable insights into the physical conditions of astronomical sources. The Southern African Large Telescope (SALT) with the Robert Stobie Spectrograph (RSS) is uniquely suited to perform optical spectropolarimetric observations. This capability makes SALT an important tool for probing a wide variety of astrophysical sources. Despite the instrumental strengths, challenges remain in ensuring precise wavelength calibration, a critical aspect for deriving reliable results from spectropolarimetric data. These challenges are further exacerbated by the non-sedentary nature of SALT's optics.
 
-\todo{
-    Basics of modelling (Different energy/wavelength ranges used and what the models tell us about emission processes/structure) so that Hester's results can be noted for applications of the pipeline.
-}
+%%% The Robert Stobie Spectrograph (RSS) on the Southern African Large Telescope (SALT) \cite{burgh2003prime} \cite{kobulnicky2003} is capable of long-slit spectropolarimetry and has been used to observe blazars in flaring and \edit{quiescent} states. Data reduction of these observations is processed using the SALT spectropolarimetry reduction package {\sc polsalt}.\footnote{https://github.com/saltastro/polsalt} {\sc polsalt} allows for the full reduction, from pre-reduction to the extraction of the target spectra, and the measuring of the polarization. However, it does not allow for much flexibility with the wavelength calibrations, nor does it provide tools to confirm that the \edit{wavelength calibrations lead to similar wavelength calibrated spectra for the O and E beams}. %The wavelength solutions can be parsed out from the FITS files but this can become tedious for a larger amount of observations, or for multiple sources.
+%%% To this end, spectropolarimetric observations of blazars during different states of activity were taken using SALT \citep{SALT} and the RSS \citep{RSS}. RSS spectropolarimetry data is reduced with the dedicated \textsc{polsalt} pipeline \citep{polsalt}. In order to facilitate the blazar observations we have developed supplementary tools to provide a more interactive approach to the wavelength calibration, allowing for improved accuracy for the O \& E beam wavelength solutions \citep{Cooper_HEASA}. Furthermore, spectropolarimetric standards, which were also observed with SALT and the RSS, were reduced alongside the blazar observations to test that the developed tools correctly performed the wavelength calibration. Here we present an overview of the pipeline as well as the preliminary results of a spectropolarimetric standard, namely Hiltner~652, and for the blazar 3C~279.
+%%% Observations of these sources were performed using \gls{SALT}, specifically using the \gls{RSS} in spectropolarimetry mode (\autoref{sec:RSS_reductions}). \gls{SALT}, and more specifically the \gls{RSS} with its gratings (\autoref{table:RSS_gratings}) and filters, limits the wavelength range to the optical and \gls{NIR} regions. This allows for the study of the polarization properties of blazars within these wavelength regimes, which are often dominated by a polarized, non-thermal emission component arising in the jets, with an underlying non-polarized, thermal emission component arising from the host galaxy, dusty torus, and accretion disk components.
 
-% \section{Active Galactic Nuclei}
 
-% \section{GRBs}
-\todo{Problem Statement, \textbf{VERY IMPORTANT}, roughly a sentence but problem thoroughly fleshed out.}
+% The development of tools to streamline and enhance the wavelength calibration process is crucial for maximizing the scientific output of SALT spectropolarimetry. The **Supplementary Tools for POLSALT Spectropolarimetry (stops)** pipeline has been designed to address these challenges, providing an efficient and accurate approach to reducing spectropolarimetric data.
 
+% \subsection{Importance of Spectropolarimetric Observations in Astrophysics}
+
+% Spectropolarimetric observations are invaluable in astrophysics as they offer a means to measure the polarization of light, which can reveal crucial information about the magnetic fields, emission mechanisms, and geometries of distant objects. In particular, SALT/RSS spectropolarimetry has proven to be highly effective for the study of high-energy astrophysical sources such as blazars and gamma-ray bursts (GRBs).
+
+%%% Active Galactic Nuclei (AGN) are the centers of galaxies powered by accretion onto a super-massive black hole. The accretion can power relativistic jets which produce non-thermal emission over multiple wavelengths \cite{1995PASP..107..803U}. Blazars are a subclass of AGN where the direction of the jet lies very close to our line of sight. The highly Doppler boosted emission from the jet results in high apparent luminosities.
+%%% Blazars are a radio-loud sub-set of Active Galactic Nuclei (AGN), where the jet is aligned very closely to our line of sight and whose observed emission varies over time scales from hours to decades \citep{Urry}. The optical emission observed from blazars is often dominated by the polarized, non-thermal emission arising in the jets, but there is also underlying non-polarized, thermal emission arising from the host galaxy, dusty torus, and accretion disk components \citep{Ghisellini}. When a blazar varies between flaring and quiescent states, the relative strength of the thermal component to the non-thermal component changes.
+%%% At optical wavelengths the observed emission is a superposition of polarized non-thermal synchrotron emission, arising from the jet, and non-polarized thermal emission, arising from the disc, broad line region, torus, and host galaxy \cite{galaxies5030052}.
+%%% Blazars are a subset of \gls{AGN} with relativistic jets closely aligned to our line of sight, and are known for their rapid and high degree of variability across the electromagnetic spectrum.
+%%% Spectropolarimetric standards must show little to no variability in both their spectroscopic and polarimetric properties. It is thus clear that blazars are not recommended as spectropolarimetric standards due to their high degree of variability.
+
+% Blazars, a type of active galactic nucleus, and GRBs, the most energetic explosions in the universe, are known for their intense emission across the electromagnetic spectrum. These sources often exhibit highly polarized light, which is directly linked to synchrotron emission in relativistic jets. Through spectropolarimetric observations, it is possible to investigate the structure and evolution of these jets, providing insights into their magnetic field configurations and energy dissipation mechanisms. 
+
+%%% The Spectral Energy Distribution (SED) of blazars shows two clear components: a lower energy component produced through leptonic synchrotron processes (covering the radio to the UV/soft X-ray regimes) and a higher energy component (covering the X-ray to the $\gamma$-ray regimes) which can be produced through either leptonic or hadronic processes \citep{Bottcher_2013}. Optical spectropolarimetry observations, coupled with multi-wavelength observations during both flaring and quiescent states, can be used to disentangle the polarized and non-polarized components in the blazar's SED, providing better constraints for the non-thermal particle distribution \citep{Schutte_COSPAR, Schutte_2022}.
+
+% The ability to perform optical spectropolarimetry with SALT allows astronomers to capture detailed polarization spectra of these high-energy sources, particularly during transient events or variable phases. These observations play a pivotal role in constraining theoretical models, particularly for high-energy phenomena, where understanding the polarization of light can lead to a deeper comprehension of jet dynamics, particle acceleration, and the role of magnetic fields in energy transport.
+
+% Given the importance of accurate spectropolarimetric data in such high-energy astrophysical research, improving the precision and efficiency of wavelength calibrations is essential. By addressing this need, the **stops** pipeline enhances the ability of SALT to conduct such observations, ultimately advancing our understanding of the most extreme processes in the universe.
+
+% \section{Research Problem and Objectives}
+
+%%% In order to streamline the data reduction we are developing additional tools to work in conjunction with {\sc polsalt}. We present the overview of this pipeline and demonstrate its application to an observation of 3C 279 taken in 2017.
+
+% One of the key limitations in SALT/RSS spectropolarimetry is the complexity and time consumption of the wavelength calibration process, particularly for high-precision measurements. Current software, such as POLSALT, has provided a foundation for data reduction but suffers from inefficiencies and lacks flexibility in handling the non-static optical paths of the SALT instrument.
+
+% This thesis addresses the problem by developing the **stops** pipeline, which supplements existing software with a streamlined set of tools aimed at improving wavelength calibration accuracy and reducing processing time. The main objectives of this thesis are:
+% \begin{itemize}
+%     \item To identify the limitations in the current wavelength calibration procedures of POLSALT.
+%     \item To develop and implement the **stops** pipeline, providing supplementary methods for improved calibration.
+%     \item To test and validate the pipeline through real-world applications and comparisons to existing methods.
+% \end{itemize}
+
+% \section{Significance of the Study}
+
+% Improving the accuracy of wavelength calibration in spectropolarimetry has broad implications for astronomical research, particularly in studies involving high-energy sources. By providing a more reliable and efficient method of data reduction, this thesis directly enhances the capability of SALT/RSS to produce high-quality spectropolarimetric results. These advancements contribute to the broader scientific community’s ability to probe the physical processes occurring in extreme environments, such as relativistic jets in blazars and GRBs.
+
+% \section{Scope of the Thesis}
+
+% The scope of this thesis encompasses the development, testing, and application of the **stops** pipeline. This includes the creation of supplementary tools for handling wavelength calibration more effectively within the SALT/RSS system. Additionally, the work assesses the pipeline's impact on data quality by applying it to existing spectropolarimetric observations, comparing the outcomes with the results from established methods. The pipeline’s effectiveness is also demonstrated through applications in published research.
+
+% MARK: Purpose of study
+%%%   * Explain the need for improved data reduction techniques.
+%%%   * compare benefits of `Old way' of data reductions to `New way'
+%%%   * limitations
+%%%   * Mention Python's integration and the role of PyPI for disseminating new tools like STOPS.
+%%%   * How STOPS fits into the reduction workflow
+
+% MARK: Problem statement, NB!!!
+%%% * Clearly define the research problem in a concise yet impactful way (1-2 sentences).
+
+% MARK: Significance and motivation
+%%% * Explain why solving this problem is significant and how it advances the field.
+%%% * Discuss the personal or academic motivation behind the project.
+
+% MARK: Brief chapter overviews
+% \section{Thesis Structure}
 \section{Outline}
 
 \noindent The layout of the rest of the thesis is as follows:
@@ -31,45 +80,6 @@ The principles, application, and challenges faced when using the existing softwa
 \autoref{ch:04} provides the testing of the developed software and discusses its application within published articles and proceedings.
 Testing was conducted on a `per-module' basis aligning with the usage of \stops.
 
-\autoref{ch:05} concludes the thesis body and notes future work to improve and expand the \stops\ software. \todo{Revise once this chapter is complete} % presents the results of the pipeline and the implications of the results.
+\autoref{ch:05} concludes the thesis body by summarizing the development and testing of the \stops\ software, noting the current application of the software in publications, and describing possible routes for future development, focusing on stability, further integration with \polsalt, and development of improved features.
 
 Finally, the appendices, \autoref{app:reduction},~\ref{app:code},~and~\ref{app:papers}, contain a working reduction procedure (referred to in \autoref{ch:03}), the \stops\ source code, and Proceedings produced from conferences (referred to in \autoref{ch:04}), respectively.
-
-
-% HEASA 2021
-% Active Galactic Nuclei (AGN) are the centers of galaxies powered by accretion onto a super-massive black hole. The accretion can power relativistic jets which produce non-thermal emission over multiple wavelengths \cite{1995PASP..107..803U}. Blazars are a subclass of AGN where the direction of the jet lies very close to our line of sight. The highly Doppler boosted emission from the jet results in high apparent luminosities.
-
-% At optical wavelengths the observed emission is a superposition of polarized non-thermal synchrotron emission, arising from the jet, and non-polarized thermal emission, arising from the disc, broad line region, torus, and host galaxy \cite{galaxies5030052}.
-
-% The Robert Stobie Spectrograph (RSS) on the Southern African Large Telescope (SALT) \cite{burgh2003prime} \cite{kobulnicky2003} is capable of long-slit spectropolarimetry and has been used to observe blazars in flaring and \edit{quiescent} states. Data reduction of these observations is processed using the SALT spectropolarimetry reduction package {\sc polsalt}.\footnote{https://github.com/saltastro/polsalt} {\sc polsalt} allows for the full reduction, from pre-reduction to the extraction of the target spectra, and the measuring of the polarization. However, it does not allow for much flexibility with the wavelength calibrations, nor does it provide tools to confirm that the \edit{wavelength calibrations lead to similar wavelength calibrated spectra for the O and E beams}. %The wavelength solutions can be parsed out from the FITS files but this can become tedious for a larger amount of observations, or for multiple sources.
-
-% In order to streamline the data reduction we are developing additional tools to work in conjunction with {\sc polsalt}. We present the overview of this pipeline and demonstrate its application to an observation of 3C 279 taken in 2017.
-
-% HEASA 2022
-% Blazars are a radio-loud sub-set of Active Galactic Nuclei (AGN), where the jet is aligned very closely to our line of sight and whose observed emission varies over time scales from hours to decades \citep{Urry}. The optical emission observed from blazars is often dominated by the polarized, non-thermal emission arising in the jets, but there is also underlying non-polarized, thermal emission arising from the host galaxy, dusty torus, and accretion disk components \citep{Ghisellini}. When a blazar varies between flaring and quiescent states, the relative strength of the thermal component to the non-thermal component changes.
-
-% The Spectral Energy Distribution (SED) of blazars shows two clear components: a lower energy component produced through leptonic synchrotron processes (covering the radio to the UV/soft X-ray regimes) and a higher energy component (covering the X-ray to the $\gamma$-ray regimes) which can be produced through either leptonic or hadronic processes \citep{Bottcher_2013}. Optical spectropolarimetry observations, coupled with multi-wavelength observations during both flaring and quiescent states, can be used to disentangle the polarized and non-polarized components in the blazar's SED, providing better constraints for the non-thermal particle distribution \citep{Schutte_COSPAR, Schutte_2022}.
-
-% To this end, spectropolarimetric observations of blazars during different states of activity were taken using SALT \citep{SALT} and the RSS \citep{RSS}. RSS spectropolarimetry data is reduced with the dedicated \textsc{polsalt} pipeline \citep{polsalt}. In order to facilitate the blazar observations we have developed supplementary tools to provide a more interactive approach to the wavelength calibration, allowing for improved accuracy for the O \& E beam wavelength solutions \citep{Cooper_HEASA}. Furthermore, spectropolarimetric standards, which were also observed with SALT and the RSS, were reduced alongside the blazar observations to test that the developed tools correctly performed the wavelength calibration. Here we present an overview of the pipeline as well as the preliminary results of a spectropolarimetric standard, namely Hiltner~652, and for the blazar 3C~279.
-
-
-% MARK: From ch. Testing
-
-% Spectropolarimetric standards must show little to no variability in both their spectroscopic and polarimetric properties. It is thus clear that blazars are not recommended as spectropolarimetric standards due to their high degree of variability.
-
-% Blazars are a subset of \gls{AGN} with relativistic jets closely aligned to our line of sight, and are known for their rapid and high degree of variability across the electromagnetic spectrum.
-
-% % What blazars are and how they are observed
-% Observations of these sources were performed using \gls{SALT}, specifically using the \gls{RSS} in spectropolarimetry mode (\autoref{sec:RSS_reductions}). \gls{SALT}, and more specifically the \gls{RSS} with its gratings (\autoref{table:RSS_gratings}) and filters, limits the wavelength range to the optical and \gls{NIR} regions. This allows for the study of the polarization properties of blazars within these wavelength regimes, which are often dominated by a polarized, non-thermal emission component arising in the jets, with an underlying non-polarized, thermal emission component arising from the host galaxy, dusty torus, and accretion disk components.
-
-% MARK: SU guide
-% Background information
-% Purpose of study
-% Problem statement
-% Significance and motivation
-% Definitions, assumptions, limitations
-% Thesis, delineation, research questions
-% Brief chapter overviews
-
-% MARK: Brian says
-% approx 1 page of content
