@@ -1,4 +1,4 @@
-#! /usr/bin/bash python
+#! /usr/bin/python3
 
 """
 A script to quickly extract the pol. degree and angle from the 3C 279 results.
@@ -61,7 +61,8 @@ for folder in FOLDER.glob("20*"):
 
     # Mask
     mask = (wav > 3800) & (wav < 9200)
-    wav, P, PA, P_err, PA_err = wav[mask], P[mask], PA[mask], P_err[mask], PA_err[mask]
+    wav, P, PA = wav[mask], P[mask], PA[mask]
+    P_err, PA_err = P_err[mask], PA_err[mask]
 
     # Averages
     print(
@@ -76,8 +77,22 @@ for folder in FOLDER.glob("20*"):
     # print(f"{m_P:.2e}, {m_PA:.2e}")
 
     # Plot
-    ax[0].errorbar(wav, P, yerr=P_err, fmt="|", alpha=0.5, label=f"{date} {lamp}")
-    ax[1].errorbar(wav, PA, yerr=PA_err, fmt="|", alpha=0.5, label=f"{date} {lamp}")
+    ax[0].errorbar(
+        wav,
+        P,
+        yerr=P_err,
+        fmt="|",
+        alpha=0.5,
+        label=f"{date} {lamp}"
+    )
+    ax[1].errorbar(
+        wav,
+        PA,
+        yerr=PA_err,
+        fmt="|",
+        alpha=0.5,
+        label=f"{date} {lamp}"
+    )
 
 print(f"{'-' * WIDTH}")
 ax[0].legend()
@@ -87,7 +102,7 @@ ax[1].set_ylabel("Polarization Angle ($\\degree$)")
 ax[1].set_xlabel("Wavelength ($\\AA$)")
 plt.show()
 
-# 3C 279
+# 3C 279 (Printed results)
 # ================================================================
 # DATE     LAMP  POLARIZATION DEGREE (%)  POLARIZATION ANGLE (deg)
 #                    (mean ± std, sigma)       (mean ± std, sigma)
