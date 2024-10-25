@@ -163,6 +163,7 @@ Here are some useful RegEx patterns I have needed:
   | Regex use | Find | Replace |
   |:---------:|-----:|:--------|
   | `John {Smith}` → `{Smith}, J.` | `([A-Z])[a-z]*?\s(\{[A-Z].+?\})` | `$2, $1.` |
+  | `E. J {Powell}` → `{Powell}, E. J.` | `(?<=and\s)([A-Z]\.\|[A-Z]\.\s[A-Z]\.)\s(\{.+?\})` | `$2, $1` |
   | `1 \| 1.1` → `$1$ \| $1.1$` | `\s([0-9][\.]*[0-9]*)\s*` | `$$$1$` |
 
 </div>
