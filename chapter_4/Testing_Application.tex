@@ -167,7 +167,9 @@ The \texttt{correlate} method returns plots validating the wavelength solutions 
 \end{figure}
 
 The \stops\ \texttt{correlate} method was tested by cross correlating synthetic $O$- and $E$-beam spectra with known offsets, with the aim of reacquiring said offsets, as shown in \autoref{fig:corr_test}.
-The spectra were generated with a feature in each \gls{CCD} region, randomly offset in both the wavelength and intensity axes, \autoref{subfig:corr_test_spec}. The features were purposefully chosen to be of low \gls{SNR}['s] and \gls{FWHM} to test the robustness of the \texttt{correlate} method. Non-synthetic spectra will include more features, with higher \gls{SNR}['s] and \gls{FWHM}, and as such will be more robust to the \texttt{correlate} method.
+The spectra were generated with a feature in each \gls{CCD} region, randomly offset in both the wavelength and intensity axes, \autoref{subfig:corr_test_spec}.
+The features were purposefully chosen to be of low \gls{SNR}['s] and \gls{FWHM} to test the robustness of the \texttt{correlate} method.
+Non-synthetic spectra will include more features, with higher \gls{SNR}['s] and \gls{FWHM}, and as such will be more robust to the \texttt{correlate} method.
 
 Through cross correlation, \autoref{subfig:corr_test_corr}, the introduced offsets, or `max lag', were reacquired.
 For spectral regions with few features or features with a low \gls{SNR} (such as the left most \gls{CCD} region of \autoref{subfig:corr_test_corr}), correlation may fail to determine the correct offset.
@@ -208,7 +210,7 @@ Additionally, the noise in the spectrum may shift a skylines' peak position, fur
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{4_sky_test_shift.pdf}
-    \caption{The \stops\ \texttt{skylines} output for a two-dimensional spectrum, as described in \autoref{subfig:sky_test_pure}, with a constant offset of $4$~\AA applied to all skyline emission features. Figure created using the \stops\ \texttt{skylines} method.}
+    \caption{The \stops\ \texttt{skylines} output for a two-dimensional spectrum, as described in \autoref{subfig:sky_test_pure}, with a constant offset of $4$~\AA\ applied to all skyline emission features. Figure created using the \stops\ \texttt{skylines} method.}
     \label{fig:sky_test_shift}
 \end{figure}
 
@@ -336,14 +338,14 @@ Observations of 3C~$279$ were taken during periods of enhanced and flaring $\gam
 This shows that on the dates of the optical observations, 3C~$279$ was between $\sim4 - 8$ times brighter when compared to its mean quiescent state. 
 % was likely at $\gamma$-ray fluxes of $1.72 \times 10^{-6}$, $3.58 \times 10^{-6}$, and $2.38 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.45 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
 
-\begin{figure}[t]
+\begin{figure}[tp]
     \centering
     \includegraphics[width = 1.0\textwidth]{4_3C279_all.pdf}
     \caption{Spectropolarimetric results for 3C~$279$ during two distinct periods of flaring. The normalized relative flux is presented for both grating angles, $12.5$\degree (top) and $19.625$\degree (second from top). Figure sourced from \citep{Cooper_HEASA2022}.}
     \label{fig:3C_279_specpol}
 \end{figure}
 
-\autoref{fig:3C_279_specpol} shows the spectropolarimetric results for 3C~$279$ during the periods of enhanced and flaring $\gamma$-ray activity as mentioned above.
+\autoref{fig:3C_279_specpol} shows the spectropolarimetric results for 3C~$279$ during the various states of $\gamma$-ray activity as mentioned above.
 The figure shows, from top to bottom, the normalized, relative flux calibrated, spectra for both grating angles ($12.5$\degree\ and $19.625$\degree, observed in that order), the percentage of linear polarization, and the polarization angle.
 
 Although the spectral shape does not vary greatly across the wavelength region, the level of $\gamma$-ray activity during observation has a clear effect on the spectra.
@@ -383,7 +385,7 @@ The optical spectropolarimetric observations of the blazar were completed using 
 \end{figure}
 \footnotetext{\protect\url{https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/source.html?source_name=4FGL_J0108.6+0134}}
 
-\autoref{fig:4C_+01.02_LCR} shows the photon flux of 4C~+$01.02$ for energies of $0.1 - 100$~GeV as provided by the \gls{FermiLCR}.
+\autoref{fig:4C_+01.02_LCR} shows the photon flux of 4C~+$01.02$ for $0.1 - 100$~GeV energies as provided by the \gls{FermiLCR}.
 The figure shows that during the optical observations of 4C~+$01.02$, the source was at $\gamma$-ray fluxes of $F \approx 1.9 \times 10^{-6}$ and $F \approx 0.1 \times 10^{-6}$~ph.\,cm$^{-2}$\,s$^{-1}$, as compared to a quiescent `median' flux of $\left\langle F \right\rangle = 0.21 \times 10^{-6}$\,ph.\,cm$^{-2}$\,s$^{-1}$.
 
 \begin{figure}[t]
@@ -396,11 +398,18 @@ The figure shows that during the optical observations of 4C~+$01.02$, the source
 % \autoref{fig:4C_01.02_specpol} shows the spectropolarimetric results for 4C~+$01.02$ during the periods of flaring and quiescence in $2016$ and $2017$, respectively.
 % The figure shows 
 
-The normalized, continuum-subtracted, intensity spectra as well as the polarization percentage for the $2016$ and $2017$ epochs are show in \autoref{fig:4C_01.02_specpol}.
+The normalized, continuum-subtracted, intensity spectra as well as the polarization percentage for the $2016$ and $2017$ epochs are presented in \autoref{fig:4C_01.02_specpol}.
 The spectral features were identified using the known redshift of 4C~$01.02$ of $z = 2.1$.
-The quiescent state spectrum exhibits more prominent features than during the flaring state, with the C\,{\sc iv} line being the most prominent feature present in both spectra.
+The quiescent state spectrum exhibits more prominent features than during the flaring state, with the C\,\textsc{iv} line being the most prominent feature present in both spectra.
 The increase in the spectral line intensity during the quiescent $\gamma$-ray state is due to the non-thermal continuum emission being fainter, as compared to the flaring state.
 % , which dominates the spectrum during the flaring state.
 
 The linear polarization percentages averaged $10.04 \pm 1.03\%$ and $1.72 \pm 0.93\%$ during flaring and quiescence, respectively.
 % , which agrees with the prediction that blazars release highly polarized synchrotron emission during periods of flaring.
+
+\pagebreak
+
+The \stops\ pipeline has already proven it's worth, aiding in the reduction of numerous spectropolarimetric observations beyond the select few presented above \citep[see e.g.,][]{Barnard_2024}.
+Wavelength calibrations are, by far, the most time consuming part of spectropolarimteric data reductions.
+The \stops\ software enables faster and thorough wavelength calibrations through external tools, such as \iraf, as well as providing methods to ensure the accuracy of the produced wavelength solutions.
+This decreases the time necessary for reductions while still ensuring their accuracy, allowing the analysis of the results to take precedence.
