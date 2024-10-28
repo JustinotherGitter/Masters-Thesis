@@ -1,12 +1,57 @@
 \chapter{Introduction} \label{ch:01}
 
+% Brief, Catchy, Introduction to the subject: Data reductions and software
+Data reductions, and by extension the software enabling them, are an often overlooked aspect of astrophysical research.
+They are the foundation upon which scientific results are built.
+With ever increasingly complex and sensitive observation techniques and instruments, coupled with the ever-increasing volume of data, the need for efficient and accurate data reductions are a critical aspect of astronomical research.
+
+% More focused subject: SALT and Spectropolarimetry
+One such instrument, installed on the \gls{SALT} \citep{SALT_design}, is the \gls{RSS} \citep{SALT_optical_design}.
+The \gls{SALT}/\gls{RSS} is capable of performing long-slit spectropolarimetry \citep{SALT_hires}, allowing for the simultaneous observation of wavelength dependent intensity and polarization information.
+The \polsalt\ software is a Python~$2$ based software package that provides a complete reduction pipeline for \gls{SALT} spectropolarimetric data, from pre- to final-reductions, and the plotting of the spectro\-polarimetric results \citep{polsalt}.
+As of 2024, data reductions for \gls{SALT} spectropolarimetric observations are completed using an adaption of the beta version of the \polsalt\ software.
+
+% B. Validation or justification of the study. State importance of study. Also define limitations of the study.
+% 2. Indicate the scope/coverage of the subject. State the limits within which you treat the subject.
+
+% Problem statement: Wavelength calibration
+A user can complete the full reduction process purely using \polsalt, with \gls{GUI} interactivity made possible by the beta version of the software, but this does not mean the software is without its limitations.
+Erroneous inputs or key presses from the user can lead to unexpected program crashes, and the wavelength calibration process is time-consuming and inflexible.
+This makes recalibrating the wavelength solutions unfeasible for anything larger than a handful of observations.
+Observations performed with the \gls{SALT}/\gls{RSS} using the PG$0300$ grating are particularly challenging due to the sparse spectral features of the \gls{SALT} \gls{Ar} arc lamp.
+
+% #. Significance and motivation, Definitions, assumptions, limitations
+% C. The method of procedure and treatment of findings.
+% 3. State the purpose of the paper (how subject is handled). What is the point of view and emphasis of the paper? How does the purpose differ from that of other papers on the same subject?
+
+% Significance and motivation: Data backlog, need for improved data reductions, wavelength solution checks
+% a need to compare wavelength solutions across the perpendicular O and E polarization beams.
+% Since PG0300 provided the widest wavelength range and highest throughput, it was almost exclusively used for observations of flaring blazars, resulting in a large backlog of unanalyzed data. The only arc available for the PG0300 grating with a close enough articulation and grating angle (∼ 10.68° and ∼ 5.38°, respectively), was the Ar arc lamp which displays sparse spectral features with large gaps over the wavelength range at these grating and articulation angles (Figure 3.5). This often led the polsalt pipeline to create inconsistent wavelength solutions, or to fail to create a wavelength solution altogether, since minor deviations of identified spectral features resulted in large deviations in regions with no spectral features. To only further compound the difficulty of the wavelength calibrations, the spectrum of the Ar arc lamp contains a partial overlap of a higher order at longer wavelengths (§ 2.1.7, Equation 2.5).
+
+% $. Thesis, delineation, research question
+% D. A clear and complete statement of the problem investigated, the hypotheses
+% tested or the purpose of the study.
+
+% MARK: Purpose of study
+%%%   * Explain the need for improved data reduction techniques.
+%%%   * compare benefits of `Old way' of data reductions to `New way'
+%%%   * limitations
+%%%   * Mention Python's integration and the role of PyPI for disseminating new tools like STOPS.
+%%%   * How STOPS fits into the reduction workflow
+
+% MARK: Problem statement, NB!!!
+%%% * Clearly define the research problem in a concise yet impactful way (1-2 sentences).
+
+% MARK: Significance and motivation
+%%% * Explain why solving this problem is significant and how it advances the field.
+%%% * Discuss the personal or academic motivation behind the project.
+
 % MARK: Background
 % \section{Background and Motivation}
 
-% Spectropolarimetry combines spectroscopy and polarimetry to provide valuable insights into the physical conditions of astronomical sources. The Southern African Large Telescope (SALT) with the Robert Stobie Spectrograph (RSS) is uniquely suited to perform optical spectropolarimetric observations. This capability makes SALT an important tool for probing a wide variety of astrophysical sources. Despite the instrumental strengths, challenges remain in ensuring precise wavelength calibration, a critical aspect for deriving reliable results from spectropolarimetric data. These challenges are further exacerbated by the non-sedentary nature of SALT's optics.
-
-%%% The Robert Stobie Spectrograph (RSS) on the Southern African Large Telescope (SALT) \cite{burgh2003prime} \cite{kobulnicky2003} is capable of long-slit spectropolarimetry and has been used to observe blazars in flaring and \edit{quiescent} states. Data reduction of these observations is processed using the SALT spectropolarimetry reduction package {\sc polsalt}.\footnote{https://github.com/saltastro/polsalt} {\sc polsalt} allows for the full reduction, from pre-reduction to the extraction of the target spectra, and the measuring of the polarization. However, it does not allow for much flexibility with the wavelength calibrations, nor does it provide tools to confirm that the \edit{wavelength calibrations lead to similar wavelength calibrated spectra for the O and E beams}. %The wavelength solutions can be parsed out from the FITS files but this can become tedious for a larger amount of observations, or for multiple sources.
-%%% To this end, spectropolarimetric observations of blazars during different states of activity were taken using SALT \citep{SALT} and the RSS \citep{RSS}. RSS spectropolarimetry data is reduced with the dedicated \textsc{polsalt} pipeline \citep{polsalt}. In order to facilitate the blazar observations we have developed supplementary tools to provide a more interactive approach to the wavelength calibration, allowing for improved accuracy for the O \& E beam wavelength solutions \citep{Cooper_HEASA}. Furthermore, spectropolarimetric standards, which were also observed with SALT and the RSS, were reduced alongside the blazar observations to test that the developed tools correctly performed the wavelength calibration. Here we present an overview of the pipeline as well as the preliminary results of a spectropolarimetric standard, namely Hiltner~652, and for the blazar 3C~279.
+%%% RSS has been used to observe blazars in flaring and \edit{quiescent} states.
+%%% To this end, spectropolarimetric observations of blazars during different states of activity were taken using SALT \citep{SALT} and the RSS \citep{RSS}.
+%%% In order to facilitate the blazar observations we have developed supplementary tools to provide a more interactive approach to the wavelength calibration, allowing for improved accuracy for the O \& E beam wavelength solutions \citep{Cooper_HEASA}. Furthermore, spectropolarimetric standards, which were also observed with SALT and the RSS, were reduced alongside the blazar observations to test that the developed tools correctly performed the wavelength calibration. Here we present an overview of the pipeline as well as the preliminary results of a spectropolarimetric standard, namely Hiltner~652, and for the blazar 3C~279.
 %%% Observations of these sources were performed using \gls{SALT}, specifically using the \gls{RSS} in spectropolarimetry mode (\autoref{sec:RSS_reductions}). \gls{SALT}, and more specifically the \gls{RSS} with its gratings (\autoref{table:RSS_gratings}) and filters, limits the wavelength range to the optical and \gls{NIR} regions. This allows for the study of the polarization properties of blazars within these wavelength regimes, which are often dominated by a polarized, non-thermal emission component arising in the jets, with an underlying non-polarized, thermal emission component arising from the host galaxy, dusty torus, and accretion disk components.
 
 
@@ -51,22 +96,6 @@
 
 % The scope of this thesis encompasses the development, testing, and application of the **stops** pipeline. This includes the creation of supplementary tools for handling wavelength calibration more effectively within the SALT/RSS system. Additionally, the work assesses the pipeline's impact on data quality by applying it to existing spectropolarimetric observations, comparing the outcomes with the results from established methods. The pipeline’s effectiveness is also demonstrated through applications in published research.
 
-% MARK: Purpose of study
-%%%   * Explain the need for improved data reduction techniques.
-%%%   * compare benefits of `Old way' of data reductions to `New way'
-%%%   * limitations
-%%%   * Mention Python's integration and the role of PyPI for disseminating new tools like STOPS.
-%%%   * How STOPS fits into the reduction workflow
-
-% MARK: Problem statement, NB!!!
-%%% * Clearly define the research problem in a concise yet impactful way (1-2 sentences).
-
-% MARK: Significance and motivation
-%%% * Explain why solving this problem is significant and how it advances the field.
-%%% * Discuss the personal or academic motivation behind the project.
-
-% MARK: Brief chapter overviews
-% \section{Thesis Structure}
 \section{Outline}
 
 \noindent The layout of the rest of the thesis is as follows:

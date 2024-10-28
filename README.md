@@ -165,8 +165,18 @@ Here are some useful RegEx patterns I have needed:
   | `John {Smith}` → `{Smith}, J.` | `([A-Z])[a-z]*?\s(\{[A-Z].+?\})` | `$2, $1.` |
   | `E. J {Powell}` → `{Powell}, E. J.` | `(?<=and\s)([A-Z]\.\|[A-Z]\.\s[A-Z]\.)\s(\{.+?\})` | `$2, $1` |
   | `1 \| 1.1` → `$1$ \| $1.1$` | `\s([0-9][\.]*[0-9]*)\s*` | `$$$1$` |
+  | `.../:version: ...` → `version: ...` | `^[^:]*:\s*` | ` ` |
 
 </div>
+
+I have also made use of `grep` for finding RegEx patterns within files using a CLI:
+
+```console
+grep -ri 'version: ' > version.txt
+```
+
+where the `r` flag is used for a recursive search in the working directory, and the `i` flag ignores the RegEx case.
+Combining this with the [VSCode] \`find and replace', \`delete duplicates', and \`sort lines ascending' results in a sanitized version list of all polsalt/pysalt software.
 
 <!-- MARK: 4. md -->
 ### Markdown
