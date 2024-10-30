@@ -22,7 +22,7 @@
 \raggedbottom
 
 %define the default submitted text
-\newcommand{\submittedtext}{{Submitted in fulfillment of the requirements for the degree}}
+\newcommand{\submittedtext}{{Submitted in partial fulfillment of the requirements for the degree}}
 
 %
 % DECLARATIONS
