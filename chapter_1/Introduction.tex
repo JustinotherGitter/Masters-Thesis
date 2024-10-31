@@ -11,7 +11,7 @@ One such instrument, installed on the \gls{SALT} \citep{SALT_design}, is the \gl
 The \gls{SALT}/\gls{RSS} is capable of performing long-slit spectropolarimetry \citep{SALT_hires}, allowing for the simultaneous observation of, wavelength dependent, intensity and polarization.
 The \polsalt\ software is a Python~$2$ based software package that provides a complete reduction pipeline for \gls{SALT} spectro\-polarimetric data, from pre- to final reductions, and the plotting of the spectro\-polarimetric results \citep{polsalt}.
 As of 2024, data reductions for \gls{SALT}/\gls{RSS} spectropolarimetric observations are generally completed using an adaption of the beta version of the \polsalt\ software.%
-% \footnote{As of writing, the versions used for \polsalt\ are as follows: \polsalt\ v0.2.dev144, pysalt v0.5dev, \iraf v2.14, and pyraf v1.8.1}
+% \footnote{As of writing, the versions used for \polsalt\ are as follows: \polsalt\ v0.2.dev144, pysalt v0.5dev, \iraf v2.14, and pyraf v1.8.1. Note \polsalt\ also implements versioning for each method following a `\textit{YYYYMMDD}' format.}
 
 % MARK: Problem
 % Expand on what the problem is: Wavelength calibrations for polsalt
@@ -31,6 +31,9 @@ The aims of these supplementary tools, named \stops, are:
     \item to ensure the accuracy of spectropolarimetric wavelength solutions, and
     \item to improve the overall efficiency and wavelength calibration process for spectro\-polarimetric wavelength calibrations.
 \end{itemize}
+Further secondary aims were to make the installation and usage of the software as user-friendly as possible, and to ensure the software is easily maintainable and extendable.
+These secondary aims, thankfully, may be set out immediately, and are controlled through the choice of programming language and the distribution method.
+Python~$3$ is chosen due to the current widespread use of Python in the astronomical community, the software will be made available through GitHub for version control with the option to later publish to \gls{PyPI}, and the installation will be handled by pip.
 
 % MARK: Scope
 % Scope and objectives: What \stops\ can and can't do
@@ -41,35 +44,30 @@ This means that \stops\ does not perform the wavelength calibration itself, but 
 
 % MARK: Importance
 % Explain importance: need for accurate and auditable wavelength solutions
-The \gls{SALT}/\gls{RSS} PG$0300$ grating, and accompanying \gls{Ar} arc lamp, provided the widest wavelength range and highest throughput, making it ideal for optical observations of blazars during differing states of flaring and quiescence.
-Due to the difficulties mentioned above, a backlog of unanalyzed data existed.
 %%% Explain why solving this problem is significant and how it advances the field.
 %%% Discuss the personal or academic motivation behind the project.
 %% a need to compare wavelength solutions across the perpendicular O and E polarization beams.
 
-%%% This allows for the study of the polarization properties of blazars within these wavelength regimes, which are often dominated by a polarized, non-thermal emission component arising in the jets, with an underlying non-polarized, thermal emission component arising from the host galaxy, dusty torus, and accretion disk components.
-
 % C. The method of procedure and treatment of findings.
 % 3. State the purpose of the paper (how subject is handled). What is the point of view and emphasis of the paper? How does the purpose differ from that of other papers on the same subject?
 
-%%%   * Mention Python's integration and the role of PyPI for disseminating new tools like STOPS.
 %%%   * How STOPS fits into the reduction workflow
 
 % The development of tools to streamline and enhance the wavelength calibration process is crucial for maximizing the scientific output of SALT spectropolarimetry. The \stops\ pipeline has been designed to address these challenges, providing an efficient and accurate approach to reducing spectropolarimetric data.
 
-% Spectropolarimetric observations are invaluable in astrophysics as they offer a means to measure the polarization of light, which can reveal crucial information about the magnetic fields, emission mechanisms, and geometries of distant objects. In particular, SALT/RSS spectropolarimetry has proven to be highly effective for the study of high-energy astrophysical sources such as blazars and gamma-ray bursts (GRBs).
+% MARK: Blazars
+\glspl{AGN} are the cores of galaxies powered by accretion onto a super-massive black hole.
+Blazars represent the subclass of radio-loud \glspl{AGN} with relativistic jets closely aligned to our line of sight ($\theta \lesssim 10$\degree), known for their rapid and high degree of variability across the electromagnetic spectrum \citep{Urry_1995}.
+The \gls{SED} of blazars shows two clear components:
+a lower energy component produced through leptonic synchrotron processes (spanning the radio to \gls{UV}/soft X-ray regimes)
+and a higher energy component (spanning the X-ray to $\gamma$-ray regimes) which is proposed to be produced through either leptonic or hadronic processes \citep{Bottcher_2013}.
 
-% MARK: Blazars / SED
-\gls{AGN} are the cores of galaxies powered by accretion onto a super-massive black hole.
-Blazars represent the subclass of radio-loud \gls{AGN} with relativistic jets closely aligned to our line of sight ($\theta \lesssim 10$\degree), known for their rapid and high degree of variability across the electromagnetic spectrum \citep{Urry_1995}.
+% MARK: SEDs / specpol
 Polarized, non-thermal, synchrotron emission arising in the jets, with underlying non-polarized, thermal, emission arising from the host galaxy, dusty torus, and accretion disk components comprises the optical emission observed from blazars \citep{Ghisellini_2009}.
-When a blazar varies between quiescent and flaring states, the relative strength of the non-thermal component to the thermal component changes, presenting unique opportunities to disentangle the underlying emission mechanisms.
+Optical spectropolarimetry, coupled with multi-wavelength observations, during both flaring and quiescent states can be used to disentangle the polarized and non-polarized components in the blazar's \gls{SED}, providing better constraints for the non-thermal particle distribution \citep{Schutte_COSPAR, Schutte4C0102}.
 
-% The \gls{SED} of blazars shows two clear components: a lower energy component produced through leptonic synchrotron processes (covering the radio to \gls{UV}/soft X-ray regimes) and a higher energy component (covering the X-ray to $\gamma$-ray regimes) which can be produced through either leptonic or hadronic processes \citep{Bottcher_2013}.
-% Optical spectropolarimetry observations, coupled with multi-wavelength observations during both flaring and quiescent states, can be used to disentangle the polarized and non-polarized components in the blazar's \gls{SED}, providing better constraints for the non-thermal particle distribution \citep{Schutte_COSPAR, Schutte_2022}.
-% These observations play a pivotal role in constraining theoretical models where understanding the polarization of light can lead to a deeper comprehension of jet dynamics, particle acceleration, and the role of magnetic fields in energy transport.
-
-% Blazars and GRBs are known for their intense emission across the electromagnetic spectrum. These sources often exhibit highly polarized light, which is directly linked to synchrotron emission in relativistic jets. Through spectropolarimetric observations, it is possible to investigate the structure and evolution of these jets, providing insights into their magnetic field configurations and energy dissipation mechanisms.
+The \gls{SALT}/\gls{RSS} PG$0300$ grating, and accompanying \gls{Ar} arc lamp, provided the widest wavelength range and highest throughput, making it ideal for optical observations of blazars during differing states of flaring and quiescence.
+Due to the difficulties mentioned above, a backlog of unanalyzed data existed.
 
 % MARK: Significance
 Integrating alternate wavelength calibrations for \gls{SALT}/\gls{RSS} spectro\-polarimetric observations has broad implications for astronomical research, particularly in studies involving sources which display high degrees of polarization, such as high-energy sources.

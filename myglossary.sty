@@ -4,7 +4,7 @@
     acronyms,
     automake,
     nonumberlist,
-    nogroupskip,
+    %nogroupskip,
     toc=false,
     style=tree,
     shortcuts,
@@ -12,7 +12,6 @@
 
 % Some set up
 \normalem
-% TODO: Add a glossary style `long-em-short-sc` for `telescopes`
 
 % MARK: Glossary styles
 % https://www.dickimaw-books.com/gallery/index.php?label=sample-abbr-styles
@@ -22,7 +21,7 @@
 % MARK: ACRONYMS
 \newacronym{ADC}{A-DC}{Analog-to-Digital Converter}
 \newacronym{ADComp}{ADC}{Atmospheric Dispersion Compensator}
-\newacronym{AGN}{AGN}{Active Galactic Nucleus}
+\newacronym[shortplural={AGN}, longplural={Active Galactic Nuclei}]{AGN}{AGN}{Active Galactic Nucleus}
 
 \newacronym{CCD}{CCD}{Charged-Coupled Device}
 \newacronym{cgs}{cgs}{centimeter-gram-second}
@@ -68,14 +67,13 @@
 \newacronym{VPH}{VPH}{Volume Phase Holographic}
 
 
-% MARK: Categories
-% Code
+% MARK: Code
 \setabbreviationstyle[code]{short-sc-long}
 \newacronym[category={code}]{IRAF}{iraf}{\textit{Image Reduction and Analysis Facility}}
 \newacronym[category={code}]{POLSALT}{polsalt}{\textit{Polarimetric reductions for SALT}}
 \newacronym[category={code}]{STOPS}{stops}{\textit{Supplementary Tools for \textsc{polsalt} Spectro\-polarimetry}}
 
-% SALT
+% MARK: SALT
 \setabbreviationstyle[elements]{short}
 \newacronym[category={elements}, sort={Argon}]{Ar}{Ar}{Argon}
 \newacronym[category={elements}, sort={Copper}]{CuAr}{CuAr}{Copper-Argon}
@@ -90,20 +88,20 @@
 \newacronym{SALT}{SALT}{Southern African Large Telescope}
 \newacronym{SALTICAM}{SALTICAM}{SALT Imaging Camera}
 
-% Fermi
+% MARK: Fermi
 \newacronym[sort={Fermi LAT}]{FermiLAT}{\textit{Fermi}-LAT}{\textit{Fermi} Large Area Telescope}
 \newacronym[sort={Fermi LCR}]{FermiLCR}{\textit{Fermi} LCR}{\textit{Fermi} Light Curve Repository}
 
-% Swift
+% MARK: Swift
 \newacronym[category={named}]{Swift}{Swift}{Neil Gerhels \textit{Swift} Observatory}
 \newacronym{Swift_BAT}{BAT}{Burst Alert Telescope}
 \newacronym{UVOT}{UVOT}{Ultraviolet Optical Telescope}
 
-% VLT
+% MARK: VLT
 \newacronym{VLT}{VLT}{Very Large Telescope}
 \newacronym{FORS}{FORS}{Focal Reducer and Low Dispersion Spectrograph}
 
-% HET
+% MARK: HET
 \newacronym{HET}{HET}{Hobby-Eberly Telescope}
 
 
@@ -112,16 +110,6 @@
 \providecommand\polsalt{\gls{POLSALT}}
 \providecommand\stops{\gls{STOPS}}
 
-% \newglossaryentry{software}{
-%     name={Software},
-%     description={},
-%     type=main
-% }
-% \newglossaryentry{arc}{
-%     name={\gls{SALT} Arc lamps},
-%     description={},
-%     type=main
-% }
 
 % Add any glossary entries below
 % cursor commands
@@ -134,39 +122,39 @@
 \setabbreviationstyle[filters]{short}
 \newglossaryentry{Johnson-Cousins}{%
     name=Johnson-Cousins photometric system,
-    description={A widely-used system of broad-band photometry that uses a set of standard filters to measure the magnitudes of stars and other astronomical objects.},
+    description={A widely-used system of broad-band photo\-metry that uses a set of standard filters to measure the magnitudes of stars and other astronomical objects.},
 }
 \newglossaryentry{U}{%
     name=\ensuremath{U},
-    description={The ultraviolet filter, typically centered around $3640$ \AA.},
+    description={The ultraviolet filter, typically centered at $\lambda \approx 3640$ \AA.},
     parent={Johnson-Cousins},
     category={filters},
     sort={a}
 }
 \newglossaryentry{B}{%
     name=\ensuremath{B},
-    description={The blue filter, typically centered around $4420$ \AA.},
+    description={The blue filter, typically centered at $\lambda \approx 4420$ \AA.},
     parent={Johnson-Cousins},
     category={filters},
     sort={b}
 }
 \newglossaryentry{V}{%
     name=\ensuremath{V},
-    description={The visual filter, designed to approximate human visual sensitivity and typically centered around $5400$ \AA.},
+    description={The visual filter, designed to approximate human visual sensitivity and typically centered at $\lambda \approx 5400$ \AA.},
     parent={Johnson-Cousins},
     category={filters},
     sort={c}
 }
 \newglossaryentry{R}{%
     name=\ensuremath{R},
-    description={The red filter, typically centered around $6580$ \AA.},
+    description={The red filter, typically centered at $\lambda \approx 6580$ \AA.},
     parent={Johnson-Cousins},
     category={filters},
     sort={d}
 }
 \newglossaryentry{I}{%
     name=\ensuremath{I},
-    description={The infrared filter, typically centered around $8060$ \AA.},
+    description={The infrared filter, typically centered at $\lambda \approx 8060$ \AA.},
     parent={Johnson-Cousins},
     category={filters},
     sort={e}
@@ -186,25 +174,25 @@
 }
 \newglossaryentry{SCI}{%
     name={`SCI'},
-    description={The Science data extension in a FITS file.},
+    description={The Science data extension in a \gls{FITS} file.},
     parent={FITS-extensions},
     category={extensions},
 }
 \newglossaryentry{VAR}{%
     name={`VAR'},
-    description={The Variance data extension in a FITS file.},
+    description={The Variance data extension in a \gls{FITS} file.},
     parent={FITS-extensions},
     category={extensions},
 }
 \newglossaryentry{BPM}{%
     name={`BPM'},
-    description={The Bad Pixel Map extension in a FITS file.},
+    description={The Bad Pixel Map extension in a \gls{FITS} file.},
     parent={FITS-extensions},
     category={extensions},
 }
 \newglossaryentry{WAV}{%
     name={`WAV'},
-    description={The Wavelength extension in a FITS file.},
+    description={The Wavelength extension in a \gls{FITS} file.},
     parent={FITS-extensions},
     category={extensions},
 }
