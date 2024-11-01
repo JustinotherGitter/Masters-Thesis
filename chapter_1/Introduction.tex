@@ -2,24 +2,28 @@
 
 % MARK: Subject
 % Brief, Catchy, Introduction to the subject: Data reductions and software
-Data reductions, and by extension the software enabling them, are an often overlooked aspect of astrophysical research.
+Data reductions and, by extension, the software enabling them, are an often overlooked aspect of astrophysical research.
 They are the foundation upon which scientific results are built.
-With ever increasingly complex and sensitive observation techniques and instruments, coupled with the ever-increasing volume of data, the need for efficient and accurate data reductions are a critical aspect of astronomical research.
+With ever increasingly complex and sensitive observational techniques and instruments, coupled with the ever-increasing volume of data, the need for efficient and accurate data reductions are a critical aspect of astronomical research.
 
 % More focused subject: SALT and Spectropolarimetry
 One such instrument, installed on the \gls{SALT} \citep{SALT_design}, is the \gls{RSS} \citep{SALT_optical_design}.
-The \gls{SALT}/\gls{RSS} is capable of performing long-slit spectropolarimetry \citep{SALT_hires}, allowing for the simultaneous observation of, wavelength dependent, intensity and polarization.
+The \gls{SALT}/\gls{RSS} is currently capable of performing, point-source and diffuse (spatial), long-slit linear spectropolarimetry, allowing for the simultaneous observation of, wavelength dependent, intensity and polarization \citep{SALT_hires}.
+
+% More focused subject: polsalt
 The \polsalt\ software is a Python~$2$ based software package that provides a complete reduction pipeline for \gls{SALT} spectro\-polarimetric data, from pre- to final reductions, and the plotting of the spectro\-polarimetric results \citep{polsalt}.
 As of 2024, data reductions for \gls{SALT}/\gls{RSS} spectropolarimetric observations are generally completed using an adaption of the beta version of the \polsalt\ software.%
-% \footnote{As of writing, the versions used for \polsalt\ are as follows: \polsalt\ v0.2.dev144, pysalt v0.5dev, \iraf v2.14, and pyraf v1.8.1. Note \polsalt\ also implements versioning for each method following a `\textit{YYYYMMDD}' format.}
+\footnote{As of writing, the versions used for \polsalt\ are as follows: \polsalt~v0.2.dev144, PySALT~v0.5dev, PyRAF~v1.8.1, and \glsxtrshort{IRAF}~v2.14\,.}
+% Note \polsalt\ also implements versioning for each method following a `\textit{YYYYMMDD}' format.
+A \gls{GUI} is implemented through the beta version, providing limited interactivity during the reduction process.
+A user can complete the full reduction process purely using \polsalt, but this does not mean the software is without its limitations.
 
 % MARK: Problem
 % Expand on what the problem is: Wavelength calibrations for polsalt
-A user can complete the full reduction process purely using \polsalt, with \gls{GUI} interactivity made possible by the beta version, but this does not mean the software is without its limitations.
 Erroneous inputs or key presses from the user can lead to unexpected program crashes, and the wavelength calibration process is time-consuming and inflexible.
 This makes recalibrating the wavelength solutions unfeasible for anything larger than a handful of observations.
-Spectro\-polarimetric observations performed with the \gls{SALT}/\gls{RSS} using the PG$0300$ grating are particularly challenging to reduce due to the \gls{SALT} \gls{Ar} arc lamp.
-The \gls{Ar} arc lamp exhibits sparse spectral features across the wavelength range, with a partial overlap of a higher order at longer wavelengths.
+Furthermore, the wavelength calibration of the $O$- and $E$-beams are entirely independent of each other.
+This allows good fits to each polarimetric beam, but does not ensure that the wavelength solutions are consistent across the two beams, leading to potential systematic errors in the final results.
 
 % MARK: Problem Statement
 % Problem Statement and Outline of Aims: Development of STOPS
@@ -31,47 +35,39 @@ The aims of these supplementary tools, named \stops, are:
     \item to ensure the accuracy of spectropolarimetric wavelength solutions, and
     \item to improve the overall efficiency and wavelength calibration process for spectro\-polarimetric wavelength calibrations.
 \end{itemize}
-Further secondary aims were to make the installation and usage of the software as user-friendly as possible, and to ensure the software is easily maintainable and extendable.
-These secondary aims, thankfully, may be set out immediately, and are controlled through the choice of programming language and the distribution method.
-Python~$3$ is chosen due to the current widespread use of Python in the astronomical community, the software will be made available through GitHub for version control with the option to later publish to \gls{PyPI}, and the installation will be handled by pip.
-
-% MARK: Scope
-% Scope and objectives: What \stops\ can and can't do
 The \stops\ software should allow for efficient and accurate wavelength calibrations.
 It is designed to be used in conjunction with the \polsalt\ software, allowing for more interactive wavelength calibration processes to be used in place of the built-in \polsalt\ \texttt{wavelength calibration} method.
 This means that \stops\ does not perform the wavelength calibration itself, but should rather parse the \gls{FITS} files from and to the \polsalt\ format before and after the wavelength calibration process, respectively.
-\stops\ should also be expected to handle any additional calibrations which are completed during the \polsalt\ wavelength calibration process, such as wollaston tilt corrections and \gls{CRR}.
+\stops\ should also be expected to handle any additional calibrations which are completed during the \polsalt\ wavelength calibration process, such as the wollaston tilt corrections and \gls{CRR}.
+
+% MARK: Scope
+% Scope and objectives: What \stops\ can and can't do
+Further secondary aims were to make the installation and usage of the software as user-friendly as possible, and to ensure the software is easily maintainable and extendable.
+These secondary aims, thankfully, relate to design choices, and are controlled through the choice of programming language and distribution method.
+Python~$3$ is the language of choice due to the current widespread use of Python in the astronomical community.
+The software will be distributed through GitHub for version control, with the option to later publish to the \gls{PyPI} once a stable release is developed.
+Lastly, Python relies on the Python package manager, pip, which allows the installation of \stops\ to be handled natively.
 
 % MARK: Importance
-% Explain importance: need for accurate and auditable wavelength solutions
-%%% Explain why solving this problem is significant and how it advances the field.
-%%% Discuss the personal or academic motivation behind the project.
-%% a need to compare wavelength solutions across the perpendicular O and E polarization beams.
-
-% C. The method of procedure and treatment of findings.
-% 3. State the purpose of the paper (how subject is handled). What is the point of view and emphasis of the paper? How does the purpose differ from that of other papers on the same subject?
-
-%%%   * How STOPS fits into the reduction workflow
-
-% The development of tools to streamline and enhance the wavelength calibration process is crucial for maximizing the scientific output of SALT spectropolarimetry. The \stops\ pipeline has been designed to address these challenges, providing an efficient and accurate approach to reducing spectropolarimetric data.
-
-% MARK: Blazars
 \glspl{AGN} are the cores of galaxies powered by accretion onto a super-massive black hole.
 Blazars represent the subclass of radio-loud \glspl{AGN} with relativistic jets closely aligned to our line of sight ($\theta \lesssim 10$\degree), known for their rapid and high degree of variability across the electromagnetic spectrum \citep{Urry_1995}.
+The \gls{SALT}/\gls{RSS} PG$0300$ grating, and accompanying \gls{Ar} arc lamp, provided the widest wavelength range and highest throughput, making them ideal for optical observations of blazars during differing states of flaring and quiescence.
+These spectro\-polarimetric observations are, however, particularly challenging to reduce as the \gls{Ar} arc lamp exhibits sparse spectral features across the wavelength range, with a partial overlap of a higher order at longer wavelengths.
+Due to these difficulties, a backlog of unanalyzed data existed.
+
+% MARK: Blazar SEDs
 The \gls{SED} of blazars shows two clear components:
 a lower energy component produced through leptonic synchrotron processes (spanning the radio to \gls{UV}/soft X-ray regimes)
 and a higher energy component (spanning the X-ray to $\gamma$-ray regimes) which is proposed to be produced through either leptonic or hadronic processes \citep{Bottcher_2013}.
 
-% MARK: SEDs / specpol
+% MARK: Blazar specpol
 Polarized, non-thermal, synchrotron emission arising in the jets, with underlying non-polarized, thermal, emission arising from the host galaxy, dusty torus, and accretion disk components comprises the optical emission observed from blazars \citep{Ghisellini_2009}.
 Optical spectropolarimetry, coupled with multi-wavelength observations, during both flaring and quiescent states can be used to disentangle the polarized and non-polarized components in the blazar's \gls{SED}, providing better constraints for the non-thermal particle distribution \citep{Schutte_COSPAR, Schutte4C0102}.
-
-The \gls{SALT}/\gls{RSS} PG$0300$ grating, and accompanying \gls{Ar} arc lamp, provided the widest wavelength range and highest throughput, making it ideal for optical observations of blazars during differing states of flaring and quiescence.
-Due to the difficulties mentioned above, a backlog of unanalyzed data existed.
 
 % MARK: Significance
 Integrating alternate wavelength calibrations for \gls{SALT}/\gls{RSS} spectro\-polarimetric observations has broad implications for astronomical research, particularly in studies involving sources which display high degrees of polarization, such as high-energy sources.
 By providing alternate reliable and efficient methods of wavelength calibration, this thesis directly enhances the capability of the \gls{SALT}/\gls{RSS} to produce high-quality spectropolarimetric results, allowing the interplay between polarization and spectral features to be further investigated.
+% The development of tools to streamline and enhance the wavelength calibration process is crucial for maximizing the scientific output of SALT spectropolarimetry. The \stops\ pipeline has been designed to address these challenges, providing an efficient and accurate approach to reducing spectropolarimetric data.
 
 \section{Outline}
 
