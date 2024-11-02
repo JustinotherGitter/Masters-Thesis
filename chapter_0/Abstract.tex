@@ -1,63 +1,62 @@
 % MARK: Abstract
 \begin{abstract}
-    % Quick introduction
-    % In one or two sentences give the goal of the thesis
-    % Summarize the main findings of our results and how that is useful. State what we have done like you have done in Conclusions but only shorter
 
-    \todo{
-        \begin{itemize}
-            \item Flow from use of SALT and pipeline and basics of its science implementations into why a more streamlined wavelength calibration is an improvement.
-            \item Give summary of results.
-            \item $\leq 600$ words without going too in-depth into anything specific.
-            \item Brian's comment: Abstract should summarize paper. Include results, conclusions, etc.
-        \end{itemize}
-    }
+    % SALT
+    The \gls{SALT} is the largest optical telescope in the Southern Hemisphere.
+    % RSS
+    Onboard \gls{SALT} is the \gls{RSS}, which is capable of performing linear spectro\-polarimetry at optical wavelengths.
+    % Spectropolarimetry
+    This, along with its wide wavelength coverage and high throughput, make the \gls{SALT}/\gls{RSS} ideal for spectropolarimetric observations of high-energy sources.
+    %
+    % AGN
+    \Glspl{AGN} are one such high-energy source, powered by the accretion of material onto a central supermassive black hole.
+    % Blazars
+    Blazars represent a subset of \glspl{AGN} with relativistic jets closely aligned to our line of sight, and whose high apparent luminosities display variability on periods from less than one day up to years.
+    % Blazar at optical
+    The optical emission of blazars is often dominated by the polarized, non-thermal emission arising in the jets, with an underlying non-polarized, thermal emission component arising from the host galaxy, dusty torus, and accretion disk components.
+    % Blazar spectroplarimetry
+    Optical spectropolarimetry of blazars during both flaring and quiescent states can be used, alongside multi-wavelength observations, to disentangle the polarized and non-polarized components.
+    This provides better constraints for \gls{SED} modeling, allowing a deeper understanding of the mechanisms and structures powering such highly energetic sources.
+    %
+    % polsalt
+    To this end, the \gls{SALT}/\gls{RSS} is used for spectro\-polarimetric observations of blazars.
+    % polsalt pipeline
+    \gls{SALT}/\gls{RSS} spectro\-polarimetric observations are reduced using an adaption of the beta version of the \polsalt\ software.
+    % Wavelength calibration errors and STOPS (AIM!)
+    Wavelength calibrations are, in general, the most time-consuming and error-prone manual step in the data reduction process, while also being the most pivotal.
+    Furthermore, wavelength solutions for the complementary $O$- and $E$-beams may seemingly be well calibrated independently, but may not be consistent with each other.
+    % , due to, e.g., misidentified spectral features in the arc spectrum or sparse spectral features to identify.
+    %
+    % STOPS development and testing
+    To aid in the reduction process, supplementary tools are presented which have been developed to improve the efficiency and accuracy of spectropolarimetric data reductions.
+    The software, named \stops, addresses limitations in the existing wavelength calibration method, allowing for external wavelength calibrations, such as those provided by \iraf, while also providing tools to verify the consistency of the wavelength solutions epoch-to-epoch or across polarimetric beams.
+    % Testing
+    Rigorous testing, through both synthetic and real data, has been conducted to ensure the reliability and accuracy of \stops.
+    %
+    % 3C 279
+    The blazar 3C~279 was observed during periods of enhanced activity, 28 March and 17 May 2017, and of flaring, 31 March 2017.
+    The normalized relative flux spectrum of 3C~279 shows a notable dip in the $\sim 6000 - 9000$~\AA\ range during the period of flaring as compared to epochs of enhanced activity.
+    The degree of polarization for 3C~279 was found to be $\Pi \approx 13.3 \%$, and $21.1 \%$ for the epochs of enhanced activity, and $8.7 \%$ for the epoch of flaring, respectively.
+    The degree of polarization shows good agreement across grating angles and remains fairly constant across the observed wavelength range while still displaying variability according to the transient nature of the blazar.
+    The polarization angle of 3C~279, was found to be $\theta \approx 53.3$\degree, and $77.7$\degree\ for the epochs of enhanced activity, and $63.3$\degree\ for the epoch of flaring, respectively.
+    The polarization angle shows a consistent angle across the observed wavelength range, with a slight deviation in the epoch of flaring.
+    % Hiltner 652
+    Furthermore, the spectrophotometric standard, Hiltner~652, was observed with the \gls{SALT}/\gls{RSS} in linear spectropolarimetry mode on 10 June 2022.
+    The reduced, $P_{Q}$ and $P_{U}$, Stokes parameters show no major deviation from previously published results which further ensures that there is no interference introduced into the Stokes parameter calculations for alternate wavelength calibrations as handled by \stops.
+    % Conclusion
+    The application of \stops\ during the reductions presented supports the feasibility of alternate wavelength calibration methods while ensuring efficient, accurate, and consistent wavelength solutions.
 
     % MARK: Keywords
-    % TODO: Update myhyperref.sty with any additional keywords
+    % `myhyperref.sty' contains `'\mykeywords'
     \textbf{Keywords:}
     \mykeywords
-    %Polarization: optical,
-    %galaxies: AGN,
-    %Blazars,
-    \todo{
-        Pipeline development and data reduction keywords → look up the astronomy journal keywords ($\sim 10$ keywords)
-    }
-
-% https://jcap.sissa.it/jcap/help/helpLoader.jsp?pgType=kwList
-% https://journals.aas.org/keywords-2013/
-% https://academic.oup.com/DocumentLibrary/mnras/keywords.pdf
-% https://www.aanda.org/for-authors/author-information/paper-organization
-% https://www.raa-journal.org/sub/author/keywords/
-% https://www.aip.de/en/astronomical-notes/instructions/keywords/
-
-% MARK: HEASA 2021
-% Blazars represent a subset of AGN with relativistic jets, where the direction of the jet lies very close to our line of sight. The highly Doppler boosted emission from the blazar's jet results in high apparent luminosities, and blazars display variability on periods from less than one day up to years. At optical wavelengths, the observed emission of the blazar is a superposition of the polarized non-thermal synchrotron emission, arising from the jet, and the non-polarized thermal emission, arising from the accretion disc, broad line region, torus and host galaxy.
-
-% Polarimetry observations can serve as an important tool for diagnosing the emission from blazars. The RSS spectrograph, on SALT, can operate in spectropolarimetry mode and is currently being used to undertake spectropolarimetric observations of transient blazar sources.
-
-% We present additional tools developed to work in conjunction with the current SALT spectropolarimetry reduction pipeline, {\sc polsalt}, that aims to streamline the reduction of the SALT polarization data, including the testing of the wavelength calibration of the individual O and E beams. This was applied to observations of 3C 279 during 2017.
-
-% MARK: HEASA 2022
-% Blazars are active galactic nuclei (AGN) with jets aligned very closely to our line of sight. The optical emission of blazars is often dominated by the polarized, non-thermal emission arising in the jets, with an underlying non-polarized, thermal emission component arising from the host galaxy, dusty torus, and accretion disk components.
-
-% Coupled with multi-wavelength observations, optical spectropolarimetry of blazars during both flaring and quiescent states can be used to disentangle the polarized and non-polarized components in their spectral energy distributions, providing better constraints for the non-thermal particle distribution. To this end, spectropolarimetry of blazars during different states of activity was taken with the Southern African Large Telescope (SALT) using the Robert Stobie Spectrograph (RSS). For RSS spectropolarimetry, reductions are performed using the \textsc{polsalt} pipeline. In order to streamline the spectropolarimetric reductions, we have implemented supplementary interactive tools which provides additional wavelength calibration to improve the accuracy of the wavelength calibration for the O \& E beam.
-
-% Here we present a brief overview of the tools and the results for Hiltner~652, a spectropolarimetric standard, as well as results for the blazars 3C~279. The reduced, $P_{Q}$ and $P_{U}$, Stokes parameters of Hiltner~652 show no major deviation from previously published results which reassures us that there is no interference introduced into the Stokes parameter calculations when wavelength calibrations are handled by our supplementary tools. The $\sim6000 - 9000$ Å range of 3C~279 shows a notable dip in the normalized spectrum during a period of flaring when compared to epochs of enhanced activity. The degree of polarization for 3C~279 of $13.2 \%$, $9.5 \%$, and $21.2 \%$ for the epochs 2017 March 28, 2017 March 31, and 2017 May 17, respectively, remains fairly constant across the observed wavelength ranges while still varying with the blazars' state of quiescence or flaring.
-
-% MARK: Old Proposed Abstract
-% Active Galactic Nuclei present the most energetic sources in the universe and are powered by the accretion of material onto a central supermassive black hole. These sources can show large relativistic jets which produce non-thermal radiation from radio to gamma-ray energies. Blazars, which are subdivided into Flat Spectrum Radio Quasars (FSRQs) and BL Lac objects, represent a subset of AGN where the direction of this jet lies very close to our line of sight. The highly Doppler boosted emission from the jet, results in high apparent luminosities and blazars display variability on periods from less than one day up to years. The Spectral Energy Distribution (SED) of blazars shows two clear components: a low energy component which is produced through electron synchrotron radiation (radio to UV/X-ray) and a high energy component which is produced through either inverse Compton scattering of soft target photons or hadronic processes (e.g. π 0 decay, proton synchrotron). In some of these sources the high energy component extends to observable Very High Energy (VHE) gamma-rays.
-
-% The blazar sub-class FSRQs have accretion discs (as shown by the strong emission lines in the optical spectra) and this means observations at optical wavelengths include a superposition of thermal emission, primarily from the accretion disc, and non-thermal radiation from synchrotron radiation originating from the jet. One of the difficulties in modelling FSRQs is to disentangle the contribution of the different components. One method, which is being employed is to look at the degree of linear polarization, since this arises from the synchrotron emission, and to simultaneously model both the flux and the degree of polarization.
-
-% As part of the SALT Large Science Proposal Observing the Transient Universe, the AGN working group is using the RSS spectrograph on the Southern African Large Telescope (SALT) to observe blazars during gamma-ray flaring/non-flaring states in spectropolarimetry mode, with quasi-simultaneous photometric optical observations undertaken with the LCO and/or Master network. This allows the degree of polarization to be directly measured (Fig. 1) and allows us to self-consistently model the low energy component of blazars, differentiating the underlying components (see Fig. 2).
-
-% The aim of the proposed Masters project will be to further develop the methodology to undertake observations of flaring blazars, take a leading role in triggering observations with SALT and the other telescope networks, the reduction and analysis of the observations, and develop the necessary pipelines to “stream-line” the observations. These observations will then serve as the input for modelling the emission, in collaboration with other members of the AGN working group, primarily Markus Böttcher and Hester Schutte.
-
-% A working knowledge of IRAF and Python will be an important skill required for this project.
-
-% MARK: CHATGPT Abstract
-
-% The Southern African Large Telescope (SALT) Robert Stobie Spectrograph (RSS) provides valuable data through spectropolarimetric observations, essential for understanding astrophysical objects and processes, such as active galactic nuclei. However, the current wavelength calibration methods, which are pivotal for accurate data analysis, are complex and time-consuming. This thesis presents supplementary wavelength calibration tools aimed at improving the efficiency and accuracy of data reductions for spectropolarimetry using SALT/RSS. The development of the Supplementary Tools for polsalt Spectropolarimetry (STOPS) addresses limitations in the existing polsalt software, including enhancements in splitting, joining, skyline subtraction, and cross-correlation routines. The implementation of these tools offers a more streamlined calibration process, reducing observational errors and improving data quality. The results demonstrate the enhanced performance of STOPS in reducing spectropolarimetric data and its potential application in future observations. The tools are validated through a series of test cases and real-world data, highlighting their effectiveness in improving the reliability and accuracy of SALT/RSS observations.
+    % See also:
+    % https://astrothesaurus.org/
+    % https://jcap.sissa.it/jcap/help/helpLoader.jsp?pgType=kwList
+    % https://journals.aas.org/keywords-2013/
+    % https://academic.oup.com/DocumentLibrary/mnras/keywords.pdf
+    % https://www.aanda.org/for-authors/author-information/paper-organization
+    % https://www.raa-journal.org/sub/author/keywords/
+    % https://www.aip.de/en/astronomical-notes/instructions/keywords/
 
 \end{abstract}
