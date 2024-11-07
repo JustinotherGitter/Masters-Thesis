@@ -36,8 +36,14 @@ Justin Cooper
 * Organize Glossary entries:
   * Glossary (Alphabetical)
   * Abbreviations, Acronyms, and Symbols (By group(?)/category, then Alphabetical)
+    * Add Symbols(?)
   * Unify usage of exposure / frame / extension and add to glossary (see references)
-  * Use `\ion{}` for acronym underline
+
+* Check no duplicates in *bibtex* file &/| bibliography
+
+* Add `EVPA` acronym in place of `polarization angle`?
+
+* Check footnotes all on correct page
 
 * Check common errors:
   * `e.g.` should be `e.g., ` (exempli gratia, Latin for \`for example')
@@ -61,6 +67,10 @@ Justin Cooper
 ## Final `TODOs`
 
 * Cite STOPS as repo? (See `.cff` references)
+* Typeset pages - odd pages right, i.e., no paragraphs broken from even to odd pages.
+* Plots:
+  * Check fonts (`CMU Serif` for text, `CMU Serif Italics` for symbols)
+  * Check scaling ($160$ mm width, variable height)
 * Ask for read through from friends to ensure no spelling/grammar errors
 
 <!-- MARK: @Submission -->

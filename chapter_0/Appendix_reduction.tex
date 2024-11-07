@@ -177,7 +177,7 @@ Repeat the \texttt{transform} procedure, replacing the \ofiles\ and \oarc\ with 
 
 
 The `gain' and `read noise' are now needed as the cosmic-ray rejection of the \stops\ \texttt{join} method accepts them as parameters. These parameters may be found using the `\textit{GAINSET}' and `\textit{ROSPEED}' keywords in the \gls{FITS} headers. The cosmic ray rejection defaults to \textit{GAINSET}$ = $`FAINT', and \textit{ROSPEED}$ = $`SLOW'. If the gain and read noise values differ from the defaults, the parameters should be updated when running \texttt{join}.%
-\footnote{The read noise and gain may be determined from \protect\url{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}, specifically \href{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html\#t.4}{Table 6.1} and \href{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html\#t.5}{Table 6.2}.}
+\footnote{The read noise and gain may be determined from \citet{SALT_CFP}, specifically \href{https://pysalt.salt.ac.za/proposal\_calls/current/ProposalCall.html\#t.4}{Table 6.1} and \href{https://pysalt.salt.ac.za/proposal\_calls/current/ProposalCall.html\#t.5}{Table 6.2}.}
 
 The \stops\ \texttt{join} method may be run using the commands in \autoref{code:stops_join}.
 

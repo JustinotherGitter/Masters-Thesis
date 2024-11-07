@@ -8,7 +8,7 @@ Spectroscopy originated in its most basic form with Newton's examinations of sun
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.9\textwidth]{2_spectrometer.pdf}
+    \includegraphics[width = 1.0\textwidth]{2_spectrometer.pdf}
     \caption{Layout depicting the light path through a spectrometer. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:spectrometer}
 \end{figure}
@@ -75,7 +75,7 @@ where $\lambda$ is the wavelength of an incident monochromatic beam and \gls{FWH
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 7cm]{2_prism_diagram.pdf}
+    \includegraphics[width = 1.0\textwidth]{2_prism_diagram.pdf}
     \caption{Geometry of a prism refracting an incident monochromatic beam at a minimum deviation angle. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:prism_diagram}
 \end{figure}
@@ -107,7 +107,7 @@ Multiple prisms can be used to increase the angular dispersion but as the disper
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 9cm]{2_grating_diagram.pdf}
+    \includegraphics[width = 1.0\textwidth]{2_grating_diagram.pdf}
     \caption{Geometry of a reflective blazed grating refracting an incident monochromatic beam. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:grating_diagram}
 \end{figure}
@@ -152,7 +152,7 @@ As mentioned before, multiple subgroups exist for both dispersive prisms and dif
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 10cm]{2_grism.pdf}
+    \includegraphics[width = 1.0\textwidth]{2_grism.pdf}
     \caption{Diagram of a grism for an incident monochromatic beam of light and a diffracted beam of order $m = 1$. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:grism}
 \end{figure}
@@ -162,7 +162,7 @@ Other types of gratings include the \gls{VPH} grating as well as the echelle gra
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 10cm]{2_vph_grating.pdf}
+    \includegraphics[width = 1.0\textwidth]{2_vph_grating.pdf}
     \caption{Diagram of a \gls{VPH} grating for an incident monochromatic beam of light. Diagram adapted from \cite{BirneyObsAstro}.}
     \label{fig:vph_grating}
 \end{figure}
@@ -685,10 +685,9 @@ Spectropolarimetric calibrations are, however, more involved when compared to th
 \begin{figure}[t]
     \centering
     \includegraphics[width = 15cm]{2_SALT_telescope.png}
-    \caption{The tracker, supporting structure, and primary mirror of SALT. Figure adapted from the SALT call for proposals (2022).\protect\footnotemark}
+    \caption{The tracker, supporting structure, and primary mirror of SALT. Figure adapted from the SALT call for proposals \citep{SALT_CFP}.}
     \label{fig:SALT_telescope}
 \end{figure}
-\footnotetext{\protect\url{http://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}}
 
 \subsection{The Primary Mirror}
 
@@ -701,10 +700,9 @@ During observations the primary mirror is stationary and the tracker tracks cele
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0 \textwidth]{2_SALT_visibility.png}
-    \caption{The visibility annulus of objects observable by SALT. Figure adapted from the SALT call for proposals (2013).\protect\footnotemark}
+    \caption{The visibility annulus of objects observable by SALT. Figure adapted from the SALT call for proposals \citep{SALT_CFP}.}
     \label{fig:SALT_visibility}
 \end{figure}
-\footnotetext{\protect\url{https://pysalt.salt.ac.za/proposal_calls/2013-2/}}
 
 % Mention Center of Curvature Alignment System? : https://en.wikipedia.org/wiki/Shack%E2%80%93Hartmann_wavefront_sensor
 
@@ -715,10 +713,9 @@ The tracker is equipped with a \gls{SAC} \citep{SALT_SAC}, and an \gls{ADComp} \
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{2_RSS_optical_path.png}
-    \caption{The optical path of the \gls{SALT} \gls{RSS}. Figure adapted from the SALT call for proposals (2023).\protect\footnotemark}
+    \caption{The optical path of the \gls{SALT} \gls{RSS}. Figure adapted from the SALT call for proposals \citep{SALT_CFP}.}
     \label{fig:RSS_layout}
 \end{figure}
-\footnotetext{\protect\url{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}}
 
 SALT is equipped with the \gls{SALTICAM} and the \gls{RSS} science instruments onboard the tracker, and the \gls{HRS} and \gls{NIRWALS} science instruments which are fibre-fed from the tracker to their own climate controlled rooms. The \gls{RSS} is currently the only instrument used for spectropolarimetry.
 
@@ -736,7 +733,7 @@ The \glsfirst{SALTICAM} functions as the acquisition camera and simple science i
 
 \subsubsection{\gls{RSS}} \label{subsubsec:RSS}
 
-The \glsfirst{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, a narrowband imaging mode, and multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][or the \href{https://pysalt.salt.ac.za/proposal_calls/current/ProposalCall.html}{latest call for proposals}]{SALT_operational_modes}.
+The \glsfirst{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, a narrowband imaging mode, and multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][]{SALT_operational_modes, SALT_CFP}.
 
 \paragraph{The Detector}
 The \gls{RSS} detector consists of a mosaic of 3 \gls{CCD} chips with a total pixel scale of $0.1267\arcsec$ per unbinned pixel with varying readout times depending on the binning and readout mode. The mosaicking results in a characteristic double `gap' in the frames and resultant spectra taken with the \gls{RSS}, as seen in \autoref{fig:specpol_exp}.

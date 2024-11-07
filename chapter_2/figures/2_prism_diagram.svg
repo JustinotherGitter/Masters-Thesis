@@ -2,12 +2,12 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="7.4968762cm"
-   height="6.5cm"
-   viewBox="0 0 74.968762 65.000001"
+   width="160mm"
+   height="63mm"
+   viewBox="0 0 160 63.000001"
    version="1.1"
    id="svg5"
-   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+   inkscape:version="1.3.1 (9b9bdc1480, 2023-11-25, custom)"
    sodipodi:docname="2_prism_diagram.svg"
    inkscape:export-filename="../f240de79/2_prism_diagram.pdf"
    inkscape:export-xdpi="96"
@@ -27,13 +27,13 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="4.9531424"
-     inkscape:cx="206.13177"
-     inkscape:cy="53.703281"
-     inkscape:window-width="1600"
-     inkscape:window-height="845"
+     inkscape:zoom="3.5024006"
+     inkscape:cx="304.36267"
+     inkscape:cy="127.19847"
+     inkscape:window-width="1920"
+     inkscape:window-height="1131"
      inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer2">
     <inkscape:grid
@@ -42,8 +42,9 @@
        units="mm"
        spacingx="1"
        spacingy="1"
-       originx="-30.015403"
-       originy="-9.9999995" />
+       originx="-30.015404"
+       originy="-9.999999"
+       visible="true" />
   </sodipodi:namedview>
   <defs
      id="defs2">
@@ -72,8 +73,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline"
-     transform="translate(-30.015402,-9.9999995)"
-     sodipodi:insensitive="true">
+     transform="translate(-30.015402,-9.9999995)">
     <path
        sodipodi:type="star"
        style="display:inline;fill:#a8a8a8;stroke:#000000;stroke-width:0.2;stroke-dasharray:none"
@@ -89,8 +89,8 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="M 35.033609,34.990071 52.511033,4.7182861 69.988458,-25.5535 87.46588,4.7182851 104.9433,34.990072 l -34.954843,-10e-7 z"
-       inkscape:transform-center-y="-9.9506947"
-       transform="matrix(0.56934071,0,0,0.98613541,30.152723,35.396438)" />
+       inkscape:transform-center-y="-9.6444959"
+       transform="matrix(0.56936275,0,0,0.95579106,72.666245,34.617331)" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -101,7 +101,7 @@
     <g
        id="g1699"
        style="display:inline"
-       sodipodi:insensitive="true">
+       transform="matrix(1.0000385,0,0,0.96922902,42.512353,0.31007108)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.200541;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
          d="M 60.041969,40.09558 35.066418,54.888237"
@@ -155,7 +155,7 @@
     <g
        id="g1918"
        style="display:inline"
-       sodipodi:insensitive="true">
+       transform="matrix(1.0000385,0,0,0.96922902,42.512353,0.31007108)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
          d="m 50.1,71 v 4"
@@ -166,13 +166,13 @@
          id="path1754" />
       <text
          xml:space="preserve"
-         style="font-size:4.23333px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;stroke-width:0.264583"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;line-height:1.25;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.264583"
          x="68.550308"
          y="74.891808"
          id="text1810"><tspan
            sodipodi:role="line"
            id="tspan1808"
-           style="font-size:4.23333px;stroke-width:0.264583"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.264583"
            x="68.550308"
            y="74.891808">B</tspan></text>
       <path
@@ -220,31 +220,32 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-size:4.23333px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;display:inline;stroke-width:0.264583"
-       x="60.869774"
-       y="25.891811"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;display:inline;stroke-width:0.260485"
+       x="101.7795"
+       y="25.805792"
        id="text2710"
-       sodipodi:insensitive="true"><tspan
+       transform="scale(1.0157697,0.98447513)"><tspan
          sodipodi:role="line"
          id="tspan2708"
-         style="font-size:4.23333px;stroke-width:0.264583"
-         x="60.869774"
-         y="25.891811">L</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.260485"
+         x="101.7795"
+         y="25.805792">L</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.23333px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;display:inline;stroke-width:0.264583"
-       x="76.569778"
-       y="25.891811"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;display:inline;stroke-width:0.260485"
+       x="117.23639"
+       y="25.805792"
        id="text2710-7"
-       sodipodi:insensitive="true"><tspan
+       transform="scale(1.0157697,0.98447513)"><tspan
          sodipodi:role="line"
          id="tspan2708-0"
-         style="font-size:4.23333px;stroke-width:0.264583"
-         x="76.569778"
-         y="25.891811">L</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.260485"
+         x="117.23639"
+         y="25.805792">L</tspan></text>
     <g
        id="g1127"
-       style="display:inline">
+       style="display:inline"
+       transform="matrix(1.0000385,0,0,0.96922902,42.512353,0.31007108)">
       <path
          style="display:inline;fill:none;stroke:#000000;stroke-width:0.2;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#Arrow2);marker-end:url(#Arrow2)"
          id="path1183"
@@ -260,13 +261,13 @@
          sodipodi:open="true" />
       <text
          xml:space="preserve"
-         style="font-size:3.52778px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;stroke-width:0.2;stroke-dasharray:none"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;line-height:1.25;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.2;stroke-dasharray:none"
          x="93.935593"
          y="36.309654"
          id="text1675"><tspan
            sodipodi:role="line"
            id="tspan1673"
-           style="font-size:3.52778px;stroke-width:0.2;stroke-dasharray:none"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.2;stroke-dasharray:none"
            x="93.935593"
            y="36.309654">θ</tspan></text>
       <path
@@ -281,11 +282,11 @@
      id="layer3"
      inkscape:label="Layer 3"
      style="display:inline"
-     transform="translate(-30.015402,-9.9999995)"
-     sodipodi:insensitive="true">
+     transform="translate(-30.015402,-9.9999995)">
     <g
        id="g2975"
-       style="display:inline">
+       style="display:inline"
+       transform="matrix(1.0000385,0,0,0.96922902,42.512353,0.31007108)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.8, 0.4;stroke-dashoffset:0;stroke-opacity:1"
          d="M 50.087715,69.930952 30.149807,33.897895 70.02904,10.153328"
@@ -298,19 +299,20 @@
          sodipodi:nodetypes="ccc" />
       <text
          xml:space="preserve"
-         style="font-size:4.23333px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;display:inline;stroke-width:0.264583"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;line-height:1.25;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;display:inline;stroke-width:0.264583"
          x="31.551384"
          y="43.532257"
          id="text3029"><tspan
            sodipodi:role="line"
            id="tspan3027"
-           style="font-size:4.23333px;stroke-width:0.264583"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.264583"
            x="31.551384"
            y="43.532257">a</tspan></text>
     </g>
     <g
        id="g3278"
-       style="display:inline">
+       style="display:inline"
+       transform="matrix(1.0000385,0,0,0.96922902,42.512353,0.31007108)">
       <path
          style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none;stroke-dashoffset:0"
          id="path3142"
@@ -363,20 +365,20 @@
          inkscape:transform-center-y="-0.066189577" />
       <text
          xml:space="preserve"
-         style="font-size:3.52778px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;stroke-width:0.2;stroke-dasharray:none"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;line-height:1.25;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.2;stroke-dasharray:none"
          x="63.805351"
          y="16.972319"
          id="text3244"><tspan
            sodipodi:role="line"
            id="tspan3242"
-           style="font-size:3.52778px;stroke-width:0.2;stroke-dasharray:none"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.2;stroke-dasharray:none"
            x="63.805351"
            y="16.972319">α</tspan></text>
     </g>
     <g
        id="g3278-5"
        style="display:inline"
-       transform="translate(-9.9607526,29.876623)">
+       transform="matrix(1.0000385,0,0,0.96922902,32.551216,29.267366)">
       <path
          style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none;stroke-dashoffset:0"
          id="path3142-9"
@@ -429,13 +431,13 @@
          inkscape:transform-center-y="-0.066189577" />
       <text
          xml:space="preserve"
-         style="font-size:3.52778px;line-height:1.25;font-family:cmr10;-inkscape-font-specification:cmr10;stroke-width:0.2;stroke-dasharray:none"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;line-height:1.25;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.2;stroke-dasharray:none"
          x="63.805351"
          y="16.972319"
          id="text3244-8"><tspan
            sodipodi:role="line"
            id="tspan3242-9"
-           style="font-size:3.52778px;stroke-width:0.2;stroke-dasharray:none"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.29993px;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;stroke-width:0.2;stroke-dasharray:none"
            x="63.805351"
            y="16.972319">α</tspan></text>
     </g>
