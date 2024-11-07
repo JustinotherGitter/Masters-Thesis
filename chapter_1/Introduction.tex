@@ -27,7 +27,7 @@ This allows good fits to each polarimetric beam, but does not ensure that the wa
 
 % MARK: Problem Statement
 % Problem Statement and Outline of Aims: Development of STOPS
-To address these challenges, supplementary tools are developed to aid in the spectro\-polarimetric reduction process.
+To address these challenges, the objective of this study is to develop supplementary tools to aid in the spectro\-polarimetric reduction process.
 The aims of these supplementary tools, named \stops, are:
 \begin{itemize}
     \item to provide a more interactive approach to the wavelength calibration process,
@@ -49,29 +49,32 @@ The software will be distributed through GitHub for version control, with the op
 Lastly, Python relies on the Python package manager, pip, which allows the installation of \stops\ to be handled natively.
 
 % MARK: Importance
+The development of \stops\ was initiated to be used as part of ongoing research which uses SALT to study the polarimetry properties of AGN, in particular, blazars.
 \glspl{AGN} are the cores of galaxies powered by accretion onto a super-massive black hole.
 Blazars represent the subclass of radio-loud \glspl{AGN} with relativistic jets closely aligned to our line of sight ($\theta \lesssim 10$\degree), known for their rapid and high degree of variability across the electromagnetic spectrum \citep{Urry_1995}.
-The \gls{SALT}/\gls{RSS} PG$0300$ grating, and accompanying \gls{Ar} arc lamp, provided the widest wavelength range and highest throughput, making them ideal for optical observations of blazars during differing states of flaring and quiescence.
-These spectro\-polarimetric observations are, however, particularly challenging to reduce as the \gls{Ar} arc lamp exhibits sparse spectral features across the wavelength range, with a partial overlap of a higher order at longer wavelengths.
-Due to these difficulties, a backlog of unanalyzed data existed.
-
 % MARK: Blazar SEDs
 The \gls{SED} of blazars shows two clear components:
 a lower energy component produced through leptonic synchrotron processes (spanning the radio to \gls{UV}/soft X-ray regimes)
 and a higher energy component (spanning the X-ray to $\gamma$-ray regimes) which is proposed to be produced through either leptonic or hadronic processes \citep{Bottcher_2013}.
-
+%
 % MARK: Blazar specpol
-Polarized, non-thermal, synchrotron emission arising in the jets, with underlying non-polarized, thermal, emission arising from the host galaxy, dusty torus, and accretion disk components comprises the optical emission observed from blazars \citep{Ghisellini_2009}.
+The optical emission from blazars comprises of polarized, non-thermal, synchrotron emission arising in the jets, with underlying non-polarized, thermal, emission arising from the host galaxy, dusty torus, and accretion disk components  \citep{Ghisellini_2009}.
 Optical spectropolarimetry, coupled with multi-wavelength observations, during both flaring and quiescent states can be used to disentangle the polarized and non-polarized components in the blazar's \gls{SED}, providing better constraints for the non-thermal particle distribution \citep{Schutte_COSPAR, Schutte4C0102}.
+
+The \gls{SALT}/\gls{RSS} PG$0300$ grating, and accompanying \gls{Ar} arc lamp, provided the widest wavelength range and highest throughput, making them ideal for optical observations of blazars during differing states of flaring and quiescence.
+These spectro\-polarimetric observations are, however, particularly challenging to reduce as the \gls{Ar} arc lamp exhibits sparse spectral features across the wavelength range, with a partial overlap of a higher order at longer wavelengths.
+Due to these difficulties, a backlog of unanalyzed data existed.
+
+
 
 % MARK: Significance
 Integrating alternate wavelength calibrations for \gls{SALT}/\gls{RSS} spectro\-polarimetric observations has broad implications for astronomical research, particularly in studies involving sources which display high degrees of polarization, such as high-energy sources.
-By providing alternate reliable and efficient methods of wavelength calibration, this thesis directly enhances the capability of the \gls{SALT}/\gls{RSS} to produce high-quality spectropolarimetric results, allowing the interplay between polarization and spectral features to be further investigated.
+By providing alternate reliable and efficient methods of wavelength calibration, this dissertation directly enhances the efficiency of the \gls{SALT}/\gls{RSS} to produce high-quality spectropolarimetric results, allowing the interplay between polarization and spectral features to be further investigated.
 % The development of tools to streamline and enhance the wavelength calibration process is crucial for maximizing the scientific output of SALT spectropolarimetry. The \stops\ pipeline has been designed to address these challenges, providing an efficient and accurate approach to reducing spectropolarimetric data.
 
 \section{Outline}
 
-\noindent The layout of the rest of the thesis is as follows:
+\noindent The layout of the rest of the dissertation is as follows:
 
 \autoref{ch:02} lays a foundation for spectroscopy, polarimetry, and spectropolarimetry as well as the implementation of these principles through instrumentation, focusing specifically on principles as relating to the \gls{SALT} \gls{RSS}.
 These principles provide an understanding of spectropolarimetric data as well as describe the reduction and calibration processes to be completed for the acquisition of spectropolarimetric results.
@@ -82,6 +85,6 @@ The principles, application, and challenges faced when using the existing softwa
 \autoref{ch:04} provides the testing of the developed software and discusses its application within published articles and proceedings.
 Testing was conducted on a `per-module' basis aligning with the usage of \stops.
 
-\autoref{ch:05} concludes the thesis body by summarizing the development and testing of the \stops\ software, noting the current application of the software in publications, and describing possible routes for future development, focusing on stability, further integration with \polsalt, and development of improved features.
+\autoref{ch:05} concludes the dissertation body by summarizing the development and testing of the \stops\ software, noting the current application of the software in publications, and describing possible routes for future development, focusing on stability, further integration with \polsalt, and development of improved features.
 
 Finally, the appendices, \autoref{app:reduction},~\ref{app:code},~and~\ref{app:papers}, contain a working reduction procedure (referred to in \autoref{ch:03}), the \stops\ source code, and Proceedings produced from conferences (referred to in \autoref{ch:04}), respectively.
