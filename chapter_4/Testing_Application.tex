@@ -250,7 +250,7 @@ These low polarization percentages are expected for afterglows this late, when t
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{4_grb191221_abs.pdf}
-    \caption{Comparison of the normalized (and offset by $\pm 0.05$) spectra as obtained with the \gls{SALT} \gls{RSS} (blue) and the \gls{VLT} \gls{FORS}[2] orange. Note the chip gap and region of sky subtraction from the \gls{RSS} spectrum. Figure adapted from \citep{Buckley191221B}.}
+    \caption{Comparison of the normalized (and offset by $\pm 0.05$) spectra of GRB~$191221$B as obtained with the \gls{SALT}/\gls{RSS} (blue, $\sim 3$~h post initial burst) and the \gls{VLT}/\gls{FORS}[2] (orange, $\sim 10$~h post initial burst). Note the chip gap and region of sky subtraction from the \gls{RSS} spectrum. Figure adapted from \citep{Buckley191221B}.}
     \label{fig:grb_abs}
 \end{figure}
 
@@ -316,31 +316,33 @@ The cross correlation of the arc lamps perpendicular polarization beams show cle
 The spectra display a good overlap between the two grating angles, especially when considering the variable nature of blazars as well as the fact that the spectra are only relatively flux calibrated.
 Both the percentage of linear polarization and the polarization angle agree well across the grating angle overlap.
 
-% MARK: HEASA 2022
-\subsection[Proceeding, HEASA (2022)]{%
-    \gls{SALT} Spectropolarimetric Pipeline Comparisons\\
-    (Proceedings of Science, \glsxtrshort{HEASA} 2022)
-}
+\subsection{Spectropolarmetric observations of 3C~279}
 
-
-\subsection{Spectropolarmetric observations of 3C 279}
-
-As was, in part, presented in  \citet[][see also \autoref{app:papers}]{Cooper_HEASA2022}, the FSRQ 3C 279 was observed with the RSS in linear spectropolarimetric mode in 2017 during a period of enhanced gamma-ray activity. \autoref{fig:3C_279_LCR} shows the $\gamma$-ray photon flux from 3C~$279$ for energies between $0.1 - 100$~GeV, observed using the \gls{FermiLAT}\footnote{Data from the \glsxtrfull{FermiLCR} \citep{FermiLCR}}, with the dates of the optical observations noted by the vertical lines.  The gamma-ray flux was between $\sim4 - 8$ times brighter when compared to the mean quiescent state (horizontal line). Observations were taken with the PG0900 grating and a slit width of 1.5'', with two grating angles (12.5$^\circ$ and 19.625$^\circ$), covering a wavelength range of $\lambda \approx 3300 - 8800$\,\AA{}, as well as PG0300 with a grating angle of 5.375$^\circ$ covering a wavelength range of [$\lambda \approx X to Y$]. The spectrophotometric standard star Hiltner~$600$, was also observed as part of these observations.
+As was, in part, presented in  \citet[][see also \autoref{app:papers}]{Cooper_HEASA2022}, the \gls{FSRQ} 3C~279 was observed with the \gls{SALT}/\gls{RSS} in linear spectropolarimetric mode in 2017 during periods of enhanced and flaring $\gamma$-ray activity.
+\autoref{fig:3C_279_LCR} shows the $\gamma$-ray photon flux from 3C~279 for energies between $0.1 - 100$~GeV, observed using the \gls{FermiLAT}\footnotemark, with the dates of the optical observations noted by the vertical lines.
+\footnotetext{Data from the \glsxtrfull{FermiLCR} \citep{FermiLCR}}%
+The $\gamma$-ray flux was between $4 - 8$ times brighter when compared to the mean quiescent state (horizontal line).
+Observations were taken with the PG$0900$ grating and a slit width of $1.5$\arcsec\!\!\!, with two grating angles ($12.5$\degree\ and $19.625$\degree), covering a wavelength range of $\lambda \approx 3300 - 8800$\,\AA.
+The spectrophotometric standard star, Hiltner~$600$, was also observed as part of these observations.
 See \autoref{table:sci_targets} for the details of each observation.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0\textwidth]{4_3C_279_LCR.pdf}
-    \caption{The \glsxtrshort{FermiLAT} photon flux [$0.1 - 100$~GeV] for 3C~$279$ as measured around the dates of the \gls{SALT}/\gls{RSS} spectropolarimetric observations (indicated by the vertical lines). Also included are the `mean' $\gamma$-ray fluxes ($\times 10^{-6}$) for the observation dates, calculated using linear interpolation of the \glsxtrshort{FermiLAT} data points. The horizontal turquoise line shows the mean quiescent flux for this source. Figure created using data sourced from the \glsxtrshort{FermiLCR}.\protect\footnotemark}
+    \caption{The \gls{FermiLAT} photon flux [$0.1 - 100$~GeV] for 3C~$279$ as measured around the dates of the \gls{SALT}/\gls{RSS} spectropolarimetric observations (indicated by the vertical lines). Also included are the `mean' $\gamma$-ray fluxes ($\times 10^{-6}$) for the observation dates, calculated using linear interpolation of the \gls{FermiLAT} data points. The horizontal turquoise line shows the mean quiescent flux for this source. Figure created using data sourced from the \gls{FermiLCR}.\protect\footnotemark}
     \label{fig:3C_279_LCR}
 \end{figure}
 \footnotetext{\protect\url{https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/source.html?source_name=4FGL_J1256.1-0547}}
 
+As a test of the \stops\ pipeline, it was found that there was no noticeable effect on the polarization properties of spectropolarimetric data, when compared to the \polsalt\ pipeline.
+The measure of the goodness of fit for the wavelength solutions could also be measured, both through correlation and measuring the position of skyline features for both the $O$- and $E$-beams. 
 
-As a test of the \stops\ pipeline, it was found that there has no noticeable effect on the polarization properties of spectropolarimetric data (when compared to the \polsalt\ pipeline) and that the measure of the goodness of fit for the wavelength solutions could be measured, both through correlation and measuring the position of skyline features for both the $O$- and $E$-beams. 
-
-\autoref{fig:3C_279_specpol} shows the spectropolarimetric results for the PG0900 observations of  3C~$279$, presenting, from top to bottom, the normalized, relative flux calibrated, spectra for both grating angles ($12.5$\degree\ and $19.625$\degree, observed in that order), the percentage of linear polarization, and the polarization angle. It is important to note that, while the flux calibration did not produce an identical shape near the overlap regions of the spectrum (compare top two panes) the reductions are able to achieve a very good agreement between the degree and angle of polarization (bottom two panels). The difference between the polarization percentage and polarization angle for the two grating angles is $\sim 0.25\%$ and $\sim 1.25$\degree, respectively.
-The most notable disagreement of the polarization properties is seen, during the $2017$ March $31$ observation, but may be explained due to the flaring state of the blazar, the asynchronous times for the two observations, and a lower \gls{SNR} near the edges of the \gls{RSS}. The discrepancy in the shape of the flux calibrated spectra is attributed to poor fitting of the standard star near the end of the spectra, due to gaps between the standard flux points obtained from the ESO catalogue [add the link to the website]. 
+\autoref{fig:3C_279_specpol} shows the spectropolarimetric results for the PG$0900$ observations of 3C~$279$, presenting, from top to bottom, the normalized, relative flux calibrated, spectra for both grating angles ($12.5$\degree\ and $19.625$\degree, observed in that order), the percentage of linear polarization, and the polarization angle.
+It is important to note that, while the flux calibration did not produce an identical shape near the overlap regions of the spectrum (compare top two panes) the reductions are able to achieve very good agreements between the degree and angle of polarization (bottom two panels).
+The difference between the polarization percentage and polarization angle for the two grating angles is $\sim 0.25\%$ and $\sim 1.25$\degree, respectively.
+The most notable disagreement of the polarization properties is seen, during the $2017$ March $31$ observation, but may be explained due to the flaring state of the blazar, the asynchronous times for the two observations, and a lower \gls{SNR} near the edges of the \gls{RSS}.
+The discrepancy in the shape of the flux calibrated spectra is attributed to poor fitting of the standard star near the end of the spectra, due to gaps between the standard flux points as obtained from the \gls{ESO} catalog.%
+\footnote{Hiltner~$600$ is available from the \gls{ESO} catalog at \url{https://www.eso.org/sci/observing/tools/standards/spectra/hilt600.html}\,.}
 
 \begin{figure}[tp]
     \centering
@@ -349,23 +351,25 @@ The most notable disagreement of the polarization properties is seen, during the
     \label{fig:3C_279_specpol}
 \end{figure}
 
-
-The observations show a variation in the linear polarization across the observations, with the level of polarization varying between $\sim 12.23\%$ and $\sim 24.22$\degree, respectively. Surprisingly, the highest level of polarization is not found near the highest gamma-ray peak (2017 March 31), but rather during the lowest gamma-ray flux state (2017 March 28).   Past measurements of the polarization of 3C~$279$ place the polarization during quiescence at $\Pi \approx 10 \%$ \citep[see e.g., ][]{3C279_xray}, falling within the range observed during the peak in the gamma-ray flare ($\Pi = 9.2 \pm 1.1\%$). The disparity between the flaring $\gamma$-ray and apparent quiescent optical regimes may be due to for example, a turbulent magnetic field located in the optical emission region.
+The observations show a variation in the linear polarization across the observations, with the level and angle of polarization varying by $\sim 12.23\%$ and $\sim 24.22$\degree, respectively.
+Surprisingly, the highest level of polarization is not found near the highest $\gamma$-ray peak (2017 March 31), but rather during the lowest $\gamma$-ray flux state (2017 March 28).
+Past measurements of the polarization of 3C~$279$ place the polarization during quiescence at $\Pi \approx 10 \%$ \citep[see e.g., ][]{3C279_xray}, falling within the range observed during the peak in the $\gamma$-ray flare ($\Pi = 9.2 \pm 1.1\%$).
+The disparity between the flaring $\gamma$-ray and apparent quiescent optical regimes may be due to for example, a turbulent magnetic field located in the optical emission region.
 An unordered magnetic field would lead to depolarization effects, and aligns with the polarization results in \autoref{fig:3C_279_specpol}.
 
-
-
+% MARK: HEASA 2022
+% \subsection[Proceeding, HEASA (2022)]{%
+%     \gls{SALT} Spectropolarimetric Pipeline Comparisons\\
+%     (Proceedings of Science, \glsxtrshort{HEASA} 2022)
+% }
 
 % As discussed in \citet[][see also \autoref{app:papers}]{Cooper_HEASA2022}, as well as expanding on the work presented in \cite{Cooper_HEASA2021}, it was shown that the \stops\ pipeline has no noticeable effect on the polarization properties of spectropolarimetric data and that the measure of the goodness of fit for the wavelength solutions could be measured, both through correlation and measuring the position of skyline features for both the $O$- and $E$-beams.
 % The blazar 3C~$279$, the spectrophotometric standard star Hiltner~$600$, and the spectropolarimetric standard star Hiltner~$652$, were observed on the dates tabulated in \autoref{table:sci_targets}.
 % Observations of 3C~$279$ were taken during periods of enhanced and flaring $\gamma$-ray activity.
 
-
-
 % \autoref{fig:3C_279_LCR} shows the $\gamma$-ray photon flux from 3C~$279$ for energies between $0.1 - 100$~GeV, observed using the \gls{FermiLAT}, as provided by the \glsxtrfull{FermiLCR} \citep{FermiLCR}.
 % This shows that on the dates of the optical observations, 3C~$279$ was between $\sim4 - 8$ times brighter when compared to its mean quiescent state. 
 % was likely at $\gamma$-ray fluxes of $1.72 \times 10^{-6}$, $3.58 \times 10^{-6}$, and $2.38 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$, as compared to a quiescent `median' flux of $0.45 \times 10^{-6}$~$ph.\,cm^{-2}s^{-1}$.
-
 
 % \autoref{fig:3C_279_specpol} shows the spectropolarimetric results for 3C~$279$ during the various states of $\gamma$-ray activity as mentioned above.
 % The figure shows, from top to bottom, the normalized, relative flux calibrated, spectra for both grating angles ($12.5$\degree\ and $19.625$\degree, observed in that order), the percentage of linear polarization, and the polarization angle.
@@ -378,13 +382,16 @@ An unordered magnetic field would lead to depolarization effects, and aligns wit
 % The most notable disagreement of the polarization properties is seen, once again, during the $2017$ March $31$ observation, but may be explained due to the flaring state of the blazar, the asynchronous times for the two observations, and a lower \gls{SNR} near the edges of the \gls{RSS}.
 % % The lower \gls{SNR} could originate from either blaze effects arising from the grating, or from the extraction of the trace, which is currently limited to a rectangular aperture in the current \polsalt\ pipeline.
 
-\subsection{Comparison to FORS observations of the  spectroscopic standard Hiltner~652}
+\subsection[Comparison of Hiltner~652 to previous VLT/FORS observations]{Comparison of Hiltner~652 to previous \gls{VLT}\gls{FORS} observations}
 
-The observations of the spectroscopic standard Hiltner~$652$, provided an opportunity to compare the 
-previous observations of this source \citep[presented in part in][]{Cooper_HEASA2022}.  \autoref{fig:Hilt652} shows the comparison between the reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$ as observed with the %\glsxtrlong{FORS} (\glsxtrshort{FORS}[1]) and \gls{FORS}[2] mounted at the \gls{VLT} \citep{FORS1, FORS2}, as well as observed with \gls{SALT}.
-\glsxtrshort{FORS}[1] and \gls{FORS}[2] \citep[as reported by][]{FORS1, FORS2}, and the \gls{SALT} observations.  The SALT spectropolarimetery observations were transformed to the photometric polarization values by...
-This shows that the Stokes parameters of Hiltner~$652$ are consistent across the different instruments, mostly falling within a standard deviation of historical results.
-Minor discrepancies are present, but can be due to multiple compounding effects, such as differing instrumental setups, varying atmospheric conditions, as well as Hiltner~$652$ being classed as a spectrophotometric, and not spectropolarimetric, standard.
+The spectropolarimetric observation of Hiltner~$652$ provided an opportunity to draw comparisons to previous observations of this source \citep[presented in part in][]{Cooper_HEASA2022}.
+\autoref{fig:Hilt652} shows the comparison between the reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$ as observed with the \gls{VLT}/\gls{FORS}[1] and \gls{VLT}/\gls{FORS}[2] \citep[as reported by][]{FORS1, FORS2}, and the \gls{SALT}/\gls{RSS} observations.
+
+Photometric polarization results for Hiltner~652 were obtained from the spectropolarimetric results by running the \polsalt\ \texttt{specpolfilter.py} script.%
+\footnote{See the \polsalt\ \protect\href{https://github.com/saltastro/polsalt/wiki/Linear-Polarization-Reduction.--Beta-version\#7-specpolfilterpy--compute-synthetic-filter-polarization-results-for-listed-filters}{`Linear Polarization Reduction. Beta version' wiki} for documentation on the \texttt{specpolfilter.py} script.}
+This script convolves the \gls{SALTICAM} filter throughputs with the relative flux (or intensity) spectrum to produce the weighted polarization and polarization error for each filter.
+\autoref{fig:Hilt652} shows that the Stokes parameters of Hiltner~$652$ are consistent across the different instruments, mostly falling within a standard deviation of historical results.
+Minor discrepancies are present, but can be due to multiple compounding effects, such as differing instrumental setups, and varying atmospheric conditions.
 
 \begin{figure}[t]
     \centering
@@ -393,11 +400,9 @@ Minor discrepancies are present, but can be due to multiple compounding effects,
     \label{fig:Hilt652}
 \end{figure}
 
-
-
 % MARK: Schutte - 4C+01.02
 \subsection[Schutte et al.\ (2022)]{%
-    Modeling the Spectral Energy Distributions and Spectro\-polari\-metry of Blazars - Application to 4C~+01.02 in 2016~$-$ 2017\\
+    Modeling the Spectral Energy Distributions and Spectro\-polarimetry of Blazars - Application to 4C~+01.02 in 2016~$-$ 2017\\
     \citep{Schutte4C0102}
 }
 
