@@ -6,7 +6,7 @@
     % RSS
     Onboard \gls{SALT} is the \gls{RSS}, which is capable of performing linear spectro\-polarimetry at optical wavelengths.
     % Spectropolarimetry
-    This, along with its wide wavelength coverage and dynamic queue scheduling, make the \gls{SALT}/\gls{RSS} ideal for spectropolarimetric observations of high-energy sources.
+    This, along with its wide wavelength coverage and dynamic observing queue, make \gls{SALT}/\gls{RSS} spectro\-polarimetric observations ideal for high-energy sources.
     %
     % AGN
     \Glspl{AGN} are one such high-energy source, powered by the accretion of material onto a central supermassive black hole.
@@ -24,24 +24,24 @@
     \gls{SALT}/\gls{RSS} spectro\-polarimetric observations are reduced using an adaption of the beta version of the \polsalt\ software.
     % Wavelength calibration errors and STOPS (AIM!)
     Wavelength calibrations are, in general, the most time-consuming and error-prone manual step in the data reduction process, while also being the most pivotal.
-    Furthermore, wavelength solutions for the complementary $O$- and $E$-beams may seemingly be well calibrated independently, but may not be consistent with each other. Consistent solutions across polarization beams are essential for correctly measuring the polarization.
+    Furthermore, wavelength solutions for the complementary $O$- and $E$-beams may seemingly be independently well calibrated, but may be inconsistent with each other - essential for accurate polarization results.
     % , due to, e.g., misidentified spectral features in the arc spectrum or sparse spectral features to identify.
     %
     % STOPS development and testing
-    To improve the efficiency of \gls{SALT}/\gls{RSS} spectropolarimetric data reductions, and to ensure consistent wavelength solutions across the $O$- and $E$- beams, this study presents supplementary tools, as well as their development and testing.
-    The software, named \stops, addresses limitations in the existing wavelength calibration method, allowing for external wavelength calibrations, such as those provided by \iraf, while also providing tools to verify the consistency of the wavelength solutions epoch-to-epoch or across polarimetric beams.
+    To improve the efficiency of \gls{SALT}/\gls{RSS} spectropolarimetric data reductions, and to ensure consistent wavelength solutions across the $O$- and $E$-beams, this study presents \stops, as well as its development and testing.
+    The \stops\ software addresses limitations in the existing wavelength calibration method, allowing for external wavelength calibrations, such as \glsxtrshort{IRAF}, while also providing tools to verify the consistency of the wavelength solutions epoch-to-epoch or across polarimetric beams.
     % Testing
     Rigorous testing, through both synthetic and real data, has been conducted to ensure the reliability and accuracy of \stops.
     %
     % 3C 279
-    The blazar 3C~279 was observed during periods of enhanced activity, 28 March and 17 May 2017, and of flaring, 31 March 2017.
+    The blazar 3C~279 was observed during periods of enhanced and flaring $\gamma$-ray activity in 2017.
     The normalized relative flux spectrum of 3C~279 shows a notable dip in the $\sim 6000 - 9000$~\AA\ range during the period of flaring as compared to epochs of enhanced activity.
-    The degree of polarization for 3C~279 was found to be $\Pi \approx 13.3 \%$, and $21.1 \%$ for the epochs of enhanced activity, and $8.7 \%$ for the epoch of flaring, respectively.
-    The degree of polarization shows good agreement across grating angles and remains fairly constant across the observed wavelength range while still displaying variability according to the transient nature of the blazar.
-    The polarization angle of 3C~279, was found to be $\theta \approx 53.3$\degree, and $77.7$\degree\ for the epochs of enhanced activity, and $63.3$\degree\ for the epoch of flaring, respectively.
-    The polarization angle shows a consistent angle across the observed wavelength range, with a slight deviation in the epoch of flaring.
+    The degree of polarization for 3C~279 was found to be $\Pi \approx 13.3 \%$, and $21.1 \%$ for the epochs of enhanced activity, and $8.7 \%$ during flaring, respectively.
+    The degree of polarization shows good agreement across grating angles and remains fairly constant over the observed wavelength range while still varying from epoch to epoch, as expected from the transient nature of 3C~279.
+    The polarization angle was found to be $\theta \approx 53.3$\degree, and $77.7$\degree\ for the epochs of enhanced activity, and $63.3$\degree\ during flaring, respectively.
+    The polarization angle shows a consistent angle across the observed wavelength range, with a slight deviation between grating angles during flaring.
     % Hiltner 652
-    Furthermore, the spectrophotometric standard, Hiltner~652, was observed with the \gls{SALT}/\gls{RSS} in linear spectropolarimetry mode on 10 June 2022.
+    Further, Hiltner~652 was observed with the \gls{SALT}/\gls{RSS} in linear spectropolarimetry mode on 10 June 2022.
     The reduced, $P_{Q}$ and $P_{U}$, Stokes parameters show no major deviation from previously published results which further ensures that there is no interference introduced into the Stokes parameter calculations for alternate wavelength calibrations as handled by \stops.
     % Conclusion
     The application of \stops\ during the reductions presented supports the feasibility of alternate wavelength calibration methods while ensuring efficient, accurate, and consistent wavelength solutions.
