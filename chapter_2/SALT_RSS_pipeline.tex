@@ -59,7 +59,7 @@ The lens functions similarly to that of the telescope's optics but in this case 
 
 The two most prevalent detector types in spectroscopy are the \gls{CCD} and \gls{CMOS} detectors. In astronomical spectroscopy however, sources are fainter and exposure times are much longer and so the \gls{CCD} detectors are by far the preferred detector as their output has a higher-quality and lower-noise when compared to \gls{CMOS} cameras under the same conditions \citep{CCDvsCMOS}.
 
-The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in \autoref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an \gls{ADC}  which produces a two-dimensional array of `counts'.
+The \gls{CCD} is a detector composed of many thousands of pixels which can store a charge so long as a voltage is maintained across the pixels. Each pixel detects incoming photons using photo-sensitive capacitors through the photoelectric effect and converts the photons to a charge \citep{CCDastronomy}. There are also thermal agitation effects which introduce noise to the charge accumulated by a pixel, further discussed in \autoref{subsec:calibration}. Once the exposure is finished the accumulated charge is read column by column, row by row, through an Analog-to-Digital Converter which produces a two-dimensional array of `counts'.
 
 % Each \gls{CCD} image may be referred to by a name such as a bias, dark, flat field, or science image, which helps the observer differentiate the purpose of each image, also further discussed in \autoref{subsec:calibration}.
 
@@ -219,7 +219,7 @@ When multichannel \glspl{CCD} are used, which consist of multiple \glspl{CCD} or
 
 \subsubsection{Wavelength Calibration}
 
-Finally, since the dispersion element breaks the incident light into its constituent wavelengths non-linearly (\autoref{subsec:dispersion}), the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modelled to produce a reliable pixel to wavelength calibration \citep[see E.g.][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths.
+Finally, since the dispersion element breaks the incident light into its constituent wavelengths non-linearly (\autoref{subsec:dispersion}), the relation between the pixel on a detector and the wavelength of the light incident on it is unknown. Ideally, the spectrometer's optics would be modelled to produce a reliable pixel to wavelength calibration \citep[see e.g.,][]{WavCalSpectraModel}, but this becomes increasingly more difficult for spectrometers with complex, non-sedentary, optical paths.
 
 Alternatively, a source with well-defined spectral features, with said features evenly populating the wavelength region of interest, such as in \autoref{fig:Ne_arc} may be observed. The observed frame is commonly referred to as an `arc' frame, after the arc-lamps used to acquire the spectra, and should be observed alongside the science frames over the course of an observation run.
 
@@ -519,7 +519,7 @@ The Mueller matrix for retardance where $\alpha$ is the angle between the incomi
         0 & -\sin 2 \alpha \sin \delta                        & \cos 2 \alpha \sin \delta                         & \cos \delta                \\
     \end{bmatrix}\rlap{.} 
 \end{equation}
-The retarder is often referred to by this retardance, e.g. if the retardance is $\delta = \pi$ or $\pi / 2$, the retarder is referred to as a half- or quarter-wave plate, respectively.
+The retarder is often referred to by this retardance, e.g., if the retardance is $\delta = \pi$ or $\pi / 2$, the retarder is referred to as a half- or quarter-wave plate, respectively.
 
 \paragraph{General Linear Polarization}
 The Mueller matrix for linear polarization where $\beta$ is the angle between the incoming vector and transmission axis,
@@ -684,7 +684,7 @@ Spectropolarimetric calibrations are, however, more involved when compared to th
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 15cm]{2_SALT_telescope.png}
+    \includegraphics[width=1.0\textwidth]{2_SALT_telescope.png}
     \caption{The tracker, supporting structure, and primary mirror of SALT. Figure adapted from the SALT call for proposals \citep{SALT_CFP}.}
     \label{fig:SALT_telescope}
 \end{figure}

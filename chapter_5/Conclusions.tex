@@ -18,7 +18,7 @@ To ensure the accuracy and reproducibility of the \stops\ software, testing was 
 A comparison of the \texttt{split} method's inputs and outputs showed that the data were unaffected during conversion from a dual beam to a single beam format, allowing accurate wavelength solutions to be found.
 The largest discrepancies introduced by the \texttt{split} method, other than the splitting of the $O$- and $E$-beams to separate files, are the cropping of the non-exposed regions of the \gls{CCD}, and the removal of extensions, both of which are not used during \iraf\ wavelength calibrations.
 
-Similarly, when comparing the output of the \stops\ \texttt{join} and \polsalt\ \texttt{wavelength calibration} methods the alternate wavelength solutions are unaffected, although they differ slightly due to the differing wavelength calibration methods, when converted back to the \polsalt\ format, thus providing \polsalt\ with accurate alternate wavelength solutions for both polarimetric beams.
+Similarly, when comparing the output of the \stops\ \texttt{join} and \polsalt\ \texttt{wavelength calibration} methods the alternate wavelength solutions are unaffected, although they differ slightly due to the different wavelength calibration method used, when converted back to the \polsalt\ format, thus providing \polsalt\ with accurate alternate wavelength solutions for both polarimetric beams.
 The largest discrepancies introduced by the \texttt{join} method are the non-wavelength related processes as handled by \stops\ to substitute the \polsalt\ \texttt{wavelength calibration}, specifically the handling of Wollaston corrections near the beam intersection (see \autoref{par:wollaston}) and the \gls{CRR} being applied to the \gls{SCI} extension instead of the \gls{BPM} extension.
 Both of these discrepancies, however, do not affect \polsalt, the rest of the reduction process, or the final results.
 
@@ -31,7 +31,7 @@ The \texttt{skylines} method is able to recover offsets in generated skyline fea
 The \texttt{correlate} method is able to recover offsets introduced to wavelength calibrated spectra, for each \gls{CCD}, and for comparisons of the $O$- and $E$-beams within a single file, or for the same polarimetric beam across multiple files, with an accuracy of $\approx1$~\AA, limited once again by the spectral resolution.
 
 % Findings
-\section{Scientific results using STOPS} \label{sec:findings}
+\section[Scientific results using \textsc{stops}]{Scientific results using \stops} \label{sec:findings}
 
 A number of publications have been produced during the development of \stops.
 Most notably are the results for the papers discussed in \autoref{sec:app_stops}, which present the findings for a selection of sources, i.e., \citet{Buckley191221B, Cooper_HEASA2021, Cooper_HEASA2022, Schutte4C0102}.

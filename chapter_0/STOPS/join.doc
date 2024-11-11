@@ -24,7 +24,7 @@ save_prefix : dict[str, list[str]], optional
     (The default is SAVE_PREFIX (See Notes))
 verbose : int, optional
     The level of verbosity to use for the Cosmic ray rejection
-    (The default is 30, I.E. logging.INFO)
+    (The default is 30, i.e., logging.INFO)
 
 Attributes
 ----------

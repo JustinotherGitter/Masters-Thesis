@@ -21,7 +21,7 @@ This section of the Appendix aims to provide a minimum working example of the co
 Both \polsalt\ and \iraf\ are launched from the default \gls{CLI} but use independent interfaces during the reduction process. To distinguish which window is in focus, the `\texttt{\$}' token is used for default \gls{CLI} commands while the `\texttt{cl>}' and `\texttt{>\->\->}' tokens are used for \iraf's `xgterm' single- and multi-line commands, respectively. \gls{CLI} commands may also require a specific Python environment. The environment being used is denoted using the `\texttt{(salt)\$}' or `\texttt{(base)\$}' tokens for the `salt' or default `base' environments.%
 \footnote{It is assumed a Python environment manager, such as `conda', is installed.}
 
-General instructions for the reduction process (I.E. not \gls{CLI} line-fed commands) may either be discussed outside a `Listing' environment or included as part of a `Listing' environment preceded with a comment `\texttt{\#}' token. Finally, \polsalt\ implements a \gls{GUI} and thus takes no line-fed commands. As such, instructions referring to the \polsalt\ \gls{GUI} also follow those of the general instructions.
+General instructions for the reduction process (i.e., not \gls{CLI} line-fed commands) may either be discussed outside a `Listing' environment or included as part of a `Listing' environment preceded with a comment `\texttt{\#}' token. Finally, \polsalt\ implements a \gls{GUI} and thus takes no line-fed commands. As such, instructions referring to the \polsalt\ \gls{GUI} also follow those of the general instructions.
 
 As a final note, some parameters are distinguished using `<angle brackets>'. They signify necessary parameters that may vary from reduction to reduction. Notable uses of this notation include the date of observation, \obsdate\ (formatted `YYYYMMDD'), the split science \gls{FITS} files, \ofiles\ or \efiles, the split arc \gls{FITS} files, \oarc\ or \earc, and a wildcard symbol, <\texttt{*}>.
 
@@ -56,7 +56,7 @@ $ conda activate salt
 
 Refer to \autoref{fig:polsalt_gui} for a depiction of the \polsalt\ \gls{GUI}. To complete the \polsalt\ pre-calibrations, and with the \gls{GUI} in focus:
 \begin{itemize}
-    \item Ensure that the `POLSALT code directory' is correct. I.E. `\mytilde/polsalt-beta'.
+    \item Ensure that the `POLSALT code directory' is correct, i.e., `\mytilde/polsalt-beta'.
     \item Set the `Top level data directory' to \obsdate.
     \item Ensure `Raw data directory' is correct.
     \item Ensure `Science data directory' is correct.

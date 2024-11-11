@@ -169,7 +169,7 @@ class Split:
             o_beam.append(hdul["PRIMARY"].copy())
             e_beam.append(hdul["PRIMARY"].copy())
 
-            # Split specific extention
+            # Split specific extension
             raw_split = self.split_ext(hdul, "SCI")
 
             # o_beam[0].data = raw_split['SCI'].data[1]

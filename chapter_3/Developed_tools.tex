@@ -96,7 +96,7 @@ Synthetic filtering is calculated via \textbf{specpolfilter.py} and computes the
 Any wavelength dependent throughput filter curve may be synthesized when defined by the user, but a few pre-defined filter curves are available, namely: the \glspl{SALTICAM} \gls{U}, \gls{B}, \gls{V}, \gls{R}, and \gls{I} Johnson-Cousins filter curves.
 
 % MARK: Need for POLSALT
-\subsection{\textsc{polsalt} Limitations and the Need for Supplementary Tools} \label{subsec:polsalt_limits}
+\subsection[The Need for Supplementary Tools]{\polsalt\ Limitations and the Need for Supplementary Tools} \label{subsec:polsalt_limits}
 
 % Why
 The creation of supplementary tools for \polsalt\ spectropolarimetric reductions stemmed from the limitations of the wavelength calibration process and a need to compare wavelength solutions across the perpendicular $O$ and $E$ polarization beams. The process of calibrating wavelength solutions using the \polsalt\ pipeline is time-consuming for the average user, and often results in unexpected program crashes when receiving erroneous inputs or key presses. Due to the time-consuming process of recalibrating the wavelength solutions it is not feasible to perform the wavelength calibrations time and time again for anything larger than a handful of observations. This is particularly true for observations performed with the \gls{SALT} PG$0300$ grating as the sparse spectral features of the \gls{Ar} arc lamp are not handled well by the \polsalt\ pipeline.
@@ -111,20 +111,21 @@ Unfortunately, \iraf\ is unable to natively parse the data structure implemented
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width = 0.98\textwidth]{3_arc_spectrum.png}
+    \includegraphics[width = 1.0\textwidth]{3_arc_spectrum.png}
     \caption{One of many \gls{Ar} arc lamp spectra as provided by \gls{SALT} for line identification. Plot adapted from \gls{SALT}'s published Longslit Line Atlases (as of 2024), resized to fit within the document margins but otherwise unchanged.\protect\footnotemark}
     \label{fig:ar_arc_salt}
 \end{figure}
 \footnotetext{\protect\href{https://pysalt.salt.ac.za/lineatlas/plot_line_argon_lores.pdf}{The `low resolution' Ar plot} sourced from \protect\url{https://astronomers.salt.ac.za/data/salt-longslit-line-atlas/}}
 
 % MARK: IRAF
+\addtocontents{toc}{\protect\enlargethispage{-1.0\baselineskip}}  % ToC Force heading to newline
 \section[\textsc{iraf}]{\iraf\ - \glsfmtlong{IRAF}} \label{sec:iraf}
 
 % What is IRAF and why necessary
 The \iraf\ (\glsxtrlong{IRAF}) software is a collection of software designed specifically for the reduction and analysis of astronomical images and spectra \citep{iraf:1986, iraf:1993}. The software consists of many tasks which perform specific operations and which are grouped into relevant packages. Only a brief overview of the tasks will be provided here. Help documentation for any of the \iraf\ tasks may be found online or through the \iraf\ \gls{CLI} through the \texttt{?} or \texttt{:.help} `cursor commands' when running interactive tasks, with more specific help documentation provided in the relevant section.%
 \footnote{Online help for \iraf\ is available at \url{https://iraf.net/irafdocs/}}
 
-Useful \iraf\ tasks that deserve a brief mention are: the \texttt{mkscript} task in the \texttt{system} package which allows a user to create and save a task along with the defined parameters as a file which can later be called as a script,%
+Useful \iraf\ tasks that deserve a brief mention are: the \texttt{mkscript} task in the \texttt{system} package which allows the user to create and save a task along with the defined parameters as a file which can later be called as a script,%
 \footnote{Help documentation for the \texttt{mkscript} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/system.mkscript.html}.}
 the \texttt{implot} task in the \texttt{plot} package which allows the rows or columns of an image to be interactively displayed,%
 \footnote{Help documentation for the \texttt{implot} task may be found at \url{https://astro.uni-bonn.de/~sysstw/lfa_html/iraf/plot.implot.html}.}
@@ -223,7 +224,7 @@ begin	identify arcO0057[*,237]
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{3_id_resids.png}
-        \caption{\gls{RMS} of the identified features.}
+        \caption{\glsxtrshort{RMS} of the identified features.}
     \end{subfigure}
     \caption{A plot and the \gls{RMS} of the identified features found using the \iraf\ \texttt{identify} task. Figures created using the \iraf\ \texttt{identify} task.}
     \label{fig:iraf_id_plot}
@@ -352,7 +353,7 @@ For example, \autoref{subfig:trans_O} shows a good fit to the wavelength solutio
 
 The parsing of \polsalt\ data into an \iraf\ usable format and the reformatting of the \iraf\ wavelength calibrated data back into a \polsalt\ usable format, referred to as \textit{splitting} and \textit{joining}, is performed by the \stops\ \texttt{split} and \texttt{join} methods, respectively.
 
-Methods to verify the validity of the wavelength calibrations were also added to \stops. The \texttt{skyline} method checks the sky line wavelength ($x$) positions across the frame as well as the variation of the sky lines across the positional ($y$) axis of the frame. The \texttt{correlate} method checks the correlation of the $O$- and $E$-beams either within a given \gls{FITS} file or across multiple files (comparing only the $O$- and $E$-beams for each). With these two additional methods, a user is able to verify that the wavelength solutions do not conflict across the $O$- and $E$-beams and that no unexpected deviations are included in the wavelength solutions.
+Methods to verify the validity of the wavelength calibrations were also added to \stops. The \texttt{skyline} method checks the sky line wavelength ($x$) positions across the frame as well as the variation of the sky lines across the positional ($y$) axis of the frame. The \texttt{correlate} method checks the correlation of the $O$- and $E$-beams either within a given \gls{FITS} file or across multiple files (comparing only the $O$- and $E$-beams for each). With these two additional methods, the user is able to verify that the wavelength solutions do not conflict across the $O$- and $E$-beams and that no unexpected deviations are included in the wavelength solutions.
 
 Help on the usage of \stops\ in a \gls{CLI} can be viewed by running:
 \begin{lstlisting}[language=bash]
@@ -381,7 +382,7 @@ As mentioned previously, the format of the \gls{FITS} file created by \polsalt\ 
 While \iraf\ is capable of dealing with multiple traces in an extension or lists of input files, it is not as capable when dealing with multiple wavelength solutions contained in a single extension (as expected by the \polsalt\ \texttt{wavelength calibration}) or extensions containing sub-extensions (as expected by the \polsalt\ \texttt{spectral extraction}). To simplify the \iraf\ reduction procedure it was decided to separate the perpendicular polarization beams into their own files.
 
 % What it does -> Primary focus
-The files with \polsalt\ pre-reductions applied, namely \gls{FITS} files with an `mxgbp' prefix (\autoref{sec:polsalt}), are used as the starting point for the supplementary tool's \texttt{split} method. Running \texttt{split} finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each \gls{FITS} file (i.e. for both the $O$- and $E$-beam), and appends all header and science data necessary for wavelength calibration to the relevant \gls{HDU} structure. Otherwise, defaults, such as which row to split the image along to separate the beams, were kept as close to the \polsalt\ pipeline as possible.
+The files with \polsalt\ pre-reductions applied, namely \gls{FITS} files with an `mxgbp' prefix (\autoref{sec:polsalt}), are used as the starting point for the supplementary tool's \texttt{split} method. Running \texttt{split} finds all the \gls{FITS} files for wavelength calibration within the working directory, creates two empty \gls{HDU} structures for each \gls{FITS} file (i.e., for both the $O$- and $E$-beam), and appends all header and science data necessary for wavelength calibration to the relevant \gls{HDU} structure. Otherwise, defaults, such as which row to split the image along to separate the beams, were kept as close to the \polsalt\ pipeline as possible.
 
 \begin{figure}[t]
     \centering
@@ -667,7 +668,7 @@ It is therefore recommended that the different versions of Python are managed us
 
 \pagebreak
 
-It is recommended to use \polsalt\ through the \gls{GUI} as it provides a user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu, as seen in \autoref{fig:polsalt_gui}. Reductions are possible, however, purely through the \gls{CLI} using the \polsalt\ `beta' scripts.
+It is recommended to use \polsalt\ through the \gls{GUI} as it provides the user-friendly environment while also sequentially listing each step of the reduction process in a dropdown menu, as seen in \autoref{fig:polsalt_gui}. Reductions are possible, however, purely through the \gls{CLI} using the \polsalt\ `beta' scripts.
 
 % MARK: Pre-reductions
 \subsection{\textsc{polsalt} Pre-Reductions} \label{subsec:reduc_pre}
@@ -701,8 +702,8 @@ The wavelength calibrations may now be completed in \iraf. This section concerns
 % MARK: Prep for IRAF
 \subsubsection{Preparing the Data for \iraf}
 
-Splitting the data is presented in \autoref{code:stops_split}. The \stops\ \texttt{split} method may take multiple parameters, as seen in \autoref{sec:stops}, but default parameters should be used wherever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{obeam}' and `\texttt{ebeam}'.
-% As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}, which would include the split `wmxgbp' \gls{FITS} files (ebeam*.fits). This naming conflict is revisited and addressed later on in the reduction process and is thus not of any concern.
+Splitting the data is presented in \autoref{code:stops_split}. The \stops\ \texttt{split} method may take multiple parameters, as seen in \autoref{sec:stops}, but default parameters should be used wherever possible. The most notable parameters are the directory, which defaults to the current working directory of the \gls{CLI}, the split row, which defaults to \polsalt's default center row, and the save prefix, which defaults to `\texttt{beamo}' and `\texttt{beame}'.
+% As an aside, the save prefix may be worth changing as, later in the reduction process, the \polsalt\ raw Stokes reductions indiscriminately selects files named \texttt{YYYYMMDD/sci/e*.fits}, which would include the split `wmxgbp' \gls{FITS} files (beame*.fits). This naming conflict is revisited and addressed later on in the reduction process and is thus not of any concern.
 
 % MARK: IRAF wavelength calibrations
 \subsubsection{\iraf\ Wavelength Calibrations}

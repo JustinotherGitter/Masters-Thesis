@@ -1,5 +1,17 @@
 # Thesis Overview and Design Organizer (TODO 😝)
 
+![Python Badge](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff&style=flat)
+![Jupyter Badge](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=fff&style=flat)
+![NumPy Badge](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=fff&style=flat)
+![SciPy Badge](https://img.shields.io/badge/SciPy-8CAAE6?logo=scipy&logoColor=fff&style=flat)
+
+![LaTeX Badge](https://img.shields.io/badge/LaTeX-008080?logo=latex&logoColor=fff&style=flat)
+![Overleaf Badge](https://img.shields.io/badge/Overleaf-47A141?logo=overleaf&logoColor=fff&style=flat)
+![GitHub Badge](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=fff&style=flat)
+![Inkscape Badge](https://img.shields.io/badge/Inkscape-000?logo=inkscape&logoColor=fff&style=flat)
+
+<!-- <https://simpleicons.org/> <https://badges.pages.dev/> <https://github.com/badges/shields> -->
+
 <!-- markdownlint-disable MD033 MD038-->
 <details>
 <summary>Useful Thesis Links</summary>
@@ -23,55 +35,21 @@ Justin Cooper
 * Unify (x-pixel/y-pixel/x/y/wavelength/) or vertical/horizontal axis or rows/columns
   * → (?) ($x_p$, $y_p$)/(\AA, $y_p$) | ($u$, $v$) for pixel position and $s_{u|v}$ for pixel ($x$|$y$) size
 
-* STOPS: skylines legend use [double markers](https://matplotlib.org/stable/users/explain/axes/legend_guide.html#legend-handlers "matplotlib.org")
-
-* Edit created plots to use $\LaTeX$ font (both Python and Inkscape figures)
-  * Edit plots to use `subfigures` where possible (?)
-  * (?) <https://jwalton.info/Matplotlib-latex-PGF/>
-
-* Align `continued` equations by `=`, align `related` equations by centering (see Equations style guide)
-
-* Limit paragraph breaks to only `left-to-right` pages, not across a page turn.
-
-* Organize Glossary entries:
-  * Glossary (Alphabetical)
-  * Abbreviations, Acronyms, and Symbols (By group(?)/category, then Alphabetical)
-    * Add Symbols(?)
-  * Unify usage of exposure / frame / extension and add to glossary (see references)
-
-* Check no duplicates in *bibtex* file &/| bibliography
-
-* Add `EVPA` acronym in place of `polarization angle`?
+* Add Symbols to glossary
+* Unify usage of exposure / frame / extension and add to glossary (see references)
 
 * Check footnotes all on correct page
 
 * Check common errors:
-  * `e.g.` should be `e.g., ` (exempli gratia, Latin for \`for example')
-  * `i.e.` should be `i.e., ` (id est, Latin for \`that is')
-  * `[O|E][arc|beam|*]*.[EXT]` should be `[arc|beam|*][o|e]*.[EXT]`
-  * unified `$O$- and $E$-beam(s)`
-  * `extension` is the correct spelling
-  * `the user` instead of `a user`
   * `$#$~unit` instead of `# $unit$`
-  * tables should use `\toprule` `\midrule`, and `\bottomrule`
   * `\approx` for `≈` \`approximate' symbol, and
   * `\sim` for `∼` \`on-the-order-of' symbol
-  * `\autoref` instead of `\ref` (unless used in a list of refs)
-
-* Badges (for GitHub signalling)
-  * <https://simpleicons.org/>
-  * <https://badges.pages.dev/>
-  * <https://github.com/badges/shields>
 
 <!-- MARK: Final TODO's -->
 ## Final `TODOs`
 
-* Cite STOPS as repo? (See `.cff` references)
-* Typeset pages - odd pages right, i.e., no paragraphs broken from even to odd pages.
-* Plots:
-  * Check fonts (`CMU Serif` for text, `CMU Serif Italics` for symbols)
-  * Check scaling ($160$ mm width, variable height)
-* Ask for read through from friends to ensure no spelling/grammar errors
+* Much empty,
+  * such wow
 
 <!-- MARK: @Submission -->
 ## At Submission
@@ -308,6 +286,8 @@ My headings use `Title Case`.[^head_case] Generally, labels are only included wh
 
 Equations are written in-text and are a part of sentences unless otherwise indicated. To this end, there is no new line before `\begin` or after `\end` (unless the sentence ends with the equation and the equation is punctuated) and multiple equations in a single environment are properly punctuated.
 
+**Note**: multi-line, or continued, equations are aligned by the `=` symbol while related equations within one environment are aligned by centering.
+
 ```Latex
 % Align center
 \begin{equation} \label{eq:name}
@@ -382,7 +362,7 @@ or, for sub-figures, use:
 Figures created by myself are (generally) made using Inkscape. To keep line widths / text size / etc. consistent the following document properties are used:
 
 * Document properties
-  * $6.28$ x ? inches
+  * $6.28$ ($160mm$) x ? inches
     * $x$-size set to the $\LaTeX$ `\textwidth` (usually in inches)
       * (`\textwidth` found by using `\the\textwidth` anywhere in the $\LaTeX$ document)
       * $6.28$ inches == $A4$ page with uniform $1$ inch border.
@@ -399,12 +379,15 @@ Figures created by myself are (generally) made using Inkscape. To keep line widt
   * (I.E. $0$, $0$, $66$, $100$)
 
 * Font properties
-  * name = cmr10
+  * `CMU Serif` for text
+  * `CMU Serif Italics` for symbols
   * weight = normal
-  * size = $16$ px
+  * size = $12$ pt
 
 * Stroke properties
   * width = $1$ px
+
+See also: <https://jwalton.info/Matplotlib-latex-PGF/>
 
 Figures are first saved as an `svg` before being exported as either a `png` or `pdf` to 'play well' with the $\LaTeX$ `\includegraphics[]{}` command.
 
@@ -489,3 +472,6 @@ See 'preamble' of `references.bib` for further useful links relevant to specific
 <!-- Hidden References -->
 [FITS]: <https://fits.gsfc.nasa.gov/standard40/fits_standard40aa-le.pdf> (The FITS Standard)
 [VSCode]: <https://code.visualstudio.com/> (VSCode Homepage)
+
+<!-- `e.g., ` (exempli gratia, Latin for \`for example') -->
+<!-- `i.e., ` (id est, Latin for \`that is') -->

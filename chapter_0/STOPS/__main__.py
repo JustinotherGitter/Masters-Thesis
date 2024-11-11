@@ -104,7 +104,7 @@ parser.add_argument(
     type=Parser.parse_path,
     help=(
         "Path of the directory which contains the working data. "
-        f"Defaults to the cwd -> `{PARSE['DATA_DIR']}` (I.E. '.')."
+        f"Defaults to the cwd -> `{PARSE['DATA_DIR']}` (i.e., '.')."
     ),
 )
 
@@ -234,7 +234,7 @@ join_parser.add_argument(
     help=(
         "Custom coefficients to use instead of the `IRAF` fitcoords "
         "database. Use as either '-c <o_solution> <e_solution>' or "
-        "a regex descriptor '-c <*solution*extention>'."
+        "a regex descriptor '-c <*solution*extension>'."
     ),
 )
 # Change `join` defaults here

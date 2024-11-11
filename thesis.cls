@@ -133,7 +133,7 @@
 %
 % The acknowledgements environment puts a large, bold, centered 
 % "Acknowledgements" label at the top of the page. The acknowledgements
-% themselves appear in a quote environment, i.e. tabbed in at both sides, and
+% themselves appear in a quote environment, i.e., tabbed in at both sides, and
 % on its own page.
 
 \newenvironment{acknowledgements}{%
@@ -168,7 +168,7 @@
 %
 % The originality environment puts a large, bold, centered 
 % "Statement of originality" label at the top of the page. The statement 
-% of originality itself appears in a quote environment, i.e. tabbed in at 
+% of originality itself appears in a quote environment, i.e., tabbed in at 
 % both sides, and on its own page.
 
 \newenvironment{originality}{%

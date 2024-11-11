@@ -56,7 +56,7 @@ class CrossCorrelate:
         The name or directory to save the figure produced to.
         "." saves a default name to the current working. A default name is
         also used when save_prefix is a directory.
-        (The default is None, I.E. The figure is not saved, only displayed)
+        (The default is None, i.e., The figure is not saved, only displayed)
 
     Attributes
     ----------
@@ -76,7 +76,7 @@ class CrossCorrelate:
     offset : int, DEPRECATED
         The amount the spectrum is shifted, mainly to test the effect of the
         cross correlation.
-        (The default is 0, I.E. no offset introduced)
+        (The default is 0, i.e., no offset introduced)
     save_prefix
     wav_unit : str
         The units of the wavelength axis.
@@ -110,7 +110,7 @@ class CrossCorrelate:
     offset : int, optional
         The amount the spectrum is shifted, mainly to test the effect of the
         cross correlation.
-        (The default is 0, I.E. no offset introduced)
+        (The default is 0, i.e., no offset introduced)
     **kwargs : dict
         keyword arguments.
         Allows for passing unpacked dictionary to the class constructor.

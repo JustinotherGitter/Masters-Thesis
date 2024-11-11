@@ -60,7 +60,7 @@ class Join:
         (The default is SAVE_PREFIX (See Notes))
     verbose : int, optional
         The level of verbosity to use for the Cosmic ray rejection
-        (The default is 30, I.E. logging.INFO)
+        (The default is 30, i.e., logging.INFO)
 
     Attributes
     ----------
@@ -397,7 +397,7 @@ class Join:
             y_shape = int(hdu["SCI"].data.shape[0] / 2) - cropsize
             x_shape = hdu["SCI"].data.shape[1]
 
-            # No differences in "PRIMARY" extention header
+            # No differences in "PRIMARY" extension header
             primary_ext = hdu["PRIMARY"]
             primary_ext.header["HISTORY"] = f"CRCLEAN: {CR_PARAMS}"
             whdu.append(primary_ext)
@@ -407,7 +407,7 @@ class Join:
                 whdu[ext].header = hdu[ext].header.copy()
                 whdu[ext].header["CTYPE3"] = "O,E"
 
-                # Create empty extentions with correct order and format
+                # Create empty extensions with correct order and format
                 if ext == "BPM":
                     whdu[ext].data = np.zeros(
                         (2, y_shape, x_shape),
@@ -421,7 +421,7 @@ class Join:
                     )
                     whdu[ext].header["BITPIX"] = "-32"
 
-                # Fill in empty extentions
+                # Fill in empty extensions
                 if cropsize:
                     temp_split = split_sci(
                         hdu,
@@ -459,7 +459,7 @@ class Join:
             )
 
             if params["function"] == 1:  # Function type (1 = chebyshev)
-                # Set wavelength extention values to function
+                # Set wavelength extension values to function
                 whdu["WAV"].data[num] = chebgrid2d(
                     x=np.linspace(-1, 1, params["ymax"]),
                     y=np.linspace(-1, 1, params["xmax"]),
@@ -467,7 +467,7 @@ class Join:
                 )
 
             elif params["function"] == 2:  # Function type (2 = legendre)
-                # Set wavelength extention values to function
+                # Set wavelength extension values to function
                 whdu["WAV"].data[num] = leggrid2d(
                     x=np.linspace(-1, 1, params["ymax"]),
                     y=np.linspace(-1, 1, params["xmax"]),

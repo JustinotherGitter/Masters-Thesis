@@ -19,7 +19,7 @@ The testing of the `reduction-specific' methods are discussed in \autoref{subsec
 % No \iraf\ tests or tests on \iraf\ \gls{FITS} files. (Trusted accurate)
 The secondary requirement during the development of \stops\ was to provide a means to check the wavelength solutions.
 This was achieved through the `check-specific' methods, namely the \stops\ \texttt{correlate} and \texttt{skylines} methods, which were designed to validate the \iraf\ wavelength solutions, specifically after re-insertion of the wavelength solutions back into the \polsalt\ \gls{FITS} file format.
-The file format distinction is necessary as \iraf\ provides immediate confirmation of the wavelength solutions during calibration through interactive \gls{RMS} plots (see e.g. \autoref{fig:iraf_id_plot}, \ref{fig:iraf_fc_plot}), as well as the transformation of the spectra through the \texttt{transform} \iraf\ task, while \polsalt\ only provides confirmation of the \gls{RMS} for the interactive line identification during \texttt{wavelength calibration}.
+The file format distinction is necessary as \iraf\ provides immediate confirmation of the wavelength solutions during calibration through interactive \gls{RMS} plots (see e.g., \autoref{fig:iraf_id_plot}, \ref{fig:iraf_fc_plot}), as well as the transformation of the spectra through the \texttt{transform} \iraf\ task, while \polsalt\ only provides confirmation of the \gls{RMS} for the interactive line identification during \texttt{wavelength calibration}.
 
 % The \texttt{correlate} method provides a means to confirm the relative offsets in the wavelength solutions across polarization beams (as well as across the related \gls{CCD}['s]), and as such was tested by correlating two synthetic spectra with a feature in each \gls{CCD} offset by a varying amount.
 % The \texttt{skylines} method provides a means to confirm the accuracy of the wavelength solution by attempting to retrieve and compare the skylines from a spectrum, which are not used during wavelength calibration and thus correlate well to the fit of the wavelength solution, to skylines as measured by \gls{SALT}, and as such was tested using a synthetic spectrum with artificial skylines added which were offset by varying amounts.
@@ -50,21 +50,21 @@ This accounts for the discrepancy in the `Cards' between the \polsalt\ and \stop
 %     \begin{subfigure}[b]{\textwidth}
 %         \centering
 %         \includegraphics[width=\textwidth]{4_diff_O.pdf}
-%         \caption{The difference in the \gls{SCI} extensions, for the `O' polarization beam.}
+%         \caption{The difference in the \gls{SCI} extensions, for the $O$- polarization beam.}
 %         \label{subfig:diff_split_O}
 %     \end{subfigure}
 %     \hfill
 %     \begin{subfigure}[b]{\textwidth}
 %         \centering
 %         \includegraphics[width=\textwidth]{4_diff_E.pdf}
-%         \caption{The difference in the \gls{SCI} extensions, for the `E' polarization beam.}
+%         \caption{The difference in the \gls{SCI} extensions, for the $E$- polarization beam.}
 %         \label{subfig:diff_split_E}
 %     \end{subfigure}
 %     \caption{The difference between the \polsalt\ pre-reduced (`mxgbp'- prefixed) \gls{FITS} files and the \stops\ `split' (`[arc|beam][o|e]'- prefixed) files. Figures created using both the \polsalt\ \texttt{Raw image reduction} and \stops\ \texttt{split} method outputs.}
 %     \label{fig:split_diff}
 % \end{figure}
 
-% \autoref{fig:split_diff} shows that the \polsalt\ \gls{SCI} data is unmodified when copying the data to the \stops\ \gls{FITS} file, although each file only includes half of the data, for the relevant $O$- or $E$-polarization beam, \autoref{subfig:diff_split_O} and \autoref{subfig:diff_split_E}, respectively.
+% \autoref{fig:split_diff} shows that the \polsalt\ \gls{SCI} data is unmodified when copying the data to the \stops\ \gls{FITS} file, although each file only includes half of the data, for the relevant $O$- or $E$- polarization beam, \autoref{subfig:diff_split_O} and \autoref{subfig:diff_split_E}, respectively.
 % The split data is also cropped at the top- and bottom-most rows of the \polsalt\ data, with the cropping defaulting to $40$~pixels (see \autoref{subsec:stops_split}).
 % This accounts for the discrepancy in the `Dimensions' between the \polsalt\ and \stops\ files in \autoref{table:split_info}.
 
@@ -142,7 +142,7 @@ Finally, the \stops\ \texttt{join} method was tested to ensure compatibility and
 This involved testing the \texttt{join} method with various data sets, with differing observation configurations, to ensure that the output files were accurate and consistent.
 
 % MARK: WAV Corr. Checks
-\subsection{Cross Correlation Checks} \label{subsec:test_corr}
+\subsection[Verifying the \texttt{correlate} Method]{Cross Correlation Checks} \label{subsec:test_corr}
 
 % O/E correlation checks to verify the consistency of the wavelength solutions.
 The \texttt{correlate} method returns plots validating the wavelength solutions and so only has to accept the files output from the \polsalt\ \texttt{spectra extraction}  method (`ecwmxgbp'- prefixed files).
@@ -176,13 +176,13 @@ For spectral regions with few features or features with a low \gls{SNR} (such as
 When a returned `max lag' peak is not significant when compared to the noise in the correlation plots, the \gls{SNR} of the features may be too low for an accurate calculation of the offset.
 
 % MARK: WAV Sky. Checks
-\subsection{Sky Line Checks} \label{subsec:test_sky}
+\subsection[Veryfing the \texttt{skylines} Method]{Sky Line Checks} \label{subsec:test_sky}
 
 % Full frame wavelength solution checks to ensure comprehensive calibration.
 % Verifying the accuracy of the cross-correlation function against known standards.
 The \texttt{skylines} method returns plots validating the wavelength solutions and so has to accept as input the files output from the \stops\ \texttt{join} method.
 
-\begin{figure}[t]
+\begin{figure}[tp]
     \centering
     \begin{subfigure}[b]{1.0 \textwidth}
         \centering
@@ -197,7 +197,7 @@ The \texttt{skylines} method returns plots validating the wavelength solutions a
         \caption{The \stops\ \texttt{skylines} output for the synthetic spectrum displayed in \subref{subfig:sky_test_spec}.}
         \label{subfig:sky_test_pure}
     \end{subfigure}
-    \caption{The \stops\ \texttt{skylines} method output \subref{subfig:sky_test_pure} for a synthetic two-dimensional spectrum \subref{subfig:sky_test_spec}. Figures generated using Python \subref{subfig:sky_test_spec} and the \stops\ \texttt{skylines} method \subref{subfig:sky_test_pure}.}
+    \caption{The \stops\ \texttt{skylines} method output (\subref{subfig:sky_test_pure}) for a synthetic two-dimensional spectrum (\subref{subfig:sky_test_spec}). Figures generated using Python (\subref{subfig:sky_test_spec}) and the \stops\ \texttt{skylines} method (\subref{subfig:sky_test_pure}).}
     \label{fig:sky_test}
 \end{figure}
 
@@ -259,6 +259,8 @@ The spectra show a good agreement across the measured position of the proposed a
 
 \input{chapter_4/tables/4_grb191221b_lines.tex}
 
+\pagebreak
+
 \autoref{table:grb_lines} shows the measured absorption line properties, specifically for the \gls{FORS}[2] spectrum due to its higher \gls{SNR} and better line resolution than the \gls{RSS} spectrum.
 Two distinct redshifts were acquired from the absorption line measurements, namely $z = 0.960 \pm 0.0017$ and $z = 1.142 \pm 0.0078$.
 Initial analysis of the spectrum by the \gls{Swift}/\gls{UVOT} team \citep{Kuin2019} placed the redshift at $z = 1.19$, which was later further refined by \citet{Vielfaure2019} who reported a redshift for the host galaxy of $z = 1.148$, as well as a fainter intervening system at $z = 0.961$, firmly agreeing with the measured redshifts found with \gls{RSS} and \gls{FORS}[2].
@@ -316,6 +318,8 @@ The cross correlation of the arc lamps perpendicular polarization beams show cle
 The spectra display a good overlap between the two grating angles, especially when considering the variable nature of blazars as well as the fact that the spectra are only relatively flux calibrated.
 Both the percentage of linear polarization and the polarization angle agree well across the grating angle overlap.
 
+\pagebreak
+
 \subsection{Spectropolarmetric observations of 3C~279}
 
 As was, in part, presented in  \citet[][see also \autoref{app:papers}]{Cooper_HEASA2022}, the \gls{FSRQ} 3C~279 was observed with the \gls{SALT}/\gls{RSS} in linear spectropolarimetric mode in 2017 during periods of enhanced and flaring $\gamma$-ray activity.
@@ -336,7 +340,9 @@ See \autoref{table:sci_targets} for the details of each observation.
 \footnotetext{\protect\url{https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/source.html?source_name=4FGL_J1256.1-0547}}
 
 As a test of the \stops\ pipeline, it was found that there was no noticeable effect on the polarization properties of spectropolarimetric data, when compared to the \polsalt\ pipeline.
-The measure of the goodness of fit for the wavelength solutions could also be measured, both through correlation and measuring the position of skyline features for both the $O$- and $E$-beams. 
+The measure of the goodness of fit for the wavelength solutions could also be measured, both through correlation and measuring the position of skyline features for both the $O$- and $E$-beams.
+
+\pagebreak
 
 \autoref{fig:3C_279_specpol} shows the spectropolarimetric results for the PG$0900$ observations of 3C~$279$, presenting, from top to bottom, the normalized, relative flux calibrated, spectra for both grating angles ($12.5$\degree\ and $19.625$\degree, observed in that order), the percentage of linear polarization, and the polarization angle.
 It is important to note that, while the flux calibration did not produce an identical shape near the overlap regions of the spectrum (compare top two panels), the reductions are able to achieve very good agreements between the degree and angle of polarization (bottom two panels).
@@ -354,7 +360,7 @@ The discrepancy in the shape of the flux calibrated spectra is attributed to poo
 
 The observations show a variation in the linear polarization across the observations, with the level and angle of polarization varying by $\sim 12.23\%$ and $\sim 24.22$\degree, respectively.
 Surprisingly, the highest level of polarization is not found near the highest $\gamma$-ray peak (2017 March 31), but rather during the lowest $\gamma$-ray flux state (2017 March 28).
-Past measurements of the polarization of 3C~$279$ place the polarization during quiescence at $\Pi \approx 10 \%$ \citep[see e.g., ][]{3C279_xray}, falling within the range observed during the peak in the $\gamma$-ray flare ($\Pi = 9.2 \pm 1.1\%$).
+Past measurements of the polarization of 3C~$279$ place the polarization during quiescence at $\Pi \approx 10 \%$ \citep[see e.g.,][]{3C279_xray}, falling within the range observed during the peak in the $\gamma$-ray flare ($\Pi = 9.2 \pm 1.1\%$).
 3C~$279$ is also known to show large, rapid minute-scale, variations in the polarization angle \citep{3C279_var}, possibly linked to repeating $\gamma$-ray activity \citep{3C279_repeat}.
 An unordered magnetic field would lead to depolarization effects, and aligns with the polarization results in \autoref{fig:3C_279_specpol}.
 The disparity between the flaring $\gamma$-ray and apparent quiescent optical regimes may be due to for example, a turbulent magnetic field located in the optical emission region.
@@ -385,7 +391,7 @@ An unordered magnetic field would lead to depolarization effects, and aligns wit
 % The most notable disagreement of the polarization properties is seen, once again, during the $2017$ March $31$ observation, but may be explained due to the flaring state of the blazar, the asynchronous times for the two observations, and a lower \gls{SNR} near the edges of the \gls{RSS}.
 % % The lower \gls{SNR} could originate from either blaze effects arising from the grating, or from the extraction of the trace, which is currently limited to a rectangular aperture in the current \polsalt\ pipeline.
 
-\subsection[Comparison of Hiltner~652 to previous VLT/FORS observations]{Comparison of Hiltner~652 to previous \gls{VLT}/\gls{FORS} observations}
+\subsection[Comparison of Hiltner~652 to VLT/FORS observations]{Comparison of Hiltner~652 to previous \gls{VLT}/\gls{FORS}\\observations}
 
 The spectropolarimetric observation of Hiltner~$652$ provided an opportunity to draw comparisons to previous observations of this source \citep[presented in part in][]{Cooper_HEASA2022}.
 \autoref{fig:Hilt652} shows the comparison between the reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$ as observed with the \gls{VLT}/\gls{FORS}[1] and \gls{VLT}/\gls{FORS}[2] \citep[as reported by][]{FORS1, FORS2}, and the \gls{SALT}/\gls{RSS} observations.
