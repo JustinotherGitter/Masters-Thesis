@@ -32,18 +32,8 @@ Justin Cooper
 <!-- MARK: Minor TODO's -->
 ## Minor `TODOs`
 
-* Unify (x-pixel/y-pixel/x/y/wavelength/) or vertical/horizontal axis or rows/columns
-  * → (?) ($x_p$, $y_p$)/(\AA, $y_p$) | ($u$, $v$) for pixel position and $s_{u|v}$ for pixel ($x$|$y$) size
-
-* Add Symbols to glossary
-* Unify usage of exposure / frame / extension and add to glossary (see references)
-
-* Check footnotes all on correct page
-
-* Check common errors:
-  * `$#$~unit` instead of `# $unit$`
-  * `\approx` for `≈` \`approximate' symbol, and
-  * `\sim` for `∼` \`on-the-order-of' symbol
+* Much empty,
+  * such wow
 
 <!-- MARK: Final TODO's -->
 ## Final `TODOs`

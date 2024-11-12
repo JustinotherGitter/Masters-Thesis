@@ -23,7 +23,8 @@ The largest discrepancies introduced by the \texttt{join} method are the non-wav
 Both of these discrepancies, however, do not affect \polsalt, the rest of the reduction process, or the final results.
 
 % What were the results of the check-specific testing?
-It is possible, and recommended, to ensure the accuracy of the wavelength solutions within whichever alternate wavelength calibration software the user decides to use, e.g., \iraf, or Python. The \stops\ \texttt{skylines} and \texttt{correlate} methods were, therefore, developed to determining the accuracy of the wavelength solutions.
+It is possible, and recommended, to ensure the accuracy of the wavelength solutions within whichever alternate wavelength calibration software the user decides to use, e.g., \iraf, or Python.
+The \stops\ \texttt{skylines} and \texttt{correlate} methods were, therefore, developed to determining the accuracy of the wavelength solutions.
 To eliminate variability inherent in real-world data, synthetic data were generated and used to test these methods.
 By introducing known offsets to synthetic data, the recovery of these offsets through the \stops\ check-specific methods ensured that the methods were functioning as intended.
 
@@ -44,7 +45,7 @@ Additionally, the \stops\ software has been used extensively in \citet{Barnard_H
 \citet{Cooper_HEASA2021}, and later \citet{Cooper_HEASA2022}, present results for the blazar $3$C~$279$, reduced using alternate \iraf\ wavelength calibrations.
 It was shown that the \stops\ software has no noticeable effect on the spectral and polarization properties, and that the \iraf\ wavelength solutions were accurate and reliable.
 The blazar was observed during periods of enhanced activity as well as during a period of flaring $\gamma$-ray activity on 31 March 2017.
-The normalized relative flux spectra of $3$C~$279$ showed a consistent spectral shape across the various epochs, only deviating slightly during the epoch of flaring, as noted by the increase at shorter wavelengths in the $\sim 6000 - 9000$~\AA\ wavelength range.
+The normalized relative flux spectra of $3$C~$279$ showed a consistent spectral shape across the various epochs, only deviating slightly during the epoch of flaring, as noted by the increase at shorter wavelengths in the $\sim 6000$ -- $9000$\,\AA\ wavelength range.
 The linear polarization remained consistent across the wavelength range at each epoch but varied across epochs, with a minimum linear polarization occurring during the period of flaring.
 The angle of polarization was also consistent across the wavelength range while varying across epochs.
 
@@ -62,7 +63,7 @@ The reduced $Q$ and $U$ Stokes parameters of Hiltner~$652$ showed no systematic 
 The spectropolarimetric results were used, alongside multi-wavelength observations, to model the \gls{SED} of the blazar across periods of quiescent and flaring activity.
 Using the known redshift for $4$C~+$01.02$ of $z = 2.1$, emission features in the normalized, continuum subtracted, spectra were identified.
 These features are more prominent during the quiescent state due to the fainter non-thermal continuum emission as compared to the flaring state.
-Optical spectropolarimetry of $4$C~$01.02$ showed a consistent polarization percentage across the observed wavelength range, averaging $10.04 \pm 1.03 \%$ and $1.72 \pm 0.93 \%$, for the flaring and quiescent state, respectively.
+Optical spectropolarimetry of $4$C~$01.02$ showed a consistent polarization percentage across the observed wavelength range, averaging $\Pi = 10.04 \pm 1.03 \%$ and $1.72 \pm 0.93 \%$, for the flaring and quiescent state, respectively.
 
 % Did \stops\ meet its objectives?
 It has been shown that the \stops\ software allows for the integration of alternate wavelength calibrations with \polsalt, and that the software is accurate and reliable, meeting the objectives laid out at the offset of its development.
