@@ -39,13 +39,14 @@ Multiple spectra may be acquired simultaneously when the slit is positioned such
 
 The spectrometer is usually situated at the focal point.
 In cases where this is not feasible due to restrictions, for example restrictions of weight or size, a fibre feed may be situated behind the slit on the telescope.
+Alternatively, the individual fibres may be rearranged to cover only the slit, altogether removing the need for a slit.
 This allows the signal to be routed away from the telescope to a controlled environment with only miniscule losses.
 
 %Spectroscopy done with no slit is commonly referred to as objective spectroscopy and, as the name suggests, the prism is situated just before the telescopes objective, the primary element of the telescope that focuses the collected light to the primary focus.
 
 \subsection{Collimator}
 
-The collimators function is to collimate the focused light from the telescope, ensuring that all light rays run parallel before reaching the dispersion element.
+The collimators function is to collimate the focused light from the telescope, ensuring that all light rays run parallel before reaching the dispersion element, as most dispersers are designed to operate in a parallel beam.
 The focal ratio of the collimator ($f_{c} / D_{c}$, where $f$ refers to the focal length and $D$ refers to the diameter) should ideally match the focal ratio of the telescope ($f_{T} / D_{T}$).
 
 % Other considerations are also necessary when dealing with collimators, such as the sizing, weight, and price, but which may be of interest but which fall outside of the scope of the basic working principles discussion are unrelated to is ensuring that the full collecting area is utilized as an oversized collimator may be heavier as well as more expensive than necessary.
@@ -96,7 +97,7 @@ Generally, while the angular dispersion is a more involved process to determine,
 \begin{equation} \label{eq:resolving_power}
     R = \frac{\lambda}{FWHM}\,,
 \end{equation}
-where $\lambda$ is the wavelength of an incident monochromatic beam and \gls{FWHM} refers to the width of the feature on the detector at half of its maximum intensity.
+where $\lambda$ is the wavelength of an incident monochromatic beam and \gls{FWHM} refers to the width of the spectral line on the detector at half of its maximum intensity.
 
 \subsubsection{Prism} \label{subsubsec:prism}
 
@@ -128,13 +129,10 @@ where $A_{C}, B_{C}, C_{C}$ are the Cauchy coefficients and have known values fo
 Cauchy's equation is a much simpler approximation of the refractive index that remains very accurate at visible wavelengths \citep{JenkinsOptics}.
 Taking only the first term of the derivative of the Cauchy equation allows us to approximate the angular dispersion of a prism,
 \begin{equation} \label{eq:prism_angular_dispersion_approx}
-    \begin{aligned}
-        \frac{\partial \theta}{\partial \lambda} &= -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}}\\
-        &\propto -\lambda^{-3}\,,
-    \end{aligned}
+    \frac{\partial \theta}{\partial \lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\frac{1}{\lambda^{3}}\,,
 \end{equation}
 which shows that the angular dispersion of a prism is wavelength dependent and furthermore that longer wavelengths are dispersed less than shorter wavelengths \citep{BirneyObsAstro, Hecht_optics}.
-The dependence of the angular dispersion, $d\theta/d\lambda$, on the wavelength, $\lambda$, is crucial for the formation of a spectrum but this cubic, non-linear, relation results in a non-linear spectrum.
+The dependence of the angular dispersion, $d\theta/d\lambda$, on the wavelength, $\lambda$, is crucial for the formation of spectra but this cubic, non-linear, relation results in a non-linear spectrum.
 Since prisms rely on the refractive index of the material they are made of, they have low angular dispersions.
 
 Multiple prisms can be used to increase the angular dispersion but as the dispersion is non-linear it becomes increasingly more difficult to calibrate.
@@ -177,7 +175,7 @@ The regions of an order that do not overlap with another order are called free s
 An order-blocking filter may be used to account for the overlaps and increase the free spectral range.
 A diffraction grating can also be blazed by an angle $\theta$, as illustrated in \autoref{fig:grating_diagram}.
 Blazing refers to the fact that the grooves on the surface of the grating are not symmetrical.
-The asymmetry of the grooves diffracts the incident beam such that most of the beam's intensity is found in a reflected, zeroth order, beam.
+The asymmetry of the grooves diffracts the incident beam such that most of the beam's intensity is found in a reflected ($\beta = \alpha$) $0^{th}$ order beam.
 The wavelength at which a blazed spectrograph is most effective is called the blaze wavelength, $\lambda_{b}$, which is determined by:
 \begin{equation} \label{eq:blaze_wavelength}
     \begin{aligned}
@@ -315,7 +313,7 @@ Mosaicking, therefore, correctly orients the data acquired from a multichannel d
     \centering
     \includegraphics[width = 16cm]{2_Ne_arc.pdf}
     \caption{
-        Example of an arc spectrum for NeAr taken with \gls{SALT}'s \gls{RSS} using the PG1800 grating at a grating angle of $34.625$\degree, an articulation angle of $69.258$\degree, and covering a wavelength range of $\sim 5600$ -- $6900$~\AA.
+        Example of an arc spectrum for NeAr taken with the \gls{SALT}/\gls{RSS} using the PG1800 grating at a grating angle of $34.625$\degree, an articulation angle of $69.258$\degree, and covering a wavelength range of $\sim 5600$ -- $6900$~\AA.
         Plot adapted from \gls{SALT}'s published Longslit Line Atlases, (2023).\protect\footnotemark
     }
     \label{fig:Ne_arc}
@@ -814,7 +812,7 @@ In astronomy in particular, spectropolarimetry has been used to study the magnet
 \begin{figure}[t]
     \centering
     \includegraphics[width=1.0\textwidth]{2_specpol_sci.pdf}
-    \caption{A spectropolarimetric target exposure as observed by the \gls{SALT} \gls{RSS} in spectropolarimetry mode.}
+    \caption{A spectropolarimetric target exposure as observed by the \gls{SALT}/\gls{RSS} in spectropolarimetry mode.}
     \label{fig:specpol_exp}
 \end{figure}
 
@@ -938,7 +936,7 @@ The tracker also houses the calibration system which contains the \gls{Ar}, \gls
     \centering
     \includegraphics[width = 1.0\textwidth]{2_RSS_optical_path.png}
     \caption{
-        The optical path of the \gls{SALT} \gls{RSS}.
+        The optical path of the \gls{SALT}/\gls{RSS}.
         Figure adapted from the \gls{SALT} call for proposals \citep{SALT_CFP}.
     }
     \label{fig:RSS_layout}

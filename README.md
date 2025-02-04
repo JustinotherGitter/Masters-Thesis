@@ -38,8 +38,14 @@ Justin Cooper
 <!-- MARK: Final TODO's -->
 ## Final `TODOs`
 
-* Much empty,
-  * such wow
+* General
+  * glspl vs gls (no "\}'s")
+  * SALT RSS -> SALT/RSS, etc.
+* 2.1.7/Prism
+  * Double check first paragraph grammar.
+  * ... where A_C, B_C, **and** C_C are ...
+* Pre-3.4.3/3.4.2 end/POLSALT pre-reductions
+  * spacing
 
 <!-- MARK: @Submission -->
 ## At Submission
