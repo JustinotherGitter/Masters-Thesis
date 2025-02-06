@@ -178,7 +178,7 @@ The \texttt{correlate} method returns plots validating the wavelength solutions 
     \label{fig:corr_test}
 \end{figure}
 
-The \stops\ \texttt{correlate} method was tested by cross correlating synthetic $O$- and $E$-beam spectra with known offsets, with the aim of reacquiring said offsets, as shown in \autoref{fig:corr_test}.
+The \stops\ \texttt{correlate} method was tested by cross correlating synthetic $O$- and $E$-beam spectra with known offsets, with the aim of reacquiring those offsets, as shown in \autoref{fig:corr_test}.
 The spectra were generated with a feature in each \gls{CCD} region, randomly offset in both the wavelength and intensity axes, \autoref{subfig:corr_test_spec}.
 The features were purposefully chosen to be of low \glspl{SNR} and \glspl{FWHM} to test the robustness of the \texttt{correlate} method.
 Non-synthetic spectra will include more features, with higher \glspl{SNR} and \glspl{FWHM}, and as such will be more robust to the \texttt{correlate} method.
@@ -401,7 +401,7 @@ Surprisingly, the highest level of polarization is not found during the brightes
 Past observations of 3C~$279$ place the polarization during quiescence at $\Pi \approx 10 \%$ \citep[see e.g.,][]{3C279_xray}, falling within the range observed during the peak in the $\gamma$-ray flare ($\Pi = 9.2 \pm 1.1\%$).
 3C~$279$ is also known to show large, rapid minute-scale, variations in the polarization angle \citep{3C279_var}, possibly linked to repeating $\gamma$-ray activity \citep{3C279_repeat}.
 An unordered magnetic field would lead to depolarization effects, and aligns with the polarization results in \autoref{fig:3C_279_specpol}.
-The disparity between the flaring $\gamma$-ray and apparent quiescent optical regimes may be due to for example, a turbulent magnetic field located in the optical emission region.
+The disparity between the flaring $\gamma$-ray and apparent quiescent optical regimes may arise from a turbulent magnetic field located in the optical emission region.
 An unordered magnetic field would lead to depolarization effects, and aligns with the observed spectropolarimetric results.
 
 % MARK: HEASA 2022
@@ -431,7 +431,7 @@ An unordered magnetic field would lead to depolarization effects, and aligns wit
 
 \subsection[Comparison of Hiltner~652 to VLT/FORS observations]{Comparison of Hiltner~652 to previous \gls{VLT}/\gls{FORS}\\observations}
 
-The spectropolarimetric observation of Hiltner~$652$ provided an opportunity to draw comparisons to previous observations of this source \citep[presented in part in][]{Cooper_HEASA2022}.
+The spectropolarimetric observation of Hiltner~$652$, a B1 star, provided an opportunity to draw comparisons to previous observations of this source \citep[presented in part in][]{Cooper_HEASA2022}.
 \autoref{fig:Hilt652} shows the comparison between the reduced $Q$ and $U$ Stokes parameters for Hiltner~$652$ as observed with the \gls{VLT}/\gls{FORS}[1] and \gls{VLT}/\gls{FORS}[2] \citep[as reported by][]{FORS1, FORS2}, and the \gls{SALT}/\gls{RSS} observations.
 
 Photometric polarization results for Hiltner~652 were obtained from the spectro\-polarimetric results by running the \polsalt\ \texttt{specpolfilter.py} script.%

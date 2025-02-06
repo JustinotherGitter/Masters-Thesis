@@ -39,11 +39,8 @@ Justin Cooper
 ## Final `TODOs`
 
 * General
-  * glspl vs gls (no "\}'s")
-  * SALT RSS -> SALT/RSS, etc.
-* 2.1.7/Prism
-  * Double check first paragraph grammar.
-  * ... where A_C, B_C, **and** C_C are ...
+  * SALT RSS → SALT/RSS, etc.
+  * Footnotes
 * Pre-3.4.3/3.4.2 end/POLSALT pre-reductions
   * spacing
 

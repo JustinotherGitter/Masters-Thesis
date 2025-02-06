@@ -71,7 +71,7 @@ Files with background and geometric corrections applied are saved with ``c'' pre
 % MARK: Raw Stokes calculations
 \subsection{Raw Stokes Calculations} \label{subsec:pol_rstokes}
 
-The raw Stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and identify waveplate pairs for which the intensity, $I$, and a `raw Stokes' signal, $S$, are calculated as:
+The raw Stokes calculations are performed via \textbf{specpolraw\-stokes\_dev.py} and combine waveplate pairs, waveplates with an offset of $\pi/4$, for which the intensity, $I$, and a `raw Stokes' signal, $S$, are calculated as:
 \begin{align} \label{eq:polsalt_rawstokes}
     I &= \frac{1}{2} (O_{1} + O_{2} + E_{1} + E_{2})\,,\ \text{and}\\
     S &= \frac{1}{2} \left[ \left( \frac{O_{1} - O_{2}}{O_{1} + O_{2}} \right) - \left( \frac{E_{1} - E_{2}}{E_{1} + E_{2}} \right) \right]\,.
@@ -99,8 +99,8 @@ The culling is performed by comparing observation cycles against one another, co
     \label{fig:polsalt_gui_vis}
 \end{figure}
 
-Plotting the results of the spectropolarimetric reduction process is done using \textbf{specpol\-view.py}, which generates a plot of the Intensity, Linear Polarization ($\%$), and Equatorial Polarization Angle (\degree) against a shared wavelength axis, as seen in \autoref{fig:polsalt_plot}.
-This step is interactive allowing the user control over various options, such as the wavelength range, binning, etc., with the \gls{GUI} shown in \autoref{fig:polsalt_gui_vis}.
+Plotting the results of the spectropolarimetric reduction process is done interactively using \textbf{specpol\-view.py} and allows the user control over various options, such as the wavelength range, binning, etc., with the \gls{GUI} shown in \autoref{fig:polsalt_gui_vis}.
+The visualization may generate a number of plot configurations, with the most common being that of the Intensity, Linear Polarization ($\%$), and Equatorial Polarization Angle (\degree) against a shared wavelength axis, as seen in \autoref{fig:polsalt_plot}.
 
 \begin{figure}[t]
     \centering
@@ -154,7 +154,7 @@ This restructuring works both ways as once the \iraf\ reductions are complete th
     \includegraphics[width = 1.0\textwidth]{3_arc_spectrum.png}
     \caption{
         One of many \gls{Ar} arc lamp spectra as provided by \gls{SALT} for line identification.
-        Plot adapted from \gls{SALT}'s published Longslit Line Atlases (as of 2024), resized to fit within the document margins but otherwise unchanged.\protect\footnotemark
+        Plot adapted from the \gls{SALT} published Longslit Line Atlases (as of 2024), resized to fit within the document margins but otherwise unchanged.\protect\footnotemark
     }
     \label{fig:ar_arc_salt}
 \end{figure}
@@ -377,8 +377,8 @@ The \texttt{transform} task is the optional final step in the \iraf\ wavelength 
 Simply put, \texttt{transform} converts the ($x_p$, $y_p$) pixel units of an exposure to ($\lambda$, $y_p$) wavelength units which allows for an immediate check of whether the wavelength solution is consistent across the frame.
 Any general error in the wavelength solution may be spotted in the transformed images; ranging from minor errors, such as the arc lines or sky lines not being purely vertical across the frame, to more major errors, such as an incorrect wavelength solution skewing the exposure beyond recognition.
 
-For example, \autoref{subfig:trans_O} shows a good fit to the wavelength solution, as after transformation all the sky lines run exactly vertical.
-\autoref{subfig:trans_E}, on the other hand, shows a seemingly good fit, but closer inspection reveals that the sky lines (especially towards the right of the frame) deviate from the vertical, indicating a poor fit to the wavelength solution.
+For example, \autoref{subfig:trans_E} shows a seemingly good fit, but closer inspection reveals that the sky lines (especially towards the right of the frame) deviate from the vertical, indicating a poor fit to the wavelength solution.
+\autoref{subfig:trans_O}, on the other hand, shows a good fit to the wavelength solution, as after transformation all the sky lines run exactly vertical.
 
 \begin{figure}[t]
     \centering
@@ -813,7 +813,7 @@ The \polsalt\ \gls{GUI} may be launched by opening a \gls{CLI} and running the c
 Once the window, depicted in \autoref{fig:polsalt_gui}, has launched, ensure that the first two paths at the top of the window point to the \polsalt\ and working directories, as seen in \autoref{fig:polsalt_gui}.
 The `raw image reduction' entry may then be selected from the dropdown menu and the pre-reductions run.
 
-Alternatively,% if the data already includes `mxgbp' \gls{FITS} files in the \texttt{YYYYMMDD/sci/} working directory,
+Alternatively, % if the data already includes `mxgbp' \gls{FITS} files in the \texttt{YYYYMMDD/sci/} working directory,
 a \gls{CLI} may be used to complete the initial pre-reductions using
 \begin{lstlisting}[language=bash]
 $ cd (*@<\textit{OBSDATE}>@*)/sci
@@ -910,7 +910,7 @@ The `beta' version of \polsalt\ provides access to a \gls{GUI} but may also be h
 % MARK: POLSALT GUI
 \subsubsection{\polsalt\ Beta in the \gls{GUI}}
 
-The reduction process using the \polsalt\ \gls{GUI} is completed by selecting and, when applicable, interactively modifying the reduction step through the interactive windows, one-by-one, from the \gls{GUI}'s dropdown menu, as explained in \autoref{app:reduction} (\autopageref{code:stops_corr} onwards).%
+The reduction process using the \polsalt\ \gls{GUI} is completed by selecting and, when applicable, interactively modifying the reduction step through the interactive windows, one-by-one, from the \glspl{GUI} dropdown menu, as explained in \autoref{app:reduction} (\autopageref{code:stops_corr} onwards).%
 \footnote{See the official \href{https://github.com/saltastro/polsalt/wiki}{\polsalt\ wiki} or alternative online resources such as the \href{https://saltworkshop2022.salt.ac.za/wp-content/uploads/2022/11/DG_polsalt_SALT_workshop_2022_finalversion.pdf}{\gls{SALT} workshop slides}.}
 
 % Covering the \gls{CLI} implementation first, the wavelength solution needs to be applied to all the \gls{FITS} files and the tilt introduced by the wollaston prism must be corrected for.

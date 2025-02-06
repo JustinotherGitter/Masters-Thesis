@@ -125,7 +125,7 @@ The refractive index of a material as a function of its wavelength, $n(\lambda)$
 \begin{equation} \label{eq:Cauchy}
     n(\lambda) = A_{C} + \frac{B_{C}}{\lambda^{2}} + \frac{C_{C}}{\lambda^{4}} + \dots\,,
 \end{equation}
-where $A_{C}, B_{C}, C_{C}$ are the Cauchy coefficients and have known values for certain materials.
+where $A_{C}$, $B_{C}$, and $C_{C}$, etc., are the Cauchy coefficients and have known values for certain materials.
 Cauchy's equation is a much simpler approximation of the refractive index that remains very accurate at visible wavelengths \citep{JenkinsOptics}.
 Taking only the first term of the derivative of the Cauchy equation allows us to approximate the angular dispersion of a prism,
 \begin{equation} \label{eq:prism_angular_dispersion_approx}
@@ -189,7 +189,7 @@ Taking the derivative of \autoref{eq:grating_equation} with respect to $\lambda$
 \begin{equation} \label{eq:grating_angular_dispersion}
     \frac{\partial \beta}{\partial \lambda} = \frac{m}{\sigma \cos(\beta)}\,.
 \end{equation}
-Substituting $m / \sigma$ with the grating equation results in
+It is important to realize that the values for $m$ and $\sigma$ are not chosen independent of other parameters, and thus the ratio $m / \sigma$ may be substituted with the grating equation, resulting in
 \begin{equation} \label{eq:grating_angular_dispersion_approx}
     \begin{aligned}
         \frac{\partial \beta}{\partial \lambda} &= \frac{\sin(\alpha) + \sin(\beta)}{\lambda \cos(\beta)}\\
@@ -198,7 +198,7 @@ Substituting $m / \sigma$ with the grating equation results in
 \end{equation}
 
 Similar to the dispersion of a prism, \autoref{eq:grating_angular_dispersion_approx} shows that the dispersion of a grating is wavelength dependent, but this dependence is only inversely proportional and thus more uniform across a wavelength range than that of a prism.
-Furthermore, shorter wavelengths are refracted less than longer wavelengths since there is no negative relation between the angular dispersion and the wavelength \citep{BirneyObsAstro, Hecht_optics}.
+Furthermore, shorter wavelengths are refracted less than longer wavelengths since there is no negative relation between the angular dispersion and the wavelength \citep{BirneyObsAstro, Hecht_optics,MKS_Handbook}.
 
 \subsubsection{Alternate Diffraction Elements}
 
@@ -274,15 +274,16 @@ An overscan region refers to adding a few cycles to the readout of each column o
 
 Dark currents can be found by taking an image with nothing exposed onto the detector for a certain exposure time.
 This resultant dark image can then be scaled to the science images exposure time since the dark current should be linearly proportional to exposure time.
-When the detector is capable of being held at precise temperatures, dark images may be taken over multiple hours during the day to produce a high quality master dark image that may then be scaled and subtracted from all subsequent images.
+When the detector is capable of being held at precise temperatures, dark images may be taken over multiple hours during the day to produce a high quality master dark image that may then be scaled and subtracted from all subsequent images, after bias subtractions.
 
-Next, multiplicative noise, such as a \gls{CCD}'s pixel-to-pixel response, should be accounted for.
+Next, multiplicative noise, such as a \gls{CCD}s pixel-to-pixel response, should be accounted for.
 This pixel-to-pixel response should be uniform across the image and to achieve this an average response may be divided out.
 The average response is referred to as a `flat' image or flat-field and may be acquired by observing a uniformly illuminated surface to determine the pixel-to-pixel response.
 
 Dome flats are images taken of a relatively flat surface, usually the inside of a telescopes dome, and are used in both photometry and spectroscopy.
 The surface is uniformly and indirectly illuminated by a projector lamp, ideal for flat-field images.
-Alternate flat-fielding methods, such as night sky and twilight flats, are available but are suited solely for photometry.
+Alternate flat-fielding methods, such as night sky and twilight flats, are available but are more suited for photometry than spectroscopy.
+Twilight flats may be used for spectroscopy when the instrumental response over the length of the slit must be calibrated for, when observing extended objects for example.
 
 Night sky flats are produced from science images containing mostly sky.
 The science images are combined using the `mode' statistic which removes any celestial objects at the cost of a low \gls{SNR} flat-field.
@@ -314,7 +315,7 @@ Mosaicking, therefore, correctly orients the data acquired from a multichannel d
     \includegraphics[width = 16cm]{2_Ne_arc.pdf}
     \caption{
         Example of an arc spectrum for NeAr taken with the \gls{SALT}/\gls{RSS} using the PG1800 grating at a grating angle of $34.625$\degree, an articulation angle of $69.258$\degree, and covering a wavelength range of $\sim 5600$ -- $6900$~\AA.
-        Plot adapted from \gls{SALT}'s published Longslit Line Atlases, (2023).\protect\footnotemark
+        Plot adapted from the \gls{SALT} published Longslit Line Atlases, (2023).\protect\footnotemark
     }
     \label{fig:Ne_arc}
 \end{figure}
@@ -760,7 +761,7 @@ The actual effect of separating the perpendicular polarization components is ach
 \paragraph{Wollaston Prisms} \label{par:wollaston}
 The Wollaston prism consists of two right-angle prisms consisting of a birefringent monoaxial material, cemented together with an optically transparent adhesive along their hypotenuses with their optical axes orthogonal, as seen in \autoref{fig:Wollaston_prism}.
 The Wollaston prism is a common optical polarizing element in astrophysical polarimetry which separates an incident beam into two linearly polarized $O$- and $E$-beams, orthogonal to one another, and deviated from their common axis equally.
-The deviation angle of the polarized beams is determined by the wedge angle which is defined as the angle from the common hypotenuse to that of the outer transmission face of either prism.
+The deviation angle of the polarized beams is determined by both the wedge angle, defined as the angle from the common hypotenuse to that of the outer transmission face of either prism, as well as the material making up the prisms.
 
 Wollaston prisms benefit over simpler elements (such as those listed in the \hyperref[par:polarizer]{polarizer} paragraph) since a single frame allows for the observation of both orthogonal polarization components.
 This halves the observational time required to collect enough data to calculate the Stokes parameters, at the cost of an increase in calibration and reduction difficulty \citep{wollaston}.
@@ -911,7 +912,7 @@ The fixed elevation means that \glspl{SALT} primary mirror has a fixed gravity v
 
 During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus.
 The tracker is capable of $6$ degrees of freedom with an accuracy of $\sim 5$\,$\mu$m and is capable of tracking $\pm 6$\degree\ from the optimal central track position.
-Targets at declinations from $10.5$\degree\ to $-75.3$\degree, as shown in \autoref{fig:SALT_visibility} are accessible during windows of opportunity.
+Targets at declinations from $10.5$\degree\ to $-75.3$\degree, as shown in \autoref{fig:SALT_visibility}, are accessible during windows of opportunity.
 As the tracker moves along the track the effective collecting area varies and thus \gls{SALT} has a varying effective diameter of $\sim 7$\,m to $9$\,m when the tracker is furthest and closest to the optimal central position, respectively.
 
 \begin{figure}[t]
@@ -919,6 +920,9 @@ As the tracker moves along the track the effective collecting area varies and th
     \includegraphics[width = 1.0 \textwidth]{2_SALT_visibility.png}
     \caption{
         The visibility annulus of objects observable by \gls{SALT}.
+        Note that the observation windows and observation durations vary based on an object's declination.
+        Objects may be visible to \gls{SALT} for several hours, falling within the outer ring, but unobservable, falling within the inner ring.
+        Thus, some objects can potentially be observed twice per night, when rising and setting.
         Figure adapted from the \gls{SALT} call for proposals \citep{SALT_CFP}.
     }
     \label{fig:SALT_visibility}
