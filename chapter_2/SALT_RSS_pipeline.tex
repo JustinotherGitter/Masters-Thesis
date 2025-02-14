@@ -129,7 +129,10 @@ where $A_{C}$, $B_{C}$, and $C_{C}$, etc., are the Cauchy coefficients and have 
 Cauchy's equation is a much simpler approximation of the refractive index that remains very accurate at visible wavelengths \citep{JenkinsOptics}.
 Taking only the first term of the derivative of the Cauchy equation allows us to approximate the angular dispersion of a prism,
 \begin{equation} \label{eq:prism_angular_dispersion_approx}
-    \frac{\partial \theta}{\partial \lambda} = -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \propto -\frac{1}{\lambda^{3}}\,,
+    \begin{aligned}
+        \frac{\partial \theta}{\partial \lambda} &= -\frac{B}{a}\frac{2B_{C}}{\lambda^{3}} \\
+        \therefore\; \frac{\partial \theta}{\partial \lambda} &\propto -\frac{1}{\lambda^{3}}\,,
+    \end{aligned}
 \end{equation}
 which shows that the angular dispersion of a prism is wavelength dependent and furthermore that longer wavelengths are dispersed less than shorter wavelengths \citep{BirneyObsAstro, Hecht_optics}.
 The dependence of the angular dispersion, $d\theta/d\lambda$, on the wavelength, $\lambda$, is crucial for the formation of spectra but this cubic, non-linear, relation results in a non-linear spectrum.
@@ -138,7 +141,6 @@ Since prisms rely on the refractive index of the material they are made of, they
 Multiple prisms can be used to increase the angular dispersion but as the dispersion is non-linear it becomes increasingly more difficult to calibrate.
 The more material and material boundaries the light must pass through, the more its intensity decreases due to attenuation effects and Fresnel losses.
 Even so, the transmittance of modern prisms for their selected wavelength range is generally very high due to improved manufacturing methods as well as improved transmitting materials.\footnote{See manufacturers technical specifications, \href{https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=148}{THORLABS}, or \href{https://www.edmundoptics.eu/c/prisms/607/}{Edmund Optics} for example.}
-\enlargethispage{-2\baselineskip}
 
 \subsubsection{Diffraction Grating} \label{subsubsec:diff_grat}
 
@@ -190,14 +192,18 @@ Taking the derivative of \autoref{eq:grating_equation} with respect to $\lambda$
     \frac{\partial \beta}{\partial \lambda} = \frac{m}{\sigma \cos(\beta)}\,.
 \end{equation}
 It is important to realize that the values for $m$ and $\sigma$ are not chosen independent of other parameters, and thus the ratio $m / \sigma$ may be substituted with the grating equation, resulting in
-\begin{equation} \label{eq:grating_angular_dispersion_approx}
+\begin{equation} \label{eq:grating_angular_dispersion_subbed}
     \begin{aligned}
-        \frac{\partial \beta}{\partial \lambda} &= \frac{\sin(\alpha) + \sin(\beta)}{\lambda \cos(\beta)}\\
-        &\propto \lambda^{-1}\,.
+        \frac{\partial \beta}{\partial \lambda} &= \frac{1}{\lambda} \frac{\sin(\alpha) + \sin(\beta)}{\cos(\beta)}\,.
     \end{aligned}
 \end{equation}
+\autoref{eq:grating_angular_dispersion_subbed} may be seen as a combination of two terms, a wavelength dependent term and an `angular' term which is dependent on the grating geometries.
+For realistic grating configurations at optical wavelengths the angular dependence varies quite slowly as compared to the wavelength dependence, and so the spectral dispersion may be approximated as:
+\begin{equation} \label{eq:grating_angular_dispersion_approx}
+    \frac{\partial \beta}{\partial \lambda} \propto \frac{1}{\lambda}\,.
+\end{equation}
 
-Similar to the dispersion of a prism, \autoref{eq:grating_angular_dispersion_approx} shows that the dispersion of a grating is wavelength dependent, but this dependence is only inversely proportional and thus more uniform across a wavelength range than that of a prism.
+Similar to the dispersion of a prism, \autoref{eq:grating_angular_dispersion_approx} shows that the dispersion of a grating is predominantly wavelength dependent, but this dependence is only inversely proportional and thus more uniform across a wavelength range than that of a prism.
 Furthermore, shorter wavelengths are refracted less than longer wavelengths since there is no negative relation between the angular dispersion and the wavelength \citep{BirneyObsAstro, Hecht_optics,MKS_Handbook}.
 
 \subsubsection{Alternate Diffraction Elements}
@@ -207,6 +213,8 @@ For prisms, along with the single and multiple prism setups mentioned, there als
 A grism (Grating Prism), as shown in \autoref{fig:grism}, refers to a transmissive grating etched onto one of the transmissive faces of a prism and allows a single camera to capture both spectroscopic and photometric images without needing to be moved, with and without the grism in the path of the beam of light, respectively.
 An immersed grating refers to a grism modified such that the transmissive grating is coated with reflective material.
 The primary source of dispersion for both grisms and immersive gratings is the grating and any aberration effects from the prism are negligible in comparison.
+
+\enlargethispage{-1\baselineskip}
 
 \begin{figure}[t]
     \centering
@@ -249,6 +257,8 @@ There is also an unintentional additional charge which is linearly proportional 
 The dark current can be minimized and possibly ignored if the \gls{CCD} is adequately cooled.
 These types of noise add to the charge held by a pixel and are thus considered additive.
 
+\pagebreak
+
 \begin{figure}[t]
     \centering
     \includegraphics[width = 10cm]{2_ccd.jpg}
@@ -264,8 +274,6 @@ The efficiency of a \gls{CCD} is referred to as the Quantum Efficiency, and it i
 The efficiency of the \gls{CCD} and telescope optics is also wavelength dependent and so the noise that results from them is more complex than that of additive noise.
 This type of noise is referred to as multiplicative noise.
 
-\pagebreak
-
 Additive noise, such as bias and dark currents, is inherent to \gls{CCD} images, and as such needs to be subtracted out first when performing calibrations.
 Bias currents can be found by taking a bias image or by adding an overscan region to each image.
 A bias image is an image where the charges on the \gls{CCD} are reset and then immediately read off without exposing anything on the detector, effectively taking an image with zero exposure time.
@@ -279,6 +287,8 @@ When the detector is capable of being held at precise temperatures, dark images 
 Next, multiplicative noise, such as a \gls{CCD}s pixel-to-pixel response, should be accounted for.
 This pixel-to-pixel response should be uniform across the image and to achieve this an average response may be divided out.
 The average response is referred to as a `flat' image or flat-field and may be acquired by observing a uniformly illuminated surface to determine the pixel-to-pixel response.
+
+\pagebreak
 
 Dome flats are images taken of a relatively flat surface, usually the inside of a telescopes dome, and are used in both photometry and spectroscopy.
 The surface is uniformly and indirectly illuminated by a projector lamp, ideal for flat-field images.
@@ -307,6 +317,7 @@ The calibrated science image, $S^{*}_{\lambda}(x,y)$, which accounts for the bia
 When multichannel \glspl{CCD} are used, which consist of multiple \glspl{CCD} or a \gls{CCD} with multiple output amplifiers, additional calibrations, specifically cross-talk corrections and mosaicking, are required.
 Cross-talk noise refers to contamination that occurs during readout in one channel from another channel with a high signal and occurs because the signals can not be completely isolated from one another.
 Cross-talk corrections therefore account for this signal contamination between channels being read out at the same time \citep{CrossTalk}.
+
 Mosaicking is necessary for multichannel \glspl{CCD} since the digitized signal read out from the detector has no reference of the physical location of the pixel it was detected at.
 Mosaicking, therefore, correctly orients the data acquired from a multichannel detector so that a single correctly oriented image is produced.
 
@@ -473,8 +484,6 @@ Nicol was the first to create a polarizer, aptly named the Nicol prism, where th
 Faraday discovered the phenomenon where the polarization plane of light is rotated when under the influence of a magnetic field, known as the Faraday effect.
 Brewster calculated the angle of incidence, $\theta_{B} = \arctan{n_{2} / n_{1}}$, at which incident polarized light is perfectly transmitted through a transparent surface, with refractive indexes of $n_{1}$ and $n_{2}$, while non-polarized incident light is perfectly polarized when reflected and partially polarized when refracted.
 
-\pagebreak
-
 Stokes' work created the first consistent description of polarization and gave us the Stokes parameters which describe an operational approach to measuring polarization (discussed further in \autoref{subsec:pol}) \citep{Stokes}.
 Hale was the first to apply polarization to astronomical observations, using a Fresnel rhomb and Nicol prism as a quarter-wave plate and polarizer, respectively \citep{Hale_pre,Hale_post}.
 Wollaston also created a prism, similarly named the Wollaston prism, which allowed simultaneous observation of the ordinary and extraordinary beams due to the smaller deviation angle \citep{WollPrism}.
@@ -502,6 +511,9 @@ Maxwell's equations for an electromagnetic field propagating through a vacuum ar
     \end{gathered}
 \end{equation}
 where $\matr{E}$ and $\matr{B}$ are the electric and magnetic field vectors, and $c$ is the speed of light.
+
+\enlargethispage{-3\baselineskip}
+
 In a right-handed $(x, y, z)$ coordinate system, a non-trivial solution of an electromagnetic wave following \hyperref[eq:Maxwell]{Maxwell's Equations} propagating along the $z$-axis, towards a hypothetical observer, is described by:
 \begin{equation} \label{eq:Maxwell_sol}
     \begin{aligned}
@@ -546,6 +558,8 @@ This ellipse is referred to as the polarization ellipse and has the form:
 where $\Phi = \Phi_{x} - \Phi_{y}$ is the phase difference between the $x$ and $y$ phase parameters.
 The degree of polarization for the polarization ellipse is related to the eccentricity of the ellipse and the angle at which it is rotated relates to the polarization angle.
 Since $\matr{E}_{0, x}$, $\matr{E}_{0, y}$, $\Phi_{x}$, and $\Phi_{y}$ describe the wave, the polarization ellipse that results from these parameters is fixed as the wave continues to propagate.
+
+\enlargethispage{-4\baselineskip}
 
 Since observations consist of images taken over a desired exposure time, time averaging of \autoref{eq:pol_ellipse} over the exposure time is necessary.
 Given the periodical nature and high frequencies of the fields, the time averaging may be found over a single oscillation using:
@@ -629,16 +643,6 @@ where $I$ denotes the total intensity, $P$ denotes the degree of polarization, o
 % Mueller matrix
 % \citep{pol_in_spectra}
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=1\textwidth]{2_polarimeter.pdf}
-    \caption{
-        A diagram of an ideal polarimeter.
-        Diagram adapted from \cite{pol_in_spectra}.
-    }
-    \label{fig:polarimeter}
-\end{figure}
-
 % - practically
 % Waveplate and polarizer
 \subsection{Polarization Measurement} \label{subsec:pol_measure}
@@ -669,7 +673,15 @@ The Mueller matrix for coordinate space rotations about the origin by an angle $
     \end{bmatrix}\,.
 \end{equation}
 
-\pagebreak
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\textwidth]{2_polarimeter.pdf}
+    \caption{
+        A diagram of an ideal polarimeter.
+        Diagram adapted from \cite{pol_in_spectra}.
+    }
+    \label{fig:polarimeter}
+\end{figure}
 
 \paragraph{General Linear Retardance}
 The Mueller matrix for retardance where $\alpha$ is the angle between the incoming vector and fast axis, and $\delta$ is the retardance introduced by the retarder,
@@ -707,10 +719,23 @@ For a setup similar to \autoref{fig:polarimeter}, the detected Stokes parameters
 \end{equation}
 where the retandance angle, $\alpha$, polarization angle, $\beta$, for a wave plate with a relative phase difference, $\gamma$, may be varied to acquire a system of equations that can be solved to retrieve the Stokes polarization parameters \citep{waveplate_in_specpol}.
 
+\enlargethispage{-2\baselineskip}
+
 Several or more frames taken under differing configurations may be used to reduce a system of equations to extract all four Stokes polarization parameters, but it is possible to extract the $I$, $Q$ and $U$ polarization parameters using only four frames, or two dual-beam frames, for well-chosen configurations and assuming ideal components.
 This ideal configuration varies the retarder angle such that $\Delta\alpha = \pi / 8$ while keeping the polarizer stationary.
 More frames for additional retarder angles are advisable and often necessary, however, as they correct for any differences in sensitivity, such as may arise in a polarized flat field and which is further discussed in \autoref{subsubsec:pol_flat} \citep{polarimetry_error}.
 From \autoref{eq:Stokes_intensity} we see that the linear retarder element is the driving element of a polarizer as the first three Stokes parameters ($S_{0-2}$, or $I$, $Q$, and $U$) may be found by changing only the angle of retardance, $\alpha$.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.5\textwidth]{2_rochon.pdf}
+    \caption{
+        Diagram of a Rochon prism.
+        Included in the diagram are the optical axes of the differing sections of the birefringent material as well as polarizing directions of the incident beam, denoted using the $\leftrightarrow$ and $\odot$ symbols, for the $O$- and $E$-beams, respectively.
+        Figure adapted from ChrisHodgesUK, \protect\href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Rochon_Prism.svg}{Wikimedia Commons} (2023).
+    }
+    \label{fig:Rochon_prism}
+\end{figure}
 
 \paragraph{Wave Plates}
 Wave plates, also commonly referred to as retarders, are generally made from optically transparent birefringent crystals.
@@ -726,6 +751,8 @@ This relative phase difference determines the name of the wave plate, such that 
 Phase differences with an integer multiple of one another relate to the same phase difference and are referred to as multiple-order wave plates, while wave plates with a phase difference less than an integer multiple are referred to as zero-order wave plates.
 Several multiple-order wave plates can be combined by alternatively aligning the fast axis of one to the slow axis of another to create a compound zero-order wave plate \citep{Hale_birefringence}.
 
+\pagebreak
+
 \paragraph{Polarizers} \label{par:polarizer}
 Polarizers are typically made from two prisms, of a birefringent material, cemented together with an optically transparent adhesive.
 The actual effect of separating the perpendicular polarization components is achieved using varying effects, namely through:
@@ -735,17 +762,6 @@ The actual effect of separating the perpendicular polarization components is ach
     \item Refraction of a single polarized component, such as in a Rochon prism (\autoref{fig:Rochon_prism}), or
     \item Refraction of both polarization components in differing directions, such as in a Wollaston prism (\autoref{fig:Wollaston_prism}).
 \end{itemize}
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.5\textwidth]{2_rochon.pdf}
-    \caption{
-        Diagram of a Rochon prism.
-        Included in the diagram are the optical axes of the differing sections of the birefringent material as well as polarizing directions of the incident beam, denoted using the $\leftrightarrow$ and $\odot$ symbols, for the $O$- and $E$-beams, respectively.
-        Figure adapted from ChrisHodgesUK, \protect\href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0}, via \protect\href{https://commons.wikimedia.org/wiki/File:Rochon_Prism.svg}{Wikimedia Commons} (2023).
-    }
-    \label{fig:Rochon_prism}
-\end{figure}
 
 \begin{figure}[t]
     \centering
@@ -825,6 +841,8 @@ This division of the incident light results in increased exposure times for both
 The image contains the $O$- and $E$-beams which are both dispersed into their spectra.
 Spectropolarimetric results are acquired from measurements and calibrations of these images alongside any necessary calibration images.
 
+\pagebreak
+
 \subsection{Spectropolarimetric Measurement}
 
 The derived relations given in \autoref{subsec:pol}, such as the \hyperref[eq:Stokes_params]{Stokes parameters}, describe polarization in general and are valid for both polarimetry and spectropolarimetry.
@@ -887,7 +905,7 @@ It should therefore be noted just how important the calibrations are when dealin
 
 \section{The Southern African Large Telescope} \label{sec:SALT} % Basics, not in depth
 
-\glsfirst{SALT} is a $10$\,m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}.
+\gls{SALT} is a $10$\,m class optical/near-infrared telescope situated at the \gls{SAAO} field station near Sutherland, South Africa \citep{SALT_optical_design}.
 The operational design was based on the \gls{HET} situated at McDonald Observatory, Texas, which limits the pointing of the telescope's primary mirror to a fixed elevation ($37$\degree\ from zenith in the case of \gls{SALT}) while still allowing for full azimuthal rotation \citep{HET}.
 Both \gls{SALT} and \gls{HET} utilize a spherical primary mirror which is stationary during observations and a tracker housing most of the instrumentation that tracks the primary mirrors spherically shaped focal path.
 \autoref{fig:SALT_telescope} depicts \glspl{SALT} tracker (top left), supporting structure, and primary mirror (bottom right).
@@ -912,17 +930,17 @@ The fixed elevation means that \glspl{SALT} primary mirror has a fixed gravity v
 
 During observations the primary mirror is stationary and the tracker tracks celestial objects across the sky by moving along the primary focus.
 The tracker is capable of $6$ degrees of freedom with an accuracy of $\sim 5$\,$\mu$m and is capable of tracking $\pm 6$\degree\ from the optimal central track position.
-Targets at declinations from $10.5$\degree\ to $-75.3$\degree, as shown in \autoref{fig:SALT_visibility}, are accessible during windows of opportunity.
 As the tracker moves along the track the effective collecting area varies and thus \gls{SALT} has a varying effective diameter of $\sim 7$\,m to $9$\,m when the tracker is furthest and closest to the optimal central position, respectively.
+
+Targets are observable during windows of opportunity, as shown in \autoref{fig:SALT_visibility}, at declinations from $10.5$\degree\ to $-75.3$\degree.
+These windows of opportunity are dependent on the object's declination and time of year, and extended observations may require moving the telescope to allow the tracker to continue tracking the object.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width = 1.0 \textwidth]{2_SALT_visibility.png}
     \caption{
         The visibility annulus of objects observable by \gls{SALT}.
-        Note that the observation windows and observation durations vary based on an object's declination.
-        Objects may be visible to \gls{SALT} for several hours, falling within the outer ring, but unobservable, falling within the inner ring.
-        Thus, some objects can potentially be observed twice per night, when rising and setting.
+        Note that the observation windows and observation durations vary based on an object's declination, and that some objects can potentially be observed twice per night, when rising and setting.
         Figure adapted from the \gls{SALT} call for proposals \citep{SALT_CFP}.
     }
     \label{fig:SALT_visibility}
@@ -930,8 +948,8 @@ As the tracker moves along the track the effective collecting area varies and th
 
 % Mention Center of Curvature Alignment System? : https://en.wikipedia.org/wiki/Shack%E2%80%93Hartmann_wavefront_sensor
 
-The tracker is equipped with a \gls{SAC} \citep{SALT_SAC}, and an \gls{ADComp} \citep{SALT_ADC}, which corrects for the spherical aberration caused by the geometry of the primary mirror and allows access to wavelengths as short as 3200\,\AA.
-These return a corrected flat focal plane with an 8\arcmin diameter field of view at prime focus on to the science instruments, with a 1\arcmin annulus around it used by the tracker in a closed-loop guidance system.
+The tracker is equipped with a \gls{SAC} \citep{SALT_SAC}, and an \gls{ADComp} \citep{SALT_ADC}, which corrects for the spherical aberration caused by the geometry of the primary mirror and allows access to wavelengths as short as $3200$\,\AA.
+These return a corrected flat focal plane with an $8$\arcmin diameter field of view at prime focus on to the science instruments, with a $1$\arcmin annulus around it used by the tracker in a closed-loop guidance system.
 The tracker also houses the calibration system which contains the \gls{Ar}, \gls{CuAr}, \gls{HgAr}, \gls{NeAr}, \gls{ThAr}, and \gls{Xe} wavelength calibration lamps \citep{SALT_cal_sys}.
 
 \subsection[SALT Instrumentation]{\gls{SALT} Instrumentation} \label{subsec:SALT_instr}
@@ -946,31 +964,31 @@ The tracker also houses the calibration system which contains the \gls{Ar}, \gls
     \label{fig:RSS_layout}
 \end{figure}
 
-\gls{SALT} is equipped with the \gls{SALTICAM} and the \gls{RSS} science instruments onboard the tracker, and the \gls{HRS} and \gls{NIRWALS} science instruments which are fibre-fed from the tracker to their own climate controlled rooms.
+\Gls{SALT} is equipped with the \gls{SALTICAM} and the \gls{RSS} science instruments onboard the tracker, and the \gls{HRS} and \gls{NIRWALS} science instruments which are fibre-fed from the tracker to their own climate controlled rooms.
 The \gls{RSS} is currently the only instrument used for spectropolarimetry.
 
 \subsubsection{\gls{NIRWALS}}
 
-The \glsfirst{NIRWALS} is currently being commissioned and will have a wavelength coverage of $8000$ to $17000$\,\AA, providing medium resolution spectroscopy at $R = 2000$ -- $5000$ over \gls{NIR} wavelengths \citep{NIRWALS, SALT_NIRWALS}.
-\gls{NIRWALS} is fibre-fed from its integral field unit, containing 212 object fibers, along with a separate sky bundle, containing $36$ fibers, housed in the \gls{SALT} fibre instrument feed.
+\Gls{NIRWALS} is currently being commissioned and will have a wavelength coverage of $8000$ -- $17000$\,\AA, providing medium resolution spectroscopy at $R = 2000$ -- $5000$ over \glsxtrshort{NIR} wavelengths \citep{NIRWALS, SALT_NIRWALS}.
+\gls{NIRWALS} is fibre-fed from its integral field unit and separate sky bundle, consisting of $212$ and $36$ fibers, respectively, housed in the \gls{SALT} fibre instrument feed.
 It is ideally suited for studies of nearby galaxies.
 
 \subsubsection{\gls{HRS}}
 
-The \glsfirst{HRS} echelle spectrograph was designed for high resolution spectroscopy at $R = 37000$ -- $67000$ covering a wavelength range of $3700$ -- $8900$\,\AA\ \citep{HRS, HRS_init, SALT_HRS} and consists of a dichroic beam splitter and two \gls{VPH} gratings \citep{SALT_hires}.
+The \gls{HRS} echelle spectrograph was designed for high resolution spectroscopy at $R = 37000$ -- $67000$ covering a wavelength range of $3700$ -- $8900$\,\AA\ \citep{HRS, HRS_init, SALT_HRS} and consists of a dichroic beam splitter and two \gls{VPH} gratings \citep{SALT_hires}.
 This instrument is capable of stellar atmospheric and radial velocity analysis.
 
 \subsubsection{\gls{SALTICAM}}
 
-The \glsfirst{SALTICAM} functions as the acquisition camera and simple science imager with various imaging modes, such as full-mode and slot-mode imaging, and supports low exposure times, down to $50$\,ms \citep{SALTICAM}.
-This enables photometry of faint objects, especially at fast exposure times.
+\Gls{SALTICAM} functions as the acquisition camera and science imager with imaging modes such as full-mode and slot-mode imaging, and supports low exposure times, down to $50$\,ms \citep{SALTICAM}.
+This enables photometry of faint objects at short exposures.
 
 \subsubsection{\gls{RSS}} \label{subsubsec:RSS}
 
-The \glsfirst{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, a narrowband imaging mode, and multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][]{SALT_operational_modes, SALT_CFP}.
+The \gls{RSS} functions as the primary spectrograph on \gls{SALT} and can operate in long-slit spectroscopy and spectropolarimetry modes, a narrowband imaging mode, and multi-object and high resolution spectroscopy modes \citep[for an in-depth discussion on operational modes see][]{SALT_operational_modes, SALT_CFP}.
 
 \paragraph{The Detector}
-The \gls{RSS} detector consists of a mosaic of 3 \gls{CCD} chips with a total pixel scale of $0.1267\arcsec$ per unbinned pixel with varying readout times depending on the binning and readout mode.
+The \gls{RSS} detector consists of a mosaic of three \gls{CCD} chips with a total pixel scale of $0.1267\arcsec$ per unbinned pixel with varying readout times depending on the binning and readout mode.
 The mosaicking results in a characteristic double `gap' in the frames and resultant spectra taken with the \gls{RSS}, as seen in \autoref{fig:specpol_exp}.
 
 \paragraph{The Available Gratings}
@@ -978,11 +996,13 @@ The \gls{RSS} is equipped with a rotatable magazine of six \gls{VPH} gratings, a
 Observations may be planned using \href{https://astronomers.salt.ac.za/software/}{simulator tools} provided by \gls{SALT} and are performed in the first order only.
 The \gls{RSS} has a clear filter, as well as three \gls{UV} (with differing lower filtering ranges) and one blue order blocking filter available, used in conjunction with the various gratings to block out contamination from the second order.
 
-\input{chapter_2/tables/2_RSS_gratings.tex}
-
 \paragraph{\gls{RSS} Spectropolarimetry} \label{sec:RSS_reductions}
 
 Spectropolarimetry using the \gls{RSS} is currently commissioned for long-slit linear spectro\-polarimetry, $(I, Q, U)$, where observations are taken following the waveplate pattern lists as in \autoref{table:RSS_specpol_patterns}.
 Circular, $(I, V)$, and all-Stokes, $(I, Q, U, V)$, spectropolarimetry modes are in commissioning with observations including redundant half-wave plate pairs to be commissioned thereafter.\footnote{Commission status sourced from the latest \href{https://astronomers.salt.ac.za/wp-content/uploads/sites/71/2022/06/3170AM0013_Polarimetry_Observers_Guide_V1.2.pdf}{SALT `Polarimetry Observers Guide' (2024)}.}
+
+\pagebreak
+
+\input{chapter_2/tables/2_RSS_gratings.tex}
 
 \input{chapter_2/tables/2_Polarimetry_patterns.tex}
