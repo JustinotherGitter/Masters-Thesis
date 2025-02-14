@@ -173,10 +173,10 @@ Help documentation for any of the \iraf\ tasks may be found online at \url{https
 
 \pagebreak
 
-Useful \iraf\ tasks that deserve a brief mention are: the \texttt{mkscript} task in the \texttt{system} package which allows the user to create and save a task along with the defined parameters as a file which can later be called as a script, the \texttt{implot} task in the \texttt{plot} package which allows the rows or columns of an image to be interactively displayed, and the \texttt{eparam} task in the \texttt{language} package which allows the parameters of a task to be edited within the \iraf\ \gls{CLI}.%
+Useful \iraf\ tasks that deserve a brief mention are: \texttt{mkscript} in the \texttt{system} package which allows the user to create, modify, and save tasks to a file which can later be called as a script; \texttt{implot} in the \texttt{plot} package which allows rows or columns of a \gls{FITS} image to be interactively displayed; and \texttt{eparam} in the \texttt{language} package which allows parameters of a specified task to be edited within the \iraf\ \gls{CLI}.%
 
-For the wavelength calibration of \gls{SALT} spectropolarimetric data, the relevant tasks are the \texttt{identify} and \texttt{reidentify} tasks located in the \texttt{noao.onedspec} package, and the \texttt{fitcoords} and the (optional) \texttt{transform} tasks located under the \texttt{noao.twodspec.long\-slit} package.
-These tasks produce a two-dimensional wavelength solution which must be obtained separately for the $O$- and $E$-beam.
+For the wavelength calibrations of \gls{SALT} spectropolarimetric data, the relevant tasks are \texttt{identify} and \texttt{reidentify} located in the \texttt{noao.onedspec} package, and \texttt{fitcoords} and (optionally) \texttt{transform} located under the \texttt{noao.twodspec.longslit} package.
+These tasks, repeated for both beams, produce a two-dimensional wavelength solution.
 
 % MARK: Identify
 \subsection{Identify} \label{subsec:iraf_identify}
